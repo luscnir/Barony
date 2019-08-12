@@ -342,14 +342,14 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 
 void Item::applyEmptyPotion(int player, Entity& entity)
 {
-	if ( entity.behavior == &actFountain || entity.behavior == &actSink )
+	if ( entity.behavior == &actFountain || entity.behavior == &actSink || entity.behavior == &actBloodFountain )
 	{
 		if ( entity.skill[0] <= 0 )
 		{
 			// fountain is dry, no bueno.
 			if ( player == clientnum )
 			{
-				if ( entity.behavior == &actFountain )
+				if ( entity.behavior == &actFountain || entity.behavior == &actBloodFountain )
 				{
 					messagePlayer(player, language[467]);
 				}
@@ -489,6 +489,12 @@ void Item::applyEmptyPotion(int player, Entity& entity)
 		{
 			std::discrete_distribution<> potionDistribution(potionChances.begin(), potionChances.end());
 			auto generatedPotion = potionStandardAppearanceMap.at(potionDistribution(fountainSeed));
+			item = newItem(static_cast<ItemType>(generatedPotion.first), SERVICABLE, 0, 1, generatedPotion.second, false, NULL);
+		}
+		else if (  entity.behavior == &actBloodFountain )
+		{
+			std::discrete_distribution<> bloodPotionDistribution(potionChances.begin(), potionChances.end());
+			auto generatedPotion = potionStandardAppearanceMap.at(bloodPotionDistribution(bloodFountainSeed));
 			item = newItem(static_cast<ItemType>(generatedPotion.first), SERVICABLE, 0, 1, generatedPotion.second, false, NULL);
 		}
 		else

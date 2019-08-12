@@ -501,6 +501,7 @@ public:
 	bool automatonCanWieldItem(const Item& item) const;
 	bool shadowCanWieldItem(const Item& item) const;
 	bool insectoidCanWieldItem(const Item& item) const;
+	bool burgGuardCanWieldItem(const Item& item) const;
 
 	bool monsterWantsItem(const Item& item, Item**& shouldEquip, node_t*& replaceInventoryItem) const;
 
@@ -574,6 +575,17 @@ public:
 	void actLightSource();
 	void actTextSource();
 	void actSignalTimer();
+	//void actBoltTrap();
+	void actPortalJump2();
+	void actPortalJump8();
+	void actLadderJump2();
+	void actLadderJump7();
+	void actLadderJump8();
+	void actLadderJump9();
+	void actLadderJump10();
+	void actLadderJump11();
+	void actLadderJump14();
+	void actMidPortalJump13();
 
 	Monster getRace() const
 	{
@@ -862,6 +874,7 @@ void actPlayer(Entity* my);
 //TODO: Allow for cursed fountains. Any fountain that has a negative effect has, say, skill[4] set to 1 to indicate cursed. Used for monster behavior and for effects of things like healing potions.
 void actFountain(Entity* my);
 void actSink(Entity* my);
+void actBloodFountain(Entity* my);
 
 //--- Mechanism functions ---
 void actCircuit(Entity* my);
@@ -914,10 +927,10 @@ void actTextSource(Entity* my);
 
 //checks if a sprite falls in certain sprite ranges
 
-static const int NUM_ITEM_STRINGS = 235;
-static const int NUM_ITEM_STRINGS_BY_TYPE = 100;
-static const int NUM_EDITOR_SPRITES = 134;
-static const int NUM_EDITOR_TILES = 300;
+static const int NUM_ITEM_STRINGS = 264;
+static const int NUM_ITEM_STRINGS_BY_TYPE = 110;
+static const int NUM_EDITOR_SPRITES = 162;
+static const int NUM_EDITOR_TILES = 346;
 
 // furniture types.
 static const int FURNITURE_TABLE = 0;
@@ -976,5 +989,8 @@ bool monsterNameIsGeneric(Stat& monsterStats); // returns true if a monster's na
 
 //Fountain potion drop chance variables.
 extern const std::vector<int> fountainPotionDropChances;
+extern const std::vector<int> bloodFountainPotionDropChances;
 extern const std::vector<std::pair<int, int>> potionStandardAppearanceMap;
+extern const std::vector<std::pair<int, int>> bloodPotionStandardAppearanceMap;
 extern std::mt19937 fountainSeed;
+extern std::mt19937 bloodFountainSeed;

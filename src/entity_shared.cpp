@@ -49,6 +49,10 @@ int checkSpriteType(Sint32 sprite)
 	case 80:
 	case 81:
 	case 82:
+	case 134:
+	case 136:
+	case 137:
+	case 138:
 		//monsters
 		return 1;
 		break;
@@ -99,10 +103,24 @@ int checkSpriteType(Sint32 sprite)
 	case 123:
 	case 124:
 	case 125:
+		// Moded A_D furniture
+	//case 139:// SymbolPedestal
+	//case 140:// BloodyFountain
+	//case 142:// BloodySpearTrap
+	case 143:
+	case 144:
+	case 147:
+	case 148:
+	case 149:
 		// general furniture/misc.
 		return 12;
 		break;
 	case 127:
+		// Moded A_D Floor dec
+	case 141:
+	case 145:
+	case 146:
+	case 150:
 		// floor decoration
 		return 13;
 		break;
@@ -362,6 +380,35 @@ char itemNameStrings[NUM_ITEM_STRINGS][32] =
 	"hat_hood_silver",
 	"hat_hood_red",
 	"silver_doublet",
+	"tool_greentorch",
+	"hat_hood_yellowgreen",
+	"cloak_yellowgreen",
+	"abyssal_helm",
+	"abyssal_boots",
+	"abyssal_knuckles",
+	"abyssal_breastpiece",
+	"abyssal_cloak",
+	"abyssal_sword",
+	"abyssal_axe",
+	"abyssal_mace",
+	"abyssal_spear",
+	"abyssal_crossbow",
+	"abyssal_shield",
+	"abyssal_ring",
+	"abyssal_amulet",
+	"hat_wizard_smily",
+	"iron_breastpiece_smily",
+	"cloak_elementalist",
+	"food_cheddarcheesewheel",
+	"food_banana",
+	"food_pizza",
+	"food_salmon",
+	"food_hamletdiner",
+	"spellbook_deathcoil",
+	"bone_spear",
+	"symbol_rage",
+	"symbol_cruelty",
+	"symbol_hatred",
 	""
 };
 
@@ -381,7 +428,10 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"iron_helm",
 		"steel_helm",
 		"crystal_helm",
-		"artifact_helm"
+		"artifact_helm",
+		"hat_hood_yellowgreen",
+		"abyssal_helm",
+		"hat_wizard_smily",
 		""
 	},
 	{
@@ -484,6 +534,16 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"artifact_orb_red",
 		"artifact_orb_purple",
 		"artifact_orb_green",
+		"abyssal_sword",
+		"abyssal_axe",
+		"abyssal_mace",
+		"abyssal_spear",
+		"abyssal_crossbow",
+		"spellbook_deathcoil",
+		"bone_spear",
+		"symbol_rage",
+		"symbol_cruelty",
+		"symbol_hatred",
 		""
 	},
 	{
@@ -499,6 +559,8 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"tool_torch",
 		"tool_lantern",
 		"tool_crystalshard",
+		"tool_greentorch",
+		"abyssal_shield",
 		""
 	},
 	{
@@ -514,6 +576,8 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"healer_doublet",
 		"tunic",
 		"silver_doublet",
+		"abyssal_cheastpiece",
+		"iron_breastpiece_slimy",
 		""
 	},
 	{
@@ -529,6 +593,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"crystal_boots",
 		"artifact_boots",
 		"suede_boots",
+		"abyssal_boots",
 		""
 	},
 	{
@@ -546,6 +611,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"ring_levitation",
 		"ring_regeneration",
 		"ring_teleportation",
+		"abyssal_ring",
 		""
 	},
 	{
@@ -557,6 +623,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"amulet_magicreflection",
 		"amulet_strangulation",
 		"amulet_poisonresistance",
+		"abyssal_amulet",
 		""
 	},
 	{
@@ -570,6 +637,9 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"cloak_protection",
 		"artifact_cloak",
 		"cloak_backpack",
+		"cloak_yellowgreen",
+		"abyssal_cloak",
+		"cloak_elementalist",
 		""
 	},
 	{
@@ -596,6 +666,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"iron_knuckles",
 		"spiked_gauntlets",
 		"suede_gloves",
+		"abyssal_knuckles",
 		""
 	}
 	
@@ -736,7 +807,35 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"SOUND SOURCE",
 	"LIGHT SOURCE",
 	"TEXT SOURCE",
-	"SIGNAL TIMER"
+	"SIGNAL TIMER",
+	"COCKROACH",
+	"NOT USED",
+	"BURG GUARD",
+	"GARGOYLE",
+	"MATILDA",
+	"PEDESTAL SYMBOLS",
+	"BLOODY FOUNTAIN",
+	"BLOODY ROCK",
+	"BLOODY SPEAR TRAP",
+	"BLUE CHAIR",
+	"BLUE BED",
+	"FLOOR GRASS SNOW",
+	"SEWER GARBAGE",
+	"SEWER PILLAR",
+	"STOL",
+	"GREEN PODIUM",
+	"ACID SPRAY TRAP",
+	"FLOOR GRASS PURPLE",
+	"PORTAL JUMP 2",
+	"PORTAL JUMP 8",
+	"LADDER JUMP 2",
+	"LADDER JUMP 7",
+	"LADDER JUMP 8",
+	"LADDER JUMP 9",
+	"LADDER JUMP 10",
+	"LADDER JUMP 11",
+	"LADDER JUMP 14",
+	"MID PORTAL JUMP 13"
 };
 
 char monsterEditorNameStrings[NUMMONSTERS][13] =
@@ -773,7 +872,11 @@ char monsterEditorNameStrings[NUMMONSTERS][13] =
 	"goatman",
 	"automaton",
 	"lich_ice",
-	"lich_fire"
+	"lich_fire",
+	"cockroach",
+	"burgguard",
+	"gargoyle",
+	"matilda"
 };
 
 char tileEditorNameStrings[NUM_EDITOR_TILES][44] =
@@ -1015,9 +1118,87 @@ char tileEditorNameStrings[NUM_EDITOR_TILES][44] =
 	"Sky.png",
 	"SkyCrackle.png",
 	"SkyCrackle_B.png",
+	"BigYellowSquare.png",
+	"OldGrid.png",
+	"OldGridwat1.png",
+	"OldGridwat2.png",
+	"OldGridwat3.png",
+	"OldGridwat4.png",
+	"OldGridwat5.png",
+	"OldGridwat6.png",
+	"OldGridwat7.png",
+	"OldGridwat8.png",
+	"SewerPipesLong.png",
+	"SewerPipesMachine.png",
+	"MossWater1.png",
+	"MossWater2.png",
+	"MossWater3.png",
+	"MossWater4.png",
+	"GrossSquare.png",
+	"GrosseBrick.png",
+	"CobblestoneGross.png",
+	"GrossBrickSkull.png",
+	"Fungus.png",
+	"GreenCobblestoneTomb.png",
+	"PurpleGrass.png",
+	"PurpleRoots.png",
+	"PurpleRootsTreetop.png",
+	"PurpleLeaves.png",
+	"FrostTiles.png",
+	"FrostyPlankCeiling.png",
+	"GrayWood.png",
+	"GrayWoodTwo.png",
+	"GrayWoodCornerNE.png",
+	"GrayWoodCornerNw.png",
+	"GrayWoodCornerSE.png",
+	"GrayWoodCornerSW.png",
+	"CatedralBrick.png",
+	"CatedralBrickCandles.png",
+	"CatedralAltar.png",
+	"Mossshopsign.png",
+	"EmptyShelf.png",
+	"RedCrakedSquare.png",
+	"BlackBrick.png",
+	"BlackPillar.png",
+	"BloodyFloor.png",
+	"BloodyFloorParasite.png",
+	"BloodyWall.png",
+	"FleshWall.png",
+	"SkyOrganic.png",
+	"Whitesquare.png",
+	"SpiderWebWall.png",
+	"SpiderWebCelling.png",
+	"SpiderWebWall1.png",
+	"SpiderWebWall2.png",
+	"SpiderWebWall3.png",
+	"SpiderWebWall4.png",
+	"SpiderWebWall5.png",
+	"SpiderWebWall6.png",
+	"SpiderWebfloor.png",
+	"Acidtiles.png",
+	"AcidtilesCracked.png",
+	"Acidtilesbroken.png",
+	"Acidtilesacidpool.png",
+	"AcidtilesCircle.png",
+	"AcidGrid1.png",
+	"AcidGrid2.png",
+	"AcidGrid3.png",
+	"AcidGrid4.png",
+	"AcidStoneWall.png",
+	"AcidStoneDrop1.png",
+	"AcidStoneDrop2.png",
+	"AcidStoneDrop3.png",
+	"AcidStoneDrop4.png",
+	"FancySlimystoneWall.png",
+	"BurgPlageBlock.png",
+	"GrossTile.png",
+	"AcidTrapWall1.png",
+	"AcidTrapWall2.png",
+	"AcidTrapWall3.png",
+	"AcidTrapWall4.png",
+	"Greenishbrick.png",
 	"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-	"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-	"", "", "", "", "", "", ""
+	"", ""
 };
 
 int canWearEquip(Entity* entity, int category)
@@ -1046,6 +1227,9 @@ int canWearEquip(Entity* entity, int category)
 				case SCARAB:
 				case CRYSTALGOLEM:
 				case COCKATRICE:
+				case COCKROACH:
+				case GARGOYLE:
+				case MATILDA:
 					equipType = 0;
 					break;
 
@@ -1076,6 +1260,7 @@ int canWearEquip(Entity* entity, int category)
 				case GOATMAN:
 				case KOBOLD:
 				case INSECTOID:
+				case BURGGUARD:
 					equipType = 3;
 					break;
 

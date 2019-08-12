@@ -811,6 +811,10 @@ bool isPathObstacle(Entity* entity)
 	{
 		return true;
 	}
+	else if (entity->behavior == &actBloodFountain)
+	{
+		return true;
+	}
 	else if ( entity->behavior == &actPowerCrystal || entity->behavior == &actPowerCrystalBase )
 	{
 		return true;

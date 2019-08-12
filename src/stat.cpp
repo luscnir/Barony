@@ -394,6 +394,10 @@ Stat* Stat::copyStats()
 	newStat->MAXHP = this->MAXHP;
 	newStat->OLDHP = this->OLDHP;
 
+	//
+	//newStat->lookupKey = this->lookupKey;
+	//newStat->hitType = this->hitType;
+
 	newStat->MP = this->MP;
 	newStat->MAXMP = this->MAXMP;
 	newStat->STR = this->STR;

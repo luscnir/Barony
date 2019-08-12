@@ -119,6 +119,10 @@ void actHudArm(Entity* my)
 		{
 			my->sprite = 802;
 		}
+		else if (stats[clientnum]->gloves->type == ABYSSAL_KNUCKLES)
+		{
+			my->sprite = 823;
+		}
 		if ( stats[clientnum]->weapon == nullptr )
 		{
 			my->scalex = 0.5f;
@@ -333,7 +337,7 @@ void actHudWeapon(Entity* my)
 	// water walking boots
 	bool waterwalkingboots = false;
 	if (stats[clientnum]->shoes != nullptr)
-		if ( stats[clientnum]->shoes->type == IRON_BOOTS_WATERWALKING )
+		if ( stats[clientnum]->shoes->type == IRON_BOOTS_WATERWALKING || stats[clientnum]->shoes->type == ABYSSAL_BOOTS )
 		{
 			waterwalkingboots = true;
 		}
@@ -373,6 +377,10 @@ void actHudWeapon(Entity* my)
 			rangedweapon = true;
 		}
 		else if ( stats[clientnum]->weapon->type == ARTIFACT_BOW )
+		{
+			rangedweapon = true;
+		}
+		else if ( stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW )
 		{
 			rangedweapon = true;
 		}
@@ -446,7 +454,7 @@ void actHudWeapon(Entity* my)
 				{
 					if ( rangedweapon )
 					{
-						if ( stats[clientnum]->weapon && stats[clientnum]->weapon->type != CROSSBOW )
+						if ( stats[clientnum]->weapon && stats[clientnum]->weapon->type != CROSSBOW || stats[clientnum]->weapon && stats[clientnum]->weapon->type != ABYSSAL_CROSSBOW )
 						{
 							my->sprite++;
 						}
@@ -635,7 +643,7 @@ void actHudWeapon(Entity* my)
 					{
 						pickaxeGimpTimer = 40;
 					}
-					if ( stats[clientnum]->weapon->type == IRON_SPEAR || stats[clientnum]->weapon->type == ARTIFACT_SPEAR )
+					if ( stats[clientnum]->weapon->type == IRON_SPEAR || stats[clientnum]->weapon->type == ARTIFACT_SPEAR || stats[clientnum]->weapon->type == ABYSSAL_SPEAR || stats[clientnum]->weapon->type == SPEAR_BONE )
 					{
 						HUDWEAPON_CHOP = 7; // spear lunges
 					}
@@ -763,7 +771,8 @@ void actHudWeapon(Entity* my)
 								messagePlayer(clientnum, language[503], item->getName());
 							}
 						}
-						else if ( item->type >= ARTIFACT_ORB_BLUE && item->type <= ARTIFACT_ORB_GREEN )
+						else if ( ( item->type >= ARTIFACT_ORB_BLUE && item->type <= ARTIFACT_ORB_GREEN )
+								|| (item->type >= SYMBOL_RAGE && item->type <= SYMBOL_HATRED) )
 						{
 							HUDWEAPON_MOVEX = 5;
 							HUDWEAPON_CHOP = 3;
@@ -1080,7 +1089,7 @@ void actHudWeapon(Entity* my)
 					HUDWEAPON_CHOP++;
 					players[clientnum]->entity->attack(1, HUDWEAPON_CHARGE, nullptr);
 					if ( stats[clientnum]->weapon
-						&& stats[clientnum]->weapon->type == CROSSBOW )
+						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW ) )
 					{
 						throwGimpTimer = 40; // fix for swapping weapon to crossbow while charging.
 					}
@@ -1140,7 +1149,8 @@ void actHudWeapon(Entity* my)
 					&& itemCategory(item) != POTION 
 					&& itemCategory(item) != GEM 
 					&& itemCategory(item) != THROWN
-					&& !(item->type >= ARTIFACT_ORB_BLUE && item->type <= ARTIFACT_ORB_GREEN) )
+					&& !(item->type >= ARTIFACT_ORB_BLUE && item->type <= ARTIFACT_ORB_GREEN) 
+					&& !(item->type >= SYMBOL_RAGE && item->type <= SYMBOL_HATRED) )
 				{
 					if ( stats[clientnum]->weapon->type != TOOL_PICKAXE )
 					{
@@ -1299,7 +1309,7 @@ void actHudWeapon(Entity* my)
 					HUDWEAPON_CHOP++;
 					players[clientnum]->entity->attack(2, HUDWEAPON_CHARGE, nullptr);
 					if ( stats[clientnum]->weapon
-						&& stats[clientnum]->weapon->type == CROSSBOW )
+						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW ) )
 					{
 						throwGimpTimer = 40; // fix for swapping weapon to crossbow while charging.
 					}
@@ -1415,7 +1425,7 @@ void actHudWeapon(Entity* my)
 					HUDWEAPON_CHOP++;
 					players[clientnum]->entity->attack(3, HUDWEAPON_CHARGE, nullptr);
 					if ( stats[clientnum]->weapon
-						&& stats[clientnum]->weapon->type == CROSSBOW )
+						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW ) )
 					{
 						throwGimpTimer = 40; // fix for swapping weapon to crossbow while charging.
 					}
@@ -1471,7 +1481,8 @@ void actHudWeapon(Entity* my)
 				}
 				else
 				{
-					if ( itemCategory(stats[clientnum]->weapon) != MAGICSTAFF && stats[clientnum]->weapon->type != CRYSTAL_SPEAR && stats[clientnum]->weapon->type != IRON_SPEAR && stats[clientnum]->weapon->type != ARTIFACT_SPEAR )
+					if ( itemCategory(stats[clientnum]->weapon) != MAGICSTAFF && stats[clientnum]->weapon->type != CRYSTAL_SPEAR && stats[clientnum]->weapon->type != IRON_SPEAR
+						 && stats[clientnum]->weapon->type != ARTIFACT_SPEAR && stats[clientnum]->weapon->type != ABYSSAL_SPEAR && stats[clientnum]->weapon->type != SPEAR_BONE )
 					{
 						HUDWEAPON_CHOP = 1;
 					}
@@ -1542,11 +1553,12 @@ void actHudWeapon(Entity* my)
 		if (item)
 		{
 			if (item->type == TOOL_SKELETONKEY || item->type == TOOL_LOCKPICK
-				|| (item->type >= ARTIFACT_ORB_BLUE && item->type <= ARTIFACT_ORB_GREEN) )
+				|| (item->type >= ARTIFACT_ORB_BLUE && item->type <= ARTIFACT_ORB_GREEN )
+				|| (item->type >= SYMBOL_RAGE && item->type <= SYMBOL_HATRED ) )
 			{
 				defaultpitch = -PI / 8.f;
 			}
-			if (item->type == CROSSBOW)
+			if (item->type == CROSSBOW || item->type == ABYSSAL_CROSSBOW)
 			{
 				my->x = 6 + HUDWEAPON_MOVEX;
 				my->y = 1.5 + HUDWEAPON_MOVEY;
@@ -1619,7 +1631,7 @@ void actHudShield(Entity* my)
 	// water walking boots
 	bool waterwalkingboots = false;
 	if (stats[clientnum]->shoes != nullptr)
-		if (stats[clientnum]->shoes->type == IRON_BOOTS_WATERWALKING)
+		if ( stats[clientnum]->shoes->type == IRON_BOOTS_WATERWALKING || stats[clientnum]->shoes->type == ABYSSAL_BOOTS )
 		{
 			waterwalkingboots = true;
 		}
@@ -1800,7 +1812,7 @@ void actHudShield(Entity* my)
 		}
 		if ( stats[clientnum]->shield )
 		{
-			if ( stats[clientnum]->shield->type == TOOL_TORCH || stats[clientnum]->shield->type == TOOL_CRYSTALSHARD )
+			if ( stats[clientnum]->shield->type == TOOL_TORCH || stats[clientnum]->shield->type == TOOL_CRYSTALSHARD || stats[clientnum]->shield->type == TOOL_GREENTORCH)
 			{
 				if ( HUDSHIELD_MOVEX < 1.5 )
 				{
@@ -1908,6 +1920,14 @@ void actHudShield(Entity* my)
 				Entity* entity = spawnFlame(my, SPRITE_FLAME);
 				entity->flags[OVERDRAW] = true;
 				entity->z += 1;
+				my->flags[BRIGHT] = true;
+			}
+			else if (stats[clientnum]->shield->type == TOOL_GREENTORCH)
+			{
+				Entity* entity = spawnFlame(my, SPRITE_GREENFLAME);
+				entity->flags[OVERDRAW] = true;
+				entity->z -= 2.5 * cos(HUDSHIELD_ROLL);
+				entity->y += 2.5 * sin(HUDSHIELD_ROLL);
 				my->flags[BRIGHT] = true;
 			}
 		}

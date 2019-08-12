@@ -56,21 +56,35 @@ void initGoblin(Entity* my, Stat* myStats)
 			}
 			else
 			{
-				myStats->HP = 120;
-				myStats->MAXHP = 120;
-				myStats->OLDHP = myStats->HP;
-				strcpy(myStats->name, "The Potato King");
-				myStats->weapon = newItem(ARTIFACT_MACE, EXCELLENT, 1, 1, rand(), true, nullptr);
-				myStats->helmet = newItem(HAT_JESTER, SERVICABLE, 3 + rand() % 3, 1, rand(), false, nullptr);
-
-				int c;
-				for ( c = 0; c < 3; c++ )
+				switch (rand() % 2)
 				{
-					Entity* entity = summonMonster(GOBLIN, my->x, my->y);
-					if ( entity )
+				case 0:					//The Potato King
+					myStats->HP = 120;
+					myStats->MAXHP = 120;
+					myStats->OLDHP = myStats->HP;
+					strcpy(myStats->name, "The Potato King");
+					myStats->weapon = newItem(ARTIFACT_MACE, EXCELLENT, 1, 1, rand(), true, nullptr);
+					myStats->helmet = newItem(HAT_JESTER, SERVICABLE, 3 + rand() % 3, 1, rand(), false, nullptr);
+
+					int c;
+					for (c = 0; c < 3; c++)
 					{
-						entity->parent = my->getUID();
+						Entity* entity = summonMonster(GOBLIN, my->x, my->y);
+						if (entity)
+						{
+							entity->parent = my->getUID();
+						}
 					}
+					break;
+				case 1:					//The Pizza Keeper
+					myStats->HP = 105;
+					myStats->MAXHP = 105;
+					myStats->OLDHP = myStats->HP;
+					strcpy(myStats->name, "The Pizza Keeper");
+					myStats->weapon = newItem(STEEL_MACE, EXCELLENT, 0, 1, rand(), true, nullptr);
+					myStats->helmet = newItem(HAT_WIZARD_SLIMY, SERVICABLE, 2 + rand() % 3, 1, rand(), false, nullptr);
+					newItem(FOOD_PIZZA, EXCELLENT, 0, 9, rand(), false, &myStats->inventory);
+					break;
 				}
 			}
 
@@ -1020,7 +1034,7 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	if ( shieldNode )
 	{
 		Entity* shieldEntity = (Entity*)shieldNode->element;
-		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index )
+		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index)
 		{
 			shieldEntity->yaw -= PI / 6;
 		}

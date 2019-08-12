@@ -292,9 +292,9 @@ void actArrow(Entity* my)
 								// rock.
 								messagePlayerColor(hit.entity->skill[2], color, language[2512]);
 							}
-							else if (my->sprite == 167)
+							else if (my->sprite == 167 || my->sprite == 861)
 							{
-								// bolt.
+								// bolt and ligthning bolt.
 								messagePlayerColor(hit.entity->skill[2], color, language[2511]);
 							}
 							else

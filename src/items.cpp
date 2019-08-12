@@ -80,7 +80,7 @@ Item* newItem(ItemType type, Status status, Sint16 beatitude, Sint16 count, Uint
 		bool notfree = false, foundaspot = false;
 
 		bool is_spell = false;
-		if (itemCategory(item) == SPELL_CAT)
+		if (itemCategory(item) == SPELL_CAT) 
 		{
 			is_spell = true;
 		}
@@ -940,12 +940,12 @@ char* Item::getName()
 
 Sint32 itemModel(Item* item)
 {
-	if ( !item )
+	if (!item)
 	{
 		return 0;
 	}
 	return items[item->type].index + item->appearance % items[item->type].variations;
-}
+}	
 
 /*-------------------------------------------------------------------------------
 
@@ -1505,7 +1505,7 @@ void equipItem(Item* item, Item** slot, int player)
 					{
 						playSoundEntity(players[player]->entity, 44 + rand() % 3, 64);
 					}
-					else if ( item->type == TOOL_TORCH || item->type == TOOL_LANTERN || item->type == TOOL_CRYSTALSHARD )
+					else if ( item->type == TOOL_TORCH || item->type == TOOL_LANTERN || item->type == TOOL_CRYSTALSHARD || item->type == TOOL_GREENTORCH)
 					{
 						playSoundEntity(players[player]->entity, 134, 64);
 					}
@@ -1850,6 +1850,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case STEEL_SHIELD_RESISTANCE:
 		case MIRROR_SHIELD:
 		case CRYSTAL_SHIELD:
+		case ABYSSAL_SHIELD:
 			equipItem(item, &stats[player]->shield, player);
 			break;
 		case CROSSBOW:
@@ -1867,6 +1868,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case IRON_KNUCKLES:
 		case SPIKED_GAUNTLETS:
 		case SUEDE_GLOVES:
+		case ABYSSAL_KNUCKLES:
 			equipItem(item, &stats[player]->gloves, player);
 			break;
 		case CLOAK:
@@ -1877,6 +1879,9 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case ARTIFACT_CLOAK:
 		case CLOAK_BACKPACK:
 		case CLOAK_SILVER:
+		case CLOAK_YELLOWGREEN:
+		case ABYSSAL_CLOAK:
+		case CLOAK_ELEMENTALIST:
 			equipItem(item, &stats[player]->cloak, player);
 			break;
 		case LEATHER_BOOTS:
@@ -1889,6 +1894,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case ARTIFACT_BOOTS:
 		case CRYSTAL_BOOTS:
 		case SUEDE_BOOTS:
+		case ABYSSAL_BOOTS:
 			equipItem(item, &stats[player]->shoes, player);
 			break;
 		case LEATHER_BREASTPIECE:
@@ -1901,6 +1907,8 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case SILVER_DOUBLET:
 		case ARTIFACT_BREASTPIECE:
 		case TUNIC:
+		case ABYSSAL_CHEASTPIECE:
+		case IRON_BREASTPIECE_SLIMY:
 			equipItem(item, &stats[player]->breastplate, player);
 			break;
 		case HAT_PHRYGIAN:
@@ -1915,6 +1923,9 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case HAT_FEZ:
 		case HAT_HOOD_RED:
 		case HAT_HOOD_SILVER:
+		case HAT_HOOD_YELLOWGREEN:
+		case ABYSSAL_HELM:
+		case HAT_WIZARD_SLIMY:
 			equipItem(item, &stats[player]->helmet, player);
 			break;
 		case AMULET_SEXCHANGE:
@@ -1925,6 +1936,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case AMULET_LIFESAVING:
 		case AMULET_WATERBREATHING:
 		case AMULET_MAGICREFLECTION:
+		case ABYSSAL_AMULET:
 			equipItem(item, &stats[player]->amulet, player);
 			break;
 		case AMULET_STRANGULATION:
@@ -2121,6 +2133,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case RING_LEVITATION:
 		case RING_REGENERATION:
 		case RING_TELEPORTATION:
+		case ABYSSAL_RING:
 			equipItem(item, &stats[player]->ring, player);
 			break;
 		case SPELLBOOK_FORCEBOLT:
@@ -2153,6 +2166,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case SPELLBOOK_DRAIN_SOUL:
 		case SPELLBOOK_VAMPIRIC_AURA:
 		case SPELLBOOK_CHARM_MONSTER:
+		case SPELLBOOK_DEATHCOIL:
 			item_Spellbook(item, player);
 			break;
 		case GEM_ROCK:
@@ -2191,6 +2205,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case TOOL_TORCH:
 		case TOOL_LANTERN:
 		case TOOL_CRYSTALSHARD:
+		case TOOL_GREENTORCH:
 			equipItem(item, &stats[player]->shield, player);
 			break;
 		case TOOL_BLINDFOLD:
@@ -2230,6 +2245,11 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case FOOD_FISH:
 		case FOOD_TOMALLEY:
 		case FOOD_BLOOD:
+		case FOOD_CHEDDARCHEESEWHEEL:
+		case FOOD_BANANA:
+		case FOOD_PIZZA:
+		case FOOD_SALMON:
+		case FOOD_HAMLETDINER:
 			item_Food(item, player);
 			break;
 		case FOOD_TIN:
@@ -2275,12 +2295,21 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case ARTIFACT_SPEAR:
 		case ARTIFACT_AXE:
 		case ARTIFACT_BOW:
+		case ABYSSAL_SWORD:
+		case ABYSSAL_AXE:
+		case ABYSSAL_MACE:
+		case ABYSSAL_SPEAR:
+		case ABYSSAL_CROSSBOW:
+		case SPEAR_BONE:
 			equipItem(item, &stats[player]->weapon, player);
 			break;
 		case ARTIFACT_ORB_BLUE:
 		case ARTIFACT_ORB_RED:
 		case ARTIFACT_ORB_PURPLE:
 		case ARTIFACT_ORB_GREEN:
+		case SYMBOL_RAGE:
+		case SYMBOL_CRUELTY:
+		case SYMBOL_HATRED:
 			equipItem(item, &stats[player]->weapon, player);
 			break;
 		default:
@@ -2344,6 +2373,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 				messagePlayer(player, language[2480]);
 				break;
 			case HAT_WIZARD:
+			case HAT_WIZARD_SLIMY:
 				messagePlayer(player, language[2481]);
 				break;
 			case SPIKED_GAUNTLETS:
@@ -2450,6 +2480,52 @@ void useItem(Item* item, int player, Entity* usedBy)
 			case TOOL_BLINDFOLD_TELEPATHY:
 				messagePlayer(player, language[2908]);
 				break;
+
+			case ABYSSAL_HELM:
+				messagePlayer(player, language[3720]);
+				break;
+			case ABYSSAL_BOOTS:
+				messagePlayer(player, language[3721]);
+				break;
+			case ABYSSAL_KNUCKLES:
+				messagePlayer(player, language[3722]);
+				break;
+			case ABYSSAL_CHEASTPIECE:
+				messagePlayer(player, language[3723]);
+				break;
+			case ABYSSAL_CLOAK:
+				messagePlayer(player, language[3724]);
+				break;
+			case ABYSSAL_SWORD:
+				messagePlayer(player, language[3725]);
+				break;
+			case ABYSSAL_MACE:
+				messagePlayer(player, language[3726]);
+				break;
+			case ABYSSAL_SPEAR:
+				messagePlayer(player, language[3727]);
+				break;
+			case ABYSSAL_AXE:
+				messagePlayer(player, language[3728]);
+				break;
+			case ABYSSAL_SHIELD:
+				messagePlayer(player, language[3729]);
+				break;
+			case ABYSSAL_CROSSBOW:
+				messagePlayer(player, language[3730]);
+				break;
+			case ABYSSAL_RING:
+				messagePlayer(player, language[3731]);
+				break;
+			case ABYSSAL_AMULET:
+				messagePlayer(player, language[3732]);
+				break;
+			case CLOAK_ELEMENTALIST:
+				messagePlayer(player, language[3735]);
+				break;
+
+			//TODO: message for abyssal items, and cloak_elementalist
+
 			default:
 				break;
 		}
@@ -2818,6 +2894,30 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	{
 		attack += 8;
 	}
+	else if ( type == ABYSSAL_SWORD )
+	{
+		attack += 9;
+	}
+	else if ( type == ABYSSAL_MACE )
+	{
+		attack += 0;	//it deals magic damage
+	}
+	else if ( type == ABYSSAL_AXE )
+	{
+		attack += 9;
+	}
+	else if ( type == ABYSSAL_SPEAR )
+	{
+		attack += 9;
+	}
+	else if ( type == ABYSSAL_CROSSBOW )
+	{
+		attack += 15;
+	}
+	else if (type == SPEAR_BONE)
+	{
+		attack += 5;
+	}
 	// old formula
 	//attack *= (double)(status / 5.0);
 	//
@@ -2982,6 +3082,34 @@ Sint32 Item::armorGetAC(Stat* wielder) const
 		armor += 2;
 	}
 	else if ( type == SPIKED_GAUNTLETS )
+	{
+		armor += 3;
+	}
+	else if (type == ABYSSAL_HELM)
+	{
+		armor += 5;
+	}
+	else if (type == ABYSSAL_CHEASTPIECE)
+	{
+		armor += 6;
+	}
+	else if (type == ABYSSAL_BOOTS)
+	{
+		armor += 5;
+	}
+	else if (type == ABYSSAL_KNUCKLES)
+	{
+		armor += 5;
+	}
+	else if (type == ABYSSAL_CLOAK)
+	{
+		armor += 0;
+	}
+	else if (type == ABYSSAL_SHIELD)
+	{
+		armor += 6;
+	}
+	else if (type == IRON_BREASTPIECE_SLIMY)
 	{
 		armor += 3;
 	}
@@ -3460,6 +3588,7 @@ bool isRangedWeapon(const Item& item)
 		case SHORTBOW:
 		case CROSSBOW:
 		case ARTIFACT_BOW:
+		case ABYSSAL_CROSSBOW:
 			return true;
 		default:
 			return false;

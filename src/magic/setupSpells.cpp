@@ -287,6 +287,14 @@ void setupSpells()   ///TODO: Verify this function.
 	spellElement_charmMonster.duration = 300;
 	strcpy(spellElement_charmMonster.name, language[2399]);
 
+	spellElementConstructor(&spellElement_deathCoil);
+	spellElement_deathCoil.mana = 15;
+	spellElement_deathCoil.base_mana = 15;
+	spellElement_deathCoil.overload_multiplier = 2;
+	spellElement_deathCoil.damage = 50;
+	spellElement_deathCoil.duration = 75;
+	strcpy(spellElement_deathCoil.name, language[3700]);
+
 	spellConstructor(&spell_forcebolt);
 	strcpy(spell_forcebolt.name, language[415]);
 	spell_forcebolt.ID = SPELL_FORCEBOLT;
@@ -831,6 +839,28 @@ void setupSpells()   ///TODO: Verify this function.
 	element->elements.last = NULL;
 	node = list_AddNodeLast(&element->elements);
 	node->element = copySpellElement(&spellElement_charmMonster);
+	node->size = sizeof(spellElement_t);
+	node->deconstructor = &spellElementDeconstructor;
+	element = (spellElement_t*)node->element;
+	element->node = node;
+
+	spellConstructor(&spell_deathCoil);
+	strcpy(spell_deathCoil.name, language[3700]);
+	spell_deathCoil.ID = SPELL_DEATHCOIL;
+	spell_deathCoil.difficulty = 80;
+	spell_deathCoil.elements.first = NULL;
+	spell_deathCoil.elements.last = NULL;
+	node = list_AddNodeLast(&spell_deathCoil.elements);
+	node->element = copySpellElement(&spellElement_deathCoil);
+	node->size = sizeof(spellElement_t);
+	node->deconstructor = &spellElementDeconstructor;
+	element = (spellElement_t*)node->element;
+	element->node = node; //Tell the element what list it resides in.
+	//Now for the second element.
+	element->elements.first = NULL;
+	element->elements.last = NULL;
+	node = list_AddNodeLast(&element->elements);
+	node->element = copySpellElement(&spellElement_deathCoil);
 	node->size = sizeof(spellElement_t);
 	node->deconstructor = &spellElementDeconstructor;
 	element = (spellElement_t*)node->element;

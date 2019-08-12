@@ -86,7 +86,7 @@ bool item_PotionWater(Item*& item, Entity* entity, Entity* usedBy)
 				stats->type == LICH_ICE ||
 				stats->type == SHADOW ||
 				stats->type == SKELETON ||
-				stats->type == VAMPIRE )
+				stats->type == VAMPIRE)
 			{
 				//Blessed water damages undead.
 				int damage = -(20 * item->beatitude);
@@ -2297,6 +2297,7 @@ void item_ScrollEnchantWeapon(Item* item, int player)
 			case BRASS_KNUCKLES:
 			case IRON_KNUCKLES:
 			case SPIKED_GAUNTLETS:
+			case ABYSSAL_KNUCKLES:
 				hasMeleeGloves = true;
 				break;
 			default:
@@ -3949,6 +3950,21 @@ void item_Food(Item*& item, int player)
 					stats[player]->HUNGER += 10;
 				}
 				break;
+			case FOOD_CHEDDARCHEESEWHEEL:
+				stats[player]->HUNGER += 300;
+				break;
+			case FOOD_BANANA:
+				stats[player]->HUNGER += 150;
+				break;
+			case FOOD_PIZZA:
+				stats[player]->HUNGER += 370;
+				break;
+			case FOOD_SALMON:
+				stats[player]->HUNGER += 550;
+				break;
+			case FOOD_HAMLETDINER:
+				stats[player]->HUNGER += 700;
+				break;
 			default:
 				stats[player]->HUNGER += 10;
 				break;
@@ -4456,6 +4472,9 @@ void item_Spellbook(Item*& item, int player)
 				break;
 			case SPELLBOOK_CHARM_MONSTER:
 				learned = addSpell(SPELL_CHARM_MONSTER, player);
+				break;
+			case SPELLBOOK_DEATHCOIL:
+				learned = addSpell(SPELL_DEATHCOIL, player);
 				break;
 			default:
 				learned = addSpell(SPELL_FORCEBOLT, player);

@@ -220,11 +220,17 @@ void clickDescription(int player, Entity* entity)
 				{
 					messagePlayer(player, language[262]);
 				}
+				else if (entity->behavior == &actBloodFountain)
+				{
+					messagePlayer(player, language[3747]);
+				}
 				else if ( entity->behavior == &actSink)
 				{
 					messagePlayer(player, language[263]);
 				}
-				else if ( entity->behavior == &actLadder)
+				else if ( entity->behavior == &actLadder || entity->behavior == &actLadderJump2
+						|| entity->behavior == &actLadderJump7 || entity->behavior == &actLadderJump9
+						|| entity->behavior == &actLadderJump14 )
 				{
 					messagePlayer(player, language[264]);
 				}
@@ -257,7 +263,8 @@ void clickDescription(int player, Entity* entity)
 					messagePlayer(player, language[271]);
 				}
 				else if ( entity->behavior == &actPortal || entity->behavior == &actWinningPortal
-					|| entity->behavior == &actMidGamePortal )
+						|| entity->behavior == &actMidGamePortal || entity->behavior == &actPortalJump2
+						|| entity->behavior == &actPortalJump8 )
 				{
 					messagePlayer(player, language[272]);
 				}
@@ -290,7 +297,7 @@ void clickDescription(int player, Entity* entity)
 				{
 					messagePlayer(player, language[2501]);
 				}
-				else if  (entity->sprite == 629 || entity->sprite == 580 ) // column
+				else if  (entity->sprite == 629 || entity->sprite == 580 || entity->sprite == 900 ) // column
 				{
 					messagePlayer(player, language[2502]);
 				}

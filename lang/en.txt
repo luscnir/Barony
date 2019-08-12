@@ -2808,7 +2808,8 @@ been designed to contain them.#
 2009 automaton#
 2010 frosty lich#
 2011 fiery lich#
-
+2012 cockroach#
+ 
 # monster plurals
 
 2050 kobolds#
@@ -2823,6 +2824,7 @@ been designed to contain them.#
 2059 automatons#
 2060 frosty lich#
 2061 fiery lich#
+2062 cockroaches#
 
 # injury types (2100-2149)
 
@@ -2838,6 +2840,7 @@ been designed to contain them.#
 2109 thumps#
 2110 hits#
 2111 hits#
+2112 bites#
 
 # additional obituary messages (2150-2199)
 2150 becomes a victim of kobold gang violence.#
@@ -2852,6 +2855,7 @@ been designed to contain them.#
 2159 gets terminated by an automaton.#
 2160 failed to foil Erudyce's plans.#
 2161 couldn't stand against Orpheus' power.#
+2162 was no match against a cockroach.#
 
 # items, reserve (2200-2349) for new items
 2200 Dragon's Mail#
@@ -2982,6 +2986,12 @@ been designed to contain them.#
 2325 red hood#
 2326 silver doublet#
 2327 silver doublet#
+2328 green torch#
+2329 green torch#
+2330 yellow hood#
+2331 yellow hood#
+2332 yellow clock#
+2333 yellow clock#
 
 #Additional ingame text.
 2350 A fragment breaks away from your %s.#
@@ -4526,4 +4536,68 @@ Thank you for your support!#
 Thank you for your support!#
 3406 ERROR: Invalid serial key.#
 
-3449 end#
+# Delver Mod starts
+#mobs 3500-3549
+
+3501 cockroach#
+3502 cockroaches#
+3503 was no match against a cockroach.#
+
+# items 3550-3599
+
+3551 green torch#
+3552 green torch#
+3553 yellow hood#
+3554 yellow hood#
+3555 yellow clock#
+3556 yellow clock#
+
+# Unique/Legendary Items 3556-3581
+
+3556 Spirit Visage#
+3557 abyssal helm#
+3558 Phantom Walker#
+3559 abyssal boots#
+3560 Ghost Claws#
+3561 abyssal knuckles#
+3562 Void Mail#
+3563 abyssal breastpiece#
+3564 Ectoplasm#
+3565 abyssal cloak#
+3566 Gorefiend#
+3567 abyssal sword#
+3568 Winter's Bite#
+3569 abyssal axe#
+3570 Pyz#
+3571 abyssal mace#
+3572 Klirynippe#
+3573 abyssal spear#
+3574 Lightning Crossbow#
+3575 abyssal crossbow#
+3576 Deep Lament#
+3577 abyssal shield#
+3578 Hi-Ma-Na#
+3579 abyssal ring#
+3580 The Vegeance#
+3581 abyssal amulet#
+
+3582 slimy wizard hat#
+3583 wizard hat#
+3584 slimy iron breastpiece#
+3585 iron breastpiece#
+3586 elementalist cloak#
+3587 weird looking cloak#
+
+3588 Cheddar Cheese Wheel#
+3589 cheese wheel#
+3590 banana#
+3591 banana#
+3592 pizza slice#
+3593 pizza slice#
+3594 salmon#
+3595 fish#
+3596 Hamlet's diner#
+3597 Hamlet's diner#
+
+
+3601 end#

@@ -260,11 +260,55 @@ void initSkeleton(Entity* my, Stat* myStats)
 				}
 				else
 				{
-					myStats->HP = 100;
-					myStats->MAXHP = 100;
-					strcpy(myStats->name, "Funny Bones");
-					myStats->weapon = newItem(ARTIFACT_AXE, EXCELLENT, 1, 1, rand(), true, nullptr);
-					myStats->cloak = newItem(CLOAK_PROTECTION, WORN, 0, 1, 2, true, nullptr);
+					// boss variants
+					switch (rand() % 4)
+					{
+					case 0:					//Funny Bones
+						myStats->HP = 100;
+						myStats->MAXHP = 100;
+						strcpy(myStats->name, "Funny Bones");
+						myStats->weapon = newItem(ARTIFACT_AXE, EXCELLENT, 1, 1, rand(), true, nullptr);
+						myStats->cloak = newItem(CLOAK_PROTECTION, WORN, 0, 1, 2, true, nullptr);
+						break;
+					case 1:					//Elementalist Bobby Bob Bones
+						myStats->HP = 90;
+						myStats->MAXHP = 90;
+						myStats->MP = 100;
+						myStats->MAXMP = 100;
+						strcpy(myStats->name, "Elementalist Bobby Bob Bones");
+						myStats->weapon = newItem(ABYSSAL_MACE, EXCELLENT, 0, 1, rand(), true, nullptr);
+						myStats->shield = newItem(TOOL_CRYSTALSHARD, WORN, 0, 1, 1, true, nullptr);
+						myStats->helmet = newItem(HAT_WIZARD, EXCELLENT, 2, 1, 1, true, nullptr);
+						myStats->cloak = newItem(CLOAK_ELEMENTALIST, DECREPIT, 0, 1, 1, true, nullptr);
+						break;
+					case 2:					//Bad Joke
+						myStats->HP = 50;
+						myStats->MAXHP = 50;
+						strcpy(myStats->name, "Bad Joke");
+						myStats->weapon = newItem(SLING, EXCELLENT, 1, 1, rand(), true, nullptr);
+						myStats->helmet = newItem(HAT_JESTER, WORN, 0, 1, 1, true, nullptr);
+						newItem(RING_LEVITATION, EXCELLENT, -2, 1, rand(), false, &myStats->inventory);
+						my->setEffect(EFF_LEVITATING, true, -1, true); //-1 duration, never expires.
+						break;
+					case 3:					//Kod, Deadhand
+						myStats->HP = 75;
+						myStats->MAXHP = 75;
+						strcpy(myStats->name, "Kod, Deadhand");
+						myStats->weapon = newItem(TOOL_PICKAXE, EXCELLENT, -1, 1, rand(), true, nullptr);
+						myStats->shield = newItem(TOOL_LANTERN, WORN, -1, 1, 1, true, nullptr);
+						myStats->breastplate = newItem(LEATHER_BREASTPIECE, EXCELLENT, 0, 1, 1, true, nullptr);
+						myStats->cloak = newItem(CLOAK_BACKPACK, WORN, 0, 1, 1, true, nullptr);
+						int c;
+						for (c = 0; c < 2; c++)
+						{
+							Entity* entity = summonMonster(GHOUL, my->x, my->y);
+							if (entity)
+							{
+								entity->parent = my->getUID();
+							}
+						}
+						break;
+					}
 				}
 
 				// random effects
@@ -1352,7 +1396,7 @@ void skeletonMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	if ( shieldNode )
 	{
 		Entity* shieldEntity = (Entity*)shieldNode->element;
-		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index )
+		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index )
 		{
 			shieldEntity->yaw -= PI / 6;
 		}

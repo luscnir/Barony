@@ -21,7 +21,7 @@
 #endif
 
 // REMEMBER TO CHANGE THIS WITH EVERY NEW OFFICIAL VERSION!!!
-#define VERSION "v3.2.3"
+#define VERSION "v3.2.4"
 #define GAME_CODE
 
 //#define MAX_FPS_LIMIT 60 //TODO: Make this configurable.
@@ -279,6 +279,17 @@ void actExpansionEndGamePortal(Entity* my);
 void actSoundSource(Entity* my);
 void actLightSource(Entity* my);
 void actSignalTimer(Entity* my);
+//void actBoltTrap(Entity* my);
+void actPortalJump2(Entity* my);
+void actPortalJump8(Entity* my);
+void actLadderJump2(Entity* my);
+void actLadderJump7(Entity* my);
+void actLadderJump8(Entity* my);
+void actLadderJump9(Entity* my);
+void actLadderJump10(Entity* my);
+void actLadderJump11(Entity* my);
+void actLadderJump14(Entity* my);
+void actMidPortalJump13(Entity* my);
 
 void startMessages();
 bool frameRateLimit(Uint32 maxFrameRate, bool resetAccumulator = true);
@@ -307,6 +318,7 @@ extern char last_port[64];
 
 #define SPRITE_FLAME 13
 #define SPRITE_CRYSTALFLAME 96
+#define SPRITE_GREENFLAME 135
 
 #define MAXCHARGE 30 // charging up weapons
 

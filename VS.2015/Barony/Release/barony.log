@@ -1,0 +1,17 @@
+﻿  sound_game.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005:  'PATH_MAX': macro redefinition
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message :  see previous definition of 'PATH_MAX'
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound_game.cpp(112,4): warning C4244:  'argument': conversion from 'real_t' to 'Uint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound_game.cpp(113,4): warning C4244:  'argument': conversion from 'real_t' to 'Uint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound_game.cpp(135,18): warning C4244:  '=': conversion from 'real_t' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound_game.cpp(137,18): warning C4244:  '=': conversion from 'real_t' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound_game.cpp(183,18): warning C4244:  '=': conversion from 'real_t' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound_game.cpp(185,18): warning C4244:  '=': conversion from 'real_t' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound_game.cpp(367,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound_game.cpp(367,47): warning C4018:  '<': signed/unsigned mismatch
+  Generating code
+  2 of 4586 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    270 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  barony.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\barony_test.exe

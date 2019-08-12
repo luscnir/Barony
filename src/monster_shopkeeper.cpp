@@ -1154,6 +1154,13 @@ void shopkeeperMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					entity2->y += 2 * sin(my->yaw);
 					entity2->z += 1;
 				}
+				else if (entity->sprite == items[TOOL_GREENTORCH].index)
+				{
+					entity2 = spawnFlame(entity, SPRITE_GREENFLAME);
+					entity2->x += 2 * cos(my->yaw);
+					entity2->y += 2 * sin(my->yaw);
+					entity2->z -= 2;
+				}
 				break;
 				// cloak
 			case LIMB_HUMANOID_CLOAK:
@@ -1319,7 +1326,7 @@ void shopkeeperMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	if ( shieldNode )
 	{
 		Entity* shieldEntity = (Entity*)shieldNode->element;
-		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index )
+		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index)
 		{
 			shieldEntity->yaw -= PI / 6;
 		}

@@ -4198,6 +4198,10 @@ Entity* castStationaryOrbitingMagicMissile(Entity* parent, int spellID, real_t c
 		{
 			entity->sprite = 679;
 		}
+		else if (spellID == SPELL_DEATHCOIL )
+		{
+			entity->sprite = 863;
+		}
 		entity->yaw = angleFromCenterDirection;
 		entity->x = centerx;
 		entity->y = centery;

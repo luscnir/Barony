@@ -111,6 +111,10 @@ bool doesEntityStopBoulder(Entity* entity)
 	{
 		return true;
 	}
+	else if (entity->behavior == &actBloodFountain)
+	{
+		return true;
+	}
 	else if ( entity->behavior == &actSink )
 	{
 		return true;

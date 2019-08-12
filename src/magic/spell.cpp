@@ -57,6 +57,7 @@ spellElement_t spellElement_stealWeapon;
 spellElement_t spellElement_drainSoul;
 spellElement_t spellElement_vampiricAura;
 spellElement_t spellElement_charmMonster;
+spellElement_t spellElement_deathCoil;
 
 spell_t spell_forcebolt;
 spell_t spell_magicmissile;
@@ -90,6 +91,7 @@ spell_t spell_stealWeapon;
 spell_t spell_drainSoul;
 spell_t spell_vampiricAura;
 spell_t spell_charmMonster;
+spell_t spell_deathCoil;
 
 bool addSpell(int spell, int player, bool ignoreSkill)
 {
@@ -196,6 +198,9 @@ bool addSpell(int spell, int player, bool ignoreSkill)
 			new_spell = copySpell(&spell_vampiricAura);
 			break;
 		case SPELL_CHARM_MONSTER:
+			new_spell = copySpell(&spell_charmMonster);
+			break;
+		case SPELL_DEATHCOIL:
 			new_spell = copySpell(&spell_charmMonster);
 			break;
 		default:
@@ -561,6 +566,9 @@ spell_t* getSpellFromID(int ID)
 		case SPELL_CHARM_MONSTER:
 			spell = &spell_charmMonster;
 			break;
+		case SPELL_DEATHCOIL:
+			spell = &spell_deathCoil;
+			break;
 		default:
 			break;
 	}
@@ -668,6 +676,9 @@ Item* getSpellbookFromSpellID(int spellID)
 		case SPELL_CHARM_MONSTER:
 			itemType = SPELLBOOK_CHARM_MONSTER;
 			break;
+		case SPELL_DEATHCOIL:
+			itemType = SPELLBOOK_DEATHCOIL;
+			break;
 		default:
 			break;
 	}
@@ -744,6 +755,8 @@ int getSpellIDFromSpellbook(int spellbookType)
 			return spell_vampiricAura.ID;
 		case SPELLBOOK_CHARM_MONSTER:
 			return spell_charmMonster.ID;
+		case SPELLBOOK_DEATHCOIL:
+			return spell_deathCoil.ID;
 		default:
 			return SPELL_NONE;
 	}

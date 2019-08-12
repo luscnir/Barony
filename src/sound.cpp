@@ -66,6 +66,9 @@ FMOD_SOUND* sokobanmusic = NULL;
 FMOD_SOUND* caveslairmusic = NULL;
 FMOD_SOUND* bramscastlemusic = NULL;
 FMOD_SOUND* hamletmusic = NULL;
+FMOD_SOUND** burgmusic = NULL;
+FMOD_SOUND* crypticspiralmusic = NULL;
+FMOD_SOUND* matildasforestmusic = NULL;
 bool levelmusicplaying = false;
 
 FMOD_CHANNEL* music_channel = NULL;
@@ -931,6 +934,8 @@ bool physfsSearchMusicToUpdate()
 	themeMusic.push_back("music/caveslair.ogg");
 	themeMusic.push_back("music/bramscastle.ogg");
 	themeMusic.push_back("music/hamlet.ogg");
+	themeMusic.push_back("music/CrypticSpiral.ogg");
+	themeMusic.push_back("music/CorruptedMedicine.ogg");
 
 	for ( std::vector<std::string>::iterator it = themeMusic.begin(); it != themeMusic.end(); ++it )
 	{
@@ -1065,6 +1070,19 @@ bool physfsSearchMusicToUpdate()
 			}
 		}
 	}
+	for (c = 0; c < NUMBURGMUSIC; c++)
+	{
+		snprintf(tempstr, 1000, "music/burg%02d.ogg", c);
+		if (PHYSFS_getRealDir(tempstr) != NULL)
+		{
+			std::string musicDir = PHYSFS_getRealDir(tempstr);
+			if (musicDir.compare("./") != 0)
+			{
+				printlog("[PhysFS]: Found modified music in music/ directory, reloading music files...");
+				return true;
+			}
+		}
+	}
 	for ( c = 0; c < NUMINTROMUSIC; c++ )
 	{
 		if ( c == 0 )
@@ -1112,6 +1130,8 @@ void physfsReloadMusic(bool &introMusicChanged, bool reloadAll)
 	themeMusic.push_back("music/caveslair.ogg");
 	themeMusic.push_back("music/bramscastle.ogg");
 	themeMusic.push_back("music/hamlet.ogg");
+	themeMusic.push_back("music/CrypticSpiral.ogg");
+	themeMusic.push_back("music/CorruptedMedicine.ogg");
 
 	int index = 0;
 #ifdef USE_OPENAL
@@ -1259,6 +1279,20 @@ void physfsReloadMusic(bool &introMusicChanged, bool reloadAll)
 							FMOD_Sound_Release(hamletmusic);
 						}
 						fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &hamletmusic);
+						break;
+					case 18:
+						if ( crypticspiralmusic )
+						{
+							FMOD_Sound_Release(crypticspiralmusic);
+						}
+						fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &crypticspiralmusic);
+						break;
+					case 19:
+						if ( matildasforestmusic )
+						{
+							FMOD_Sound_Release(matildasforestmusic);
+						}
+						fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &matildasforestmusic);
 						break;
 					default:
 						break;
@@ -1435,6 +1469,25 @@ void physfsReloadMusic(bool &introMusicChanged, bool reloadAll)
 				printlog("[PhysFS]: Reloading music file %s...", tempstr);
 				music = citadelmusic;
 				if ( music )
+				{
+					FMOD_Sound_Release(music[c]);
+					fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &music[c]);
+				}
+			}
+		}
+	}
+	for (c = 0; c < NUMBURGMUSIC; c++)
+	{
+		snprintf(tempstr, 1000, "music/burg%02d.ogg", c);
+		if (PHYSFS_getRealDir(tempstr) != NULL)
+		{
+			std::string musicDir = PHYSFS_getRealDir(tempstr);
+			if (musicDir.compare("./") != 0 || reloadAll)
+			{
+				musicDir.append(PHYSFS_getDirSeparator()).append(tempstr);
+				printlog("[PhysFS]: Reloading music file %s...", tempstr);
+				music = citadelmusic;
+				if (music)
 				{
 					FMOD_Sound_Release(music[c]);
 					fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &music[c]);

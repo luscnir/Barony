@@ -1080,7 +1080,13 @@ Entity* castSpell(Uint32 caster_uid, spell_t* spell, bool using_magicstaff, bool
 					node_t* node = caster->children.first;
 					Entity* ceilingModel = (Entity*)(node->element);
 					entity->z = ceilingModel->z;
-				}
+				}/*
+				else if (caster->behavior == &actBoltTrap)
+				{
+					node_t* node = caster->children.first;
+					Entity* ceilingModel = (Entity*)(node->element);
+					entity->z = ceilingModel->z;
+				}*/
 			}
 		}
 		else if ( propulsion == PROPULSION_MISSILE_TRIO )
@@ -1206,7 +1212,7 @@ Entity* castSpell(Uint32 caster_uid, spell_t* spell, bool using_magicstaff, bool
 		}
 
 		extramagic_to_use = 0;
-		if (extramagic > 0)
+		if (extramagic > 0)//void actBoltTrap(Entity* my)
 		{
 			//Extra magic. Pump it in here?
 			chance = rand() % 5;
@@ -1393,6 +1399,13 @@ Entity* castSpell(Uint32 caster_uid, spell_t* spell, bool using_magicstaff, bool
 				if ( propulsion == PROPULSION_MISSILE )
 				{
 					entity->sprite = 173;
+				}
+			}
+			else if ( !strcmp(element->name, spellElement_deathCoil.name) )
+			{
+				if ( propulsion == PROPULSION_MISSILE )
+				{
+					entity->sprite = 177;
 				}
 			}
 		}

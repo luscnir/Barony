@@ -43,6 +43,11 @@ void initDemon(Entity* my, Stat* myStats)
 				myStats->leader_uid = 0;
 			}
 
+			if ( !strncmp (myStats->name, "blood demon", strlen("blood demon")) )
+			{
+				myStats->weapon = newItem(SPELLBOOK_BLEED, EXCELLENT, 0, 1, 0, false, nullptr);
+			}
+
 			// apply random stat increases if set in stat_shared.cpp or editor
 			setRandomMonsterStats(myStats);
 

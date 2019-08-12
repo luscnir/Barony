@@ -1324,6 +1324,7 @@ void clientActions(Entity* entity)
 			entity->flags[NOUPDATE] = true;
 			break;
 		case 629:
+		case 900:
 			entity->behavior = &actColumn;
 			entity->flags[NOUPDATE] = true;
 			break;
@@ -1331,6 +1332,17 @@ void clientActions(Entity* entity)
 		case 633:
 			entity->behavior = &actPistonCam;
 			entity->flags[NOUPDATE] = true;
+			break;
+		case 891:
+			entity->skill[2] = (int)SDLNet_Read32(&net_packet->data[30]);
+			entity->behavior = &actBloodFountain;
+			break;
+		case 904:
+		case 905:
+		case 906:
+		case 907:
+			//act portals yellow
+			entity->behavior = &actPortal;// Jump2;
 			break;
 		default:
 			if ( entity->isPlayerHeadSprite() )

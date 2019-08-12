@@ -2387,6 +2387,7 @@ void consoleCommand(char* command_str)
 			learned = addSpell(SPELL_DRAIN_SOUL, clientnum, true);
 			learned = addSpell(SPELL_VAMPIRIC_AURA, clientnum, true);
 			learned = addSpell(SPELL_CHARM_MONSTER, clientnum, true);
+			learned = addSpell(SPELL_DEATHCOIL, clientnum, true);
 			return;
 		}
 		else

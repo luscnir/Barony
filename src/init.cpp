@@ -841,6 +841,12 @@ int loadLanguage(char* lang)
 	// update item internal language entries.
 	for ( int c = 0; c < NUMITEMS; ++c )
 	{
+		if (c >= TOOL_GREENTORCH)
+		{
+			int newItems = c - TOOL_GREENTORCH;
+			items[c].name_identified = language[3550 + newItems * 2];
+			items[c].name_unidentified = language[3551 + newItems * 2];
+		}
 		if ( c > ARTIFACT_BOW )
 		{
 			int newItems = c - ARTIFACT_BOW - 1;

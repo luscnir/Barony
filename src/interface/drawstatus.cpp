@@ -1634,6 +1634,11 @@ void drawSpellTooltip(spell_t* spell)
 				snprintf(spellEffectText, 255, language[3326]);
 				spellInfoLines = 3;
 				break;
+			case SPELL_DEATHCOIL:
+				snprintf(spellEffectText, 255, language[3290], damage);
+				snprintf(spellType, 31, language[3303]);
+				spellInfoLines = 2;
+				break;
 			default:
 				break;
 		}

@@ -53,28 +53,49 @@ void initSpider(Entity* my, Stat* myStats)
 			// boss variants
 			if ( rand() % 50 == 0 && !my->flags[USERFLAG2] )
 			{
-				strcpy(myStats->name, "Shelob");
-				myStats->HP = 150;
-				myStats->MAXHP = 150;
-				myStats->OLDHP = myStats->HP;
-				myStats->STR = 10;
-				myStats->DEX = 10;
-				myStats->CON = 8;
-				myStats->INT = 5;
-				myStats->PER = 10;
-				myStats->CHR = 10;
-				myStats->LVL = 15;
-				newItem(RING_INVISIBILITY, EXCELLENT, -5, 1, rand(), false, &myStats->inventory);
-				newItem(ARTIFACT_SWORD, EXCELLENT, 1, 1, rand(), false, &myStats->inventory);
-				customItemsToGenerate -= 2;
-				int c;
-				for ( c = 0; c < 3; c++ )
+				switch (rand() % 2)
 				{
-					Entity* entity = summonMonster(SPIDER, my->x, my->y);
-					if ( entity )
+				case 0:
+					strcpy(myStats->name, "Shelob");
+					myStats->HP = 150;
+					myStats->MAXHP = 150;
+					myStats->OLDHP = myStats->HP;
+					myStats->STR = 10;
+					myStats->DEX = 10;
+					myStats->CON = 8;
+					myStats->INT = 5;
+					myStats->PER = 10;
+					myStats->CHR = 10;
+					myStats->LVL = 15;
+					newItem(RING_INVISIBILITY, EXCELLENT, -5, 1, rand(), false, &myStats->inventory);
+					newItem(ARTIFACT_SWORD, EXCELLENT, 1, 1, rand(), false, &myStats->inventory);
+					customItemsToGenerate -= 2;
+					int c;
+					for (c = 0; c < 3; c++)
 					{
-						entity->parent = my->getUID();
+						Entity* entity = summonMonster(SPIDER, my->x, my->y);
+						if (entity)
+						{
+							entity->parent = my->getUID();
+						}
 					}
+					break;
+				case 1:
+					strcpy(myStats->name, "Blightbringer");
+					myStats->HP = 115;
+					myStats->MAXHP = 115;
+					myStats->OLDHP = myStats->HP;
+					myStats->STR = 10;
+					myStats->DEX = 20;
+					myStats->CON = 8;
+					myStats->INT = 5;
+					myStats->PER = 10;
+					myStats->CHR = 10;
+					myStats->LVL = 15;
+					newItem(POTION_ACID, EXCELLENT, 0, 5, 1, false, &myStats->inventory);
+					newItem(TOOL_ALEMBIC, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
+					customItemsToGenerate -= 2;
+					break;
 				}
 			}
 

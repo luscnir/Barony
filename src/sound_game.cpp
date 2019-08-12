@@ -608,9 +608,30 @@ void handleLevelMusic()
 				playmusic(minesmusic[4], true, true, true);
 			}
 		}
+		else if ( !strncmp(map.name, "The Burg", 9))     // the Burg
+		{
+			if ( !playing )
+			{
+				currenttrack = 1 + rand() % (NUMBURGMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMBURGMUSIC;
+			if ( currenttrack == 0 )
+			{
+				currenttrack = 1;
+			}
+			playmusic( burgmusic[currenttrack], false, true, true );
+		}
+		else if ( !strcmp (map.name, "Cryptic Spiral" ) )
+		{
+			playmusic( crypticspiralmusic, true, true, true );
+		}
+		else if ( !strcmp( map.name, "Matilda's Forest" ) )
+		{
+			playmusic( matildasforestmusic, true, true, true );
+		}
 		else
 		{
-			playmusic(intermissionmusic, true, true, true);
+			playmusic(intermissionmusic, true, true, true );
 		}
 		olddarkmap = darkmap;
 		levelmusicplaying = true;
@@ -705,6 +726,10 @@ void handleLevelMusic()
 		else if ( !strncmp(map.name, "Citadel", 7) || !strcmp(map.name, "Bram's Castle") )
 		{
 			playmusic(citadelmusic[0], true, true, true);
+		}
+		else if (!strncmp(map.name, "The Burg", 9) )	// the burg
+		{
+			playmusic(burgmusic[0], true, true, true);
 		}
 		else
 		{

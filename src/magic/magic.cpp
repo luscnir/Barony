@@ -55,6 +55,7 @@ void freeSpells()
 	list_FreeAll(&spell_drainSoul.elements);
 	list_FreeAll(&spell_vampiricAura.elements);
 	list_FreeAll(&spell_charmMonster.elements);
+	list_FreeAll(&spell_deathCoil.elements);
 }
 
 void spell_magicMap(int player)
@@ -288,6 +289,7 @@ bool spellEffectDominate(Entity& my, spellElement_t& element, Entity& caster, En
 		|| hitstats->type == SHADOW
 		|| (hitstats->type == VAMPIRE && !strncmp(hitstats->name, "Bram Kindly", 11))
 		|| (hitstats->type == COCKATRICE && !strncmp(map.name, "Cockatrice Lair", 15))
+		|| hitstats->type == MATILDA
 		)
 	{
 		Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
@@ -892,6 +894,7 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case SKELETON:
 				case SCORPION:
 				case SHOPKEEPER:
+				case COCKROACH:
 					difficulty = 0;
 					break;
 				case GOBLIN:
@@ -901,6 +904,7 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case SCARAB:
 				case AUTOMATON:
 				case SUCCUBUS:
+				case BURGGUARD:
 					difficulty = 1;
 					break;
 				case CREATURE_IMP:
@@ -909,6 +913,7 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case INCUBUS:
 				case INSECTOID:
 				case GOATMAN:
+				case GARGOYLE:
 					difficulty = 2;
 					break;
 				case CRYSTALGOLEM:
@@ -922,6 +927,7 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case LICH_ICE:
 				case LICH_FIRE:
 				case MINOTAUR:
+				case MATILDA:
 					difficulty = 666;
 					break;
 			}
@@ -1255,7 +1261,7 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent)
 			|| monsterSummonType == MIMIC || monsterSummonType == BUGBEAR || monsterSummonType == OCTOPUS
 			|| monsterSummonType == MINOTAUR || monsterSummonType == LICH_FIRE || monsterSummonType == LICH_ICE
 			|| monsterSummonType == NOTHING || monsterSummonType == targetStats->type || monsterSummonType == HUMAN
-			|| (targetStats->leader_uid != 0 && monsterSummonType == SHADOW) )
+			|| (targetStats->leader_uid != 0 && monsterSummonType == SHADOW) || monsterSummonType == MATILDA )
 		{
 			monsterSummonType = static_cast<Monster>(rand() % NUMMONSTERS);
 		}
@@ -1282,6 +1288,8 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent)
 			case CRYSTALGOLEM:
 			case SHADOW:
 			case COCKATRICE:
+			case COCKROACH:
+			case GARGOYLE:
 				summonCanEquipItems = false;
 				break;
 			default:
@@ -1303,6 +1311,8 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent)
 			case CRYSTALGOLEM:
 			case SHADOW:
 			case COCKATRICE:
+			case COCKROACH:
+			case GARGOYLE:
 				hitMonsterCanTransferEquipment = false;
 				break;
 			default:
@@ -1316,7 +1326,7 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent)
 		bool fellInWater = false;
 
 		if ( targetStats->EFFECTS[EFF_LEVITATING]
-			&& (monsterSummonType != CREATURE_IMP && monsterSummonType != COCKATRICE && monsterSummonType != SHADOW) )
+			&& (monsterSummonType != CREATURE_IMP && monsterSummonType != COCKATRICE && monsterSummonType != SHADOW && monsterSummonType != GARGOYLE) )
 		{
 			// check if there's a floor...
 			int x, y, u, v;

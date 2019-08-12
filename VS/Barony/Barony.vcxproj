@@ -20,13 +20,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -43,12 +43,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;E:\GameLibs\SDL2-2.0.4\include;E:\GameLibs\SDL2_image-2.0.0\include;E:\GameLibs\SDL2_net-2.0.0\include;E:\GameLibs\libpng-1.2.37-lib\include;E:\GameLibs\zlib-1.2.3-lib\include;E:\GameLibs\steamworks_sdk_135\sdk\public;E:\GameLibs\SDL2_ttf-2.0.14\include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\lib;E:\GameLibs\SDL2-2.0.4\lib\x86;E:\GameLibs\SDL2_image-2.0.0\lib\x86;E:\GameLibs\SDL2_net-2.0.0\lib\x86;E:\GameLibs\libpng-1.2.37-lib\lib;E:\GameLibs\zlib-1.2.3-lib\lib;E:\GameLibs\steamworks_sdk_135\sdk\redistributable_bin;E:\GameLibs\SDL2_ttf-2.0.14\lib\x86</LibraryPath>
+    <LibraryPath>C:\Users\Lucas\Desktop\Barony-Bloated Rendition\Barony\Libraries;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\lib;E:\GameLibs\SDL2-2.0.4\lib\x86;E:\GameLibs\SDL2_image-2.0.0\lib\x86;E:\GameLibs\SDL2_net-2.0.0\lib\x86;E:\GameLibs\libpng-1.2.37-lib\lib;E:\GameLibs\zlib-1.2.3-lib\lib;E:\GameLibs\steamworks_sdk_135\sdk\redistributable_bin;E:\GameLibs\SDL2_ttf-2.0.14\lib\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;E:\GameLibs\SDL2-2.0.4\include;E:\GameLibs\SDL2_image-2.0.0\include;E:\GameLibs\SDL2_net-2.0.0\include;E:\GameLibs\libpng-1.2.37-lib\include;E:\GameLibs\zlib-1.2.3-lib\include;E:\GameLibs\steamworks_sdk_135\sdk\public;E:\GameLibs\SDL2_ttf-2.0.14\include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\lib;E:\GameLibs\SDL2-2.0.4\lib\x86;E:\GameLibs\SDL2_image-2.0.0\lib\x86;E:\GameLibs\SDL2_net-2.0.0\lib\x86;E:\GameLibs\libpng-1.2.37-lib\lib;E:\GameLibs\zlib-1.2.3-lib\lib;E:\GameLibs\steamworks_sdk_135\sdk\redistributable_bin;E:\GameLibs\SDL2_ttf-2.0.14\lib\x86</LibraryPath>
+    <LibraryPath>C:\Users\Lucas\Desktop\Barony-Bloated Rendition\Barony\Libraries;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\Program Files (x86)\FMOD SoundSystem\FMOD Programmers API Windows\api\lib;E:\GameLibs\SDL2-2.0.4\lib\x86;E:\GameLibs\SDL2_image-2.0.0\lib\x86;E:\GameLibs\SDL2_net-2.0.0\lib\x86;E:\GameLibs\libpng-1.2.37-lib\lib;E:\GameLibs\zlib-1.2.3-lib\lib;E:\GameLibs\steamworks_sdk_135\sdk\redistributable_bin;E:\GameLibs\SDL2_ttf-2.0.14\lib\x86</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

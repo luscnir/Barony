@@ -45,12 +45,16 @@ enum Monster : int
 	GOATMAN,
 	AUTOMATON,
 	LICH_ICE,
-	LICH_FIRE
+	LICH_FIRE,
+	COCKROACH,
+	BURGGUARD,
+	GARGOYLE,
+	MATILDA
 };
-const int NUMMONSTERS = 33;
+const int NUMMONSTERS = 37;
 extern int kills[NUMMONSTERS];
 
-static char monstertypename[][15] =
+static char monstertypename[][16] =
 {
 	"nothing",
 	"human",
@@ -84,10 +88,14 @@ static char monstertypename[][15] =
 	"goatman",
 	"automaton",
 	"lichice",
-	"lichfire"
+	"lichfire",
+	"cockroach",
+	"burgguard",
+	"gargoyle",
+	"matilda"
 };
 
-static char monstertypenamecapitalized[][15] =
+static char monstertypenamecapitalized[][16] =
 {
 	"Nothing",
 	"Human",
@@ -121,7 +129,11 @@ static char monstertypenamecapitalized[][15] =
 	"Goatman",
 	"Automaton",
 	"Lichice",
-	"Lichfire"
+	"Lichfire",
+	"Cockroach",
+	"Burgguard",
+	"Gargoyle",
+	"Matilda"
 };
 
 // body part focal points
@@ -165,7 +177,11 @@ static char gibtype[NUMMONSTERS] =
 	1,	//GOATMAN,
 	0,	//AUTOMATON,
 	2,	//LICH_ICE,
-	2	//LICH_FIRE
+	2,	//LICH_FIRE,
+	2,	//COCKROACH,
+	2,	//BURG GUARD,
+	2,	//GARGOYLE,
+	2	//MATILDA
 
 };
 
@@ -206,7 +222,11 @@ static double damagetables[NUMMONSTERS][7] =
 	{ 0.9, 1.f, 1.1, 1.1, 1.1, 1.4, 1.f }, // goatman
 	{ 0.5, 1.4, 0.8, 1.3, 0.5, 0.8, 0.7 }, // automaton
 	{ 1.5, 1.5, 1.5, 1.5, 1.f, 0.7, 1.2 }, // lich ice
-	{ 1.8, 1.8, 1.8, 1.8, 1.f, 1.f, 1.4 }  // lich fire
+	{ 1.8, 1.8, 1.8, 1.8, 1.f, 1.f, 1.4 }, // lich fire
+	{ 0.9, 1.5, 1.f, 0.9, 1.3, 1.f, 1.5 }, // cockroach
+	{ 1.f, 1.1, 0.9, 1.f, 0.8, 1.1, 0.9 }, // burg guard
+	{ 1.2, 1.1, 1.1, 1.f, 1.f, 1.1, 0.8 }, // gargoyle
+	{ 1.f, 1.2, 1.f, 1.4, 1.2, 1.f, 1.2 }  // matilda
 
 };
 
@@ -396,6 +416,10 @@ void initInsectoid(Entity* my, Stat* myStats);
 void initGoatman(Entity* my, Stat* myStats);
 void initLichFire(Entity* my, Stat* myStats);
 void initLichIce(Entity* my, Stat* myStats);
+void initCockroach(Entity* my, Stat* myStats);
+void initBurgGuard(Entity* my, Stat* myStats);
+void initGargoyle(Entity* my, Stat* myStats);
+void initMatilda(Entity* my, Stat* myStats);
 
 //--act*Limb functions--
 void actHumanLimb(Entity* my);
@@ -425,6 +449,9 @@ void actGoatmanLimb(Entity* my);
 void actScarabLimb(Entity* my);
 void actLichFireLimb(Entity* my);
 void actLichIceLimb(Entity* my);
+void actBurgGuardLimb(Entity* my);
+void actGargoyleLimb(Entity* my);
+void actMatildaLimb(Entity* my);
 
 //--*Die functions--
 void humanDie(Entity* my);
@@ -456,6 +483,10 @@ void insectoidDie(Entity* my);
 void goatmanDie(Entity* my);
 void lichFireDie(Entity* my);
 void lichIceDie(Entity* my);
+void cockroachDie(Entity* my);
+void burgGuardDie(Entity* my);
+void gargoyleDie(Entity* my);
+void matildaDie(Entity* my);
 
 //--*MoveBodyparts functions--
 void humanMoveBodyparts(Entity* my, Stat* myStats, double dist);
@@ -487,6 +518,10 @@ void insectoidMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void goatmanMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void lichFireAnimate(Entity* my, Stat* myStats, double dist);
 void lichIceAnimate(Entity* my, Stat* myStats, double dist);
+void cockroachAnimate(Entity* my, double dist);
+void burgGuardMoveBodyparts(Entity* my, Stat* myStats, double dist);
+void gargoyleMoveBodyparts(Entity* my, Stat* myStats, double dist);
+void matildaMoveBodyparts(Entity* my, Stat* myStats, double dist);
 
 //--misc functions--
 void actMinotaurTrap(Entity* my);
@@ -558,6 +593,7 @@ static const int MONSTER_POSE_VAMPIRE_DRAIN = 29;
 static const int MONSTER_POSE_VAMPIRE_AURA_CAST = 30;
 static const int MONSTER_POSE_AUTOMATON_MALFUNCTION = 31;
 static const int MONSTER_POSE_LICH_FIRE_SWORD = 32;
+static const int MONSTER_POSE_GARGOYLE_DOUBLEATTACK = 33;
 
 //--monster special cooldowns
 static const int MONSTER_SPECIAL_COOLDOWN_GOLEM = 150;
@@ -582,6 +618,8 @@ static const int MONSTER_SPECIAL_COOLDOWN_INCUBUS_TELEPORT_TARGET = 200;
 static const int MONSTER_SPECIAL_COOLDOWN_VAMPIRE_AURA = 500;
 static const int MONSTER_SPECIAL_COOLDOWN_VAMPIRE_DRAIN = 300;
 static const int MONSTER_SPECIAL_COOLDOWN_SUCCUBUS_CHARM = 400;
+static const int MONSTER_SPECIAL_COOLDOWN_GARGOYLE_ATK = 200;
+static const int MONSTER_SPECIAL_COOLDOWN_GARGOYLE_SLOW = 100;
 
 //--monster target search types
 static const int MONSTER_TARGET_ENEMY = 0;

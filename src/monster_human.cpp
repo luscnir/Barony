@@ -1504,9 +1504,16 @@ void humanMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					entity2->y += 2 * sin(entity->yaw);
 					entity2->z += 1;
 				}
+				else if (entity->sprite == items[TOOL_GREENTORCH].index)
+				{
+					entity2 = spawnFlame(entity, SPRITE_GREENFLAME);
+					entity2->x += 2 * cos(entity->yaw);
+					entity2->y += 2 * sin(entity->yaw);
+					entity2->z -= 2;
+				}
 				if ( MONSTER_SHIELDYAW > PI / 32 )
 				{
-					if ( entity->sprite != items[TOOL_TORCH].index && entity->sprite != items[TOOL_LANTERN].index && entity->sprite != items[TOOL_CRYSTALSHARD].index )
+					if ( entity->sprite != items[TOOL_TORCH].index && entity->sprite != items[TOOL_LANTERN].index && entity->sprite != items[TOOL_CRYSTALSHARD].index && entity->sprite != items[TOOL_GREENTORCH].index)
 					{
 						// shield, so rotate a little.
 						entity->roll += PI / 64;
@@ -1688,7 +1695,7 @@ void humanMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	if ( shieldNode )
 	{
 		Entity* shieldEntity = (Entity*)shieldNode->element;
-		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index )
+		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index)
 		{
 			shieldEntity->yaw -= PI / 6;
 		}

@@ -2372,6 +2372,7 @@ int FollowerRadialMenu::optionDisabledForCreature(int playerSkillLVL, int monste
 		case SPIDER:
 		case SKELETON:
 		case SCORPION:
+		case COCKROACH:
 			creatureTier = 0;
 			break;
 		case GOBLIN:
@@ -2381,6 +2382,7 @@ int FollowerRadialMenu::optionDisabledForCreature(int playerSkillLVL, int monste
 		case SCARAB:
 		case AUTOMATON:
 		case SUCCUBUS:
+		case BURGGUARD:
 			creatureTier = 1;
 			break;
 		case CREATURE_IMP:
@@ -2389,6 +2391,7 @@ int FollowerRadialMenu::optionDisabledForCreature(int playerSkillLVL, int monste
 		case INCUBUS:
 		case INSECTOID:
 		case GOATMAN:
+		case GARGOYLE:
 			creatureTier = 2;
 			break;
 		case CRYSTALGOLEM:
@@ -2564,6 +2567,7 @@ bool FollowerRadialMenu::allowedClassToggle(int monsterType)
 		case GOBLIN:
 		case AUTOMATON:
 		case GOATMAN:
+		case BURGGUARD:
 			return true;
 			break;
 		default:
@@ -2580,6 +2584,7 @@ bool FollowerRadialMenu::allowedItemPickupToggle(int monsterType)
 		case GOBLIN:
 		case AUTOMATON:
 		case GOATMAN:
+		case BURGGUARD:
 			return true;
 			break;
 		default:
@@ -2605,6 +2610,9 @@ bool FollowerRadialMenu::allowedInteractFood(int monsterType)
 		case TROLL:
 		case COCKATRICE:
 		case SCARAB:
+		case COCKROACH:
+		case BURGGUARD:
+		case GARGOYLE:
 			return true;
 			break;
 		default:
@@ -2624,6 +2632,7 @@ bool FollowerRadialMenu::allowedInteractWorld(int monsterType)
 		case KOBOLD:
 		case GOATMAN:
 		case SKELETON:
+		case BURGGUARD:
 			return true;
 			break;
 		default:
@@ -2647,6 +2656,7 @@ bool FollowerRadialMenu::allowedInteractItems(int monsterType)
 		case SKELETON:
 		case VAMPIRE:
 		case SLIME:
+		case BURGGUARD:
 			if ( followerToCommand && followerToCommand->monsterAllySummonRank != 0 )
 			{
 				return false;

@@ -727,28 +727,28 @@ void actPlayer(Entity* my)
 						messagePlayerColor(clientnum, color, language[537]);
 						messagePlayerColor(clientnum, color, language[70 + speech]);
 					}
-					else if ( currentlevel == 5 && !secretlevel )
+					else if ( ( currentlevel == 5 || currentlevel == 12 ) && !secretlevel )
 					{
 						int speech = rand() % 2;
 						playSound(156 + speech, 128);
 						messagePlayerColor(clientnum, color, language[537]);
 						messagePlayerColor(clientnum, color, language[83 + speech]);
 					}
-					else if ( currentlevel == 10 && !secretlevel )
+					else if ( ( currentlevel == 10 || currentlevel == 11 || currentlevel == 17 || currentlevel == 18 ) && !secretlevel )
 					{
 						int speech = rand() % 2;
 						playSound(158 + speech, 128);
 						messagePlayerColor(clientnum, color, language[537]);
 						messagePlayerColor(clientnum, color, language[85 + speech]);
 					}
-					else if ( currentlevel == 15 && !secretlevel )
+					else if ( ( currentlevel == 23 || currentlevel == 24 || currentlevel == 29 || currentlevel == 30 ) && !secretlevel )
 					{
 						int speech = rand() % 2;
 						playSound(160 + speech, 128);
 						messagePlayerColor(clientnum, color, language[537]);
 						messagePlayerColor(clientnum, color, language[87 + speech]);
 					}
-					else if ( currentlevel == 26 && !secretlevel )
+					else if ( currentlevel == 47 && !secretlevel )
 					{
 						int speech = 1 + rand() % 3;
 						switch ( speech )
@@ -771,7 +771,7 @@ void actPlayer(Entity* my)
 						}
 						my->playerLevelEntrySpeech = speech;
 					}
-					else if ( currentlevel == 28 && !secretlevel )
+					else if ( currentlevel == 49 && !secretlevel )
 					{
 						int speech = 1 + rand() % 3;
 						switch ( speech )
@@ -794,7 +794,7 @@ void actPlayer(Entity* my)
 						}
 						my->playerLevelEntrySpeech = speech;
 					}
-					else if ( currentlevel == 30 && !secretlevel )
+					else if ( currentlevel == 51 && !secretlevel )
 					{
 						int speech = 1;
 						switch ( speech )
@@ -807,7 +807,7 @@ void actPlayer(Entity* my)
 						}
 						my->playerLevelEntrySpeech = speech;
 					}
-					else if ( currentlevel == 31 && !secretlevel )
+					else if ( currentlevel == 52 && !secretlevel )
 					{
 						int speech = 1;
 						switch ( speech )
@@ -820,7 +820,7 @@ void actPlayer(Entity* my)
 						}
 						my->playerLevelEntrySpeech = speech;
 					}
-					else if ( currentlevel == 33 && !secretlevel )
+					else if ( currentlevel == 54 && !secretlevel )
 					{
 						int speech = 1 + rand() % 2;
 						switch ( speech )
@@ -838,7 +838,7 @@ void actPlayer(Entity* my)
 						}
 						my->playerLevelEntrySpeech = speech;
 					}
-					else if ( currentlevel == 35 && !secretlevel )
+					else if ( currentlevel == 56 && !secretlevel )
 					{
 						int speech = 1;
 						switch ( speech )
@@ -853,7 +853,7 @@ void actPlayer(Entity* my)
 					}
 					else if ( minotaurlevel )
 					{
-						if ( currentlevel < 25 )
+						if ( currentlevel < 45 )
 						{
 							int speech = rand() % 3;
 							playSound(123 + speech, 128);
@@ -893,7 +893,7 @@ void actPlayer(Entity* my)
 						playSound(120 + rand() % 3, 128);
 						messagePlayerColor(clientnum, color, language[73]);
 					}
-					else if ( minotaurlevel && currentlevel < 25 )
+					else if ( minotaurlevel && currentlevel < 45 )
 					{
 						int speech = rand() % 3;
 						playSound(129 + speech, 128);
@@ -1451,7 +1451,7 @@ void actPlayer(Entity* my)
 	// swimming
 	bool waterwalkingboots = false;
 	if ( stats[PLAYER_NUM]->shoes != NULL )
-		if ( stats[PLAYER_NUM]->shoes->type == IRON_BOOTS_WATERWALKING )
+		if ( stats[PLAYER_NUM]->shoes->type == IRON_BOOTS_WATERWALKING || stats[PLAYER_NUM]->shoes->type == ABYSSAL_BOOTS )
 		{
 			waterwalkingboots = true;
 		}
@@ -1982,6 +1982,14 @@ void actPlayer(Entity* my)
 					{
 						PLAYER_TORCH = 5 + my->getPER() / 3 + (stats[PLAYER_NUM]->defending) * 2;
 					}
+					else if (stats[PLAYER_NUM]->shield->type == TOOL_GREENTORCH)
+					{
+						PLAYER_TORCH = 9 + my->getPER() / 3 + (stats[PLAYER_NUM]->defending) * 2;
+					}
+					else if (stats[PLAYER_NUM]->shield->type == ABYSSAL_SHIELD)
+					{
+						PLAYER_TORCH = 6 + my->getPER() / 3 + (stats[PLAYER_NUM]->defending) * 2;
+					}
 					else if ( !PLAYER_DEBUGCAM )
 					{
 						PLAYER_TORCH = 3 + my->getPER() / 3;
@@ -2004,6 +2012,14 @@ void actPlayer(Entity* my)
 					else if ( stats[PLAYER_NUM]->shield->type == TOOL_CRYSTALSHARD )
 					{
 						PLAYER_TORCH = 5;
+					}
+					else if (stats[PLAYER_NUM]->shield->type == TOOL_GREENTORCH)
+					{
+						PLAYER_TORCH = 9;
+					}
+					else if (stats[PLAYER_NUM]->shield->type == ABYSSAL_SHIELD)
+					{
+						PLAYER_TORCH = 6;
 					}
 					else
 					{
@@ -3986,7 +4002,7 @@ void actPlayer(Entity* my)
 		if ( shieldNode )
 		{
 			Entity* shieldEntity = (Entity*)shieldNode->element;
-			if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index )
+			if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index)
 			{
 				shieldEntity->yaw -= PI / 6;
 			}

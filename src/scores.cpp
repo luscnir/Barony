@@ -985,7 +985,23 @@ void loadAllScores(const std::string& scoresfilename)
 				fread(&score->stats->PROFICIENCIES[c], sizeof(Sint32), 1, fp);
 			}
 		}
-		if ( versionNumber < 300 )
+
+		if (versionNumber < 324)
+		{
+			// legacy nummonsters
+			for (c = 0; c < NUMMONSTERS; c++)
+			{
+				if (c < 33)
+				{
+					fread(&score->kills[c], sizeof(Sint32), 1, fp);
+				}
+				else
+				{
+					score->kills[c] = 0;
+				}
+			}
+		}
+		else if (versionNumber < 300)
 		{
 			// legacy effects
 			for ( c = 0; c < NUMEFFECTS; c++ )
@@ -2016,11 +2032,17 @@ int loadGame(int player, int saveIndex)
 		node->size = sizeof(spell);
 	}
 
+	int monsters = NUMMONSTERS;
+	if (versionNumber < 324)
+	{
+		monsters = 33;
+	}
+
 	// skip through other player data until you get to the correct player
 	for ( c = 0; c < player; c++ )
 	{
 		fseek(fp, sizeof(Uint32), SEEK_CUR);
-		fseek(fp, NUMMONSTERS * sizeof(Sint32), SEEK_CUR);
+		fseek(fp, monsters * sizeof(Sint32), SEEK_CUR);//fseek(fp, NUMMONSTERS * sizeof(Sint32), SEEK_CUR);
 		fseek(fp, sizeof(Monster), SEEK_CUR);
 		fseek(fp, sizeof(sex_t), SEEK_CUR);
 		fseek(fp, sizeof(Uint32), SEEK_CUR);
@@ -2105,7 +2127,7 @@ int loadGame(int player, int saveIndex)
 	// read in player data
 	stats[player]->clearStats();
 	fread(&client_classes[player], sizeof(Uint32), 1, fp);
-	for ( c = 0; c < NUMMONSTERS; c++ )
+	for ( c = 0; c < monsters; c++ )//NUMMONSTERS
 	{
 		fread(&kills[c], sizeof(Sint32), 1, fp);
 	}

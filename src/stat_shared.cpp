@@ -1205,6 +1205,121 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_3] = 1;
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_3 + ITEM_CHANCE] = 25; //Random Items
 			break;
+		case 134:
+		case (1000 + COCKROACH):
+			stats->type = COCKROACH;
+			stats->sex = static_cast<sex_t>(rand() % 2);
+			stats->appearance = rand();
+			stats->inventory.first = NULL;
+			stats->inventory.last = NULL;
+			stats->HP = 20;
+			stats->MAXHP = 20;
+			stats->MP = 5;
+			stats->MAXMP = 5;
+			stats->OLDHP = stats->HP;
+			stats->STR = 5;
+			stats->DEX = 6;
+			stats->CON = 1;
+			stats->INT = -2;
+			stats->PER = 0;
+			stats->CHR = -1;
+			stats->EXP = 0;
+			stats->LVL = 2;
+			stats->GOLD = 0;
+			stats->HUNGER = 900;
+
+			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1] = 1;
+			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1 + ITEM_CHANCE] = 15; //Random Items
+			break;
+		case 136:
+		case (1000 + BURGGUARD):
+			stats->type = BURGGUARD;
+			stats->sex = static_cast<sex_t>(rand() % 2);
+			stats->appearance = rand();
+			stats->inventory.first = NULL;
+			stats->inventory.last = NULL;
+			stats->HP = 85;
+			stats->MAXHP = 85;
+			stats->MP = 10;
+			stats->MAXMP = 10;
+			stats->OLDHP = stats->HP;
+			stats->STR = 9;
+			stats->DEX = 1;
+			stats->CON = 7;
+			stats->INT = -3;
+			stats->PER = 2;
+			stats->CHR = 0;
+			stats->EXP = 0;
+			stats->LVL = 5;
+			stats->GOLD = 0;
+			stats->RANDOM_GOLD = 50;
+			stats->HUNGER = 900;
+
+			stats->EDITOR_ITEMS[ITEM_SLOT_WEAPON] = 1;
+			stats->EDITOR_ITEMS[ITEM_SLOT_SHIELD] = 1;
+			stats->EDITOR_ITEMS[ITEM_SLOT_ARMOR] = 1;
+			stats->EDITOR_ITEMS[ITEM_SLOT_HELM] = 1;
+			stats->EDITOR_ITEMS[ITEM_SLOT_CLOAK] = 1;
+
+			stats->PROFICIENCIES[PRO_SWORD] = 35;
+			stats->PROFICIENCIES[PRO_MACE] = 70;
+			stats->PROFICIENCIES[PRO_AXE] = 25;
+			stats->PROFICIENCIES[PRO_POLEARM] = 75;
+			stats->PROFICIENCIES[PRO_RANGED] = 50;
+			stats->PROFICIENCIES[PRO_SHIELD] = 35;
+			break;
+		case 137:
+		case (1000 + GARGOYLE):
+			stats->type = GARGOYLE;
+			stats->sex = static_cast<sex_t>(rand() % 2);
+			stats->appearance = rand();
+			stats->inventory.first = NULL;
+			stats->inventory.last = NULL;
+			stats->HP = 145;
+			stats->MAXHP = stats->HP;
+			stats->MP = 80;
+			stats->MAXMP = 80;
+			stats->OLDHP = stats->HP;
+			stats->STR = 20;
+			stats->DEX = 7;
+			stats->CON = 19;
+			stats->INT = -2;
+			stats->PER = 10;
+			stats->CHR = -3;
+			stats->EXP = 0;
+			stats->LVL = 20;//level 20 (burg) but it is not suppose to spawn anywhere else
+			stats->GOLD = 0;
+			stats->RANDOM_GOLD = 0;
+			stats->HUNGER = 900;
+
+			stats->EDITOR_ITEMS[ITEM_SLOT_WEAPON] = 1;
+
+			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1] = 1;
+			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1 + ITEM_CHANCE] = 100; //Random Items
+			break;
+		case 138:
+		case (1000 + MATILDA):
+			stats->type = MATILDA;
+			stats->sex = static_cast<sex_t>(rand() % 2);
+			stats->appearance = rand();
+			stats->inventory.first = NULL;
+			stats->inventory.last = NULL;
+			stats->HP = 200;
+			stats->MAXHP = 200;
+			stats->MP = 10;
+			stats->MAXMP = 10;
+			stats->OLDHP = stats->HP;
+			stats->STR = 9;
+			stats->DEX = 10;
+			stats->CON = 12;
+			stats->INT = -3;
+			stats->PER = -3;
+			stats->CHR = -30;
+			stats->EXP = 0;
+			stats->LVL = 15;//level 15 (burg) but it is not suppose to spawn anywhere else
+			stats->GOLD = 0;
+			stats->HUNGER = 900;
+			break;
 		case 10:
 		default:
 			break;

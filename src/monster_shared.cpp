@@ -153,6 +153,22 @@ void Entity::initMonster(int mySprite)
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_HUMANOID;
 			break;
+		case COCKROACH:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case BURGGUARD:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case GARGOYLE:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case MATILDA:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
 		default:
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
@@ -287,6 +303,22 @@ int Entity::getMonsterTypeFromSprite()
 	{
 		return SLIME;
 	}
+	else if (mySprite == 818 || mySprite == 819)	// cockroach
+	{
+		return COCKROACH;
+	}
+	else if (mySprite == 865)     // burg guard head
+	{
+		return BURGGUARD;
+	}
+	else if (mySprite == 873)     // gargoyle head
+	{
+		return GARGOYLE;
+	}
+	else if (mySprite == 881)     // Matilda body
+	{
+		return MATILDA;
+	}
 	return NOTHING;
 }
 
@@ -342,6 +374,14 @@ void Entity::actMonsterLimb(bool processLight)
 			else if ( sprite == 529 )	// crystal shard
 			{
 				carryingLightSource = 4;
+			}
+			else if (sprite == 814)	// green torch
+			{
+				carryingLightSource = 8;
+			}
+			else if (sprite == 836)	// abyssal shield
+			{
+				carryingLightSource = 5;
 			}
 		}
 

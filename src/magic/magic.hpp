@@ -48,7 +48,8 @@ static const int SPELL_STEAL_WEAPON = 28;
 static const int SPELL_DRAIN_SOUL = 29;
 static const int SPELL_VAMPIRIC_AURA = 30;
 static const int SPELL_CHARM_MONSTER = 31;
-static const int NUM_SPELLS = 32;
+static const int SPELL_DEATHCOIL = 32;
+static const int NUM_SPELLS = 33;
 
 
 #define SPELLELEMENT_CONFUSE_BASE_DURATION 2//In seconds.
@@ -351,6 +352,12 @@ extern spellElement_t spellElement_drainSoul;
 extern spellElement_t spellElement_vampiricAura;
 
 extern spellElement_t spellElement_charmMonster;
+
+/*
+ * Moded Spells
+ */
+extern spellElement_t spellElement_deathCoil;
+
 /*
  */
 //TODO: Differentiate between touch spells, enchantment spells, personal spells, ranged spells, area of effect spells, close blast/burst spells, and enemy/ally target spells.
@@ -422,6 +429,7 @@ extern spell_t spell_stealWeapon;
 extern spell_t spell_drainSoul;
 extern spell_t spell_vampiricAura;
 extern spell_t spell_charmMonster;
+extern spell_t spell_deathCoil;
 //TODO: Armor/protection/warding spells.
 //TODO: Targeting method?
 

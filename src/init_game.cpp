@@ -158,7 +158,13 @@ int initGame()
 	fp = openDataFile(itemsDirectory.c_str(), "r");
 	for ( c = 0; !feof(fp); ++c )
 	{
-		if ( c > ARTIFACT_BOW )
+		if (c >= TOOL_GREENTORCH)
+		{
+			newItems = c - TOOL_GREENTORCH;
+			items[c].name_identified = language[3550 + newItems * 2];
+			items[c].name_unidentified = language[3551 + newItems * 2];
+		}
+		else if ( c > ARTIFACT_BOW )
 		{
 			newItems = c - ARTIFACT_BOW - 1;
 			items[c].name_identified = language[2200 + newItems * 2];
@@ -448,6 +454,8 @@ int fmod_result;
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/escape.ogg", FMOD_SOFTWARE, NULL, &escapemusic);
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/devil.ogg", FMOD_SOFTWARE, NULL, &devilmusic);
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/sanctum.ogg", FMOD_SOFTWARE, NULL, &sanctummusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/CrypticSpiral.ogg", FMOD_SOFTWARE, NULL, &crypticspiralmusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/CorruptedMedicine.ogg", FMOD_SOFTWARE, NULL, &matildasforestmusic);
 	if ( PHYSFS_getRealDir("music/gnomishmines.ogg") != NULL )
 	{
 		fmod_result = FMOD_System_CreateStream(fmod_system, "music/gnomishmines.ogg", FMOD_SOFTWARE, NULL, &gnomishminesmusic);
@@ -553,6 +561,15 @@ int fmod_result;
 		{
 			snprintf(tempstr, 1000, "music/citadel%02d.ogg", c);
 			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &citadelmusic[c]);
+		}
+	}
+	if ( NUMBURGMUSIC > 0)
+	{
+		burgmusic = (FMOD_SOUND * *)malloc(sizeof(FMOD_SOUND*) * NUMBURGMUSIC);
+		for (c = 0; c < NUMBURGMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/burg%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &burgmusic[c]);
 		}
 	}
 	if ( NUMINTROMUSIC > 0 )
@@ -800,6 +817,8 @@ void deinitGame()
 	FMOD_Sound_Release(caveslairmusic);
 	FMOD_Sound_Release(bramscastlemusic);
 	FMOD_Sound_Release(hamletmusic);
+	FMOD_Sound_Release(crypticspiralmusic);
+	FMOD_Sound_Release(matildasforestmusic);
 	for ( c = 0; c < NUMMINESMUSIC; c++ )
 	{
 		FMOD_Sound_Release(minesmusic[c]);
@@ -871,6 +890,14 @@ void deinitGame()
 	if ( citadelmusic )
 	{
 		free(citadelmusic);
+	}
+	for (c = 0; c < NUMBURGMUSIC; c++)
+	{
+		FMOD_Sound_Release(burgmusic[c]);
+	}
+	if ( burgmusic )
+	{
+		free(burgmusic);
 	}
 	for ( c = 0; c < NUMINTROMUSIC; c++ )
 	{

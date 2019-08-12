@@ -707,11 +707,841 @@ void Entity::actMidGamePortal()
 				}
 				subwindow = 0;
 				fadeout = true;
+				currentlevel += 6;
 				if ( !intro )
 				{
 					pauseGame(2, false);
 				}
 				introstage = 9; // prepares mid game sequence
+				return;
+			}
+		}
+	}
+}
+
+// modded portals TODO: This is a lot of duplicated code, make only one ladder/portal that can choose how make levels to skip.
+void actPortalJump2(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actPortalJump2();
+}
+
+void Entity::actPortalJump2()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer != CLIENT)
+	{
+		if (flags[INVISIBLE])
+		{
+			if (circuit_status != 0)
+			{
+				if (circuit_status == CIRCUIT_ON)
+				{
+					// powered on.
+					if (!portalFireAnimation)
+					{
+						Entity* timer = createParticleTimer(this, 100, 169);
+						timer->particleTimerCountdownAction = PARTICLE_TIMER_ACTION_SPAWN_PORTAL;
+						timer->particleTimerCountdownSprite = 174;
+						timer->particleTimerEndAction = PARTICLE_EFFECT_PORTAL_SPAWN;
+						serverSpawnMiscParticles(this, PARTICLE_EFFECT_PORTAL_SPAWN, 174);
+						portalFireAnimation = 1;
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		if (flags[INVISIBLE])
+		{
+			return;
+		}
+	}
+
+	if (!portalInit)
+	{
+		portalInit = 1;
+		light = lightSphereShadow(x / 16, y / 16, 3, 255);
+	}
+
+	portalAmbience--;
+	if (portalAmbience <= 0)
+	{
+		portalAmbience = TICKS_PER_SECOND * 2;
+		playSoundEntityLocal(this, 154, 128);
+	}
+
+	yaw += 0.01; // rotate slowly on my axis
+	sprite = 904 + (this->ticks / 20) % 4; // animate
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through portal
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+				
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				++currentlevel;
+				loadnextlevel = true;
+
+				return;
+			}
+		}
+	}
+}
+
+void actPortalJump8(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actPortalJump8();
+}
+
+void Entity::actPortalJump8()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer != CLIENT)
+	{
+		if (flags[INVISIBLE])
+		{
+			if (circuit_status != 0)
+			{
+				if (circuit_status == CIRCUIT_ON)
+				{
+					// powered on.
+					if (!portalFireAnimation)
+					{
+						Entity* timer = createParticleTimer(this, 100, 169);
+						timer->particleTimerCountdownAction = PARTICLE_TIMER_ACTION_SPAWN_PORTAL;
+						timer->particleTimerCountdownSprite = 174;
+						timer->particleTimerEndAction = PARTICLE_EFFECT_PORTAL_SPAWN;
+						serverSpawnMiscParticles(this, PARTICLE_EFFECT_PORTAL_SPAWN, 174);
+						portalFireAnimation = 1;
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		if (flags[INVISIBLE])
+		{
+			return;
+		}
+	}
+
+	if (!portalInit)
+	{
+		portalInit = 1;
+		light = lightSphereShadow(x / 16, y / 16, 3, 255);
+	}
+
+	portalAmbience--;
+	if (portalAmbience <= 0)
+	{
+		portalAmbience = TICKS_PER_SECOND * 2;
+		playSoundEntityLocal(this, 154, 128);
+	}
+
+	yaw += 0.01; // rotate slowly on my axis
+	sprite = 904 + (this->ticks / 20) % 4; // animate
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through portal
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				currentlevel += 7;
+				loadnextlevel = true;
+
+				return;
+			}
+		}
+	}
+}
+
+void actLadderJump2(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actLadderJump2();
+}
+
+void Entity::actLadderJump2()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through ladder
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				++currentlevel;
+				loadnextlevel = true;
+
+				return;
+			}
+		}
+	}
+}
+
+void actLadderJump7(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actLadderJump7();
+}
+
+void Entity::actLadderJump7()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through ladder
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				currentlevel += 6;
+				loadnextlevel = true;
+
+				return;
+			}
+		}
+	}
+}
+
+void actLadderJump8(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actLadderJump8();
+}
+
+void Entity::actLadderJump8()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through ladder
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				currentlevel += 7;
+				loadnextlevel = true;
+
+				return;
+			}
+		}
+	}
+}
+
+void actLadderJump9(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actLadderJump9();
+}
+
+void Entity::actLadderJump9()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through ladder
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				currentlevel += 8;
+				loadnextlevel = true;
+
+				return;
+			}
+		}
+	}
+}
+
+void actLadderJump10(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actLadderJump10();
+}
+
+void Entity::actLadderJump10()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through ladder
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				currentlevel += 9;
+				loadnextlevel = true;
+
+				return;
+			}
+		}
+	}
+}
+
+void actLadderJump11(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actLadderJump11();
+}
+
+void Entity::actLadderJump11()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through ladder
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				currentlevel += 10;
+				loadnextlevel = true;
+
+				return;
+			}
+		}
+	}
+}
+
+void actLadderJump14(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actLadderJump14();
+}
+
+void Entity::actLadderJump14()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through ladder
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				currentlevel += 13;
+				loadnextlevel = true;
+
+				return;
+			}
+		}
+	}
+}
+
+void actMidPortalJump13(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actMidPortalJump13();
+}
+
+void Entity::actMidPortalJump13()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer != CLIENT)
+	{
+		if (flags[INVISIBLE])
+		{
+			if (circuit_status != 0)
+			{
+				if (circuit_status == CIRCUIT_ON)
+				{
+					// powered on.
+					if (!portalFireAnimation)
+					{
+						Entity* timer = createParticleTimer(this, 100, 169);
+						timer->particleTimerCountdownAction = PARTICLE_TIMER_ACTION_SPAWN_PORTAL;
+						timer->particleTimerCountdownSprite = 174;
+						timer->particleTimerEndAction = PARTICLE_EFFECT_PORTAL_SPAWN;
+						serverSpawnMiscParticles(this, PARTICLE_EFFECT_PORTAL_SPAWN, 174);
+						portalFireAnimation = 1;
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		if (flags[INVISIBLE])
+		{
+			return;
+		}
+	}
+
+	if (!portalInit)
+	{
+		portalInit = 1;
+		light = lightSphereShadow(x / 16, y / 16, 3, 255);
+	}
+
+	portalAmbience--;
+	if (portalAmbience <= 0)
+	{
+		portalAmbience = TICKS_PER_SECOND * 2;
+		playSoundEntityLocal(this, 154, 128);
+	}
+
+	yaw += 0.01; // rotate slowly on my axis
+	sprite = 904 + (this->ticks / 20) % 4; // animate
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through portal
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				currentlevel += 12;
+				loadnextlevel = true;
+
 				return;
 			}
 		}
