@@ -1,15 +1,44 @@
-﻿  sound.cpp
+﻿  init.cpp
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005:  'PATH_MAX': macro redefinition
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message :  see previous definition of 'PATH_MAX'
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(113,15): warning C4244:  '=': conversion from 'real_t' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(114,25): warning C4244:  '=': conversion from 'real_t' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(115,15): warning C4244:  '=': conversion from 'real_t' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(128,16): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(130,16): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-  Microsoft (R) Incremental Linker Version 14.21.27702.2
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(770,7): warning C4101:  'dummy': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1018,43): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1099,41): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1164,43): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1245,41): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1310,43): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1390,41): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1455,43): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1535,41): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1600,43): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1681,41): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1746,43): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1827,41): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1855,18): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1925,22): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1933,30): warning C4244:  '=': conversion from 'const real_t' to '_Ty', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1933,30): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1933,30): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1933,30): warning C4244:             _Ty=GLfloat
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1933,30): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1934,30): warning C4244:  '=': conversion from 'const real_t' to '_Ty', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1934,30): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1934,30): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1934,30): warning C4244:             _Ty=GLfloat
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1934,30): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1935,34): warning C4244:  '=': conversion from 'const real_t' to '_Ty', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1935,34): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1935,34): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1935,34): warning C4244:             _Ty=GLfloat
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1935,34): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2452,39): warning C4244:  'argument': conversion from 'real_t' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2485,18): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2528,17): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2554,6): warning C4101:  'c': unreferenced local variable
+  Microsoft (R) Incremental Linker Version 14.22.27905.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  "/OUT:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.exe" OpenGL32.lib glu32.lib SDL2.lib SDL2main.lib SDL2_net.lib SDL2_image.lib fmodex_vc.lib libpng.lib zlib.lib SDL2_ttf.lib physfs.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST "/MANIFESTUAC:level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG "/PDB:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT "/IMPLIB:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.lib" /MACHINE:X86 /SAFESEH Release\wineditoricon.res 
+  "/OUT:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.exe" steam_api.lib OpenGL32.lib glu32.lib SDL2.lib SDL2main.lib SDL2_net.lib SDL2_image.lib fmodex_vc.lib libpng.lib zlib.lib SDL2_ttf.lib physfs.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST "/MANIFESTUAC:level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG "/PDB:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT "/IMPLIB:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.lib" /MACHINE:X86 /SAFESEH Release\wineditoricon.res 
   Release\buttons.obj 
   Release\cursors.obj 
   Release\draw.obj 
@@ -30,8 +59,8 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(130,16): wa
   Release\stat_shared.obj 
   Release\steam_shared.obj 
   Generating code
-  0 of 1395 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  283 of 1480 functions (19.1%) were compiled, the rest were copied from previous compilation.
+    115 functions were new in current compilation
+    64 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   editor.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.exe

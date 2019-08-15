@@ -151,7 +151,7 @@ int initApp(char* title, int fullscreen)
 	g_SteamWorkshop = new CSteamWorkshop();
 	g_SteamStatistics = new CSteamStatistics(g_SteamStats, g_SteamGlobalStats, NUM_STEAM_STATISTICS);
 	// Preloads mod content from a workshop fileID
-	//gamemodsWorkshopPreloadMod(YOUR WORKSHOP FILE ID HERE, "YOUR WORKSHOP TITLE HERE");
+	//gamemodsWorkshopPreloadMod(1828792406, "Wicked Rendition");
 #endif
 
 	window_title = title;
