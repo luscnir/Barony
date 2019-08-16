@@ -835,7 +835,8 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"LADDER JUMP 10",
 	"LADDER JUMP 11",
 	"LADDER JUMP 14",
-	"MID PORTAL JUMP 13"
+	"MID PORTAL JUMP 13",
+	"MID PORTAL 2"
 };
 
 char monsterEditorNameStrings[NUMMONSTERS][13] =

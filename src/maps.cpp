@@ -5617,6 +5617,23 @@ void assignActions(map_t* map)
 				entity->flags[PASSABLE] = true;
 				entity->flags[BRIGHT] = true;
 				break;
+				// mid game portal:
+			case 162:
+				entity->x += 8;
+				entity->y += 8;
+				entity->sprite = 614;
+				entity->sizex = 4;
+				entity->sizey = 4;
+				entity->yaw = PI / 2;
+				entity->behavior = &actMidGamePortalBoss2;
+				entity->flags[PASSABLE] = true;
+				entity->flags[BRIGHT] = true;
+				if (strstr(map->name, "Boss2"))
+				{
+					entity->flags[INVISIBLE] = true;
+					entity->skill[28] = 1; // is a mechanism
+				}
+				break;
 			default:
 				break;
 		}

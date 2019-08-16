@@ -586,6 +586,7 @@ public:
 	void actLadderJump11();
 	void actLadderJump14();
 	void actMidPortalJump13();
+	void actMidGamePortalBoss2();
 
 	Monster getRace() const
 	{
@@ -929,7 +930,7 @@ void actTextSource(Entity* my);
 
 static const int NUM_ITEM_STRINGS = 264;
 static const int NUM_ITEM_STRINGS_BY_TYPE = 110;
-static const int NUM_EDITOR_SPRITES = 162;
+static const int NUM_EDITOR_SPRITES = 163;
 static const int NUM_EDITOR_TILES = 346;
 
 // furniture types.

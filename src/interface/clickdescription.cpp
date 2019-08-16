@@ -264,7 +264,7 @@ void clickDescription(int player, Entity* entity)
 				}
 				else if ( entity->behavior == &actPortal || entity->behavior == &actWinningPortal
 						|| entity->behavior == &actMidGamePortal || entity->behavior == &actPortalJump2
-						|| entity->behavior == &actPortalJump8 )
+						|| entity->behavior == &actPortalJump8 || entity->behavior == &actMidGamePortalBoss2 )
 				{
 					messagePlayer(player, language[272]);
 				}

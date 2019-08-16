@@ -719,7 +719,7 @@ void Entity::actMidGamePortal()
 	}
 }
 
-// modded portals TODO: This is a lot of duplicated code, make only one ladder/portal that can choose how make levels to skip.
+// modded portals TODO: This is a lot of duplicated code, make only one ladder/portal that can choose how many levels to skip.
 void actPortalJump2(Entity* my)
 {
 	if (!my)
@@ -1542,6 +1542,165 @@ void Entity::actMidPortalJump13()
 				currentlevel += 12;
 				loadnextlevel = true;
 
+				return;
+			}
+		}
+	}
+}
+
+void actMidGamePortalBoss2(Entity* my)
+{
+	if (!my)
+	{
+		return;
+	}
+
+	my->actMidGamePortalBoss2();
+}
+
+void Entity::actMidGamePortalBoss2()
+{
+	int playercount = 0;
+	double dist;
+	int i, c;
+
+	if (multiplayer != CLIENT)
+	{
+		if (flags[INVISIBLE])
+		{
+			if (!strncmp(map.name, "Boss2", 4))
+			{
+				if ((svFlags & SV_FLAG_CLASSIC))
+				{
+					return; // classic mode enabled, don't process.
+				}
+			}
+			node_t* node;
+			for (node = map.creatures->first; node != nullptr; node = node->next)
+			{
+				Entity* entity = (Entity*)node->element;
+				if (entity)
+				{
+					if (entity->behavior == &actMonster)
+					{
+						Stat* stats = entity->getStats();
+						if (stats)
+						{
+							if (stats->type == LICH)
+							{
+								return;
+							}
+						}
+					}
+				}
+			}
+			if (circuit_status != 0)
+			{
+				if (circuit_status == CIRCUIT_ON)
+				{
+					// powered on.
+					if (!portalFireAnimation)
+					{
+						Entity* timer = createParticleTimer(this, 100, 174);
+						timer->particleTimerCountdownAction = PARTICLE_TIMER_ACTION_SPAWN_PORTAL;
+						timer->particleTimerCountdownSprite = 174;
+						timer->particleTimerEndAction = PARTICLE_EFFECT_PORTAL_SPAWN;
+						serverSpawnMiscParticles(this, PARTICLE_EFFECT_PORTAL_SPAWN, 174);
+						portalFireAnimation = 1;
+					}
+				}
+			}
+		}
+		else
+		{
+			if (!strncmp(map.name, "Boss2", 4))
+			{
+				if ((svFlags & SV_FLAG_CLASSIC))
+				{
+					flags[INVISIBLE] = true; // classic mode enabled, hide.
+					serverUpdateEntityFlag(this, INVISIBLE);
+					portalFireAnimation = 0;
+				}
+			}
+		}
+	}
+	else
+	{
+		if (flags[INVISIBLE])
+		{
+			return;
+		}
+	}
+
+	if (!portalInit)
+	{
+		portalInit = 1;
+		light = lightSphereShadow(x / 16, y / 16, 3, 255);
+	}
+
+	portalAmbience--;
+	if (portalAmbience <= 0)
+	{
+		portalAmbience = TICKS_PER_SECOND * 2;
+		playSoundEntityLocal(this, 154, 128);
+	}
+
+	yaw += 0.01; // rotate slowly on my axis
+	sprite = 614 + (this->ticks / 20) % 4; // animate
+
+	if (multiplayer == CLIENT)
+	{
+		return;
+	}
+
+	// step through portal
+	for (i = 0; i < MAXPLAYERS; i++)
+	{
+		if ((i == 0 && selectedEntity == this) || (client_selected[i] == this))
+		{
+			if (inrange[i])
+			{
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					if (client_disconnected[c] || players[c] == nullptr || players[c]->entity == nullptr)
+					{
+						continue;
+					}
+					else
+					{
+						playercount++;
+					}
+					dist = sqrt(pow(x - players[c]->entity->x, 2) + pow(y - players[c]->entity->y, 2));
+					if (dist > TOUCHRANGE)
+					{
+						messagePlayer(i, language[509]);
+						return;
+					}
+				}
+				//victory = portalVictoryType;
+				if (multiplayer == SERVER)
+				{
+					for (c = 0; c < MAXPLAYERS; c++)
+					{
+						if (client_disconnected[c] == true)
+						{
+							continue;
+						}
+						strcpy((char*)net_packet->data, "MIDG");
+						net_packet->address.host = net_clients[c - 1].host;
+						net_packet->address.port = net_clients[c - 1].port;
+						net_packet->len = 7;
+						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+					}
+				}
+				subwindow = 0;
+				fadeout = true;
+				currentlevel -= 4;
+				if (!intro)
+				{
+					pauseGame(2, false);
+				}
+				introstage = 9; // prepares mid game sequence
 				return;
 			}
 		}
