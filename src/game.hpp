@@ -287,7 +287,7 @@ void actLadderJump7(Entity* my);
 void actLadderJump8(Entity* my);
 void actLadderJump9(Entity* my);
 void actLadderJump10(Entity* my);
-void actLadderJump11(Entity* my);
+void actLadderJump16(Entity* my);
 void actLadderJump14(Entity* my);
 void actMidPortalJump13(Entity* my);
 void actMidGamePortalBoss2(Entity* my);

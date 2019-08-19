@@ -1295,17 +1295,17 @@ void Entity::actLadderJump10()
 	}
 }
 
-void actLadderJump11(Entity* my)
+void actLadderJump16(Entity* my)
 {
 	if (!my)
 	{
 		return;
 	}
 
-	my->actLadderJump11();
+	my->actLadderJump16();
 }
 
-void Entity::actLadderJump11()
+void Entity::actLadderJump16()
 {
 	int playercount = 0;
 	double dist;
@@ -1355,7 +1355,7 @@ void Entity::actLadderJump11()
 						sendPacketSafe(net_sock, -1, net_packet, c - 1);
 					}
 				}
-				currentlevel += 10;
+				currentlevel += 15;
 				loadnextlevel = true;
 
 				return;

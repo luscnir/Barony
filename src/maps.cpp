@@ -5572,7 +5572,7 @@ void assignActions(map_t* map)
 				entity->behavior = &actLadderJump9;
 				entity->sprite = 161;
 				break;
-				// ladder jumps 11 levels
+				// ladder jumps 10 levels
 			case 158:
 				entity->sizex = 4;
 				entity->sizey = 4;
@@ -5580,10 +5580,10 @@ void assignActions(map_t* map)
 				entity->y += 8;
 				entity->z = 5.45;
 				entity->flags[PASSABLE] = true;
-				entity->behavior = &actLadderJump11;
+				entity->behavior = &actLadderJump10;
 				entity->sprite = 161;
 				break;
-			// ladder jumps 11 levels
+			// ladder jumps 16 levels
 			case 159:
 				entity->sizex = 4;
 				entity->sizey = 4;
@@ -5591,7 +5591,7 @@ void assignActions(map_t* map)
 				entity->y += 8;
 				entity->z = 5.45;
 				entity->flags[PASSABLE] = true;
-				entity->behavior = &actLadderJump11;
+				entity->behavior = &actLadderJump16;
 				entity->sprite = 161;
 				break;
 			// ladder jumps 14 levels
