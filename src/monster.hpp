@@ -497,6 +497,7 @@ void actLichFireLimb(Entity* my);
 void actLichIceLimb(Entity* my);
 void actBurgGuardLimb(Entity* my);
 void actGargoyleLimb(Entity* my);
+void actMatildaLimb(Entity* my);
 void actYetiLimb(Entity* my);
 void actIceDemonLimb(Entity* my);
 void actDenomeLimb(Entity* my);
