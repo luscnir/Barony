@@ -18,7 +18,7 @@ static const int LICH_LEFTARM = 3;
 static const int LICH_HEAD = 4;
 static const int LICH_WEAPON = 5;
 
-void initLichIce(Entity* my, Stat* myStats)
+void initLichFallen(Entity* my, Stat* myStats)
 {
 	my->initMonster(950);
 
@@ -104,10 +104,10 @@ void initLichIce(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[LICH_ICE][1][0]; // 0
-	entity->focaly = limbs[LICH_ICE][1][1]; // 0
-	entity->focalz = limbs[LICH_ICE][1][2]; // 2
-	entity->behavior = &actLichIceLimb;
+	entity->focalx = limbs[LICH_FALLEN][1][0]; // 0
+	entity->focaly = limbs[LICH_FALLEN][1][1]; // 0
+	entity->focalz = limbs[LICH_FALLEN][1][2]; // 2
+	entity->behavior = &actLichFallenLimb;
 	entity->parent = my->getUID();
 	node_t* node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -123,10 +123,10 @@ void initLichIce(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[LICH_ICE][2][0]; // 0
-	entity->focaly = limbs[LICH_ICE][2][1]; // 0
-	entity->focalz = limbs[LICH_ICE][2][2]; // 2
-	entity->behavior = &actLichIceLimb;
+	entity->focalx = limbs[LICH_FALLEN][2][0]; // 0
+	entity->focaly = limbs[LICH_FALLEN][2][1]; // 0
+	entity->focalz = limbs[LICH_FALLEN][2][2]; // 2
+	entity->behavior = &actLichFallenLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -143,10 +143,10 @@ void initLichIce(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[LICH_ICE][3][0]; // 0
-	entity->focaly = limbs[LICH_ICE][3][1]; // 0
-	entity->focalz = limbs[LICH_ICE][3][2]; // -2
-	entity->behavior = &actLichIceLimb;
+	entity->focalx = limbs[LICH_FALLEN][3][0]; // 0
+	entity->focaly = limbs[LICH_FALLEN][3][1]; // 0
+	entity->focalz = limbs[LICH_FALLEN][3][2]; // -2
+	entity->behavior = &actLichFallenLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -162,10 +162,10 @@ void initLichIce(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[LICH_ICE][4][0]; // 1.5
-	entity->focaly = limbs[LICH_ICE][4][1]; // 0
-	entity->focalz = limbs[LICH_ICE][4][2]; // -.5
-	entity->behavior = &actLichIceLimb;
+	entity->focalx = limbs[LICH_FALLEN][4][0]; // 1.5
+	entity->focaly = limbs[LICH_FALLEN][4][1]; // 0
+	entity->focalz = limbs[LICH_FALLEN][4][2]; // -.5
+	entity->behavior = &actLichFallenLimb;
 	entity->parent = my->getUID();
 	entity->pitch = .25;
 	node = list_AddNodeLast(&my->children);
@@ -175,7 +175,7 @@ void initLichIce(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 }
 
-void lichIceDie(Entity* my)
+void lichFallenDie(Entity* my)
 {
 	node_t* node, *nextnode;
 	int c;
@@ -223,7 +223,7 @@ void lichIceDie(Entity* my)
 	playSoundEntity(my, 479, 128);
 	my->removeLightField();
 	// kill all other monsters on the level
-	for ( node = map.creatures->first; my->monsterLichAllyStatus == LICH_ALLY_DEAD && node != NULL; node = nextnode )
+	for ( node = map.creatures->first; node != NULL; node = nextnode )
 	{
 		nextnode = node->next;
 		Entity* entity = (Entity*)node->element;
@@ -258,7 +258,7 @@ void actLichFallenLimb(Entity* my)
 	my->actMonsterLimb();
 }
 
-void lichIceAnimate(Entity* my, Stat* myStats, double dist)
+void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
 {
 	node_t* node;
 	Entity* entity = nullptr, *entity2 = nullptr;
@@ -374,9 +374,8 @@ void lichIceAnimate(Entity* my, Stat* myStats, double dist)
 			{
 				my->monsterLichBattleState = LICH_BATTLE_READY;
 				generatePathMaps();
-				/*swornenemies[LICH_ICE][AUTOMATON] = false;
-				swornenemies[LICH_FIRE][AUTOMATON] = false;
-				swornenemies[AUTOMATON][HUMAN] = true;*/
+				/*swornenemies[LICH_FALLEN][CHOLOROSH] = false;
+				swornenemies[CHOLOROSH][HUMAN] = true;*/
 				real_t distToPlayer = 0;
 				int c, playerToChase = -1;
 				for ( c = 0; c < MAXPLAYERS; c++ )
@@ -410,7 +409,7 @@ void lichIceAnimate(Entity* my, Stat* myStats, double dist)
 		}
 
 		// passive floating effect, server only.
-		if ( my->monsterState == MONSTER_STATE_LICHICE_DIE )
+		if ( my->monsterState == MONSTER_STATE_LICHFALLEN_DIE )
 		{
 			my->z -= 0.03;
 		}
@@ -464,7 +463,7 @@ void lichIceAnimate(Entity* my, Stat* myStats, double dist)
 		|| my->monsterAttack == MONSTER_POSE_SPECIAL_WINDUP2
 		|| my->monsterAttack == MONSTER_POSE_SPECIAL_WINDUP3
 		|| my->monsterState == MONSTER_STATE_LICH_CASTSPELLS)
-		&& my->monsterState != MONSTER_STATE_LICHICE_DIE )
+		&& my->monsterState != MONSTER_STATE_LICHFALLEN_DIE )
 	{
 		//Always turn to face the target.
 		Entity* target = uidToEntity(my->monsterTarget);
@@ -810,7 +809,7 @@ void lichIceAnimate(Entity* my, Stat* myStats, double dist)
 						{
 							if ( multiplayer != CLIENT )
 							{
-								if ( my->monsterState != MONSTER_STATE_LICHICE_DIE )
+								if ( my->monsterState != MONSTER_STATE_LICHFALLEN_DIE )
 								{
 									my->attack(1, 0, nullptr);
 								}
@@ -819,7 +818,7 @@ void lichIceAnimate(Entity* my, Stat* myStats, double dist)
 									my->monsterAttackTime = 25; //reset this attack time to allow successive strikes
 								}
 
-								if ( my->monsterState == MONSTER_STATE_LICHICE_DIE )
+								if ( my->monsterState == MONSTER_STATE_LICHFALLEN_DIE )
 								{
 									int spellID = SPELL_DRAIN_SOUL;
 									for ( int i = 0; i < 8; ++i )
@@ -1180,14 +1179,14 @@ void lichIceAnimate(Entity* my, Stat* myStats, double dist)
 						entity->pitch += PI / 2 + 0.25;
 					}
 
-					entity->focalx = limbs[LICH_ICE][4][0];
-					entity->focaly = limbs[LICH_ICE][4][1];
-					entity->focalz = limbs[LICH_ICE][4][2];
+					entity->focalx = limbs[LICH_FALLEN][4][0];
+					entity->focaly = limbs[LICH_FALLEN][4][1];
+					entity->focalz = limbs[LICH_FALLEN][4][2];
 					if ( my->monsterArmbended )
 					{
 						// adjust focal points during side swing
-						entity->focalx = limbs[LICH_ICE][4][0] - 0.8;
-						entity->focalz = limbs[LICH_ICE][4][2] + 1;
+						entity->focalx = limbs[LICH_FALLEN][4][0] - 0.8;
+						entity->focalz = limbs[LICH_FALLEN][4][2] + 1;
 						entity->pitch += cos(weaponarm->roll) * PI / 2;
 						entity->yaw -= sin(weaponarm->roll) * PI / 2;
 					}

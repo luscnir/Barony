@@ -1298,6 +1298,9 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent)
 			case COCKATRICE:
 			case COCKROACH:
 			case GARGOYLE:
+			case CRYORUNE:
+			case YETI:
+			case EYEBALL:
 				summonCanEquipItems = false;
 				break;
 			default:
@@ -1321,6 +1324,9 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent)
 			case COCKATRICE:
 			case COCKROACH:
 			case GARGOYLE:
+			case CRYORUNE:
+			case YETI:
+			case EYEBALL:
 				hitMonsterCanTransferEquipment = false;
 				break;
 			default:
@@ -1334,7 +1340,7 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent)
 		bool fellInWater = false;
 
 		if ( targetStats->EFFECTS[EFF_LEVITATING]
-			&& (monsterSummonType != CREATURE_IMP && monsterSummonType != COCKATRICE && monsterSummonType != SHADOW && monsterSummonType != GARGOYLE) )
+			&& (monsterSummonType != CREATURE_IMP && monsterSummonType != COCKATRICE && monsterSummonType != SHADOW && monsterSummonType != GARGOYLE && monsterSummonType != CRYORUNE && monsterSummonType != EYEBALL ) )
 		{
 			// check if there's a floor...
 			int x, y, u, v;
