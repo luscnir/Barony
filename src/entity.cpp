@@ -669,6 +669,30 @@ void Entity::killedByMonsterObituary(Entity* victim)
 			case MATILDA:
 				victim->setObituary(language[2165]);
 				break;
+			case CRYORUNE:
+				victim->setObituary(language[2166]);
+				break;
+			case YETI:
+				victim->setObituary(language[2167]);
+				break;
+			case ICEDEMON:
+				victim->setObituary(language[2168]);
+				break;
+			case EYEBALL:
+				victim->setObituary(language[2169]);
+				break;
+			case DENOME:
+				victim->setObituary(language[2170]);
+				break;
+			case ABOMINATION:
+				victim->setObituary(language[2171]);
+				break;
+			case CHOLOROSH:
+				victim->setObituary(language[2172]);
+				break;
+			case LICH_FALLEN:
+				victim->setObituary(language[2173]);
+				break;
 			default:
 				victim->setObituary(language[1500]);
 				break;
@@ -6779,6 +6803,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 								messagePlayer(playerhit, language[686]);
 								messagePlayer(playerhit, language[687]);
 								serverUpdateEffects(playerhit);
+								break;
 							case SUCCUBUS:
 								switch ( armorstolen )
 								{
@@ -6904,6 +6929,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 									messagePlayer(playerhit, language[686]);
 									messagePlayer(playerhit, language[687]);
 									serverUpdateEffects(playerhit);
+									break;
 								default:
 									break;
 							}
@@ -8380,7 +8406,7 @@ void Entity::awardXP(Entity* src, bool share, bool root)
 	// award XP to main victor
 	destStats->EXP += xpGain;
 
-	if ( (srcStats->type == LICH || srcStats->type == LICH_FIRE || srcStats->type == LICH_ICE) && root )
+	if ( (srcStats->type == LICH || srcStats->type == LICH_FIRE || srcStats->type == LICH_ICE || srcStats->type == LICH_FALLEN) && root )
 	{
 		if ( destStats->type == CREATURE_IMP 
 			|| destStats->type == DEMON
@@ -8440,6 +8466,10 @@ void Entity::awardXP(Entity* src, bool share, bool root)
 				kills[LICH]++;
 			}
 			else if ( srcStats->type == LICH_ICE )
+			{
+				kills[LICH]++;
+			}
+			else if (srcStats->type == LICH_FALLEN)
 			{
 				kills[LICH]++;
 			}
@@ -9541,6 +9571,7 @@ bool Entity::setBootSprite(Entity* leg, int spriteOffset)
 		case SUCCUBUS:
 		case SHOPKEEPER:
 		case BURGGUARD:
+		case CHOLOROSH:
 			if ( myStats->shoes->type == LEATHER_BOOTS || myStats->shoes->type == LEATHER_BOOTS_SPEED )
 			{
 				leg->sprite = 148 + spriteOffset;
@@ -9885,7 +9916,8 @@ int Entity::getAttackPose() const
 				|| myStats->type == HUMAN || myStats->type == GOBLIN
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
-				|| myStats->type == SHADOW || myStats->type == BURGGUARD )
+				|| myStats->type == SHADOW || myStats->type == BURGGUARD
+				|| myStats->type == CHOLOROSH )
 			{
 				pose = MONSTER_POSE_MELEE_WINDUP1;
 			}
@@ -9934,11 +9966,12 @@ int Entity::getAttackPose() const
 				|| myStats->type == GOBLIN || myStats->type == SKELETON 
 				|| myStats->type == GNOME || myStats->type == SUCCUBUS
 				|| myStats->type == SHOPKEEPER || myStats->type == SHADOW 
-				|| myStats->type == BURGGUARD || myStats->type == GARGOYLE )
+				|| myStats->type == BURGGUARD || myStats->type == GARGOYLE
+				|| myStats->type == CHOLOROSH )
 			{
 				pose = MONSTER_POSE_MAGIC_WINDUP1;
 			}
-			else if ( myStats->type == DEMON || myStats->type == CREATURE_IMP )
+			else if ( myStats->type == DEMON || myStats->type == CREATURE_IMP || myStats->type == ICEDEMON  )
 			{
 				pose = MONSTER_POSE_MELEE_WINDUP1;
 			}
@@ -9985,7 +10018,8 @@ int Entity::getAttackPose() const
 				|| myStats->type == HUMAN || myStats->type == GOBLIN 
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
-				|| myStats->type == SHADOW || myStats->type == BURGGUARD )
+				|| myStats->type == SHADOW || myStats->type == BURGGUARD
+				|| myStats->type == CHOLOROSH )
 			{
 				if ( myStats->weapon->type == CROSSBOW )
 				{
@@ -10027,7 +10061,8 @@ int Entity::getAttackPose() const
 				|| myStats->type == HUMAN || myStats->type == GOBLIN
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
-				|| myStats->type == SHADOW || myStats->type == BURGGUARD )
+				|| myStats->type == SHADOW || myStats->type == BURGGUARD
+				|| myStats->type == CHOLOROSH )
 			{
 				if ( getWeaponSkill(myStats->weapon) == PRO_AXE || getWeaponSkill(myStats->weapon) == PRO_MACE )
 				{
@@ -10056,7 +10091,8 @@ int Entity::getAttackPose() const
 			|| myStats->type == GNOME || myStats->type == DEMON
 			|| myStats->type == CREATURE_IMP || myStats->type == SUCCUBUS
 			|| myStats->type == SHOPKEEPER || myStats->type == MINOTAUR
-			|| myStats->type == SHADOW || myStats->type == BURGGUARD )
+			|| myStats->type == SHADOW || myStats->type == BURGGUARD 
+			|| myStats->type == ICEDEMON || myStats->type == CHOLOROSH )
 		{
 			pose = MONSTER_POSE_MELEE_WINDUP1;
 		}
@@ -10082,7 +10118,7 @@ int Entity::getAttackPose() const
 				pose = MONSTER_POSE_MELEE_WINDUP1 + rand() % 2;
 			}
 		}
-		else if ( myStats->type == TROLL )
+		else if ( myStats->type == TROLL || myStats->type == YETI )
 		{
 			pose = MONSTER_POSE_MELEE_WINDUP1;
 		}
@@ -11505,6 +11541,7 @@ void Entity::checkGroundForItems()
 				}
 				break;
 			case GOATMAN:
+			case CHOLOROSH:
 				//Goatman boss picks up items too.
 				monsterAddNearbyItemToInventory(myStats, 16, 9); //Replaces checkBetterEquipment(), because more better. Adds items to inventory, and swaps out current equipped with better stuff on the ground.
 																 //checkBetterEquipment(myStats);
@@ -11540,6 +11577,8 @@ bool Entity::canWieldItem(const Item& item) const
 			return shadowCanWieldItem(item);
 		case BURGGUARD:
 			return burgGuardCanWieldItem(item);
+		case CHOLOROSH:
+			return choloroshCanWieldItem(item);
 		default:
 			return false;
 	}
@@ -11975,6 +12014,12 @@ bool Entity::monsterWantsItem(const Item& item, Item**& shouldEquip, node_t*& re
 				return false;
 			}
 			break;
+		case CHOLOROSH:
+			if (!choloroshCanWieldItem(item))
+			{
+				return false;
+			}
+			break;
 		default:
 			return false;
 			break;
@@ -12401,9 +12446,16 @@ bool Entity::shouldRetreat(Stat& myStats)
 	}
 
 	//Moded creatures that don't run:
-	else if ( myStats.type == BURGGUARD || myStats.type == GARGOYLE || myStats.type == MATILDA )
+	if ( myStats.type == BURGGUARD || myStats.type == GARGOYLE || myStats.type == MATILDA || myStats.type == CRYORUNE || myStats.type == ICEDEMON || myStats.type == ABOMINATION )
 	{
 		return false;
+	}
+	else if (myStats.type == LICH_FALLEN)
+	{
+		//may need change depending with attack/phase lich_fallen is using
+		{
+			return false;
+		}
 	}
 
 	if ( myStats.type == VAMPIRE )
@@ -13481,6 +13533,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalz = limbs[monster][9][2] + 2.5;
 				break;
 			case GOATMAN:
+			case CHOLOROSH:
 				helm->focalx = limbs[monster][9][0] - .5;
 				helm->focaly = limbs[monster][9][1] - 3.55;
 				helm->focalz = limbs[monster][9][2] + 2.75;
@@ -13533,6 +13586,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalz = limbs[monster][9][2] + 2.25;
 				break;
 			case GOATMAN:
+			case CHOLOROSH:
 				helm->focalx = limbs[monster][9][0] - .5;
 				helm->focaly = limbs[monster][9][1] - 2.75;
 				helm->focalz = limbs[monster][9][2] + 2.75;
@@ -13601,6 +13655,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalz = limbs[monster][9][2] + 2.25;
 				break;
 			case GOATMAN:
+			case CHOLOROSH:
 				helm->focalx = limbs[monster][9][0];
 				helm->focaly = limbs[monster][9][1] - 5.f;
 				helm->focalz = limbs[monster][9][2] + 2.75;
@@ -13646,6 +13701,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalz = limbs[monster][9][2] + 2.25;
 				break;
 			case GOATMAN:
+			case CHOLOROSH:
 				helm->focalx = limbs[monster][9][0];
 				helm->focaly = limbs[monster][9][1] - 4.5;
 				helm->focalz = limbs[monster][9][2] + 2.75;
@@ -14245,6 +14301,7 @@ void Entity::setHumanoidLimbOffset(Entity* limb, Monster race, int limbType)
 		case GOATMAN:
 		case INSECTOID:
 		case BURGGUARD:
+		case CHOLOROSH:
 			if ( limbType == LIMB_HUMANOID_TORSO )
 			{
 				limb->x -= .25 * cos(this->yaw);
@@ -14539,6 +14596,7 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 		case INCUBUS:
 		case SUCCUBUS:
 		case BURGGUARD:
+		case CHOLOROSH:
 			shieldLimb->x -= 2.5 * cos(this->yaw + PI / 2) + .20 * cos(this->yaw);
 			shieldLimb->y -= 2.5 * sin(this->yaw + PI / 2) + .20 * sin(this->yaw);
 			shieldLimb->z += 2.5;
@@ -14635,7 +14693,7 @@ bool Entity::isBossMonsterOrBossMap()
 	Stat* myStats = getStats();
 	if ( myStats )
 	{
-		if ( myStats->type == MINOTAUR
+		if (myStats->type == MINOTAUR
 			|| myStats->type == SHOPKEEPER
 			|| myStats->type == SHADOW
 			|| (myStats->type == VAMPIRE && !strncmp(myStats->name, "Bram Kindly", 11))
@@ -14644,6 +14702,9 @@ bool Entity::isBossMonsterOrBossMap()
 			|| !strncmp(map.name, "Boss", 4)
 			|| !strncmp(map.name, "Hell Boss", 9)
 			|| myStats->type == MATILDA
+			|| myStats->type == ICEDEMON
+			|| myStats->type == ABOMINATION
+			|| myStats->type == LICH_FALLEN
 			)
 		{
 			return true;

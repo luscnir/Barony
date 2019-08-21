@@ -2383,6 +2383,7 @@ int FollowerRadialMenu::optionDisabledForCreature(int playerSkillLVL, int monste
 		case AUTOMATON:
 		case SUCCUBUS:
 		case BURGGUARD:
+		case CRYORUNE:
 			creatureTier = 1;
 			break;
 		case CREATURE_IMP:
@@ -2392,12 +2393,16 @@ int FollowerRadialMenu::optionDisabledForCreature(int playerSkillLVL, int monste
 		case INSECTOID:
 		case GOATMAN:
 		case GARGOYLE:
+		case YETI:
+		case EYEBALL:
+		case DENOME:
 			creatureTier = 2;
 			break;
 		case CRYSTALGOLEM:
 		case VAMPIRE:
 		case COCKATRICE:
 		case SHADOW:
+		case CHOLOROSH:
 			creatureTier = 3;
 			break;
 	}
@@ -2568,6 +2573,7 @@ bool FollowerRadialMenu::allowedClassToggle(int monsterType)
 		case AUTOMATON:
 		case GOATMAN:
 		case BURGGUARD:
+		case CHOLOROSH:
 			return true;
 			break;
 		default:
@@ -2585,6 +2591,7 @@ bool FollowerRadialMenu::allowedItemPickupToggle(int monsterType)
 		case AUTOMATON:
 		case GOATMAN:
 		case BURGGUARD:
+		case CHOLOROSH:
 			return true;
 			break;
 		default:
@@ -2613,6 +2620,9 @@ bool FollowerRadialMenu::allowedInteractFood(int monsterType)
 		case COCKROACH:
 		case BURGGUARD:
 		case GARGOYLE:
+		case YETI:
+		case DENOME:
+		case CHOLOROSH:
 			return true;
 			break;
 		default:
@@ -2633,6 +2643,8 @@ bool FollowerRadialMenu::allowedInteractWorld(int monsterType)
 		case GOATMAN:
 		case SKELETON:
 		case BURGGUARD:
+		case DENOME:
+		case CHOLOROSH:
 			return true;
 			break;
 		default:
@@ -2657,6 +2669,8 @@ bool FollowerRadialMenu::allowedInteractItems(int monsterType)
 		case VAMPIRE:
 		case SLIME:
 		case BURGGUARD:
+		case DENOME:
+		case CHOLOROSH:
 			if ( followerToCommand && followerToCommand->monsterAllySummonRank != 0 )
 			{
 				return false;

@@ -905,6 +905,7 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case AUTOMATON:
 				case SUCCUBUS:
 				case BURGGUARD:
+				case EYEBALL:
 					difficulty = 1;
 					break;
 				case CREATURE_IMP:
@@ -914,10 +915,14 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case INSECTOID:
 				case GOATMAN:
 				case GARGOYLE:
+				case CRYORUNE:
+				case YETI:
+				case DENOME:
 					difficulty = 2;
 					break;
 				case CRYSTALGOLEM:
 				case VAMPIRE:
+				case CHOLOROSH:
 					difficulty = 5;
 					break;
 				case COCKATRICE:
@@ -928,6 +933,9 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case LICH_FIRE:
 				case MINOTAUR:
 				case MATILDA:
+				case ICEDEMON:
+				case ABOMINATION:
+				case LICH_FALLEN:
 					difficulty = 666;
 					break;
 			}

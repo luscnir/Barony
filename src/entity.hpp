@@ -502,6 +502,7 @@ public:
 	bool shadowCanWieldItem(const Item& item) const;
 	bool insectoidCanWieldItem(const Item& item) const;
 	bool burgGuardCanWieldItem(const Item& item) const;
+	bool choloroshCanWieldItem(const Item& item) const;
 
 	bool monsterWantsItem(const Item& item, Item**& shouldEquip, node_t*& replaceInventoryItem) const;
 
@@ -583,7 +584,7 @@ public:
 	void actLadderJump8();
 	void actLadderJump9();
 	void actLadderJump10();
-	void actLadderJump11();
+	void actLadderJump16();
 	void actLadderJump14();
 	void actMidPortalJump13();
 	void actMidGamePortalBoss2();
@@ -740,6 +741,9 @@ public:
 			case SUCCUBUS:
 				succubusChooseWeapon(target, dist);
 				break;
+			case CHOLOROSH:
+				choloroshChooseWeapon(target, dist);
+				break;
 			default:
 				break;
 		}
@@ -750,6 +754,7 @@ public:
 	void vampireChooseWeapon(const Entity* target, double dist);
 	void shadowChooseWeapon(const Entity* target, double dist);
 	void succubusChooseWeapon(const Entity* target, double dist);
+	void choloroshChooseWeapon(const Entity* target, double dist);
 	void skeletonSummonSetEquipment(Stat* myStats, int rank);
 	bool monsterInMeleeRange(const Entity* target, double dist) const
 	{
@@ -930,7 +935,7 @@ void actTextSource(Entity* my);
 
 static const int NUM_ITEM_STRINGS = 264;
 static const int NUM_ITEM_STRINGS_BY_TYPE = 110;
-static const int NUM_EDITOR_SPRITES = 163;
+static const int NUM_EDITOR_SPRITES = 171;
 static const int NUM_EDITOR_TILES = 346;
 
 // furniture types.

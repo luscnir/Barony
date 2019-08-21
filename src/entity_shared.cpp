@@ -53,6 +53,14 @@ int checkSpriteType(Sint32 sprite)
 	case 136:
 	case 137:
 	case 138:
+	case 163:
+	case 164:
+	case 165:
+	case 166:
+	case 167:
+	case 168:
+	case 169:
+	case 170:
 		//monsters
 		return 1;
 		break;
@@ -836,7 +844,15 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"LADDER JUMP 16",
 	"LADDER JUMP 14",
 	"MID PORTAL JUMP 13",
-	"MID PORTAL 2"
+	"MID PORTAL 2",
+	"CRYORUNE",
+	"YETI",
+	"ICEDEMON",
+	"EYEBALL",
+	"DENOME",
+	"ABOMINATION",
+	"CHOLOROSH",
+	"LICH_FALLEN"
 };
 
 char monsterEditorNameStrings[NUMMONSTERS][13] =
@@ -877,7 +893,15 @@ char monsterEditorNameStrings[NUMMONSTERS][13] =
 	"cockroach",
 	"burgguard",
 	"gargoyle",
-	"matilda"
+	"matilda",
+	"cryorune",
+	"yeti",
+	"icedemon",
+	"eyeball",
+	"denome",
+	"abomination",
+	"cholorosh",
+	"lichfallen"
 };
 
 char tileEditorNameStrings[NUM_EDITOR_TILES][44] =
@@ -1231,6 +1255,9 @@ int canWearEquip(Entity* entity, int category)
 				case COCKROACH:
 				case GARGOYLE:
 				case MATILDA:
+				case YETI:
+				case EYEBALL:
+				case ABOMINATION:
 					equipType = 0;
 					break;
 
@@ -1238,6 +1265,8 @@ int canWearEquip(Entity* entity, int category)
 				case LICH:
 				case CREATURE_IMP:
 				case DEMON:
+				case CRYORUNE:
+				case ICEDEMON:
 					equipType = 1;
 					break;
 
@@ -1247,6 +1276,8 @@ int canWearEquip(Entity* entity, int category)
 				case SUCCUBUS:
 				case LICH_FIRE:
 				case LICH_ICE:
+				case DENOME:
+				case LICH_FALLEN:
 					equipType = 2;
 					break;
 
@@ -1262,6 +1293,7 @@ int canWearEquip(Entity* entity, int category)
 				case KOBOLD:
 				case INSECTOID:
 				case BURGGUARD:
+				case CHOLOROSH:
 					equipType = 3;
 					break;
 

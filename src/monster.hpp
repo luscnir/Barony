@@ -49,9 +49,17 @@ enum Monster : int
 	COCKROACH,
 	BURGGUARD,
 	GARGOYLE,
-	MATILDA
+	MATILDA,
+	CRYORUNE,
+	YETI,
+	ICEDEMON,
+	EYEBALL,
+	DENOME,
+	ABOMINATION,
+	CHOLOROSH,
+	LICH_FALLEN
 };
-const int NUMMONSTERS = 37;
+const int NUMMONSTERS = 45;
 extern int kills[NUMMONSTERS];
 
 static char monstertypename[][16] =
@@ -92,7 +100,15 @@ static char monstertypename[][16] =
 	"cockroach",
 	"burgguard",
 	"gargoyle",
-	"matilda"
+	"matilda",
+	"cryorune",
+	"yeti",
+	"icedemon",
+	"eyeball",
+	"denome",
+	"abomination",
+	"cholorosh",
+	"lichfallen"
 };
 
 static char monstertypenamecapitalized[][16] =
@@ -133,7 +149,15 @@ static char monstertypenamecapitalized[][16] =
 	"Cockroach",
 	"Burgguard",
 	"Gargoyle",
-	"Matilda"
+	"Matilda",
+	"Cryorune",
+	"Yeti",
+	"Icedemon",
+	"Eyeball",
+	"Denome",
+	"Abomination",
+	"Cholorosh",
+	"Lichfallen"
 };
 
 // body part focal points
@@ -181,8 +205,15 @@ static char gibtype[NUMMONSTERS] =
 	2,	//COCKROACH,
 	2,	//BURG GUARD,
 	2,	//GARGOYLE,
-	2	//MATILDA
-
+	2,	//MATILDA
+	0,	//CRYORUNE,
+	1,	//YETI,
+	3,	//ICEDEMON,
+	1,	//EYEBALL,
+	1,	//DENOME,
+	1,	//ABOMINATION,
+	2,	//CHOLOROSH,
+	4	//LICH_FALLEN
 };
 
 // columns go like this:
@@ -226,8 +257,15 @@ static double damagetables[NUMMONSTERS][7] =
 	{ 0.9, 1.5, 1.f, 0.9, 1.3, 1.f, 1.5 }, // cockroach
 	{ 1.f, 1.1, 0.9, 1.f, 0.8, 1.1, 0.9 }, // burg guard
 	{ 1.2, 1.1, 1.1, 1.f, 1.f, 1.1, 0.8 }, // gargoyle
-	{ 1.f, 1.2, 1.f, 1.4, 1.2, 1.f, 1.2 }  // matilda
-
+	{ 1.f, 1.2, 1.f, 1.4, 1.2, 1.f, 1.2 }, // matilda
+	{ 0.8, 1.4, 1.3, 0.8, 0.8, 0.6, 1.f }, // cryorune
+	{ 1.1, 0.8, 1.1, 0.8, 1.5, 1.f, 0.8 }, // yeti
+	{ 1.f, 0.8, 1.f, 0.8, 1.f, 1.2, 0.8 }, // icedemon
+	{ 1.2, 1.f, 1.3, 1.4, 1.4, 0.5, 1.f }, // eyeball
+	{ 0.9, 1.f, 1.f, 0.9, 1.2, 1.f, 1.f }, // denome
+	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.f }, // abomination
+	{ 1.1, 0.8, 1.3, 1.f, 1.f, 0.9, 0.8 }, // cholorosh
+	{ 1.5, 1.5, 1.5, 1.5, 1.3, 1.f, 1.5 }  // lichfallen
 };
 
 static std::vector<std::vector<int>> classStatGrowth =
@@ -420,6 +458,14 @@ void initCockroach(Entity* my, Stat* myStats);
 void initBurgGuard(Entity* my, Stat* myStats);
 void initGargoyle(Entity* my, Stat* myStats);
 void initMatilda(Entity* my, Stat* myStats);
+void initCryorune(Entity* my, Stat* myStats);
+void initYeti(Entity* my, Stat* myStats);
+void initIceDemon(Entity* my, Stat* myStats);
+void initEyeball(Entity* my, Stat* myStats);
+void initDenome(Entity* my, Stat* myStats);
+void initAbomination(Entity* my, Stat* myStats);
+void initCholorosh(Entity* my, Stat* myStats);
+void initLichFallen(Entity* my, Stat* myStats);
 
 //--act*Limb functions--
 void actHumanLimb(Entity* my);
@@ -451,7 +497,12 @@ void actLichFireLimb(Entity* my);
 void actLichIceLimb(Entity* my);
 void actBurgGuardLimb(Entity* my);
 void actGargoyleLimb(Entity* my);
-void actMatildaLimb(Entity* my);
+void actYetiLimb(Entity* my);
+void actIceDemonLimb(Entity* my);
+void actDenomeLimb(Entity* my);
+void actAbominationLimb(Entity* my);
+void actCholoroshLimb(Entity* my);
+void actLichFallenLimb(Entity* my);
 
 //--*Die functions--
 void humanDie(Entity* my);
@@ -487,6 +538,14 @@ void cockroachDie(Entity* my);
 void burgGuardDie(Entity* my);
 void gargoyleDie(Entity* my);
 void matildaDie(Entity* my);
+void cryoruneDie(Entity* my);
+void yetiDie(Entity* my);
+void iceDemonDie(Entity* my);
+void eyeballDie(Entity* my);
+void denomeDie(Entity* my);
+void abominationDie(Entity* my);
+void choloroshDie(Entity* my);
+void lichfallenDie(Entity* my);
 
 //--*MoveBodyparts functions--
 void humanMoveBodyparts(Entity* my, Stat* myStats, double dist);
@@ -522,6 +581,14 @@ void cockroachAnimate(Entity* my, double dist);
 void burgGuardMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void gargoyleMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void matildaMoveBodyparts(Entity* my, Stat* myStats, double dist);
+void cryoruneAnimate(Entity* my, double dist);
+void yetiMoveBodyparts(Entity* my, Stat* myStats, double dist);
+void iceDemonMoveBodyparts(Entity* my, Stat* myStats, double dist);
+void eyeballAnimate(Entity* my, double dist);
+void denomeMoveBodyparts(Entity* my, Stat* myStats, double dist);
+void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist);
+void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist);
+void lichFallenMoveBodyparts(Entity* my, Stat* myStats, double dist);
 
 //--misc functions--
 void actMinotaurTrap(Entity* my);
@@ -560,6 +627,7 @@ static const Sint32 MONSTER_STATE_LICHICE_TELEPORT_STATIONARY = 17;
 static const Sint32 MONSTER_STATE_LICHICE_DODGE = 13;
 static const Sint32 MONSTER_STATE_LICHFIRE_DIE = 18;
 static const Sint32 MONSTER_STATE_LICHICE_DIE = 18;
+//static const Sint32 MONSTER_STATE_LICHFALLEN_DIE = 18;
 
 //--special monster attack constants
 static const int MONSTER_POSE_MELEE_WINDUP1 = 4;

@@ -169,6 +169,38 @@ void Entity::initMonster(int mySprite)
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
 			break;
+		case CRYORUNE:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case YETI:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case ICEDEMON:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case EYEBALL:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case DENOME:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case ABOMINATION:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case CHOLOROSH:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case LICH_FALLEN:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
 		default:
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
@@ -319,6 +351,40 @@ int Entity::getMonsterTypeFromSprite()
 	{
 		return MATILDA;
 	}
+	else if (mySprite == 908 || mySprite == 909 || mySprite == 910)	// cryorune
+	{
+		return CRYORUNE;
+	}
+	else if (mySprite == 911)     // yeti head
+	{
+		return YETI;
+	}
+	else if (mySprite == 917)     // ice demon head
+	{
+		return ICEDEMON;
+	}
+	else if (mySprite == 924 || mySprite == 925)	// eyeball
+	{
+		return EYEBALL;
+	}
+	else if (mySprite == 926)     // denome head
+	{
+		return DENOME;
+	}
+	else if (mySprite == 934)     // abomination head
+	{
+		return ABOMINATION;
+	}
+	else if (mySprite == 942)     // cholorosh head
+	{
+		return CHOLOROSH;
+	}
+	else if (mySprite == 950)     // fallen lich head
+	{
+		return LICH_FALLEN;
+	}
+
+
 	return NOTHING;
 }
 

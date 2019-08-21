@@ -1,13 +1,3 @@
-/*-------------------------------------------------------------------------------
-
-	BARONY
-	File: monster_goblin.cpp
-	Desc: implements all of the goblin monster's code
-
-	Copyright 2013-2016 (c) Turning Wheel LLC, all rights reserved.
-	See LICENSE for details.
-
--------------------------------------------------------------------------------*/
 
 #include "main.hpp"
 #include "game.hpp"
@@ -16,23 +6,23 @@
 #include "items.hpp"
 #include "monster.hpp"
 #include "sound.hpp"
+#include "book.hpp"
 #include "net.hpp"
 #include "collision.hpp"
 #include "player.hpp"
 
-void initGoblin(Entity* my, Stat* myStats)
+void initDenome(Entity* my, Stat* myStats)
 {
 	int c;
 	node_t* node;
 
-	//Sprite 180 = Goblin head model.
-	my->initMonster(180);
+	my->initMonster(926);
 
 	if ( multiplayer != CLIENT )
 	{
-		MONSTER_SPOTSND = 60;
-		MONSTER_SPOTVAR = 3;
-		MONSTER_IDLESND = 98;
+		MONSTER_SPOTSND = 449;
+		MONSTER_SPOTVAR = 5;
+		MONSTER_IDLESND = 446;
 		MONSTER_IDLEVAR = 3;
 	}
 	if ( multiplayer != CLIENT && !MONSTER_INIT )
@@ -51,43 +41,41 @@ void initGoblin(Entity* my, Stat* myStats)
 			int customItemsToGenerate = ITEM_CUSTOM_SLOT_LIMIT;
 
 			// boss variants
-			if ( rand() % 50 || my->flags[USERFLAG2] )
+			if (rand() % 50 || my->flags[USERFLAG2])
 			{
 			}
 			else
 			{
 				switch (rand() % 2)
 				{
-				case 0:					//The Potato King
-					myStats->HP = 120;
-					myStats->MAXHP = 120;
+				case 0:					//The Bloodthirsty
+					myStats->HP = 165;
+					myStats->MAXHP = 165;
 					myStats->OLDHP = myStats->HP;
-					strcpy(myStats->name, "The Potato King");
-					myStats->weapon = newItem(ARTIFACT_MACE, EXCELLENT, 1, 1, rand(), true, nullptr);
-					myStats->helmet = newItem(HAT_JESTER, SERVICABLE, 3 + rand() % 3, 1, rand(), false, nullptr);
-
+					strcpy(myStats->name, "The Bloodthirsty");
+					myStats->weapon = newItem(ABYSSAL_SWORD, EXCELLENT, 1, 1, rand(), true, nullptr);
+					myStats->shield = newItem(STEEL_SHIELD, EXCELLENT, 0, 1, rand(), true, nullptr);
 					int c;
 					for (c = 0; c < 3; c++)
 					{
-						Entity* entity = summonMonster(GOBLIN, my->x, my->y);
+						Entity* entity = summonMonster(TROLL, my->x, my->y);
 						if (entity)
 						{
 							entity->parent = my->getUID();
 						}
 					}
 					break;
-				case 1:					//Peter Pizza Keeper
-					myStats->HP = 105;
-					myStats->MAXHP = 105;
+				case 1:					//Thiseddys, Mutant priest
+					myStats->HP = 130;
+					myStats->MAXHP = 130;
 					myStats->OLDHP = myStats->HP;
-					strcpy(myStats->name, "Peter Pizza Keeper");
-					myStats->weapon = newItem(STEEL_MACE, EXCELLENT, 0, 1, rand(), true, nullptr);
-					myStats->helmet = newItem(HAT_WIZARD_SLIMY, SERVICABLE, 2 + rand() % 3, 1, rand(), false, nullptr);
-					newItem(FOOD_PIZZA, EXCELLENT, 0, 9, rand(), false, &myStats->inventory);
+					strcpy(myStats->name, "Thiseddys, Mutant priest");
+					myStats->weapon = newItem(SPELLBOOK_ACID_SPRAY, EXCELLENT, 0, 1, rand(), true, nullptr);
+					myStats->mask = newItem(TOOL_BLINDFOLD_TELEPATHY, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
+					myStats->cloak = newItem(CLOAK_YELLOWGREEN, SERVICABLE, 1, 1, rand(), false, nullptr);
 					break;
 				}
 			}
-
 			// random effects
 			if ( rand() % 8 == 0 )
 			{
@@ -117,7 +105,19 @@ void initGoblin(Entity* my, Stat* myStats)
 				case 4:
 				case 3:
 				case 2:
+					if ( rand() % 10 == 0 )
+					{
+						int i = 1 + rand() % 4;
+						for ( c = 0; c < i; c++ )
+						{
+							newItem(static_cast<ItemType>(GEM_GARNET + rand() % 15), static_cast<Status>(1 + rand() % 4), 0, 1, rand(), false, &myStats->inventory);
+						}
+					}
 				case 1:
+					if ( rand() % 3 == 0 )
+					{
+						newItem(FOOD_SALMON, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
+					}
 					break;
 				default:
 					break;
@@ -126,27 +126,22 @@ void initGoblin(Entity* my, Stat* myStats)
 			//give shield
 			if ( myStats->shield == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_SHIELD] == 1 )
 			{
-				// give shield
 				switch ( rand() % 10 )
 				{
 					case 0:
 					case 1:
-						myStats->shield = newItem(TOOL_TORCH, SERVICABLE, -1 + rand() % 3, 1, rand(), false, nullptr);
+						myStats->shield = newItem(TOOL_TORCH, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 					case 2:
 					case 3:
 					case 4:
-						break;
 					case 5:
 					case 6:
-						myStats->shield = newItem(WOODEN_SHIELD, DECREPIT, -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 					case 7:
 					case 8:
-						myStats->shield = newItem(BRONZE_SHIELD, DECREPIT, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
 					case 9:
-						myStats->shield = newItem(IRON_SHIELD, DECREPIT, -1 + rand() % 3, 1, rand(), false, nullptr);
+						myStats->shield = newItem(IRON_SHIELD, static_cast<Status>(WORN + rand() % 2), -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 				}
 			}
@@ -157,24 +152,21 @@ void initGoblin(Entity* my, Stat* myStats)
 				switch ( rand() % 10 )
 				{
 					case 0:
+						myStats->GOLD += 100;
+						myStats->weapon = newItem(TOOL_PICKAXE, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
 					case 1:
 					case 2:
-						myStats->weapon = newItem(SHORTBOW, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
 					case 3:
 					case 4:
-					case 5:
-						myStats->weapon = newItem(BRONZE_AXE, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
+						myStats->weapon = newItem(CROSSBOW, DECREPIT, -2 + rand() % 3, 1, rand(), false, nullptr);
 						break;
+					case 5:
 					case 6:
 					case 7:
-						myStats->weapon = newItem(IRON_MACE, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
 					case 8:
-						myStats->weapon = newItem(IRON_AXE, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
 					case 9:
-						myStats->weapon = newItem(MAGICSTAFF_FIRE, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);
+						myStats->weapon = newItem(MAGICSTAFF_BLEED, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 				}
 			}
@@ -190,64 +182,12 @@ void initGoblin(Entity* my, Stat* myStats)
 					case 3:
 					case 4:
 					case 5:
-						break;
 					case 6:
+						break;
 					case 7:
 					case 8:
-						myStats->cloak = newItem(CLOAK, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
 					case 9:
-						myStats->cloak = newItem(CLOAK_MAGICREFLECTION, WORN, 0, 1, rand(), false, nullptr);
-						break;
-				}
-			}
-
-			// give helmet
-			if ( myStats->helmet == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_HELM] == 1 )
-			{
-				switch ( rand() % 10 )
-				{
-					case 0:
-					case 1:
-					case 2:
-						break;
-					case 3:
-					case 4:
-						myStats->helmet = newItem(HAT_PHRYGIAN, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
-					case 5:
-						myStats->helmet = newItem(HAT_WIZARD, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
-					case 6:
-					case 7:
-						myStats->helmet = newItem(LEATHER_HELM, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
-					case 8:
-					case 9:
-						myStats->helmet = newItem(IRON_HELM, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
-				}
-			}
-
-			// give armor
-			if ( myStats->breastplate == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_ARMOR] == 1 )
-			{
-				switch ( rand() % 10 )
-				{
-					case 0:
-					case 1:
-					case 2:
-					case 3:
-					case 4:
-						break;
-					case 5:
-					case 6:
-					case 7:
-						myStats->breastplate = newItem(LEATHER_BREASTPIECE, DECREPIT, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
-					case 8:
-					case 9:
-						myStats->breastplate = newItem(IRON_BREASTPIECE, DECREPIT, -1 + rand() % 3, 1, rand(), false, nullptr);
+						myStats->cloak = newItem(CLOAK, SERVICABLE, -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 				}
 			}
@@ -255,20 +195,17 @@ void initGoblin(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(183, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(933, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
-	entity->scalex = 1.01;
-	entity->scaley = 1.01;
-	entity->scalez = 1.01;
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[GOBLIN][1][0]; // 0
-	entity->focaly = limbs[GOBLIN][1][1]; // 0
-	entity->focalz = limbs[GOBLIN][1][2]; // 0
-	entity->behavior = &actGoblinLimb;
+	entity->focalx = limbs[DENOME][1][0]; // 0
+	entity->focaly = limbs[DENOME][1][1]; // 0
+	entity->focalz = limbs[DENOME][1][2]; // 0
+	entity->behavior = &actDenomeLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -277,17 +214,17 @@ void initGoblin(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(182, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(932, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[GOBLIN][2][0]; // 0
-	entity->focaly = limbs[GOBLIN][2][1]; // 0
-	entity->focalz = limbs[GOBLIN][2][2]; // 2
-	entity->behavior = &actGoblinLimb;
+	entity->focalx = limbs[DENOME][2][0]; // .25
+	entity->focaly = limbs[DENOME][2][1]; // 0
+	entity->focalz = limbs[DENOME][2][2]; // 1.5
+	entity->behavior = &actDenomeLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -296,17 +233,17 @@ void initGoblin(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(181, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(929, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[GOBLIN][3][0]; // 0
-	entity->focaly = limbs[GOBLIN][3][1]; // 0
-	entity->focalz = limbs[GOBLIN][3][2]; // 2
-	entity->behavior = &actGoblinLimb;
+	entity->focalx = limbs[DENOME][3][0]; // .25
+	entity->focaly = limbs[DENOME][3][1]; // 0
+	entity->focalz = limbs[DENOME][3][2]; // 1.5
+	entity->behavior = &actDenomeLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -315,17 +252,17 @@ void initGoblin(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(178, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(930, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[GOBLIN][4][0]; // 0
-	entity->focaly = limbs[GOBLIN][4][1]; // 0
-	entity->focalz = limbs[GOBLIN][4][2]; // 1.5
-	entity->behavior = &actGoblinLimb;
+	entity->focalx = limbs[DENOME][4][0]; // 0
+	entity->focaly = limbs[DENOME][4][1]; // 0
+	entity->focalz = limbs[DENOME][4][2]; // 2
+	entity->behavior = &actDenomeLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -334,17 +271,17 @@ void initGoblin(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(176, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(927, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[GOBLIN][5][0]; // 0
-	entity->focaly = limbs[GOBLIN][5][1]; // 0
-	entity->focalz = limbs[GOBLIN][5][2]; // 1.5
-	entity->behavior = &actGoblinLimb;
+	entity->focalx = limbs[DENOME][5][0]; // 0
+	entity->focaly = limbs[DENOME][5][1]; // 0
+	entity->focalz = limbs[DENOME][5][2]; // 2
+	entity->behavior = &actDenomeLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -359,11 +296,12 @@ void initGoblin(Entity* my, Stat* myStats)
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
+	entity->flags[INVISIBLE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[GOBLIN][6][0]; // 1.5
-	entity->focaly = limbs[GOBLIN][6][1]; // 0
-	entity->focalz = limbs[GOBLIN][6][2]; // -.5
-	entity->behavior = &actGoblinLimb;
+	entity->focalx = limbs[DENOME][6][0]; // 2
+	entity->focaly = limbs[DENOME][6][1]; // 0
+	entity->focalz = limbs[DENOME][6][2]; // -.5
+	entity->behavior = &actDenomeLimb;
 	entity->parent = my->getUID();
 	entity->pitch = .25;
 	node = list_AddNodeLast(&my->children);
@@ -379,11 +317,12 @@ void initGoblin(Entity* my, Stat* myStats)
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
+	entity->flags[INVISIBLE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[GOBLIN][7][0]; // 2
-	entity->focaly = limbs[GOBLIN][7][1]; // 0
-	entity->focalz = limbs[GOBLIN][7][2]; // 0
-	entity->behavior = &actGoblinLimb;
+	entity->focalx = limbs[DENOME][7][0]; // 0
+	entity->focaly = limbs[DENOME][7][1]; // 0
+	entity->focalz = limbs[DENOME][7][2]; // 1.5
+	entity->behavior = &actDenomeLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -396,54 +335,17 @@ void initGoblin(Entity* my, Stat* myStats)
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
-	entity->flags[PASSABLE] = true;
-	entity->flags[NOUPDATE] = true;
-	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[GOBLIN][8][0]; // 0
-	entity->focaly = limbs[GOBLIN][8][1]; // 0
-	entity->focalz = limbs[GOBLIN][8][2]; // 4
-	entity->behavior = &actGoblinLimb;
-	entity->parent = my->getUID();
-	node = list_AddNodeLast(&my->children);
-	node->element = entity;
-	node->deconstructor = &emptyDeconstructor;
-	node->size = sizeof(Entity*);
-	my->bodyparts.push_back(entity);
-
-	// helmet
-	entity = newEntity(-1, 0, map.entities, nullptr); //Limb entity.
-	entity->sizex = 4;
-	entity->sizey = 4;
-	entity->skill[2] = my->getUID();
 	entity->scalex = 1.01;
 	entity->scaley = 1.01;
 	entity->scalez = 1.01;
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
+	entity->flags[INVISIBLE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[GOBLIN][9][0]; // 0
-	entity->focaly = limbs[GOBLIN][9][1]; // 0
-	entity->focalz = limbs[GOBLIN][9][2]; // -2
-	entity->behavior = &actGoblinLimb;
-	entity->parent = my->getUID();
-	node = list_AddNodeLast(&my->children);
-	node->element = entity;
-	node->deconstructor = &emptyDeconstructor;
-	node->size = sizeof(Entity*);
-	my->bodyparts.push_back(entity);
-
-	// mask
-	entity = newEntity(-1, 0, map.entities, nullptr); //Limb entity.
-	entity->sizex = 4;
-	entity->sizey = 4;
-	entity->skill[2] = my->getUID();
-	entity->flags[PASSABLE] = true;
-	entity->flags[NOUPDATE] = true;
-	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[GOBLIN][10][0]; // 0
-	entity->focaly = limbs[GOBLIN][10][1]; // 0
-	entity->focalz = limbs[GOBLIN][10][2]; // .25
-	entity->behavior = &actGoblinLimb;
+	entity->focalx = limbs[DENOME][8][0]; // 0
+	entity->focaly = limbs[DENOME][8][1]; // 0
+	entity->focalz = limbs[DENOME][8][2]; // 4
+	entity->behavior = &actDenomeLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -457,33 +359,35 @@ void initGoblin(Entity* my, Stat* myStats)
 	}
 }
 
-void actGoblinLimb(Entity* my)
+void actDenomeLimb(Entity* my)
 {
 	my->actMonsterLimb(true);
 }
 
-void goblinDie(Entity* my)
+void denomeDie(Entity* my)
 {
 	int c;
-	for ( c = 0; c < 5; c++ )
+	for ( c = 0; c < 6; c++ )
 	{
-		Entity* gib = spawnGib(my);
-		serverSpawnGibForClient(gib);
+		Entity* entity = spawnGib(my);
+		if ( entity )
+		{
+			serverSpawnGibForClient(entity);
+		}
 	}
 
 	my->spawnBlood();
 
-	playSoundEntity(my, 63 + rand() % 3, 128);
-
 	my->removeMonsterDeathNodes();
 
+	playSoundEntity(my, 454 + rand() % 4, 128);
 	list_RemoveNode(my->mynode);
 	return;
 }
 
-#define GOBLINWALKSPEED .13
+#define DENOMEWALKSPEED .13
 
-void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
+void denomeMoveBodyparts(Entity* my, Stat* myStats, double dist)
 {
 	node_t* node;
 	Entity* entity = nullptr, *entity2 = nullptr;
@@ -514,10 +418,10 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 			{
 				if ( bodypart < LIMB_HUMANOID_TORSO )
 				{
-					bodypart++;
+					++bodypart;
 					continue;
 				}
-				if ( bodypart >= 7 )
+				if ( bodypart >= LIMB_HUMANOID_WEAPON )
 				{
 					break;
 				}
@@ -537,7 +441,7 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 			bodypart = 0;
 			for (node = my->children.first; node != nullptr; node = node->next)
 			{
-				if ( bodypart < LIMB_HUMANOID_TORSO )
+				if ( bodypart < 2 )
 				{
 					bodypart++;
 					continue;
@@ -560,16 +464,13 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 		// sleeping
 		if ( myStats->EFFECTS[EFF_ASLEEP] )
 		{
-			my->z = 2.5;
+			my->z = 4;
 			my->pitch = PI / 4;
 		}
 		else
 		{
-			my->z = 0;
-			if ( my->monsterAttack == 0 )
-			{
-				my->pitch = 0;
-			}
+			my->z = 2.25;
+			my->pitch = 0;
 		}
 	}
 
@@ -594,10 +495,9 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 		{
 			entity->yaw = my->yaw;
 		}
-
 		if ( bodypart == LIMB_HUMANOID_RIGHTLEG || bodypart == LIMB_HUMANOID_LEFTARM )
 		{
-			my->humanoidAnimateWalk(entity, node, bodypart, GOBLINWALKSPEED, dist, 0.4);
+			my->humanoidAnimateWalk(entity, node, bodypart, DENOMEWALKSPEED, dist, 0.4);
 		}
 		else if ( bodypart == LIMB_HUMANOID_LEFTLEG || bodypart == LIMB_HUMANOID_RIGHTARM || bodypart == LIMB_HUMANOID_CLOAK )
 		{
@@ -615,8 +515,8 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				entity->pitch = entity->fskill[0];
 			}
 
-			my->humanoidAnimateWalk(entity, node, bodypart, GOBLINWALKSPEED, dist, 0.4);
-			
+			my->humanoidAnimateWalk(entity, node, bodypart, DENOMEWALKSPEED, dist, 0.4);
+
 			if ( bodypart == LIMB_HUMANOID_CLOAK )
 			{
 				entity->fskill[0] = entity->pitch;
@@ -628,31 +528,9 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 		{
 			// torso
 			case LIMB_HUMANOID_TORSO:
-				if ( multiplayer != CLIENT )
-				{
-					if ( myStats->breastplate == nullptr )
-					{
-						entity->sprite = 183;
-					}
-					else
-					{
-						entity->sprite = itemModel(myStats->breastplate);
-					}
-					if ( multiplayer == SERVER )
-					{
-						// update sprites for clients
-						if ( entity->skill[10] != entity->sprite )
-						{
-							entity->skill[10] = entity->sprite;
-							serverUpdateEntityBodypart(my, bodypart);
-						}
-						if ( entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10) )
-						{
-							serverUpdateEntityBodypart(my, bodypart);
-						}
-					}
-				}
-				my->setHumanoidLimbOffset(entity, GOBLIN, LIMB_HUMANOID_TORSO);
+				entity->x -= .25 * cos(my->yaw);
+				entity->y -= .25 * sin(my->yaw);
+				entity->z += 1.25;
 				break;
 			// right leg
 			case LIMB_HUMANOID_RIGHTLEG:
@@ -660,7 +538,7 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->shoes == nullptr )
 					{
-						entity->sprite = 182;
+						entity->sprite = 932;
 					}
 					else
 					{
@@ -680,7 +558,14 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						}
 					}
 				}
-				my->setHumanoidLimbOffset(entity, GOBLIN, LIMB_HUMANOID_RIGHTLEG);
+				entity->x += 1.25 * cos(my->yaw + PI / 2);
+				entity->y += 1.25 * sin(my->yaw + PI / 2);
+				entity->z += 2.75;
+				if ( my->z >= 3.9 && my->z <= 4.1 )
+				{
+					entity->yaw += PI / 8;
+					entity->pitch = -PI / 2;
+				}
 				break;
 			// left leg
 			case LIMB_HUMANOID_LEFTLEG:
@@ -688,7 +573,7 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->shoes == nullptr )
 					{
-						entity->sprite = 181;
+						entity->sprite = 929;
 					}
 					else
 					{
@@ -708,37 +593,49 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						}
 					}
 				}
-				my->setHumanoidLimbOffset(entity, GOBLIN, LIMB_HUMANOID_LEFTLEG);
+				entity->x -= 1.25 * cos(my->yaw + PI / 2);
+				entity->y -= 1.25 * sin(my->yaw + PI / 2);
+				entity->z += 2.75;
+				if ( my->z >= 3.9 && my->z <= 4.1 )
+				{
+					entity->yaw -= PI / 8;
+					entity->pitch = -PI / 2;
+				}
 				break;
 			// right arm
 			case LIMB_HUMANOID_RIGHTARM:
 			{
+				;
 				node_t* weaponNode = list_Node(&my->children, 7);
 				if ( weaponNode )
 				{
 					Entity* weapon = (Entity*)weaponNode->element;
-					if ( MONSTER_ARMBENDED || (weapon->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT) )
+					if ( my->monsterArmbended || (weapon->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT) )
 					{
-						// if weapon invisible and I'm not attacking, relax arm.
-						entity->focalx = limbs[GOBLIN][4][0]; // 0
-						entity->focaly = limbs[GOBLIN][4][1]; // 0
-						entity->focalz = limbs[GOBLIN][4][2]; // 2
-						entity->sprite = 178;
+						entity->focalx = limbs[DENOME][4][0]; // 0
+						entity->focaly = limbs[DENOME][4][1]; // 0
+						entity->focalz = limbs[DENOME][4][2]; // 2
+						entity->sprite = 930;
 					}
 					else
 					{
-						// else flex arm.
-						entity->focalx = limbs[GOBLIN][4][0] + 0.75;
-						entity->focaly = limbs[GOBLIN][4][1];
-						entity->focalz = limbs[GOBLIN][4][2] - 0.75;
-						entity->sprite = 179;
+						entity->focalx = limbs[DENOME][4][0] + 1; // 1
+						entity->focaly = limbs[DENOME][4][1]; // 0
+						entity->focalz = limbs[DENOME][4][2] - 1; // 1
+						entity->sprite = 931;
 					}
 				}
-				my->setHumanoidLimbOffset(entity, GOBLIN, LIMB_HUMANOID_RIGHTARM);
+				entity->x += 2.5 * cos(my->yaw + PI / 2) - .75 * cos(my->yaw);
+				entity->y += 2.5 * sin(my->yaw + PI / 2) - .75 * sin(my->yaw);
+				entity->z -= .25;
 				entity->yaw += MONSTER_WEAPONYAW;
+				if ( my->z >= 3.9 && my->z <= 4.1 )
+				{
+					entity->pitch = 0;
+				}
 				break;
-			// left arm
 			}
+			// left arm
 			case LIMB_HUMANOID_LEFTARM:
 			{
 				shieldarm = entity;
@@ -748,20 +645,26 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					Entity* shield = (Entity*)shieldNode->element;
 					if ( shield->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT )
 					{
-						entity->focalx = limbs[GOBLIN][5][0]; // 0
-						entity->focaly = limbs[GOBLIN][5][1]; // 0
-						entity->focalz = limbs[GOBLIN][5][2]; // 2
-						entity->sprite = 176;
+						entity->focalx = limbs[DENOME][5][0]; // 0
+						entity->focaly = limbs[DENOME][5][1]; // 0
+						entity->focalz = limbs[DENOME][5][2]; // 2
+						entity->sprite = 927;
 					}
 					else
 					{
-						entity->focalx = limbs[GOBLIN][5][0] + 0.75;
-						entity->focaly = limbs[GOBLIN][5][1];
-						entity->focalz = limbs[GOBLIN][5][2] - 0.75;
-						entity->sprite = 177;
+						entity->focalx = limbs[DENOME][5][0] + 1; // 1
+						entity->focaly = limbs[DENOME][5][1]; // 0
+						entity->focalz = limbs[DENOME][5][2] - 1; // 1
+						entity->sprite = 928;
 					}
 				}
-				my->setHumanoidLimbOffset(entity, GOBLIN, LIMB_HUMANOID_LEFTARM);
+				entity->x -= 2.5 * cos(my->yaw + PI / 2) + .75 * cos(my->yaw);
+				entity->y -= 2.5 * sin(my->yaw + PI / 2) + .75 * sin(my->yaw);
+				entity->z -= .25;
+				if ( my->z >= 3.9 && my->z <= 4.1 )
+				{
+					entity->pitch = 0;
+				}
 				if ( my->monsterDefend && my->monsterAttack == 0 )
 				{
 					MONSTER_SHIELDYAW = PI / 5;
@@ -825,7 +728,7 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				}
 				break;
 			// shield
-			case 8:
+			case LIMB_HUMANOID_SHIELD:
 				if ( multiplayer != CLIENT )
 				{
 					if ( myStats->shield == nullptr )
@@ -868,7 +771,60 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->flags[INVISIBLE] = true;
 					}
 				}
-				my->handleHumanoidShieldLimb(entity, shieldarm);
+				entity->x -= 2.5 * cos(my->yaw + PI / 2) + .20 * cos(my->yaw);
+				entity->y -= 2.5 * sin(my->yaw + PI / 2) + .20 * sin(my->yaw);
+				entity->z += 1;
+				entity->yaw = shieldarm->yaw;
+				entity->roll = 0;
+				entity->pitch = 0;
+				if ( entity->sprite == items[TOOL_TORCH].index )
+				{
+					entity2 = spawnFlame(entity, SPRITE_FLAME);
+					entity2->x += 2 * cos(entity->yaw);
+					entity2->y += 2 * sin(entity->yaw);
+					entity2->z -= 2;
+				}
+				else if ( entity->sprite == items[TOOL_CRYSTALSHARD].index )
+				{
+					entity2 = spawnFlame(entity, SPRITE_CRYSTALFLAME);
+					entity2->x += 2 * cos(entity->yaw);
+					entity2->y += 2 * sin(entity->yaw);
+					entity2->z -= 2;
+				}
+				else if ( entity->sprite == items[TOOL_LANTERN].index )
+				{
+					entity->z += 2;
+					entity2 = spawnFlame(entity, SPRITE_FLAME);
+					entity2->x += 2 * cos(entity->yaw);
+					entity2->y += 2 * sin(entity->yaw);
+					entity2->z += 1;
+				}
+				else if (entity->sprite == items[TOOL_GREENTORCH].index)
+				{
+					entity2 = spawnFlame(entity, SPRITE_GREENFLAME);
+					entity2->x += 2 * cos(entity->yaw);
+					entity2->y += 2 * sin(entity->yaw);
+					entity2->z -= 2;
+				}
+				if ( MONSTER_SHIELDYAW > PI / 32 )
+				{
+					if ( entity->sprite != items[TOOL_TORCH].index && entity->sprite != items[TOOL_LANTERN].index && entity->sprite != items[TOOL_CRYSTALSHARD].index && entity->sprite != items[TOOL_GREENTORCH].index)
+					{
+						// shield, so rotate a little.
+						entity->roll += PI / 64;
+					}
+					else
+					{
+						entity->x += 0.25 * cos(my->yaw);
+						entity->y += 0.25 * sin(my->yaw);
+						entity->pitch += PI / 16;
+						if ( entity2 )
+						{
+							entity2->x += 0.75 * cos(shieldarm->yaw);
+							entity2->y += 0.75 * sin(shieldarm->yaw);
+						}
+					}
+				}
 				break;
 			// cloak
 			case LIMB_HUMANOID_CLOAK:
@@ -909,123 +865,9 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->flags[INVISIBLE] = true;
 					}
 				}
-				entity->x -= cos(my->yaw);
-				entity->y -= sin(my->yaw);
+				entity->x -= cos(my->yaw) * 1.5;
+				entity->y -= sin(my->yaw) * 1.5;
 				entity->yaw += PI / 2;
-				break;
-			// helm
-			case LIMB_HUMANOID_HELMET:
-				entity->focalx = limbs[GOBLIN][9][0]; // 0
-				entity->focaly = limbs[GOBLIN][9][1]; // 0
-				entity->focalz = limbs[GOBLIN][9][2]; // -2
-				entity->pitch = my->pitch;
-				entity->roll = 0;
-				if ( multiplayer != CLIENT )
-				{
-					entity->sprite = itemModel(myStats->helmet);
-					if ( myStats->helmet == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring ) //TODO: isInvisible()?
-					{
-						entity->flags[INVISIBLE] = true;
-					}
-					else
-					{
-						entity->flags[INVISIBLE] = false;
-					}
-					if ( multiplayer == SERVER )
-					{
-						// update sprites for clients
-						if ( entity->skill[10] != entity->sprite )
-						{
-							entity->skill[10] = entity->sprite;
-							serverUpdateEntityBodypart(my, bodypart);
-						}
-						if ( entity->skill[11] != entity->flags[INVISIBLE] )
-						{
-							entity->skill[11] = entity->flags[INVISIBLE];
-							serverUpdateEntityBodypart(my, bodypart);
-						}
-						if ( entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10) )
-						{
-							serverUpdateEntityBodypart(my, bodypart);
-						}
-					}
-				}
-				else
-				{
-					if ( entity->sprite <= 0 )
-					{
-						entity->flags[INVISIBLE] = true;
-					}
-				}
-				my->setHelmetLimbOffset(entity);
-				break;
-			// mask
-			case LIMB_HUMANOID_MASK:
-				entity->focalx = limbs[GOBLIN][10][0]; // 0
-				entity->focaly = limbs[GOBLIN][10][1]; // 0
-				entity->focalz = limbs[GOBLIN][10][2]; // .25
-				entity->pitch = my->pitch;
-				entity->roll = PI / 2;
-				if ( multiplayer != CLIENT )
-				{
-					if ( myStats->mask == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring ) //TODO: isInvisible()?
-					{
-						entity->flags[INVISIBLE] = true;
-					}
-					else
-					{
-						entity->flags[INVISIBLE] = false;
-					}
-					if ( myStats->mask != nullptr )
-					{
-						if ( myStats->mask->type == TOOL_GLASSES )
-						{
-							entity->sprite = 165; // GlassesWorn.vox
-						}
-						else
-						{
-							entity->sprite = itemModel(myStats->mask);
-						}
-					}
-					if ( multiplayer == SERVER )
-					{
-						// update sprites for clients
-						if ( entity->skill[10] != entity->sprite )
-						{
-							entity->skill[10] = entity->sprite;
-							serverUpdateEntityBodypart(my, bodypart);
-						}
-						if ( entity->skill[11] != entity->flags[INVISIBLE] )
-						{
-							entity->skill[11] = entity->flags[INVISIBLE];
-							serverUpdateEntityBodypart(my, bodypart);
-						}
-						if ( entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10) )
-						{
-							serverUpdateEntityBodypart(my, bodypart);
-						}
-					}
-				}
-				else
-				{
-					if ( entity->sprite <= 0 )
-					{
-						entity->flags[INVISIBLE] = true;
-					}
-				}
-
-				if ( entity->sprite != 165 )
-				{
-					entity->focalx = limbs[GOBLIN][10][0] + .35; // .35
-					entity->focaly = limbs[GOBLIN][10][1] - 2; // -2
-					entity->focalz = limbs[GOBLIN][10][2]; // .25
-				}
-				else
-				{
-					entity->focalx = limbs[GOBLIN][10][0] + .25; // .25
-					entity->focaly = limbs[GOBLIN][10][1] - 2.25; // -2.25
-					entity->focalz = limbs[GOBLIN][10][2]; // .25
-				}
 				break;
 		}
 	}
@@ -1034,7 +876,7 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	if ( shieldNode )
 	{
 		Entity* shieldEntity = (Entity*)shieldNode->element;
-		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index)
+		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index )
 		{
 			shieldEntity->yaw -= PI / 6;
 		}
@@ -1051,34 +893,4 @@ void goblinMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	{
 		// do nothing, don't reset attacktime or increment it.
 	}
-}
-
-bool Entity::goblinCanWieldItem(const Item& item) const
-{
-	Stat* myStats = getStats();
-	if ( !myStats )
-	{
-		return false;
-	}
-
-	if ( monsterAllyIndex >= 0 && (monsterAllyClass != ALLY_CLASS_MIXED || item.interactNPCUid == getUID()) )
-	{
-		return monsterAllyEquipmentInClass(item);
-	}
-
-	switch ( itemCategory(&item) )
-	{
-		case WEAPON:
-			return true;
-		case ARMOR:
-			return true;
-		case MAGICSTAFF:
-			return true;
-		case THROWN:
-			return true;
-		default:
-			return false;
-	}
-
-	return false;
 }

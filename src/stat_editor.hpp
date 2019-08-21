@@ -61,8 +61,16 @@ typedef enum
 	BURGGUARD,
 	GARGOYLE,
 	MATILDA,
+	CRYORUNE,
+	YETI,
+	ICEDEMON,
+	EYEBALL,
+	DENOME,
+	ABOMINATION,
+	CHOLOROSH,
+	LICH_FALLEN,
 } Monster;
-#define NUMMONSTERS 37
+#define NUMMONSTERS 45
 extern int kills[NUMMONSTERS];
 
 // effects

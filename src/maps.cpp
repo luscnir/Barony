@@ -3149,13 +3149,45 @@ void assignActions(map_t* map)
 				{
 					monsterType = BURGGUARD;
 				}
-				else if (entity->sprite == 137)     // cockroach.png
+				else if (entity->sprite == 137)     // gargoyle.png
 				{
 					monsterType = GARGOYLE;
 				}
-				else if (entity->sprite == 138)     // cockroach.png
+				else if (entity->sprite == 138)     // matilda.png
 				{
 					monsterType = MATILDA;
+				}
+				else if (entity->sprite == 163)     // cryorune.png
+				{
+					monsterType = CRYORUNE;
+				}
+				else if (entity->sprite == 164)     // yeti.png
+				{
+					monsterType = YETI;
+				}
+				else if (entity->sprite == 165)     // icedemon.png
+				{
+					monsterType = ICEDEMON;
+				}
+				else if (entity->sprite == 166)     // eyeball.png
+				{
+					monsterType = EYEBALL;
+				}
+				else if (entity->sprite == 167)     // denome.png
+				{
+					monsterType = DENOME;
+				}
+				else if (entity->sprite == 168)     // abomination.png
+				{
+					monsterType = ABOMINATION;
+				}
+				else if (entity->sprite == 169)     // cholorosh.png
+				{
+					monsterType = CHOLOROSH;
+				}
+				else if (entity->sprite == 170)     // lich.png
+				{
+					monsterType = LICH_FALLEN;
 				}
 				else
 				{
@@ -3441,6 +3473,56 @@ void assignActions(map_t* map)
 						entity->focalx = limbs[MATILDA][0][0]; // -3
 						entity->focaly = limbs[MATILDA][0][1]; // 0
 						entity->focalz = limbs[MATILDA][0][2]; // -1
+						break;
+					case CRYORUNE:
+						entity->z = -5;
+						entity->focalx = limbs[CRYORUNE][0][0]; // 0
+						entity->focaly = limbs[CRYORUNE][0][1]; // 0
+						entity->focalz = limbs[CRYORUNE][0][2]; // -1.75
+						break;
+					case YETI:
+						entity->z = -1.5;
+						entity->focalx = limbs[YETI][0][0]; // 1
+						entity->focaly = limbs[YETI][0][1]; // 0
+						entity->focalz = limbs[YETI][0][2]; // -2
+						break;
+					case ICEDEMON:
+						entity->z = -8.5;
+						entity->focalx = limbs[ICEDEMON][0][0]; // -1
+						entity->focaly = limbs[ICEDEMON][0][1]; // 0
+						entity->focalz = limbs[ICEDEMON][0][2]; // -1.25
+						break;
+					case EYEBALL:
+						entity->z = -5;
+						entity->focalx = limbs[EYEBALL][0][0]; // 0
+						entity->focaly = limbs[EYEBALL][0][1]; // 0
+						entity->focalz = limbs[EYEBALL][0][2]; // -1.75
+						break;
+					case DENOME:
+						entity->z = 2.25;
+						entity->focalx = limbs[DENOME][0][0]; // 0
+						entity->focaly = limbs[DENOME][0][1]; // 0
+						entity->focalz = limbs[DENOME][0][2]; // -2
+						break;
+					case ABOMINATION:
+						entity->z = -1;
+						entity->focalx = limbs[ABOMINATION][0][0]; // 0
+						entity->focaly = limbs[ABOMINATION][0][1]; // 0
+						entity->focalz = limbs[ABOMINATION][0][2]; // -1.75
+						break;
+					case CHOLOROSH:
+						entity->z = 0;
+						entity->focalx = limbs[CHOLOROSH][0][0]; // 0
+						entity->focaly = limbs[CHOLOROSH][0][1]; // 0
+						entity->focalz = limbs[CHOLOROSH][0][2]; // -1.75
+						break;
+					case LICH_FALLEN:
+						entity->focalx = limbs[LICH_ICE][0][0]; // -0.75
+						entity->focaly = limbs[LICH_ICE][0][1]; // 0
+						entity->focalz = limbs[LICH_ICE][0][2]; // 0
+						entity->z = -1.3;
+						entity->yaw = PI;
+						entity->sprite = 950;
 						break;
 					default:
 						break;
