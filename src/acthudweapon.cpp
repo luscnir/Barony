@@ -123,6 +123,10 @@ void actHudArm(Entity* my)
 		{
 			my->sprite = 823;
 		}
+		else if (stats[clientnum]->gloves->type == ICE_GLOVES)
+		{
+			my->sprite = 955;
+		}
 		if ( stats[clientnum]->weapon == nullptr )
 		{
 			my->scalex = 0.5f;
@@ -384,6 +388,14 @@ void actHudWeapon(Entity* my)
 		{
 			rangedweapon = true;
 		}
+		else if (stats[clientnum]->weapon->type == MAKESHIFT_BOW)
+		{
+			rangedweapon = true;
+		}
+		else if (stats[clientnum]->weapon->type == CANNON || stats[clientnum]->weapon->type == CANNON_BOULDER)
+		{
+			rangedweapon = true;
+		}
 	}
 
 	// select model
@@ -397,6 +409,13 @@ void actHudWeapon(Entity* my)
 	if ( stats[clientnum]->cloak != nullptr )
 	{
 		if ( stats[clientnum]->cloak->type == CLOAK_INVISIBILITY )
+		{
+			wearingring = true;
+		}
+	}
+	if (stats[clientnum]->mask != nullptr)
+	{
+		if (stats[clientnum]->cloak->type == ABYSSAL_MASK)
 		{
 			wearingring = true;
 		}
@@ -454,7 +473,8 @@ void actHudWeapon(Entity* my)
 				{
 					if ( rangedweapon )
 					{
-						if ( stats[clientnum]->weapon && stats[clientnum]->weapon->type != CROSSBOW || stats[clientnum]->weapon && stats[clientnum]->weapon->type != ABYSSAL_CROSSBOW )
+						if ( stats[clientnum]->weapon && stats[clientnum]->weapon->type != CROSSBOW || stats[clientnum]->weapon && stats[clientnum]->weapon->type != ABYSSAL_CROSSBOW
+						  || stats[clientnum]->weapon && stats[clientnum]->weapon->type != CANNON || stats[clientnum]->weapon && stats[clientnum]->weapon->type != CANNON_BOULDER )
 						{
 							my->sprite++;
 						}
@@ -643,13 +663,14 @@ void actHudWeapon(Entity* my)
 					{
 						pickaxeGimpTimer = 40;
 					}
-					if ( stats[clientnum]->weapon->type == IRON_SPEAR || stats[clientnum]->weapon->type == ARTIFACT_SPEAR || stats[clientnum]->weapon->type == ABYSSAL_SPEAR || stats[clientnum]->weapon->type == SPEAR_BONE )
+					if ( stats[clientnum]->weapon->type == IRON_SPEAR || stats[clientnum]->weapon->type == ARTIFACT_SPEAR || stats[clientnum]->weapon->type == ABYSSAL_SPEAR 
+					  || stats[clientnum]->weapon->type == SPEAR_BONE || stats[clientnum]->weapon->type == TRIDENT )
 					{
 						HUDWEAPON_CHOP = 7; // spear lunges
 					}
 					else if ( rangedweapon )
 					{
-						if ( stats[clientnum]->weapon->type == SLING || stats[clientnum]->weapon->type == SHORTBOW || stats[clientnum]->weapon->type == ARTIFACT_BOW )
+						if ( stats[clientnum]->weapon->type == SLING || stats[clientnum]->weapon->type == SHORTBOW || stats[clientnum]->weapon->type == ARTIFACT_BOW || stats[clientnum]->weapon->type == MAKESHIFT_BOW )
 						{
 							if ( !stats[clientnum]->defending && !throwGimpTimer )
 							{
@@ -854,7 +875,8 @@ void actHudWeapon(Entity* my)
 			{
 				if ( stats[clientnum]->weapon )
 				{
-					if ( stats[clientnum]->weapon->type == SLING || stats[clientnum]->weapon->type == SHORTBOW || stats[clientnum]->weapon->type == ARTIFACT_BOW )
+					if ( stats[clientnum]->weapon->type == SLING || stats[clientnum]->weapon->type == SHORTBOW || stats[clientnum]->weapon->type == ARTIFACT_BOW 
+					  || stats[clientnum]->weapon->type == MAKESHIFT_BOW )
 					{
 #ifdef SOUND
 						if ( bowDrawingSoundPlaying && bowDrawingSound )
@@ -1089,7 +1111,8 @@ void actHudWeapon(Entity* my)
 					HUDWEAPON_CHOP++;
 					players[clientnum]->entity->attack(1, HUDWEAPON_CHARGE, nullptr);
 					if ( stats[clientnum]->weapon
-						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW ) )
+						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW
+						  || stats[clientnum]->weapon->type == CANNON || stats[clientnum]->weapon->type == CANNON_BOULDER ) )
 					{
 						throwGimpTimer = 40; // fix for swapping weapon to crossbow while charging.
 					}
@@ -1174,7 +1197,8 @@ void actHudWeapon(Entity* my)
 		{
 			if (stats[clientnum]->weapon)
 			{
-				if (stats[clientnum]->weapon->type == SLING || stats[clientnum]->weapon->type == SHORTBOW || stats[clientnum]->weapon->type == ARTIFACT_BOW)
+				if (stats[clientnum]->weapon->type == SLING || stats[clientnum]->weapon->type == SHORTBOW || stats[clientnum]->weapon->type == ARTIFACT_BOW 
+				 || stats[clientnum]->weapon->type == MAKESHIFT_BOW )
 				{
 					if (bowFire)
 					{
@@ -1309,7 +1333,8 @@ void actHudWeapon(Entity* my)
 					HUDWEAPON_CHOP++;
 					players[clientnum]->entity->attack(2, HUDWEAPON_CHARGE, nullptr);
 					if ( stats[clientnum]->weapon
-						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW ) )
+						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW 
+						  || stats[clientnum]->weapon->type == CANNON || stats[clientnum]->weapon->type == CANNON_BOULDER) )
 					{
 						throwGimpTimer = 40; // fix for swapping weapon to crossbow while charging.
 					}
@@ -1425,7 +1450,8 @@ void actHudWeapon(Entity* my)
 					HUDWEAPON_CHOP++;
 					players[clientnum]->entity->attack(3, HUDWEAPON_CHARGE, nullptr);
 					if ( stats[clientnum]->weapon
-						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW ) )
+						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW 
+							|| stats[clientnum]->weapon->type == CANNON || stats[clientnum]->weapon->type == CANNON_BOULDER ) )
 					{
 						throwGimpTimer = 40; // fix for swapping weapon to crossbow while charging.
 					}
@@ -1482,7 +1508,8 @@ void actHudWeapon(Entity* my)
 				else
 				{
 					if ( itemCategory(stats[clientnum]->weapon) != MAGICSTAFF && stats[clientnum]->weapon->type != CRYSTAL_SPEAR && stats[clientnum]->weapon->type != IRON_SPEAR
-						 && stats[clientnum]->weapon->type != ARTIFACT_SPEAR && stats[clientnum]->weapon->type != ABYSSAL_SPEAR && stats[clientnum]->weapon->type != SPEAR_BONE )
+						 && stats[clientnum]->weapon->type != ARTIFACT_SPEAR && stats[clientnum]->weapon->type != ABYSSAL_SPEAR && stats[clientnum]->weapon->type != SPEAR_BONE 
+						 && stats[clientnum]->weapon->type != TRIDENT )
 					{
 						HUDWEAPON_CHOP = 1;
 					}
@@ -1558,7 +1585,7 @@ void actHudWeapon(Entity* my)
 			{
 				defaultpitch = -PI / 8.f;
 			}
-			if (item->type == CROSSBOW || item->type == ABYSSAL_CROSSBOW)
+			if (item->type == CROSSBOW || item->type == ABYSSAL_CROSSBOW || item->type == CANNON || item->type == CANNON_BOULDER )
 			{
 				my->x = 6 + HUDWEAPON_MOVEX;
 				my->y = 1.5 + HUDWEAPON_MOVEY;
@@ -1567,7 +1594,7 @@ void actHudWeapon(Entity* my)
 				my->pitch = HUDWEAPON_PITCH - camera_shakey2 / 200.f;
 				my->roll = HUDWEAPON_ROLL;
 			}
-			else if (item->type == SLING || item->type == SHORTBOW || item->type == ARTIFACT_BOW)
+			else if (item->type == SLING || item->type == SHORTBOW || item->type == ARTIFACT_BOW || item->type == MAKESHIFT_BOW )
 			{
 				my->x = 6 + HUDWEAPON_MOVEX;
 				my->y = 3 + HUDWEAPON_MOVEY;
@@ -1648,6 +1675,13 @@ void actHudShield(Entity* my)
 	if ( stats[clientnum]->cloak != nullptr )
 	{
 		if ( stats[clientnum]->cloak->type == CLOAK_INVISIBILITY )
+		{
+			wearingring = true;
+		}
+	}
+	if (stats[clientnum]->mask != nullptr)
+	{
+		if (stats[clientnum]->cloak->type == ABYSSAL_MASK)
 		{
 			wearingring = true;
 		}

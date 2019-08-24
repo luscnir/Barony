@@ -3965,6 +3965,30 @@ void item_Food(Item*& item, int player)
 			case FOOD_HAMLETDINER:
 				stats[player]->HUNGER += 700;
 				break;
+			case FOOD_ANGLERFISH:
+				stats[player]->HUNGER += 600;
+				stats[player]->EFFECTS[EFF_HP_REGEN];
+				stats[player]->EFFECTS_TIMERS[EFF_HP_REGEN] = TICKS_PER_SECOND * 20;
+				break;
+			case FOOD_TENTACLEPIE:
+				stats[player]->HUNGER += 200;
+				switch(rand() % 3)
+				{
+				case 0:
+					stats[player]->EFFECTS[EFF_CONFUSED];
+					stats[player]->EFFECTS_TIMERS[EFF_CONFUSED] = TICKS_PER_SECOND * 10;
+					break;
+
+				case 1:
+					stats[player]->EFFECTS[EFF_POISONED];
+					stats[player]->EFFECTS_TIMERS[EFF_POISONED] = TICKS_PER_SECOND * 20;
+					break;
+				case 2:
+					stats[player]->EFFECTS[EFF_LEVITATING];
+					stats[player]->EFFECTS_TIMERS[EFF_LEVITATING] = TICKS_PER_SECOND * 60;
+					break;
+				}
+				break;
 			default:
 				stats[player]->HUNGER += 10;
 				break;

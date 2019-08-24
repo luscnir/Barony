@@ -6456,7 +6456,7 @@ void Entity::handleMonsterAttack(Stat* myStats, Entity* target, double dist)
 		int bow = 1;
 		if ( hasrangedweapon )
 		{
-			if ( myStats->weapon && (myStats->weapon->type == SLING || myStats->weapon->type == SHORTBOW || myStats->weapon->type == ARTIFACT_BOW) )
+			if ( myStats->weapon && (myStats->weapon->type == SLING || myStats->weapon->type == SHORTBOW || myStats->weapon->type == ARTIFACT_BOW || myStats->weapon->type == MAKESHIFT_BOW) )
 			{
 				bow = 2;
 			}
@@ -8941,6 +8941,32 @@ bool Entity::monsterConsumeFoodEntity(Entity* food, Stat* myStats)
 		case FOOD_HAMLETDINER:
 			heal = 10 + item->beatitude;
 			myStats->HUNGER += 700;
+		case FOOD_ANGLERFISH:
+			heal = 9 + item->beatitude;
+			myStats->HUNGER += 600;
+			myStats->EFFECTS[EFF_HP_REGEN];
+			myStats->EFFECTS_TIMERS[EFF_HP_REGEN] = TICKS_PER_SECOND * 20;
+			break;
+		case FOOD_TENTACLEPIE:
+			heal = 7 + item->beatitude;
+			buffDuration = std::min(buffDuration, 6 * TICKS_PER_SECOND);
+			myStats->HUNGER += 200;
+			switch (rand() % 3)
+			{
+			case 0:
+				myStats->EFFECTS[EFF_CONFUSED];
+				myStats->EFFECTS_TIMERS[EFF_CONFUSED] = TICKS_PER_SECOND * 10;
+				break;
+			
+			case 1:
+				myStats->EFFECTS[EFF_POISONED];
+				myStats->EFFECTS_TIMERS[EFF_POISONED] = TICKS_PER_SECOND * 20;
+				break;
+			case 2:
+				myStats->EFFECTS[EFF_LEVITATING];
+				myStats->EFFECTS_TIMERS[EFF_LEVITATING] = TICKS_PER_SECOND * 60;
+				break;
+			}
 			break;
 		default:
 			free(item);

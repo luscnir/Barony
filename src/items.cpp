@@ -1851,6 +1851,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case MIRROR_SHIELD:
 		case CRYSTAL_SHIELD:
 		case ABYSSAL_SHIELD:
+		case NECRO_SHIELD:
 			equipItem(item, &stats[player]->shield, player);
 			break;
 		case CROSSBOW:
@@ -1869,6 +1870,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case SPIKED_GAUNTLETS:
 		case SUEDE_GLOVES:
 		case ABYSSAL_KNUCKLES:
+		case ICE_GLOVES:
 			equipItem(item, &stats[player]->gloves, player);
 			break;
 		case CLOAK:
@@ -1882,6 +1884,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case CLOAK_YELLOWGREEN:
 		case ABYSSAL_CLOAK:
 		case CLOAK_ELEMENTALIST:
+		case CLOAK_MELTING:
 			equipItem(item, &stats[player]->cloak, player);
 			break;
 		case LEATHER_BOOTS:
@@ -1895,6 +1898,8 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case CRYSTAL_BOOTS:
 		case SUEDE_BOOTS:
 		case ABYSSAL_BOOTS:
+		case BOOTS_LIGHTNESS:
+		case BOOTS_SUPER_LIGHTNESS:
 			equipItem(item, &stats[player]->shoes, player);
 			break;
 		case LEATHER_BREASTPIECE:
@@ -2134,6 +2139,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case RING_REGENERATION:
 		case RING_TELEPORTATION:
 		case ABYSSAL_RING:
+		case RING_POLYMORPH:
 			equipItem(item, &stats[player]->ring, player);
 			break;
 		case SPELLBOOK_FORCEBOLT:
@@ -2222,6 +2228,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 				}
 			break;
 		case TOOL_GLASSES:
+		case ABYSSAL_MASK:
 			equipItem(item, &stats[player]->mask, player);
 			break;
 		case TOOL_BEARTRAP:
@@ -2250,6 +2257,8 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case FOOD_PIZZA:
 		case FOOD_SALMON:
 		case FOOD_HAMLETDINER:
+		case FOOD_ANGLERFISH:
+		case FOOD_TENTACLEPIE:
 			item_Food(item, player);
 			break;
 		case FOOD_TIN:
@@ -2301,6 +2310,16 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case ABYSSAL_SPEAR:
 		case ABYSSAL_CROSSBOW:
 		case SPEAR_BONE:
+		case STONE_AXE:
+		case MAKESHIFT_BOW:
+		case MACHETE:
+		case WOOD_HAMMER:
+		case EXECUTIONER_AXE:
+		case RAPIER:
+		case GRANITE_MAUL:
+		case TRIDENT:
+		case CANNON:
+		case CANNON_BOULDER:
 			equipItem(item, &stats[player]->weapon, player);
 			break;
 		case ARTIFACT_ORB_BLUE:
@@ -2522,6 +2541,9 @@ void useItem(Item* item, int player, Entity* usedBy)
 				break;
 			case CLOAK_ELEMENTALIST:
 				messagePlayer(player, language[3735]);
+				break;
+			case ABYSSAL_MASK:
+				messagePlayer(player, language[3759]);
 				break;
 
 			//TODO: message for abyssal items, and cloak_elementalist
@@ -2900,7 +2922,7 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if ( type == ABYSSAL_MACE )
 	{
-		attack += 0;	//it deals magic damage
+		attack += 1;	//it deals magic damage
 	}
 	else if ( type == ABYSSAL_AXE )
 	{
@@ -2916,7 +2938,47 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if (type == SPEAR_BONE)
 	{
-		attack += 5;
+		attack += 4;
+	}
+	else if (type == WOOD_HAMMER)
+	{
+		attack += 4;
+	}
+	else if (type == MACHETE)
+	{
+		attack += 4;
+	}
+	else if (type == STONE_AXE)
+	{
+		attack += 4;
+	}
+	else if (type == MAKESHIFT_BOW)
+	{
+		attack += 6;
+	}
+	else if (type == TRIDENT)
+	{
+		attack += 9;
+	}
+	else if (type == GRANITE_MAUL)
+	{
+		attack += 9;
+	}
+	else if (type == EXECUTIONER_AXE)
+	{
+		attack += 9;
+	}
+	else if (type == RAPIER)
+	{
+		attack += 9;
+	}
+	else if (type == CANNON)
+	{
+		attack += 10;
+	}
+	else if (type == CANNON_BOULDER)
+	{
+		attack += 75;
 	}
 	// old formula
 	//attack *= (double)(status / 5.0);
@@ -3112,6 +3174,22 @@ Sint32 Item::armorGetAC(Stat* wielder) const
 	else if (type == IRON_BREASTPIECE_SLIMY)
 	{
 		armor += 3;
+	}
+	else if (type == ICE_GLOVES)
+	{
+		armor += 2;
+	}
+	else if (type == CLOAK_MELTING)
+	{
+		armor += 2;
+	}
+	else if (type == BOOTS_LIGHTNESS || type == BOOTS_SUPER_LIGHTNESS)
+	{
+		armor += 1;
+	}
+	else if (type == NECRO_SHIELD)
+	{
+		armor += 5;
 	}
 	//armor *= (double)(item->status/5.0);
 
@@ -3589,6 +3667,9 @@ bool isRangedWeapon(const Item& item)
 		case CROSSBOW:
 		case ARTIFACT_BOW:
 		case ABYSSAL_CROSSBOW:
+		case MAKESHIFT_BOW:
+		case CANNON:
+		case CANNON_BOULDER:
 			return true;
 		default:
 			return false;

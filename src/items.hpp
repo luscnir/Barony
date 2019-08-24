@@ -284,8 +284,29 @@ typedef enum ItemType
 	SYMBOL_RAGE,
 	SYMBOL_CRUELTY,
 	SYMBOL_HATRED,
+	ICE_GLOVES,
+	BOOTS_LIGHTNESS,
+	BOOTS_SUPER_LIGHTNESS,
+	CLOAK_MELTING,
+	RING_POLYMORPH,
+	FOOD_ANGLERFISH,
+	FOOD_TENTACLEPIE,
+	TOOL_UNIHORN,
+	ABYSSAL_MASK,
+	EXECUTIONER_AXE,
+	GRANITE_MAUL,
+	TRIDENT,
+	RAPIER,
+	CANNON,
+	CANNON_BOULDER,
+	NECRO_SHIELD,
+	MAKESHIFT_BOW,
+	WOOD_HAMMER,
+	MACHETE,
+	STONE_AXE,
+	NULLITEM,
 } ItemType;
-const int NUMITEMS = 261;
+const int NUMITEMS = 282;
 
 //NOTE: If you change this, make sure to update NUMCATEGORIES in game.h to reflect the total number of categories. Not doing that will make bad things happen.
 typedef enum Category

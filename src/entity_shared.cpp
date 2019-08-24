@@ -417,7 +417,28 @@ char itemNameStrings[NUM_ITEM_STRINGS][32] =
 	"symbol_rage",
 	"symbol_cruelty",
 	"symbol_hatred",
-	""
+	"ice_gloves",
+	"boots_lightness",
+	"boots_super_lightness",
+	"cloak_melting",
+	"ring_polymorph",
+	"food_anglerfish",
+	"food_tentaclepie",
+	"tool_unihorn",
+	"abyssal_mask",
+	"executioner_axe",
+	"granite_maul",
+	"trident",
+	"rapier",
+	"cannon",
+	"cannon_boulder",
+	"necro_shield",
+	"makeshift_bow",
+	"wood_hammer",
+	"machete",
+	"stone_axe",
+	"nullitem",
+	"",
 };
 
 char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
@@ -552,6 +573,16 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"symbol_rage",
 		"symbol_cruelty",
 		"symbol_hatred",
+		"executioner_axe",
+		"granite_maul",
+		"trident",
+		"rapier",
+		"cannon",
+		"cannon_boulder",
+		"makeshift_bow",
+		"wood_hammer",
+		"machete",
+		"stone_axe",
 		""
 	},
 	{
@@ -569,6 +600,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"tool_crystalshard",
 		"tool_greentorch",
 		"abyssal_shield",
+		"necro_shield",
 		""
 	},
 	{
@@ -602,6 +634,8 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"artifact_boots",
 		"suede_boots",
 		"abyssal_boots",
+		"boots_lightness",
+		"boots_super_lightness",
 		""
 	},
 	{
@@ -620,6 +654,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"ring_regeneration",
 		"ring_teleportation",
 		"abyssal_ring",
+		"ring_polymorph",
 		""
 	},
 	{
@@ -648,6 +683,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"cloak_yellowgreen",
 		"abyssal_cloak",
 		"cloak_elementalist",
+		"cloak_melting",
 		""
 	},
 	{
@@ -657,6 +693,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"tool_glasses",
 		"tool_blindfold_focus",
 		"tool_blindfold_telepathy",
+		"abyssal_mask",
 		""
 	},
 	{
@@ -675,6 +712,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"spiked_gauntlets",
 		"suede_gloves",
 		"abyssal_knuckles",
+		"ice_gloves",
 		""
 	}
 	

@@ -3018,7 +3018,7 @@ void Entity::handleEffects(Stat* myStats)
 	// torches/lamps burn down
 	if ( myStats->shield != NULL )
 	{
-		if ( myStats->shield->type == TOOL_TORCH || myStats->shield->type == TOOL_LANTERN )
+		if ( myStats->shield->type == TOOL_TORCH || myStats->shield->type == TOOL_LANTERN || myStats->shield->type == TOOL_GREENTORCH )
 		{
 			this->char_torchtime++;
 			if ( (this->char_torchtime >= 7200 && myStats->shield->type == TOOL_TORCH) || (this->char_torchtime >= 10260) )
@@ -3078,7 +3078,8 @@ void Entity::handleEffects(Stat* myStats)
 			if ( myStats->type == LICH_ICE
 				|| myStats->type == LICH_FIRE
 				|| myStats->type == LICH
-				|| myStats->type == DEVIL )
+				|| myStats->type == DEVIL
+				|| myStats->type == LICH_FALLEN )
 			{
 				poisonhurt = std::min(poisonhurt, 15); // prevent doing 50+ dmg
 			}
@@ -3145,7 +3146,8 @@ void Entity::handleEffects(Stat* myStats)
 				if ( myStats->type == LICH_ICE
 					|| myStats->type == LICH_FIRE
 					|| myStats->type == LICH
-					|| myStats->type == DEVIL )
+					|| myStats->type == DEVIL
+					|| myStats->type == LICH_FALLEN )
 				{
 					bleedhurt = std::min(bleedhurt, 15); // prevent doing 50+ dmg
 				}
@@ -3743,9 +3745,22 @@ void Entity::handleEffects(Stat* myStats)
 		}
 	}
 
+	if (myStats->mask != NULL)
+	{
+		//abyssal boots imunity to slow and paralyzed
+		if (myStats->mask->type == ABYSSAL_MASK)
+		{
+			if (myStats->EFFECTS_TIMERS[EFF_BLIND] > 0)
+			{
+				myStats->EFFECTS_TIMERS[EFF_BLIND] = 1;
+			}
+			//myStats->EFFECTS_TIMERS[EFF_SLOW] > 0
+		}
+	}
+
 	// unparalyze certain boss characters
 	if ( myStats->EFFECTS[EFF_PARALYZED] && ((myStats->type >= LICH && myStats->type < KOBOLD)
-		|| myStats->type == COCKATRICE || myStats->type == LICH_FIRE || myStats->type == LICH_ICE) )
+		|| myStats->type == COCKATRICE || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == LICH_FALLEN ) )
 	{
 		myStats->EFFECTS[EFF_PARALYZED] = false;
 		myStats->EFFECTS_TIMERS[EFF_PARALYZED] = 0;
@@ -3753,7 +3768,7 @@ void Entity::handleEffects(Stat* myStats)
 
 	// wake up
 	if ( myStats->EFFECTS[EFF_ASLEEP] && (myStats->OLDHP != myStats->HP || (myStats->type >= LICH && myStats->type < KOBOLD)
-		|| myStats->type == COCKATRICE || myStats->type == LICH_FIRE || myStats->type == LICH_ICE) )
+		|| myStats->type == COCKATRICE || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == LICH_FALLEN) )
 	{
 		messagePlayer(player, language[658]);
 		if ( monsterAllyGetPlayerLeader() && monsterAllySpecial == ALLY_SPECIAL_CMD_REST )
@@ -4613,6 +4628,14 @@ bool Entity::isInvisible() const
 		}
 	}
 
+	if (entitystats->mask != NULL)
+	{
+		if (entitystats->mask->type == ABYSSAL_MASK )
+		{
+			return true;
+		}
+	}
+
 	if ( this->behavior == &actPlayer )
 	{
 		if ( this->skill[2] >= 0 && this->skill[2] < MAXPLAYERS )
@@ -4673,7 +4696,7 @@ bool Entity::isMobile()
 		return false;
 	}
 
-	if ( (entitystats->type == LICH_FIRE || entitystats->type == LICH_ICE)
+	if ( (entitystats->type == LICH_FIRE || entitystats->type == LICH_ICE || entitystats->type == LICH_FALLEN)
 		&& monsterLichBattleState < LICH_BATTLE_READY )
 	{
 		return false;
@@ -5001,7 +5024,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 
 					// magicstaffs deplete themselves for each use
 					bool degradeWeapon = true;
-					if ( myStats->type == SHADOW || myStats->type == LICH_FIRE || myStats->type == LICH_ICE )
+					if ( myStats->type == SHADOW || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == LICH_FALLEN )
 					{
 						degradeWeapon = false; //certain monster's weapons don't degrade.
 					}
@@ -5165,7 +5188,8 @@ void Entity::attack(int pose, int charge, Entity* target)
 			}
 
 			// ranged weapons (bows)
-			else if ( myStats->weapon->type == SHORTBOW || myStats->weapon->type == CROSSBOW || myStats->weapon->type == SLING || myStats->weapon->type == ARTIFACT_BOW || myStats->weapon->type == ABYSSAL_CROSSBOW )
+			else if ( myStats->weapon->type == SHORTBOW || myStats->weapon->type == CROSSBOW || myStats->weapon->type == SLING || myStats->weapon->type == ARTIFACT_BOW 
+				   || myStats->weapon->type == ABYSSAL_CROSSBOW || myStats->weapon->type == CANNON || myStats->weapon->type == CANNON_BOULDER)
 			{
 				// damage weapon if applicable
 				int bowDegradeChance = 50;
@@ -5220,6 +5244,14 @@ void Entity::attack(int pose, int charge, Entity* target)
 				else if ( myStats->weapon->type == ABYSSAL_CROSSBOW ){
 					entity = newEntity(861, 1, map.entities, nullptr); // lighting bolt
 					playSoundEntity(this, 239 + rand() % 3, 96);
+				}
+				else if (myStats->weapon->type == CANNON) {
+					entity = newEntity(985, 1, map.entities, nullptr); // cannonball
+					playSoundEntity(this, 153 + rand() % 3, 96);
+				}
+				else if (myStats->weapon->type == CANNON_BOULDER) {
+					entity = newEntity(245, 1, map.entities, nullptr); // boulder
+					playSoundEntity(this, 150 + rand() % 3, 96);
 				}
 				
 				else
@@ -5401,8 +5433,8 @@ void Entity::attack(int pose, int charge, Entity* target)
 					return;
 				}
 			}
-			else if ( (myStats->type == LICH_FIRE && hit.entity->getRace() == LICH_ICE)
-				|| (myStats->type == LICH_ICE && hit.entity->getRace() == LICH_FIRE) )
+			else if ( (myStats->type == LICH_FIRE && hit.entity->getRace() == LICH_ICE && hit.entity->getRace() == LICH_FALLEN)
+				|| (myStats->type == LICH_ICE && hit.entity->getRace() == LICH_FIRE && hit.entity->getRace() == LICH_FALLEN) )
 			{
 				// friendship <3
 				return;
@@ -5690,7 +5722,8 @@ void Entity::attack(int pose, int charge, Entity* target)
 				if ( myStats->weapon )
 				{
 					if ( myStats->weapon->type == BRONZE_AXE || myStats->weapon->type == IRON_AXE || myStats->weapon->type == STEEL_AXE
-						|| myStats->weapon->type == CRYSTAL_BATTLEAXE || myStats->weapon->type == ABYSSAL_AXE )
+						|| myStats->weapon->type == CRYSTAL_BATTLEAXE || myStats->weapon->type == ABYSSAL_AXE || myStats->weapon->type == EXECUTIONER_AXE 
+						|| myStats->weapon->type == STONE_AXE )
 					{
 						axe = 1; // axes do extra damage to doors :)
 					}
@@ -6152,7 +6185,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 								// don't degrade on capstone skill.
 								degradeWeapon = false;
 							}
-							else if ( myStats->type == SHADOW || myStats->type == LICH_FIRE || myStats->type == LICH_ICE )
+							else if ( myStats->type == SHADOW || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == LICH_FALLEN )
 							{
 								degradeWeapon = false; //certain monster's weapons don't degrade.
 							}
@@ -6426,6 +6459,18 @@ void Entity::attack(int pose, int charge, Entity* target)
 							hitstats->EFFECTS_TIMERS[EFF_SLOW] = TICKS_PER_SECOND * 25;
 						}
 
+						if (myStats->weapon->type == ABYSSAL_CROSSBOW)
+						{
+							//this crossbow casts lightning while full HP
+							if (hitstats)
+							{
+								if (myStats->HP == myStats->MAXHP)
+								{
+									castSpell(uid, &spell_lightning, true, false);
+								}
+							}
+						}
+
 						if (myStats->weapon->type == ABYSSAL_MACE)
 						{
 							if (hitstats)
@@ -6480,16 +6525,29 @@ void Entity::attack(int pose, int charge, Entity* target)
 						{
 							if (hitstats)
 							{
-								//10% chance to confuse on hit
+								//10% chance to stun on hit
 								if (rand() % 10 == 0)
 								{
-									hitstats->EFFECTS[EFF_CONFUSED] = true;
-									hitstats->EFFECTS_TIMERS[EFF_CONFUSED] = TICKS_PER_SECOND * 5;
+									hitstats->EFFECTS[EFF_PARALYZED] = true;
+									hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = TICKS_PER_SECOND * 5;
 								}
 							}
 						}
 					}
 
+					if (myStats->cloak)
+					{
+						if (myStats->cloak->type == ABYSSAL_CLOAK)
+						{
+							if (hitstats)
+							{
+								myStats->EFFECTS[EFF_FAST];
+								myStats->EFFECTS_TIMERS[EFF_FAST] = TICKS_PER_SECOND * 3;
+								myStats->EFFECTS[EFF_INVISIBLE];
+								myStats->EFFECTS_TIMERS[EFF_INVISIBLE] = TICKS_PER_SECOND * 3;
+							}
+						}
+					}
 					if (myStats->ring)
 					{
 						if (myStats->ring->type == ABYSSAL_RING)
@@ -6538,8 +6596,6 @@ void Entity::attack(int pose, int charge, Entity* target)
 						}
 					}
 
-
-					//stat->MP
 
 					bool statusInflicted = false;
 					bool paralyzeStatusInflicted = false;
@@ -9348,6 +9404,8 @@ int checkEquipType(const Item *item)
 		case ARTIFACT_BOOTS:
 		case SUEDE_BOOTS:
 		case ABYSSAL_BOOTS:
+		case BOOTS_LIGHTNESS:
+		case BOOTS_SUPER_LIGHTNESS:
 			return TYPE_BOOTS;
 			break;
 
@@ -9381,6 +9439,7 @@ int checkEquipType(const Item *item)
 		case STEEL_SHIELD_RESISTANCE:
 		case MIRROR_SHIELD:
 		case ABYSSAL_SHIELD:
+		case NECRO_SHIELD:
 			return TYPE_SHIELD;
 			break;
 
@@ -9402,6 +9461,7 @@ int checkEquipType(const Item *item)
 		case CLOAK_YELLOWGREEN:
 		case ABYSSAL_CLOAK:
 		case CLOAK_ELEMENTALIST:
+		case CLOAK_MELTING:
 			return TYPE_CLOAK;
 			break;
 
@@ -9418,6 +9478,7 @@ int checkEquipType(const Item *item)
 		case BRASS_KNUCKLES:
 		case SUEDE_GLOVES:
 		case ABYSSAL_KNUCKLES:
+		case ICE_GLOVES:
 			return TYPE_GLOVES;
 			break;
 
@@ -9487,6 +9548,10 @@ int setGloveSprite(Stat* myStats, Entity* ent, int spriteOffset)
 	{
 		ent->sprite = 849 + (spriteOffset > 0 ? 1 : 0);
 	}
+	else if (myStats->gloves->type == ICE_GLOVES)
+	{
+		ent->sprite = 956 + (spriteOffset > 0 ? 1 : 0);
+	}
 	else
 	{
 		return 0;
@@ -9548,9 +9613,13 @@ bool Entity::setBootSprite(Entity* leg, int spriteOffset)
 			{
 				leg->sprite = 808 + (spriteOffset > 0 ? 1 : 0);
 			}
-			else if (myStats->shoes->type == ABYSSAL_BOOTS )
+			else if ( myStats->shoes->type == ABYSSAL_BOOTS )
 			{
 				leg->sprite = 857 + myStats->sex + spriteOffset;
+			}
+			else if ( myStats->shoes->type == BOOTS_LIGHTNESS || myStats->shoes->type == BOOTS_SUPER_LIGHTNESS )
+			{
+				leg->sprite = 965 + myStats->sex + spriteOffset;
 			}
 			else
 			{
@@ -9571,6 +9640,7 @@ bool Entity::setBootSprite(Entity* leg, int spriteOffset)
 		case SUCCUBUS:
 		case SHOPKEEPER:
 		case BURGGUARD:
+		case DENOME:
 		case CHOLOROSH:
 			if ( myStats->shoes->type == LEATHER_BOOTS || myStats->shoes->type == LEATHER_BOOTS_SPEED )
 			{
@@ -9596,9 +9666,13 @@ bool Entity::setBootSprite(Entity* leg, int spriteOffset)
 			{
 				leg->sprite = 808 + (spriteOffset > 0 ? 1 : 0);
 			}
-			else if (myStats->shoes->type == ABYSSAL_BOOTS)
+			else if ( myStats->shoes->type == ABYSSAL_BOOTS )
 			{
 				leg->sprite = 857 + spriteOffset;
+			}
+			else if ( myStats->shoes->type == BOOTS_LIGHTNESS || myStats->shoes->type == BOOTS_SUPER_LIGHTNESS )
+			{
+				leg->sprite = 965 + myStats->sex + spriteOffset;
 			}
 			else
 			{
@@ -9692,23 +9766,23 @@ int getWeaponSkill(Item* weapon)
 		return PRO_UNARMED;
 	}
 
-	if ( weapon->type == QUARTERSTAFF || weapon->type == IRON_SPEAR || weapon->type == STEEL_HALBERD || weapon->type == ARTIFACT_SPEAR || weapon->type == CRYSTAL_SPEAR || weapon->type == ABYSSAL_SPEAR || weapon->type == SPEAR_BONE)
+	if ( weapon->type == QUARTERSTAFF || weapon->type == IRON_SPEAR || weapon->type == STEEL_HALBERD || weapon->type == ARTIFACT_SPEAR || weapon->type == CRYSTAL_SPEAR || weapon->type == ABYSSAL_SPEAR || weapon->type == SPEAR_BONE || weapon->type == TRIDENT )
 	{
 		return PRO_POLEARM;
 	}
-	if ( weapon->type == BRONZE_SWORD || weapon->type == IRON_SWORD || weapon->type == STEEL_SWORD || weapon->type == ARTIFACT_SWORD || weapon->type == CRYSTAL_SWORD || weapon->type == ABYSSAL_SWORD )
+	if ( weapon->type == BRONZE_SWORD || weapon->type == IRON_SWORD || weapon->type == STEEL_SWORD || weapon->type == ARTIFACT_SWORD || weapon->type == CRYSTAL_SWORD || weapon->type == ABYSSAL_SWORD || weapon->type == MACHETE || weapon->type == RAPIER )
 	{
 		return PRO_SWORD;
 	}
-	if ( weapon->type == BRONZE_MACE || weapon->type == IRON_MACE || weapon->type == STEEL_MACE || weapon->type == ARTIFACT_MACE || weapon->type == CRYSTAL_MACE || weapon->type == ABYSSAL_MACE )
+	if ( weapon->type == BRONZE_MACE || weapon->type == IRON_MACE || weapon->type == STEEL_MACE || weapon->type == ARTIFACT_MACE || weapon->type == CRYSTAL_MACE || weapon->type == ABYSSAL_MACE || weapon->type == WOOD_HAMMER || weapon->type == GRANITE_MAUL )
 	{
 		return PRO_MACE;
 	}
-	if ( weapon->type == BRONZE_AXE || weapon->type == IRON_AXE || weapon->type == STEEL_AXE || weapon->type == ARTIFACT_AXE || weapon->type == CRYSTAL_BATTLEAXE || weapon->type == ABYSSAL_AXE )
+	if ( weapon->type == BRONZE_AXE || weapon->type == IRON_AXE || weapon->type == STEEL_AXE || weapon->type == ARTIFACT_AXE || weapon->type == CRYSTAL_BATTLEAXE || weapon->type == ABYSSAL_AXE || weapon->type == STONE_AXE || weapon->type == EXECUTIONER_AXE )
 	{
 		return PRO_AXE;
 	}
-	if ( weapon->type == SLING || weapon->type == SHORTBOW || weapon->type == CROSSBOW || weapon->type == ARTIFACT_BOW || weapon->type == ABYSSAL_CROSSBOW )
+	if ( weapon->type == SLING || weapon->type == SHORTBOW || weapon->type == CROSSBOW || weapon->type == ARTIFACT_BOW || weapon->type == ABYSSAL_CROSSBOW || weapon->type == MAKESHIFT_BOW || weapon->type == CANNON || weapon->type == CANNON_BOULDER )
 	{
 		return PRO_RANGED;
 	}
@@ -9917,7 +9991,7 @@ int Entity::getAttackPose() const
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
 				|| myStats->type == SHADOW || myStats->type == BURGGUARD
-				|| myStats->type == CHOLOROSH )
+				|| myStats->type == DENOME || myStats->type == CHOLOROSH )
 			{
 				pose = MONSTER_POSE_MELEE_WINDUP1;
 			}
@@ -9967,7 +10041,7 @@ int Entity::getAttackPose() const
 				|| myStats->type == GNOME || myStats->type == SUCCUBUS
 				|| myStats->type == SHOPKEEPER || myStats->type == SHADOW 
 				|| myStats->type == BURGGUARD || myStats->type == GARGOYLE
-				|| myStats->type == CHOLOROSH )
+				|| myStats->type == DENOME || myStats->type == CHOLOROSH )
 			{
 				pose = MONSTER_POSE_MAGIC_WINDUP1;
 			}
@@ -10019,7 +10093,7 @@ int Entity::getAttackPose() const
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
 				|| myStats->type == SHADOW || myStats->type == BURGGUARD
-				|| myStats->type == CHOLOROSH )
+				|| myStats->type == DENOME || myStats->type == CHOLOROSH )
 			{
 				if ( myStats->weapon->type == CROSSBOW )
 				{
@@ -10062,7 +10136,7 @@ int Entity::getAttackPose() const
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
 				|| myStats->type == SHADOW || myStats->type == BURGGUARD
-				|| myStats->type == CHOLOROSH )
+				|| myStats->type == DENOME || myStats->type == CHOLOROSH )
 			{
 				if ( getWeaponSkill(myStats->weapon) == PRO_AXE || getWeaponSkill(myStats->weapon) == PRO_MACE )
 				{
@@ -10092,8 +10166,8 @@ int Entity::getAttackPose() const
 			|| myStats->type == CREATURE_IMP || myStats->type == SUCCUBUS
 			|| myStats->type == SHOPKEEPER || myStats->type == MINOTAUR
 			|| myStats->type == SHADOW || myStats->type == BURGGUARD 
-			|| myStats->type == ICEDEMON || myStats->type == ABOMINATION 
-			|| myStats->type == CHOLOROSH)
+			|| myStats->type == ICEDEMON || myStats->type == DENOME 
+			|| myStats->type == ABOMINATION || myStats->type == CHOLOROSH)
 		{
 			pose = MONSTER_POSE_MELEE_WINDUP1;
 		}
@@ -10168,6 +10242,18 @@ bool Entity::hasRangedWeapon() const
 		return true;
 	}
 	else if (myStats->weapon->type == ABYSSAL_CROSSBOW )
+	{
+		return true;
+	}
+	else if (myStats->weapon->type == MAKESHIFT_BOW)
+	{
+		return true;
+	}
+	else if (myStats->weapon->type == CANNON)
+	{
+		return true;
+	}
+	else if (myStats->weapon->type == CANNON_BOULDER)
 	{
 		return true;
 	}
@@ -10839,6 +10925,10 @@ Uint32 Entity::getMonsterFootstepSound(int footstepType, int bootSprite)
 			{
 				sound = 14 + rand() % 7;
 			}
+			else if (bootSprite >= 965 && bootSprite <= 968) // boots of lightness
+			{
+				sound = 14 + rand() % 7;
+			}
 			else
 			{
 				sound = rand() % 7;
@@ -10868,7 +10958,7 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 
 	if ( weaponLimb->flags[INVISIBLE] == false ) //TODO: isInvisible()?
 	{
-		if ( weaponLimb->sprite == items[SHORTBOW].index )
+		if ( weaponLimb->sprite == items[SHORTBOW].index || weaponLimb->sprite == items[MAKESHIFT_BOW].index )
 		{
 			weaponLimb->x = weaponArmLimb->x - .5 * cos(weaponArmLimb->yaw);
 			weaponLimb->y = weaponArmLimb->y - .5 * sin(weaponArmLimb->yaw);
@@ -10892,7 +10982,7 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 				weaponLimb->pitch = weaponArmLimb->pitch + .25;
 			}
 		}
-		else if ( weaponLimb->sprite == items[CROSSBOW].index || weaponLimb->sprite == items[ABYSSAL_CROSSBOW].index )
+		else if ( weaponLimb->sprite == items[CROSSBOW].index || weaponLimb->sprite == items[ABYSSAL_CROSSBOW].index || weaponLimb->sprite == items[CANNON].index || weaponLimb->sprite == items[CANNON_BOULDER].index )
 		{
 			weaponLimb->x = weaponArmLimb->x;
 			weaponLimb->y = weaponArmLimb->y;
@@ -10994,7 +11084,7 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 	if ( !armBended )
 	{
 		weaponLimb->focalx = limbs[monsterType][6][0]; // 2.5
-		if ( weaponLimb->sprite == items[CROSSBOW].index || weaponLimb->sprite == items[ABYSSAL_CROSSBOW].index)
+		if ( weaponLimb->sprite == items[CROSSBOW].index || weaponLimb->sprite == items[ABYSSAL_CROSSBOW].index || weaponLimb->sprite == items[CANNON].index || weaponLimb->sprite == items[CANNON_BOULDER].index )
 		{
 			weaponLimb->focalx += 2;
 		}
@@ -11180,7 +11270,7 @@ void Entity::handleEffectsClient()
 		spawnAmbientParticles(20, 175, 20 + rand() % 30, 0.5, true);
 	}
 
-	//Amulet of Veagence
+	//Amulet of Veagence //TODO: make particles work
 	if (myStats->amulet)
 	{
 		if (myStats->amulet->type == ABYSSAL_AMULET)
@@ -11266,7 +11356,7 @@ bool Entity::setEffect(int effect, bool value, int duration, bool updateClients,
 		case EFF_KNOCKBACK:
 		case EFF_BLIND:
 			if ( (myStats->type >= LICH && myStats->type < KOBOLD)
-				|| myStats->type == COCKATRICE || myStats->type == LICH_FIRE || myStats->type == LICH_ICE )
+				|| myStats->type == COCKATRICE || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == LICH_FALLEN )
 			{
 				if ( !(effect == EFF_PACIFY && myStats->type == SHOPKEEPER) &&
 					!(effect == EFF_KNOCKBACK && myStats->type == COCKATRICE) &&
@@ -11453,7 +11543,7 @@ void Entity::monsterAcquireAttackTarget(const Entity& target, Sint32 state, bool
 	{
 		if ( monsterState != MONSTER_STATE_ATTACK && state == MONSTER_STATE_PATH )
 		{
-			if ( myStats->type != LICH_FIRE && myStats->type != LICH_ICE && myStats->type != LICH && myStats->type != DEVIL )
+			if ( myStats->type != LICH_FIRE && myStats->type != LICH_ICE && myStats->type != LICH && myStats->type != DEVIL && myStats->type != LICH_FALLEN )
 			{
 				real_t distance = pow(x - target.x, 2) + pow(y - target.y, 2);
 				if ( distance < STRIKERANGE * STRIKERANGE )
@@ -12359,7 +12449,8 @@ void Entity::degradeArmor(Stat& hitstats, Item& armor, int armornum)
 		|| armor.type == ABYSSAL_CHEASTPIECE
 		|| armor.type == ABYSSAL_SHIELD
 		|| armor.type == ABYSSAL_RING
-		|| armor.type == ABYSSAL_AMULET )
+		|| armor.type == ABYSSAL_AMULET
+		|| armor.type == ABYSSAL_MASK )
 	
 	{
 		return;
@@ -14034,7 +14125,8 @@ bool monsterNameIsGeneric(Stat& monsterStats)
 		|| strstr(monsterStats.name, "cultist")
 		|| strstr(monsterStats.name, "knight")
 		|| strstr(monsterStats.name, "sentinel")
-		|| strstr(monsterStats.name, "mage") )
+		|| strstr(monsterStats.name, "mage")
+		|| strstr(monsterStats.name, "knight") )
 	{
 		// If true, pretend the monster doesn't have a name and use the generic message "You hit the lesser skeleton!"
 		return true;
