@@ -20,7 +20,7 @@ static const int LICH_WEAPON = 5;
 
 void initLichFallen(Entity* my, Stat* myStats)
 {
-	my->initMonster(950);
+	my->initMonster(951);
 
 	if ( multiplayer != CLIENT )
 	{

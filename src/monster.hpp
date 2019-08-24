@@ -546,7 +546,7 @@ void eyeballDie(Entity* my);
 void denomeDie(Entity* my);
 void abominationDie(Entity* my);
 void choloroshDie(Entity* my);
-void lichfallenDie(Entity* my);
+void lichFallenDie(Entity* my);
 
 //--*MoveBodyparts functions--
 void humanMoveBodyparts(Entity* my, Stat* myStats, double dist);
@@ -589,7 +589,7 @@ void eyeballAnimate(Entity* my, double dist);
 void denomeMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist);
-void lichFallenMoveBodyparts(Entity* my, Stat* myStats, double dist);
+void lichFallenAnimate(Entity* my, Stat* myStats, double dist);
 
 //--misc functions--
 void actMinotaurTrap(Entity* my);
@@ -628,7 +628,7 @@ static const Sint32 MONSTER_STATE_LICHICE_TELEPORT_STATIONARY = 17;
 static const Sint32 MONSTER_STATE_LICHICE_DODGE = 13;
 static const Sint32 MONSTER_STATE_LICHFIRE_DIE = 18;
 static const Sint32 MONSTER_STATE_LICHICE_DIE = 18;
-//static const Sint32 MONSTER_STATE_LICHFALLEN_DIE = 18;
+static const Sint32 MONSTER_STATE_LICHFALLEN_DIE = 18;
 
 //--special monster attack constants
 static const int MONSTER_POSE_MELEE_WINDUP1 = 4;

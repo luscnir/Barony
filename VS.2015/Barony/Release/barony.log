@@ -1,6 +1,9 @@
-﻿  Generating code
-  0 of 4511 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+﻿  monster_matilda.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005:  'PATH_MAX': macro redefinition
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message :  see previous definition of 'PATH_MAX'
+  Generating code
+  8 of 4592 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    278 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   barony.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\barony_test.exe

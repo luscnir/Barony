@@ -1300,7 +1300,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 		case 138:
 		case (1000 + MATILDA):
 			stats->type = MATILDA;
-			stats->sex = static_cast<sex_t>(rand() % 2);
+			stats->sex = FEMALE;
 			stats->appearance = rand();
 			stats->inventory.first = NULL;
 			stats->inventory.last = NULL;
@@ -1378,7 +1378,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 		case 165:
 		case (1000 + ICEDEMON):
 			stats->type = ICEDEMON;
-			stats->sex = static_cast<sex_t>(rand() % 2);
+			stats->sex = MALE;
 			stats->appearance = rand();
 			stats->inventory.first = NULL;
 			stats->inventory.last = NULL;
@@ -1476,7 +1476,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->appearance = rand();
 			stats->inventory.first = nullptr;
 			stats->inventory.last = nullptr;
-			stats->sex = static_cast<sex_t>(rand() % 2);
+			stats->sex = MALE;
 			stats->MAXHP = 365;
 			stats->HP = stats->MAXHP;
 			stats->MAXMP = 500;

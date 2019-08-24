@@ -79,6 +79,12 @@ void initMatilda(Entity* my, Stat* myStats)
 			case 3:
 			case 2:
 			case 1:
+				switch( rand()% 10 ) //10% chance for rare drop
+				{
+				case 0:
+					//newItem(ABYSSAL_MASK, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);	//once abyssal_mask is created.
+					break;
+				}
 				break;
 			default:
 				break;

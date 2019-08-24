@@ -56,7 +56,6 @@ void initEyeball(Entity* my, Stat* myStats)
 						entity->parent = my->getUID();
 					}
 				}
-				//newItem(ABYSSAL_MASK, EXCELLENT, 1, 1, rand(), false, &myStats->inventory);	//once abyssal_mask is created.
 			}
 
 			// random effects

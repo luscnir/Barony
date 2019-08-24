@@ -379,7 +379,7 @@ int Entity::getMonsterTypeFromSprite()
 	{
 		return CHOLOROSH;
 	}
-	else if (mySprite == 950)     // fallen lich head
+	else if (mySprite == 951)     // fallen lich body
 	{
 		return LICH_FALLEN;
 	}

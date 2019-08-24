@@ -174,7 +174,7 @@ double sightranges[NUMMONSTERS] =
 	512,  //ICEDEMON
 	96,	  //EYEBALL
 	128,  //DENOME
-	512,  //ABOMINATION
+	128,  //ABOMINATION
 	256,  //CHOLOROSH
 	512,  //LICH_FALLEN
 };
@@ -522,7 +522,7 @@ Entity* summonMonster(Monster creature, long x, long y, bool forceLocation)
 				entity->focalz = limbs[MATILDA][0][2]; // -1
 				break;
 			case CRYORUNE:
-				entity->z = -5;
+				entity->z = -4.5;
 				entity->focalx = limbs[CRYORUNE][0][0]; // 0
 				entity->focaly = limbs[CRYORUNE][0][1]; // 0
 				entity->focalz = limbs[CRYORUNE][0][2]; // -1.75
@@ -540,7 +540,7 @@ Entity* summonMonster(Monster creature, long x, long y, bool forceLocation)
 				entity->focalz = limbs[ICEDEMON][0][2]; // -1.25
 				break;
 			case EYEBALL:
-				entity->z = -5;
+				entity->z = -4.5;
 				entity->focalx = limbs[EYEBALL][0][0]; // 0
 				entity->focaly = limbs[EYEBALL][0][1]; // 0
 				entity->focalz = limbs[EYEBALL][0][2]; // -1.75
@@ -1202,7 +1202,7 @@ void actMonster(Entity* my)
 			{
 				initCholorosh(my, nullptr);
 			}
-			else if (my->sprite == 950)     // lich head
+			else if (my->sprite == 951)     // fallen lich body
 			{
 				initLichFallen(my, nullptr);
 			}
@@ -1377,10 +1377,10 @@ void actMonster(Entity* my)
 			{
 				choloroshMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 950)     // lich body
+			else if (my->sprite == 951)     // lich body
 			{
 				my->flags[BURNABLE] = false;
-				lichFallenMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
+				lichFallenAnimate(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
 			else
 			{
@@ -1541,12 +1541,14 @@ void actMonster(Entity* my)
 					initMatilda(my, myStats);
 					break;
 				case CRYORUNE:
+					my->flags[BURNABLE] = false;
 					initCryorune(my, myStats);
 					break;
 				case YETI:
 					initYeti(my, myStats);
 					break;
 				case ICEDEMON:
+					my->flags[BURNABLE] = false;
 					initIceDemon(my, myStats);
 					break;
 				case EYEBALL:
@@ -2599,7 +2601,7 @@ void actMonster(Entity* my)
 				break;
 			case LICH_FALLEN:
 				my->flags[PASSABLE] = true; // so I can't take any more hits
-				//my->monsterState = MONSTER_STATE_LICHFALLEN_DIE; // lich death state
+				my->monsterState = MONSTER_STATE_LICHFALLEN_DIE; // lich death state
 				my->monsterSpecialTimer = 180;
 				my->monsterAttack = 0;
 				my->monsterAttackTime = 0;
@@ -6406,7 +6408,7 @@ timeToGoAgain:
 		}
 		else if (myStats->type == LICH_FALLEN)
 		{
-			lichFallenMoveBodyparts(my, myStats, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
+			lichFallenAnimate(my, myStats, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 		}
 	}
 }

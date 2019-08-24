@@ -68,6 +68,11 @@ void initIceDemon(Entity* my, Stat* myStats)
 			case 2:
 			case 1:
 				myStats->weapon = newItem(SPELLBOOK_COLD, EXCELLENT, 0, 1, 0, false, nullptr);
+				switch (rand() % 10) //10% chance for rare drop
+				{
+				case 0:
+					newItem(ABYSSAL_RING, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
+				}
 				break;
 			default:
 				break;

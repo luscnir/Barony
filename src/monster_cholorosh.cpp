@@ -16,7 +16,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	node_t* node;
 	int boss = 0;
 
-	my->initMonster(942);
+	my->initMonster(942);// chlorosh head
 
 	if ( multiplayer != CLIENT )
 	{
@@ -41,7 +41,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 				minion = true;
 			}
 
-			if ( !strncmp(myStats->name, "cholorosh knight", strlen("cholorosh knight")) )
+			if ( !strncmp(myStats->name, "chlorosh knight", strlen("chlorosh knight")) )
 			{
 				myStats->MAXHP = 200;
 				myStats->HP = myStats->MAXHP;

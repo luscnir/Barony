@@ -1,4 +1,8 @@
-﻿  Microsoft (R) Incremental Linker Version 14.22.27905.0
+﻿  stat_shared.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005:  'PATH_MAX': macro redefinition
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message :  see previous definition of 'PATH_MAX'
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(385,2): warning C4091:  'typedef ': ignored on left of 'spell_t' when no variable is declared
+  Microsoft (R) Incremental Linker Version 14.22.27905.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
   "/OUT:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.exe" steam_api.lib OpenGL32.lib glu32.lib SDL2.lib SDL2main.lib SDL2_net.lib SDL2_image.lib fmodex_vc.lib libpng.lib zlib.lib SDL2_ttf.lib physfs.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST "/MANIFESTUAC:level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG "/PDB:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT "/IMPLIB:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.lib" /MACHINE:X86 /SAFESEH Release\wineditoricon.res 
@@ -22,8 +26,8 @@
   Release\stat_shared.obj 
   Release\steam_shared.obj 
   Generating code
-  13 of 1365 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
+  1 of 1365 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    11 functions had inline decision re-evaluated but remain unchanged
+    16 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   editor.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.exe

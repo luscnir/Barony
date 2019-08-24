@@ -43,8 +43,12 @@ void initCryorune(Entity* my, Stat* myStats)
 			int customItemsToGenerate = ITEM_CUSTOM_SLOT_LIMIT;
 
 			// boss variants
+			bool isBoss = false;
+
 			if ( rand() % 50 == 0 && !my->flags[USERFLAG2] )
 			{
+				isBoss = true;
+
 				strcpy(myStats->name, "Zed");
 				myStats->HP = 140;
 				myStats->MAXHP = 140;
@@ -59,8 +63,7 @@ void initCryorune(Entity* my, Stat* myStats)
 				myStats->CHR = 5;
 				myStats->LVL = 20;
 				my->setEffect(EFF_VAMPIRICAURA, true, -1, true); //-1 duration, never expires.
-				myStats->weapon = newItem(SPELLBOOK_MAGICMISSILE, EXCELLENT, 0, 1, 0, false, NULL);
-				newItem(ABYSSAL_RING, EXCELLENT, 0, 1, 0, false, NULL);
+				myStats->weapon = newItem(SPELLBOOK_MAGICMISSILE, EXCELLENT, 0, 1, 0, false, nullptr);
 				customItemsToGenerate = customItemsToGenerate - 1;
 				int c;
 				for ( c = 0; c < 2; ++c )
@@ -75,6 +78,10 @@ void initCryorune(Entity* my, Stat* myStats)
 			// random effects
 			myStats->EFFECTS[EFF_LEVITATING] = true;
 			myStats->EFFECTS_TIMERS[EFF_LEVITATING] = 0;
+			if ( !isBoss )
+			{
+				myStats->weapon = newItem(SPELLBOOK_COLD, EXCELLENT, 0, 1, 0, false, nullptr);
+			}
 
 			// generates equipment and weapons if available from editor
 			createMonsterEquipment(myStats);
@@ -107,7 +114,6 @@ void initCryorune(Entity* my, Stat* myStats)
 				case 4:
 				case 3:
 				case 2:
-					myStats->weapon = newItem(SPELLBOOK_COLD, EXCELLENT, 0, 1, 0, false, NULL);
 				case 1:
 					if ( rand() % 2 || playerCount > 1 )
 					{
@@ -157,57 +163,13 @@ void initCryorune(Entity* my, Stat* myStats)
 	}
 }
 
-void cryoruneAnimate(Entity* my, Stat* myStats, double dist)
+void cryoruneAnimate(Entity* my, double dist)
 {
 	node_t* node;
 	int bodypart;
 	Entity* entity = nullptr;
 
 	// set invisibility //TODO: isInvisible()?
-	if ( multiplayer != CLIENT )
-	{
-		if ( myStats->EFFECTS[EFF_INVISIBLE] == true )
-		{
-			my->flags[INVISIBLE] = true;
-			my->flags[BLOCKSIGHT] = false;
-			bodypart = 0;
-			for ( node = my->children.first; node != nullptr; node = node->next )
-			{
-				if ( bodypart >= 3 )
-				{
-					break;
-				}
-				entity = (Entity*)node->element;
-				if ( !entity->flags[INVISIBLE] )
-				{
-					entity->flags[INVISIBLE] = true;
-					serverUpdateEntityBodypart(my, bodypart);
-				}
-				++bodypart;
-			}
-		}
-		else
-		{
-			my->flags[INVISIBLE] = false;
-			//my->flags[BLOCKSIGHT] = true; //No. It never blocks sight.
-			bodypart = 0;
-			for ( node = my->children.first; node != NULL; node = node->next )
-			{
-				if ( bodypart < 2 )
-				{
-					continue;
-				}
-				entity = (Entity*)node->element;
-				if ( entity->flags[INVISIBLE] )
-				{
-					entity->flags[INVISIBLE] = false;
-					serverUpdateEntityBodypart(my, bodypart);
-					serverUpdateEntityFlag(my, INVISIBLE);
-				}
-				bodypart++;
-			}
-		}
-	}
 
 	// move
 	if ( (ticks % 10 == 0 && dist > 0.1) || (MONSTER_ATTACKTIME == 0 && MONSTER_ATTACK == 1) )

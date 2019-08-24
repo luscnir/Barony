@@ -851,7 +851,7 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"EYEBALL",
 	"DENOME",
 	"ABOMINATION",
-	"CHOLOROSH",
+	"CHLOROSH",
 	"LICH_FALLEN"
 };
 
@@ -900,7 +900,7 @@ char monsterEditorNameStrings[NUMMONSTERS][13] =
 	"eyeball",
 	"denome",
 	"abomination",
-	"cholorosh",
+	"chlorosh",
 	"lichfallen"
 };
 

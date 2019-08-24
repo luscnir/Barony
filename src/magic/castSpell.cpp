@@ -354,7 +354,7 @@ Entity* castSpell(Uint32 caster_uid, spell_t* spell, bool using_magicstaff, bool
 		}
 		if ( stat->shoes != NULL )
 		{
-			if (stat->shoes->type == IRON_BOOTS_WATERWALKING )
+			if (stat->shoes->type == IRON_BOOTS_WATERWALKING || stat->shoes->type == ABYSSAL_BOOTS)
 			{
 				waterwalkingboots = true;
 			}

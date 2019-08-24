@@ -3005,6 +3005,14 @@ void assignActions(map_t* map)
 			case 136:
 			case 137:
 			case 138:
+			case 163:
+			case 164:
+			case 165:
+			case 166:
+			case 167:
+			case 168:
+			case 169:
+			case 170:
 			{
 				entity->sizex = 4;
 				entity->sizey = 4;
@@ -3475,7 +3483,7 @@ void assignActions(map_t* map)
 						entity->focalz = limbs[MATILDA][0][2]; // -1
 						break;
 					case CRYORUNE:
-						entity->z = -5;
+						entity->z = -4.5;
 						entity->focalx = limbs[CRYORUNE][0][0]; // 0
 						entity->focaly = limbs[CRYORUNE][0][1]; // 0
 						entity->focalz = limbs[CRYORUNE][0][2]; // -1.75
@@ -3493,7 +3501,7 @@ void assignActions(map_t* map)
 						entity->focalz = limbs[ICEDEMON][0][2]; // -1.25
 						break;
 					case EYEBALL:
-						entity->z = -5;
+						entity->z = -4.5;
 						entity->focalx = limbs[EYEBALL][0][0]; // 0
 						entity->focaly = limbs[EYEBALL][0][1]; // 0
 						entity->focalz = limbs[EYEBALL][0][2]; // -1.75
@@ -3522,7 +3530,7 @@ void assignActions(map_t* map)
 						entity->focalz = limbs[LICH_ICE][0][2]; // 0
 						entity->z = -1.3;
 						entity->yaw = PI;
-						entity->sprite = 950;
+						entity->sprite = 951;
 						break;
 					default:
 						break;

@@ -230,6 +230,7 @@ void clickDescription(int player, Entity* entity)
 				}
 				else if ( entity->behavior == &actLadder || entity->behavior == &actLadderJump2
 						|| entity->behavior == &actLadderJump7 || entity->behavior == &actLadderJump9
+						|| entity->behavior == &actLadderJump10 || entity->behavior == &actLadderJump16
 						|| entity->behavior == &actLadderJump14 )
 				{
 					messagePlayer(player, language[264]);
