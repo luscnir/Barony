@@ -1924,7 +1924,7 @@ void initClass(int player)
 	}
 
 	if ( stats[player]->appearance == 0 
-		&& client_classes[player] <= CLASS_MONK 
+		&& client_classes[player] <= CLASS_DECIVER 
 		&& stats[player]->playerRace != RACE_HUMAN )
 	{
 		if ( player == clientnum )
@@ -2035,8 +2035,8 @@ void initClass(int player)
 		stats[player]->MP += 10;
 
 		// skills
-		stats[player]->PROFICIENCIES[PRO_MACE] = 20;
-		stats[player]->PROFICIENCIES[PRO_MAGIC] = 25;
+		stats[player]->PROFICIENCIES[PRO_MACE] = 5;
+		stats[player]->PROFICIENCIES[PRO_MAGIC] = 45;
 		stats[player]->PROFICIENCIES[PRO_LEADERSHIP] = 10;
 		stats[player]->PROFICIENCIES[PRO_APPRAISAL] = 40;
 		stats[player]->PROFICIENCIES[PRO_TRADING] = 30;
@@ -2044,8 +2044,8 @@ void initClass(int player)
 		stats[player]->PROFICIENCIES[PRO_STEALTH] = 20;
 
 
-		// stone axe
-		item = newItem(STONE_AXE, SERVICABLE, 0, 1, 0, true, NULL);
+		// wooden hammer
+		item = newItem(WOOD_HAMMER, DECREPIT, 0, 1, 0, true, NULL);
 		if (player == clientnum)
 		{
 			item2 = itemPickup(player, item);
@@ -2085,7 +2085,7 @@ void initClass(int player)
 		}
 
 		// ice gloves
-		item = newItem(ICE_GLOVES, WORN, 0, 1, 0, true, NULL);
+		item = newItem(ICE_GLOVES, DECREPIT, 0, 1, 0, true, NULL);
 		if (player == clientnum)
 		{
 			item2 = itemPickup(player, item);
@@ -2135,7 +2135,12 @@ void initClass(int player)
 			free(item);
 
 			// water bootle
-			item = newItem(POTION_WATER, EXCELLENT, 0, 5, 0, true, NULL);
+			item = newItem(POTION_WATER, SERVICABLE, 0, 5, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// spellbook of confusion
+			item = newItem(SPELLBOOK_CONFUSE, DECREPIT, 0, 1, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			free(item);
 		}
