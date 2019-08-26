@@ -141,7 +141,8 @@ enum PlayerClasses : int
 	CLASS_UNDEF1,
 	CLASS_UNDEF2,
 	CLASS_UNDEF3,
-	CLASS_UNDEF4
+	CLASS_UNDEF4,
+	CLASS_DECIVER
 };
 
 enum PlayerRaces : int

@@ -2021,5 +2021,124 @@ void initClass(int player)
 			}
 		}
 	}
+	// deciver
+	else if (client_classes[player] == CLASS_DECIVER)
+	{
+		// attributes
+		stats[player]->PER += 1;
+		stats[player]->INT += 1;
+		stats[player]->CHR -= 1;
+		stats[player]->CON -= 1;
+		stats[player]->GOLD += 500;
+
+		stats[player]->MAXMP -= 20;
+		stats[player]->MP += 10;
+
+		// skills
+		stats[player]->PROFICIENCIES[PRO_MACE] = 20;
+		stats[player]->PROFICIENCIES[PRO_MAGIC] = 25;
+		stats[player]->PROFICIENCIES[PRO_LEADERSHIP] = 10;
+		stats[player]->PROFICIENCIES[PRO_APPRAISAL] = 40;
+		stats[player]->PROFICIENCIES[PRO_TRADING] = 30;
+		stats[player]->PROFICIENCIES[PRO_ALCHEMY] = 20;
+		stats[player]->PROFICIENCIES[PRO_STEALTH] = 20;
+
+
+		// stone axe
+		item = newItem(STONE_AXE, SERVICABLE, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			hotbar[0].item = item2->uid;
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		//  yellow hood
+		item = newItem(HAT_HOOD_YELLOWGREEN, SERVICABLE, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// yellow cloak
+		item = newItem(CLOAK_YELLOWGREEN, SERVICABLE, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// ice gloves
+		item = newItem(ICE_GLOVES, WORN, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// green torch
+		item = newItem(TOOL_GREENTORCH, WORN, 0, 1, 2, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		if (player == clientnum)
+		{
+			// unicorn horn
+			item = newItem(TOOL_UNIHORN, WORN, 0, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[1].item = item2->uid;
+			free(item);
+
+			// ring of polymorph
+			item = newItem(RING_POLYMORPH, DECREPIT, 0, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+
+			// ring of conflict
+			item = newItem(RING_CONFLICT, DECREPIT, 0, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// banana
+			item = newItem(FOOD_BANANA, EXCELLENT, 0, 3, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// water bootle
+			item = newItem(POTION_WATER, EXCELLENT, 0, 5, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+		}
+	}
 	//stats[clientnum]->printStats();
 }

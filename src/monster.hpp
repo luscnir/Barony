@@ -292,7 +292,8 @@ static std::vector<std::vector<int>> classStatGrowth =
 	{	4,	4,	4,	4,	4,	4 }, // RESERVED 17
 	{	4,	4,	4,	4,	4,	4 }, // RESERVED 18
 	{	4,	4,	4,	4,	4,	4 }, // RESERVED 19
-	{	4,	4,	4,	4,	4,	4 } // RESERVED 20
+	{	4,	4,	4,	4,	4,	4 }, // RESERVED 20
+	{	2,	3,	3,	6,	5,	5 }  // DECIVER 21
 };
 
 enum AllyNPCCommand : int
