@@ -4525,3 +4525,17 @@ void item_Spellbook(Item*& item, int player)
 		}
 	}
 }
+
+void item_ToolUnihorn(Item*& item, int player)
+{
+	if (players[player] == nullptr || players[player]->entity == nullptr)
+	{
+		return;
+	}
+	messagePlayer(player, language[3760]);
+	stats[player]->EFFECTS_TIMERS[EFF_BLIND] = 0;
+	stats[player]->EFFECTS_TIMERS[EFF_CONFUSED] = 0;
+	stats[player]->EFFECTS_TIMERS[EFF_PARALYZED] = 0;
+	stats[player]->EFFECTS_TIMERS[EFF_STUNNED] = 0;
+	stats[player]->EFFECTS_TIMERS[EFF_POISONED] = 0;
+}

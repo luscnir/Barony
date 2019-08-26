@@ -415,7 +415,7 @@ void actHudWeapon(Entity* my)
 	}
 	if (stats[clientnum]->mask != nullptr)
 	{
-		if (stats[clientnum]->cloak->type == ABYSSAL_MASK)
+		if (stats[clientnum]->mask->type == ABYSSAL_MASK)
 		{
 			wearingring = true;
 		}

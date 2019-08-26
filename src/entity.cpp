@@ -2951,9 +2951,10 @@ void Entity::handleEffects(Stat* myStats)
 		}
 	}
 
-	// random teleportation
+	
 	if ( myStats->ring != NULL )
 	{
+		// random teleportation
 		if ( myStats->ring->type == RING_TELEPORTATION )
 		{
 			if ( rand() % 1000 == 0 )   // .1% chance every frame
@@ -2961,7 +2962,18 @@ void Entity::handleEffects(Stat* myStats)
 				teleportRandom();
 			}
 		}
+		// random polymorph
+		if (myStats->ring->type == RING_POLYMORPH)
+		{
+			if (rand() % 2000 == 0)   // .05% chance every frame
+			{
+				myStats->EFFECTS[EFF_POLYMORPH] = true;
+				myStats->EFFECTS_TIMERS[EFF_POLYMORPH] = 60 * TICKS_PER_SECOND;
+			}
+		}
 	}
+
+
 
 	// regaining energy over time
 	int manaRegenInterval = getManaRegenInterval(*myStats);
@@ -3747,14 +3759,13 @@ void Entity::handleEffects(Stat* myStats)
 
 	if (myStats->mask != NULL)
 	{
-		//abyssal boots imunity to slow and paralyzed
+		//abyssal mask imunity to blindness
 		if (myStats->mask->type == ABYSSAL_MASK)
 		{
 			if (myStats->EFFECTS_TIMERS[EFF_BLIND] > 0)
 			{
 				myStats->EFFECTS_TIMERS[EFF_BLIND] = 1;
 			}
-			//myStats->EFFECTS_TIMERS[EFF_SLOW] > 0
 		}
 	}
 
@@ -5433,8 +5444,8 @@ void Entity::attack(int pose, int charge, Entity* target)
 					return;
 				}
 			}
-			else if ( (myStats->type == LICH_FIRE && hit.entity->getRace() == LICH_ICE && hit.entity->getRace() == LICH_FALLEN)
-				|| (myStats->type == LICH_ICE && hit.entity->getRace() == LICH_FIRE && hit.entity->getRace() == LICH_FALLEN) )
+			else if ( ( myStats->type == LICH_FIRE && hit.entity->getRace() == LICH_ICE )
+				|| ( myStats->type == LICH_ICE && hit.entity->getRace() == LICH_FIRE ) )
 			{
 				// friendship <3
 				return;
@@ -6541,9 +6552,9 @@ void Entity::attack(int pose, int charge, Entity* target)
 						{
 							if (hitstats)
 							{
-								myStats->EFFECTS[EFF_FAST];
+								myStats->EFFECTS[EFF_FAST] = true;
 								myStats->EFFECTS_TIMERS[EFF_FAST] = TICKS_PER_SECOND * 3;
-								myStats->EFFECTS[EFF_INVISIBLE];
+								myStats->EFFECTS[EFF_INVISIBLE] = true;
 								myStats->EFFECTS_TIMERS[EFF_INVISIBLE] = TICKS_PER_SECOND * 3;
 							}
 						}
@@ -11625,6 +11636,8 @@ void Entity::checkGroundForItems()
 			case GOBLIN:
 			case HUMAN:
 			case BURGGUARD:
+			case DENOME:
+			case CHOLOROSH:
 				if ( !strcmp(myStats->name, "") )
 				{
 					//checkBetterEquipment(myStats);
@@ -11632,7 +11645,6 @@ void Entity::checkGroundForItems()
 				}
 				break;
 			case GOATMAN:
-			case CHOLOROSH:
 				//Goatman boss picks up items too.
 				monsterAddNearbyItemToInventory(myStats, 16, 9); //Replaces checkBetterEquipment(), because more better. Adds items to inventory, and swaps out current equipped with better stuff on the ground.
 																 //checkBetterEquipment(myStats);
@@ -12091,6 +12103,7 @@ bool Entity::monsterWantsItem(const Item& item, Item**& shouldEquip, node_t*& re
 		case INSECTOID:
 		case SKELETON:
 		case VAMPIRE:
+		case DENOME:
 			if ( !monsterAllyEquipmentInClass(item) )
 			{
 				return false;

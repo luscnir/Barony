@@ -438,7 +438,7 @@ char itemNameStrings[NUM_ITEM_STRINGS][32] =
 	"machete",
 	"stone_axe",
 	"nullitem",
-	"",
+	""
 };
 
 char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =

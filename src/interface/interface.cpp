@@ -2720,6 +2720,8 @@ bool GenericGUIMenu::isItemRepairable(const Item* item)
 				case TOOL_MIRROR:
 				case TOOL_SKELETONKEY:
 				case TOOL_TINOPENER:
+				case TOOL_UNIHORN:
+				case NULLITEM:
 					return false;
 					break;
 				default:

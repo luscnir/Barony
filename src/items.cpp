@@ -2331,6 +2331,8 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case SYMBOL_HATRED:
 			equipItem(item, &stats[player]->weapon, player);
 			break;
+		case TOOL_UNIHORN:
+			item_ToolUnihorn(item, player);
 		default:
 			printlog("error: item %d used, but it has no use case!\n", (int)item->type);
 			break;

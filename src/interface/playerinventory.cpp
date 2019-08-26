@@ -214,6 +214,7 @@ char* itemUseString(const Item* item)
 					return language[328];
 				}
 			case TOOL_TOWEL:
+			case TOOL_UNIHORN:
 				return language[332];
 			case TOOL_GLASSES:
 				if ( itemIsEquipped(item, clientnum) )
