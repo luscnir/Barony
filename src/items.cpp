@@ -2139,7 +2139,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case RING_REGENERATION:
 		case RING_TELEPORTATION:
 		case ABYSSAL_RING:
-		case RING_POLYMORPH:
+		case RING_RANDOMNESS:
 			equipItem(item, &stats[player]->ring, player);
 			break;
 		case SPELLBOOK_FORCEBOLT:
@@ -2320,6 +2320,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case TRIDENT:
 		case CANNON:
 		case CANNON_BOULDER:
+		case NEEDLE:
 			equipItem(item, &stats[player]->weapon, player);
 			break;
 		case ARTIFACT_ORB_BLUE:
@@ -2981,6 +2982,10 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	else if (type == CANNON_BOULDER)
 	{
 		attack += 75;
+	}
+	else if (type == NEEDLE)
+	{
+		attack += 99;
 	}
 	// old formula
 	//attack *= (double)(status / 5.0);

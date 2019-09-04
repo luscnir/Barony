@@ -1478,6 +1478,146 @@ void initClass(int player)
 			free(item);
 		}
 	}
+	// modded classes
+
+	// deciver
+	else if (client_classes[player] == CLASS_LUNATIC)
+	{
+		// attributes
+		stats[player]->PER += 1;
+		stats[player]->INT += 1;
+		stats[player]->CHR -= 1;
+		stats[player]->CON -= 1;
+		stats[player]->GOLD += 500;
+
+		stats[player]->MAXHP -= 20;
+		stats[player]->HP -= 20;
+		stats[player]->MAXMP += 10;
+		stats[player]->MP += 10;
+
+		// skills
+		stats[player]->PROFICIENCIES[PRO_MACE] = 5;
+		stats[player]->PROFICIENCIES[PRO_MAGIC] = 45;
+		stats[player]->PROFICIENCIES[PRO_LEADERSHIP] = 10;
+		stats[player]->PROFICIENCIES[PRO_APPRAISAL] = 40;
+		stats[player]->PROFICIENCIES[PRO_TRADING] = 30;
+		stats[player]->PROFICIENCIES[PRO_ALCHEMY] = 20;
+		stats[player]->PROFICIENCIES[PRO_STEALTH] = 20;
+
+
+		// wooden hammer
+		item = newItem(WOOD_HAMMER, DECREPIT, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			hotbar[0].item = item2->uid;
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		//  yellow hood
+		item = newItem(HAT_HOOD_YELLOWGREEN, SERVICABLE, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// yellow cloak
+		item = newItem(CLOAK_YELLOWGREEN, SERVICABLE, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// boots of lightness
+		item = newItem(BOOTS_LIGHTNESS, DECREPIT, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// green torch
+		item = newItem(TOOL_GREENTORCH, WORN, 0, 1, 2, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			hotbar[1].item = item2->uid;
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		if (player == clientnum)
+		{
+			// unicorn horn
+			item = newItem(TOOL_UNIHORN, WORN, 0, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[2].item = item2->uid;
+			free(item);
+
+			// scroll of teleport
+			item = newItem(SCROLL_TELEPORTATION, DECREPIT, 0, 10, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[3].item = item2->uid;
+			free(item);
+
+			// ring of randomness
+			item = newItem(RING_RANDOMNESS, DECREPIT, -1, 1, 0, false, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// ring of conflict
+			item = newItem(RING_CONFLICT, DECREPIT, 0, 1, 0, false, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// tentacle pie
+			item = newItem(FOOD_TENTACLEPIE, EXCELLENT, 0, 2, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// water bootle
+			item = newItem(POTION_WATER, SERVICABLE, 1, 5, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// potion of confusion
+			item = newItem(POTION_CONFUSION, DECREPIT, 0, 3, 2, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// potion of polymorph
+			item = newItem(POTION_POLYMORPH, DECREPIT, 0, 1, 1, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+		}
+	}
+
 	// start DLC
 	else if ( client_classes[player] == CLASS_CONJURER )
 	{
@@ -1924,7 +2064,7 @@ void initClass(int player)
 	}
 
 	if ( stats[player]->appearance == 0 
-		&& client_classes[player] <= CLASS_DECIVER 
+		&& client_classes[player] <= CLASS_LUNATIC 
 		&& stats[player]->playerRace != RACE_HUMAN )
 	{
 		if ( player == clientnum )
@@ -2019,130 +2159,6 @@ void initClass(int player)
 					}
 				}
 			}
-		}
-	}
-	// deciver
-	else if (client_classes[player] == CLASS_DECIVER)
-	{
-		// attributes
-		stats[player]->PER += 1;
-		stats[player]->INT += 1;
-		stats[player]->CHR -= 1;
-		stats[player]->CON -= 1;
-		stats[player]->GOLD += 500;
-
-		stats[player]->MAXMP -= 20;
-		stats[player]->MP += 10;
-
-		// skills
-		stats[player]->PROFICIENCIES[PRO_MACE] = 5;
-		stats[player]->PROFICIENCIES[PRO_MAGIC] = 45;
-		stats[player]->PROFICIENCIES[PRO_LEADERSHIP] = 10;
-		stats[player]->PROFICIENCIES[PRO_APPRAISAL] = 40;
-		stats[player]->PROFICIENCIES[PRO_TRADING] = 30;
-		stats[player]->PROFICIENCIES[PRO_ALCHEMY] = 20;
-		stats[player]->PROFICIENCIES[PRO_STEALTH] = 20;
-
-
-		// wooden hammer
-		item = newItem(WOOD_HAMMER, DECREPIT, 0, 1, 0, true, NULL);
-		if (player == clientnum)
-		{
-			item2 = itemPickup(player, item);
-			useItem(item2, player);
-			hotbar[0].item = item2->uid;
-			free(item);
-		}
-		else
-		{
-			useItem(item, player);
-		}
-
-		//  yellow hood
-		item = newItem(HAT_HOOD_YELLOWGREEN, SERVICABLE, 0, 1, 0, true, NULL);
-		if (player == clientnum)
-		{
-			item2 = itemPickup(player, item);
-			useItem(item2, player);
-			free(item);
-		}
-		else
-		{
-			useItem(item, player);
-		}
-
-		// yellow cloak
-		item = newItem(CLOAK_YELLOWGREEN, SERVICABLE, 0, 1, 0, true, NULL);
-		if (player == clientnum)
-		{
-			item2 = itemPickup(player, item);
-			useItem(item2, player);
-			free(item);
-		}
-		else
-		{
-			useItem(item, player);
-		}
-
-		// ice gloves
-		item = newItem(ICE_GLOVES, DECREPIT, 0, 1, 0, true, NULL);
-		if (player == clientnum)
-		{
-			item2 = itemPickup(player, item);
-			useItem(item2, player);
-			free(item);
-		}
-		else
-		{
-			useItem(item, player);
-		}
-
-		// green torch
-		item = newItem(TOOL_GREENTORCH, WORN, 0, 1, 2, true, NULL);
-		if (player == clientnum)
-		{
-			item2 = itemPickup(player, item);
-			useItem(item2, player);
-			free(item);
-		}
-		else
-		{
-			useItem(item, player);
-		}
-
-		if (player == clientnum)
-		{
-			// unicorn horn
-			item = newItem(TOOL_UNIHORN, WORN, 0, 1, 0, true, NULL);
-			item2 = itemPickup(player, item);
-			hotbar[1].item = item2->uid;
-			free(item);
-
-			// ring of polymorph
-			item = newItem(RING_POLYMORPH, DECREPIT, 0, 1, 0, true, NULL);
-			item2 = itemPickup(player, item);
-			useItem(item2, player);
-			free(item);
-
-			// ring of conflict
-			item = newItem(RING_CONFLICT, DECREPIT, 0, 1, 0, true, NULL);
-			item2 = itemPickup(player, item);
-			free(item);
-
-			// banana
-			item = newItem(FOOD_BANANA, EXCELLENT, 0, 3, 0, true, NULL);
-			item2 = itemPickup(player, item);
-			free(item);
-
-			// water bootle
-			item = newItem(POTION_WATER, SERVICABLE, 0, 5, 0, true, NULL);
-			item2 = itemPickup(player, item);
-			free(item);
-
-			// spellbook of confusion
-			item = newItem(SPELLBOOK_CONFUSE, DECREPIT, 0, 1, 0, true, NULL);
-			item2 = itemPickup(player, item);
-			free(item);
 		}
 	}
 	//stats[clientnum]->printStats();

@@ -4345,6 +4345,35 @@ void item_AmuletSexChange(Item* item, int player)
 	messagePlayer(player, language[969]);
 }
 
+void item_ToolUnihorn(Item*& item, int player)
+{
+	if (players[player] == nullptr || players[player]->entity == nullptr)
+	{
+		return;
+	}
+	messagePlayer(player, language[3760]);
+	if( stats[player]->EFFECTS_TIMERS[EFF_BLIND] > 1 )
+	{
+		stats[player]->EFFECTS_TIMERS[EFF_BLIND] = 1;
+	}
+	if (stats[player]->EFFECTS_TIMERS[EFF_CONFUSED] > 1)
+	{
+		stats[player]->EFFECTS_TIMERS[EFF_CONFUSED] = 1;
+	}
+	if (stats[player]->EFFECTS_TIMERS[EFF_PARALYZED] > 1)
+	{
+		stats[player]->EFFECTS_TIMERS[EFF_PARALYZED] = 1;
+	}
+	if (stats[player]->EFFECTS_TIMERS[EFF_STUNNED] > 1)
+	{
+		stats[player]->EFFECTS_TIMERS[EFF_STUNNED] = 1;
+	}
+	if (stats[player]->EFFECTS_TIMERS[EFF_POISONED] > 1)
+	{
+		stats[player]->EFFECTS_TIMERS[EFF_POISONED] = 1;
+	}
+}
+
 void item_Spellbook(Item*& item, int player)
 {
 	node_t* node, *nextnode;
@@ -4524,18 +4553,4 @@ void item_Spellbook(Item*& item, int player)
 			}
 		}
 	}
-}
-
-void item_ToolUnihorn(Item*& item, int player)
-{
-	if (players[player] == nullptr || players[player]->entity == nullptr)
-	{
-		return;
-	}
-	messagePlayer(player, language[3760]);
-	stats[player]->EFFECTS_TIMERS[EFF_BLIND] = 0;
-	stats[player]->EFFECTS_TIMERS[EFF_CONFUSED] = 0;
-	stats[player]->EFFECTS_TIMERS[EFF_PARALYZED] = 0;
-	stats[player]->EFFECTS_TIMERS[EFF_STUNNED] = 0;
-	stats[player]->EFFECTS_TIMERS[EFF_POISONED] = 0;
 }

@@ -212,6 +212,7 @@ Entity::Entity(Sint32 in_sprite, Uint32 pos, list_t* entlist, list_t* creatureli
 	arrowPower(skill[3]),
 	arrowPoisonTime(skill[4]),
 	arrowArmorPierce(skill[5]),
+	arrowStunTime(skill[6]),
 	actmagicIsVertical(skill[6]),
 	actmagicIsOrbiting(skill[7]),
 	actmagicOrbitDist(skill[8]),
@@ -2962,13 +2963,109 @@ void Entity::handleEffects(Stat* myStats)
 				teleportRandom();
 			}
 		}
-		// random polymorph
-		if (myStats->ring->type == RING_POLYMORPH)
+		// random effects from ring of randomness
+		if (myStats->ring->type == RING_RANDOMNESS)
 		{
 			if (rand() % 2000 == 0)   // .05% chance every frame
 			{
-				myStats->EFFECTS[EFF_POLYMORPH] = true;
-				myStats->EFFECTS_TIMERS[EFF_POLYMORPH] = 60 * TICKS_PER_SECOND;
+				messagePlayer(player, language[3761]);
+
+				switch (rand() % 20)	//5% chance for each effect
+				{
+				case 0:
+					myStats->EFFECTS[EFF_POISONED] = true;
+					myStats->EFFECTS_TIMERS[EFF_POISONED] = 30 *TICKS_PER_SECOND;
+					break;
+				case 1:
+					myStats->EFFECTS[EFF_ASLEEP] = true;
+					myStats->EFFECTS_TIMERS[EFF_ASLEEP] = 10 * TICKS_PER_SECOND;
+					break;
+				case 2:
+					myStats->EFFECTS[EFF_BLIND] = true;
+					myStats->EFFECTS_TIMERS[EFF_BLIND] = 5 * TICKS_PER_SECOND;
+					break;
+				case 3:
+					myStats->EFFECTS[EFF_CONFUSED] = true;
+					myStats->EFFECTS_TIMERS[EFF_CONFUSED] = 15 * TICKS_PER_SECOND;
+					break;
+				case 4:
+					myStats->EFFECTS[EFF_DRUNK] = true;
+					myStats->EFFECTS_TIMERS[EFF_DRUNK] = 15 * TICKS_PER_SECOND;
+					break;
+				case 5:
+					myStats->EFFECTS[EFF_FAST] = true;
+					myStats->EFFECTS_TIMERS[EFF_FAST] = 20 * TICKS_PER_SECOND;
+					break;
+				case 6:
+					myStats->EFFECTS[EFF_HP_REGEN] = true;
+					myStats->EFFECTS_TIMERS[EFF_HP_REGEN] = 30 * TICKS_PER_SECOND;
+					break;
+				case 7:
+					myStats->EFFECTS[EFF_INVISIBLE] = true;
+					myStats->EFFECTS_TIMERS[EFF_INVISIBLE] = 30 * TICKS_PER_SECOND;
+					break;
+				case 8:
+					myStats->EFFECTS[EFF_LEVITATING] = true;
+					myStats->EFFECTS_TIMERS[EFF_LEVITATING] = 30 * TICKS_PER_SECOND;
+					break;
+				case 9:
+					myStats->EFFECTS[EFF_MAGICREFLECT] = true;
+					myStats->EFFECTS_TIMERS[EFF_MAGICREFLECT] = 30 * TICKS_PER_SECOND;
+					break;
+				case 10:
+					teleportRandom();
+					break;
+				case 11:
+					this->modHP(-5);
+					break;
+				case 12:
+					this->modHP(+15);
+					break;
+				case 13:
+					this->modMP(-10);
+					break;
+				case 14:
+					this->modMP(+20);
+					break;
+				case 15:
+					switch (rand() % 5)
+					{
+					case 0:
+						castSpell(uid, &spell_forcebolt, true, false);
+						break;
+					case 1:
+						castSpell(uid, &spell_fireball, true, false);
+						break;
+					case 2:
+						castSpell(uid, &spell_cold, true, false);
+						break;
+					case 3:
+						castSpell(uid, &spell_lightning, true, false);
+						break;
+					case 4:
+						castSpell(uid, &spell_acidSpray, true, false);
+						break;
+					}
+					break;
+				case 16:
+					castSpell(uid, &spell_magicmapping, true, false);
+					break;
+				case 17:
+					castSpell(uid, &spell_light, true, false);
+					break;
+				case 18:
+					this->modHP(+50);
+					this->modMP(-25);
+					castSpell(uid, &spell_cureailment, true, false);
+					break;
+				case 19:
+					this->modHP(-15);
+					this->modMP(+50);
+					castSpell(uid, &spell_bleed, true, false);
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
@@ -6470,18 +6567,6 @@ void Entity::attack(int pose, int charge, Entity* target)
 							hitstats->EFFECTS_TIMERS[EFF_SLOW] = TICKS_PER_SECOND * 25;
 						}
 
-						if (myStats->weapon->type == ABYSSAL_CROSSBOW)
-						{
-							//this crossbow casts lightning while full HP
-							if (hitstats)
-							{
-								if (myStats->HP == myStats->MAXHP)
-								{
-									castSpell(uid, &spell_lightning, true, false);
-								}
-							}
-						}
-
 						if (myStats->weapon->type == ABYSSAL_MACE)
 						{
 							if (hitstats)
@@ -9561,7 +9646,7 @@ int setGloveSprite(Stat* myStats, Entity* ent, int spriteOffset)
 	}
 	else if (myStats->gloves->type == ICE_GLOVES)
 	{
-		ent->sprite = 956 + (spriteOffset > 0 ? 1 : 0);
+		ent->sprite = 956 + myStats->sex + spriteOffset;
 	}
 	else
 	{
@@ -9781,7 +9866,7 @@ int getWeaponSkill(Item* weapon)
 	{
 		return PRO_POLEARM;
 	}
-	if ( weapon->type == BRONZE_SWORD || weapon->type == IRON_SWORD || weapon->type == STEEL_SWORD || weapon->type == ARTIFACT_SWORD || weapon->type == CRYSTAL_SWORD || weapon->type == ABYSSAL_SWORD || weapon->type == MACHETE || weapon->type == RAPIER )
+	if ( weapon->type == BRONZE_SWORD || weapon->type == IRON_SWORD || weapon->type == STEEL_SWORD || weapon->type == ARTIFACT_SWORD || weapon->type == CRYSTAL_SWORD || weapon->type == ABYSSAL_SWORD || weapon->type == MACHETE || weapon->type == RAPIER || weapon->type == NEEDLE )
 	{
 		return PRO_SWORD;
 	}
@@ -13227,7 +13312,7 @@ void Entity::setRangedProjectileAttack(Entity& marksman, Stat& myStats)
 			// poison arrow
 			this->arrowPoisonTime = 540;    // 9 seconds of poison
 		}
-
+		
 		if ( myStats.weapon->type != SLING )
 		{
 			// get armor pierce chance.
@@ -13240,6 +13325,18 @@ void Entity::setRangedProjectileAttack(Entity& marksman, Stat& myStats)
 			else
 			{
 				this->arrowArmorPierce = 0;
+			}
+		}
+
+		if (myStats.weapon->type == ABYSSAL_CROSSBOW)
+		{
+			//this crossbow stuns while you are full HP
+			{
+				if (myStats.HP == myStats.MAXHP)
+				{
+					//mini-stuns bolts
+					this->arrowStunTime = 10;
+				}
 			}
 		}
 	}
@@ -13560,7 +13657,7 @@ char* playerClassLangEntry(int classnum, int playernum)
 	{
 		return language[3223 + classnum - CLASS_CONJURER];
 	}
-	else if ( classnum >= CLASS_SEXTON && classnum <= CLASS_DECIVER )
+	else if ( classnum >= CLASS_SEXTON && classnum <= CLASS_LUNATIC )
 	{
 		return language[2550 + classnum - CLASS_SEXTON];
 	}
@@ -13587,7 +13684,7 @@ char* playerClassDescription(int classnum, int playernum)
 	{
 		return language[3231 + classnum - CLASS_CONJURER];
 	}
-	else if ( classnum >= CLASS_SEXTON && classnum <= CLASS_DECIVER )
+	else if ( classnum >= CLASS_SEXTON && classnum <= CLASS_LUNATIC )
 	{
 		return language[2560 + classnum - CLASS_SEXTON];
 	}
@@ -14138,8 +14235,7 @@ bool monsterNameIsGeneric(Stat& monsterStats)
 		|| strstr(monsterStats.name, "cultist")
 		|| strstr(monsterStats.name, "knight")
 		|| strstr(monsterStats.name, "sentinel")
-		|| strstr(monsterStats.name, "mage")
-		|| strstr(monsterStats.name, "knight") )
+		|| strstr(monsterStats.name, "mage") )
 	{
 		// If true, pretend the monster doesn't have a name and use the generic message "You hit the lesser skeleton!"
 		return true;

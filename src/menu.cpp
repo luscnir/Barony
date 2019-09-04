@@ -2045,15 +2045,15 @@ void handleMainMenu(bool mode)
 										stats[0]->sex = lastSex;
 									}
 									// convert human class to monster special classes on reselect.
-									if ( stats[0]->playerRace != RACE_HUMAN && lastRace != RACE_HUMAN && client_classes[0] > CLASS_DECIVER )
+									if ( stats[0]->playerRace != RACE_HUMAN && lastRace != RACE_HUMAN && client_classes[0] > CLASS_LUNATIC )
 									{
-										client_classes[0] = CLASS_DECIVER + stats[0]->playerRace;
+										client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace;
 										stats[0]->clearStats();
 										initClass(0);
 									}
-									else if ( stats[0]->playerRace != RACE_HUMAN && lastRace == RACE_HUMAN && client_classes[0] > CLASS_DECIVER )
+									else if ( stats[0]->playerRace != RACE_HUMAN && lastRace == RACE_HUMAN && client_classes[0] > CLASS_LUNATIC )
 									{
-										client_classes[0] = CLASS_DECIVER + stats[0]->playerRace;
+										client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace;
 										stats[0]->clearStats();
 										initClass(0);
 									}
@@ -2212,15 +2212,15 @@ void handleMainMenu(bool mode)
 						stats[0]->sex = lastSex;
 					}
 					// convert human class to monster special classes on reselect.
-					if ( stats[0]->playerRace != RACE_HUMAN && lastRace != RACE_HUMAN && client_classes[0] > CLASS_DECIVER )
+					if ( stats[0]->playerRace != RACE_HUMAN && lastRace != RACE_HUMAN && client_classes[0] > CLASS_LUNATIC )
 					{
-						client_classes[0] = CLASS_DECIVER + stats[0]->playerRace;
+						client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace;
 						stats[0]->clearStats();
 						initClass(0);
 					}
-					else if ( stats[0]->playerRace != RACE_HUMAN && lastRace == RACE_HUMAN && client_classes[0] > CLASS_DECIVER )
+					else if ( stats[0]->playerRace != RACE_HUMAN && lastRace == RACE_HUMAN && client_classes[0] > CLASS_LUNATIC )
 					{
-						client_classes[0] = CLASS_DECIVER + stats[0]->playerRace;
+						client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace;
 						stats[0]->clearStats();
 						initClass(0);
 					}
@@ -2332,15 +2332,15 @@ void handleMainMenu(bool mode)
 						stats[0]->sex = lastSex;
 					}
 					// convert human class to monster special classes on reselect.
-					if ( stats[0]->playerRace != RACE_HUMAN && lastRace != RACE_HUMAN && client_classes[0] > CLASS_DECIVER )
+					if ( stats[0]->playerRace != RACE_HUMAN && lastRace != RACE_HUMAN && client_classes[0] > CLASS_LUNATIC )
 					{
-						client_classes[0] = CLASS_DECIVER + stats[0]->playerRace;
+						client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace;
 						stats[0]->clearStats();
 						initClass(0);
 					}
-					else if ( stats[0]->playerRace != RACE_HUMAN && lastRace == RACE_HUMAN && client_classes[0] > CLASS_DECIVER )
+					else if ( stats[0]->playerRace != RACE_HUMAN && lastRace == RACE_HUMAN && client_classes[0] > CLASS_LUNATIC )
 					{
-						client_classes[0] = CLASS_DECIVER + stats[0]->playerRace;
+						client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace;
 						stats[0]->clearStats();
 						initClass(0);
 					}
@@ -2443,8 +2443,8 @@ void handleMainMenu(bool mode)
 			int lastClassInList = NUMCLASSES - 1;
 			if ( stats[0]->playerRace != RACE_HUMAN && (enabledDLCPack1 || enabledDLCPack2) )
 			{
-				entriesToDisplay = CLASS_DECIVER + 2;
-				lastClassInList = CLASS_DECIVER + stats[0]->playerRace;
+				entriesToDisplay = CLASS_LUNATIC + 2;
+				lastClassInList = CLASS_LUNATIC + stats[0]->playerRace;
 			}
 			else if ( stats[0]->playerRace == RACE_HUMAN )
 			{
@@ -2466,8 +2466,8 @@ void handleMainMenu(bool mode)
 				}
 				else
 				{
-					entriesToDisplay = CLASS_DECIVER + 1;
-					lastClassInList = CLASS_DECIVER;
+					entriesToDisplay = CLASS_LUNATIC + 1;
+					lastClassInList = CLASS_LUNATIC;
 				}
 			}
 
@@ -2478,13 +2478,13 @@ void handleMainMenu(bool mode)
 				{
 					// monsters only get to choose their particular class, while humans can choose all new classes.
 					// so the 'last' entry is the monster's class, advance to the appropriate index.
-					classToPick = CLASS_DECIVER + stats[0]->playerRace;
+					classToPick = CLASS_LUNATIC + stats[0]->playerRace;
 				}
 				else if ( stats[0]->playerRace == RACE_HUMAN && (enabledDLCPack1 || enabledDLCPack2) )
 				{
 					if ( skipFirstDLC )
 					{
-						if ( c > CLASS_MONK && (c < entriesToDisplay) )
+						if ( c > CLASS_LUNATIC && (c < entriesToDisplay) )
 						{
 							classToPick = c + 4; // classToPick refers to the descriptions of the second half of the DLC classes.
 						}
@@ -2529,7 +2529,7 @@ void handleMainMenu(bool mode)
 					{
 						if ( stats[0]->playerRace != RACE_HUMAN )
 						{
-							client_classes[0] = CLASS_DECIVER + stats[0]->playerRace;
+							client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace;
 						}
 						else
 						{
@@ -2540,14 +2540,14 @@ void handleMainMenu(bool mode)
 					{
 						if ( client_classes[0] == CLASS_BREWER && skipFirstDLC )
 						{
-							client_classes[0] = CLASS_DECIVER;
+							client_classes[0] = CLASS_LUNATIC;
 						}
 					}
 					else if ( stats[0]->playerRace != RACE_HUMAN )
 					{
-						if ( client_classes[0] > CLASS_DECIVER )
+						if ( client_classes[0] > CLASS_LUNATIC )
 						{
-							client_classes[0] = CLASS_DECIVER;
+							client_classes[0] = CLASS_LUNATIC;
 						}
 					}
 
@@ -2570,16 +2570,16 @@ void handleMainMenu(bool mode)
 					}
 					else if ( stats[0]->playerRace == RACE_HUMAN )
 					{
-						if ( client_classes[0] == CLASS_DECIVER + 1 && skipFirstDLC )
+						if ( client_classes[0] == CLASS_LUNATIC + 1 && skipFirstDLC )
 						{
 							client_classes[0] = CLASS_UNDEF1;
 						}
 					}
 					else if ( stats[0]->playerRace != RACE_HUMAN )
 					{
-						if ( client_classes[0] == CLASS_DECIVER + 1 )
+						if ( client_classes[0] == CLASS_LUNATIC + 1 )
 						{
-							client_classes[0] = CLASS_DECIVER + stats[0]->playerRace; // jump ahead to the monster specific class.
+							client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace; // jump ahead to the monster specific class.
 						}
 					}
 
@@ -12231,7 +12231,7 @@ void buttonRandomCharacter(button_t* my)
 	charcreation_step = 4;
 	camera_charsheet_offsetyaw = (330) * PI / 180;
 	stats[0]->sex = static_cast<sex_t>(rand() % 2);
-	client_classes[0] = rand() % (CLASS_DECIVER + 1);//NUMCLASSES;
+	client_classes[0] = rand() % (CLASS_LUNATIC + 1);//NUMCLASSES;
 	stats[0]->clearStats();
 	initClass(0);
 	stats[0]->appearance = rand() % NUMAPPEARANCES;
@@ -12244,7 +12244,7 @@ void buttonReplayLastCharacter(button_t* my)
 		playing_random_char = false;
 		camera_charsheet_offsetyaw = (330) * PI / 180;
 		stats[0]->sex = static_cast<sex_t>(lastCreatedCharacterSex);
-		client_classes[0] = std::min(lastCreatedCharacterClass, static_cast<int>(CLASS_DECIVER));
+		client_classes[0] = std::min(lastCreatedCharacterClass, static_cast<int>(CLASS_LUNATIC));
 		stats[0]->clearStats();
 		initClass(0);
 		stats[0]->appearance = lastCreatedCharacterAppearance;

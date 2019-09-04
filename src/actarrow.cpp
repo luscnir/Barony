@@ -18,6 +18,8 @@
 #include "interface/interface.hpp"
 #include "net.hpp"
 #include "collision.hpp"
+#include "magic/magic.hpp"
+#include "items.hpp"
 
 /*-------------------------------------------------------------------------------
 
@@ -329,6 +331,13 @@ void actArrow(Entity* my)
 							serverUpdateEffects(hit.entity->skill[2]);
 						}
 					}
+
+					if (my->arrowStunTime > 0)
+					{
+						hitstats->EFFECTS[EFF_STUNNED] = true;
+						hitstats->EFFECTS_TIMERS[EFF_STUNNED] = my->arrowStunTime;
+					}
+
 
 					// update enemy bar for attacker
 					if ( !strcmp(hitstats->name, "") )

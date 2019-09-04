@@ -201,7 +201,7 @@ bool addSpell(int spell, int player, bool ignoreSkill)
 			new_spell = copySpell(&spell_charmMonster);
 			break;
 		case SPELL_DEATHCOIL:
-			new_spell = copySpell(&spell_charmMonster);
+			new_spell = copySpell(&spell_deathCoil);
 			break;
 		default:
 			return false;

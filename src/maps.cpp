@@ -338,6 +338,37 @@ int monsterCurve(int level)
 			return GARGOYLE;
 		}
 	}
+	else if (!strncmp(map.name, "The Tundra", 11))     // tundra
+	{
+		switch (rand() % 20)
+		{
+		case 0:
+		case 1:
+		case 2:
+			return GOBLIN;
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+			return GHOUL;
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+			return YETI;
+		case 14:
+		case 15:
+		case 16:
+		case 17:
+		case 18:
+			return CRYORUNE;
+		case 19:
+			return TROLL;
+		}
+	}
 	return SKELETON; // basic monster
 }
 
@@ -515,6 +546,21 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 		else if (currentlevel == 13 || currentlevel == 15 )		//burg
 		{
 			secretlevelexit = 8;
+		}
+		else if (currentlevel == 25 || currentlevel == 27 )		// tundra
+		{
+			secretlevelexit = 9;
+		}
+		else if (currentlevel == 9 || currentlevel == 16)		// tundra entrance (side path)
+		{
+			secretlevelexit = 10;
+		}
+		else if (currentlevel == 26)	// tundra catedral secret
+		{
+			if (rand() % 5 == 0)		// 20% chance
+			{
+				secretlevelexit = 11;
+			}
 		}
 	}
 
@@ -879,6 +925,15 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 						break;
 					case 8:
 						strcpy(secretmapname, "burgsecret");
+						break;
+					case 9:
+						strcpy(secretmapname, "tundrasecret");
+						break;
+					case 10:
+						strcpy(secretmapname, "tundrapath");
+						break;
+					case 11:
+						strcpy(secretmapname, "catedralentrance");
 						break;
 					default:
 						break;

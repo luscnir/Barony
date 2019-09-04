@@ -417,11 +417,11 @@ char itemNameStrings[NUM_ITEM_STRINGS][32] =
 	"symbol_rage",
 	"symbol_cruelty",
 	"symbol_hatred",
-	"ice_gloves",
 	"boots_lightness",
+	"ice_gloves",
 	"boots_super_lightness",
 	"cloak_melting",
-	"ring_polymorph",
+	"ring_randomness",
 	"food_anglerfish",
 	"food_tentaclepie",
 	"tool_unihorn",
@@ -437,7 +437,7 @@ char itemNameStrings[NUM_ITEM_STRINGS][32] =
 	"wood_hammer",
 	"machete",
 	"stone_axe",
-	"nullitem",
+	"needle",
 	""
 };
 
@@ -583,6 +583,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"wood_hammer",
 		"machete",
 		"stone_axe",
+		"needle",
 		""
 	},
 	{
@@ -654,7 +655,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"ring_regeneration",
 		"ring_teleportation",
 		"abyssal_ring",
-		"ring_polymorph",
+		"ring_randomness",
 		""
 	},
 	{
@@ -1260,8 +1261,46 @@ char tileEditorNameStrings[NUM_EDITOR_TILES][44] =
 	"AcidTrapWall3.png",
 	"AcidTrapWall4.png",
 	"Greenishbrick.png",
-	"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-	"", ""
+	"SnowGrass.png",
+	"ColdPath.png",
+	"MountainWall",
+	"MountainWallLayers",
+	"PineLeaves",
+	"Pine",
+	"CyanSquare",
+	"Frozenwat1",
+	"Frozenwat2",
+	"Frozenwat3",
+	"Frozenwat4",
+	"Frozenwat5",
+	"Frozenwat6",
+	"Frozenwat7",
+	"Frozenwat8",
+	"SolidIce.png",
+	"DarkBlueStone.png",
+	"ColdGrayBrick.png",
+	"ColdGrayFloor.png",
+	"ColdGrayFloorIce.png",
+	"GrayBrickCracked.png",
+	"CrackShine1.png",
+	"CrackShine2.png",
+	"CrackShine3.png",
+	"FancyTundraWall.png",
+	"TransparantIce.png",
+	"IcefallStone.png",
+	"IceStoneDrop1.png",
+	"IceStoneDrop2.png",
+	"IceStoneDrop3.png",
+	"IceStoneDrop4.png",
+	"WBdimond.png",
+	"WBdemonface.png",
+	"ColdDungeon.png",
+	"WoodTundra.png",
+	"PineLogs.png",
+	"Snow.png",
+	"FrozenCreature.png",
+	"", "", "", "", "", "", "", "", "", "", "", "",
+	"", "", ""
 };
 
 int canWearEquip(Entity* entity, int category)

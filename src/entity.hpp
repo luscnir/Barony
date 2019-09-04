@@ -349,6 +349,7 @@ public:
 	Sint32& arrowPower;
 	Sint32& arrowPoisonTime;
 	Sint32& arrowArmorPierce;
+	Sint32& arrowStunTime;
 
 	//--PUBLIC ITEM SKILLS--
 	Sint32& itemNotMoving; // skill[18]
@@ -934,9 +935,9 @@ void actTextSource(Entity* my);
 //checks if a sprite falls in certain sprite ranges
 
 static const int NUM_ITEM_STRINGS = 285;
-static const int NUM_ITEM_STRINGS_BY_TYPE = 120;
+static const int NUM_ITEM_STRINGS_BY_TYPE = 130;
 static const int NUM_EDITOR_SPRITES = 171;
-static const int NUM_EDITOR_TILES = 346;
+static const int NUM_EDITOR_TILES = 369;
 
 // furniture types.
 static const int FURNITURE_TABLE = 0;

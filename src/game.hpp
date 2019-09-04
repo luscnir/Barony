@@ -103,7 +103,7 @@ extern Uint32 cycles, pingtime;
 extern Uint32 timesync;
 extern real_t fps;
 extern bool shootmode;
-#define NUMCLASSES 21
+#define NUMCLASSES 22
 #define NUMRACES 10
 #define NUMPLAYABLERACES 9
 extern char address[64];
@@ -134,7 +134,7 @@ enum PlayerClasses : int
 	CLASS_SEXTON,
 	CLASS_NINJA,
 	CLASS_MONK,
-	CLASS_DECIVER,
+	CLASS_LUNATIC,
 	CLASS_CONJURER,
 	CLASS_ACCURSED,
 	CLASS_MESMER,

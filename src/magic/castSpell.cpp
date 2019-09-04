@@ -1067,6 +1067,12 @@ Entity* castSpell(Uint32 caster_uid, spell_t* spell, bool using_magicstaff, bool
 				traveltime = 15;
 				entity->skill[5] = traveltime;
 			}
+			else if (!strcmp(spell->name, spell_deathCoil.name))
+			{
+				playSoundEntity(entity, 422, volume);
+				traveltime = 15;
+				entity->skill[5] = traveltime;
+			}
 			else
 			{
 				playSoundEntity(entity, 169, volume);
