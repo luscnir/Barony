@@ -5967,7 +5967,7 @@ int loadMainMenuMap(bool blessedAdditionMaps, bool forceVictoryMap)
 	}
 	else
 	{
-		switch ( rand() % 6 )
+		switch ( rand() % 7 )
 		{
 			case 0:
 				fullMapName = physfsFormatMapName("mainmenu1");
@@ -6017,6 +6017,14 @@ int loadMainMenuMap(bool blessedAdditionMaps, bool forceVictoryMap)
 				camera.y = 5.2;
 				camera.z = 0.5;
 				camera.ang = 0.0;
+				break;
+			case 6:
+				fullMapName = physfsFormatMapName("mainmenu12");
+				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures);
+				camera.x = 13.0;
+				camera.y = 30.6;
+				camera.z = 5;
+				camera.ang = 4.3;
 				break;
 		}
 	}
