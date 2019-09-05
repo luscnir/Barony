@@ -64,6 +64,7 @@ void initCryorune(Entity* my, Stat* myStats)
 				myStats->LVL = 20;
 				my->setEffect(EFF_VAMPIRICAURA, true, -1, true); //-1 duration, never expires.
 				myStats->weapon = newItem(SPELLBOOK_MAGICMISSILE, EXCELLENT, 0, 1, 0, false, nullptr);
+				newItem(BOOTS_LIGHTNESS, EXCELLENT, 0, 1, 0, false, nullptr);
 				customItemsToGenerate = customItemsToGenerate - 1;
 				int c;
 				for ( c = 0; c < 2; ++c )

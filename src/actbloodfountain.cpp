@@ -252,12 +252,12 @@ void actBloodFountain(Entity* my)
 								}
 							}
 						}
-						else if (currentlevel < 10)
+						else if (currentlevel < 18)
 						{
 							messagePlayerColor(i, color, language[3752]);
 							spawnedMonster = summonMonster(CREATURE_IMP, my->x, my->y);
 						}
-						else if (currentlevel < 20)
+						else if (currentlevel < 46)
 						{
 							if (rand() % 2)
 							{

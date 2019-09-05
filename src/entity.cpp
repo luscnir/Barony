@@ -6626,7 +6626,22 @@ void Entity::attack(int pose, int charge, Entity* target)
 								{
 									hitstats->EFFECTS[EFF_PARALYZED] = true;
 									hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = TICKS_PER_SECOND * 5;
+									messagePlayer(player, language[3764]);
 								}
+							}
+						}
+					}
+
+					if (myStats->gloves)
+					{
+						if ( myStats->gloves->type == ICE_GLOVES )
+						{
+							//Ice gloves steals MP when hit fire monsters
+							if ( hitstats->type == DEMON || hitstats->type == CREATURE_IMP || hitstats->type == DEVIL || hitstats->type == LICH_FIRE )
+							{
+								hitstats->MP -= 1;
+								this->modMP(+1);
+								messagePlayer(player, language[3762]);
 							}
 						}
 					}
@@ -6645,17 +6660,16 @@ void Entity::attack(int pose, int charge, Entity* target)
 						}
 						else if ( myStats->cloak->type == CLOAK_MELTING )
 						{
-							if (hitstats->type == RAT)
+							//Melting cloak steals HP when hit ice monsters
+							if ( hitstats->type == CRYORUNE || hitstats->type == YETI || hitstats->type == ICEDEMON || hitstats->type == LICH_ICE )
 							{
-								//hitstats->modHP(-1);
-								//this->modHP(+1);
-								myStats->EFFECTS[EFF_FAST] = true;
-								myStats->EFFECTS_TIMERS[EFF_FAST] = TICKS_PER_SECOND * 3;
-								myStats->EFFECTS[EFF_INVISIBLE] = true;
-								myStats->EFFECTS_TIMERS[EFF_INVISIBLE] = TICKS_PER_SECOND * 3;
+								hitstats->HP -= 1;
+								this->modHP(+1);
+								messagePlayer(player, language[3763]);
 							}
 						}
 					}
+
 					if (myStats->ring)
 					{
 						if (myStats->ring->type == ABYSSAL_RING)
@@ -6687,7 +6701,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 
 										if (playerhit > 0 && hit.entity->flags[BURNING])
 										{
-											messagePlayer(playerhit, language[3737]); // "The Vengeance sets you on fire (and not Dyrnwyn)!"
+											messagePlayer(playerhit, language[3737]); // "The Amulet sets you on fire!"
 										}
 									}
 									this->modHP(+25);
@@ -7056,6 +7070,25 @@ void Entity::attack(int pose, int charge, Entity* target)
 									monsterTarget = 0;
 								}
 								break;
+							case EYEBALL:
+								if (rand() % 2 == 0)
+								{
+									hitstats->EFFECTS[EFF_PARALYZED] = true;
+									hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = std::max(50, 150 - hit.entity->getCON() * 5);
+									messagePlayer(playerhit, language[3765]);
+									messagePlayer(playerhit, language[3766]);
+									serverUpdateEffects(playerhit);
+								}
+								else
+								{
+									hitstats->EFFECTS[EFF_BLIND] = true;
+									hitstats->EFFECTS_TIMERS[EFF_BLIND] = std::max(50, 150 - hit.entity->getCON() * 5);
+									messagePlayer(playerhit, language[3765]);
+									messagePlayer(playerhit, language[3767]);
+									serverUpdateEffects(playerhit);
+								}
+								hitstats->HP -= 15;
+								break;
 							default:
 								break;
 						}
@@ -7093,6 +7126,25 @@ void Entity::attack(int pose, int charge, Entity* target)
 									messagePlayer(playerhit, language[686]);
 									messagePlayer(playerhit, language[687]);
 									serverUpdateEffects(playerhit);
+									break;
+								case EYEBALL:
+									if (rand() % 2 == 0)
+									{
+										hitstats->EFFECTS[EFF_PARALYZED] = true;
+										hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = std::max(50, 150 - hit.entity->getCON() * 5);
+										messagePlayer(playerhit, language[3765]);
+										messagePlayer(playerhit, language[3766]);
+										serverUpdateEffects(playerhit);
+									}
+									else
+									{
+										hitstats->EFFECTS[EFF_BLIND] = true;
+										hitstats->EFFECTS_TIMERS[EFF_BLIND] = std::max(50, 150 - hit.entity->getCON() * 5);
+										messagePlayer(playerhit, language[3765]);
+										messagePlayer(playerhit, language[3767]);
+										serverUpdateEffects(playerhit);
+									}
+									hitstats->HP -= 15;
 									break;
 								default:
 									break;

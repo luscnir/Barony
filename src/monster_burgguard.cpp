@@ -141,19 +141,19 @@ void initBurgGuard(Entity* my, Stat* myStats)
 				case 0:
 				case 1:
 				case 2:
-					myStats->weapon = newItem(SHORTBOW, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
+					myStats->weapon = newItem(MAKESHIFT_BOW, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
 					break;
 				case 3:
 				case 4:
 				case 5:
-					myStats->weapon = newItem(SPEAR_BONE, WORN, 0 + rand() % 3, 1, rand(), false, nullptr);
+					myStats->weapon = newItem(SPEAR_BONE, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
 					break;
 				case 6:
 				case 7:
 					myStats->weapon = newItem(IRON_SPEAR, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
 					break;
 				case 8:
-					myStats->weapon = newItem(IRON_SWORD, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
+					myStats->weapon = newItem(MACHETE, WORN, 0 + rand() % 3, 1, rand(), false, nullptr);
 					break;
 				case 9:
 					myStats->weapon = newItem(MAGICSTAFF_SLOW, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);

@@ -46,15 +46,36 @@ void initEyeball(Entity* my, Stat* myStats)
 			}
 			else
 			{
-				strcpy(myStats->name, "Baphomet's watcher");
-				myStats->STR = 30;
-				for (c = 0; c < 3; c++)
+				switch (rand() % 2)
 				{
-					Entity* entity = summonMonster(EYEBALL, my->x, my->y);
-					if (entity)
+				case 0:
+					strcpy(myStats->name, "Baphomet's watcher");
+					myStats->INT += 30;
+					myStats->weapon = newItem(SPELLBOOK_FIREBALL, EXCELLENT, 0, 1, 0, false, nullptr);
+					newItem (BOOTS_LIGHTNESS, EXCELLENT, 0, 1, 0, false, nullptr);
+					newItem (TOOL_GLASSES, EXCELLENT, 5, 1, 0, false, nullptr);
+
+					for (c = 0; c < 3; c++)
 					{
-						entity->parent = my->getUID();
+						Entity* entity = summonMonster(EYEBALL, my->x, my->y);
+						if (entity)
+						{
+							entity->parent = my->getUID();
+						}
 					}
+					break;
+				case 1:
+					strcpy(myStats->name, "Blind Soul Seeker");
+					myStats->MAXHP -= 40;
+					myStats->HP -= 40;
+					myStats->CON += 30;
+					myStats->GOLD += 1000;
+					myStats->RANDOM_GOLD += 1000;
+					myStats->weapon = newItem(SPELLBOOK_TELEPORTATION, EXCELLENT, 0, 1, 0, false, nullptr); //runs away
+					newItem (TOOL_UNIHORN, EXCELLENT, 0, 1, 0, true, nullptr);
+					myStats->EFFECTS[EFF_BLIND] = true;
+					myStats->EFFECTS_TIMERS[EFF_BLIND] = 0;
+					break;
 				}
 			}
 
