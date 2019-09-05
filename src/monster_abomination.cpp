@@ -72,11 +72,6 @@ void initAbomination(Entity* my, Stat* myStats)
 				case 2:
 				case 1:
 					newItem(READABLE_BOOK, EXCELLENT, 0, 1, getBook("The fall of the Queen"), false, &myStats->inventory);
-					switch (rand() % 10) //10% chance for rare drop
-					{
-					case 0:
-						newItem(ABYSSAL_AMULET, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
-					}
 					break;
 				default:
 					break;
