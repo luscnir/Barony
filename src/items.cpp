@@ -2925,7 +2925,7 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if ( type == ABYSSAL_MACE )
 	{
-		attack += 1;	//it deals magic damage
+		attack += 0;	//it deals magic damage
 	}
 	else if ( type == ABYSSAL_AXE )
 	{
@@ -2977,7 +2977,7 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if (type == CANNON)
 	{
-		attack += 10;
+		attack += 12;
 	}
 	else if (type == CANNON_BOULDER)
 	{

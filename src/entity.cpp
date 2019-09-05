@@ -5297,7 +5297,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 
 			// ranged weapons (bows)
 			else if ( myStats->weapon->type == SHORTBOW || myStats->weapon->type == CROSSBOW || myStats->weapon->type == SLING || myStats->weapon->type == ARTIFACT_BOW 
-				   || myStats->weapon->type == ABYSSAL_CROSSBOW || myStats->weapon->type == CANNON || myStats->weapon->type == CANNON_BOULDER)
+				   || myStats->weapon->type == ABYSSAL_CROSSBOW || myStats->weapon->type == CANNON || myStats->weapon->type == CANNON_BOULDER || myStats->weapon->type == MAKESHIFT_BOW )
 			{
 				// damage weapon if applicable
 				int bowDegradeChance = 50;
@@ -5355,11 +5355,11 @@ void Entity::attack(int pose, int charge, Entity* target)
 				}
 				else if (myStats->weapon->type == CANNON) {
 					entity = newEntity(985, 1, map.entities, nullptr); // cannonball
-					playSoundEntity(this, 153 + rand() % 3, 96);
+					playSoundEntity(this, 153 , 96);
 				}
 				else if (myStats->weapon->type == CANNON_BOULDER) {
 					entity = newEntity(245, 1, map.entities, nullptr); // boulder
-					playSoundEntity(this, 150 + rand() % 3, 96);
+					playSoundEntity(this, 150 , 96);
 				}
 				
 				else
@@ -6561,13 +6561,13 @@ void Entity::attack(int pose, int charge, Entity* target)
 							hitstats->EFFECTS_TIMERS[EFF_BLEEDING] = TICKS_PER_SECOND * 15;
 						}
 
-						if (myStats->weapon->type == ABYSSAL_AXE)
+						else if (myStats->weapon->type == ABYSSAL_AXE)
 						{
 							hitstats->EFFECTS[EFF_SLOW] = true;
 							hitstats->EFFECTS_TIMERS[EFF_SLOW] = TICKS_PER_SECOND * 25;
 						}
 
-						if (myStats->weapon->type == ABYSSAL_MACE)
+						else if (myStats->weapon->type == ABYSSAL_MACE)
 						{
 							if (hitstats)
 							{
@@ -6617,7 +6617,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 							}
 						}
 
-						if (myStats->weapon->type == ABYSSAL_SPEAR)
+						else if (myStats->weapon->type == ABYSSAL_SPEAR)
 						{
 							if (hitstats)
 							{
@@ -6633,10 +6633,22 @@ void Entity::attack(int pose, int charge, Entity* target)
 
 					if (myStats->cloak)
 					{
-						if (myStats->cloak->type == ABYSSAL_CLOAK)
+						if ( myStats->cloak->type == ABYSSAL_CLOAK )
 						{
 							if (hitstats)
 							{
+								myStats->EFFECTS[EFF_FAST] = true;
+								myStats->EFFECTS_TIMERS[EFF_FAST] = TICKS_PER_SECOND * 3;
+								myStats->EFFECTS[EFF_INVISIBLE] = true;
+								myStats->EFFECTS_TIMERS[EFF_INVISIBLE] = TICKS_PER_SECOND * 3;
+							}
+						}
+						else if ( myStats->cloak->type == CLOAK_MELTING )
+						{
+							if (hitstats->type == RAT)
+							{
+								//hitstats->modHP(-1);
+								//this->modHP(+1);
 								myStats->EFFECTS[EFF_FAST] = true;
 								myStats->EFFECTS_TIMERS[EFF_FAST] = TICKS_PER_SECOND * 3;
 								myStats->EFFECTS[EFF_INVISIBLE] = true;
