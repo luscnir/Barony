@@ -1428,8 +1428,8 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1 + ITEM_CHANCE] = 25; //Random Items
 			break;
 		case 167:
-		case (1000 + DENOME):
-			stats->type = DENOME;
+		case (1000 + FLESHLING):
+			stats->type = FLESHLING;
 			stats->sex = static_cast<sex_t>(rand() % 2);
 			stats->appearance = 0;
 			stats->HP = 100;

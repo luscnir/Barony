@@ -3236,9 +3236,9 @@ void assignActions(map_t* map)
 				{
 					monsterType = EYEBALL;
 				}
-				else if (entity->sprite == 167)     // denome.png
+				else if (entity->sprite == 167)     // fleshling.png
 				{
-					monsterType = DENOME;
+					monsterType = FLESHLING;
 				}
 				else if (entity->sprite == 168)     // abomination.png
 				{
@@ -3561,11 +3561,11 @@ void assignActions(map_t* map)
 						entity->focaly = limbs[EYEBALL][0][1]; // 0
 						entity->focalz = limbs[EYEBALL][0][2]; // -1.75
 						break;
-					case DENOME:
+					case FLESHLING:
 						entity->z = 2.25;
-						entity->focalx = limbs[DENOME][0][0]; // 0
-						entity->focaly = limbs[DENOME][0][1]; // 0
-						entity->focalz = limbs[DENOME][0][2]; // -2
+						entity->focalx = limbs[FLESHLING][0][0]; // 0
+						entity->focaly = limbs[FLESHLING][0][1]; // 0
+						entity->focalz = limbs[FLESHLING][0][2]; // -2
 						break;
 					case ABOMINATION:
 						entity->z = -1;

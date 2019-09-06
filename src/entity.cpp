@@ -682,7 +682,7 @@ void Entity::killedByMonsterObituary(Entity* victim)
 			case EYEBALL:
 				victim->setObituary(language[2169]);
 				break;
-			case DENOME:
+			case FLESHLING:
 				victim->setObituary(language[2170]);
 				break;
 			case ABOMINATION:
@@ -9800,7 +9800,7 @@ bool Entity::setBootSprite(Entity* leg, int spriteOffset)
 		case SUCCUBUS:
 		case SHOPKEEPER:
 		case BURGGUARD:
-		case DENOME:
+		case FLESHLING:
 		case CHOLOROSH:
 			if ( myStats->shoes->type == LEATHER_BOOTS || myStats->shoes->type == LEATHER_BOOTS_SPEED )
 			{
@@ -10151,7 +10151,7 @@ int Entity::getAttackPose() const
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
 				|| myStats->type == SHADOW || myStats->type == BURGGUARD
-				|| myStats->type == DENOME || myStats->type == CHOLOROSH )
+				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH )
 			{
 				pose = MONSTER_POSE_MELEE_WINDUP1;
 			}
@@ -10201,7 +10201,7 @@ int Entity::getAttackPose() const
 				|| myStats->type == GNOME || myStats->type == SUCCUBUS
 				|| myStats->type == SHOPKEEPER || myStats->type == SHADOW 
 				|| myStats->type == BURGGUARD || myStats->type == GARGOYLE
-				|| myStats->type == DENOME || myStats->type == CHOLOROSH )
+				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH )
 			{
 				pose = MONSTER_POSE_MAGIC_WINDUP1;
 			}
@@ -10253,7 +10253,7 @@ int Entity::getAttackPose() const
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
 				|| myStats->type == SHADOW || myStats->type == BURGGUARD
-				|| myStats->type == DENOME || myStats->type == CHOLOROSH )
+				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH )
 			{
 				if ( myStats->weapon->type == CROSSBOW )
 				{
@@ -10296,7 +10296,7 @@ int Entity::getAttackPose() const
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
 				|| myStats->type == SHADOW || myStats->type == BURGGUARD
-				|| myStats->type == DENOME || myStats->type == CHOLOROSH )
+				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH )
 			{
 				if ( getWeaponSkill(myStats->weapon) == PRO_AXE || getWeaponSkill(myStats->weapon) == PRO_MACE )
 				{
@@ -10326,7 +10326,7 @@ int Entity::getAttackPose() const
 			|| myStats->type == CREATURE_IMP || myStats->type == SUCCUBUS
 			|| myStats->type == SHOPKEEPER || myStats->type == MINOTAUR
 			|| myStats->type == SHADOW || myStats->type == BURGGUARD 
-			|| myStats->type == ICEDEMON || myStats->type == DENOME 
+			|| myStats->type == ICEDEMON || myStats->type == FLESHLING 
 			|| myStats->type == ABOMINATION || myStats->type == CHOLOROSH)
 		{
 			pose = MONSTER_POSE_MELEE_WINDUP1;
@@ -11785,7 +11785,7 @@ void Entity::checkGroundForItems()
 			case GOBLIN:
 			case HUMAN:
 			case BURGGUARD:
-			case DENOME:
+			case FLESHLING:
 			case CHOLOROSH:
 				if ( !strcmp(myStats->name, "") )
 				{
@@ -12252,7 +12252,7 @@ bool Entity::monsterWantsItem(const Item& item, Item**& shouldEquip, node_t*& re
 		case INSECTOID:
 		case SKELETON:
 		case VAMPIRE:
-		case DENOME:
+		case FLESHLING:
 			if ( !monsterAllyEquipmentInClass(item) )
 			{
 				return false;

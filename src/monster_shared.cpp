@@ -185,7 +185,7 @@ void Entity::initMonster(int mySprite)
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
 			break;
-		case DENOME:
+		case FLESHLING:
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
 			break;
@@ -367,9 +367,9 @@ int Entity::getMonsterTypeFromSprite()
 	{
 		return EYEBALL;
 	}
-	else if (mySprite == 926)     // denome head
+	else if (mySprite == 926)     // fleshling head
 	{
-		return DENOME;
+		return FLESHLING;
 	}
 	else if (mySprite == 934)     // abomination head
 	{

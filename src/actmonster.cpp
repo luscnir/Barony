@@ -73,11 +73,11 @@ bool swornenemies[NUMMONSTERS][NUMMONSTERS] =
 	{ 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0 }, // YETI
 	{ 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0 }, // ICEDEMON
 	{ 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }, // EYEBALL
-	{ 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0 }, // DENOME
+	{ 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0 }, // FLESHLING
 	{ 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1 }, // ABOMINATION
 	{ 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0 }, // CHOLOROSH
 	{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }  // LICH_FALLEN
-}; // N, H, R, G, S, T, x, S, G, S, S, I, x, G, D, S, x,BO, M,BO,SP, K, S, G, I, V, S, C, I, G, A,BO,BO, C, B, G,BO, C, Y,BO, E, D,BO, C,BO
+}; // N, H, R, G, S, T, x, S, G, S, S, I, x, G, D, S, x,BO, M,BO,SP, K, S, G, I, V, S, C, I, G, A,BO,BO, C, B, G,BO, C, Y,BO, E, F,BO, C,BO
 
 // determines which monsters come to the aid of other monsters
 bool monsterally[NUMMONSTERS][NUMMONSTERS] =
@@ -123,11 +123,11 @@ bool monsterally[NUMMONSTERS][NUMMONSTERS] =
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // YETI
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 }, // ICEDEMON
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0 }, // EYEBALL
-	{ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 }, // DENOME
+	{ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 }, // FLESHLING
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 }, // ABOMINATION
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }, // CHOLOROSH
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }  // LICH_FALLEN
-}; // N, H, R, G, S, T, x, S, G, S, S, I, x, G, D, S, x,BO, M,BO,SP, K, S, G, I, V, S, C, I, G, A,BO,BO, C, B, G,BO, C, Y,BO, E, D,BO, C,BO
+}; // N, H, R, G, S, T, x, S, G, S, S, I, x, G, D, S, x,BO, M,BO,SP, K, S, G, I, V, S, C, I, G, A,BO,BO, C, B, G,BO, C, Y,BO, E, F,BO, C,BO
 
 // monster sight ranges
 double sightranges[NUMMONSTERS] =
@@ -170,13 +170,13 @@ double sightranges[NUMMONSTERS] =
 	96,   // GARGOYLE
 	512,  // MATILDA
 	256,  //CRYORUNE
-	64,   //YETI
-	512,  //ICEDEMON
-	96,	  //EYEBALL
-	128,  //DENOME
-	128,  //ABOMINATION
-	256,  //CHOLOROSH
-	512,  //LICH_FALLEN
+	64,   // YETI
+	512,  // ICEDEMON
+	96,	  // EYEBALL
+	128,  // FLESHLING
+	128,  // ABOMINATION
+	256,  // CHOLOROSH
+	512,  // LICH_FALLEN
 };
 
 int monsterGlobalAnimationMultiplier = 10;
@@ -545,11 +545,11 @@ Entity* summonMonster(Monster creature, long x, long y, bool forceLocation)
 				entity->focaly = limbs[EYEBALL][0][1]; // 0
 				entity->focalz = limbs[EYEBALL][0][2]; // -1.75
 				break;
-			case DENOME:
+			case FLESHLING:
 				entity->z = 2.25;
-				entity->focalx = limbs[DENOME][0][0]; // 0
-				entity->focaly = limbs[DENOME][0][1]; // 0
-				entity->focalz = limbs[DENOME][0][2]; // -2
+				entity->focalx = limbs[FLESHLING][0][0]; // 0
+				entity->focaly = limbs[FLESHLING][0][1]; // 0
+				entity->focalz = limbs[FLESHLING][0][2]; // -2
 				break;
 			case ABOMINATION:
 				entity->z = -1;
@@ -1190,9 +1190,9 @@ void actMonster(Entity* my)
 			{
 				initEyeball(my, nullptr);
 			}
-			else if (my->sprite == 926)     // denome head
+			else if (my->sprite == 926)     // fleshling head
 			{
-				initDenome(my, nullptr);
+				initFleshling(my, nullptr);
 			}
 			else if (my->sprite == 934)     // abomination head
 			{
@@ -1365,9 +1365,9 @@ void actMonster(Entity* my)
 			{
 				eyeballAnimate(my, sqrt(MONSTER_VELX* MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 926)     // denome head
+			else if (my->sprite == 926)     // fleshling head
 			{
-				denomeMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
+				fleshlingMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
 			else if (my->sprite == 934)     // abomination head
 			{
@@ -1554,8 +1554,8 @@ void actMonster(Entity* my)
 				case EYEBALL:
 					initEyeball(my, myStats);
 					break;
-				case DENOME:
-					initDenome(my, myStats);
+				case FLESHLING:
+					initFleshling(my, myStats);
 					break;
 				case ABOMINATION:
 					initAbomination(my, myStats);
@@ -2590,8 +2590,8 @@ void actMonster(Entity* my)
 			case EYEBALL:
 				eyeballDie(my);
 				break;
-			case DENOME:
-				denomeDie(my);
+			case FLESHLING:
+				fleshlingDie(my);
 				break;
 			case ABOMINATION:
 				abominationDie(my);
@@ -6394,9 +6394,9 @@ timeToGoAgain:
 		{
 			eyeballAnimate(my, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 		}
-		else if (myStats->type == DENOME)
+		else if (myStats->type == FLESHLING)
 		{
-			denomeMoveBodyparts(my, myStats, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
+			fleshlingMoveBodyparts(my, myStats, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 		}
 		else if (myStats->type == ABOMINATION)
 		{

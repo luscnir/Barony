@@ -888,7 +888,7 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"YETI",
 	"ICEDEMON",
 	"EYEBALL",
-	"DENOME",
+	"FLESHLING",
 	"ABOMINATION",
 	"CHLOROSH",
 	"LICH_FALLEN"
@@ -937,7 +937,7 @@ char monsterEditorNameStrings[NUMMONSTERS][13] =
 	"yeti",
 	"icedemon",
 	"eyeball",
-	"denome",
+	"fleshling",
 	"abomination",
 	"chlorosh",
 	"lichfallen"
@@ -1353,7 +1353,7 @@ int canWearEquip(Entity* entity, int category)
 				case SUCCUBUS:
 				case LICH_FIRE:
 				case LICH_ICE:
-				case DENOME:
+				case FLESHLING:
 				case LICH_FALLEN:
 					equipType = 2;
 					break;

@@ -917,7 +917,7 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case GARGOYLE:
 				case CRYORUNE:
 				case YETI:
-				case DENOME:
+				case FLESHLING:
 					difficulty = 2;
 					break;
 				case CRYSTALGOLEM:

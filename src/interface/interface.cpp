@@ -2395,7 +2395,7 @@ int FollowerRadialMenu::optionDisabledForCreature(int playerSkillLVL, int monste
 		case GARGOYLE:
 		case YETI:
 		case EYEBALL:
-		case DENOME:
+		case FLESHLING:
 			creatureTier = 2;
 			break;
 		case CRYSTALGOLEM:
@@ -2621,7 +2621,7 @@ bool FollowerRadialMenu::allowedInteractFood(int monsterType)
 		case BURGGUARD:
 		case GARGOYLE:
 		case YETI:
-		case DENOME:
+		case FLESHLING:
 		case CHOLOROSH:
 			return true;
 			break;
@@ -2643,7 +2643,7 @@ bool FollowerRadialMenu::allowedInteractWorld(int monsterType)
 		case GOATMAN:
 		case SKELETON:
 		case BURGGUARD:
-		case DENOME:
+		case FLESHLING:
 		case CHOLOROSH:
 			return true;
 			break;
@@ -2669,7 +2669,7 @@ bool FollowerRadialMenu::allowedInteractItems(int monsterType)
 		case VAMPIRE:
 		case SLIME:
 		case BURGGUARD:
-		case DENOME:
+		case FLESHLING:
 		case CHOLOROSH:
 			if ( followerToCommand && followerToCommand->monsterAllySummonRank != 0 )
 			{

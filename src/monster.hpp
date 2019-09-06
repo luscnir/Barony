@@ -54,7 +54,7 @@ enum Monster : int
 	YETI,
 	ICEDEMON,
 	EYEBALL,
-	DENOME,
+	FLESHLING,
 	ABOMINATION,
 	CHOLOROSH,
 	LICH_FALLEN
@@ -105,7 +105,7 @@ static char monstertypename[][16] =
 	"yeti",
 	"icedemon",
 	"eyeball",
-	"denome",
+	"fleshling",
 	"abomination",
 	"cholorosh",
 	"lichfallen"
@@ -154,7 +154,7 @@ static char monstertypenamecapitalized[][16] =
 	"Yeti",
 	"Icedemon",
 	"Eyeball",
-	"Denome",
+	"Fleshling",
 	"Abomination",
 	"Cholorosh",
 	"Lichfallen"
@@ -210,7 +210,7 @@ static char gibtype[NUMMONSTERS] =
 	1,	//YETI,
 	3,	//ICEDEMON,
 	1,	//EYEBALL,
-	1,	//DENOME,
+	1,	//FLESHLING,
 	1,	//ABOMINATION,
 	2,	//CHOLOROSH,
 	4	//LICH_FALLEN
@@ -258,11 +258,11 @@ static double damagetables[NUMMONSTERS][7] =
 	{ 1.f, 1.1, 0.9, 1.f, 0.8, 1.1, 0.9 }, // burg guard
 	{ 1.2, 1.1, 1.1, 1.f, 1.f, 1.1, 0.8 }, // gargoyle
 	{ 1.f, 1.2, 1.f, 1.4, 1.2, 1.f, 1.2 }, // matilda
-	{ 0.8, 1.4, 1.3, 0.8, 0.8, 0.6, 1.f }, // cryorune
+	{ 0.8, 1.8, 1.3, 0.8, 0.8, 0.6, 1.f }, // cryorune
 	{ 1.1, 0.8, 1.1, 0.8, 1.5, 1.f, 0.8 }, // yeti
 	{ 1.f, 0.8, 1.f, 0.8, 1.f, 1.2, 0.8 }, // icedemon
 	{ 1.2, 1.f, 1.3, 1.4, 1.4, 0.5, 1.f }, // eyeball
-	{ 0.9, 1.f, 1.f, 0.9, 1.2, 1.f, 1.f }, // denome
+	{ 0.9, 1.f, 1.f, 0.9, 1.2, 1.f, 1.f }, // fleshling
 	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.f }, // abomination
 	{ 1.1, 0.8, 1.3, 1.f, 1.f, 0.9, 0.8 }, // cholorosh
 	{ 1.5, 1.5, 1.5, 1.5, 1.3, 1.f, 1.5 }  // lichfallen
@@ -465,7 +465,7 @@ void initCryorune(Entity* my, Stat* myStats);
 void initYeti(Entity* my, Stat* myStats);
 void initIceDemon(Entity* my, Stat* myStats);
 void initEyeball(Entity* my, Stat* myStats);
-void initDenome(Entity* my, Stat* myStats);
+void initFleshling(Entity* my, Stat* myStats);
 void initAbomination(Entity* my, Stat* myStats);
 void initCholorosh(Entity* my, Stat* myStats);
 void initLichFallen(Entity* my, Stat* myStats);
@@ -503,7 +503,7 @@ void actGargoyleLimb(Entity* my);
 void actMatildaLimb(Entity* my);
 void actYetiLimb(Entity* my);
 void actIceDemonLimb(Entity* my);
-void actDenomeLimb(Entity* my);
+void actFleshlingLimb(Entity* my);
 void actAbominationLimb(Entity* my);
 void actCholoroshLimb(Entity* my);
 void actLichFallenLimb(Entity* my);
@@ -546,7 +546,7 @@ void cryoruneDie(Entity* my);
 void yetiDie(Entity* my);
 void iceDemonDie(Entity* my);
 void eyeballDie(Entity* my);
-void denomeDie(Entity* my);
+void fleshlingDie(Entity* my);
 void abominationDie(Entity* my);
 void choloroshDie(Entity* my);
 void lichFallenDie(Entity* my);
@@ -589,7 +589,7 @@ void cryoruneAnimate(Entity* my, double dist);
 void yetiMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void iceDemonMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void eyeballAnimate(Entity* my, double dist);
-void denomeMoveBodyparts(Entity* my, Stat* myStats, double dist);
+void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void lichFallenAnimate(Entity* my, Stat* myStats, double dist);
