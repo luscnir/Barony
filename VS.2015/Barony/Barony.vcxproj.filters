@@ -402,9 +402,6 @@
     <ClCompile Include="..\..\src\monster_cryorune.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\monster_denome.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\monster_eyeball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -415,6 +412,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\monster_yeti.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\monster_fleshling.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

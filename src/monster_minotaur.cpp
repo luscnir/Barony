@@ -58,7 +58,7 @@ void initMinotaur(Entity* my, Stat* myStats)
 				myStats->DEX = 20;
 				myStats->CON = 20;
 			}
-			else if ( currentlevel >= 25 )
+			else if ( currentlevel >= 46 )
 			{
 				myStats->HP += 400;
 				myStats->MAXHP += 400;

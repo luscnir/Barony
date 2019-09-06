@@ -8645,7 +8645,7 @@ void Entity::awardXP(Entity* src, bool share, bool root)
 		{
 			updateAchievementThankTheTank(player, src, true);
 		}
-		if ( currentlevel >= 25 && srcStats->type == MINOTAUR )
+		if ( currentlevel >= 46 && srcStats->type == MINOTAUR )
 		{
 			for ( int c = 0; c < MAXPLAYERS; c++ )
 			{

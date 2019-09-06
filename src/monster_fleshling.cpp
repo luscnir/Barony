@@ -11,7 +11,7 @@
 #include "collision.hpp"
 #include "player.hpp"
 
-void initDenome(Entity* my, Stat* myStats)
+void initFleshling(Entity* my, Stat* myStats)
 {
 	int c;
 	node_t* node;
@@ -49,12 +49,12 @@ void initDenome(Entity* my, Stat* myStats)
 				switch (rand() % 2)
 				{
 				case 0:					//The Bloodthirsty
-					myStats->HP = 165;
-					myStats->MAXHP = 165;
+					myStats->HP += 165;
+					myStats->MAXHP += 165;
 					myStats->OLDHP = myStats->HP;
 					strcpy(myStats->name, "The Bloodthirsty");
 					myStats->weapon = newItem(ABYSSAL_SWORD, EXCELLENT, 1, 1, rand(), true, nullptr);
-					myStats->shield = newItem(STEEL_SHIELD, EXCELLENT, 0, 1, rand(), true, nullptr);
+					myStats->shield = newItem(STEEL_SHIELD_RESISTANCE, EXCELLENT, 0, 1, rand(), true, nullptr);
 					int c;
 					for (c = 0; c < 3; c++)
 					{
@@ -66,13 +66,14 @@ void initDenome(Entity* my, Stat* myStats)
 					}
 					break;
 				case 1:					//Thiseddys, Mutant priest
-					myStats->HP = 130;
-					myStats->MAXHP = 130;
+					myStats->HP += 130;
+					myStats->MAXHP += 130;
 					myStats->OLDHP = myStats->HP;
 					strcpy(myStats->name, "Thiseddys, Mutant priest");
 					myStats->weapon = newItem(SPELLBOOK_ACID_SPRAY, EXCELLENT, 0, 1, rand(), true, nullptr);
 					myStats->mask = newItem(TOOL_BLINDFOLD_TELEPATHY, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
 					myStats->cloak = newItem(CLOAK_YELLOWGREEN, SERVICABLE, 1, 1, rand(), false, nullptr);
+					newItem(BOOTS_LIGHTNESS, WORN, -1, 1, rand(), false, nullptr);
 					break;
 				}
 			}
@@ -140,8 +141,9 @@ void initDenome(Entity* my, Stat* myStats)
 						break;
 					case 7:
 					case 8:
-					case 9:
 						myStats->shield = newItem(IRON_SHIELD, static_cast<Status>(WORN + rand() % 2), -1 + rand() % 3, 1, rand(), false, nullptr);
+					case 9:
+						myStats->shield = newItem(STEEL_SHIELD, static_cast<Status>(WORN + rand() % 2), -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 				}
 			}
@@ -166,7 +168,7 @@ void initDenome(Entity* my, Stat* myStats)
 					case 7:
 					case 8:
 					case 9:
-						myStats->weapon = newItem(MAGICSTAFF_BLEED, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);
+						myStats->weapon = newItem(MAGICSTAFF_BLEED, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 				}
 			}
@@ -202,10 +204,10 @@ void initDenome(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[DENOME][1][0]; // 0
-	entity->focaly = limbs[DENOME][1][1]; // 0
-	entity->focalz = limbs[DENOME][1][2]; // 0
-	entity->behavior = &actDenomeLimb;
+	entity->focalx = limbs[FLESHLING][1][0]; // 0
+	entity->focaly = limbs[FLESHLING][1][1]; // 0
+	entity->focalz = limbs[FLESHLING][1][2]; // 0
+	entity->behavior = &actFleshlingLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -221,10 +223,10 @@ void initDenome(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[DENOME][2][0]; // .25
-	entity->focaly = limbs[DENOME][2][1]; // 0
-	entity->focalz = limbs[DENOME][2][2]; // 1.5
-	entity->behavior = &actDenomeLimb;
+	entity->focalx = limbs[FLESHLING][2][0]; // .25
+	entity->focaly = limbs[FLESHLING][2][1]; // 0
+	entity->focalz = limbs[FLESHLING][2][2]; // 1.5
+	entity->behavior = &actFleshlingLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -240,10 +242,10 @@ void initDenome(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[DENOME][3][0]; // .25
-	entity->focaly = limbs[DENOME][3][1]; // 0
-	entity->focalz = limbs[DENOME][3][2]; // 1.5
-	entity->behavior = &actDenomeLimb;
+	entity->focalx = limbs[FLESHLING][3][0]; // .25
+	entity->focaly = limbs[FLESHLING][3][1]; // 0
+	entity->focalz = limbs[FLESHLING][3][2]; // 1.5
+	entity->behavior = &actFleshlingLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -259,10 +261,10 @@ void initDenome(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[DENOME][4][0]; // 0
-	entity->focaly = limbs[DENOME][4][1]; // 0
-	entity->focalz = limbs[DENOME][4][2]; // 2
-	entity->behavior = &actDenomeLimb;
+	entity->focalx = limbs[FLESHLING][4][0]; // 0
+	entity->focaly = limbs[FLESHLING][4][1]; // 0
+	entity->focalz = limbs[FLESHLING][4][2]; // 2
+	entity->behavior = &actFleshlingLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -278,10 +280,10 @@ void initDenome(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[DENOME][5][0]; // 0
-	entity->focaly = limbs[DENOME][5][1]; // 0
-	entity->focalz = limbs[DENOME][5][2]; // 2
-	entity->behavior = &actDenomeLimb;
+	entity->focalx = limbs[FLESHLING][5][0]; // 0
+	entity->focaly = limbs[FLESHLING][5][1]; // 0
+	entity->focalz = limbs[FLESHLING][5][2]; // 2
+	entity->behavior = &actFleshlingLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -298,10 +300,10 @@ void initDenome(Entity* my, Stat* myStats)
 	entity->flags[NOUPDATE] = true;
 	entity->flags[INVISIBLE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[DENOME][6][0]; // 2
-	entity->focaly = limbs[DENOME][6][1]; // 0
-	entity->focalz = limbs[DENOME][6][2]; // -.5
-	entity->behavior = &actDenomeLimb;
+	entity->focalx = limbs[FLESHLING][6][0]; // 2
+	entity->focaly = limbs[FLESHLING][6][1]; // 0
+	entity->focalz = limbs[FLESHLING][6][2]; // -.5
+	entity->behavior = &actFleshlingLimb;
 	entity->parent = my->getUID();
 	entity->pitch = .25;
 	node = list_AddNodeLast(&my->children);
@@ -319,10 +321,10 @@ void initDenome(Entity* my, Stat* myStats)
 	entity->flags[NOUPDATE] = true;
 	entity->flags[INVISIBLE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[DENOME][7][0]; // 0
-	entity->focaly = limbs[DENOME][7][1]; // 0
-	entity->focalz = limbs[DENOME][7][2]; // 1.5
-	entity->behavior = &actDenomeLimb;
+	entity->focalx = limbs[FLESHLING][7][0]; // 0
+	entity->focaly = limbs[FLESHLING][7][1]; // 0
+	entity->focalz = limbs[FLESHLING][7][2]; // 1.5
+	entity->behavior = &actFleshlingLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -342,10 +344,10 @@ void initDenome(Entity* my, Stat* myStats)
 	entity->flags[NOUPDATE] = true;
 	entity->flags[INVISIBLE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[DENOME][8][0]; // 0
-	entity->focaly = limbs[DENOME][8][1]; // 0
-	entity->focalz = limbs[DENOME][8][2]; // 4
-	entity->behavior = &actDenomeLimb;
+	entity->focalx = limbs[FLESHLING][8][0]; // 0
+	entity->focaly = limbs[FLESHLING][8][1]; // 0
+	entity->focalz = limbs[FLESHLING][8][2]; // 4
+	entity->behavior = &actFleshlingLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -359,12 +361,12 @@ void initDenome(Entity* my, Stat* myStats)
 	}
 }
 
-void actDenomeLimb(Entity* my)
+void actFleshlingLimb(Entity* my)
 {
 	my->actMonsterLimb(true);
 }
 
-void denomeDie(Entity* my)
+void fleshlingDie(Entity* my)
 {
 	int c;
 	for ( c = 0; c < 6; c++ )
@@ -385,9 +387,9 @@ void denomeDie(Entity* my)
 	return;
 }
 
-#define DENOMEWALKSPEED .13
+#define FLESHLINGWALKSPEED .13
 
-void denomeMoveBodyparts(Entity* my, Stat* myStats, double dist)
+void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 {
 	node_t* node;
 	Entity* entity = nullptr, *entity2 = nullptr;
@@ -497,7 +499,7 @@ void denomeMoveBodyparts(Entity* my, Stat* myStats, double dist)
 		}
 		if ( bodypart == LIMB_HUMANOID_RIGHTLEG || bodypart == LIMB_HUMANOID_LEFTARM )
 		{
-			my->humanoidAnimateWalk(entity, node, bodypart, DENOMEWALKSPEED, dist, 0.4);
+			my->humanoidAnimateWalk(entity, node, bodypart, FLESHLINGWALKSPEED, dist, 0.4);
 		}
 		else if ( bodypart == LIMB_HUMANOID_LEFTLEG || bodypart == LIMB_HUMANOID_RIGHTARM || bodypart == LIMB_HUMANOID_CLOAK )
 		{
@@ -515,7 +517,7 @@ void denomeMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				entity->pitch = entity->fskill[0];
 			}
 
-			my->humanoidAnimateWalk(entity, node, bodypart, DENOMEWALKSPEED, dist, 0.4);
+			my->humanoidAnimateWalk(entity, node, bodypart, FLESHLINGWALKSPEED, dist, 0.4);
 
 			if ( bodypart == LIMB_HUMANOID_CLOAK )
 			{
@@ -612,16 +614,16 @@ void denomeMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					Entity* weapon = (Entity*)weaponNode->element;
 					if ( my->monsterArmbended || (weapon->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT) )
 					{
-						entity->focalx = limbs[DENOME][4][0]; // 0
-						entity->focaly = limbs[DENOME][4][1]; // 0
-						entity->focalz = limbs[DENOME][4][2]; // 2
+						entity->focalx = limbs[FLESHLING][4][0]; // 0
+						entity->focaly = limbs[FLESHLING][4][1]; // 0
+						entity->focalz = limbs[FLESHLING][4][2]; // 2
 						entity->sprite = 930;
 					}
 					else
 					{
-						entity->focalx = limbs[DENOME][4][0] + 1; // 1
-						entity->focaly = limbs[DENOME][4][1]; // 0
-						entity->focalz = limbs[DENOME][4][2] - 1; // 1
+						entity->focalx = limbs[FLESHLING][4][0] + 1; // 1
+						entity->focaly = limbs[FLESHLING][4][1]; // 0
+						entity->focalz = limbs[FLESHLING][4][2] - 1; // 1
 						entity->sprite = 931;
 					}
 				}
@@ -645,16 +647,17 @@ void denomeMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					Entity* shield = (Entity*)shieldNode->element;
 					if ( shield->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT )
 					{
-						entity->focalx = limbs[DENOME][5][0]; // 0
-						entity->focaly = limbs[DENOME][5][1]; // 0
-						entity->focalz = limbs[DENOME][5][2]; // 2
+						entity->focalx = limbs[FLESHLING][5][0]; // 0
+						entity->focaly = limbs[FLESHLING][5][1]; // 0
+						entity->focalz = limbs[FLESHLING][5][2]; // 2
+						entity->sprite = 927;
 						entity->sprite = 927;
 					}
 					else
 					{
-						entity->focalx = limbs[DENOME][5][0] + 1; // 1
-						entity->focaly = limbs[DENOME][5][1]; // 0
-						entity->focalz = limbs[DENOME][5][2] - 1; // 1
+						entity->focalx = limbs[FLESHLING][5][0] + 1; // 1
+						entity->focaly = limbs[FLESHLING][5][1]; // 0
+						entity->focalz = limbs[FLESHLING][5][2] - 1; // 1
 						entity->sprite = 928;
 					}
 				}

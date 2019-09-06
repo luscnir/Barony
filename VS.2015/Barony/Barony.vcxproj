@@ -173,7 +173,7 @@
     <ClCompile Include="..\..\src\monster_cryorune.cpp" />
     <ClCompile Include="..\..\src\monster_crystalgolem.cpp" />
     <ClCompile Include="..\..\src\monster_demon.cpp" />
-    <ClCompile Include="..\..\src\monster_denome.cpp" />
+    <ClCompile Include="..\..\src\monster_fleshling.cpp" />
     <ClCompile Include="..\..\src\monster_devil.cpp" />
     <ClCompile Include="..\..\src\monster_eyeball.cpp" />
     <ClCompile Include="..\..\src\monster_gargoyle.cpp" />
