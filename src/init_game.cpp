@@ -456,6 +456,8 @@ int fmod_result;
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/sanctum.ogg", FMOD_SOFTWARE, NULL, &sanctummusic);
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/CrypticSpiral.ogg", FMOD_SOFTWARE, NULL, &crypticspiralmusic);
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/CorruptedMedicine.ogg", FMOD_SOFTWARE, NULL, &matildasforestmusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/snowtown.ogg", FMOD_SOFTWARE, NULL, &snowtownmusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/catedral.ogg", FMOD_SOFTWARE, NULL, &catedralmusic);
 	if ( PHYSFS_getRealDir("music/gnomishmines.ogg") != NULL )
 	{
 		fmod_result = FMOD_System_CreateStream(fmod_system, "music/gnomishmines.ogg", FMOD_SOFTWARE, NULL, &gnomishminesmusic);
@@ -565,11 +567,29 @@ int fmod_result;
 	}
 	if ( NUMBURGMUSIC > 0)
 	{
-		burgmusic = (FMOD_SOUND * *)malloc(sizeof(FMOD_SOUND*) * NUMBURGMUSIC);
+		burgmusic = (FMOD_SOUND **)malloc(sizeof(FMOD_SOUND*) * NUMBURGMUSIC);
 		for (c = 0; c < NUMBURGMUSIC; c++)
 		{
 			snprintf(tempstr, 1000, "music/burg%02d.ogg", c);
 			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &burgmusic[c]);
+		}
+	}
+	if ( NUMTUNDRAMUSIC > 0)
+	{
+		tundramusic = (FMOD_SOUND **)malloc(sizeof(FMOD_SOUND*) * NUMTUNDRAMUSIC);
+		for (c = 0; c < NUMTUNDRAMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/tundra%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &tundramusic[c]);
+		}
+	}
+	if ( NUMICEDUNGMUSIC > 0)
+	{
+		icedungmusic = (FMOD_SOUND **)malloc(sizeof(FMOD_SOUND*) * NUMICEDUNGMUSIC);
+		for (c = 0; c < NUMICEDUNGMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/freezingdungeon%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &icedungmusic[c]);
 		}
 	}
 	if ( NUMINTROMUSIC > 0 )
@@ -819,6 +839,8 @@ void deinitGame()
 	FMOD_Sound_Release(hamletmusic);
 	FMOD_Sound_Release(crypticspiralmusic);
 	FMOD_Sound_Release(matildasforestmusic);
+	FMOD_Sound_Release(snowtownmusic);
+	FMOD_Sound_Release(catedralmusic);
 	for ( c = 0; c < NUMMINESMUSIC; c++ )
 	{
 		FMOD_Sound_Release(minesmusic[c]);
@@ -898,6 +920,22 @@ void deinitGame()
 	if ( burgmusic )
 	{
 		free(burgmusic);
+	}
+	for (c = 0; c < NUMTUNDRAMUSIC; c++)
+	{
+		FMOD_Sound_Release(tundramusic[c]);
+	}
+	if (tundramusic)
+	{
+		free(tundramusic);
+	}
+	for (c = 0; c < NUMICEDUNGMUSIC; c++)
+	{
+		FMOD_Sound_Release(icedungmusic[c]);
+	}
+	if (icedungmusic)
+	{
+		free(icedungmusic);
 	}
 	for ( c = 0; c < NUMINTROMUSIC; c++ )
 	{

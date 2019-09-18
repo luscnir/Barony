@@ -69,6 +69,11 @@ FMOD_SOUND* hamletmusic = NULL;
 FMOD_SOUND** burgmusic = NULL;
 FMOD_SOUND* crypticspiralmusic = NULL;
 FMOD_SOUND* matildasforestmusic = NULL;
+FMOD_SOUND** tundramusic = NULL;
+FMOD_SOUND* snowtownmusic = NULL;
+FMOD_SOUND** icedungmusic = NULL;
+FMOD_SOUND* catedralmusic = NULL;
+
 bool levelmusicplaying = false;
 
 FMOD_CHANNEL* music_channel = NULL;
@@ -936,6 +941,8 @@ bool physfsSearchMusicToUpdate()
 	themeMusic.push_back("music/hamlet.ogg");
 	themeMusic.push_back("music/CrypticSpiral.ogg");
 	themeMusic.push_back("music/CorruptedMedicine.ogg");
+	themeMusic.push_back("music/snowtown.ogg");
+	themeMusic.push_back("music/catedral.ogg");
 
 	for ( std::vector<std::string>::iterator it = themeMusic.begin(); it != themeMusic.end(); ++it )
 	{
@@ -1083,6 +1090,32 @@ bool physfsSearchMusicToUpdate()
 			}
 		}
 	}
+	for (c = 0; c < NUMTUNDRAMUSIC; c++)
+	{
+		snprintf(tempstr, 1000, "music/tundra%02d.ogg", c);
+		if (PHYSFS_getRealDir(tempstr) != NULL)
+		{
+			std::string musicDir = PHYSFS_getRealDir(tempstr);
+			if (musicDir.compare("./") != 0)
+			{
+				printlog("[PhysFS]: Found modified music in music/ directory, reloading music files...");
+				return true;
+			}
+		}
+	}
+	for (c = 0; c < NUMICEDUNGMUSIC; c++)
+	{
+		snprintf(tempstr, 1000, "music/freezingdungeon%02d.ogg", c);
+		if (PHYSFS_getRealDir(tempstr) != NULL)
+		{
+			std::string musicDir = PHYSFS_getRealDir(tempstr);
+			if (musicDir.compare("./") != 0)
+			{
+				printlog("[PhysFS]: Found modified music in music/ directory, reloading music files...");
+				return true;
+			}
+		}
+	}
 	for ( c = 0; c < NUMINTROMUSIC; c++ )
 	{
 		if ( c == 0 )
@@ -1132,6 +1165,8 @@ void physfsReloadMusic(bool &introMusicChanged, bool reloadAll)
 	themeMusic.push_back("music/hamlet.ogg");
 	themeMusic.push_back("music/CrypticSpiral.ogg");
 	themeMusic.push_back("music/CorruptedMedicine.ogg");
+	themeMusic.push_back("music/snowtown.ogg");
+	themeMusic.push_back("music/catedral.ogg");
 
 	int index = 0;
 #ifdef USE_OPENAL
@@ -1293,6 +1328,20 @@ void physfsReloadMusic(bool &introMusicChanged, bool reloadAll)
 							FMOD_Sound_Release(matildasforestmusic);
 						}
 						fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &matildasforestmusic);
+						break;
+					case 20:
+						if (snowtownmusic)
+						{
+							FMOD_Sound_Release(snowtownmusic);
+						}
+						fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &snowtownmusic);
+						break;
+					case 21:
+						if (catedralmusic)
+						{
+							FMOD_Sound_Release(catedralmusic);
+						}
+						fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &catedralmusic);
 						break;
 					default:
 						break;
@@ -1486,7 +1535,45 @@ void physfsReloadMusic(bool &introMusicChanged, bool reloadAll)
 			{
 				musicDir.append(PHYSFS_getDirSeparator()).append(tempstr);
 				printlog("[PhysFS]: Reloading music file %s...", tempstr);
-				music = citadelmusic;
+				music = burgmusic;
+				if (music)
+				{
+					FMOD_Sound_Release(music[c]);
+					fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &music[c]);
+				}
+			}
+		}
+	}
+	for (c = 0; c < NUMTUNDRAMUSIC; c++)
+	{
+		snprintf(tempstr, 1000, "music/tundra%02d.ogg", c);
+		if (PHYSFS_getRealDir(tempstr) != NULL)
+		{
+			std::string musicDir = PHYSFS_getRealDir(tempstr);
+			if (musicDir.compare("./") != 0 || reloadAll)
+			{
+				musicDir.append(PHYSFS_getDirSeparator()).append(tempstr);
+				printlog("[PhysFS]: Reloading music file %s...", tempstr);
+				music = tundramusic;
+				if (music)
+				{
+					FMOD_Sound_Release(music[c]);
+					fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &music[c]);
+				}
+			}
+		}
+	}
+	for (c = 0; c < NUMICEDUNGMUSIC; c++)
+	{
+		snprintf(tempstr, 1000, "music/freezingdungeon%02d.ogg", c);
+		if (PHYSFS_getRealDir(tempstr) != NULL)
+		{
+			std::string musicDir = PHYSFS_getRealDir(tempstr);
+			if (musicDir.compare("./") != 0 || reloadAll)
+			{
+				musicDir.append(PHYSFS_getDirSeparator()).append(tempstr);
+				printlog("[PhysFS]: Reloading music file %s...", tempstr);
+				music = icedungmusic;
 				if (music)
 				{
 					FMOD_Sound_Release(music[c]);

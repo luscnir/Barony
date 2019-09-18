@@ -380,6 +380,7 @@ void handleLevelMusic()
 	bool activeminotaur = false;
 	bool herxaround = false;
 	bool magisteraround = false;
+	bool fallenaround = false;
 	node_t* node;
 	for ( node = map.creatures->first; node != nullptr; node = node->next )
 	{
@@ -404,6 +405,11 @@ void handleLevelMusic()
 			magisteraround = true;
 			break;
 		}
+		else if (entity->sprite == 951)     // fallen lich body
+		{
+			fallenaround = true;
+			break;
+		}
 	}
 
 	FMOD_BOOL playing = true;
@@ -416,7 +422,7 @@ void handleLevelMusic()
 
 	if ( (!levelmusicplaying || !playing || olddarkmap != darkmap) && (!combat || !strcmp(map.name, "Hell Boss")) 
 		&& !inshop 
-		&& (!activeminotaur || !strcmp(map.name, "Hell Boss")) && !herxaround && !devilaround && !magisteraround )
+		&& (!activeminotaur || !strcmp(map.name, "Hell Boss")) && !herxaround && !devilaround && !magisteraround && !fallenaround )
 	{
 		if ( !strncmp(map.name, "The Mines", 9) )     // the mines
 		{
@@ -629,6 +635,41 @@ void handleLevelMusic()
 		{
 			playmusic( matildasforestmusic, true, true, true );
 		}
+		else if (!strncmp(map.name, "The Tundra", 11))     // the Tundra
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMTUNDRAMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMTUNDRAMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(tundramusic[currenttrack], false, true, true);
+		}
+		else if ( !strcmp( map.name, "Freezing Dungeon" ) )     // Freezing dungeon
+		{//*
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMICEDUNGMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMICEDUNGMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(icedungmusic[currenttrack], false, true, true);
+		}//*/
+		else if (!strcmp(map.name, "Snow town"))	//snow town
+		{
+			playmusic( snowtownmusic, true, true, true);
+		}
+		else if (!strcmp(map.name, "Catedral"))		//catedral
+		{
+			playmusic( catedralmusic, true, true, true);
+		}
+
 		else
 		{
 			playmusic(intermissionmusic, true, true, true );
@@ -692,6 +733,8 @@ void handleLevelMusic()
 		fadein_increment = default_fadein_increment * 2;
 		fadeout_increment = default_fadeout_increment * 2;
 	}
+	//else if ( (!musicplaying || !playing) && fallenaround) TODO: fallen_lich music
+
 	else if ( (!combatmusicplaying || !playing) 
 		&& !herxaround 
 		&& !activeminotaur 
@@ -727,9 +770,17 @@ void handleLevelMusic()
 		{
 			playmusic(citadelmusic[0], true, true, true);
 		}
-		else if (!strncmp(map.name, "The Burg", 9) )	// the burg
+		else if ( !strncmp(map.name, "The Burg", 9) )	// the burg
 		{
 			playmusic(burgmusic[0], true, true, true);
+		}
+		else if ( !strncmp(map.name, "The Tundra", 11) )	// the tundra
+		{
+			playmusic(tundramusic[0], true, true, true);
+		}
+		else if ( !strcmp(map.name, "Freezing Dungeon") )	// Freezing Dungeon
+		{
+			playmusic(icedungmusic[0], true, true, true);
 		}
 		else
 		{

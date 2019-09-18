@@ -1,14 +1,11 @@
-﻿  monster_fleshling.cpp
+﻿  init_game.cpp
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005:  'PATH_MAX': macro redefinition
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message :  see previous definition of 'PATH_MAX'
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(61,54): warning C4244:  'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(61,47): warning C4244:  'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(710,58): warning C4805:  '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(759,58): warning C4805:  '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(853,58): warning C4805:  '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(385,2): warning C4091:  'typedef ': ignored on left of 'spell_t' when no variable is declared
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init_game.cpp(301,18): warning C4018:  '<': signed/unsigned mismatch
   Generating code
-  1 of 4593 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  4 of 4593 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    281 functions had inline decision re-evaluated but remain unchanged
+    297 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   barony.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\barony_test.exe
