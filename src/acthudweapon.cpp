@@ -119,14 +119,23 @@ void actHudArm(Entity* my)
 		{
 			my->sprite = 802;
 		}
-		else if (stats[clientnum]->gloves->type == ABYSSAL_KNUCKLES)
+		else if ( stats[clientnum]->gloves->type == ABYSSAL_KNUCKLES )
 		{
 			my->sprite = 823;
 		}
-		else if (stats[clientnum]->gloves->type == ICE_GLOVES)
+		else if ( stats[clientnum]->gloves->type == ICE_GLOVES ) 
 		{
 			my->sprite = 955;
 		}
+
+		//handle new gloves position
+		if ( stats[clientnum]->gloves->type == ICE_GLOVES || stats[clientnum]->gloves->type == ABYSSAL_KNUCKLES )
+		{
+			my->x -= 0.5;
+			my->y -= 0.75;
+			my->z -= 0.45;
+		}
+
 		if ( stats[clientnum]->weapon == nullptr )
 		{
 			my->scalex = 0.5f;

@@ -1591,11 +1591,6 @@ void initClass(int player)
 			item2 = itemPickup(player, item);
 			free(item);
 
-			// ring of conflict
-			item = newItem(RING_CONFLICT, DECREPIT, 0, 1, 0, false, NULL);
-			item2 = itemPickup(player, item);
-			free(item);
-
 			// tentacle pie
 			item = newItem(FOOD_TENTACLEPIE, EXCELLENT, 0, 2, 0, true, NULL);
 			item2 = itemPickup(player, item);
