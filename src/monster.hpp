@@ -286,7 +286,8 @@ static std::vector<std::vector<int>> classStatGrowth =
 	{	5,	5,	3,	2,	2,	1 }, // NINJA 11
 	{	4,	2,	5,	3,	2,	2 }, // MONK 12
 
-	{	2,	3,	3,	5,	6,	5 }, // DECIVER 21
+	{	3,	6,	5,	2,	6,	2 }, // SHARPSHOOTER 21
+	{	2,	3,	3,	5,	6,	5 }, // LUNATIC 22
 
 	{	3,	2,	4,	6,	4,	4 }, // CONJURER 13
 	{	3,	3,	1,	6,	6,	3 }, // ACCURSED 14

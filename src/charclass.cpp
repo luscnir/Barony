@@ -1478,9 +1478,140 @@ void initClass(int player)
 			free(item);
 		}
 	}
-	// modded classes
+	// Wicked Rendition classes
 
-	// deciver
+	//sharpshooter
+	else if (client_classes[player] == CLASS_SHARPSHOOTER)
+	{
+		// attributes
+		stats[player]->PER += 1;
+		stats[player]->DEX += 1;
+		stats[player]->CHR -= 1;
+		stats[player]->INT -= 1;
+
+		stats[player]->MAXHP += 5;
+		stats[player]->HP += 5;
+		stats[player]->MAXMP += 5;
+		stats[player]->MP += 5;
+
+		// skills
+		stats[player]->PROFICIENCIES[PRO_AXE] = 5;
+		stats[player]->PROFICIENCIES[PRO_RANGED] = 65;
+		stats[player]->PROFICIENCIES[PRO_APPRAISAL] = 20;
+		stats[player]->PROFICIENCIES[PRO_TRADING] = 10;
+		stats[player]->PROFICIENCIES[PRO_ALCHEMY] = 30;
+		stats[player]->PROFICIENCIES[PRO_STEALTH] = 40;
+
+		// makeshift bow
+		item = newItem(MAKESHIFT_BOW, EXCELLENT, 1, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			hotbar[0].item = item2->uid;
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		//  glasses
+		item = newItem(TOOL_GLASSES, SERVICABLE, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// backpack
+		item = newItem(CLOAK_BACKPACK, SERVICABLE, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// boots of lightness
+		item = newItem(LEATHER_BOOTS_SPEED, DECREPIT, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// leather breastpiece
+		item = newItem(LEATHER_BREASTPIECE, WORN, 0, 1, 2, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		if (player == clientnum)
+		{
+			// shortbow
+			item = newItem(SHORTBOW, DECREPIT, 3, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[1].item = item2->uid;
+			free(item);
+
+			// stone axe
+			item = newItem(STONE_AXE, WORN, 1, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[1].item = item2->uid;
+			free(item);
+
+			// healing potion
+			item = newItem(POTION_HEALING, SERVICABLE, 1, 3, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[2].item = item2->uid;
+			free(item);
+
+			// beartrap
+			item = newItem(TOOL_BEARTRAP, EXCELLENT, 0, 3, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[3].item = item2->uid;
+			free(item);
+
+			// ring of magic resistance
+			item = newItem(RING_MAGICRESISTANCE, DECREPIT, 0, 1, 0, false, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// banana
+			item = newItem(FOOD_BANANA, EXCELLENT, 0, 2, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// salmon
+			item = newItem(FOOD_SALMON, EXCELLENT, 0, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+		}
+	}
+
+	// lunatic
 	else if (client_classes[player] == CLASS_LUNATIC)
 	{
 		// attributes

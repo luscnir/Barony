@@ -1,47 +1,55 @@
 ﻿  acthudweapon.cpp
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005:  'PATH_MAX': macro redefinition
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message :  see previous definition of 'PATH_MAX'
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(385,2): warning C4091:  'typedef ': ignored on left of 'spell_t' when no variable is declared
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(362,53): warning C4244:  'argument': conversion from 'double' to 'const _Ty', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(362,53): warning C4244:         with
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(362,53): warning C4244:         [
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(362,53): warning C4244:             _Ty=int
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(362,53): warning C4244:         ]
+  act_HandMagic.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005:  'PATH_MAX': macro redefinition (compiling source file ..\..\src\acthudweapon.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message :  see previous definition of 'PATH_MAX' (compiling source file ..\..\src\acthudweapon.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005:  'PATH_MAX': macro redefinition (compiling source file ..\..\src\magic\act_HandMagic.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message :  see previous definition of 'PATH_MAX' (compiling source file ..\..\src\magic\act_HandMagic.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(385,2): warning C4091:  'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\acthudweapon.cpp)
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(363,53): warning C4244:  'argument': conversion from 'double' to 'const _Ty', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(363,53): warning C4244:         with
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(363,53): warning C4244:         [
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(363,53): warning C4244:             _Ty=int
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(363,53): warning C4244:         ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1145,41): warning C4244:  '=': conversion from 'const _Ty' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1145,41): warning C4244:         with
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1145,41): warning C4244:         [
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1145,41): warning C4244:             _Ty=real_t
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1145,41): warning C4244:         ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1358,41): warning C4244:  '=': conversion from 'const _Ty' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1358,41): warning C4244:         with
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1358,41): warning C4244:         [
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1358,41): warning C4244:             _Ty=real_t
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1358,41): warning C4244:         ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1476,41): warning C4244:  '=': conversion from 'const _Ty' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1476,41): warning C4244:         with
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1476,41): warning C4244:         [
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1476,41): warning C4244:             _Ty=real_t
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1476,41): warning C4244:         ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(285,11): warning C4101:  'type': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1735,48): warning C4244:  'argument': conversion from 'double' to 'const _Ty', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1735,48): warning C4244:         with
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1735,48): warning C4244:         [
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1735,48): warning C4244:             _Ty=int
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1735,48): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(364,53): warning C4244:  'argument': conversion from 'double' to 'const _Ty', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(364,53): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(364,53): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(364,53): warning C4244:             _Ty=int
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(364,53): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(385,2): warning C4091:  'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\magic\act_HandMagic.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1146,41): warning C4244:  '=': conversion from 'const _Ty' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1146,41): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1146,41): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1146,41): warning C4244:             _Ty=real_t
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1146,41): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1359,41): warning C4244:  '=': conversion from 'const _Ty' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1359,41): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1359,41): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1359,41): warning C4244:             _Ty=real_t
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1359,41): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1477,41): warning C4244:  '=': conversion from 'const _Ty' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1477,41): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1477,41): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1477,41): warning C4244:             _Ty=real_t
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1477,41): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(286,11): warning C4101:  'type': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\act_HandMagic.cpp(103,115): warning C4244:  '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1736,48): warning C4244:  'argument': conversion from 'double' to 'const _Ty', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1736,48): warning C4244:         with
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1736,48): warning C4244:         [
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1736,48): warning C4244:             _Ty=int
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1736,48): warning C4244:         ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1792,6): warning C4805:  '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1802,6): warning C4805:  '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1737,48): warning C4244:  'argument': conversion from 'double' to 'const _Ty', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1737,48): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1737,48): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1737,48): warning C4244:             _Ty=int
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1737,48): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1793,6): warning C4805:  '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\acthudweapon.cpp(1803,6): warning C4805:  '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\act_HandMagic.cpp(387,60): warning C4305:  '+=': truncation from 'double' to 'float'
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\act_HandMagic.cpp(388,72): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\act_HandMagic.cpp(389,72): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
   Generating code
-  2 of 4593 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 4593 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     281 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
