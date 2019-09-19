@@ -1556,7 +1556,20 @@ void initClass(int player)
 		}
 
 		// leather breastpiece
-		item = newItem(LEATHER_BREASTPIECE, WORN, 0, 1, 2, true, NULL);
+		item = newItem(LEATHER_BREASTPIECE, WORN, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// ring of magic resist
+		item = newItem(RING_MAGICRESISTANCE, SERVICABLE, 0, 1, 0, false, NULL);
 		if (player == clientnum)
 		{
 			item2 = itemPickup(player, item);
@@ -1579,24 +1592,19 @@ void initClass(int player)
 			// stone axe
 			item = newItem(STONE_AXE, WORN, 1, 1, 0, true, NULL);
 			item2 = itemPickup(player, item);
-			hotbar[1].item = item2->uid;
+			hotbar[2].item = item2->uid;
 			free(item);
 
 			// healing potion
 			item = newItem(POTION_HEALING, SERVICABLE, 1, 3, 0, true, NULL);
 			item2 = itemPickup(player, item);
-			hotbar[2].item = item2->uid;
+			hotbar[3].item = item2->uid;
 			free(item);
 
 			// beartrap
 			item = newItem(TOOL_BEARTRAP, EXCELLENT, 0, 3, 0, true, NULL);
 			item2 = itemPickup(player, item);
-			hotbar[3].item = item2->uid;
-			free(item);
-
-			// ring of magic resistance
-			item = newItem(RING_MAGICRESISTANCE, DECREPIT, 0, 1, 0, false, NULL);
-			item2 = itemPickup(player, item);
+			hotbar[4].item = item2->uid;
 			free(item);
 
 			// banana

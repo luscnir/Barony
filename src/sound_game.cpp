@@ -635,7 +635,7 @@ void handleLevelMusic()
 		{
 			playmusic( matildasforestmusic, true, true, true );
 		}
-		else if (!strncmp(map.name, "The Tundra", 11))     // the Tundra
+		else if ( !strncmp (map.name, "The Tundra", 11 ) )     // the Tundra
 		{
 			if (!playing)
 			{
@@ -649,7 +649,7 @@ void handleLevelMusic()
 			playmusic(tundramusic[currenttrack], false, true, true);
 		}
 		else if ( !strcmp( map.name, "Freezing Dungeon" ) )     // Freezing dungeon
-		{//*
+		{
 			if (!playing)
 			{
 				currenttrack = 1 + rand() % (NUMICEDUNGMUSIC - 1);
@@ -660,14 +660,14 @@ void handleLevelMusic()
 				currenttrack = 1;
 			}
 			playmusic(icedungmusic[currenttrack], false, true, true);
-		}//*/
-		else if (!strcmp(map.name, "Snow town"))	//snow town
+		}
+		else if ( !strcmp(map.name, "Snow town") )	//snow town
 		{
 			playmusic( snowtownmusic, true, true, true);
 		}
-		else if (!strcmp(map.name, "Catedral"))		//catedral
+		else if ( !strcmp(map.name, "Catedral") )		//catedral
 		{
-			playmusic( catedralmusic, true, true, true);
+			playmusic( catedralmusic, true, true, true );
 		}
 
 		else
@@ -774,7 +774,7 @@ void handleLevelMusic()
 		{
 			playmusic(burgmusic[0], true, true, true);
 		}
-		else if ( !strncmp(map.name, "The Tundra", 11) )	// the tundra
+		else if ( !strncmp(map.name, "The Tundra", 11) || !strcmp(map.name, "Snow town") )	// the tundra
 		{
 			playmusic(tundramusic[0], true, true, true);
 		}
