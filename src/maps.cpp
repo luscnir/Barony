@@ -317,7 +317,7 @@ int monsterCurve(int level)
 	}
 
 	//Moded areas:
-	else if (!strncmp(map.name, "The Burg", 9))
+	else if (!strncmp(map.name, "The Burg", 9))		//burg
 	{
 		switch (rand() % 10)
 		{
@@ -367,6 +367,27 @@ int monsterCurve(int level)
 			return CRYORUNE;
 		case 19:
 			return TROLL;
+		}
+	}
+	else if (!strncmp(map.name, "The Catacombs", 10))	// catacombs
+	{
+		switch (rand() % 10)
+		{
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+				return FLESHLING;
+			case 4:
+			case 5:
+			case 6:
+				return EYEBALL;
+			case 7:
+				return COCKROACH;
+			case 8:
+				return VAMPIRE;
+			case 9:
+				return DEMON;
 		}
 	}
 	return SKELETON; // basic monster
@@ -561,6 +582,10 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 			{
 				secretlevelexit = 11;
 			}
+		}
+		else if (currentlevel == 43)		// catacombs
+		{
+			secretlevelexit = 12;
 		}
 	}
 
@@ -934,6 +959,9 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 						break;
 					case 11:
 						strcpy(secretmapname, "catedralentrance");
+						break;
+					case 12:
+						strcpy(secretmapname, "catacombssecret");
 						break;
 					default:
 						break;
@@ -3437,7 +3465,7 @@ void assignActions(map_t* map)
 						entity->focalx = limbs[VAMPIRE][0][0]; // 0
 						entity->focaly = limbs[VAMPIRE][0][1]; // 0
 						entity->focalz = limbs[VAMPIRE][0][2]; // -1.5
-						if ( !strncmp(map->name, "The Ruins", 9) )
+						if ( !strncmp(map->name, "The Ruins", 9) || !strncmp(map->name, "The Catacombs", 9) )
 						{
 							if ( myStats )
 							{
