@@ -412,6 +412,7 @@ public:
 	void applyLockpick(int player, Entity& entity);
 	void applyOrb(int player, ItemType type, Entity& entity);
 	void applyEmptyPotion(int player, Entity& entity);
+	//void applySymbol(int player, ItemType type, Entity& entity);
 
 	//-----ITEM COMPARISON FUNCTIONS-----
 	/*

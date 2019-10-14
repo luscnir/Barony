@@ -665,7 +665,7 @@ void handleLevelMusic()
 		{
 			playmusic( snowtownmusic, true, true, true);
 		}
-		else if ( !strcmp(map.name, "Catedral") )		//catedral
+		else if ( !strcmp(map.name, "Catedral") )	//catedral
 		{
 			playmusic( catedralmusic, true, true, true );
 		}

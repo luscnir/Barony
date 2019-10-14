@@ -3380,10 +3380,18 @@ void Item::apply(int player, Entity* entity)
 		{
 			applyEmptyPotion(player, *entity);
 		}
+		if ( type >= SYMBOL_RAGE && type <= SYMBOL_HATRED )
+		{
+			applyOrb(player, type, *entity);
+		}
 		return;
 	}
 
 	if ( type >= ARTIFACT_ORB_BLUE && type <= ARTIFACT_ORB_GREEN )
+	{
+		applyOrb(player, type, *entity);
+	}
+	if ( type >= SYMBOL_RAGE && type <= SYMBOL_HATRED)
 	{
 		applyOrb(player, type, *entity);
 	}

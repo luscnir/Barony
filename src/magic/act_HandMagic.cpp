@@ -521,7 +521,7 @@ void actRightHandMagic(Entity* my)
 		}
 		else if (stats[clientnum]->gloves->type == ICE_GLOVES)
 		{
-			my->sprite = 997;
+			my->sprite = 1002;
 		}
 	}
 

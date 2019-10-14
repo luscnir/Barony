@@ -1352,7 +1352,17 @@ char tileEditorNameStrings[NUM_EDITOR_TILES][44] =
 	"SkyWickedD.png",
 	"SkyWickedE.png",
 	"SkyWickedF.png",
-	"", "", "", "", "", "", ""
+	"Necrohousetiles.png",
+	"NecroHouseWall.png",
+	"NecroSquareTiles.png",
+	"NecroPlankCeiling.png",
+	"NecroDirt.png",
+	"DeepSeaSquare.png",
+	"AbyssColumnsAlcove.png",
+	"AbyssColumns.png",
+	"ChloroshSeed.png", 
+	"ChloroshLeaves.png", 
+	"", "", "", "", ""
 };
 
 int canWearEquip(Entity* entity, int category)

@@ -390,6 +390,27 @@ int monsterCurve(int level)
 				return DEMON;
 		}
 	}
+	else if (!strncmp(map.name, "The Abyss", 10))	// abyss
+	{
+		switch (rand() % 10)
+		{
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+				return CHOLOROSH;
+			case 4:
+			case 5:
+			case 6:
+				return INSECTOID;
+			case 7:
+				return EYEBALL;
+			case 8:
+				return GARGOYLE;
+			case 9:
+				return COCKATRICE;
+		}
+	}
 	return SKELETON; // basic monster
 }
 
@@ -556,11 +577,11 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 		{
 			secretlevelexit = 4;
 		}
-		else if ( currentlevel == 50 )	//crystal caves
+		else if ( currentlevel == 49 )	//crystal caves
 		{
 			secretlevelexit = 5;
 		}
-		else if ( currentlevel == 55 )	//citadel
+		else if ( currentlevel == 54 )	//citadel
 		{
 			secretlevelexit = 6;
 		}
@@ -586,6 +607,18 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 		else if (currentlevel == 43)		// catacombs
 		{
 			secretlevelexit = 12;
+		}
+		else if (currentlevel == 22 || currentlevel == 28)		// catacombs entrance (side path)
+		{
+			secretlevelexit = 13;
+		}
+		else if (currentlevel == 59)		// abyss early
+		{
+			secretlevelexit = 14;
+		}
+		else if (currentlevel == 61)		// abyss mid
+		{
+			secretlevelexit = 15;
 		}
 	}
 
@@ -962,6 +995,15 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 						break;
 					case 12:
 						strcpy(secretmapname, "catacombssecret");
+						break;
+					case 13:
+						strcpy(secretmapname, "catacombspath");
+						break;
+					case 14:
+						strcpy(secretmapname, "abysssecretearly");
+						break;
+					case 15:
+						strcpy(secretmapname, "abysssecretmid");
 						break;
 					default:
 						break;
@@ -5020,7 +5062,7 @@ void assignActions(map_t* map)
 				tempNode->size = sizeof(Entity*);
 				break;
 			}
-			// symbol pedestal TODO: this is copypaste from pedestal, make it recive symbols instead of orbs.
+			// symbol pedestal
 			case 139:
 			{
 				entity->sizex = 4;
@@ -5037,7 +5079,7 @@ void assignActions(map_t* map)
 					entity->pedestalHasOrb = entity->pedestalOrbType;
 				}
 				//entity->pedestalInvertedPower // set in editor
-				entity->pedestalInit = 0;
+				//entity->pedestalOrbInit = 0;
 				//entity->pedestalInGround = 0; // set in editor
 				//entity->pedestalLockOrb // set in editor
 				if (entity->pedestalInGround)
@@ -5046,13 +5088,13 @@ void assignActions(map_t* map)
 					entity->flags[PASSABLE] = true;
 				}
 
-				childEntity = newEntity(602 + entity->pedestalOrbType - 1, 0, map->entities, nullptr); //floating symbols(rage,cruelty,hatred)
+				childEntity = newEntity(887 + entity->pedestalOrbType - 1, 0, map->entities, nullptr); //floating symbols(rage,cruelty,hatred)
 				childEntity->parent = entity->getUID();
 				childEntity->behavior = &actPedestalOrb;
 				childEntity->x = entity->x;
 				childEntity->y = entity->y;
 				TileEntityList.addEntity(*childEntity);
-				childEntity->z = -2;
+				childEntity->z = -3;
 				childEntity->sizex = 2;
 				childEntity->sizey = 2;
 				childEntity->flags[UNCLICKABLE] = true;
@@ -5061,9 +5103,10 @@ void assignActions(map_t* map)
 				if (entity->pedestalInGround)
 				{
 					childEntity->z += 11;
-					childEntity->orbStartZ = -2;
+					childEntity->orbStartZ = -3;
 				}
 				childEntity->pedestalOrbInit();
+				//childEntity->pedestalSymbolInit();
 
 				node_t* tempNode = list_AddNodeLast(&entity->children);
 				tempNode->element = childEntity; // add the node to the children list.
