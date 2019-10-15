@@ -215,7 +215,7 @@ int monsterCurve(int level)
 	}
 	else if ( !strncmp(map.name, "Caves", 5) )
 	{
-		if ( currentlevel <= 26 )
+		if ( currentlevel <= 46 )
 		{
 			switch ( rand() % 15 )
 			{
@@ -500,7 +500,7 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 	prng_seed_bytes(&mapseed, sizeof(mapseed));
 
 	// determine whether shop level or not
-	if ( prng_get_uint() % 2 && currentlevel > 1 && strncmp(map.name, "Underworld", 10) && strncmp(map.name, "Hell", 4) )
+	if ( prng_get_uint() % 2 && currentlevel > 1 && strncmp(map.name, "Underworld", 10) && strncmp(map.name, "Hell", 4) && strncmp(map.name, "Abyss", 10) )
 	{
 		shoplevel = true;
 	}
@@ -513,8 +513,8 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 			minotaurlevel = 1;
 		}
 	}
-	else if ( (currentlevel < 25 && (currentlevel % LENGTH_OF_LEVEL_REGION == 2 || currentlevel % LENGTH_OF_LEVEL_REGION == 3))
-		|| (currentlevel > 25 && (currentlevel % LENGTH_OF_LEVEL_REGION == 2 || currentlevel % LENGTH_OF_LEVEL_REGION == 4)) )
+	else if ( (currentlevel < 45 && (currentlevel % LENGTH_OF_LEVEL_REGION == 2 || currentlevel % LENGTH_OF_LEVEL_REGION == 3))
+		|| (currentlevel > 45 && (currentlevel % LENGTH_OF_LEVEL_REGION == 2 || currentlevel % LENGTH_OF_LEVEL_REGION == 4)) )
 	{
 		if ( prng_get_uint() % 2 && (svFlags & SV_FLAG_MINOTAURS) )
 		{

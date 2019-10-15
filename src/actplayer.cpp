@@ -860,7 +860,7 @@ void actPlayer(Entity* my)
 							messagePlayerColor(clientnum, color, language[537]);
 							messagePlayerColor(clientnum, color, language[74 + speech]);
 						}
-						else
+						else if ( currentlevel > 45 && currentlevel < 57 )
 						{
 							int speech = 1 + rand() % 3;
 							switch ( speech )
@@ -882,6 +882,10 @@ void actPlayer(Entity* my)
 									break;
 							}
 							my->playerLevelEntrySpeech = speech;
+						}
+						else
+						{
+							messagePlayerColor(clientnum, color, language[3768]);
 						}
 					}
 				}

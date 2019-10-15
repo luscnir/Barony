@@ -290,6 +290,9 @@ bool spellEffectDominate(Entity& my, spellElement_t& element, Entity& caster, En
 		|| (hitstats->type == VAMPIRE && !strncmp(hitstats->name, "Bram Kindly", 11))
 		|| (hitstats->type == COCKATRICE && !strncmp(map.name, "Cockatrice Lair", 15))
 		|| hitstats->type == MATILDA
+		|| hitstats->type == ICEDEMON
+		|| hitstats->type == ABOMINATION
+		|| hitstats->type == LICH_FALLEN
 		)
 	{
 		Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
@@ -1251,6 +1254,8 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent)
 
 	if ( targetStats->type == LICH || targetStats->type == SHOPKEEPER || targetStats->type == DEVIL
 		|| targetStats->type == MINOTAUR || targetStats->type == LICH_FIRE || targetStats->type == LICH_ICE
+		|| targetStats->type == MATILDA || targetStats->type == ICEDEMON || targetStats->type == ABOMINATION
+		|| targetStats->type == LICH_FALLEN
 		|| (target->behavior == &actMonster && target->monsterAllySummonRank != 0) )
 	{
 		if ( parent && parent->behavior == &actPlayer )
@@ -1268,6 +1273,8 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent)
 		while ( monsterSummonType == LICH || monsterSummonType == SHOPKEEPER || monsterSummonType == DEVIL
 			|| monsterSummonType == MIMIC || monsterSummonType == BUGBEAR || monsterSummonType == OCTOPUS
 			|| monsterSummonType == MINOTAUR || monsterSummonType == LICH_FIRE || monsterSummonType == LICH_ICE
+			|| monsterSummonType == MATILDA || monsterSummonType == ICEDEMON || monsterSummonType == ABOMINATION
+			|| monsterSummonType == LICH_FALLEN
 			|| monsterSummonType == NOTHING || monsterSummonType == targetStats->type || monsterSummonType == HUMAN
 			|| (targetStats->leader_uid != 0 && monsterSummonType == SHADOW) || monsterSummonType == MATILDA )
 		{

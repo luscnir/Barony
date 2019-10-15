@@ -770,7 +770,7 @@ void handleLevelMusic()
 		{
 			playmusic(citadelmusic[0], true, true, true);
 		}
-		else if ( !strncmp(map.name, "The Burg", 9) )	// the burg
+		else if ( !strncmp(map.name, "The Burg", 9) || !strcmp(map.name, "Cryptic Spiral") )	// the burg
 		{
 			playmusic(burgmusic[0], true, true, true);
 		}

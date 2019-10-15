@@ -7944,9 +7944,9 @@ void handleMainMenu(bool mode)
 					steamAchievement("BARONY_ACH_IN_GREATER_NUMBERS");
 				}
 
-				if ( (victory == 1 && currentlevel >= 20)
-					|| (victory == 2 && currentlevel >= 24)
-					|| (victory == 3 && currentlevel >= 35) )
+				if ( (victory == 1 && currentlevel >= 32)
+					|| (victory == 2 && currentlevel >= 36)
+					|| (victory == 3 && currentlevel >= 55) )
 				{
 					if ( client_classes[clientnum] == CLASS_ACCURSED )
 					{
@@ -8040,9 +8040,9 @@ void handleMainMenu(bool mode)
 			if ( victory )
 			{
 				// conduct achievements
-				if ( (victory == 1 && currentlevel >= 20)
-					|| (victory == 2 && currentlevel >= 24)
-					|| (victory == 3 && currentlevel >= 35) )
+				if ( (victory == 1 && currentlevel >= 32)
+					|| (victory == 2 && currentlevel >= 36)
+					|| (victory == 3 && currentlevel >= 55) )
 				{
 					if ( conductPenniless )
 					{
@@ -8069,7 +8069,7 @@ void handleMainMenu(bool mode)
 
 				if ( victory == 1 )
 				{
-					if ( currentlevel >= 20 )
+					if ( currentlevel >= 32 )
 					{
 						if ( conductGameChallenges[CONDUCT_HARDCORE] )
 						{
@@ -8079,7 +8079,7 @@ void handleMainMenu(bool mode)
 				}
 				else if ( victory == 2 )
 				{
-					if ( currentlevel >= 24 )
+					if ( currentlevel >= 36 )
 					{
 						if ( conductGameChallenges[CONDUCT_HARDCORE] )
 						{
@@ -8089,7 +8089,7 @@ void handleMainMenu(bool mode)
 				}
 				else if ( victory == 3 )
 				{
-					if ( currentlevel >= 35 )
+					if ( currentlevel >= 55 )
 					{
 						if ( conductGameChallenges[CONDUCT_BRAWLER] )
 						{

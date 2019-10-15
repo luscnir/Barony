@@ -68,6 +68,17 @@ void initMinotaur(Entity* my, Stat* myStats)
 				myStats->EFFECTS[EFF_VAMPIRICAURA] = true;
 				myStats->EFFECTS_TIMERS[EFF_VAMPIRICAURA] = -1;
 			}
+			else if ( currentlevel >= 58 )
+			{
+				strcpy(myStats->name, "Revenant Minotaur");
+				myStats->HP += 500;
+				myStats->MAXHP += 500;
+				myStats->STR = 50;
+				myStats->DEX = 30;
+				myStats->CON = 30;
+				myStats->EFFECTS[EFF_MAGICRESIST] = true;
+				myStats->EFFECTS_TIMERS[EFF_MAGICRESIST] = -1;
+			}
 
 
 			// random effects
@@ -638,8 +649,8 @@ void actMinotaurTimer(Entity* my)
 	node_t* node;
 
 	MINOTAURTIMER_LIFE++;
-	if (( (currentlevel < 25 && MINOTAURTIMER_LIFE == TICKS_PER_SECOND * 120)
-			|| (currentlevel >= 25 && MINOTAURTIMER_LIFE == TICKS_PER_SECOND * 180)
+	if (( (currentlevel < 45 && MINOTAURTIMER_LIFE == TICKS_PER_SECOND * 120)
+			|| (currentlevel >= 45 && MINOTAURTIMER_LIFE == TICKS_PER_SECOND * 180)
 		)
 		&& rand() % 5 == 0 )   // two minutes if currentlevel < 25, else 3 minutes.
 	{
@@ -686,10 +697,10 @@ void actMinotaurTimer(Entity* my)
 			}
 		}
 	}
-	else if (( (currentlevel < 25 && MINOTAURTIMER_LIFE >= TICKS_PER_SECOND * 150)
-					|| (currentlevel >= 25 && MINOTAURTIMER_LIFE >= TICKS_PER_SECOND * 210)
+	else if (( (currentlevel < 45 && MINOTAURTIMER_LIFE >= TICKS_PER_SECOND * 150)
+					|| (currentlevel >= 45 && MINOTAURTIMER_LIFE >= TICKS_PER_SECOND * 210)
 				)
-		&& !MINOTAURTIMER_ACTIVE )     // two and a half minutes if currentlevel < 25, else 3.5 minutes
+		&& !MINOTAURTIMER_ACTIVE )     // two and a half minutes if currentlevel < 45, else 3.5 minutes
 	{
 		Entity* monster = summonMonster(MINOTAUR, my->x, my->y);
 		if ( monster )
@@ -709,7 +720,7 @@ void actMinotaurTimer(Entity* my)
 		int c;
 		for ( c = 0; c < MAXPLAYERS; c++ )
 		{
-			if ( currentlevel < 25 )
+			if ( currentlevel < 45 )
 			{
 				playSoundPlayer(c, 120 + rand() % 3, 128);
 				Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 255);
