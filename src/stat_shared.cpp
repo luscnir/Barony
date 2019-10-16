@@ -1504,7 +1504,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 		case 169:
 		case (1000 + CHOLOROSH):
 			stats->type = CHOLOROSH;
-			stats->sex = MALE;
+			stats->sex = static_cast<sex_t>(rand() % 2);
 			stats->appearance = rand();
 			stats->inventory.first = nullptr;
 			stats->inventory.last = nullptr;
@@ -1552,7 +1552,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->type = LICH_FALLEN;
 			stats->sex = FEMALE;
 			stats->appearance = rand();
-			strcpy(stats->name, "The Fallen Queen");
+			strcpy(stats->name, "Wicked Scourge of The Abyss");
 			stats->inventory.first = nullptr;
 			stats->inventory.last = nullptr;
 			stats->HP = 3000;

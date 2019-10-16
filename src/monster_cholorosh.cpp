@@ -110,7 +110,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 			// random effects
 			if ( rand() % 20 == 0 )
 			{
-				my->setEffect(EFF_INVISIBLE, true, 500 + rand() % 1000, false);
+				my->setEffect(EFF_FAST, true, 500 + rand() % 1000, false);
 			}
 
 			// generates equipment and weapons if available from editor
@@ -185,7 +185,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 			if ( isShaman )
 			{
 				//give shield
-				if ( myStats->shield == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_SHIELD] == 1 )
+				if ( myStats->shield == nullptr )
 				{
 					// give shield
 					switch ( rand() % 20 )
@@ -195,6 +195,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 						case 2:
 						case 3:
 						case 4:
+							myStats->shield = newItem(STEEL_SHIELD_RESISTANCE, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
 							break;
 						case 5:
 						case 6:
@@ -205,12 +206,11 @@ void initCholorosh(Entity* my, Stat* myStats)
 							myStats->shield = newItem(MIRROR_SHIELD, static_cast<Status>(rand() % 4 + DECREPIT), -1 + rand() % 3, 1, rand(), false, nullptr);
 							break;
 						default:
-							myStats->shield = newItem(STEEL_SHIELD_RESISTANCE, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
 							break;
 					}
 				}
 				// give cloak
-				if ( myStats->cloak == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_CLOAK] == 1 )
+				if ( myStats->cloak == nullptr )
 				{
 					switch ( rand() % 10 )
 					{
@@ -224,7 +224,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 					}
 				}
 				// give helmet
-				if ( myStats->helmet == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_HELM] == 1 )
+				if ( myStats->helmet == nullptr  )
 				{
 					switch ( rand() % 10 )
 					{
@@ -237,13 +237,13 @@ void initCholorosh(Entity* my, Stat* myStats)
 					}
 				}
 				// give armor
-				if ( myStats->breastplate == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_ARMOR] == 1 )
+				if ( myStats->breastplate == nullptr )
 				{
 					switch ( rand() % 10 )
 					{
 						case 0:
 						case 1:
-							//myStats->breastplate = newItem(IRON_BREASTPIECE, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
+							myStats->breastplate = newItem(IRON_BREASTPIECE, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
 							break;
 						case 2:
 							myStats->breastplate = newItem(LEATHER_BREASTPIECE, static_cast<Status>(rand() % 3 + DECREPIT), -1 + rand() % 3, 1, rand(), false, nullptr);
@@ -253,13 +253,14 @@ void initCholorosh(Entity* my, Stat* myStats)
 					}
 				}
 				// give booties
-				if ( myStats->shoes == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_BOOTS] == 1 )
+				if ( myStats->shoes == nullptr )
 				{
 					switch ( rand() % 20 )
 					{
 						case 0:
 						case 1:
 						case 2:
+							break;
 						case 3:
 							myStats->shoes = newItem(IRON_BOOTS, static_cast<Status>(rand() % 3 + DECREPIT), -1 + rand() % 3, 1, rand(), false, nullptr);
 							break;
@@ -267,12 +268,12 @@ void initCholorosh(Entity* my, Stat* myStats)
 							myStats->shoes = newItem(LEATHER_BOOTS_SPEED, static_cast<Status>(rand() % 4 + DECREPIT), -6 + rand() % 3, 1, rand(), false, nullptr);
 							break;
 						default:
-							myStats->shoes = newItem(STEEL_BOOTS, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
+							myStats->shoes = newItem(LEATHER_BOOTS, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
 							break;
 					}
 				}
 				// give weapon
-				if ( myStats->weapon == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_WEAPON] == 1 )
+				if ( myStats->weapon == nullptr )
 				{
 					switch ( rand() % 15 )
 					{
@@ -314,7 +315,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 				// give armor
 				if ( myStats->breastplate == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_ARMOR] == 1 )
 				{
-					switch ( rand() % 15 )
+					switch ( rand() % 10 )
 					{
 					case 0:
 					case 1:
@@ -323,20 +324,20 @@ void initCholorosh(Entity* my, Stat* myStats)
 						break;
 					case 3:
 					case 4:
-						myStats->breastplate = newItem(LEATHER_BREASTPIECE, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 					case 5:
 					case 6:
 						myStats->breastplate = newItem(IRON_BREASTPIECE, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 					default:
+						myStats->breastplate = newItem(LEATHER_BREASTPIECE, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 					}
 				}
 				// give booties
-				if ( myStats->shoes == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_BOOTS] == 1 )
+				if ( myStats->shoes == nullptr )
 				{
-					switch ( rand() % 15 )
+					switch ( rand() % 10 )
 					{
 					case 0:
 					case 1:
@@ -350,14 +351,22 @@ void initCholorosh(Entity* my, Stat* myStats)
 					}
 				}
 				// give weapon
-				if ( myStats->weapon == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_WEAPON] == 1 )
+				if ( myStats->weapon == nullptr )
 				{
 					switch ( rand() % 20 )
 					{
 					case 0:
+						myStats->weapon = newItem(RAPIER, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
 					case 1:
+						myStats->weapon = newItem(TRIDENT, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
 					case 2:
+						myStats->weapon = newItem(GRANITE_MAUL, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
 					case 3:
+						myStats->weapon = newItem(EXECUTIONER_AXE, static_cast<Status>(rand() % 3 + WORN), -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
 					case 4:
 					case 5:
 					case 6:
