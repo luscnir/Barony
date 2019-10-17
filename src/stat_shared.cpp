@@ -1552,7 +1552,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->type = LICH_FALLEN;
 			stats->sex = FEMALE;
 			stats->appearance = rand();
-			strcpy(stats->name, "Wicked Scourge of The Abyss");
+			strcpy(stats->name, "The Empty One");
 			stats->inventory.first = nullptr;
 			stats->inventory.last = nullptr;
 			stats->HP = 3000;
