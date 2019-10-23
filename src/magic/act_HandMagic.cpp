@@ -331,6 +331,13 @@ void actLeftHandMagic(Entity* my)
 			wearingring = true;
 		}
 	}
+	if (stats[clientnum]->mask != NULL)
+	{
+		if (stats[clientnum]->mask->type == ABYSSAL_MASK)
+		{
+			wearingring = true;
+		}
+	}
 	if (players[clientnum]->entity->skill[3] == 1 || players[clientnum]->entity->isInvisible() )   // debug cam or player invisible
 	{
 		my->flags[INVISIBLE] = true;
@@ -621,6 +628,13 @@ void actRightHandMagic(Entity* my)
 	if (stats[clientnum]->cloak != NULL)
 	{
 		if (stats[clientnum]->cloak->type == CLOAK_INVISIBILITY)
+		{
+			wearingring = true;
+		}
+	}
+	if (stats[clientnum]->mask != NULL)
+	{
+		if (stats[clientnum]->mask->type == ABYSSAL_MASK)
 		{
 			wearingring = true;
 		}

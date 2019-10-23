@@ -91,7 +91,7 @@ void initLichFallen(Entity* my, Stat* myStats)
 			//give weapon
 			if ( myStats->weapon == NULL && myStats->EDITOR_ITEMS[ITEM_SLOT_WEAPON] == 1 )
 			{
-				myStats->weapon = newItem(ARTIFACT_BOW, EXCELLENT, -5, 1, rand(), false, NULL);//change to new axe/bow once made
+				myStats->weapon = newItem(EXECUTIONER_AXE, EXCELLENT, -3, 1, rand(), true, NULL);//change to new axe/bow once made
 			}
 		}
 	}
@@ -292,6 +292,13 @@ void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
 			{
 				wearingring = true;
 			}
+		if (myStats->mask != nullptr)
+		{
+			if (myStats->mask->type == ABYSSAL_MASK)
+			{
+				wearingring = true;
+			}
+		}
 		if ( myStats->EFFECTS[EFF_INVISIBLE] == true || wearingring == true )
 		{
 			my->flags[INVISIBLE] = true;
@@ -374,8 +381,8 @@ void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
 			{
 				my->monsterLichBattleState = LICH_BATTLE_READY;
 				generatePathMaps();
-				/*swornenemies[LICH_FALLEN][CHOLOROSH] = false;
-				swornenemies[CHOLOROSH][HUMAN] = true;*/
+				swornenemies[LICH_FALLEN][CHOLOROSH] = false;
+				swornenemies[CHOLOROSH][HUMAN] = true;
 				real_t distToPlayer = 0;
 				int c, playerToChase = -1;
 				for ( c = 0; c < MAXPLAYERS; c++ )
@@ -783,7 +790,7 @@ void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
 						createParticleDropRising(my, 592, 0.7);
 						if ( multiplayer != CLIENT )
 						{
-							if ( my->monsterState != MONSTER_STATE_LICHFIRE_DIE )
+							if ( my->monsterState != MONSTER_STATE_LICHFALLEN_DIE )
 							{
 								my->monsterAnimationLimbOvershoot = ANIMATE_OVERSHOOT_TO_SETPOINT;
 								// lich can't be paralyzed, use EFF_STUNNED instead.
@@ -1210,7 +1217,7 @@ void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
 	}
 }
 /*
-void Entity::lichIceSetNextAttack(Stat& myStats)
+void Entity::lichFallenSetNextAttack(Stat& myStats)
 {
 	monsterLichIceCastPrev = monsterLichIceCastSeq;
 	//messagePlayer(0, "melee: %d, magic %d", monsterLichMeleeSwingCount, monsterLichMagicCastCount);
@@ -1355,31 +1362,10 @@ void Entity::lichIceSetNextAttack(Stat& myStats)
 			break;
 	}
 }
-*/
+//*/
+
 /*
-void Entity::lichIceTeleport()
-{
-	monsterLichTeleportTimer = 0;
-	Entity* spellTimer = createParticleTimer(this, 40, 593);//TODO custom sprite for LICH_FALLEN
-	if ( monsterState == MONSTER_STATE_LICHICE_TELEPORT_STATIONARY )
-	{
-		spellTimer->particleTimerEndAction = PARTICLE_EFFECT_LICHICE_TELEPORT_STATIONARY; // teleport behavior of timer.
-	}
-	else
-	{
-		spellTimer->particleTimerEndAction = PARTICLE_EFFECT_LICH_TELEPORT_ROAMING; // teleport behavior of timer.
-	}
-	spellTimer->particleTimerEndSprite = 593; // sprite to use for end of timer function.
-	spellTimer->particleTimerCountdownAction = PARTICLE_TIMER_ACTION_SHOOT_PARTICLES;
-	spellTimer->particleTimerCountdownSprite = 593;
-	if ( multiplayer == SERVER )
-	{
-		serverSpawnMiscParticles(this, spellTimer->particleTimerEndAction, 593);
-	}
-}
-*/
-/*
-void Entity::lichIceCreateCannon()
+void Entity::lichFallenCreateCannon()
 {
 	//spellTimer->particleTimerCountdownAction = PARTICLE_TIMER_ACTION_SHOOT_PARTICLES;
 	for ( int i = 0; i < 6; ++i )
@@ -1392,81 +1378,6 @@ void Entity::lichIceCreateCannon()
 	if ( multiplayer == SERVER )
 	{
 		serverSpawnMiscParticles(this, PARTICLE_EFFECT_RISING_DROP, 678);
-	}
-}
-*/
-/*
-Entity* Entity::lichThrowProjectile(real_t angle)
-{
-	Entity* projectile = newEntity(items[STEEL_CHAKRAM].index, 1, map.entities, nullptr); // thrown item
-	projectile->parent = uid;
-	projectile->x = x;
-	projectile->y = y;
-	projectile->z = z;
-	projectile->yaw = yaw + angle;
-	projectile->sizex = 1;
-	projectile->sizey = 1;
-	projectile->behavior = &actThrown;
-	projectile->flags[UPDATENEEDED] = true;
-	projectile->flags[PASSABLE] = true;
-	projectile->skill[10] = STEEL_CHAKRAM;
-	projectile->skill[11] = EXCELLENT;
-	projectile->skill[12] = 0;
-	projectile->skill[13] = 1;
-	projectile->skill[14] = 0;
-	projectile->skill[15] = 1;
-
-	// todo: change velocity of chakram/shuriken?
-	projectile->vel_x = 6 * cos(yaw + angle);
-	projectile->vel_y = 6 * sin(yaw + angle);
-	projectile->vel_z = -.3;
-
-	return projectile;
-}
-
-void Entity::lichIceSummonMonster(Monster creature)
-{
-	Entity* target = nullptr;
-	for ( node_t* searchNode = map.entities->first; searchNode != nullptr; searchNode = searchNode->next )
-	{
-		target = (Entity*)searchNode->element;
-		if ( target->behavior == &actDevilTeleport
-			&& target->sprite == 128 )
-		{
-			break; // found specified center of map
-		}
-	}
-	if ( target )
-	{
-		int tries = 25; // max iteration in while loop, fail safe.
-		long spawn_x = (target->x / 16) - 11 + rand() % 23;
-		long spawn_y = (target->y / 16) - 11 + rand() % 23;
-		int index = (spawn_x)* MAPLAYERS + (spawn_y)* MAPLAYERS * map.height;
-		while ( tries > 0 &&
-				(map.tiles[OBSTACLELAYER + index] == 1
-				|| map.tiles[index] == 0
-				|| swimmingtiles[map.tiles[index]]
-				|| lavatiles[map.tiles[index]])
-			)
-		{
-			// find a spot that isn't wall, no floor or lava/water tiles.
-			spawn_x = (target->x / 16) - 11 + rand() % 23;
-			spawn_y = (target->y / 16) - 11 + rand() % 23;
-			index = (spawn_x)* MAPLAYERS + (spawn_y)* MAPLAYERS * map.height;
-			--tries;
-		}
-		if ( tries > 0 )
-		{
-			Entity* timer = createParticleTimer(this, 70, 174);
-			timer->x = spawn_x * 16.0 + 8;
-			timer->y = spawn_y * 16.0 + 8;
-			timer->z = 0;
-			timer->particleTimerCountdownAction = PARTICLE_TIMER_ACTION_SUMMON_MONSTER;
-			timer->particleTimerCountdownSprite = 174;
-			timer->particleTimerEndAction = PARTICLE_EFFECT_SUMMON_MONSTER;
-			timer->particleTimerVariable1 = creature;
-			serverSpawnMiscParticlesAtLocation(spawn_x, spawn_y, 0, PARTICLE_EFFECT_SUMMON_MONSTER, 174);
-		}
 	}
 }
 */

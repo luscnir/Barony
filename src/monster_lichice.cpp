@@ -302,6 +302,13 @@ void lichIceAnimate(Entity* my, Stat* myStats, double dist)
 			{
 				wearingring = true;
 			}
+		if (myStats->mask != nullptr)
+		{
+			if (myStats->mask->type == ABYSSAL_MASK)
+			{
+				wearingring = true;
+			}
+		}
 		if ( myStats->EFFECTS[EFF_INVISIBLE] == true || wearingring == true )
 		{
 			my->flags[INVISIBLE] = true;

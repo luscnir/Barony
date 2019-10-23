@@ -43,10 +43,10 @@ bool swornenemies[NUMMONSTERS][NUMMONSTERS] =
 	{ 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // GHOUL
 	{ 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0 }, // SKELETON
 	{ 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0 }, // SCORPION
-	{ 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0 }, // IMP
+	{ 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 }, // IMP
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // BUGBEAR
 	{ 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0 }, // GNOME
-	{ 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0 }, // DEMON
+	{ 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 }, // DEMON
 	{ 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }, // SUCCUBUS
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // MIMIC
 	{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // LICH
@@ -66,7 +66,7 @@ bool swornenemies[NUMMONSTERS][NUMMONSTERS] =
 	{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // LICH_ICE
 	{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // LICH_FIRE
 	{ 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }, // COCKROACH
-	{ 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0 }, // BURGGUARD
+	{ 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 }, // BURGGUARD
 	{ 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }, // GARGOYLE
 	{ 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0 }, // MATILDA
 	{ 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0 }, // CRYORUNE
@@ -74,9 +74,9 @@ bool swornenemies[NUMMONSTERS][NUMMONSTERS] =
 	{ 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0 }, // ICEDEMON
 	{ 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }, // EYEBALL
 	{ 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0 }, // FLESHLING
-	{ 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1 }, // ABOMINATION
-	{ 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0 }, // CHOLOROSH
-	{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }  // LICH_FALLEN
+	{ 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0 }, // ABOMINATION
+	{ 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0 }, // CHOLOROSH
+	{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }  // LICH_FALLEN
 }; // N, H, R, G, S, T, x, S, G, S, S, I, x, G, D, S, x,BO, M,BO,SP, K, S, G, I, V, S, C, I, G, A,BO,BO, C, B, G,BO, C, Y,BO, E, F,BO, C,BO
 
 // determines which monsters come to the aid of other monsters
@@ -1719,6 +1719,49 @@ void actMonster(Entity* my)
 		}
 	}
 
+	// some special abyss Boss behavior
+	if (myStats->type == LICH_FALLEN)
+	{
+		// destroying Columns
+		if (myStats->HP <= myStats->MAXHP / 2)
+		{
+			node_t* node, * nextnode;
+			bool foundcolumn = false;
+			for (node = map.entities->first; node != nullptr; node = nextnode)
+			{
+				nextnode = node->next;
+				Entity* tempEntity = (Entity*)node->element;
+
+				if (tempEntity->behavior == &actColumn)
+				{
+					foundcolumn = true;
+					//list_RemoveNode(tempEntity->actColumn->node);
+					//tempEntity->actColumn = nullptr;
+					list_RemoveNode(tempEntity->mynode);
+				}
+			}
+			if (foundcolumn)
+			{
+				int c;
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					MONSTER_SOUND = playSoundPlayer(c, 477, 128);
+					playSoundPlayer(c, 166, 128);
+				}
+			}
+		}
+		// dodging away
+		if (((rand() % 4 == 0 && my->monsterState != 6) || (rand() % 10 == 0 && my->monsterState == MONSTER_STATE_LICH_SUMMON)) && myStats->OLDHP != myStats->HP)
+		{
+			playSoundEntity(my, 180, 128);
+			my->monsterState = MONSTER_STATE_LICH_DODGE; // dodge state
+			double dir = my->yaw - (PI / 2) + PI * (rand() % 2);
+			MONSTER_VELX = cos(dir) * 5;
+			MONSTER_VELY = sin(dir) * 5;
+			my->monsterSpecialTimer = 0;
+		}
+	}
+
 	if ( (myStats->type == LICH_FIRE && my->monsterState != MONSTER_STATE_LICHFIRE_DIE) 
 		|| (myStats->type == LICH_ICE && my->monsterState != MONSTER_STATE_LICHICE_DIE )
 		&& myStats->HP > 0 )
@@ -2239,7 +2282,8 @@ void actMonster(Entity* my)
 		&& my->monsterState != MONSTER_STATE_LICH_DEATH
 		&& my->monsterState != MONSTER_STATE_DEVIL_DEATH
 		&& my->monsterState != MONSTER_STATE_LICHFIRE_DIE 
-		&& my->monsterState != MONSTER_STATE_LICHICE_DIE )
+		&& my->monsterState != MONSTER_STATE_LICHICE_DIE
+		&& my->monsterState != MONSTER_STATE_LICHFALLEN_DIE )
 	{
 		//TODO: Refactor die function.
 		// drop all equipment
@@ -3121,6 +3165,7 @@ void actMonster(Entity* my)
 			&& myStats->type != DEVIL 
 			&& myStats->type != LICH_ICE
 			&& myStats->type != LICH_FIRE
+			&& myStats->type != LICH_FALLEN
 			&& my->monsterSpecialTimer > 0 )
 		{
 			--my->monsterSpecialTimer;
@@ -3229,7 +3274,7 @@ void actMonster(Entity* my)
 
 							// skip if light level is too low and distance is too high
 							int light = entity->entityLightAfterReductions(*hitstats, my);
-							if ( (myStats->type >= LICH && myStats->type < KOBOLD) || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == SHADOW )
+							if ( (myStats->type >= LICH && myStats->type < KOBOLD) || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == SHADOW || myStats->type == LICH_FALLEN )
 							{
 								//See invisible.
 								light = 1000;
@@ -3273,7 +3318,7 @@ void actMonster(Entity* my)
 							}
 							if ( visiontest )   // vision cone
 							{
-								if ( (myStats->type >= LICH && myStats->type < KOBOLD) || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == SHADOW )
+								if ( (myStats->type >= LICH && myStats->type < KOBOLD) || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == SHADOW || myStats->type == LICH_FALLEN )
 								{
 									//See invisible
 									lineTrace(my, my->x, my->y, tangent, sightranges[myStats->type], 0, false);
@@ -3364,7 +3409,8 @@ void actMonster(Entity* my)
 					|| myStats->type == LICH_FIRE 
 					|| myStats->type == LICH_ICE 
 					|| (myStats->type == CREATURE_IMP && strstr(map.name, "Boss"))
-					|| (myStats->type == AUTOMATON && strstr(myStats->name, "corrupted automaton")) )
+					|| (myStats->type == AUTOMATON && strstr(myStats->name, "corrupted automaton"))
+					|| myStats->type == LICH_FALLEN )
 				{
 					double distToPlayer = 0;
 					int c, playerToChase = -1;
@@ -3464,7 +3510,8 @@ void actMonster(Entity* my)
 				&& myStats->type != LICH 
 				&& myStats->type != DEVIL
 				&& myStats->type != LICH_FIRE
-				&& myStats->type != LICH_ICE )
+				&& myStats->type != LICH_ICE
+				&& myStats->type != LICH_FALLEN )
 			{
 				my->monsterLookTime = 0;
 				my->monsterMoveTime--;
@@ -3686,7 +3733,7 @@ void actMonster(Entity* my)
 			{
 				// skip if light level is too low and distance is too high
 				int light = entity->entityLightAfterReductions(*hitstats, my);
-				if ( (myStats->type >= LICH && myStats->type < KOBOLD) || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == SHADOW )
+				if ( (myStats->type >= LICH && myStats->type < KOBOLD) || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == SHADOW || myStats->type == LICH_FALLEN )
 				{
 					//See invisible.
 					light = 1000;
@@ -4370,7 +4417,7 @@ timeToGoAgain:
 
 							// skip if light level is too low and distance is too high
 							int light = entity->entityLightAfterReductions(*hitstats, my);
-							if ( (myStats->type >= LICH && myStats->type < KOBOLD) || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == SHADOW )
+							if ( (myStats->type >= LICH && myStats->type < KOBOLD) || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == SHADOW || myStats->type == LICH_FALLEN )
 							{
 								//See invisible.
 								light = 1000;
@@ -4482,7 +4529,8 @@ timeToGoAgain:
 				|| (myStats->type == LICH && my->monsterSpecialTimer <= 0)
 				|| ((myStats->type == LICH_FIRE || myStats->type == LICH_ICE) && my->monsterSpecialTimer <= 0 )
 				|| (myStats->type == CREATURE_IMP && strstr(map.name, "Boss"))
-				|| (myStats->type == AUTOMATON && strstr(myStats->name, "corrupted automaton")) )
+				|| (myStats->type == AUTOMATON && strstr(myStats->name, "corrupted automaton"))
+				|| myStats->type == LICH_FALLEN )
 			{
 				bool shouldHuntPlayer = false;
 				Entity* playerOrNot = uidToEntity(my->monsterTarget);
@@ -4560,7 +4608,7 @@ timeToGoAgain:
 			}
 
 			// lich cooldown
-			if ( myStats->type == LICH )
+			if ( myStats->type == LICH )//|| myStats->type == LICH_FALLEN )
 			{
 				if ( my->monsterSpecialTimer > 0 )
 				{
@@ -5303,6 +5351,35 @@ timeToGoAgain:
 			if ( my->z > 96 )
 			{
 				devilDie(my);
+			}
+		}
+		else if (my->monsterState == MONSTER_STATE_LICHFALLEN_DIE)     // lich fallen death state
+		{
+			my->yaw += .5; // rotate
+			if (my->yaw >= PI * 2)
+			{
+				my->yaw -= PI * 2;
+			}
+			MONSTER_ATTACK = 1;
+			MONSTER_ATTACKTIME = 0;
+			if (my->monsterSpecialTimer == 0)
+			{
+				serverUpdateEntitySkill(my, 8);
+				serverUpdateEntitySkill(my, 9);
+				int c;
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					playSoundPlayer(c, 479, 128);
+				}
+			}
+			if (my->monsterSpecialTimer % 10 == 0)
+			{
+				spawnExplosion(my->x - 8 + rand() % 16, my->y - 8 + rand() % 16, -4 + rand() % 8);
+			}
+			my->monsterSpecialTimer++;
+			if (my->monsterSpecialTimer > 180)
+			{
+				lichFallenDie(my);
 			}
 		}
 		else if ( my->monsterState == MONSTER_STATE_DEVIL_TELEPORT )     // devil teleport state
@@ -7098,7 +7175,8 @@ bool Entity::handleMonsterSpecialAttack(Stat* myStats, Entity* target, double di
 			|| myStats->type == DEVIL 
 			|| myStats->type == SHOPKEEPER
 			|| myStats->type == LICH_FIRE
-			|| myStats->type == LICH_ICE )
+			|| myStats->type == LICH_ICE
+			|| myStats->type == LICH_FALLEN )
 		{
 			// monster should attack after this function is called.
 			return true;
@@ -8702,6 +8780,7 @@ int Entity::shouldMonsterDefend(Stat& myStats, const Entity& target, const Stat&
 		|| myStats.type == LICH_ICE
 		|| myStats.type == LICH_FIRE
 		|| myStats.type == SHOPKEEPER
+		|| myStats.type == LICH_FALLEN
 		)
 	{
 		return MONSTER_DEFEND_NONE;

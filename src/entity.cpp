@@ -2645,7 +2645,8 @@ void Entity::handleEffects(Stat* myStats)
 	if ( !strncmp(map.name, "Sanctum", 7) 
 		|| !strncmp(map.name, "Boss", 4) 
 		|| !strncmp(map.name, "Hell Boss", 9)
-		|| !strncmp(map.name, "Mages Guild", 11) )
+		|| !strncmp(map.name, "Mages Guild", 11)
+		|| !strncmp(map.name, "Abyss Boss", 4) )
 	{
 		hungerring = 1; // slow down hunger on boss stages.
 		if ( vampiricHunger > 0 )
@@ -11620,6 +11621,7 @@ void Entity::monsterAcquireAttackTarget(const Entity& target, Sint32 state, bool
 		if ( myStats->type != LICH_FIRE 
 			&& myStats->type != LICH_ICE
 			&& (myStats->type < LICH || myStats->type > DEVIL)
+			&& myStats->type != LICH_FALLEN
 			)
 		{
 			// check to see if holding ranged weapon, set hittime to be ready to attack.
@@ -14970,7 +14972,7 @@ bool Entity::isBossMonsterOrBossMap()
 			|| myStats->type == MATILDA
 			|| myStats->type == ICEDEMON
 			|| myStats->type == ABOMINATION
-			|| myStats->type == LICH_FALLEN
+			|| !strncmp(map.name, "Abyss Boss", 4)
 			)
 		{
 			return true;

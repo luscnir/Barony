@@ -936,7 +936,7 @@ void actTextSource(Entity* my);
 
 static const int NUM_ITEM_STRINGS = 285;
 static const int NUM_ITEM_STRINGS_BY_TYPE = 130;
-static const int NUM_EDITOR_SPRITES = 171;
+static const int NUM_EDITOR_SPRITES = 172;
 static const int NUM_EDITOR_TILES = 422;
 
 // furniture types.

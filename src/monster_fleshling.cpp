@@ -411,6 +411,11 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 			{
 				wearingring = true;
 			}
+		if (myStats->mask != NULL)
+			if (myStats->mask->type == ABYSSAL_AMULET)
+			{
+				wearingring = true;
+			}
 		if ( myStats->EFFECTS[EFF_INVISIBLE] == true || wearingring == true )
 		{
 			my->flags[INVISIBLE] = true;

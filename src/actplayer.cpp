@@ -1303,6 +1303,11 @@ void actPlayer(Entity* my)
 				{
 					wearingring = true;
 				}
+			if (stats[PLAYER_NUM]->mask != NULL)
+				if (stats[PLAYER_NUM]->mask->type == ABYSSAL_MASK)
+				{
+					wearingring = true;
+				}
 			//if ( stats[PLAYER_NUM]->EFFECTS[EFF_INVISIBLE] == true || wearingring == true )
 			if ( my->isInvisible() )
 			{

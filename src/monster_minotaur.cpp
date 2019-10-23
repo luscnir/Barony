@@ -73,7 +73,7 @@ void initMinotaur(Entity* my, Stat* myStats)
 				strcpy(myStats->name, "Revenant Minotaur");
 				myStats->HP += 500;
 				myStats->MAXHP += 500;
-				myStats->STR = 50;
+				myStats->STR = 65;
 				myStats->DEX = 30;
 				myStats->CON = 30;
 				myStats->EFFECTS[EFF_MAGICRESIST] = true;

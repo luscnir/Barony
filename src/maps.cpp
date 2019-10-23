@@ -5413,6 +5413,18 @@ void assignActions(map_t* map)
 				entity->behavior = &actColumn;
 				break;
 			}
+			case 171:
+			{
+				entity->x += 8;
+				entity->y += 8;
+				entity->sprite = 1004;
+				entity->sizex = 6;
+				entity->sizey = 6;
+				entity->z = -7.75;
+				entity->flags[BLOCKSIGHT] = false;
+				entity->behavior = &actColumn;
+				break;
+			}
 			// podium
 			case 125:
 			{

@@ -120,6 +120,7 @@ int checkSpriteType(Sint32 sprite)
 	case 147:
 	case 148:
 	case 149:
+	case 171:
 		// general furniture/misc.
 		return 12;
 		break;
@@ -891,7 +892,8 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"FLESHLING",
 	"ABOMINATION",
 	"CHLOROSH",
-	"LICH_FALLEN"
+	"LICH_FALLEN",
+	"ABYSS COLUMN BLOCK"
 };
 
 char monsterEditorNameStrings[NUMMONSTERS][13] =

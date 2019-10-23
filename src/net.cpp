@@ -1325,6 +1325,7 @@ void clientActions(Entity* entity)
 			break;
 		case 629:
 		case 900:
+		case 1004:
 			entity->behavior = &actColumn;
 			entity->flags[NOUPDATE] = true;
 			break;
