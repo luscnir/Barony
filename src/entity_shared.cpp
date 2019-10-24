@@ -1363,7 +1363,17 @@ char tileEditorNameStrings[NUM_EDITOR_TILES][44] =
 	"AbyssColumnsAlcove.png",
 	"AbyssColumns.png",
 	"ChloroshSeed.png", 
-	"ChloroshLeaves.png", 
+	"ChloroshLeaves.png",
+	"GhostPlatformArrow1.png",
+	"GhostPlatformArrow2.png",
+	"GhostPlatformArrow3.png",
+	"GhostPlatformArrow4.png",
+	"GhostPlatformArrow5.png",
+	"GhostPlatformArrow6.png",
+	"GrayGrass.png",
+	"AbyssFancyFloor.png",
+	"AbyssFancyCeiling.png",
+	"SkyWickedBlank.png",
 	"", "", "", "", ""
 };
 
