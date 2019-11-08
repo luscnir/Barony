@@ -136,6 +136,14 @@ void gameLogic(void)
 	{
 		fourthendmovietime++;
 	}
+	if ( fifthendmoviestage > 0 )
+	{
+		fifthendmovietime++;
+	}
+	if ( sixtyendmoviestage > 0 )
+	{
+		sixtyendmovietime++;
+	}
 
 	DebugStats.eventsT1 = std::chrono::high_resolution_clock::now();
 
@@ -853,18 +861,21 @@ void gameLogic(void)
 						switch ( currentlevel )
 						{
 							case 5:
+							case 12:
 								steamAchievement("BARONY_ACH_TWISTY_PASSAGES");
 								break;
 							case 10:
+							case 11:
 								steamAchievement("BARONY_ACH_JUNGLE_FEVER");
 								break;
-							case 15:
+							case 23:
+							case 24:
 								steamAchievement("BARONY_ACH_SANDMAN");
 								break;
-							case 30:
+							case 51:
 								steamAchievement("BARONY_ACH_SPELUNKY");
 								break;
-							case 35:
+							case 56:
 								if ( ((completionTime / TICKS_PER_SECOND) / 60) <= 45 )
 								{
 									conductGameChallenges[CONDUCT_BLESSED_BOOTS_SPEED] = 1;
@@ -911,7 +922,7 @@ void gameLogic(void)
 					assignActions(&map);
 					generatePathMaps();
 
-					if ( !strncmp(map.name, "Mages Guild", 11) )
+					if ( !strncmp(map.name, "Mages Guild", 11) || !strncmp(map.name, "Necropolis", 4))
 					{
 						for ( c = 0; c < MAXPLAYERS; ++c )
 						{
@@ -2476,6 +2487,10 @@ void pauseGame(int mode, int ignoreplayer)
 		return;
 	}
 	if ( introstage == 9 )
+	{
+		return;
+	}
+	if (introstage == 11)
 	{
 		return;
 	}

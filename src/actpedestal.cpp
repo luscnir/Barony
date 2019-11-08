@@ -166,7 +166,7 @@ void Entity::actPedestalBase()
 		{
 			mechanismPowerOn();
 			updateCircuitNeighbors();
-			if ( !strncmp(map.name, "Boss", 4) )
+			if ( !strncmp(map.name, "Boss", 4) || !strncmp(map.name, "Mural of portals", 4) )
 			{
 				applyAura = true;
 			}
@@ -256,19 +256,19 @@ void Entity::actPedestalBase()
 				{
 					if ( orbEntity && pedestalHasOrb > 0 )
 					{
-						if ( pedestalHasOrb == pedestalOrbType && pedestalLockOrb == 1 )
+						if (pedestalHasOrb == pedestalOrbType && pedestalLockOrb == 1)
 						{
 							// if orb locked, then can't retreive.
 							messagePlayer(i, language[2367]);
 						}
-						else
+						else if (!strncmp(map.name, "Boss", 4))
 						{
 							Item* itemOrb = newItem(static_cast<ItemType>(ARTIFACT_ORB_BLUE + pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
 							itemPickup(i, itemOrb);
-							if ( pedestalHasOrb == pedestalOrbType )
+							if (pedestalHasOrb == pedestalOrbType)
 							{
 								// only update power when right orb is in place.
-								if ( !pedestalInvertedPower )
+								if (!pedestalInvertedPower)
 								{
 									mechanismPowerOff();
 								}
@@ -281,6 +281,28 @@ void Entity::actPedestalBase()
 							pedestalHasOrb = 0;
 							serverUpdateEntitySkill(this, 0); // update orb status.
 							messagePlayer(i, language[2374], itemOrb->getName());
+						}
+
+						else if (!strncmp(map.name, "Mural of portals", 4))	//portal symbols
+						{
+							Item* symbolOrb = newItem(static_cast<ItemType>(SYMBOL_RAGE + pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
+							itemPickup(i, symbolOrb);
+							if (pedestalHasOrb == pedestalOrbType)
+							{
+								// only update power when right symbol is in place.
+								if (!pedestalInvertedPower)
+								{
+									mechanismPowerOff();
+								}
+								else
+								{
+									mechanismPowerOn();
+								}
+								updateCircuitNeighbors();
+							}
+							pedestalHasOrb = 0;
+							serverUpdateEntitySkill(this, 0); // update symbol status.
+							messagePlayer(i, language[2374], symbolOrb->getName());
 						}
 					}
 					else
@@ -341,8 +363,14 @@ void Entity::actPedestalOrb()
 	}
 	else if ( orbInitialised )
 	{
-		sprite = parent->pedestalHasOrb + 602 - 1;
-
+		if (!strncmp(map.name, "Mural of portals", 4))
+		{
+			sprite = parent->pedestalHasOrb + 887 - 1;
+		}
+		else
+		{
+			sprite = parent->pedestalHasOrb + 602 - 1;
+		}
 		// handle player interaction
 		if ( multiplayer != CLIENT )
 		{
@@ -361,14 +389,14 @@ void Entity::actPedestalOrb()
 									// if orb locked, then can't retreive.
 									messagePlayer(i, language[2367]);
 								}
-								else
+								else if (!strncmp(map.name, "Boss", 4))
 								{
 									Item* itemOrb = newItem(static_cast<ItemType>(ARTIFACT_ORB_BLUE + parent->pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
 									itemPickup(i, itemOrb);
-									if ( parent->pedestalHasOrb == parent->pedestalOrbType )
+									if (parent->pedestalHasOrb == parent->pedestalOrbType)
 									{
 										// only update power when right orb is in place.
-										if ( !pedestalInvertedPower )
+										if (!pedestalInvertedPower)
 										{
 											parent->mechanismPowerOff();
 										}
@@ -379,7 +407,28 @@ void Entity::actPedestalOrb()
 										updateCircuitNeighbors();
 									}
 									parent->pedestalHasOrb = 0;
-									serverUpdateEntitySkill(parent, 0); // update orb status 
+									serverUpdateEntitySkill(parent, 0); // update orb status
+									messagePlayer(i, language[2374], itemOrb->getName());
+								}
+								else if (!strncmp(map.name, "Mural of portals", 4))//Symbol version
+								{
+									Item* itemOrb = newItem(static_cast<ItemType>(SYMBOL_RAGE + parent->pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
+									itemPickup(i, itemOrb);
+									if (parent->pedestalHasOrb == parent->pedestalOrbType)
+									{
+										// only update power when right symbol is in place.
+										if (!pedestalInvertedPower)
+										{
+											parent->mechanismPowerOff();
+										}
+										else
+										{
+											parent->mechanismPowerOn();
+										}
+										updateCircuitNeighbors();
+									}
+									parent->pedestalHasOrb = 0;
+									serverUpdateEntitySkill(parent, 0); // update symbol status 
 									messagePlayer(i, language[2374], itemOrb->getName());
 								}
 							}
@@ -491,6 +540,11 @@ void Entity::actPedestalOrb()
 		case 604:
 		case 605:
 			particleSprite = sprite + 4;
+			break;
+		case 887:
+		case 888:
+		case 889:
+			particleSprite = 593;
 			break;
 		default:
 			particleSprite = -1;

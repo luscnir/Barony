@@ -38,6 +38,8 @@ SDL_Surface* character_bmp = nullptr;
 SDL_Surface* hunger_bmp = nullptr;
 SDL_Surface* hunger_blood_bmp = nullptr;
 SDL_Surface* minotaur_bmp = nullptr;
+SDL_Surface* backdrop_abyssmid_bmp = nullptr;
+SDL_Surface* backdrop_abyssend_bmp = nullptr;
 int textscroll = 0;
 int attributespage = 0;
 int proficienciesPage = 0;
@@ -202,6 +204,8 @@ std::vector<std::pair<SDL_Surface**, std::string>> systemResourceImages =
 	std::make_pair(&minotaur_bmp, "images/system/minotaur.png"),
 	std::make_pair(&attributesleft_bmp, "images/system/AttributesLeftHighlighted.png"),
 	std::make_pair(&attributesright_bmp, "images/system/AttributesRightHighlighted.png"),
+	std::make_pair(&backdrop_abyssmid_bmp, "images/system/backdrop_abyss_mid.png"),
+	std::make_pair(&backdrop_abyssend_bmp, "images/system/backdrop_abyss_end.png"),
 
 	//General GUI images.
 	std::make_pair(&attributesleftunclicked_bmp, "images/system/AttributesLeft.png"),
@@ -289,6 +293,8 @@ bool loadInterfaceResources()
 	attributesrightunclicked_bmp = loadImage("images/system/AttributesRight.png");
 	shopkeeper_bmp = loadImage("images/system/shopkeeper.png");
 	damage_bmp = loadImage("images/system/damage.png");
+	backdrop_abyssmid_bmp = loadImage("images/system/backdrop_abyss_mid.png");
+	backdrop_abyssend_bmp = loadImage("images/system/backdrop_abyss_end.png");
 
 	//Magic GUI images.
 	magicspellList_bmp = loadImage("images/system/spellList.png");
@@ -651,6 +657,14 @@ void freeInterfaceResources()
 	if ( effect_hungover_bmp )
 	{
 		SDL_FreeSurface(effect_hungover_bmp);
+	}
+	if (backdrop_abyssmid_bmp)
+	{
+		SDL_FreeSurface(backdrop_abyssmid_bmp);
+	}
+	if (backdrop_abyssend_bmp)
+	{
+		SDL_FreeSurface(backdrop_abyssend_bmp);
 	}
 	list_FreeAll(&damageIndicators);
 }

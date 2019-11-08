@@ -1722,7 +1722,7 @@ void actMonster(Entity* my)
 	// some special abyss Boss behavior
 	if (myStats->type == LICH_FALLEN)
 	{
-		// destroying Columns
+		// destroying Columns phase 2
 		if (myStats->HP <= myStats->MAXHP / 2)
 		{
 			node_t* node, * nextnode;
@@ -1746,7 +1746,74 @@ void actMonster(Entity* my)
 				for (c = 0; c < MAXPLAYERS; c++)
 				{
 					MONSTER_SOUND = playSoundPlayer(c, 477, 128);
-					playSoundPlayer(c, 166, 128);
+				}
+			}
+		}
+		// destroying room lights phase 3
+		if (myStats->HP <= myStats->MAXHP / 4)
+		{
+			node_t* node, * nextnode;
+			bool foundlights = false;
+			for (node = map.entities->first; node != nullptr; node = nextnode)
+			{
+				nextnode = node->next;
+				Entity* tempEntity = (Entity*)node->element;
+
+				if (tempEntity->behavior == &actTorch || tempEntity->behavior == &actCampfire)
+				{
+					foundlights = true;
+					if (tempEntity->light)
+					{
+						list_RemoveNode(tempEntity->light->node);
+						tempEntity->light = nullptr;
+					}
+					list_RemoveNode(tempEntity->mynode);
+				}
+			}
+			if (foundlights)
+			{
+#ifdef USE_FMOD
+				if (MONSTER_SOUND)
+				{
+					FMOD_Channel_Stop(MONSTER_SOUND);
+				}
+#elif defined USE_OPENAL
+				if (MONSTER_SOUND)
+				{
+					OPENAL_Channel_Stop(MONSTER_SOUND);
+				}
+#endif
+				int c;
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					MONSTER_SOUND = playSoundPlayer(c, 478, 128);
+				}
+			}
+		}
+		// death, unlocks path to portal.
+		if (myStats->HP <=  0)
+		{
+			node_t* node, * nextnode;
+			bool foundcolumn = false;
+			for (node = map.entities->first; node != nullptr; node = nextnode)
+			{
+				nextnode = node->next;
+				Entity* tempEntity = (Entity*)node->element;
+
+				if (tempEntity->behavior == &actPedestalBase)
+				{
+					foundcolumn = true;
+					//list_RemoveNode(tempEntity->actColumn->node);
+					//tempEntity->actColumn = nullptr;
+					list_RemoveNode(tempEntity->mynode);
+				}
+			}
+			if (foundcolumn)
+			{
+				int c;
+				for (c = 0; c < MAXPLAYERS; c++)
+				{
+					playSoundPlayer(c, 479, 128);
 				}
 			}
 		}
@@ -2657,6 +2724,7 @@ void actMonster(Entity* my)
 					myStats->EFFECTS[c] = false;
 					myStats->EFFECTS_TIMERS[c] = 0;
 				}
+				lichFallenDie(my);
 				break;
 			default:
 				break; //This should never be reached.
@@ -5318,14 +5386,8 @@ timeToGoAgain:
 		}
 		else if ( my->monsterState == MONSTER_STATE_DEVIL_DEATH )     // devil death state
 		{
-			my->z += .5; // descend slowly
 			MONSTER_ATTACK = 4;
 			MONSTER_ATTACKTIME = 0;
-			/*if( MONSTER_SPECIAL==0 ) {
-				int c;
-				for( c=0; c<MAXPLAYERS; c++ )
-					playSoundPlayer(c,186,128);
-			}*/
 			if ( my->monsterSpecialTimer == 0 )
 			{
 				serverUpdateEntitySkill(my, 8);
@@ -5355,17 +5417,13 @@ timeToGoAgain:
 		}
 		else if (my->monsterState == MONSTER_STATE_LICHFALLEN_DIE)     // lich fallen death state
 		{
-			my->yaw += .5; // rotate
-			if (my->yaw >= PI * 2)
-			{
-				my->yaw -= PI * 2;
-			}
 			MONSTER_ATTACK = 1;
 			MONSTER_ATTACKTIME = 0;
 			if (my->monsterSpecialTimer == 0)
 			{
 				serverUpdateEntitySkill(my, 8);
 				serverUpdateEntitySkill(my, 9);
+				serverUpdateEntitySkill(my, 0);
 				int c;
 				for (c = 0; c < MAXPLAYERS; c++)
 				{
@@ -5377,7 +5435,7 @@ timeToGoAgain:
 				spawnExplosion(my->x - 8 + rand() % 16, my->y - 8 + rand() % 16, -4 + rand() % 8);
 			}
 			my->monsterSpecialTimer++;
-			if (my->monsterSpecialTimer > 180)
+			//if (my->monsterSpecialTimer > 180)
 			{
 				lichFallenDie(my);
 			}
@@ -5398,118 +5456,9 @@ timeToGoAgain:
 			{
 				serverUpdateEntitySkill(my, 8);
 				serverUpdateEntitySkill(my, 9);
-				serverUpdateEntitySkill(my, 10);
+				serverUpdateEntitySkill(my, 0);
 			}
 			++my->monsterSpecialTimer;
-			if ( my->z >= 64 )
-			{
-				node_t* node;
-				int c = 0;
-				for ( node = map.entities->first; node != nullptr; node = node->next )
-				{
-					Entity* entity = (Entity*)node->element;
-					if ( entity->behavior == &actDevilTeleport )
-					{
-						if ( entity->x == my->x && entity->y == my->y )
-						{
-							continue;
-						}
-						switch ( entity->sprite )
-						{
-							case 72:
-								if ( devilstate == 74 )
-								{
-									c++;
-								}
-								continue;
-							case 73:
-								if ( devilstate == 0 || devilstate == 72 )
-								{
-									c++;
-								}
-								continue;
-							case 74:
-								if ( devilstate == 73 )
-								{
-									c++;
-								}
-								continue;
-							default:
-								continue;
-						}
-					}
-				}
-				if ( c )
-				{
-					int i = rand() % c;
-					c = 0;
-					for ( node = map.entities->first; node != nullptr; node = node->next )
-					{
-						Entity* entity = (Entity*)node->element;
-						if ( entity->behavior == &actDevilTeleport )
-						{
-							if ( entity->x == my->x && entity->y == my->y )
-							{
-								continue;
-							}
-							switch ( entity->sprite )
-							{
-								case 72:
-									if ( devilstate == 74 )
-									{
-										if ( c == i )
-										{
-											break;
-										}
-										else
-										{
-											c++;
-											continue;
-										}
-									}
-									continue;
-								case 73:
-									if ( devilstate == 0 || devilstate == 72 )
-									{
-										if ( c == i )
-										{
-											break;
-										}
-										else
-										{
-											c++;
-											continue;
-										}
-									}
-									continue;
-								case 74:
-									if ( devilstate == 73 )
-									{
-										if ( c == i )
-										{
-											break;
-										}
-										else
-										{
-											c++;
-											continue;
-										}
-									}
-									continue;
-								default:
-									continue;
-							}
-							my->x = entity->x;
-							my->y = entity->y;
-							devilstate = entity->sprite;
-							devilacted = 0;
-							break;
-						}
-					}
-				}
-				my->monsterSpecialTimer = 30;
-				my->monsterState = MONSTER_STATE_DEVIL_RISING;
-			}
 		}
 		else if ( my->monsterState == MONSTER_STATE_DEVIL_RISING )     // devil rising state (post-teleport)
 		{

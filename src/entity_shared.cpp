@@ -893,7 +893,8 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"ABOMINATION",
 	"CHLOROSH",
 	"LICH_FALLEN",
-	"ABYSS COLUMN BLOCK"
+	"ABYSS COLUMN BLOCK",
+	"END PORTAL ABYSS"
 };
 
 char monsterEditorNameStrings[NUMMONSTERS][13] =

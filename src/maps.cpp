@@ -4261,7 +4261,7 @@ void assignActions(map_t* map)
 				entity->sizey = 4;
 				entity->yaw = PI / 2;
 				entity->behavior = &actPortal;
-				if ( !strcmp(map->name, "Mages Guild") )
+				if ( !strcmp(map->name, "Mages Guild") || !strcmp(map->name, "Necropolis") )
 				{
 					entity->skill[3] = 1; // not secret portal, just aesthetic.
 				}
@@ -5073,28 +5073,25 @@ void assignActions(map_t* map)
 				entity->behavior = &actPedestalBase;
 				entity->sprite = 890; //pedestal base
 				entity->flags[PASSABLE] = false;
-				entity->pedestalOrbType = entity->pedestalOrbType + 1;// set in editor as 0-3, need 1-4.
+				entity->pedestalOrbType = entity->pedestalOrbType = 5;// 5 so no orbs are accepted
 				if (entity->pedestalHasOrb == 1) // set in editor
 				{
 					entity->pedestalHasOrb = entity->pedestalOrbType;
 				}
-				//entity->pedestalInvertedPower // set in editor
-				//entity->pedestalOrbInit = 0;
-				//entity->pedestalInGround = 0; // set in editor
-				//entity->pedestalLockOrb // set in editor
+				entity->pedestalInit = 0;
 				if (entity->pedestalInGround)
 				{
 					entity->z += 11;
 					entity->flags[PASSABLE] = true;
 				}
 
-				childEntity = newEntity(887 + entity->pedestalOrbType - 1, 0, map->entities, nullptr); //floating symbols(rage,cruelty,hatred)
+				childEntity = newEntity(887 + entity->pedestalOrbType - 1, 0, map->entities, nullptr); //floating orb
 				childEntity->parent = entity->getUID();
 				childEntity->behavior = &actPedestalOrb;
 				childEntity->x = entity->x;
 				childEntity->y = entity->y;
 				TileEntityList.addEntity(*childEntity);
-				childEntity->z = -3;
+				childEntity->z = -2;
 				childEntity->sizex = 2;
 				childEntity->sizey = 2;
 				childEntity->flags[UNCLICKABLE] = true;
@@ -5106,7 +5103,6 @@ void assignActions(map_t* map)
 					childEntity->orbStartZ = -3;
 				}
 				childEntity->pedestalOrbInit();
-				//childEntity->pedestalSymbolInit();
 
 				node_t* tempNode = list_AddNodeLast(&entity->children);
 				tempNode->element = childEntity; // add the node to the children list.
@@ -5862,6 +5858,23 @@ void assignActions(map_t* map)
 					entity->skill[28] = 1; // is a mechanism
 				}
 				break;
+			case 172:
+				entity->x += 8;
+				entity->y += 8;
+				entity->sprite = 614;
+				entity->sizex = 4;
+				entity->sizey = 4;
+				entity->yaw = PI / 2;
+				entity->behavior = &actEndGamePortalAbyss;
+				entity->flags[PASSABLE] = true;
+				entity->flags[BRIGHT] = true;
+				/*if (strstr(map->name, "Abyss Boss"))
+				{
+					entity->flags[INVISIBLE] = true;
+					entity->skill[28] = 1; // is a mechanism
+				}*/
+				entity->portalVictoryType = 3;
+				break;
 			default:
 				break;
 		}
@@ -6084,7 +6097,7 @@ int loadMainMenuMap(bool blessedAdditionMaps, bool forceVictoryMap)
 				camera.z = -24;
 				camera.ang = 5.0;
 				break;
-			//moded (Wicked Rendition) maps
+			//(Wicked Rendition) maps
 			case 4:
 				fullMapName = physfsFormatMapName("mainmenu10");
 				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures);

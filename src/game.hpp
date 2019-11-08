@@ -293,6 +293,7 @@ void actLadderJump16(Entity* my);
 void actLadderJump14(Entity* my);
 void actMidPortalJump13(Entity* my);
 void actMidGamePortalBoss2(Entity* my);
+void actEndGamePortalAbyss(Entity* my);
 
 void startMessages();
 bool frameRateLimit(Uint32 maxFrameRate, bool resetAccumulator = true);

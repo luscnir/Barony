@@ -327,7 +327,14 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 				createParticleDropRising(&entity, entity.pedestalOrbType + 605, 1.0);
 				serverSpawnMiscParticles(&entity, PARTICLE_EFFECT_RISING_DROP, entity.pedestalOrbType + 605);
 			}
-			entity.pedestalHasOrb = type - ARTIFACT_ORB_BLUE + 1;
+			if (!strncmp(map.name, "Mural of portals", 4))
+			{
+				entity.pedestalHasOrb = type - SYMBOL_RAGE + 1;
+			}
+			else
+			{
+				entity.pedestalHasOrb = type - ARTIFACT_ORB_BLUE + 1;
+			}
 			serverUpdateEntitySkill(&entity, 0); // update orb status.
 			Item* item = stats[player]->weapon;
 			consumeItem(item, player);
@@ -599,57 +606,3 @@ void Item::applyEmptyPotion(int player, Entity& entity)
 		messagePlayer(player, language[2371]);
 	}
 }
-/*
-void Item::applySymbol(int player, ItemType type, Entity& entity)
-{
-	if (entity.behavior == &actPedestalBase && entity.pedestalHasSymbol == 0)//TODO: &actSymbolPedestalBase (?)
-	{
-		if (multiplayer == CLIENT)
-		{
-			Item* item = stats[player]->weapon;
-			stats[player]->weapon = nullptr;
-			consumeItem(item, player);
-			return;
-		}
-		messagePlayer(player, language[3741]);
-		bool playSound = true;
-
-		if (type == SYMBOL_RAGE && entity.pedestalSymbolType == 1)
-		{
-			messagePlayer(player, language[3743]);
-		}
-		else if (type == SYMBOL_CRUELTY && entity.pedestalSymbolType == 2)
-		{
-			messagePlayer(player, language[3743]);
-		}
-		else if (type == SYMBOL_HATRED && entity.pedestalSymbolType == 3)
-		{
-			messagePlayer(player, language[3743]);
-		}
-		else
-		{
-			// incorrect symbol.
-			messagePlayer(player, language [3742]);
-			playSound = false;
-		}
-
-		if (multiplayer != CLIENT)
-		{
-			if (playSound)
-			{
-				playSoundEntity(&entity, 166, 128); // invisible.ogg
-				createParticleDropRising(&entity, entity.pedestalSymbolType + 605, 1.0);
-				serverSpawnMiscParticles(&entity, PARTICLE_EFFECT_RISING_DROP, entity.pedestalSymbolType + 605);
-			}
-			entity.pedestalHasSymbol = type - SYMBOL_RAGE + 1;
-			serverUpdateEntitySkill(&entity, 0); // update symbol status.
-			Item* item = stats[player]->weapon;
-			consumeItem(item, player);
-			stats[player]->weapon = nullptr;
-		}
-	}
-	else
-	{
-		messagePlayer(player, language[2371]);
-	}
-}*/

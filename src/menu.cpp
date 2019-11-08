@@ -239,6 +239,8 @@ int fourthendmoviealpha[30];
 int intromoviealpha[30];
 int rebindkey = -1;
 int rebindaction = -1;
+int fifthendmoviealpha[30];
+int sixtyendmoviealpha[30];
 
 Sint32 gearrot = 0;
 Sint32 gearsize = 5000;
@@ -257,6 +259,12 @@ int thirdEndNumLines = 6;
 int fourthendmoviestage = 0;
 int fourthendmovietime = 0;
 int fourthEndNumLines = 13;
+int fifthendmoviestage = 0;
+int fifthendmovietime = 0;
+int fifthEndNumLines = 6;
+int sixtyendmoviestage = 0;
+int sixtyendmovietime = 0;
+int sixtyEndNumLines = 6;
 real_t drunkextend = 0;
 bool losingConnection[4] = { false };
 bool subtitleVisible = false;
@@ -8437,6 +8445,37 @@ void handleMainMenu(bool mode)
 				movie = true;
 			}
 		}
+
+		//Moded sequences
+		else if (introstage == 12)     // win game sequence (abyss)
+		{
+#ifdef MUSIC
+		if (fifthendmoviestage == 0)
+		{
+			playmusic(endgamemusic, true, true, false);
+		}
+#endif
+		fifthendmoviestage++;
+		if (fifthendmoviestage >= 5)
+		{
+			introstage = 4;
+			fifthendmovietime = 0;
+			fifthendmoviestage = 0;
+			int c;
+			for (c = 0; c < 30; c++)
+			{
+				fifthendmoviealpha[c] = 0;
+			}
+			fadeout = true;
+		}
+		else
+		{
+			fadefinished = false;
+			fadeout = false;
+			fifthendmovietime = 0;
+			movie = true;
+		}
+		}
 	}
 
 	// credits sequence
@@ -9014,6 +9053,147 @@ void handleMainMenu(bool mode)
 			}
 		}
 		if ( fourthendmoviestage >= 13 )
+		{
+			fadealpha = std::min(fadealpha + 2, 255);
+		}
+	}
+	// fifth (expansion) end movie stage
+	if (fifthendmoviestage > 0)
+	{
+		SDL_Rect pos;
+		pos.x = 0;
+		pos.y = 0;
+		pos.w = xres;
+		pos.h = (((real_t)xres) / backdrop_abyssmid_bmp->w) * backdrop_abyssmid_bmp->h;
+		drawRect(&pos, 0, 255);
+		drawImageScaled(backdrop_abyssmid_bmp, NULL, &pos);
+
+		if (fifthendmovietime >= 600
+			|| (mousestatus[SDL_BUTTON_LEFT]
+				&& fifthendmoviestage < 10
+				&& fifthendmoviestage != 10
+				&& fifthendmoviestage != 5
+				&& fifthendmoviestage != 1)
+			|| (fifthendmovietime >= 120 && fifthendmoviestage == 1)
+			|| (fifthendmovietime >= 60 && fifthendmoviestage == 5)
+			|| (fifthendmovietime >= 240 && fifthendmoviestage == 10)
+			|| (fifthendmovietime >= 200 && fifthendmoviestage == 11)
+			|| (fifthendmovietime >= 60 && fifthendmoviestage == 12)
+			|| (fifthendmovietime >= 400 && fifthendmoviestage == 13)
+			)
+		{
+			fifthendmovietime = 0;
+			mousestatus[SDL_BUTTON_LEFT] = 0;
+			if (fifthendmoviestage < fifthEndNumLines)
+			{
+				fifthendmoviestage++;
+			}
+			else if (fifthendmoviestage == fifthEndNumLines)
+			{
+				fadeout = true;
+				introstage = 10;
+			}
+		}
+		Uint32 color = 0x00FFFFFF;
+		if (fifthendmoviestage >= 1)
+		{
+			fifthendmoviealpha[8] = std::min(fifthendmoviealpha[8] + 2, 255);
+			color = 0x00FFFFFF;
+			color += std::min(std::max(0, fifthendmoviealpha[8]), 255) << 24;
+			ttfPrintTextColor(ttf16, 16, yres - 32, color, true, language[2606]);
+		}
+		if (fifthendmoviestage >= 2)
+		{
+			if (fifthendmoviestage < 5)
+			{
+				fifthendmoviealpha[0] = std::min(fifthendmoviealpha[0] + 2, 255);
+			}
+			color = 0x00FFFFFF;
+			color += std::min(std::max(0, fifthendmoviealpha[0]), 255) << 24;
+			ttfPrintTextColor(ttf16, 16 + (xres - 960) / 2, 16 + (yres - 600) / 2, color, true, language[20]);
+		}
+		if (fifthendmoviestage >= 3)
+		{
+			if (fifthendmoviestage < 5)
+			{
+				fifthendmoviealpha[1] = std::min(fifthendmoviealpha[1] + 2, 255);
+			}
+			color = 0x00FFFFFF;
+			color += std::min(std::max(0, fifthendmoviealpha[1]), 255) << 24;
+			ttfPrintTextColor(ttf16, 16 + (xres - 960) / 2, 16 + (yres - 600) / 2, color, true, language[26]);
+		}
+		if (fifthendmoviestage >= 4)
+		{
+			if (fifthendmoviestage < 5)
+			{
+				fifthendmoviealpha[2] = std::min(fifthendmoviealpha[2] + 2, 255);
+			}
+			color = 0x00FFFFFF;
+			color += std::min(std::max(0, fifthendmoviealpha[2]), 255) << 24;
+			ttfPrintTextColor(ttf16, 16 + (xres - 960) / 2, 16 + (yres - 600) / 2, color, true, language[29]);
+		}
+		if (fifthendmoviestage >= 5)
+		{
+			fifthendmoviealpha[0] = std::max(fifthendmoviealpha[2] - 2, 0);
+			fifthendmoviealpha[1] = std::max(fifthendmoviealpha[2] - 2, 0);
+			fifthendmoviealpha[2] = std::max(fifthendmoviealpha[2] - 2, 0);
+		}
+		if (fifthendmoviestage >= 6)
+		{
+			if (fifthendmoviestage < 10)
+			{
+				fifthendmoviealpha[3] = std::min(fifthendmoviealpha[3] + 2, 255);
+			}
+			color = 0x00FFFFFF;
+			color += std::min(std::max(0, fifthendmoviealpha[3]), 255) << 24;
+			ttfPrintTextColor(ttf16, 16 + (xres - 960) / 2, 16 + (yres - 600) / 2, color, true, language[20]);
+		}
+		if (fifthendmoviestage >= 7)
+		{
+			if (fifthendmoviestage < 10)
+			{
+				fifthendmoviealpha[4] = std::min(fifthendmoviealpha[4] + 2, 255);
+			}
+			color = 0x00FFFFFF;
+			color += std::min(std::max(0, fifthendmoviealpha[4]), 255) << 24;
+			ttfPrintTextColor(ttf16, 16 + (xres - 960) / 2, 16 + (yres - 600) / 2, color, true, language[21]);
+		}
+		if (fifthendmoviestage >= 8)
+		{
+			if (fifthendmoviestage < 10)
+			{
+				fifthendmoviealpha[5] = std::min(fifthendmoviealpha[5] + 2, 255);
+			}
+			color = 0x00FFFFFF;
+			color += std::min(std::max(0, fifthendmoviealpha[5]), 255) << 24;
+			ttfPrintTextColor(ttf16, 16 + (xres - 960) / 2, 16 + (yres - 600) / 2, color, true, language[12]);
+		}
+		if (fifthendmoviestage >= 9)
+		{
+			if (fifthendmoviestage < 10)
+			{
+				fifthendmoviealpha[6] = std::min(fifthendmoviealpha[6] + 2, 255);
+			}
+			color = 0x00FFFFFF;
+			color += std::min(std::max(0, fifthendmoviealpha[6]), 255) << 24;
+			ttfPrintTextColor(ttf16, 16 + (xres - 960) / 2, 16 + (yres - 600) / 2, color, true, language[23]);
+		}
+		if (fifthendmoviestage >= 10)
+		{
+			fifthendmoviealpha[3] = std::max(fifthendmoviealpha[3] - 2, 0);
+			fifthendmoviealpha[4] = std::max(fifthendmoviealpha[4] - 2, 0);
+			fifthendmoviealpha[5] = std::max(fifthendmoviealpha[5] - 2, 0);
+			fifthendmoviealpha[6] = std::max(fifthendmoviealpha[6] - 2, 0);
+		}
+		if (fifthendmoviestage >= 11)
+		{
+			fifthendmoviealpha[7] = std::min(fifthendmoviealpha[7] + 2, 255);
+			color = 0x00FFFFFF;
+			color += std::min(std::max(0, fifthendmoviealpha[7]), 255) << 24;
+			ttfPrintTextColor(ttf16, 16 + (xres / 2) - 256, (yres / 2) - 64, color, true, language[26]);
+			
+		}
+		if (fifthendmoviestage >= 13)
 		{
 			fadealpha = std::min(fadealpha + 2, 255);
 		}

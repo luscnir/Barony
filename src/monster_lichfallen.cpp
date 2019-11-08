@@ -184,38 +184,6 @@ void lichFallenDie(Entity* my)
 		Entity* entity = spawnGib(my);
 		if ( entity )
 		{
-			switch ( c )
-			{
-				case 0:
-					entity->sprite = 230;
-					break;
-				case 1:
-					entity->sprite = 231;
-					break;
-				case 2:
-					entity->sprite = 233;
-					break;
-				case 3:
-					entity->sprite = 235;
-					break;
-				case 4:
-					entity->sprite = 236;
-					break;
-				case 5:
-					entity->sprite = 950;
-					break;
-				case 6:
-					entity->sprite = 951;
-					break;
-				case 7:
-					entity->sprite = 952;
-					break;
-				case 8:
-					entity->sprite = 953;
-					break;
-				default:
-					break;
-			}
 			serverSpawnGibForClient(entity);
 		}
 	}

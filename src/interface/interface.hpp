@@ -81,6 +81,9 @@ extern SDL_Surface* itembroken_bmp;
 //extern SDL_Surface *category_bmp[NUMCATEGORIES];
 extern SDL_Surface* shopkeeper_bmp;
 extern SDL_Surface* damage_bmp;
+extern SDL_Surface* backdrop_abyssmid_bmp;
+extern SDL_Surface* backdrop_abyssend_bmp;
+
 extern int textscroll;
 extern int attributespage;
 extern int proficienciesPage;

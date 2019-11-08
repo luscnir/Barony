@@ -1304,12 +1304,16 @@ void clientActions(Entity* entity)
 			entity->behavior = &actSwitchWithTimer;
 			break;
 		case 601:
+		case 990:
 			entity->behavior = &actPedestalBase;
 			break;
 		case 602:
 		case 603:
 		case 604:
 		case 605:
+		case 887:
+		case 888:
+		case 889:
 			entity->behavior = &actPedestalOrb;
 			break;
 		case 667:
@@ -1343,7 +1347,7 @@ void clientActions(Entity* entity)
 		case 906:
 		case 907:
 			//act portals yellow
-			entity->behavior = &actPortal;// Jump2;
+			entity->behavior = &actPortal;
 			break;
 		default:
 			if ( entity->isPlayerHeadSprite() )
@@ -3397,6 +3401,13 @@ void clientHandlePacket()
 				if ( entity->behavior == &actPedestalBase )
 				{
 					entity->pedestalInit = 1;
+				}
+			}
+			if (strstr(map.name, "Abyss"))
+			{
+				if (entity->behavior == &actEndGamePortalAbyss)
+				{
+					entity->flags[INVISIBLE] = false;
 				}
 			}
 		}
