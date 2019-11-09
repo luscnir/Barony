@@ -1375,7 +1375,8 @@ char tileEditorNameStrings[NUM_EDITOR_TILES][44] =
 	"AbyssFancyFloor.png",
 	"AbyssFancyCeiling.png",
 	"SkyWickedBlank.png",
-	"", "", "", "", ""
+	"AbyssMid.png",
+	"", "", "", ""
 };
 
 int canWearEquip(Entity* entity, int category)

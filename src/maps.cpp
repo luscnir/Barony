@@ -411,6 +411,25 @@ int monsterCurve(int level)
 				return COCKATRICE;
 		}
 	}
+	if (!strncmp(map.name, "Ant Nest", 16))
+	{
+		switch (rand() % 10)
+		{
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+			return RAT;
+		case 9:
+			return COCKROACH;
+			break;
+		}
+	}
 	return SKELETON; // basic monster
 }
 
