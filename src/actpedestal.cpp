@@ -261,28 +261,6 @@ void Entity::actPedestalBase()
 							// if orb locked, then can't retreive.
 							messagePlayer(i, language[2367]);
 						}
-						else if (!strncmp(map.name, "Boss", 4))
-						{
-							Item* itemOrb = newItem(static_cast<ItemType>(ARTIFACT_ORB_BLUE + pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
-							itemPickup(i, itemOrb);
-							if (pedestalHasOrb == pedestalOrbType)
-							{
-								// only update power when right orb is in place.
-								if (!pedestalInvertedPower)
-								{
-									mechanismPowerOff();
-								}
-								else
-								{
-									mechanismPowerOn();
-								}
-								updateCircuitNeighbors();
-							}
-							pedestalHasOrb = 0;
-							serverUpdateEntitySkill(this, 0); // update orb status.
-							messagePlayer(i, language[2374], itemOrb->getName());
-						}
-
 						else if (!strncmp(map.name, "Mural of portals", 4))	//portal symbols
 						{
 							Item* symbolOrb = newItem(static_cast<ItemType>(SYMBOL_RAGE + pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
@@ -304,6 +282,29 @@ void Entity::actPedestalBase()
 							serverUpdateEntitySkill(this, 0); // update symbol status.
 							messagePlayer(i, language[2374], symbolOrb->getName());
 						}
+						else
+						{
+							Item* itemOrb = newItem(static_cast<ItemType>(ARTIFACT_ORB_BLUE + pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
+							itemPickup(i, itemOrb);
+							if (pedestalHasOrb == pedestalOrbType)
+							{
+								// only update power when right orb is in place.
+								if (!pedestalInvertedPower)
+								{
+									mechanismPowerOff();
+								}
+								else
+								{
+									mechanismPowerOn();
+								}
+								updateCircuitNeighbors();
+							}
+							pedestalHasOrb = 0;
+							serverUpdateEntitySkill(this, 0); // update orb status.
+							messagePlayer(i, language[2374], itemOrb->getName());
+						}
+
+						
 					}
 					else
 					{
@@ -389,27 +390,6 @@ void Entity::actPedestalOrb()
 									// if orb locked, then can't retreive.
 									messagePlayer(i, language[2367]);
 								}
-								else if (!strncmp(map.name, "Boss", 4))
-								{
-									Item* itemOrb = newItem(static_cast<ItemType>(ARTIFACT_ORB_BLUE + parent->pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
-									itemPickup(i, itemOrb);
-									if (parent->pedestalHasOrb == parent->pedestalOrbType)
-									{
-										// only update power when right orb is in place.
-										if (!pedestalInvertedPower)
-										{
-											parent->mechanismPowerOff();
-										}
-										else
-										{
-											parent->mechanismPowerOn();
-										}
-										updateCircuitNeighbors();
-									}
-									parent->pedestalHasOrb = 0;
-									serverUpdateEntitySkill(parent, 0); // update orb status
-									messagePlayer(i, language[2374], itemOrb->getName());
-								}
 								else if (!strncmp(map.name, "Mural of portals", 4))//Symbol version
 								{
 									Item* itemOrb = newItem(static_cast<ItemType>(SYMBOL_RAGE + parent->pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
@@ -429,6 +409,27 @@ void Entity::actPedestalOrb()
 									}
 									parent->pedestalHasOrb = 0;
 									serverUpdateEntitySkill(parent, 0); // update symbol status 
+									messagePlayer(i, language[2374], itemOrb->getName());
+								}
+								else
+								{
+									Item* itemOrb = newItem(static_cast<ItemType>(ARTIFACT_ORB_BLUE + parent->pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
+									itemPickup(i, itemOrb);
+									if (parent->pedestalHasOrb == parent->pedestalOrbType)
+									{
+										// only update power when right orb is in place.
+										if (!pedestalInvertedPower)
+										{
+											parent->mechanismPowerOff();
+										}
+										else
+										{
+											parent->mechanismPowerOn();
+										}
+										updateCircuitNeighbors();
+									}
+									parent->pedestalHasOrb = 0;
+									serverUpdateEntitySkill(parent, 0); // update orb status
 									messagePlayer(i, language[2374], itemOrb->getName());
 								}
 							}
