@@ -117,7 +117,7 @@ void initFleshling(Entity* my, Stat* myStats)
 				case 1:
 					if ( rand() % 3 == 0 )
 					{
-						newItem(FOOD_SALMON, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
+						newItem(FOOD_ANGLERFISH, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
 					}
 					break;
 				default:
@@ -154,10 +154,11 @@ void initFleshling(Entity* my, Stat* myStats)
 				switch ( rand() % 10 )
 				{
 					case 0:
-						myStats->GOLD += 100;
 						myStats->weapon = newItem(TOOL_PICKAXE, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 					case 1:
+						myStats->weapon = newItem(MACHETE, EXCELLENT, 0 + rand() % 3, 1, rand(), false, nullptr);
+						break;
 					case 2:
 					case 3:
 					case 4:

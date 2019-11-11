@@ -41,7 +41,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 				minion = true;
 			}
 
-			if ( !strncmp(myStats->name, "chlorosh knight", strlen("chlorosh knight")) )
+			/*if ( !strncmp(myStats->name, "chlorosh knight", strlen("chlorosh knight")) )
 			{
 				myStats->MAXHP = 200;
 				myStats->HP = myStats->MAXHP;
@@ -57,7 +57,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 				myStats->CHR = -10;
 				myStats->weapon = newItem(STEEL_SWORD, EXCELLENT,-1, 1, rand(), false, &myStats->inventory);
 				myStats->shield = newItem(STEEL_SHIELD, EXCELLENT,-1, 1, rand(), false, &myStats->inventory);
-			}
+			}*/
 
 			// apply random stat increases if set in stat_shared.cpp or editor
 			setRandomMonsterStats(myStats);
@@ -80,8 +80,8 @@ void initCholorosh(Entity* my, Stat* myStats)
 					myStats->PER += 1;
 					myStats->CON += 10;
 					myStats->MAXHP += 75;
-					myStats->HP = myStats->MAXHP;
-					myStats->OLDHP = myStats->MAXHP;
+					myStats->HP = myStats->MAXHP -1;
+					myStats->OLDHP = myStats->MAXHP -1;		//Can not be full HP or abyssal_crossbow can stun-lock the player/target.
 					myStats->weapon = newItem(ABYSSAL_CROSSBOW, EXCELLENT, 1 , 1, rand(), false, &myStats->inventory);
 					myStats->helmet = newItem(STEEL_HELM, SERVICABLE, rand() % 5, 1, rand(), false, nullptr);
 					myStats->breastplate = newItem(STEEL_BREASTPIECE, SERVICABLE, 0, 1, rand(), false, nullptr);
@@ -99,7 +99,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 					myStats->HP = myStats->MAXHP;
 					myStats->OLDHP = myStats->MAXHP;
 					my->setEffect(EFF_MAGICREFLECT, true, -1, true);
-					myStats->weapon = newItem(POTION_SICKNESS, EXCELLENT, -1, 3, rand(), true, &myStats->inventory);
+					myStats->weapon = newItem(POTION_SICKNESS, EXCELLENT, -1, 4, rand(), true, &myStats->inventory);
 					myStats->helmet = newItem(HAT_WIZARD, SERVICABLE, 3 + rand() % 3, 1, rand(), false, nullptr);
 					myStats->shoes = newItem(GLOVES_DEXTERITY, WORN, 7, 1, rand(), false, nullptr);
 					newItem(SHORTBOW, EXCELLENT, -1, 1, rand(), true, &myStats->inventory);
