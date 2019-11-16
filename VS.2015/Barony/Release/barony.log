@@ -1,21 +1,6 @@
-﻿  entity_shared.cpp
-  monster_cholorosh.cpp
-  monster_fleshling.cpp
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_fleshling.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_fleshling.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\entity_shared.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\entity_shared.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(55,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_cholorosh.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_cholorosh.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity_shared.cpp(1379,18): error C2078: too many initializers
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(15,6): warning C4101: 'c': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(61,54): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(61,47): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(990,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(1039,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(1080,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(1128,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(1184,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(716,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(765,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(859,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+﻿  Generating code
+  0 of 4450 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    284 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  barony.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\barony_test.exe
