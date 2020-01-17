@@ -41,12 +41,12 @@ real_t entityDist(Entity* my, Entity* your)
 	returns the entity that was last clicked on with the mouse
 -------------------------------------------------------------------------------*/
 
-Entity* entityClicked()
+Entity* entityClicked(bool* clickedOnGUI, bool clickCheckOverride)
 {
 	Uint32 uidnum;
 	GLubyte pixel[4];
 
-	if (!(*inputPressed(impulses[IN_USE])) && !(*inputPressed(joyimpulses[INJOY_GAME_USE])))
+	if ( !clickCheckOverride && !(*inputPressed(impulses[IN_USE])) && !(*inputPressed(joyimpulses[INJOY_GAME_USE])) )
 	{
 		return NULL;
 	}
@@ -54,25 +54,45 @@ Entity* entityClicked()
 	{
 		if (itemMenuOpen)
 		{
+			if ( clickedOnGUI )
+			{
+				*clickedOnGUI = true;
+			}
 			return NULL;
 		}
 		if (omousex < camera.winx || omousex >= camera.winx + camera.winw || omousey < camera.winy || omousey >= camera.winy + camera.winh)
 		{
+			if ( clickedOnGUI )
+			{
+				*clickedOnGUI = true;
+			}
 			return NULL;
 		}
 		if (openedChest[clientnum])
 			if (omousex > CHEST_INVENTORY_X && omousex < CHEST_INVENTORY_X + inventoryChest_bmp->w && omousey > CHEST_INVENTORY_Y && omousey < CHEST_INVENTORY_Y + inventoryChest_bmp->h)
 			{
+				if ( clickedOnGUI )
+				{
+					*clickedOnGUI = true;
+				}
 				return NULL;    //Click falls inside the chest inventory GUI.
 			}
 		if (identifygui_active)
 			if (omousex > IDENTIFY_GUI_X && omousex < IDENTIFY_GUI_X + identifyGUI_img->w && omousey > IDENTIFY_GUI_Y && omousey < IDENTIFY_GUI_Y + identifyGUI_img->h)
 			{
+				if ( clickedOnGUI )
+				{
+					*clickedOnGUI = true;
+				}
 				return NULL;    //Click falls inside the identify item gui.
 			}
 		if (book_open)
 			if (mouseInBounds(BOOK_GUI_X, BOOK_GUI_X + bookgui_img->w, BOOK_GUI_Y, BOOK_GUI_Y + bookgui_img->h))
 			{
+				if ( clickedOnGUI )
+				{
+					*clickedOnGUI = true;
+				}
 				return NULL;    //Click falls inside the book GUI.
 			}
 		if (gui_mode == GUI_MODE_INVENTORY || gui_mode == GUI_MODE_SHOP)
@@ -80,6 +100,10 @@ Entity* entityClicked()
 			if (gui_mode == GUI_MODE_INVENTORY)
 				if (mouseInBounds(RIGHTSIDEBAR_X, RIGHTSIDEBAR_X + rightsidebar_titlebar_img->w, RIGHTSIDEBAR_Y, RIGHTSIDEBAR_Y + rightsidebar_height))
 				{
+					if ( clickedOnGUI )
+					{
+						*clickedOnGUI = true;
+					}
 					return NULL;    //Click falls inside the right sidebar.
 				}
 			//int x = std::max(character_bmp->w, xres/2-inventory_bmp->w/2);
@@ -88,6 +112,10 @@ Entity* entityClicked()
 			if (mouseInBounds(INVENTORY_STARTX, INVENTORY_STARTX + INVENTORY_SIZEX * INVENTORY_SLOTSIZE, INVENTORY_STARTY, INVENTORY_STARTY + INVENTORY_SIZEY * INVENTORY_SLOTSIZE))
 			{
 				// clicked in inventory
+				if ( clickedOnGUI )
+				{
+					*clickedOnGUI = true;
+				}
 				return NULL;
 			}
 			if (gui_mode == GUI_MODE_SHOP)
@@ -96,6 +124,10 @@ Entity* entityClicked()
 				int y1 = yres / 2 - SHOPWINDOW_SIZEY / 2, y2 = yres / 2 + SHOPWINDOW_SIZEY / 2;
 				if (mouseInBounds(x1, x2, y1, y2))
 				{
+					if ( clickedOnGUI )
+					{
+						*clickedOnGUI = true;
+					}
 					return NULL;
 				}
 			}
@@ -119,17 +151,29 @@ Entity* entityClicked()
 
 				if (mouseInBounds(MAGICSPELL_LIST_X, MAGICSPELL_LIST_X + spell_list_titlebar_bmp->w, spelllist_y, spelllist_y + height))
 				{
+					if ( clickedOnGUI )
+					{
+						*clickedOnGUI = true;
+					}
 					return NULL;
 				}
 			}
 		}
 		if (mouseInBounds(0, 224, 0, 420))   // character sheet
 		{
+			if ( clickedOnGUI )
+			{
+				*clickedOnGUI = true;
+			}
 			return NULL;
 		}
 		int x = xres / 2 - (status_bmp->w / 2);
 		if (mouseInBounds(x, x + status_bmp->w, yres - status_bmp->h, yres))
 		{
+			if ( clickedOnGUI )
+			{
+				*clickedOnGUI = true;
+			}
 			return NULL;
 		}
 
@@ -139,6 +183,10 @@ Entity* entityClicked()
 			if (mouseInBounds(interfaceSkillsSheet.x, interfaceSkillsSheet.x + interfaceSkillsSheet.w,
 				interfaceSkillsSheet.y, interfaceSkillsSheet.y + interfaceSkillsSheet.h))
 			{
+				if ( clickedOnGUI )
+				{
+					*clickedOnGUI = true;
+				}
 				return NULL;
 			}
 		}
@@ -147,12 +195,20 @@ Entity* entityClicked()
 			if (mouseInBounds(interfacePartySheet.x, interfacePartySheet.x + interfacePartySheet.w,
 				interfacePartySheet.y, interfacePartySheet.y + interfacePartySheet.h))
 			{
+				if ( clickedOnGUI )
+				{
+					*clickedOnGUI = true;
+				}
 				return NULL;
 			}
 		}
 
 		if (mouseInsidePlayerInventory() || mouseInsidePlayerHotbar())
 		{
+			if ( clickedOnGUI )
+			{
+				*clickedOnGUI = true;
+			}
 			return NULL;
 		}
 
@@ -177,7 +233,9 @@ Entity* entityClicked()
 		}
 	}
 
-	if (!uidToEntity(uidnum) && !mute_player_monster_sounds)
+	Entity* entity = uidToEntity(uidnum);
+
+	if ( !entity && !mute_player_monster_sounds && !clickCheckOverride )
 	{
 		if (players[clientnum] && players[clientnum]->entity && monsterEmoteGimpTimer == 0)
 		{
@@ -186,41 +244,63 @@ Entity* entityClicked()
 			int line = 0;
 			switch (stats[clientnum]->type)
 			{
-			case SKELETON:
-				sfx = 95;
-				monsterEmoteGimpTimer = TICKS_PER_SECOND;
-				break;
-			case SUCCUBUS:
-				sfx = 70;
-				break;
-			case VAMPIRE:
-				if (rand() % 4 == 0)
-				{
-					sfx = 329;
-				}
-				else
-				{
-					sfx = 322 + rand() % 3;
-				}
-				break;
-			case GOATMAN:
-				sfx = 332 + rand() % 2;
-				break;
-			case INSECTOID:
-				sfx = 291 + rand() % 4;
-				break;
-			case GOBLIN:
-				sfx = 60 + rand() % 3;
-				break;
-			case AUTOMATON:
-				sfx = 257 + rand() % 2;
-				break;
-			case INCUBUS:
-				sfx = 276 + rand() % 3;
-				break;
-			default:
-				sfx = 0;
-				break;
+				case SKELETON:
+					sfx = 95;
+					monsterEmoteGimpTimer = TICKS_PER_SECOND;
+					break;
+				case SUCCUBUS:
+					sfx = 70;
+					break;
+				case VAMPIRE:
+					if ( rand() % 4 == 0 )
+					{
+						sfx = 329;
+					}
+					else
+					{
+						sfx = 322 + rand() % 3;
+					}
+					break;
+				case GOATMAN:
+					sfx = 332 + rand() % 2;
+					break;
+				case INSECTOID:
+					sfx = 291 + rand() % 4;
+					break;
+				case GOBLIN:
+					sfx = 60 + rand() % 3;
+					break;
+				case AUTOMATON:
+					sfx = 257 + rand() % 2;
+					break;
+				case INCUBUS:
+					sfx = 276 + rand() % 3;
+					break;
+				case RAT:
+					sfx = 29;
+					break;
+				case TROLL:
+					if ( rand() % 3 == 0 )
+					{
+						sfx = 79;
+					}
+					break;
+				case SPIDER:
+					if ( rand() % 3 == 2 )
+					{
+						sfx = 235;
+					}
+					else
+					{
+						sfx = 230 + rand() % 2;
+					}
+					break;
+				case CREATURE_IMP:
+					sfx = 198 + rand() % 3;
+					break;
+				default:
+					sfx = 0;
+					break;
 			}
 
 			//Tell the server we made a noise.
@@ -262,7 +342,7 @@ Entity* entityClicked()
 	// pixel processing (opengl only)
 	if (softwaremode == false)
 	{
-		return uidToEntity(uidnum);
+		return entity;
 	}
 	else
 	{
@@ -275,7 +355,7 @@ Entity* entityClicked()
 	checks whether an entity is intersecting an impassible tile
 -------------------------------------------------------------------------------*/
 
-bool entityInsideTile(Entity* entity, int x, int y, int z)
+bool entityInsideTile(Entity* entity, int x, int y, int z, bool checkSafeTiles)
 {
 	if (x < 0 || x >= map.width || y < 0 || y >= map.height || z < 0 || z >= MAPLAYERS)
 	{
@@ -298,7 +378,11 @@ bool entityInsideTile(Entity* entity, int x, int y, int z)
 					}
 					else if (z == 0)
 					{
-						if (!map.tiles[z + y * MAPLAYERS + x * MAPLAYERS * map.height])
+						if ( !checkSafeTiles && !map.tiles[z + y * MAPLAYERS + x * MAPLAYERS * map.height] )
+						{
+							return true;
+						}
+						else if ( checkSafeTiles && map.tiles[z + y * MAPLAYERS + x * MAPLAYERS * map.height] )
 						{
 							return true;
 						}
@@ -495,11 +579,26 @@ int barony_clear(real_t tx, real_t ty, Entity* my)
 		for (node = currentList->first; node != nullptr; node = node->next)
 		{
 			entity = (Entity*)node->element;
-			if (entity == my || entity->flags[PASSABLE] || my->parent == entity->getUID())
+			if ( entity == my || my->parent == entity->getUID() )
 			{
 				continue;
 			}
-			if (my->behavior == &actMonster && entity->behavior == &actDoorFrame)
+			if ( entity->flags[PASSABLE] )
+			{
+				if ( my->behavior == &actBoulder && entity->sprite == 886 )
+				{
+					// 886 is gyrobot, as they are passable, force collision here.
+				}
+				else
+				{
+					continue;
+				}
+			}
+			if ( entity->behavior == &actParticleTimer && static_cast<Uint32>(entity->particleTimerTarget) == my->getUID() )
+			{
+				continue;
+			}
+			if ( (my->behavior == &actMonster || my->behavior == &actBoulder) && entity->behavior == &actDoorFrame )
 			{
 				continue;    // monsters don't have hard collision with door frames
 			}
@@ -519,11 +618,23 @@ int barony_clear(real_t tx, real_t ty, Entity* my)
 				{
 					continue;
 				}
-				if (monsterally[myStats->type][yourStats->type])
+				if ( entity->behavior == &actMonster && yourStats->type == NOTHING && multiplayer == CLIENT )
+				{
+					// client doesn't know about the type of the monster.
+					yourStats->type = static_cast<Monster>(entity->getMonsterTypeFromSprite());
+				}
+				if ( monsterally[myStats->type][yourStats->type] )
 				{
 					if (my->behavior == &actPlayer && myStats->type != HUMAN)
 					{
 						if (my->checkFriend(entity))
+						{
+							continue;
+						}
+					}
+					else if ( my->behavior == &actMonster && entity->behavior == &actPlayer )
+					{
+						if ( my->checkFriend(entity) )
 						{
 							continue;
 						}
@@ -817,7 +928,20 @@ Entity* findEntityInLine(Entity* my, real_t x1, real_t y1, real_t angle, int ent
 		for (node = currentList->first; node != nullptr; node = node->next)
 		{
 			Entity* entity = (Entity*)node->element;
-			if ((entity != target && target != nullptr) || entity->flags[PASSABLE] || entity == my || (entities && !entity->flags[BLOCKSIGHT]))
+			if ( (entity != target && target != nullptr) || entity->flags[PASSABLE] || entity == my 
+				|| (entities && 
+						( (!entity->flags[BLOCKSIGHT] && entity->behavior != &actMonster) 
+							|| (entity->behavior == &actMonster && (entity->flags[INVISIBLE] && entity->sprite != 889) )
+						)
+					) 
+				)
+			{
+				// if entities == 1, then ignore entities that block sight.
+				// 16/11/19 - added exception to monsters. if monster, use the INVISIBLE flag to skip checking.
+				// 889 is dummybot "invisible" AI entity. so it's invisible, need to make it shown here.
+				continue;
+			}
+			if ( entity->behavior == &actParticleTimer )
 			{
 				continue;
 			}
@@ -997,6 +1121,10 @@ real_t lineTrace(Entity* my, real_t x1, real_t y1, real_t angle, real_t range, i
 			{
 				ground = false;
 			}
+			else if ( stats->type == SENTRYBOT || stats->type == SPELLBOT )
+			{
+				ground = false;
+			}
 		}
 	}
 
@@ -1061,7 +1189,41 @@ real_t lineTrace(Entity* my, real_t x1, real_t y1, real_t angle, real_t range, i
 		// check against entity
 		if (entity)
 		{
-			if (ix >= entity->x - entity->sizex && ix <= entity->x + entity->sizex)
+			// debug particles.
+			//if ( entity->behavior == &actMonster && entities != 0 )
+			//{
+			//	Entity* particle = spawnMagicParticle(my);
+			//	particle->sprite = 576;
+			//	particle->x = ix;
+			//	particle->y = iy;
+			//	particle->z = 0;
+
+			//	particle = spawnMagicParticle(my);
+			//	particle->sprite = 942;
+			//	particle->x = entity->x + entity->sizex;
+			//	particle->y = entity->y + entity->sizey;
+			//	particle->z = 0;
+
+			//	particle = spawnMagicParticle(my);
+			//	particle->sprite = 942;
+			//	particle->x = entity->x - entity->sizex;
+			//	particle->y = entity->y + entity->sizey;
+			//	particle->z = 0;
+
+			//	particle = spawnMagicParticle(my);
+			//	particle->sprite = 942;
+			//	particle->x = entity->x + entity->sizex;
+			//	particle->y = entity->y - entity->sizey;
+			//	particle->z = 0;
+
+			//	particle = spawnMagicParticle(my);
+			//	particle->sprite = 942;
+			//	particle->x = entity->x - entity->sizex;
+			//	particle->y = entity->y - entity->sizey;
+			//	particle->z = 0;
+			//}
+
+			if ( ix >= entity->x - entity->sizex && ix <= entity->x + entity->sizex )
 			{
 				if (iy >= entity->y - entity->sizey && iy <= entity->y + entity->sizey)
 				{
@@ -1289,7 +1451,7 @@ int checkObstacle(long x, long y, Entity* my, Entity* target)
 					{
 						continue;
 					}
-					if (x >= (int)(entity->x - entity->sizex) && x <= (int)(entity->x + entity->sizex))
+					if ( x >= (int)(entity->x - entity->sizex) && x <= (int)(entity->x + entity->sizex) )
 					{
 						if (y >= (int)(entity->y - entity->sizey) && y <= (int)(entity->y + entity->sizey))
 						{

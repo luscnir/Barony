@@ -121,10 +121,21 @@ void Entity::actChest()
 				chesttype = rand() % 8;
 				if ( chesttype == 1 )
 				{
-					if ( rand() % 2 == 0 )
+					if ( currentlevel > 10 )
 					{
 						// re-roll the garbage chest.
-						chesttype = rand() % 8;
+						while ( chesttype == 1 )
+						{
+							chesttype = rand() % 8;
+						}
+					}
+					else
+					{
+						// re-roll the garbage chest 50% chance
+						if ( rand() % 2 == 0 )
+						{
+							chesttype = rand() % 8;
+						}
 					}
 				}
 			}
@@ -166,7 +177,15 @@ void Entity::actChest()
 					//}
 					//newItem(static_cast<ItemType>(itemnum), static_cast<Status>(WORN + rand() % 3), 0, 1, rand(), false, inventory);
 					int cat = rand() % (NUMCATEGORIES - 1); // exclude spell_cat
-					newItem(itemLevelCurve(static_cast<Category>(cat), 0, currentlevel + 5), static_cast<Status>(WORN + rand() % 3), 0, 1, rand(), false, inventory);
+					Item* currentItem = newItem(itemLevelCurve(static_cast<Category>(cat), 0, currentlevel + 5), static_cast<Status>(WORN + rand() % 3), 0, 1, rand(), false, inventory);
+					if ( currentItem )
+					{
+						if ( currentItem->type >= BRONZE_TOMAHAWK && currentItem->type <= CRYSTAL_SHURIKEN )
+						{
+							// thrown weapons always fixed status. (tomahawk = decrepit, shuriken = excellent)
+							currentItem->status = std::min(static_cast<Status>(DECREPIT + (currentItem->type - BRONZE_TOMAHAWK)), EXCELLENT);
+						}
+					}
 				}
 				break;
 			case 1:
@@ -351,8 +370,15 @@ void Entity::actChest()
 						itemcount = 0 + rand() % 2;
 						for ( i = 0; i < itemcount; ++i )
 						{
-							Status durability = static_cast<Status>(WORN + rand() % 3);
-							newItem(itemLevelCurve(THROWN, minimumQuality, currentlevel), durability, 0, 3 + rand() % 3, rand(), false, inventory);
+							Item* thrown = newItem(itemLevelCurve(THROWN, minimumQuality, currentlevel), WORN, 0, 3 + rand() % 3, rand(), false, inventory);
+							if ( thrown )
+							{
+								if ( thrown->type >= BRONZE_TOMAHAWK && thrown->type <= CRYSTAL_SHURIKEN )
+								{
+									// thrown weapons always fixed status. (tomahawk = decrepit, shuriken = excellent)
+									thrown->status = std::min(static_cast<Status>(DECREPIT + (thrown->type - BRONZE_TOMAHAWK)), EXCELLENT);
+								}
+							}
 						}
 					}
 					break;
@@ -384,12 +410,26 @@ void Entity::actChest()
 						{
 							newItem(CLOAK_BACKPACK, durability, 0, 1, rand(), false, inventory);
 						}
+						if ( rand() % 20 == 0 )
+						{
+							newItem(TOOL_TINKERING_KIT, DECREPIT, 0, 1, rand(), false, inventory);
+							newItem(TOOL_METAL_SCRAP, DECREPIT, 0, 10 + rand() % 11, 0, true, inventory);
+							newItem(TOOL_MAGIC_SCRAP, DECREPIT, 0, 10 + rand() % 11, 0, true, inventory);
+						}
 						break;
 					case 2:
 						itemcount = 1 + rand() % 2;
 						for ( i = 0; i < itemcount; ++i )
 						{
-							newItem(itemLevelCurve(THROWN, minimumQuality, currentlevel), durability, 0, 3 + rand() % 3, rand(), false, inventory);
+							Item* thrown = newItem(itemLevelCurve(THROWN, minimumQuality, currentlevel), WORN, 0, 3 + rand() % 3, rand(), false, inventory);
+							if ( thrown )
+							{
+								if ( thrown->type >= BRONZE_TOMAHAWK && thrown->type <= CRYSTAL_SHURIKEN )
+								{
+									// thrown weapons always fixed status. (tomahawk = decrepit, shuriken = excellent)
+									thrown->status = std::min(static_cast<Status>(DECREPIT + (thrown->type - BRONZE_TOMAHAWK)), EXCELLENT);
+								}
+							}
 						}
 						break;
 					default:
@@ -419,6 +459,21 @@ void Entity::actChest()
 						{
 							//newItem(static_cast<ItemType>(SCROLL_IDENTIFY + rand() % 12), static_cast<Status>(WORN + rand() % 3), 0, 1, rand(), false, inventory);
 							newItem(itemLevelCurve(SCROLL, 0, currentlevel + 5), static_cast<Status>(WORN + rand() % 3), 0, 1, rand(), false, inventory);
+						}
+						if ( rand() % 10 == 0 )
+						{
+							if ( rand() % 5 == 0 )
+							{
+								newItem(ENCHANTED_FEATHER, EXCELLENT, 0, 1, ENCHANTED_FEATHER_MAX_DURABILITY - 1, false, inventory);
+							}
+							else
+							{
+								newItem(ENCHANTED_FEATHER, SERVICABLE, 0, 1, (3 * (ENCHANTED_FEATHER_MAX_DURABILITY - 1)) / 4, false, inventory);
+							}
+							if ( rand() % 2 == 0 )
+							{
+								newItem(SCROLL_BLANK, static_cast<Status>(WORN + rand() % 3), 0, 1 + rand() % 3, rand(), false, inventory);
+							}
 						}
 						break;
 					case 1:
@@ -450,7 +505,7 @@ void Entity::actChest()
 						newItem(itemLevelCurve(SPELLBOOK, 0, currentlevel + 6), static_cast<Status>(WORN + rand() % 3), 0, 1, rand(), false, inventory);
 						//newItem(static_cast<ItemType>(MAGICSTAFF_LIGHT + rand() % 10), static_cast<Status>(WORN + rand() % 3), 0, 1, rand(), false, inventory);
 						newItem(itemLevelCurve(MAGICSTAFF, 0, currentlevel + 5), static_cast<Status>(WORN + rand() % 3), 0, 1, rand(), false, inventory);
-						switch (rand() % 6)
+						switch (rand() % 7)
 						{
 							case 0:
 								//A cloak. Item 24.
@@ -482,6 +537,13 @@ void Entity::actChest()
 							case 5:
 								//A wizard's hat. Item 39.
 								newItem(HAT_WIZARD, static_cast<Status>(WORN + rand() % 3), 0, 1, rand(), false, inventory);
+								break;
+							case 6:
+								newItem(ENCHANTED_FEATHER, EXCELLENT, 0, 1, ENCHANTED_FEATHER_MAX_DURABILITY - 1, false, inventory);
+								if ( rand() % 2 == 0 )
+								{
+									newItem(SCROLL_BLANK, static_cast<Status>(WORN + rand() % 3), 0, 1 + rand() % 3, rand(), false, inventory);
+								}
 								break;
 						}
 						break;
@@ -943,18 +1005,23 @@ void Entity::addItemToChestFromInventory(int player, Item* item, bool all)
 		return;
 	}
 
-	if ( itemIsEquipped(item, player) == true && !item->canUnequip(stats[player]) )
+	bool isEquipped = itemIsEquipped(item, player);
+
+	if ( isEquipped )
 	{
-		if ( shouldInvertEquipmentBeatitude(stats[player]) && item->beatitude > 0 )
+		if ( !item->canUnequip(stats[player]) )
 		{
-			messagePlayer(player, language[3218]);
+			if ( shouldInvertEquipmentBeatitude(stats[player]) && item->beatitude > 0 )
+			{
+				messagePlayer(player, language[3218]);
+			}
+			else
+			{
+				messagePlayer(player, language[1087]);
+			}
+			item->identified = true;
+			return;
 		}
-		else
-		{
-			messagePlayer(player, language[1087]);
-		}
-		item->identified = true;
-		return;
 	}
 	playSoundPlayer(player, 47 + rand() % 3, 64);
 
@@ -972,10 +1039,65 @@ void Entity::addItemToChestFromInventory(int player, Item* item, bool all)
 	newitem->appearance = item->appearance;
 	newitem->identified = item->identified;
 
+	Item** slot = itemSlot(stats[player], item);
+	if ( multiplayer == CLIENT )
+	{
+		// tell the server to unequip.
+		if ( slot != nullptr )
+		{
+			if ( slot == &stats[clientnum]->weapon )
+			{
+				playerTryEquipItemAndUpdateServer(item);
+			}
+			else if ( slot == &stats[clientnum]->shield && itemCategory(newitem) == SPELLBOOK )
+			{
+				playerTryEquipItemAndUpdateServer(item);
+			}
+			else
+			{
+				if ( slot == &stats[clientnum]->helmet )
+				{
+					clientUnequipSlotAndUpdateServer(EQUIP_ITEM_SLOT_HELM, item);
+				}
+				else if ( slot == &stats[clientnum]->breastplate )
+				{
+					clientUnequipSlotAndUpdateServer(EQUIP_ITEM_SLOT_BREASTPLATE, item);
+				}
+				else if ( slot == &stats[clientnum]->gloves )
+				{
+					clientUnequipSlotAndUpdateServer(EQUIP_ITEM_SLOT_GLOVES, item);
+				}
+				else if ( slot == &stats[clientnum]->shoes )
+				{
+					clientUnequipSlotAndUpdateServer(EQUIP_ITEM_SLOT_BOOTS, item);
+				}
+				else if ( slot == &stats[clientnum]->shield )
+				{
+					clientUnequipSlotAndUpdateServer(EQUIP_ITEM_SLOT_SHIELD, item);
+				}
+				else if ( slot == &stats[clientnum]->cloak )
+				{
+					clientUnequipSlotAndUpdateServer(EQUIP_ITEM_SLOT_CLOAK, item);
+				}
+				else if ( slot == &stats[clientnum]->amulet )
+				{
+					clientUnequipSlotAndUpdateServer(EQUIP_ITEM_SLOT_AMULET, item);
+				}
+				else if ( slot == &stats[clientnum]->ring )
+				{
+					clientUnequipSlotAndUpdateServer(EQUIP_ITEM_SLOT_RING, item);
+				}
+				else if ( slot == &stats[clientnum]->mask )
+				{
+					clientUnequipSlotAndUpdateServer(EQUIP_ITEM_SLOT_MASK, item);
+				}
+			}
+		}
+	}
+
 	// unequip the item
 	if ( item->count <= 1 || all)
 	{
-		Item** slot = itemSlot(stats[player], item);
 		if ( slot != NULL )
 		{
 			*slot = NULL;
@@ -1277,11 +1399,25 @@ void Entity::chestHandleDamageMagic(int damage, Entity &magicProjectile, Entity 
 		{
 			if ( chestHealth <= 0 )
 			{
-				messagePlayer(caster->skill[2], language[2520]);
+				if ( magicProjectile.behavior == &actBomb )
+				{
+					messagePlayer(caster->skill[2], language[3617], items[magicProjectile.skill[21]].name_identified, language[675]);
+				}
+				else
+				{
+					messagePlayer(caster->skill[2], language[2520]);
+				}
 			}
 			else
 			{
-				messagePlayer(caster->skill[2], language[378], language[675]);
+				if ( magicProjectile.behavior == &actBomb )
+				{
+					messagePlayer(caster->skill[2], language[3618], items[magicProjectile.skill[21]].name_identified, language[675]);
+				}
+				else
+				{
+					messagePlayer(caster->skill[2], language[378], language[675]);
+				}
 			}
 		}
 		updateEnemyBar(caster, this, language[675], chestHealth, chestMaxHealth);

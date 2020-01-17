@@ -389,6 +389,61 @@ char itemNameStrings[NUM_ITEM_STRINGS][32] =
 	"hat_hood_silver",
 	"hat_hood_red",
 	"silver_doublet",
+	"spellbook_revert_form",
+	"spellbook_rat_form",
+	"spellbook_spider_form",
+	"spellbook_troll_form",
+	"spellbook_imp_form",
+	"spellbook_spray_web",
+	"spellbook_poison",
+	"spellbook_speed",
+	"spellbook_fear",
+	"spellbook_strike",
+	"spellbook_detect_food",
+	"spellbook_weakness",
+	"mask_shaman",
+	"spellbook_amplify_magic",
+	"spellbook_shadow_tag",
+	"spellbook_telepull",
+	"spellbook_demon_illu",
+	"spellbook_trolls_blood",
+	"spellbook_salvage",
+	"tool_whip",
+	"spellbook_flutter",
+	"spellbook_dash",
+	"spellbook_self_polymorph",
+	"spellbook_9",
+	"spellbook_10",
+	"magicstaff_poison",
+	"tool_metal_scrap",
+	"tool_magic_scrap",
+	"tool_tinkering_kit",
+	"tool_sentrybot",
+	"tool_repairkit",
+	"tool_fire_bomb",
+	"tool_sleep_bomb",
+	"tool_freeze_bomb",
+	"tool_teleport_bomb",
+	"tool_gyrobot",
+	"tool_spellbot",
+	"tool_decoy",
+	"tool_dummybot",
+	"machinist_apron",
+	"enchanted_feather",
+	"punisher_hood",
+	"scroll_charging",
+	"quiver_sharp",
+	"quiver_pierce",
+	"quiver_lightweight",
+	"quiver_fire",
+	"quiver_heavy",
+	"quiver_crystal",
+	"quiver_hunting",
+	"longbow",
+	"compound_bow",
+	"heavy_crossbow",
+	"boomerang",
+	"scroll_conjurearrow",
 	"tool_greentorch",
 	"hat_hood_yellowgreen",
 	"cloak_yellowgreen",
@@ -454,6 +509,8 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"hat_fez",
 		"hat_hood_silver",
 		"hat_hood_red",
+		"mask_shaman",
+		"punisher_hood",
 		"leather_helm",
 		"iron_helm",
 		"steel_helm",
@@ -490,6 +547,10 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"iron_dagger",
 		"steel_chakram",
 		"crystal_shuriken",
+		"boomerang",
+		"longbow",
+		"compound_bow",
+		"heavy_crossbow",
 		"potion_water",
 		"potion_booze",
 		"potion_juice",
@@ -524,6 +585,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"magicstaff_bleed",
 		"magicstaff_summon",
 		"magicstaff_charm",
+		"magicstaff_poison",
 		"spellbook_forcebolt",
 		"spellbook_magicmissile",
 		"spellbook_cold",
@@ -554,6 +616,30 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"spellbook_drain_soul",
 		"spellbook_vampiric_aura",
 		"spellbook_charm",
+		"spellbook_revert_form",
+		"spellbook_rat_form",
+		"spellbook_spider_form",
+		"spellbook_troll_form",
+		"spellbook_imp_form",
+		"spellbook_spray_web",
+		"spellbook_poison",
+		"spellbook_speed",
+		"spellbook_fear",
+		"spellbook_strike",
+		"spellbook_detect_food",
+		"spellbook_weakness",
+		"spellbook_amplify_magic",
+		"spellbook_shadow_tag",
+		"spellbook_telepull",
+		"spellbook_demon_illu",
+		"spellbook_trolls_blood",
+		"spellbook_salvage",
+		"spellbook_flutter",
+		"spellbook_dash",
+		"spellbook_self_polymorph",
+		"spellbook_9",
+		"spellbook_10",
+		"tool_whip",
 		"tool_pickaxe",
 		"artifact_sword",
 		"artifact_mace",
@@ -600,6 +686,13 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"tool_torch",
 		"tool_lantern",
 		"tool_crystalshard",
+		"quiver_sharp",
+		"quiver_pierce",
+		"quiver_lightweight",
+		"quiver_fire",
+		"quiver_heavy",
+		"quiver_crystal",
+		"quiver_hunting",
 		"tool_greentorch",
 		"abyssal_shield",
 		"necro_shield",
@@ -618,6 +711,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"healer_doublet",
 		"tunic",
 		"silver_doublet",
+		"machinist_apron",
 		"abyssal_cheastpiece",
 		"iron_breastpiece_slimy",
 		""
@@ -897,7 +991,7 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"END PORTAL ABYSS"
 };
 
-char monsterEditorNameStrings[NUMMONSTERS][13] =
+char monsterEditorNameStrings[NUMMONSTERS][16] =
 {
 	"nothing",
 	"human",
@@ -932,6 +1026,9 @@ char monsterEditorNameStrings[NUMMONSTERS][13] =
 	"automaton",
 	"lich_ice",
 	"lich_fire",
+	"sentrybot",
+	"spellbot",
+	"gyrobot"
 	"cockroach",
 	"burgguard",
 	"gargoyle",
@@ -1593,19 +1690,20 @@ void setSpriteAttributes(Entity* entityNew, Entity* entityToCopy, Entity* entity
 			node2->element = nullptr;
 			node2->deconstructor = &emptyDeconstructor;
 
-			myStats = new Stat(entityNew->sprite);
 			node2 = list_AddNodeLast(&entityNew->children);
 			if ( tmpStats != nullptr )
 			{
 				node2->element = tmpStats->copyStats();
+				node2->size = sizeof(tmpStats);
 			}
 			else
 			{
 				// if the previous sprite did not have stats initialised, or creating a new entity.
+				myStats = new Stat(entityNew->sprite);
 				node2->element = myStats;
+				node2->size = sizeof(myStats);
 			}
 			//					node2->deconstructor = &myStats->~Stat;
-			node2->size = sizeof(myStats);
 		}
 	}
 	// chests.

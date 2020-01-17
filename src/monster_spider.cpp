@@ -68,7 +68,8 @@ void initSpider(Entity* my, Stat* myStats)
 					myStats->CHR = 10;
 					myStats->LVL = 15;
 					newItem(RING_INVISIBILITY, EXCELLENT, -5, 1, rand(), false, &myStats->inventory);
-					newItem(ARTIFACT_SWORD, EXCELLENT, 1, 1, rand(), false, &myStats->inventory);
+					int status = DECREPIT + (currentlevel > 5) + (currentlevel > 15) + (currentlevel > 20);
+					newItem(ARTIFACT_SWORD, static_cast<Status>(status), 1, 1, rand(), false, &myStats->inventory);
 					customItemsToGenerate -= 2;
 					int c;
 					for (c = 0; c < 3; c++)
@@ -86,7 +87,7 @@ void initSpider(Entity* my, Stat* myStats)
 					myStats->MAXHP = 115;
 					myStats->OLDHP = myStats->HP;
 					myStats->STR = 10;
-					myStats->DEX = 20;
+					myStats->DEX = 15;
 					myStats->CON = 8;
 					myStats->INT = 5;
 					myStats->PER = 10;

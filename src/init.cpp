@@ -117,6 +117,7 @@ int initApp(char* title, int fullscreen)
 		if ( PHYSFS_setWriteDir(outputdir) )
 		{
 			PHYSFS_mkdir("savegames");
+			PHYSFS_mkdir("crashlogs");
 			if ( PHYSFS_mkdir("mods") )
 			{
 				std::string path = outputdir;
@@ -333,6 +334,9 @@ int initApp(char* title, int fullscreen)
 #endif
 #endif
 
+	drawClearBuffers();
+	GO_SwapBuffers(screen);
+
 	// load resources
 	printlog("loading engine resources...\n");
 	if ((fancyWindow_bmp = loadImage("images/system/fancyWindow.png")) == NULL)
@@ -354,6 +358,25 @@ int initApp(char* title, int fullscreen)
 	{
 		printlog("failed to load font16x16.png\n");
 		return 5;
+	}
+
+	// cache language entries
+	bool cacheText = false;
+	if (cacheText) {
+		for (int c = 0; c < NUMLANGENTRIES; ++c) {
+			bool foundSpecialChar = false;
+			for (int i = 0; language[c][i] != '\0'; ++i) {
+				if (language[c][i] == '\\' || language[c][i] == '%') {
+					foundSpecialChar = true;
+				}
+			}
+			if (foundSpecialChar) {
+				continue;
+			}
+			ttfPrintText(ttf8, 0, -200, language[c]);
+			ttfPrintText(ttf12, 0, -200, language[c]);
+			ttfPrintText(ttf16, 0, -200, language[c]);
+		}
 	}
 
 	// print a loading message
@@ -844,10 +867,16 @@ int loadLanguage(char* lang)
 		if (c >= TOOL_GREENTORCH)
 		{
 			int newItems = c - TOOL_GREENTORCH;
-			items[c].name_identified = language[3550 + newItems * 2];
-			items[c].name_unidentified = language[3551 + newItems * 2];
+			items[c].name_identified = language[3950 + newItems * 2];
+			items[c].name_unidentified = language[3951 + newItems * 2];
 		}
-		if ( c > ARTIFACT_BOW )
+		else if ( c > SPELLBOOK_DETECT_FOOD )
+		{
+			int newItems = c - SPELLBOOK_DETECT_FOOD - 1;
+			items[c].name_identified = language[3500 + newItems * 2];
+			items[c].name_unidentified = language[3501 + newItems * 2];
+		}
+		else if ( c > ARTIFACT_BOW )
 		{
 			int newItems = c - ARTIFACT_BOW - 1;
 			items[c].name_identified = language[2200 + newItems * 2];
@@ -859,6 +888,7 @@ int loadLanguage(char* lang)
 			items[c].name_unidentified = language[1546 + c * 2];
 		}
 	}
+
 	return 0;
 }
 
@@ -958,12 +988,15 @@ void generatePolyModels(int start, int end, bool forceCacheRebuild)
 		// print a loading message
 		if ( start == 0 && end == nummodels )
 		{
-			drawClearBuffers();
-			int w, h;
-			TTF_SizeUTF8(ttf16, loadText, &w, &h);
-			ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, loadText);
+			if ( c % 50 == 0 )
+			{
+				drawClearBuffers();
+				int w, h;
+				TTF_SizeUTF8(ttf16, loadText, &w, &h);
+				ttfPrintText(ttf16, (xres - w) / 2, (yres - h) / 2, loadText);
 
-			GO_SwapBuffers(screen);
+				GO_SwapBuffers(screen);
+			}
 		}
 		numquads = 0;
 		polymodels[c].numfaces = 0;
@@ -2141,7 +2174,7 @@ int deinitApp()
 	printlog("freeing sounds...\n");
 	if ( sounds != NULL )
 	{
-		for ( c = 0; c < numsounds; c++ )
+		for ( c = 0; c < numsounds && !no_sound; c++ )
 		{
 			if (sounds[c] != NULL)
 			{

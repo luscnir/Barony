@@ -25,6 +25,7 @@ typedef double real_t;
 using std::string; //Instead of including an entire namespace, please explicitly include only the parts you need, and check for conflicts as reasonably possible.
 #include <unordered_map>
 #include <unordered_set>
+#include <set>
 #include "Config.hpp"
 #include "physfs.h"
 
@@ -37,6 +38,7 @@ extern bool showfirst;
 extern bool logCheckObstacle;
 extern int logCheckObstacleCount;
 extern bool logCheckMainLoopTimers;
+extern bool autoLimbReload;
 
 #include <dirent.h>
 #include <stdlib.h>
@@ -54,6 +56,7 @@ extern bool logCheckMainLoopTimers;
 #define GL_GLEXT_PROTOTYPES
 #define PATH_MAX 1024
 #include <windows.h>
+#include <Dbghelp.h>
 #undef min
 #undef max
 #endif
@@ -175,7 +178,10 @@ extern bool stop;
 #define IN_FOLLOWERMENU 19
 #define IN_FOLLOWERMENU_LASTCMD 20
 #define IN_FOLLOWERMENU_CYCLENEXT 21
-#define NUMIMPULSES 22
+#define IN_HOTBAR_SCROLL_LEFT 22
+#define IN_HOTBAR_SCROLL_RIGHT 23
+#define IN_HOTBAR_SCROLL_SELECT 24
+#define NUMIMPULSES 25
 
 //Joystick/gamepad impulses
 //TODO: Split bindings into three subcategories: Bifunctional, Game Exclusive, Menu Exclusive.
@@ -509,7 +515,7 @@ extern int minotaurlevel;
 #define DIRECTCLIENT 4
 
 // language stuff
-#define NUMLANGENTRIES 3800
+#define NUMLANGENTRIES 4300
 extern char languageCode[32];
 extern char** language;
 
@@ -561,6 +567,7 @@ extern voxel_t** models;
 extern polymodel_t* polymodels;
 extern bool useModelCache;
 extern Uint32 imgref, vboref;
+extern const Uint32 ttfTextCacheLimit;
 extern GLuint* texid;
 extern bool disablevbos;
 extern Uint32 fov;
@@ -578,6 +585,15 @@ extern char tempstr[1024];
 extern Sint8 minimap[64][64];
 extern Uint32 mapseed;
 extern bool* shoparea;
+extern real_t globalLightModifier;
+extern real_t globalLightTelepathyModifier;
+extern int globalLightModifierActive;
+enum LightModifierValues : int
+{
+	GLOBAL_LIGHT_MODIFIER_STOPPED,
+	GLOBAL_LIGHT_MODIFIER_INUSE,
+	GLOBAL_LIGHT_MODIFIER_DISSIPATING
+};
 
 // function prototypes for main.c:
 int sgn(real_t x);
@@ -659,12 +675,11 @@ extern GLuint fbo_ren;
 #endif
 void GO_SwapBuffers(SDL_Window* screen);
 unsigned int GO_GetPixelU32(int x, int y);
-static const Uint32 cacheLimit = 8096;
 
 #ifdef STEAMWORKS
 #include <steam/steam_api.h>
 #include "steam.hpp"
-static const int NUM_STEAM_STATISTICS = 19;
+static const int NUM_STEAM_STATISTICS = 43;
 extern CSteamLeaderboards* g_SteamLeaderboards;
 extern CSteamWorkshop* g_SteamWorkshop;
 extern SteamStat_t g_SteamStats[NUM_STEAM_STATISTICS];

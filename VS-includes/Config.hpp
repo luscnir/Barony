@@ -10,3 +10,5 @@
 #define BASE_DATA_DIR "./"
 
 #define USE_FMOD
+
+//#define DEBUG_ACHIEVEMENTS

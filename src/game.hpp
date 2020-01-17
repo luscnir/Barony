@@ -21,7 +21,7 @@
 #endif
 
 // REMEMBER TO CHANGE THIS WITH EVERY NEW OFFICIAL VERSION!!!
-#define VERSION "v3.2.4"
+#define VERSION "v3.3.2"
 #define GAME_CODE
 
 //#define MAX_FPS_LIMIT 60 //TODO: Make this configurable.
@@ -103,12 +103,13 @@ extern Uint32 cycles, pingtime;
 extern Uint32 timesync;
 extern real_t fps;
 extern bool shootmode;
-#define NUMCLASSES 22
-#define NUMRACES 10
+#define NUMCLASSES 24
+#define NUMRACES 13
 #define NUMPLAYABLERACES 9
 extern char address[64];
 extern bool loadnextlevel;
 extern int skipLevelsOnLoad;
+extern Uint32 forceMapSeed;
 extern int currentlevel;
 extern bool secretlevel;
 extern bool darkmap;
@@ -135,16 +136,19 @@ enum PlayerClasses : int
 	CLASS_NINJA,
 	CLASS_MONK,
 	CLASS_SHARPSHOOTER,
+	CLASS_PROPHET,
 	CLASS_LUNATIC,
 	CLASS_CONJURER,
 	CLASS_ACCURSED,
 	CLASS_MESMER,
 	CLASS_BREWER,
-	CLASS_UNDEF1,
-	CLASS_UNDEF2,
-	CLASS_UNDEF3,
-	CLASS_UNDEF4
+	CLASS_MACHINIST,
+	CLASS_PUNISHER,
+	CLASS_SHAMAN,
+	CLASS_HUNTER
 };
+
+static const int CLASS_SHAMAN_NUM_STARTING_SPELLS = 15;
 
 enum PlayerRaces : int
 {
@@ -157,7 +161,10 @@ enum PlayerRaces : int
 	RACE_INCUBUS,
 	RACE_GOBLIN,
 	RACE_INSECTOID,
-	RACE_RAT
+	RACE_RAT,
+	RACE_TROLL,
+	RACE_SPIDER,
+	RACE_IMP
 };
 
 enum ESteamStatTypes
@@ -206,6 +213,7 @@ enum ESteamLeaderboardTitles : int
 
 bool achievementUnlocked(const char* achName);
 void steamAchievement(const char* achName);
+void steamUnsetAchievement(const char* achName);
 void steamAchievementClient(int player, const char* achName);
 void steamAchievementEntity(Entity* my, const char* achName); // give steam achievement to an entity, and check for valid player info.
 void steamStatisticUpdate(int statisticNum, ESteamStatTypes type, int value);
@@ -234,10 +242,12 @@ void actCrystalShard(Entity* my);
 void actDoor(Entity* my);
 void actHudWeapon(Entity* my);
 void actHudShield(Entity* my);
+void actHudAdditional(Entity* my);
+void actHudArrowModel(Entity* my);
 void actItem(Entity* my);
 void actGoldBag(Entity* my);
 void actGib(Entity* my);
-Entity* spawnGib(Entity* parentent);
+Entity* spawnGib(Entity* parentent, int customGibSprite = -1);
 Entity* spawnGibClient(Sint16 x, Sint16 y, Sint16 z, Sint16 sprite);
 void serverSpawnGibForClient(Entity* gib);
 void actLadder(Entity* my);
@@ -254,7 +264,9 @@ void actSpriteNametag(Entity* my);
 void actSleepZ(Entity* my);
 Entity* spawnBang(Sint16 x, Sint16 y, Sint16 z);
 Entity* spawnExplosion(Sint16 x, Sint16 y, Sint16 z);
+Entity* spawnExplosionFromSprite(Uint16 sprite, Sint16 x, Sint16 y, Sint16 z);
 Entity* spawnSleepZ(Sint16 x, Sint16 y, Sint16 z);
+Entity* spawnFloatingSpriteMisc(int sprite, Sint16 x, Sint16 y, Sint16 z);
 void actArrow(Entity* my);
 void actBoulder(Entity* my);
 void actBoulderTrap(Entity* my);
@@ -266,6 +278,9 @@ void actHeadstone(Entity* my);
 void actThrown(Entity* my);
 void actBeartrap(Entity* my);
 void actBeartrapLaunched(Entity* my);
+void actBomb(Entity* my);
+void actDecoyBox(Entity* my);
+void actDecoyBoxCrank(Entity* my);
 void actSpearTrap(Entity* my);
 void actWallBuster(Entity* my);
 void actWallBuilder(Entity* my);
@@ -299,6 +314,7 @@ void startMessages();
 bool frameRateLimit(Uint32 maxFrameRate, bool resetAccumulator = true);
 extern Uint32 networkTickrate;
 extern bool gameloopFreezeEntities;
+extern Uint32 serverSchedulePlayerHealthUpdate;
 
 #define TOUCHRANGE 32
 #define STRIKERANGE 24
@@ -306,6 +322,9 @@ extern bool gameloopFreezeEntities;
 
 // function prototypes for charclass.c:
 void initClass(int player);
+void initShapeshiftHotbar();
+void deinitShapeshiftHotbar();
+bool playerUnlockedShamanSpell(int player, Item* item);
 
 extern char last_ip[64];
 extern char last_port[64];
@@ -328,7 +347,7 @@ extern char last_port[64];
 
 static const int BASE_MELEE_DAMAGE = 8;
 static const int BASE_RANGED_DAMAGE = 7;
-static const int BASE_THROWN_DAMAGE = 10;
+static const int BASE_THROWN_DAMAGE = 6;
 static const int BASE_PLAYER_UNARMED_DAMAGE = 8;
 
 extern bool spawn_blood;
@@ -351,7 +370,9 @@ extern bool enabledDLCPack2;
 extern std::vector<std::string> physFSFilesInDirectory;
 void loadRandomNames();
 extern int monsterEmoteGimpTimer;
+extern int selectedEntityGimpTimer;
 void mapLevel(int player);
+void mapFoodOnLevel(int player);
 
 class TileEntityListHandler
 {
@@ -444,6 +465,9 @@ public:
 
 	std::chrono::high_resolution_clock::time_point messagesT2WhileLoop;
 	bool handlePacketStartLoop = false;
+
+	std::unordered_map<unsigned long, std::pair<std::string, int>> networkPackets;
+	std::unordered_map<int, int> entityUpdatePackets;
 
 	bool displayStats = false;
 	char debugOutput[1024];

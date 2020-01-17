@@ -527,7 +527,7 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 	// determine whether minotaur level or not
 	if ( std::get<LEVELPARAM_CHANCE_MINOTAUR>(mapParameters) != -1 )
 	{
-		if ( prng_get_uint() % 100 < std::get<LEVELPARAM_CHANCE_DARKNESS>(mapParameters) && (svFlags & SV_FLAG_MINOTAURS) )
+		if ( prng_get_uint() % 100 < std::get<LEVELPARAM_CHANCE_MINOTAUR>(mapParameters) && (svFlags & SV_FLAG_MINOTAURS) )
 		{
 			minotaurlevel = 1;
 		}
@@ -1268,7 +1268,7 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 			int subRoom_tileStartx = -1;
 			int subRoom_tileStarty = -1;
 			int foundSubRoom = 0;
-			if ( levelnum2 - levelnum > 1 && c > 0 && subroomCount[levelnum2 - 1] > 0 )
+			if ( ((levelnum2 - levelnum) > 1) && (c > 0) && (subroomCount[levelnum2] > 0) )
 			{
 				// levelnum is the start of map search, levelnum2 is jumps required to get to a suitable map.
 				// normal operation is levelnum2 - levelnum == 1. if a levelnum map is unavailable, 
@@ -1277,7 +1277,7 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 				printlog("[SUBMAP GENERATOR] Skipped map when searching for levelnum %d, setting to %d", levelnum, levelnum2 - 1);
 				levelnum = levelnum2 - 1;
 			}
-
+			//printlog("(%d | %d), possible: (%d, %d) x: %d y: %d", levelnum, levelnum2, possiblerooms[1], possiblerooms[2], x, y);
 			if ( subroomCount[levelnum + 1] > 0 )
 			{
 				int jumps = 0;
@@ -1324,7 +1324,7 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 								subRoom_tileStartx = x0;
 								subRoom_tileStarty = y0;
 								foundSubRoom = 1;
-								//messagePlayer(0, "Picked level: %d from %d possible rooms in submap %d", pickSubRoom + 1, subroomCount[levelnum + 1], levelnum + 1);
+								printlog("Picked level: %d from %d possible rooms in submap %d at x:%d y:%d", pickSubRoom + 1, subroomCount[levelnum + 1], levelnum + 1, x, y);
 							}
 
 							map.tiles[z + y0 * MAPLAYERS + x0 * MAPLAYERS * map.height] = subRoomMap->tiles[z + (subRoom_tiley)* MAPLAYERS + (subRoom_tilex)* MAPLAYERS * subRoomMap->height];
@@ -1670,7 +1670,7 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 	}
 	if ( foundsubmaptile )
 	{
-		//messagePlayerColor(0, 0xFFFF00FF, "found some junk tiles!");
+		printlog("[SUBMAP GENERATOR] Found some junk tiles!");
 	}
 
 	for ( node = map.entities->first; node != nullptr; node = node->next )
@@ -1968,7 +1968,14 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 						}
 					}
 				}
-				entity = newEntity(34, 1, map.entities, nullptr); // pressure plate
+				if ( arrowtrap )
+				{
+					entity = newEntity(33, 1, map.entities, nullptr); // pressure plate
+				}
+				else
+				{
+					entity = newEntity(34, 1, map.entities, nullptr); // pressure plate
+				}
 				entity->x = x * 16;
 				entity->y = y * 16;
 				//printlog("7 Generated entity. Sprite: %d Uid: %d X: %.2f Y: %.2f\n",entity->sprite,entity->getUID(),entity->x,entity->y);
@@ -2190,9 +2197,13 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 				}
 			}
 		}
-		else if ( c == 1 && secretlevel && currentlevel == 7 )
+		else if ( c == 1 && secretlevel && currentlevel == 7 && !strncmp(map.name, "Underworld", 10) )
 		{
-			entity = newEntity(68, 1, map.entities, nullptr); // magic (artifact) bow
+			entity = newEntity(89, 1, map.entities, nullptr);
+			entity->monsterStoreType = 1;
+			entity->skill[5] = nummonsters;
+			++nummonsters;
+			//entity = newEntity(68, 1, map.entities, nullptr); // magic (artifact) bow
 		}
 		else
 		{
@@ -2601,7 +2612,7 @@ void assignActions(map_t* map)
 							for ( c = 0; c < NUMEFFECTS; ++c )
 							{
 								if ( !(c == EFF_VAMPIRICAURA && stats[numplayers]->EFFECTS_TIMERS[c] == -2) 
-									&& c != EFF_WITHDRAWAL )
+									&& c != EFF_WITHDRAWAL && c != EFF_SHAPESHIFT )
 								{
 									stats[numplayers]->EFFECTS[c] = false;
 									stats[numplayers]->EFFECTS_TIMERS[c] = 0;
@@ -2609,38 +2620,38 @@ void assignActions(map_t* map)
 							}
 						}
 					}
-				}
-				entity->behavior = &actPlayer;
-				entity->addToCreatureList(map->creatures);
-				entity->x += 8;
-				entity->y += 8;
-				entity->z = -1;
-				entity->focalx = limbs[HUMAN][0][0]; // 0
-				entity->focaly = limbs[HUMAN][0][1]; // 0
-				entity->focalz = limbs[HUMAN][0][2]; // -1.5
-				entity->sprite = 113; // head model
-				entity->sizex = 4;
-				entity->sizey = 4;
-				entity->flags[GENIUS] = true;
-				if ( numplayers == clientnum && multiplayer == CLIENT )
-				{
-					entity->flags[UPDATENEEDED] = false;
-				}
-				else
-				{
-					entity->flags[UPDATENEEDED] = true;
-				}
-				entity->flags[BLOCKSIGHT] = true;
-				entity->skill[2] = numplayers; // skill[2] == PLAYER_NUM
-				players[numplayers]->entity = entity;
-				if ( multiplayer != CLIENT )
-				{
-					if ( numplayers == 0 && minotaurlevel )
+					entity->behavior = &actPlayer;
+					entity->addToCreatureList(map->creatures);
+					entity->x += 8;
+					entity->y += 8;
+					entity->z = -1;
+					entity->focalx = limbs[HUMAN][0][0]; // 0
+					entity->focaly = limbs[HUMAN][0][1]; // 0
+					entity->focalz = limbs[HUMAN][0][2]; // -1.5
+					entity->sprite = 113; // head model
+					entity->sizex = 4;
+					entity->sizey = 4;
+					entity->flags[GENIUS] = true;
+					if ( numplayers == clientnum && multiplayer == CLIENT )
 					{
-						createMinotaurTimer(entity, map);
+						entity->flags[UPDATENEEDED] = false;
 					}
+					else
+					{
+						entity->flags[UPDATENEEDED] = true;
+					}
+					entity->flags[BLOCKSIGHT] = true;
+					entity->skill[2] = numplayers; // skill[2] == PLAYER_NUM
+					players[numplayers]->entity = entity;
+					if ( multiplayer != CLIENT )
+					{
+						if ( numplayers == 0 && minotaurlevel )
+						{
+							createMinotaurTimer(entity, map);
+						}
+					}
+					++numplayers;
 				}
-				++numplayers;
 				if ( numplayers > MAXPLAYERS )
 				{
 					printlog("warning: too many player objects in level!\n");
@@ -2974,7 +2985,7 @@ void assignActions(map_t* map)
 				}
 				else
 				{
-					entity->skill[11] = EXCELLENT;
+					entity->skill[11] = DECREPIT + (currentlevel > 5) + (currentlevel > 15) + (currentlevel > 20);
 				}
 				if ( entity->sprite == 8 )
 				{
@@ -3062,22 +3073,43 @@ void assignActions(map_t* map)
 				{
 					entity->skill[15] = 0; // unidentified.
 				}
+
+				if ( entity->skill[10] == ENCHANTED_FEATHER )
+				{
+					entity->skill[14] = 75 + 25 * (prng_get_uint() % 2);    // appearance
+				}
+				else if ( entity->skill[10] >= BRONZE_TOMAHAWK && entity->skill[10] <= CRYSTAL_SHURIKEN )
+				{
+					// thrown weapons always fixed status. (tomahawk = decrepit, shuriken = excellent)
+					entity->skill[11] = std::min(DECREPIT + (entity->skill[10] - BRONZE_TOMAHAWK), static_cast<int>(EXCELLENT));
+				}
+
 				item = newItemFromEntity(entity);
 				entity->sprite = itemModel(item);
 				if ( !entity->itemNotMoving )
 				{
 					// shurikens and chakrams need to lie flat on floor as their models are rotated.
-					if ( item->type == CRYSTAL_SHURIKEN || item->type == STEEL_CHAKRAM )
+					if ( item->type == CRYSTAL_SHURIKEN || item->type == STEEL_CHAKRAM || item->type == BOOMERANG )
 					{
 						entity->roll = PI;
 						if ( item->type == CRYSTAL_SHURIKEN )
 						{
 							entity->z = 8.5 - models[entity->sprite]->sizey * .25;
 						}
+						else if ( item->type == BOOMERANG )
+						{
+							entity->z = 9.0 - models[entity->sprite]->sizey * .25;
+						}
 						else
 						{
 							entity->z = 8.75 - models[entity->sprite]->sizey * .25;
 						}
+					}
+					else if ( item->type == TOOL_BOMB || item->type == TOOL_FREEZE_BOMB
+						|| item->type == TOOL_SLEEP_BOMB || item->type == TOOL_TELEPORT_BOMB )
+					{
+						entity->roll = PI;
+						entity->z = 7 - models[entity->sprite]->sizey * .25;
 					}
 					else
 					{
@@ -3365,7 +3397,7 @@ void assignActions(map_t* map)
 						else
 						{
 							// if monster not random, then create the stat struct here
-							// should not occur
+							// should not occur (unless we hack it)
 							myStats = new Stat(entity->sprite);
 						}
 						node2 = list_AddNodeLast(&entity->children);
@@ -3539,6 +3571,10 @@ void assignActions(map_t* map)
 						entity->focalx = limbs[SHADOW][0][0]; // 0
 						entity->focaly = limbs[SHADOW][0][1]; // 0
 						entity->focalz = limbs[SHADOW][0][2]; // -1.75
+						if ( !strncmp(map->name, "Underworld", 10) && currentlevel <= 7 && entity->monsterStoreType == 0 )
+						{
+							entity->monsterStoreType = 2;
+						}
 						break;
 					case COCKATRICE:
 						entity->z = -4.5;
@@ -3602,6 +3638,30 @@ void assignActions(map_t* map)
 						entity->yaw = PI;
 						entity->sprite = 646;
 						entity->skill[29] = 120;
+						break;
+					case SENTRYBOT:
+						entity->z = 0;
+						entity->focalx = limbs[SENTRYBOT][0][0]; // 0
+						entity->focaly = limbs[SENTRYBOT][0][1]; // 0
+						entity->focalz = limbs[SENTRYBOT][0][2]; // -1.75
+						break;
+					case SPELLBOT:
+						entity->z = 0;
+						entity->focalx = limbs[SENTRYBOT][0][0];
+						entity->focaly = limbs[SENTRYBOT][0][1];
+						entity->focalz = limbs[SENTRYBOT][0][2];
+						break;
+					case GYROBOT:
+						entity->z = 5;
+						entity->focalx = limbs[GYROBOT][0][0];
+						entity->focaly = limbs[GYROBOT][0][1];
+						entity->focalz = limbs[GYROBOT][0][2];
+						break;
+					case DUMMYBOT:
+						entity->z = 0;
+						entity->focalx = limbs[DUMMYBOT][0][0];
+						entity->focaly = limbs[DUMMYBOT][0][1];
+						entity->focalz = limbs[DUMMYBOT][0][2];
 						break;
 					case COCKROACH:
 						entity->focalx = limbs[COCKROACH][0][0]; // 0
@@ -4071,6 +4131,15 @@ void assignActions(map_t* map)
 				entity->flags[PASSABLE] = true;
 				entity->flags[NOUPDATE] = true;
 				entity->skill[28] = 1; // is a mechanism
+				entity->skill[1] = QUIVER_SILVER + rand() % 7; // random arrow type.
+				if ( currentlevel <= 15 )
+				{
+					while ( entity->skill[1] == QUIVER_CRYSTAL || entity->skill[1] == QUIVER_PIERCE )
+					{
+						entity->skill[1] = QUIVER_SILVER + rand() % 7; // random arrow type.
+					}
+				}
+				entity->skill[3] = 0; // refire type.
 				break;
 			// trap (pressure plate thingy)
 			case 33:
@@ -4433,6 +4502,8 @@ void assignActions(map_t* map)
 				if ( strstr(map->name, "Hell") )
 				{
 					entity->skill[4] = 2;
+					entity->flags[INVISIBLE] = true;
+					entity->skill[28] = 1; // is a mechanism
 				}
 				else
 				{
@@ -5961,6 +6032,18 @@ void assignActions(map_t* map)
 					}
 				}
 			}
+			else if ( postProcessEntity->sprite == 586 || postProcessEntity->sprite == 585
+				|| postProcessEntity->sprite == 184 || postProcessEntity->sprite == 185 )
+			{
+				int findx = static_cast<int>(postProcessEntity->x) >> 4;
+				int findy = static_cast<int>(postProcessEntity->y) >> 4;
+				if ( !map->tiles[findy * MAPLAYERS + findx * MAPLAYERS * map->height] )
+				{
+					// remove the lever as it is over a pit.
+					printlog("[MAP GENERATOR] Removed switch over a pit at x:%d y:%d.", findx, findy);
+					list_RemoveNode(postProcessEntity->mynode);
+				}
+			}
 		}
 	}
 	if ( vampireQuestChest )
@@ -6005,6 +6088,48 @@ void mapLevel(int player)
 				}
 			}
 		}
+	}
+}
+
+void mapFoodOnLevel(int player)
+{
+	int numFood = 0;
+	bool previouslyIdentifiedFood = false;
+	for ( node_t* node = map.entities->first; node != nullptr; node = node->next )
+	{
+		Entity* entity = (Entity*)node->element;
+		if ( entity && entity->behavior == &actItem )
+		{
+			Item* item = newItemFromEntity(entity);
+			if ( item )
+			{
+				if ( itemCategory(item) == FOOD )
+				{
+					if ( entity->itemShowOnMap != 0 )
+					{
+						previouslyIdentifiedFood = true;
+					}
+					else
+					{
+						++numFood;
+					}
+					entity->itemShowOnMap = 1;
+				}
+				free(item);
+			}
+		}
+	}
+	if ( numFood == 0 && previouslyIdentifiedFood )
+	{
+		messagePlayer(player, language[3425]);
+	}
+	else if ( numFood == 0 )
+	{
+		messagePlayer(player, language[3423]);
+	}
+	else
+	{
+		messagePlayerColor(player, SDL_MapRGB(mainsurface->format, 0, 255, 0),language[3424]);
 	}
 }
 

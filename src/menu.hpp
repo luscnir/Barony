@@ -35,10 +35,27 @@ extern int thirdendmoviestage;
 extern int thirdendmovietime;
 extern int fourthendmoviestage;
 extern int fourthendmovietime;
-extern int fifthendmoviestage;
+/*extern int fifthendmoviestage;
 extern int fifthendmovietime;
 extern int sixtyendmoviestage;
-extern int sixtyendmovietime;
+extern int sixtyendmovietime;*/
+extern int DLCendmovieStageAndTime[8][2];
+enum NewMovieStageAndTimeIndex : int
+{
+	MOVIE_STAGE,
+	MOVIE_TIME,
+};
+enum NewMovieCrawlTypes : int
+{
+	MOVIE_MIDGAME_HERX_MONSTERS,
+	MOVIE_MIDGAME_BAPHOMET_MONSTERS,
+	MOVIE_MIDGAME_BAPHOMET_HUMAN_AUTOMATON,
+	MOVIE_CLASSIC_WIN_MONSTERS,
+	MOVIE_CLASSIC_WIN_BAPHOMET_MONSTERS,
+	MOVIE_WIN_AUTOMATON,
+	MOVIE_WIN_DEMONS_UNDEAD,
+	MOVIE_WIN_BEASTS
+};
 extern real_t drunkextend;
 extern bool losingConnection[4];
 extern int rebindaction;
@@ -121,6 +138,7 @@ void openGameoverWindow();
 void openSteamLobbyBrowserWindow(button_t* my);
 void openLoadGameWindow(button_t* my);
 void openNewLoadGameWindow(button_t* my);
+void reloadSavegamesList(bool showWindow = true);
 void doSlider(int x, int y, int dots, int minvalue, int maxvalue, int increment, int* var, SDL_Surface* slider_font = SLIDERFONT, int slider_font_char_width = 16);
 void doSliderF(int x, int y, int dots, real_t minvalue, real_t maxvalue, real_t increment, real_t* var);
 
@@ -164,9 +182,11 @@ bool gamemodsCheckIfSubscribedAndDownloadedFileID(uint64 fileID);
 bool gamemodsCheckFileIDInLoadedPaths(uint64 fileID);
 bool gamemodsIsClientLoadOrderMatchingHost(std::vector<std::string> serverModList);
 extern std::vector<std::pair<std::string, uint64>> gamemods_workshopLoadedFileIDMap;
+extern std::unordered_set<uint64> betaPlayers;
 #endif // STEAMWORKS
 bool drawClickableButton(int padx, int pady, int padw, int padh, Uint32 btnColor);
 extern bool scoreDisplayMultiplayer;
+extern std::vector<std::tuple<int, int, int, std::string>> savegamesList; // tuple - last modified, multiplayer type, file entry, and description of save game.
 
 extern Sint32 slidery, slidersize, oslidery;
 
@@ -181,6 +201,7 @@ extern int settings_sfxvolume, settings_musvolume;
 extern int settings_impulses[NUMIMPULSES];
 extern int settings_reversemouse;
 extern bool settings_smoothmouse;
+extern bool settings_disablemouserotationlimit;
 extern real_t settings_mousespeed;
 extern bool settings_broadcast;
 extern bool settings_nohud;
@@ -200,6 +221,7 @@ extern char portnumber_char[6];
 extern char connectaddress[64];
 extern int multiplayerselect;
 extern bool smoothmouse;
+extern bool disablemouserotationlimit;
 extern bool broadcast;
 extern bool nohud;
 extern int menuselect;
@@ -224,6 +246,7 @@ extern bool settings_hide_statusbar;
 extern bool settings_hide_playertags;
 extern bool settings_show_skill_values;
 extern bool settings_disableMultithreadedSteamNetworking;
+extern bool settings_disableFPSLimitOnNetworkMessages;
 
 static const int NUM_SETTINGS_TABS = 7;
 

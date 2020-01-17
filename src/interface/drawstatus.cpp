@@ -26,6 +26,8 @@ char enemy_name[128];
 Sint32 enemy_hp = 0, enemy_maxhp = 0, enemy_oldhp = 0;
 Uint32 enemy_timer = 0, enemy_lastuid = 0;
 Uint32 enemy_bar_color[MAXPLAYERS] = { 0 }; // color for each player's enemy bar to display. multiplayer clients only refer to their own [clientnum] entry.
+int magicBoomerangHotbarSlot = -1;
+Uint32 hotbarTooltipLastGameTick = 0;
 
 /*-------------------------------------------------------------------------------
 
@@ -142,7 +144,7 @@ void updateEnemyBarStatusEffectColor(int player, const Entity &target, const Sta
 	{
 		enemy_bar_color[player] = SDL_MapRGB(mainsurface->format, 112, 112, 0);
 	}
-	else if ( targetStats.EFFECTS[EFF_CONFUSED] )
+	else if ( targetStats.EFFECTS[EFF_CONFUSED] || targetStats.EFFECTS[EFF_DISORIENTED] )
 	{
 		enemy_bar_color[player] = SDL_MapRGB(mainsurface->format, 92, 0, 92);
 	}
@@ -191,6 +193,22 @@ void updateEnemyBar(Entity* source, Entity* target, char* name, Sint32 hp, Sint3
 	if ( player == -1 )
 	{
 		if ( source->behavior == &actMonster && source->monsterAllySummonRank != 0
+			&& (target->behavior == &actMonster || target->behavior == &actPlayer) )
+		{
+			if ( source->monsterAllyGetPlayerLeader() && source->monsterAllyGetPlayerLeader() != target )
+			{
+				player = source->monsterAllyIndex; // don't update enemy bar if attacking leader.
+			}
+		}
+		else if ( source->behavior == &actMonster && source->monsterIllusionTauntingThisUid != 0 )
+		{
+			Entity* parent = uidToEntity(source->parent);
+			if ( parent && parent->behavior == &actPlayer && parent != target )
+			{
+				player = parent->skill[2]; // don't update enemy bar if attacking leader.
+			}
+		}
+		else if ( source->behavior == &actMonster && monsterIsImmobileTurret(source, nullptr)
 			&& (target->behavior == &actMonster || target->behavior == &actPlayer) )
 		{
 			if ( source->monsterAllyGetPlayerLeader() && source->monsterAllyGetPlayerLeader() != target )
@@ -506,23 +524,26 @@ void drawStatus()
 		}
 
 		// mouse wheel
-		if ( mousex >= STATUS_X && mousex < STATUS_X + status_bmp->w * uiscale_chatlog )
+		if ( !shootmode )
 		{
-			if ( mousey >= initial_position.y && mousey < initial_position.y + status_bmp->h * uiscale_chatlog )
+			if ( mousex >= STATUS_X && mousex < STATUS_X + status_bmp->w * uiscale_chatlog )
 			{
-				if ( mousestatus[SDL_BUTTON_WHEELDOWN] )
+				if ( mousey >= initial_position.y && mousey < initial_position.y + status_bmp->h * uiscale_chatlog )
 				{
-					mousestatus[SDL_BUTTON_WHEELDOWN] = 0;
-					textscroll--;
-					if ( textscroll < 0 )
+					if ( mousestatus[SDL_BUTTON_WHEELDOWN] )
 					{
-						textscroll = 0;
+						mousestatus[SDL_BUTTON_WHEELDOWN] = 0;
+						textscroll--;
+						if ( textscroll < 0 )
+						{
+							textscroll = 0;
+						}
 					}
-				}
-				else if ( mousestatus[SDL_BUTTON_WHEELUP] )
-				{
-					mousestatus[SDL_BUTTON_WHEELUP] = 0;
-					textscroll++;
+					else if ( mousestatus[SDL_BUTTON_WHEELUP] )
+					{
+						mousestatus[SDL_BUTTON_WHEELUP] = 0;
+						textscroll++;
+					}
 				}
 			}
 		}
@@ -581,6 +602,24 @@ void drawStatus()
 	pos.h = playerStatusBarHeight;
 	pos.y = yres - (playerStatusBarHeight + 12);
 	drawTooltip(&pos);
+	if ( stats[clientnum] && stats[clientnum]->HP > 0 
+		&& stats[clientnum]->EFFECTS[EFF_HP_REGEN] )
+	{
+		bool lowDurationFlash = !((ticks % 50) - (ticks % 25));
+		bool lowDuration = stats[clientnum]->EFFECTS_TIMERS[EFF_HP_REGEN] > 0 &&
+			(stats[clientnum]->EFFECTS_TIMERS[EFF_HP_REGEN] < TICKS_PER_SECOND * 5);
+		if ( (lowDuration && !lowDurationFlash) || !lowDuration )
+		{
+			if ( colorblind )
+			{
+				drawTooltip(&pos, SDL_MapRGB(mainsurface->format, 0, 255, 255)); // blue
+			}
+			else
+			{
+				drawTooltip(&pos, SDL_MapRGB(mainsurface->format, 0, 255, 0)); // green
+			}
+		}
+	}
 
 	// Display "HP" at top of Health bar
 	ttfPrintText(ttf12, pos.x + (playerStatusBarWidth / 2 - 10), pos.y + 6, language[306]);
@@ -591,6 +630,24 @@ void drawStatus()
 	pos.h = 0;
 	pos.y = yres - (playerStatusBarHeight - 9);
 	drawTooltip(&pos);
+	if ( stats[clientnum] && stats[clientnum]->HP > 0
+		&& stats[clientnum]->EFFECTS[EFF_HP_REGEN] )
+	{
+		bool lowDurationFlash = !((ticks % 50) - (ticks % 25));
+		bool lowDuration = stats[clientnum]->EFFECTS_TIMERS[EFF_HP_REGEN] > 0 &&
+			(stats[clientnum]->EFFECTS_TIMERS[EFF_HP_REGEN] < TICKS_PER_SECOND * 5);
+		if ( (lowDuration && !lowDurationFlash) || !lowDuration )
+		{
+			if ( colorblind )
+			{
+				drawTooltip(&pos, SDL_MapRGB(mainsurface->format, 0, 255, 255)); // blue
+			}
+			else
+			{
+				drawTooltip(&pos, SDL_MapRGB(mainsurface->format, 0, 255, 0)); // green
+			}
+		}
+	}
 
 	// Display the actual Health bar's faint background
 	pos.x = 42 + 38 * uiscale_playerbars;
@@ -657,7 +714,8 @@ void drawStatus()
 	int xoffset = pos.x;
 
 	// hunger icon
-	if ( (svFlags & SV_FLAG_HUNGER) && stats[clientnum]->HUNGER <= 250 && (ticks % 50) - (ticks % 25) )
+	if ( stats[clientnum]->type != AUTOMATON 
+		&& (svFlags & SV_FLAG_HUNGER) && stats[clientnum]->HUNGER <= 250 && (ticks % 50) - (ticks % 25) )
 	{
 		pos.x = xoffset + playerStatusBarWidth + 10; // was pos.x = 128;
 		pos.y = yres - 160;
@@ -672,6 +730,35 @@ void drawStatus()
 			drawImageScaled(hunger_bmp, NULL, &pos);
 		}
 	}
+
+	if ( stats[clientnum]->type == AUTOMATON )
+	{
+		if ( stats[clientnum]->HUNGER > 300 || (ticks % 50) - (ticks % 25) )
+		{
+			pos.x = xoffset + playerStatusBarWidth + 10; // was pos.x = 128;
+			pos.y = yres - 160;
+			pos.w = 64;
+			pos.h = 64;
+			if ( stats[clientnum]->HUNGER > 1200 )
+			{
+				drawImageScaled(hunger_boiler_hotflame_bmp, nullptr, &pos);
+			}
+			else
+			{
+				if ( stats[clientnum]->HUNGER > 600 )
+				{
+					drawImageScaledPartial(hunger_boiler_flame_bmp, nullptr, &pos, 1.f);
+				}
+				else
+				{
+					float percent = (stats[clientnum]->HUNGER - 300) / 300.f; // always show a little bit more at the bottom (10-20%)
+					drawImageScaledPartial(hunger_boiler_flame_bmp, nullptr, &pos, percent);
+				}
+			}
+			drawImageScaled(hunger_boiler_bmp, nullptr, &pos);
+		}
+	}
+
 	// minotaur icon
 	if ( minotaurlevel && (ticks % 50) - (ticks % 25) )
 	{
@@ -690,9 +777,43 @@ void drawStatus()
 	pos.h = playerStatusBarHeight;
 	pos.y = yres - (playerStatusBarHeight + 12);
 	drawTooltip(&pos);
-
-	// Display "MP" at the top of Magic bar
-	ttfPrintText(ttf12, pos.x + (playerStatusBarWidth / 2 - 10), pos.y + 6, language[307]);
+	if ( stats[clientnum] && stats[clientnum]->HP > 0
+		&& stats[clientnum]->EFFECTS[EFF_MP_REGEN] )
+	{
+		bool lowDurationFlash = !((ticks % 50) - (ticks % 25));
+		bool lowDuration = stats[clientnum]->EFFECTS_TIMERS[EFF_MP_REGEN] > 0 &&
+			(stats[clientnum]->EFFECTS_TIMERS[EFF_MP_REGEN] < TICKS_PER_SECOND * 5);
+		if ( (lowDuration && !lowDurationFlash) || !lowDuration )
+		{
+			if ( colorblind )
+			{
+				drawTooltip(&pos, SDL_MapRGB(mainsurface->format, 0, 255, 255)); // blue
+			}
+			else
+			{
+				drawTooltip(&pos, SDL_MapRGB(mainsurface->format, 0, 255, 0)); // green
+			}
+		}
+	}
+	Uint32 mpColorBG = SDL_MapRGB(mainsurface->format, 0, 0, 48);
+	Uint32 mpColorFG = SDL_MapRGB(mainsurface->format, 0, 24, 128);
+	if ( stats[clientnum] && stats[clientnum]->playerRace == RACE_INSECTOID && stats[clientnum]->appearance == 0 )
+	{
+		ttfPrintText(ttf12, pos.x + (playerStatusBarWidth / 2 - 10), pos.y + 6, language[3768]);
+		mpColorBG = SDL_MapRGB(mainsurface->format, 32, 48, 0);
+		mpColorFG = SDL_MapRGB(mainsurface->format, 92, 192, 0);
+	}
+	else if ( stats[clientnum] && stats[clientnum]->type == AUTOMATON )
+	{
+		ttfPrintText(ttf12, pos.x + (playerStatusBarWidth / 2 - 10), pos.y + 6, language[3474]);
+		mpColorBG = SDL_MapRGB(mainsurface->format, 64, 32, 0);
+		mpColorFG = SDL_MapRGB(mainsurface->format, 192, 92, 0);
+	}
+	else
+	{
+		// Display "MP" at the top of Magic bar
+		ttfPrintText(ttf12, pos.x + (playerStatusBarWidth / 2 - 10), pos.y + 6, language[307]);
+	}
 
 	// Display border between actual Magic bar and "MP"
 	//pos.x = 12;
@@ -700,6 +821,24 @@ void drawStatus()
 	pos.h = 0;
 	pos.y = yres - (playerStatusBarHeight - 9);
 	drawTooltip(&pos);
+	if ( stats[clientnum] && stats[clientnum]->HP > 0
+		&& stats[clientnum]->EFFECTS[EFF_MP_REGEN] )
+	{
+		bool lowDurationFlash = !((ticks % 50) - (ticks % 25));
+		bool lowDuration = stats[clientnum]->EFFECTS_TIMERS[EFF_MP_REGEN] > 0 &&
+			(stats[clientnum]->EFFECTS_TIMERS[EFF_MP_REGEN] < TICKS_PER_SECOND * 5);
+		if ( (lowDuration && !lowDurationFlash) || !lowDuration )
+		{
+			if ( colorblind )
+			{
+				drawTooltip(&pos, SDL_MapRGB(mainsurface->format, 0, 255, 255)); // blue
+			}
+			else
+			{
+				drawTooltip(&pos, SDL_MapRGB(mainsurface->format, 0, 255, 0)); // green
+			}
+		}
+	}
 
 	// Display the actual Magic bar's faint background
 	if ( uiscale_playerbars < 1.5 )
@@ -719,7 +858,7 @@ void drawStatus()
 	pos.y = yres - 15 - pos.h;
 
 	// Draw the actual Magic bar's faint background
-	drawRect(&pos, SDL_MapRGB(mainsurface->format, 0, 0, 48), 255); // Display blue
+	drawRect(&pos, mpColorBG, 255); // Display blue
 
 	// If the Player has MP, base the size of the actual Magic bar off remaining MP
 	if ( stats[clientnum]->MP > 0 )
@@ -730,7 +869,7 @@ void drawStatus()
 		pos.y = yres - 15 - pos.h;
 
 		// Only draw the actual Magic bar if the Player has MP
-		drawRect(&pos, SDL_MapRGB(mainsurface->format, 0, 24, 128), 255); // Display blue
+		drawRect(&pos, mpColorFG, 255); // Display blue
 	}
 
 	// Print out the amount of MP the Player currently has
@@ -762,6 +901,10 @@ void drawStatus()
 		item = uidToItem(hotbar[num].item);
 		if ( item )
 		{
+			if ( item->type == BOOMERANG )
+			{
+				magicBoomerangHotbarSlot = num;
+			}
 			bool used = false;
 			pos.w = hotbar_img->w * uiscale_hotbar;
 			pos.h = hotbar_img->h * uiscale_hotbar;
@@ -800,6 +943,27 @@ void drawStatus()
 			}
 
 			drawImageScaled(itemSprite(item), NULL, &pos);
+
+			bool disableItemUsage = false;
+
+			if ( players[clientnum] && players[clientnum]->entity && players[clientnum]->entity->effectShapeshift != NOTHING )
+			{
+				// shape shifted, disable some items
+				if ( !item->usableWhileShapeshifted(stats[clientnum]) )
+				{
+					disableItemUsage = true;
+					drawRect(&highlightBox, SDL_MapRGB(mainsurface->format, 64, 64, 64), 144);
+				}
+			}
+			if ( client_classes[clientnum] == CLASS_SHAMAN )
+			{
+				if ( item->type == SPELL_ITEM && !(playerUnlockedShamanSpell(clientnum, item)) )
+				{
+					disableItemUsage = true;
+					drawRect(&highlightBox, SDL_MapRGB(mainsurface->format, 64, 64, 64), 144);
+				}
+			}
+
 			if ( stats[clientnum]->HP > 0 )
 			{
 				if ( !shootmode && mouseInBounds(pos.x, pos.x + hotbar_img->w * uiscale_hotbar, pos.y, pos.y + hotbar_img->h * uiscale_hotbar) )
@@ -850,6 +1014,8 @@ void drawStatus()
 						mousestatus[SDL_BUTTON_RIGHT] = 0;
 						*inputPressed(joyimpulses[INJOY_MENU_USE]) = 0;
 						bool badpotion = false;
+						bool learnedSpell = false;
+
 						if ( itemCategory(item) == POTION && item->identified )
 						{
 							badpotion = isPotionBad(*item); //So that you wield empty potions be default.
@@ -857,6 +1023,11 @@ void drawStatus()
 						if ( item->type == POTION_EMPTY )
 						{
 							badpotion = true;
+						}
+						if ( itemCategory(item) == SPELLBOOK && (item->identified || itemIsEquipped(item, clientnum)) )
+						{
+							// equipped spellbook will unequip on use.
+							learnedSpell = (playerLearnedSpellbook(item) || itemIsEquipped(item, clientnum));
 						}
 
 						if ( keystatus[SDL_SCANCODE_LSHIFT] || keystatus[SDL_SCANCODE_RSHIFT] )
@@ -871,44 +1042,106 @@ void drawStatus()
 						}
 						else
 						{
-							if ( itemCategory(item) == POTION 
+							if ( (itemCategory(item) == POTION || itemCategory(item) == SPELLBOOK || item->type == FOOD_CREAMPIE )
 								&& (keystatus[SDL_SCANCODE_LALT] || keystatus[SDL_SCANCODE_RALT]) )
 							{
 								badpotion = true;
+								learnedSpell = true;
 							}
-							if ( !badpotion )
+
+							if ( !learnedSpell && item->identified 
+								&& itemCategory(item) == SPELLBOOK && players[clientnum] && players[clientnum]->entity )
 							{
-								useItem(item, clientnum);
-							}
-							else
-							{
-								if ( multiplayer == CLIENT )
+								learnedSpell = true; // let's always equip/unequip spellbooks from the hotbar?
+								spell_t* currentSpell = getSpellFromID(getSpellIDFromSpellbook(item->type));
+								if ( currentSpell )
 								{
-									if ( swapWeaponGimpTimer > 0
-										&& (itemCategory(item) == POTION || itemCategory(item) == GEM || itemCategory(item) == THROWN) )
+									int skillLVL = stats[clientnum]->PROFICIENCIES[PRO_MAGIC] + statGetINT(stats[clientnum], players[clientnum]->entity);
+									if ( stats[clientnum]->PROFICIENCIES[PRO_MAGIC] >= 100 )
 									{
-										// don't send to host as we're not allowed to "use" or equip these items. 
-										// will return false in equipItem.
+										skillLVL = 100;
+									}
+									if ( skillLVL >= currentSpell->difficulty )
+									{
+										// can learn spell, try that instead.
+										learnedSpell = false;
+									}
+								}
+							}
+
+							if ( itemCategory(item) == SPELLBOOK && stats[clientnum] && stats[clientnum]->type == GOBLIN )
+							{
+								learnedSpell = true; // goblinos can't learn spells but always equip books.
+							}
+
+							if ( !badpotion && !learnedSpell )
+							{
+								if ( !(isItemEquippableInShieldSlot(item) && cast_animation.active_spellbook) )
+								{
+									if ( !disableItemUsage )
+									{
+										if ( stats[clientnum] && stats[clientnum]->type == AUTOMATON
+											&& (item->type == TOOL_METAL_SCRAP || item->type == TOOL_MAGIC_SCRAP) )
+										{
+											// consume item
+											if ( multiplayer == CLIENT )
+											{
+												strcpy((char*)net_packet->data, "FODA");
+												SDLNet_Write32((Uint32)item->type, &net_packet->data[4]);
+												SDLNet_Write32((Uint32)item->status, &net_packet->data[8]);
+												SDLNet_Write32((Uint32)item->beatitude, &net_packet->data[12]);
+												SDLNet_Write32((Uint32)item->count, &net_packet->data[16]);
+												SDLNet_Write32((Uint32)item->appearance, &net_packet->data[20]);
+												net_packet->data[24] = item->identified;
+												net_packet->data[25] = clientnum;
+												net_packet->address.host = net_server.host;
+												net_packet->address.port = net_server.port;
+												net_packet->len = 26;
+												sendPacketSafe(net_sock, -1, net_packet, 0);
+											}
+											item_FoodAutomaton(item, clientnum);
+										}
+										else
+										{
+											useItem(item, clientnum);
+										}
 									}
 									else
 									{
-										strcpy((char*)net_packet->data, "EQUI");
-										SDLNet_Write32((Uint32)item->type, &net_packet->data[4]);
-										SDLNet_Write32((Uint32)item->status, &net_packet->data[8]);
-										SDLNet_Write32((Uint32)item->beatitude, &net_packet->data[12]);
-										SDLNet_Write32((Uint32)item->count, &net_packet->data[16]);
-										SDLNet_Write32((Uint32)item->appearance, &net_packet->data[20]);
-										net_packet->data[24] = item->identified;
-										net_packet->data[25] = clientnum;
-										net_packet->address.host = net_server.host;
-										net_packet->address.port = net_server.port;
-										net_packet->len = 26;
-										sendPacketSafe(net_sock, -1, net_packet, 0);
+										if ( client_classes[clientnum] == CLASS_SHAMAN && item->type == SPELL_ITEM )
+										{
+											messagePlayer(clientnum, language[3488]); // unable to use with current level.
+										}
+										else
+										{
+											messagePlayer(clientnum, language[3432]); // unable to use in current form message.
+										}
 									}
 								}
-								equipItem(item, &stats[clientnum]->weapon, clientnum);
+							}
+							else
+							{
+								if ( !disableItemUsage )
+								{
+									playerTryEquipItemAndUpdateServer(item);
+								}
+								else
+								{
+									if ( client_classes[clientnum] == CLASS_SHAMAN && item->type == SPELL_ITEM )
+									{
+										messagePlayer(clientnum, language[3488]); // unable to use with current level.
+									}
+									else
+									{
+										messagePlayer(clientnum, language[3432]); // unable to use in current form message.
+									}
+								}
 							}
 							used = true;
+							if ( disableItemUsage )
+							{
+								used = false;
+							}
 						}
 					}
 				}
@@ -953,7 +1186,8 @@ void drawStatus()
 				else
 				{
 					spell_t* spell = getSpellFromItem(item);
-					if ( selected_spell == spell )
+					if ( selected_spell == spell 
+						&& (selected_spell_last_appearance == item->appearance || selected_spell_last_appearance == -1 ) )
 					{
 						drawImageScaled(equipped_bmp, NULL, &src);
 					}
@@ -970,7 +1204,13 @@ void drawStatus()
 		}
 	}
 
-	if ( !shootmode )
+	bool drawHotBarTooltipOnCycle = false;
+	if ( !intro && hotbarTooltipLastGameTick != 0 && (ticks - hotbarTooltipLastGameTick) < TICKS_PER_SECOND * 2 )
+	{
+		drawHotBarTooltipOnCycle = true;
+	}
+
+	if ( !shootmode || drawHotBarTooltipOnCycle )
 	{
 		pos.x = initial_position.x;
 		//Go back through all of the hotbar slots and draw the tooltips.
@@ -979,28 +1219,113 @@ void drawStatus()
 			item = uidToItem(hotbar[num].item);
 			if ( item )
 			{
-				if ( mouseInBounds(pos.x, pos.x + hotbar_img->w * uiscale_hotbar, pos.y, pos.y + hotbar_img->h * uiscale_hotbar) )
+				bool drawTooltipOnSlot = !shootmode && mouseInBounds(pos.x, pos.x + hotbar_img->w * uiscale_hotbar, pos.y, pos.y + hotbar_img->h * uiscale_hotbar);
+				if ( !drawTooltipOnSlot )
+				{
+					if ( drawHotBarTooltipOnCycle && current_hotbar == num )
+					{
+						drawTooltipOnSlot = true;
+					}
+				}
+				else
+				{
+					if ( !shootmode )
+					{
+						// reset timer.
+						hotbarTooltipLastGameTick = 0;
+						drawHotBarTooltipOnCycle = false;
+					}
+					else
+					{
+						if ( drawHotBarTooltipOnCycle )
+						{
+							drawTooltipOnSlot = false;
+						}
+					}
+				}
+
+				if ( drawTooltipOnSlot )
 				{
 					//Tooltip
 					SDL_Rect src;
 					src.x = mousex + 16;
 					src.y = mousey + 8;
+
+					if ( drawHotBarTooltipOnCycle )
+					{
+						src.x = pos.x + hotbar_img->w * uiscale_hotbar;
+						src.y = pos.y + hotbar_img->h * uiscale_hotbar;
+						src.y -= 16;
+					}
+
 					if ( itemCategory(item) == SPELL_CAT )
 					{
 						spell_t* spell = getSpellFromItem(item);
-						drawSpellTooltip(spell);
+						if ( drawHotBarTooltipOnCycle )
+						{
+							drawSpellTooltip(spell, item, &src);
+						}
+						else
+						{
+							drawSpellTooltip(spell, item, nullptr);
+						}
 					}
 					else
 					{
 						src.w = std::max(13, longestline(item->description())) * TTF12_WIDTH + 8;
 						src.h = TTF12_HEIGHT * 4 + 8;
+						char spellEffectText[256] = "";
 						if ( item->identified )
 						{
-							if ( itemCategory(item) == WEAPON || itemCategory(item) == ARMOR )
+							bool learnedSpellbook = false;
+							if ( itemCategory(item) == SPELLBOOK )
+							{
+								learnedSpellbook = playerLearnedSpellbook(item);
+								if ( !learnedSpellbook && stats[clientnum] && players[clientnum] && players[clientnum]->entity )
+								{
+									// spellbook tooltip shows if you have the magic requirement as well (for goblins)
+									int skillLVL = stats[clientnum]->PROFICIENCIES[PRO_MAGIC] + statGetINT(stats[clientnum], players[clientnum]->entity);
+									spell_t* spell = getSpellFromID(getSpellIDFromSpellbook(item->type));
+									if ( spell && skillLVL >= spell->difficulty )
+									{
+										learnedSpellbook = true;
+									}
+								}
+							}
+
+							if ( itemCategory(item) == WEAPON || itemCategory(item) == ARMOR || itemCategory(item) == THROWN
+								|| itemTypeIsQuiver(item->type) )
 							{
 								src.h += TTF12_HEIGHT;
 							}
+							else if ( itemCategory(item) == SCROLL && item->identified )
+							{
+								src.h += TTF12_HEIGHT;
+								src.w = std::max((2 + longestline(language[3862]) + longestline(item->getScrollLabel())) * TTF12_WIDTH + 8, src.w);
+							}
+							else if ( itemCategory(item) == SPELLBOOK && learnedSpellbook )
+							{
+								int height = 1;
+								char effectType[32] = "";
+								int spellID = getSpellIDFromSpellbook(item->type);
+								int damage = drawSpellTooltip(getSpellFromID(spellID), item, nullptr);
+								real_t dummy = 0.f;
+								getSpellEffectString(spellID, spellEffectText, effectType, damage, &height, &dummy);
+								int width = longestline(spellEffectText) * TTF12_WIDTH + 8;
+								if ( width > src.w )
+								{
+									src.w = width;
+								}
+								src.h += height * TTF12_HEIGHT;
+							}
+							else if ( item->type == TOOL_GYROBOT || item->type == TOOL_DUMMYBOT
+								|| item->type == TOOL_SENTRYBOT || item->type == TOOL_SPELLBOT
+								|| (item->type == ENCHANTED_FEATHER && item->identified) )
+							{
+								src.w += 7 * TTF12_WIDTH;
+							}
 						}
+
 						int furthestX = xres;
 						if ( proficienciesPage == 0 )
 						{
@@ -1024,7 +1349,15 @@ void drawStatus()
 						{
 							src.y -= (src.y + src.h + 16 - yres);
 						}
-						drawTooltip(&src);
+
+						if ( drawHotBarTooltipOnCycle )
+						{
+							drawTooltip(&src);
+						}
+						else
+						{
+							drawTooltip(&src);
+						}
 
 						Uint32 color = 0xFFFFFFFF;
 						if ( !item->identified )
@@ -1054,14 +1387,56 @@ void drawStatus()
 						{
 							color = 0xFFFFFFFF;
 						}
-						ttfPrintTextFormattedColor(ttf12, src.x + 4, src.y + 4, color, "%s", item->description());
-						ttfPrintTextFormatted(ttf12, src.x + 4 + TTF12_WIDTH, src.y + 4 + TTF12_HEIGHT * 2, language[313], items[item->type].weight * item->count);
+
+						if ( item->type == TOOL_GYROBOT || item->type == TOOL_DUMMYBOT
+							|| item->type == TOOL_SENTRYBOT || item->type == TOOL_SPELLBOT )
+						{
+							int health = 100;
+							if ( !item->tinkeringBotIsMaxHealth() )
+							{
+								health = 25 * (item->appearance % 10);
+								if ( health == 0 && item->status != BROKEN )
+								{
+									health = 5;
+								}
+							}
+							ttfPrintTextFormattedColor(ttf12, src.x + 4, src.y + 4, color, "%s (%d%%)", item->description(), health);
+						}
+						else if ( item->type == ENCHANTED_FEATHER && item->identified )
+						{
+							ttfPrintTextFormattedColor(ttf12, src.x + 4, src.y + 4, color, "%s (%d%%)", item->description(), item->appearance % ENCHANTED_FEATHER_MAX_DURABILITY);
+						}
+						else
+						{
+							ttfPrintTextFormattedColor(ttf12, src.x + 4, src.y + 4, color, "%s", item->description());
+						}
+						int itemWeight = items[item->type].weight * item->count;
+						if ( itemTypeIsQuiver(item->type) )
+						{
+							itemWeight = std::max(1, itemWeight / 5);
+						}
+						ttfPrintTextFormatted(ttf12, src.x + 4 + TTF12_WIDTH, src.y + 4 + TTF12_HEIGHT * 2, language[313], itemWeight);
 						ttfPrintTextFormatted(ttf12, src.x + 4 + TTF12_WIDTH, src.y + 4 + TTF12_HEIGHT * 3, language[314], item->sellValue(clientnum));
+						if ( strcmp(spellEffectText, "") )
+						{
+							ttfPrintTextFormattedColor(ttf12, src.x + 4, src.y + 4 + TTF12_HEIGHT * 4, SDL_MapRGB(mainsurface->format, 0, 255, 255), spellEffectText);
+						}
 
 						if ( item->identified )
 						{
-							if ( itemCategory(item) == WEAPON )
+							if ( itemCategory(item) == WEAPON || itemCategory(item) == THROWN
+								|| itemTypeIsQuiver(item->type) )
 							{
+								Monster tmpRace = stats[clientnum]->type;
+								if ( stats[clientnum]->type == TROLL
+									|| stats[clientnum]->type == RAT
+									|| stats[clientnum]->type == SPIDER
+									|| stats[clientnum]->type == CREATURE_IMP )
+								{
+									// these monsters have 0 bonus from weapons, but want the tooltip to say the normal amount.
+									stats[clientnum]->type = HUMAN;
+								}
+
 								if ( item->weaponGetAttack(stats[clientnum]) >= 0 )
 								{
 									color = SDL_MapRGB(mainsurface->format, 0, 255, 255);
@@ -1070,10 +1445,26 @@ void drawStatus()
 								{
 									color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
 								}
+								if ( stats[clientnum]->type != tmpRace )
+								{
+									color = SDL_MapRGB(mainsurface->format, 127, 127, 127); // grey out the text if monster doesn't benefit.
+								}
+
 								ttfPrintTextFormattedColor(ttf12, src.x + 4 + TTF12_WIDTH, src.y + 4 + TTF12_HEIGHT * 4, color, language[315], item->weaponGetAttack(stats[clientnum]));
+								stats[clientnum]->type = tmpRace;
 							}
 							else if ( itemCategory(item) == ARMOR )
 							{
+								Monster tmpRace = stats[clientnum]->type;
+								if ( stats[clientnum]->type == TROLL
+									|| stats[clientnum]->type == RAT
+									|| stats[clientnum]->type == SPIDER
+									|| stats[clientnum]->type == CREATURE_IMP )
+								{
+									// these monsters have 0 bonus from armor, but want the tooltip to say the normal amount.
+									stats[clientnum]->type = HUMAN;
+								}
+
 								if ( item->armorGetAC(stats[clientnum]) >= 0 )
 								{
 									color = SDL_MapRGB(mainsurface->format, 0, 255, 255);
@@ -1082,11 +1473,22 @@ void drawStatus()
 								{
 									color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
 								}
+								if ( stats[clientnum]->type != tmpRace )
+								{
+									color = SDL_MapRGB(mainsurface->format, 127, 127, 127); // grey out the text if monster doesn't benefit.
+								}
+
 								ttfPrintTextFormattedColor(ttf12, src.x + 4 + TTF12_WIDTH, src.y + 4 + TTF12_HEIGHT * 4, color, language[316], item->armorGetAC(stats[clientnum]));
+								stats[clientnum]->type = tmpRace;
+							}
+							else if ( itemCategory(item) == SCROLL )
+							{
+								color = SDL_MapRGB(mainsurface->format, 0, 255, 255);
+								ttfPrintTextFormattedColor(ttf12, src.x + 4 + TTF12_WIDTH, src.y + 4 + TTF12_HEIGHT * 4, color, "%s%s", language[3862], item->getScrollLabel());
 							}
 						}
 					}
-					if ( hotbar_numkey_quick_add )
+					if ( !drawHotBarTooltipOnCycle && hotbar_numkey_quick_add )
 					{
 						Uint32 swapItem = 0;
 						if ( keystatus[SDL_SCANCODE_1] )
@@ -1280,25 +1682,67 @@ void drawStatus()
 
 		bool bumper_moved = false;
 		//Gamepad change hotbar selection.
-		if ( shootmode && *inputPressed(joyimpulses[INJOY_GAME_HOTBAR_NEXT]) 
-			&& !itemMenuOpen && !openedChest[clientnum] 
-			&& gui_mode != (GUI_MODE_SHOP) && !book_open 
-			&& !identifygui_active && !removecursegui_active
-			&& !GenericGUI.isGUIOpen() )
+		if ( (*inputPressed(joyimpulses[INJOY_GAME_HOTBAR_NEXT]) || *inputPressed(impulses[IN_HOTBAR_SCROLL_RIGHT])) )
 		{
-			*inputPressed(joyimpulses[INJOY_GAME_HOTBAR_NEXT]) = 0;
-			selectHotbarSlot(current_hotbar + 1);
-			bumper_moved = true;
+			if ( shootmode && !itemMenuOpen && !openedChest[clientnum] 
+				&& gui_mode != (GUI_MODE_SHOP) && !book_open 
+				&& !identifygui_active && !removecursegui_active
+				&& !GenericGUI.isGUIOpen() )
+			{
+				if ( *inputPressed(impulses[IN_HOTBAR_SCROLL_RIGHT]) )
+				{
+					*inputPressed(impulses[IN_HOTBAR_SCROLL_RIGHT]) = 0;
+					hotbarTooltipLastGameTick = ticks;
+				}
+				else
+				{
+					*inputPressed(joyimpulses[INJOY_GAME_HOTBAR_NEXT]) = 0;
+					bumper_moved = true;
+				}
+				selectHotbarSlot(current_hotbar + 1);
+			}
+			else
+			{
+				hotbarTooltipLastGameTick = 0;
+				/*if ( intro || shootmode )
+				{
+					if ( *inputPressed(impulses[IN_HOTBAR_SCROLL_RIGHT]) )
+					{
+						*inputPressed(impulses[IN_HOTBAR_SCROLL_RIGHT]) = 0;
+					}
+				}*/
+			}
 		}
-		if ( shootmode && *inputPressed(joyimpulses[INJOY_GAME_HOTBAR_PREV]) 
-			&& !itemMenuOpen && !openedChest[clientnum] 
-			&& gui_mode != (GUI_MODE_SHOP) && !book_open 
-			&& !identifygui_active && !removecursegui_active
-			&& !GenericGUI.isGUIOpen() )
+		if ( *inputPressed(joyimpulses[INJOY_GAME_HOTBAR_PREV]) || *inputPressed(impulses[IN_HOTBAR_SCROLL_LEFT]) )
 		{
-			*inputPressed(joyimpulses[INJOY_GAME_HOTBAR_PREV]) = 0;
-			selectHotbarSlot(current_hotbar - 1);
-			bumper_moved = true;
+			if ( shootmode && !itemMenuOpen && !openedChest[clientnum] 
+				&& gui_mode != (GUI_MODE_SHOP) && !book_open 
+				&& !identifygui_active && !removecursegui_active
+				&& !GenericGUI.isGUIOpen() )
+			{
+				if ( *inputPressed(impulses[IN_HOTBAR_SCROLL_LEFT]) )
+				{
+					*inputPressed(impulses[IN_HOTBAR_SCROLL_LEFT]) = 0;
+					hotbarTooltipLastGameTick = ticks;
+				}
+				else
+				{
+					*inputPressed(joyimpulses[INJOY_GAME_HOTBAR_PREV]) = 0;
+					bumper_moved = true;
+				}
+				selectHotbarSlot(current_hotbar - 1);
+			}
+			else
+			{
+				hotbarTooltipLastGameTick = 0;
+				/*if ( intro || shootmode )
+				{
+					if ( *inputPressed(impulses[IN_HOTBAR_SCROLL_LEFT]) )
+					{
+						*inputPressed(impulses[IN_HOTBAR_SCROLL_LEFT]) = 0;
+					}
+				}*/
+			}
 		}
 
 		if ( bumper_moved && !itemMenuOpen 
@@ -1311,13 +1755,21 @@ void drawStatus()
 
 		if ( !itemMenuOpen && !selectedItem && !openedChest[clientnum] && gui_mode != (GUI_MODE_SHOP) )
 		{
-			if ( shootmode && *inputPressed(joyimpulses[INJOY_GAME_HOTBAR_ACTIVATE]) 
+			if ( shootmode && (*inputPressed(joyimpulses[INJOY_GAME_HOTBAR_ACTIVATE]) || *inputPressed(impulses[IN_HOTBAR_SCROLL_SELECT]))
 				&& !openedChest[clientnum] && gui_mode != (GUI_MODE_SHOP) 
 				&& !book_open && !identifygui_active 
 				&& !removecursegui_active && !GenericGUI.isGUIOpen() )
 			{
 				//Activate a hotbar slot if in-game.
-				*inputPressed(joyimpulses[INJOY_GAME_HOTBAR_ACTIVATE]) = 0;
+				if ( *inputPressed(impulses[IN_HOTBAR_SCROLL_SELECT]) )
+				{
+					hotbarTooltipLastGameTick = std::max(ticks - TICKS_PER_SECOND, ticks - hotbarTooltipLastGameTick);
+					*inputPressed(impulses[IN_HOTBAR_SCROLL_SELECT]) = 0;
+				}
+				else
+				{
+					*inputPressed(joyimpulses[INJOY_GAME_HOTBAR_ACTIVATE]) = 0;
+				}
 				item = uidToItem(hotbar[current_hotbar].item);
 			}
 
@@ -1346,6 +1798,7 @@ void drawStatus()
 		if ( item )
 		{
 			bool badpotion = false;
+			bool learnedSpell = false;
 			if ( itemCategory(item) == POTION && item->identified )
 			{
 				badpotion = isPotionBad(*item);
@@ -1354,43 +1807,121 @@ void drawStatus()
 			{
 				badpotion = true; //So that you wield empty potions be default.
 			}
-
-			if ( (keystatus[SDL_SCANCODE_LALT] || keystatus[SDL_SCANCODE_RALT]) && itemCategory(item) == POTION )
+			if ( itemCategory(item) == SPELLBOOK && (item->identified || itemIsEquipped(item, clientnum)) )
 			{
-				badpotion = true;
+				// equipped spellbook will unequip on use.
+				learnedSpell = (playerLearnedSpellbook(item) || itemIsEquipped(item, clientnum));
 			}
 
-			if ( !badpotion )
+			if ( (keystatus[SDL_SCANCODE_LALT] || keystatus[SDL_SCANCODE_RALT]) 
+				&& (itemCategory(item) == POTION || itemCategory(item) == SPELLBOOK || item->type == FOOD_CREAMPIE) )
 			{
-				useItem(item, clientnum);
+				badpotion = true;
+				learnedSpell = true;
+			}
+
+			if ( !learnedSpell && item->identified
+				&& itemCategory(item) == SPELLBOOK && players[clientnum] && players[clientnum]->entity )
+			{
+				learnedSpell = true; // let's always equip/unequip spellbooks from the hotbar?
+				spell_t* currentSpell = getSpellFromID(getSpellIDFromSpellbook(item->type));
+				if ( currentSpell )
+				{
+					int skillLVL = stats[clientnum]->PROFICIENCIES[PRO_MAGIC] + statGetINT(stats[clientnum], players[clientnum]->entity);
+					if ( stats[clientnum]->PROFICIENCIES[PRO_MAGIC] >= 100 )
+					{
+						skillLVL = 100;
+					}
+					if ( skillLVL >= currentSpell->difficulty )
+					{
+						// can learn spell, try that instead.
+						learnedSpell = false;
+					}
+				}
+			}
+
+			if ( itemCategory(item) == SPELLBOOK && stats[clientnum] && stats[clientnum]->type == GOBLIN )
+			{
+				learnedSpell = true; // goblinos can't learn spells but always equip books.
+			}
+
+			bool disableItemUsage = false;
+			if ( players[clientnum] && players[clientnum]->entity )
+			{
+				if ( players[clientnum]->entity->effectShapeshift != NOTHING )
+				{
+					if ( !item->usableWhileShapeshifted(stats[clientnum]) )
+					{
+						disableItemUsage = true;
+					}
+				}
+				else
+				{
+					if ( itemCategory(item) == SPELL_CAT && item->appearance >= 1000 )
+					{
+						if ( canUseShapeshiftSpellInCurrentForm(*item) != 1 )
+						{
+							disableItemUsage = true;
+						}
+					}
+				}
+			}
+			if ( client_classes[clientnum] == CLASS_SHAMAN )
+			{
+				if ( item->type == SPELL_ITEM && !(playerUnlockedShamanSpell(clientnum, item)) )
+				{
+					disableItemUsage = true;
+				}
+			}
+
+			if ( !disableItemUsage )
+			{
+				if ( !badpotion && !learnedSpell )
+				{
+					if ( !(isItemEquippableInShieldSlot(item) && cast_animation.active_spellbook) )
+					{
+						if ( stats[clientnum] && stats[clientnum]->type == AUTOMATON
+							&& (item->type == TOOL_METAL_SCRAP || item->type == TOOL_MAGIC_SCRAP) )
+						{
+							// consume item
+							if ( multiplayer == CLIENT )
+							{
+								strcpy((char*)net_packet->data, "FODA");
+								SDLNet_Write32((Uint32)item->type, &net_packet->data[4]);
+								SDLNet_Write32((Uint32)item->status, &net_packet->data[8]);
+								SDLNet_Write32((Uint32)item->beatitude, &net_packet->data[12]);
+								SDLNet_Write32((Uint32)item->count, &net_packet->data[16]);
+								SDLNet_Write32((Uint32)item->appearance, &net_packet->data[20]);
+								net_packet->data[24] = item->identified;
+								net_packet->data[25] = clientnum;
+								net_packet->address.host = net_server.host;
+								net_packet->address.port = net_server.port;
+								net_packet->len = 26;
+								sendPacketSafe(net_sock, -1, net_packet, 0);
+							}
+							item_FoodAutomaton(item, clientnum);
+						}
+						else
+						{
+							useItem(item, clientnum);
+						}
+					}
+				}
+				else
+				{
+					playerTryEquipItemAndUpdateServer(item);
+				}
 			}
 			else
 			{
-				if ( multiplayer == CLIENT )
+				if ( client_classes[clientnum] == CLASS_SHAMAN && item->type == SPELL_ITEM )
 				{
-					if ( swapWeaponGimpTimer > 0
-						&& (itemCategory(item) == POTION || itemCategory(item) == GEM || itemCategory(item) == THROWN) )
-					{
-						// don't send to host as we're not allowed to "use" or equip these items. 
-						// will return false in equipItem.
-					}
-					else
-					{
-						strcpy((char*)net_packet->data, "EQUI");
-						SDLNet_Write32((Uint32)item->type, &net_packet->data[4]);
-						SDLNet_Write32((Uint32)item->status, &net_packet->data[8]);
-						SDLNet_Write32((Uint32)item->beatitude, &net_packet->data[12]);
-						SDLNet_Write32((Uint32)item->count, &net_packet->data[16]);
-						SDLNet_Write32((Uint32)item->appearance, &net_packet->data[20]);
-						net_packet->data[24] = item->identified;
-						net_packet->data[25] = clientnum;
-						net_packet->address.host = net_server.host;
-						net_packet->address.port = net_server.port;
-						net_packet->len = 26;
-						sendPacketSafe(net_sock, -1, net_packet, 0);
-					}
+					messagePlayer(clientnum, language[3488]); // unable to use with current level.
 				}
-				equipItem(item, &stats[clientnum]->weapon, clientnum);
+				else
+				{
+					messagePlayer(clientnum, language[3432]); // unable to use in current form message.
+				}
 			}
 		}
 	}
@@ -1461,12 +1992,24 @@ void drawStatus()
 	}
 }
 
-void drawSpellTooltip(spell_t* spell)
+int drawSpellTooltip(spell_t* spell, Item* item, SDL_Rect* src)
 {
-	SDL_Rect src;
-	src.x = mousex + 16;
-	src.y = mousey + 8;
-
+	SDL_Rect pos;
+	if ( src )
+	{
+		pos.x = src->x;
+		pos.y = src->y;
+	}
+	else
+	{
+		pos.x = mousex + 16;
+		pos.y = mousey + 8;
+	}
+	bool spellbook = false;
+	if ( item && itemCategory(item) == SPELLBOOK )
+	{
+		spellbook = true;
+	}
 	if ( spell )
 	{
 		node_t* rootNode = spell->elements.first;
@@ -1477,11 +2020,13 @@ void drawSpellTooltip(spell_t* spell)
 		}
 		int damage = 0;
 		int mana = 0;
+		int heal = 0;
 		spellElement_t* primaryElement = nullptr;
 		if ( elementRoot )
 		{
 			node_t* primaryNode = elementRoot->elements.first;
 			mana = elementRoot->mana;
+			heal = mana;
 			if ( primaryNode )
 			{
 				primaryElement = (spellElement_t*)(primaryNode->element);
@@ -1490,162 +2035,83 @@ void drawSpellTooltip(spell_t* spell)
 					damage = primaryElement->damage;
 				}
 			}
+			if ( players[clientnum] )
+			{
+				int bonus = 0;
+				if ( spellbook )
+				{
+					bonus = 25 * ((shouldInvertEquipmentBeatitude(stats[clientnum]) ? abs(item->beatitude) : item->beatitude));
+					if ( stats[clientnum] )
+					{
+						if ( players[clientnum] && players[clientnum]->entity )
+						{
+							bonus += players[clientnum]->entity->getINT() * 0.5;
+						}
+						else
+						{
+							bonus += statGetINT(stats[clientnum], nullptr) * 0.5;
+						}
+					}
+					if ( bonus < 0 )
+					{
+						bonus = 0;
+					}
+				}
+				damage += (damage * (bonus * 0.01 + getBonusFromCasterOfSpellElement(players[clientnum]->entity, primaryElement)));
+				heal += (heal * (bonus * 0.01 + getBonusFromCasterOfSpellElement(players[clientnum]->entity, primaryElement)));
+			}
+			if ( spell->ID == SPELL_HEALING || spell->ID == SPELL_EXTRAHEALING )
+			{
+				damage = heal;
+			}
 		}
 		int spellInfoLines = 1;
 		char spellType[32] = "";
 		char spellEffectText[256] = "";
 		real_t sustainCostPerSecond = 0.f;
-		switch ( spell->ID )
-		{
-			case SPELL_FORCEBOLT:
-			case SPELL_MAGICMISSILE:
-			case SPELL_LIGHTNING:
-				snprintf(spellEffectText, 255, language[3289], damage);
-				snprintf(spellType, 31, language[3303]);
-				break;
-			case SPELL_COLD:
-				snprintf(spellEffectText, 255, language[3290], damage, language[3294]);
-				snprintf(spellType, 31, language[3303]);
-				spellInfoLines = 2;
-				break;
-			case SPELL_FIREBALL:
-				snprintf(spellEffectText, 255, language[3290], damage, language[3295]);
-				snprintf(spellType, 31, language[3303]);
-				spellInfoLines = 2;
-				break;
-			case SPELL_BLEED:
-				snprintf(spellEffectText, 255, language[3291], damage, language[3297], language[3294]);
-				spellInfoLines = 2;
-				snprintf(spellType, 31, language[3303]);
-				break;
-			case SPELL_SLOW:
-				snprintf(spellEffectText, 255, language[3292], language[3294]);
-				snprintf(spellType, 31, language[3303]);
-				break;
-			case SPELL_SLEEP:
-				snprintf(spellEffectText, 255, language[3292], language[3298]);
-				snprintf(spellType, 31, language[3303]);
-				break;
-			case SPELL_CONFUSE:
-				snprintf(spellEffectText, 255, language[3292], language[3299]);
-				snprintf(spellType, 31, language[3303]);
-				break;
-			case SPELL_ACID_SPRAY:
-				snprintf(spellEffectText, 255, language[3293], damage, language[3300]);
-				snprintf(spellType, 31, language[3304]);
-				spellInfoLines = 2;
-				break;
-			case SPELL_HEALING:
-			case SPELL_EXTRAHEALING:
-			{
-				int heal = mana;
-				snprintf(spellType, 31, language[3301]);
-				snprintf(spellEffectText, 255, language[3307], heal);
-				spellInfoLines = 2;
-				break;
-			}
-			case SPELL_REFLECT_MAGIC:
-				snprintf(spellType, 31, language[3302]);
-				snprintf(spellEffectText, 255, language[3308]);
-				spellInfoLines = 2;
-				sustainCostPerSecond = 6.f;
-				break;
-			case SPELL_LEVITATION:
-				snprintf(spellType, 31, language[3302]);
-				snprintf(spellEffectText, 255, language[3309]);
-				sustainCostPerSecond = 0.6;
-				break;
-			case SPELL_INVISIBILITY:
-				snprintf(spellType, 31, language[3302]);
-				snprintf(spellEffectText, 255, language[3310]);
-				sustainCostPerSecond = 1.f;
-				break;
-			case SPELL_LIGHT:
-				snprintf(spellType, 31, language[3302]);
-				snprintf(spellEffectText, 255, language[3311]);
-				sustainCostPerSecond = 15.f;
-				break;
-			case SPELL_REMOVECURSE:
-				snprintf(spellType, 31, language[3305]);
-				snprintf(spellEffectText, 255, language[3312]);
-				break;
-			case SPELL_IDENTIFY:
-				snprintf(spellType, 31, language[3305]);
-				snprintf(spellEffectText, 255, language[3313]);
-				break;
-			case SPELL_MAGICMAPPING:
-				snprintf(spellType, 31, language[3305]);
-				snprintf(spellEffectText, 255, language[3314]);
-				spellInfoLines = 2;
-				break;
-			case SPELL_TELEPORTATION:
-				snprintf(spellType, 31, language[3305]);
-				snprintf(spellEffectText, 255, language[3315]);
-				break;
-			case SPELL_OPENING:
-				snprintf(spellType, 31, language[3303]);
-				snprintf(spellEffectText, 255, language[3316]);
-				break;
-			case SPELL_LOCKING:
-				snprintf(spellType, 31, language[3303]);
-				snprintf(spellEffectText, 255, language[3317]);
-				break;
-			case SPELL_CUREAILMENT:
-				snprintf(spellType, 31, language[3301]);
-				snprintf(spellEffectText, 255, language[3318]);
-				spellInfoLines = 2;
-				break;
-			case SPELL_DIG:
-				snprintf(spellType, 31, language[3303]);
-				snprintf(spellEffectText, 255, language[3319]);
-				break;
-			case SPELL_SUMMON:
-				snprintf(spellType, 31, language[3306]);
-				snprintf(spellEffectText, 255, language[3320]);
-				spellInfoLines = 3;
-				break;
-			case SPELL_STONEBLOOD:
-				snprintf(spellType, 31, language[3304]);
-				snprintf(spellEffectText, 255, language[3292], language[3296]);
-				break;
-			case SPELL_DOMINATE:
-				snprintf(spellType, 31, language[3303]);
-				snprintf(spellEffectText, 255, language[3321]);
-				spellInfoLines = 4;
-				break;
-			case SPELL_STEAL_WEAPON:
-				snprintf(spellType, 31, language[3303]);
-				snprintf(spellEffectText, 255, language[3322]);
-				spellInfoLines = 2;
-				break;
-			case SPELL_DRAIN_SOUL:
-				snprintf(spellType, 31, language[3303]);
-				snprintf(spellEffectText, 255, language[3323], damage);
-				spellInfoLines = 2;
-				break;
-			case SPELL_VAMPIRIC_AURA:
-				snprintf(spellType, 31, language[3302]);
-				snprintf(spellEffectText, 255, language[3324]);
-				spellInfoLines = 4;
-				sustainCostPerSecond = 0.33;
-				break;
-			case SPELL_CHARM_MONSTER:
-				snprintf(spellType, 31, language[3303]);
-				snprintf(spellEffectText, 255, language[3326]);
-				spellInfoLines = 3;
-				break;
-			case SPELL_DEATHCOIL:
-				snprintf(spellEffectText, 255, language[3290], damage);
-				snprintf(spellType, 31, language[3303]);
-				spellInfoLines = 2;
-				break;
-			default:
-				break;
-		}
+		getSpellEffectString(spell->ID, spellEffectText, spellType, damage, &spellInfoLines, &sustainCostPerSecond);
 		char tempstr[64] = "";
+		char spellNameString[128] = "";
+		if ( item && item->appearance >= 1000 )
+		{
+			// shapeshift spells, append the form name here.
+			switch ( spell->ID )
+			{
+				case SPELL_SPEED:
+				case SPELL_DETECT_FOOD:
+					snprintf(spellNameString, 127, "%s (%s)", spell->name, language[3408]);
+					break;
+				case SPELL_POISON:
+				case SPELL_SPRAY_WEB:
+					snprintf(spellNameString, 127, "%s (%s)", spell->name, language[3409]);
+					break;
+				case SPELL_STRIKE:
+				case SPELL_FEAR:
+				case SPELL_TROLLS_BLOOD:
+					snprintf(spellNameString, 127, "%s (%s)", spell->name, language[3410]);
+					break;
+				case SPELL_LIGHTNING:
+				case SPELL_CONFUSE:
+				case SPELL_AMPLIFY_MAGIC:
+					snprintf(spellNameString, 127, "%s (%s)", spell->name, language[3411]);
+					break;
+				default:
+					strncpy(spellNameString, spell->name, 127);
+					break;
+			}
+		}
+		else
+		{
+			strncpy(spellNameString, spell->name, 127);
+		}
+
 		if ( spell->ID == SPELL_DOMINATE )
 		{
 			snprintf(tempstr, 63, language[2977], getCostOfSpell(spell));
+		}
+		else if ( spell->ID == SPELL_DEMON_ILLUSION )
+		{
+			snprintf(tempstr, 63, language[3853], getCostOfSpell(spell));
 		}
 		else
 		{
@@ -1676,58 +2142,327 @@ void drawSpellTooltip(spell_t* spell)
 		}
 		if ( strcmp(spellEffectText, "") )
 		{
-			src.w = (longestline(spellEffectText) + 1) * TTF12_WIDTH + 8;
+			pos.w = (longestline(spellEffectText) + 1) * TTF12_WIDTH + 8;
 		}
 		else
 		{
-			src.w = std::max(longestline(spell->name), longestline(tempstr)) * TTF12_WIDTH + 8;
+			pos.w = std::max(longestline(spellNameString), longestline(tempstr)) * TTF12_WIDTH + 8;
 		}
 
 		int furthestX = xres;
 		if ( proficienciesPage == 0 )
 		{
-			if ( src.y < interfaceSkillsSheet.y + interfaceSkillsSheet.h )
+			if ( pos.y < interfaceSkillsSheet.y + interfaceSkillsSheet.h )
 			{
 				furthestX = xres - interfaceSkillsSheet.w;
 			}
 		}
 		else
 		{
-			if ( src.y < interfacePartySheet.y + interfacePartySheet.h )
+			if ( pos.y < interfacePartySheet.y + interfacePartySheet.h )
 			{
 				furthestX = xres - interfacePartySheet.w;
 			}
 		}
 
-		if ( src.x + src.w + 16 > furthestX ) // overflow right side of screen
+		if ( pos.x + pos.w + 16 > furthestX ) // overflow right side of screen
 		{
-			src.x -= (src.w + 32);
+			pos.x -= (pos.w + 32);
 		}
-		src.h = TTF12_HEIGHT * (2 + spellInfoLines + 1) + 8;
+		pos.h = TTF12_HEIGHT * (2 + spellInfoLines + 1) + 8;
 		if ( spellInfoLines >= 4 )
 		{
-			src.h += 4;
+			pos.h += 4;
 		}
 		else if ( spellInfoLines == 3 )
 		{
-			src.h += 2;
+			pos.h += 2;
 		}
-		if ( src.y + src.h + 16 > yres ) // overflow bottom of screen
+		if ( pos.y + pos.h + 16 > yres ) // overflow bottom of screen
 		{
-			src.y -= (src.y + src.h + 16 - yres);
+			pos.y -= (pos.y + pos.h + 16 - yres);
 		}
-		drawTooltip(&src);
-		ttfPrintTextFormatted(ttf12, src.x + 4, src.y + 4, "%s\n%s\n%s",
-			spell->name, tempstr, spellType);
+		if ( spellbook )
+		{
+			return damage;
+		}
+
+		drawTooltip(&pos);
+		ttfPrintTextFormatted(ttf12, pos.x + 4, pos.y + 4, "%s\n%s\n%s",
+			spellNameString, tempstr, spellType);
 		Uint32 effectColor = uint32ColorLightBlue(*mainsurface);
-		ttfPrintTextFormattedColor(ttf12, src.x + 4, src.y + 4, effectColor,
+		ttfPrintTextFormattedColor(ttf12, pos.x + 4, pos.y + 4, effectColor,
 			"\n\n\n%s", spellEffectText);
 	}
 	else
 	{
-		src.w = longestline("Error: Spell doesn't exist!") * TTF12_WIDTH + 8;
-		src.h = TTF12_HEIGHT + 8;
-		drawTooltip(&src);
-		ttfPrintTextFormatted(ttf12, src.x + 4, src.y + 4, "%s", "Error: Spell doesn't exist!");
+		pos.w = longestline("Error: Spell doesn't exist!") * TTF12_WIDTH + 8;
+		pos.h = TTF12_HEIGHT + 8;
+		drawTooltip(&pos);
+		ttfPrintTextFormatted(ttf12, pos.x + 4, pos.y + 4, "%s", "Error: Spell doesn't exist!");
+	}
+	return 0;
+}
+
+void getSpellEffectString(int spellID, char effectTextBuffer[256], char spellType[32], int value, int* spellInfoLines, real_t* sustainCostPerSecond)
+{
+	if ( !spellInfoLines || !sustainCostPerSecond )
+	{
+		return;
+	}
+	switch ( spellID )
+	{
+		case SPELL_FORCEBOLT:
+		case SPELL_MAGICMISSILE:
+		case SPELL_LIGHTNING:
+			snprintf(effectTextBuffer, 255, language[3289], value);
+			snprintf(spellType, 31, language[3303]);
+			break;
+		case SPELL_COLD:
+			snprintf(effectTextBuffer, 255, language[3290], value, language[3294]);
+			snprintf(spellType, 31, language[3303]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_POISON:
+			snprintf(effectTextBuffer, 255, language[3290], value, language[3300]);
+			snprintf(spellType, 31, language[3303]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_FIREBALL:
+			snprintf(effectTextBuffer, 255, language[3290], value, language[3295]);
+			snprintf(spellType, 31, language[3303]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_BLEED:
+			snprintf(effectTextBuffer, 255, language[3291], value, language[3297], language[3294]);
+			*spellInfoLines = 2;
+			snprintf(spellType, 31, language[3303]);
+			break;
+		case SPELL_SLOW:
+			snprintf(effectTextBuffer, 255, language[3292], language[3294]);
+			snprintf(spellType, 31, language[3303]);
+			break;
+		case SPELL_SLEEP:
+			snprintf(effectTextBuffer, 255, language[3292], language[3298]);
+			snprintf(spellType, 31, language[3303]);
+			break;
+		case SPELL_CONFUSE:
+			snprintf(effectTextBuffer, 255, language[3292], language[3299]);
+			snprintf(spellType, 31, language[3303]);
+			break;
+		case SPELL_ACID_SPRAY:
+			snprintf(effectTextBuffer, 255, language[3293], value, language[3300]);
+			snprintf(spellType, 31, language[3304]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_HEALING:
+		case SPELL_EXTRAHEALING:
+		{
+			snprintf(spellType, 31, language[3301]);
+			snprintf(effectTextBuffer, 255, language[3307], value);
+			*spellInfoLines = 2;
+			break;
+		}
+		case SPELL_REFLECT_MAGIC:
+			snprintf(spellType, 31, language[3302]);
+			snprintf(effectTextBuffer, 255, language[3308]);
+			*spellInfoLines = 2;
+			*sustainCostPerSecond = 6.f;
+			break;
+		case SPELL_LEVITATION:
+			snprintf(spellType, 31, language[3302]);
+			snprintf(effectTextBuffer, 255, language[3309]);
+			*sustainCostPerSecond = 0.6;
+			break;
+		case SPELL_INVISIBILITY:
+			snprintf(spellType, 31, language[3302]);
+			snprintf(effectTextBuffer, 255, language[3310]);
+			*sustainCostPerSecond = 1.f;
+			break;
+		case SPELL_LIGHT:
+			snprintf(spellType, 31, language[3302]);
+			snprintf(effectTextBuffer, 255, language[3311]);
+			*sustainCostPerSecond = 15.f;
+			break;
+		case SPELL_REMOVECURSE:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3312]);
+			break;
+		case SPELL_IDENTIFY:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3313]);
+			break;
+		case SPELL_MAGICMAPPING:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3314]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_TELEPORTATION:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3315]);
+			break;
+		case SPELL_OPENING:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3316]);
+			break;
+		case SPELL_LOCKING:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3317]);
+			break;
+		case SPELL_CUREAILMENT:
+			snprintf(spellType, 31, language[3301]);
+			snprintf(effectTextBuffer, 255, language[3318]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_DIG:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3319]);
+			break;
+		case SPELL_SUMMON:
+			snprintf(spellType, 31, language[3306]);
+			snprintf(effectTextBuffer, 255, language[3320]);
+			*spellInfoLines = 3;
+			break;
+		case SPELL_STONEBLOOD:
+			snprintf(spellType, 31, language[3304]);
+			snprintf(effectTextBuffer, 255, language[3292], language[3296]);
+			break;
+		case SPELL_DOMINATE:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3321]);
+			*spellInfoLines = 4;
+			break;
+		case SPELL_STEAL_WEAPON:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3322]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_DRAIN_SOUL:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3323], value);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_VAMPIRIC_AURA:
+			snprintf(spellType, 31, language[3302]);
+			snprintf(effectTextBuffer, 255, language[3324]);
+			*spellInfoLines = 4;
+			*sustainCostPerSecond = 0.33;
+			break;
+		case SPELL_CHARM_MONSTER:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3326]);
+			*spellInfoLines = 3;
+			break;
+		case SPELL_REVERT_FORM:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3851]);
+			*spellInfoLines = 1;
+			break;
+		case SPELL_RAT_FORM:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3847]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_SPIDER_FORM:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3848]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_TROLL_FORM:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3849]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_IMP_FORM:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3850]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_SPRAY_WEB:
+			snprintf(spellType, 31, language[3304]);
+			snprintf(effectTextBuffer, 255, language[3834]);
+			*spellInfoLines = 4;
+			break;
+		case SPELL_SPEED:
+			snprintf(spellType, 31, language[3301]);
+			snprintf(effectTextBuffer, 255, language[3835]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_FEAR:
+			snprintf(spellType, 31, language[3301]);
+			snprintf(effectTextBuffer, 255, language[3836]);
+			*spellInfoLines = 3;
+			break;
+		case SPELL_STRIKE:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3838]);
+			*spellInfoLines = 4;
+			break;
+		case SPELL_DETECT_FOOD:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3839]);
+			*spellInfoLines = 1;
+			break;
+		case SPELL_WEAKNESS:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3837]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_AMPLIFY_MAGIC:
+			snprintf(spellType, 31, language[3302]);
+			snprintf(effectTextBuffer, 255, language[3852]);
+			*spellInfoLines = 2;
+			*sustainCostPerSecond = 0.25;
+			break;
+		case SPELL_SHADOW_TAG:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3843]);
+			*spellInfoLines = 3;
+			break;
+		case SPELL_TELEPULL:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3844]);
+			*spellInfoLines = 3;
+			break;
+		case SPELL_DEMON_ILLUSION:
+			snprintf(spellType, 31, language[3303]);
+			snprintf(effectTextBuffer, 255, language[3845]);
+			*spellInfoLines = 3;
+			break;
+		case SPELL_TROLLS_BLOOD:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3840]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_SALVAGE:
+			snprintf(spellType, 31, language[3301]);
+			snprintf(effectTextBuffer, 255, language[3846]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_FLUTTER:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3841]);
+			*spellInfoLines = 1;
+			break;
+		case SPELL_DASH:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3842]);
+			*spellInfoLines = 3;
+			break;
+		case SPELL_SELF_POLYMORPH:
+			snprintf(spellType, 31, language[3305]);
+			snprintf(effectTextBuffer, 255, language[3886]);
+			*spellInfoLines = 2;
+			break;
+		case SPELL_9:
+		case SPELL_10:
+			break;
+		case SPELL_DEATHCOIL:
+			snprintf(spellEffectText, 255, language[3290], damage);
+			snprintf(spellType, 31, language[3303]);
+			spellInfoLines = 2;
+			break;
+		default:
+			break;
 	}
 }
