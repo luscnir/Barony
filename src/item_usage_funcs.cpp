@@ -87,7 +87,8 @@ bool item_PotionWater(Item*& item, Entity* entity, Entity* usedBy)
 				stats->type == LICH_ICE ||
 				stats->type == SHADOW ||
 				stats->type == SKELETON ||
-				stats->type == VAMPIRE)
+				stats->type == VAMPIRE ||
+				stats->type == LICH_FALLEN)
 			{
 				//Blessed water damages undead.
 				int damage = -(20 * item->beatitude);

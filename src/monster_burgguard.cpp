@@ -26,13 +26,13 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	node_t* node;
 
 	//Sprite 865 = Burg Guard head model.
-	my->initMonster(865);
+	my->initMonster(1042);
 
 	if (multiplayer != CLIENT)
 	{
-		MONSTER_SPOTSND = 413;
+		MONSTER_SPOTSND = 497;
 		MONSTER_SPOTVAR = 3;
-		MONSTER_IDLESND = 410;
+		MONSTER_IDLESND = 494;
 		MONSTER_IDLEVAR = 3;
 	}
 	if (multiplayer != CLIENT && !MONSTER_INIT)
@@ -237,7 +237,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(866, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1043, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -259,7 +259,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(872, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1049, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -278,7 +278,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(871, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1048, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -297,7 +297,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(872, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1045, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -316,7 +316,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(875, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1044, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -455,7 +455,7 @@ void burgGuardDie(Entity* my)
 
 	my->spawnBlood(212);
 
-	playSoundEntity(my, 407 + rand() % 3, 128);
+	playSoundEntity(my, 491 + rand() % 3, 128);
 
 	my->removeMonsterDeathNodes();
 
@@ -619,7 +619,7 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			{
 				if (myStats->breastplate == nullptr)
 				{
-					entity->sprite = 866;
+					entity->sprite = 1043;
 				}
 				else
 				{
@@ -647,7 +647,7 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			{
 				if (myStats->shoes == nullptr)
 				{
-					entity->sprite = 872;
+					entity->sprite = 1049;
 				}
 				else
 				{
@@ -675,7 +675,7 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			{
 				if (myStats->shoes == nullptr)
 				{
-					entity->sprite = 871;
+					entity->sprite = 1048;
 				}
 				else
 				{
@@ -710,7 +710,7 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 					entity->focalx = limbs[BURGGUARD][4][0]; // 0
 					entity->focaly = limbs[BURGGUARD][4][1]; // 0
 					entity->focalz = limbs[BURGGUARD][4][2]; // 2
-					entity->sprite = 868;
+					entity->sprite = 1045;
 				}
 				else
 				{
@@ -718,7 +718,7 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 					entity->focalx = limbs[BURGGUARD][4][0] + 0.75;
 					entity->focaly = limbs[BURGGUARD][4][1];
 					entity->focalz = limbs[BURGGUARD][4][2] - 0.75;
-					entity->sprite = 870;
+					entity->sprite = 1047;
 				}
 			}
 			my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_RIGHTARM);
@@ -738,14 +738,14 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 					entity->focalx = limbs[BURGGUARD][5][0]; // 0
 					entity->focaly = limbs[BURGGUARD][5][1]; // 0
 					entity->focalz = limbs[BURGGUARD][5][2]; // 2
-					entity->sprite = 867;
+					entity->sprite = 1044;
 				}
 				else
 				{
 					entity->focalx = limbs[BURGGUARD][5][0] + 0.75;
 					entity->focaly = limbs[BURGGUARD][5][1];
 					entity->focalz = limbs[BURGGUARD][5][2] - 0.75;
-					entity->sprite = 869;
+					entity->sprite = 1046;
 				}
 			}
 			my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_LEFTARM);

@@ -4857,6 +4857,10 @@ Entity* Entity::castOrbitingMagicMissile(int spellID, real_t distFromCaster, rea
 		{
 			entity->sprite = 679;
 		}
+		else if (spellID == SPELL_DEATHCOIL)
+		{
+			entity->sprite = 1040;
+		}
 		entity->yaw = angleFromCasterDirection;
 		entity->x = x + distFromCaster * cos(yaw + entity->yaw);
 		entity->y = y + distFromCaster * sin(yaw + entity->yaw);
@@ -4876,6 +4880,7 @@ Entity* Entity::castOrbitingMagicMissile(int spellID, real_t distFromCaster, rea
 		entity->vel_z = entity->actmagicOrbitVerticalSpeed;
 		playSoundEntity(entity, spellGetCastSound(spell), 128);
 		//spawnMagicEffectParticles(entity->x, entity->y, 0, 174);
+		
 	}
 	return entity;
 }
@@ -4935,7 +4940,7 @@ Entity* castStationaryOrbitingMagicMissile(Entity* parent, int spellID, real_t c
 		}
 		else if (spellID == SPELL_DEATHCOIL )
 		{
-			entity->sprite = 863;
+			entity->sprite = 1040;
 		}
 		entity->yaw = angleFromCenterDirection;
 		entity->x = centerx;

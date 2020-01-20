@@ -15,7 +15,7 @@ void initIceDemon(Entity* my, Stat* myStats)
 	int c;
 	node_t* node;
 
-	my->initMonster(917);
+	my->initMonster(1088);
 
 	if (multiplayer != CLIENT)
 	{
@@ -76,7 +76,7 @@ void initIceDemon(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(923, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1100, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -95,7 +95,7 @@ void initIceDemon(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(922, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1099, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -114,7 +114,7 @@ void initIceDemon(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(920, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1097, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -133,7 +133,7 @@ void initIceDemon(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(921, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1098, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -152,7 +152,7 @@ void initIceDemon(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(919, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1096, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -171,7 +171,7 @@ void initIceDemon(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// jaw
-	entity = newEntity(918, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1095, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();

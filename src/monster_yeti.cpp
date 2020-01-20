@@ -15,13 +15,13 @@ void initYeti(Entity* my, Stat* myStats)
 	int c;
 	node_t* node;
 
-	my->initMonster(911);
+	my->initMonster(1088);
 
 	if ( multiplayer != CLIENT )
 	{
-		MONSTER_SPOTSND = 437;
+		MONSTER_SPOTSND = 521;
 		MONSTER_SPOTVAR = 2;
-		MONSTER_IDLESND = 439;
+		MONSTER_IDLESND = 523;
 		MONSTER_IDLEVAR = 2;
 	}
 	if ( multiplayer != CLIENT && !MONSTER_INIT )
@@ -109,7 +109,7 @@ void initYeti(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(912, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1089, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -128,7 +128,7 @@ void initYeti(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(916, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1093, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -147,7 +147,7 @@ void initYeti(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(915, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1092, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -166,7 +166,7 @@ void initYeti(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(914, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1091, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -185,7 +185,7 @@ void initYeti(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(913, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1090, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -220,7 +220,7 @@ void yetiDie(Entity* my)
 
 	my->spawnBlood();
 
-	playSoundEntity(my, 441 + rand() % 2, 128);
+	playSoundEntity(my, 525 + rand() % 2, 128);
 
 	my->removeMonsterDeathNodes();
 

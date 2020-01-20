@@ -49,18 +49,18 @@ int checkSpriteType(Sint32 sprite)
 	case 80:
 	case 81:
 	case 82:
-	case 134:
-	case 136:
-	case 137:
-	case 138:
+	case 161:
 	case 163:
 	case 164:
 	case 165:
-	case 166:
-	case 167:
-	case 168:
-	case 169:
-	case 170:
+	case 190:
+	case 191:
+	case 192:
+	case 193:
+	case 194:
+	case 195:
+	case 196:
+	case 197:
 		//monsters
 		return 1;
 		break;
@@ -91,6 +91,7 @@ int checkSpriteType(Sint32 sprite)
 		return 7;
 		break;
 	case 116:
+	case 166:
 		//pedestal
 		return 8;
 		break;
@@ -112,24 +113,23 @@ int checkSpriteType(Sint32 sprite)
 	case 124:
 	case 125:
 		// Moded A_D furniture
-	//case 139:// SymbolPedestal
-	//case 140:// BloodyFountain
-	//case 142:// BloodySpearTrap
-	case 143:
-	case 144:
-	case 147:
-	case 148:
-	case 149:
+	//case 167:// BloodyFountain
+	//case 169:// BloodySpearTrap
+	case 170:
 	case 171:
+	case 174:
+	case 175:
+	case 176:
+	case 177:
 		// general furniture/misc.
 		return 12;
 		break;
 	case 127:
 		// Moded A_D Floor dec
-	case 141:
-	case 145:
-	case 146:
-	case 150:
+	case 168:
+	case 172:
+	case 173:
+	case 178:
 		// floor decoration
 		return 13;
 		break;
@@ -950,6 +950,33 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"LIGHT SOURCE",
 	"TEXT SOURCE",
 	"SIGNAL TIMER",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
 	"COCKROACH",
 	"NOT USED",
 	"BURG GUARD",
@@ -991,7 +1018,7 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"END PORTAL ABYSS"
 };
 
-char monsterEditorNameStrings[NUMMONSTERS][16] =
+char monsterEditorNameStrings[NUMMONSTERS][17] =
 {
 	"nothing",
 	"human",

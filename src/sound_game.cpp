@@ -405,7 +405,7 @@ void handleLevelMusic()
 			magisteraround = true;
 			break;
 		}
-		else if (entity->sprite == 951)     // fallen lich body
+		else if (entity->sprite == 1128)     // fallen lich body
 		{
 			fallenaround = true;
 			break;

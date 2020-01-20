@@ -1389,16 +1389,16 @@ void clientActions(Entity* entity)
 			entity->behavior = &actSwitchWithTimer;
 			break;
 		case 601:
-		case 990:
+		case 1067:
 			entity->behavior = &actPedestalBase;
 			break;
 		case 602:
 		case 603:
 		case 604:
 		case 605:
-		case 887:
-		case 888:
-		case 889:
+		case 1064:
+		case 1065:
+		case 1066:
 			entity->behavior = &actPedestalOrb;
 			break;
 		case 667:
@@ -1409,12 +1409,14 @@ void clientActions(Entity* entity)
 		case 675:
 		case 676:
 		case 677:
+		case 1165:
+		case 1166:
 			entity->behavior = &actCeilingTile;
 			entity->flags[NOUPDATE] = true;
 			break;
 		case 629:
-		case 900:
-		case 1004:
+		case 1077:
+		case 1181:
 			entity->behavior = &actColumn;
 			entity->flags[NOUPDATE] = true;
 			break;
@@ -1423,14 +1425,14 @@ void clientActions(Entity* entity)
 			entity->behavior = &actPistonCam;
 			entity->flags[NOUPDATE] = true;
 			break;
-		case 891:
+		case 1068:
 			entity->skill[2] = (int)SDLNet_Read32(&net_packet->data[30]);
 			entity->behavior = &actBloodFountain;
 			break;
-		case 904:
-		case 905:
-		case 906:
-		case 907:
+		case 1081:
+		case 1082:
+		case 1083:
+		case 1084:
 			//act portals yellow
 			entity->behavior = &actPortal;
 			break;

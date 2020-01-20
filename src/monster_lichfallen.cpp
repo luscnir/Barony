@@ -20,11 +20,11 @@ static const int LICH_WEAPON = 5;
 
 void initLichFallen(Entity* my, Stat* myStats)
 {
-	my->initMonster(951);
+	my->initMonster(1128);
 
 	if ( multiplayer != CLIENT )
 	{
-		MONSTER_SPOTSND = 473;
+		MONSTER_SPOTSND = 557;
 		MONSTER_SPOTVAR = 4;
 		MONSTER_IDLESND = -1;
 		MONSTER_IDLEVAR = 1;
@@ -97,7 +97,7 @@ void initLichFallen(Entity* my, Stat* myStats)
 	}
 
 	// right arm
-	Entity* entity = newEntity(953, 0, map.entities, nullptr);
+	Entity* entity = newEntity(1130, 0, map.entities, nullptr);
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -116,7 +116,7 @@ void initLichFallen(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(952, 0, map.entities, nullptr);
+	entity = newEntity(1129, 0, map.entities, nullptr);
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -135,7 +135,7 @@ void initLichFallen(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// head
-	entity = newEntity(950, 0, map.entities, nullptr);
+	entity = newEntity(1127, 0, map.entities, nullptr);
 	entity->yaw = my->yaw;
 	entity->sizex = 4;
 	entity->sizey = 4;
@@ -188,7 +188,7 @@ void lichFallenDie(Entity* my)
 		}
 	}
 	my->removeMonsterDeathNodes();
-	playSoundEntity(my, 479, 128);
+	playSoundEntity(my, 563, 128);
 	my->removeLightField();
 	// kill all other monsters on the level
 	for ( node = map.creatures->first; node != NULL; node = nextnode )
@@ -755,7 +755,7 @@ void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
 						my->monsterWeaponYaw = 0;
 						weaponarm->roll = 0;
 						weaponarm->skill[1] = 0;
-						createParticleDropRising(my, 592, 0.7);
+						createParticleDropRising(my, 593, 0.7);
 						if ( multiplayer != CLIENT )
 						{
 							if ( my->monsterState != MONSTER_STATE_LICHFALLEN_DIE )

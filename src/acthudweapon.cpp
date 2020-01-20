@@ -147,11 +147,11 @@ void actHudArm(Entity* my)
 		}
 		else if ( stats[clientnum]->gloves->type == ABYSSAL_KNUCKLES )
 		{
-			my->sprite = 823;
+			my->sprite = 1000;
 		}
 		else if ( stats[clientnum]->gloves->type == ICE_GLOVES ) 
 		{
-			my->sprite = 955;
+			my->sprite = 1132;
 		}
 
 		//handle new gloves position
@@ -2272,7 +2272,7 @@ void actHudWeapon(Entity* my)
 						players[clientnum]->entity->attack(3, HUDWEAPON_CHARGE, nullptr);
 					}
 					if ( stats[clientnum]->weapon
-						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW) ||  stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW
+						&& ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW ||  stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW
 							|| stats[clientnum]->weapon->type == CANNON || stats[clientnum]->weapon->type == CANNON_BOULDER ) )
 					{
 						throwGimpTimer = 40; // fix for swapping weapon to crossbow while charging.

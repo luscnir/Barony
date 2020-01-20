@@ -21,7 +21,7 @@
 #endif
 
 // REMEMBER TO CHANGE THIS WITH EVERY NEW OFFICIAL VERSION!!!
-#define VERSION "v3.3.2"
+#define VERSION "v3.3.2"//official is at 3.3.2
 #define GAME_CODE
 
 //#define MAX_FPS_LIMIT 60 //TODO: Make this configurable.
@@ -103,7 +103,7 @@ extern Uint32 cycles, pingtime;
 extern Uint32 timesync;
 extern real_t fps;
 extern bool shootmode;
-#define NUMCLASSES 24
+#define NUMCLASSES 23
 #define NUMRACES 13
 #define NUMPLAYABLERACES 9
 extern char address[64];

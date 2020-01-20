@@ -260,6 +260,8 @@ void initSkeleton(Entity* my, Stat* myStats)
 				}
 				else
 				{
+					int status = DECREPIT + (currentlevel > 5) + (currentlevel > 15) + (currentlevel > 20);
+
 					// boss variants
 					switch (rand() % 4)
 					{
@@ -268,7 +270,6 @@ void initSkeleton(Entity* my, Stat* myStats)
 						myStats->MAXHP = 100;
 						strcpy(myStats->name, "Funny Bones");
 						myStats->STR += 6;
-						int status = DECREPIT + (currentlevel > 5) + (currentlevel > 15) + (currentlevel > 20);
 						myStats->weapon = newItem(ARTIFACT_AXE, static_cast<Status>(status), 1, 1, rand(), true, nullptr);
 						myStats->cloak = newItem(CLOAK_PROTECTION, WORN, 0, 1, 2, true, nullptr);
 						break;
@@ -286,6 +287,7 @@ void initSkeleton(Entity* my, Stat* myStats)
 					case 2:					//Bad Joke
 						myStats->HP = 50;
 						myStats->MAXHP = 50;
+						myStats->DEX += 1;
 						strcpy(myStats->name, "Bad Joke");
 						myStats->weapon = newItem(SLING, EXCELLENT, 1, 1, rand(), true, nullptr);
 						myStats->helmet = newItem(HAT_JESTER, WORN, 0, 1, 1, true, nullptr);

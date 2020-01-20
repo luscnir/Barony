@@ -541,7 +541,7 @@ void drawSustainedSpells()
 	for (; node; node = node->next, count++)
 	{
 		tooltipText = nullptr;
-		spell_t* spell = (spell_t*)node->element;
+		spell_t* spell = (spell_t*)node->element;//Exception thrown: read access violation. node was 0x49C.
 		if (!spell)
 		{
 			break;

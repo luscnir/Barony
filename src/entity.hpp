@@ -370,7 +370,6 @@ public:
 	Sint32& arrowShotByWeapon; //skill[7]
 	Sint32& arrowQuiverType; //skill[8]
 	Sint32& arrowShotByParent; //skill[9]
-	Sint32& arrowArmorPierce;
 	Sint32& arrowStunTime;
 	enum arrowShotBy : int
 	{
@@ -1000,9 +999,9 @@ void actTextSource(Entity* my);
 
 //checks if a sprite falls in certain sprite ranges
 
-static const int NUM_ITEM_STRINGS = 290;//TODO
+static const int NUM_ITEM_STRINGS = 340;
 static const int NUM_ITEM_STRINGS_BY_TYPE = 160;
-static const int NUM_EDITOR_SPRITES = 193;
+static const int NUM_EDITOR_SPRITES = 227;
 static const int NUM_EDITOR_TILES = 505;
 
 // furniture types.
@@ -1015,7 +1014,7 @@ static const int FURNITURE_PODIUM = 4;
 int checkSpriteType(Sint32 sprite);
 extern char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64];
 extern char tileEditorNameStrings[NUM_EDITOR_TILES][44];
-extern char monsterEditorNameStrings[NUMMONSTERS][16];
+extern char monsterEditorNameStrings[NUMMONSTERS][17];
 extern char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32];
 extern char itemNameStrings[NUM_ITEM_STRINGS][32];
 int canWearEquip(Entity* entity, int category);

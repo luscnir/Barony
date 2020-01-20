@@ -1513,7 +1513,7 @@ void initClass(int player)
 		stats[player]->PROFICIENCIES[PRO_STEALTH] = 40;
 
 		// makeshift bow
-		item = newItem(MAKESHIFT_BOW, EXCELLENT, 1, 1, 0, true, NULL);
+		item = newItem(MAKESHIFT_BOW, EXCELLENT, 2, 1, 0, true, NULL);
 		if (player == clientnum)
 		{
 			item2 = itemPickup(player, item);
@@ -1552,7 +1552,7 @@ void initClass(int player)
 			useItem(item, player);
 		}
 
-		// boots of lightness
+		// boots
 		item = newItem(LEATHER_BOOTS_SPEED, DECREPIT, 0, 1, 0, true, NULL);
 		if (player == clientnum)
 		{
@@ -1594,7 +1594,7 @@ void initClass(int player)
 		if (player == clientnum)
 		{
 			// shortbow
-			item = newItem(SHORTBOW, DECREPIT, 3, 1, 0, true, NULL);
+			item = newItem(QUIVER_KNOCKBACK, EXCELLENT, 0, 20, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[1].item = item2->uid;
 			free(item);
@@ -1629,6 +1629,167 @@ void initClass(int player)
 		}
 	}
 
+	//prophet
+	else if (client_classes[player] == CLASS_PROPHET)
+	{
+		// attributes
+		stats[player]->PER += 1;
+		stats[player]->CON += 1;
+		stats[player]->INT += 1;
+		stats[player]->DEX -= 1;
+
+		stats[player]->MAXHP -= 5;
+		stats[player]->HP -= 5;
+		stats[player]->MAXMP += 5;
+		stats[player]->MP += 5;
+
+		// skills
+		stats[player]->PROFICIENCIES[PRO_POLEARM] = 35;
+		stats[player]->PROFICIENCIES[PRO_MACE] = 5;
+		stats[player]->PROFICIENCIES[PRO_MAGIC] = 30;
+		stats[player]->PROFICIENCIES[PRO_SPELLCASTING] = 50;
+		stats[player]->PROFICIENCIES[PRO_APPRAISAL] = 20;
+		stats[player]->PROFICIENCIES[PRO_SWIMMING] = 20;
+		stats[player]->PROFICIENCIES[PRO_ALCHEMY] = 20;
+
+		// bone spear
+		item = newItem(SPEAR_BONE, EXCELLENT, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			hotbar[0].item = item2->uid;
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// candle
+		item = newItem(TOOL_TORCH, EXCELLENT, 0, 3, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			hotbar[1].item = item2->uid;
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+		
+
+		// cloak of magic reflection
+		item = newItem(CLOAK_MAGICREFLECTION, DECREPIT, 0, 1, 3, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// boots
+		item = newItem(LEATHER_BOOTS, DECREPIT, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// elementalist hat
+		item = newItem(HAT_WIZARD, WORN, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// tunic
+		item = newItem(TUNIC, WORN, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// ring of constitution
+		item = newItem(RING_CONSTITUTION, SERVICABLE, 0, 1, 0, false, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		if (player == clientnum)
+		{
+
+			// staff of opening
+			item = newItem(MAGICSTAFF_OPENING, WORN, 0, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[2].item = item2->uid;
+			free(item);
+
+			// cure potion
+			item = newItem(POTION_CUREAILMENT, SERVICABLE, 0, 3, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[3].item = item2->uid;
+			free(item);
+
+			// scroll of magic map
+			item = newItem(SCROLL_MAGICMAPPING, SERVICABLE, 0, 3, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// speed spellbook
+			item = newItem(SPELLBOOK_SPEED, EXCELLENT, 0, 1, 2, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[8].item = item2->uid;
+			free(item);
+
+			// healing spellbook
+			item = newItem(SPELLBOOK_HEALING, EXCELLENT, 0, 1, 2, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[9].item = item2->uid;
+			free(item);
+
+			// pear
+			item = newItem(FOOD_BANANA, EXCELLENT, 0, 4, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+
+			// cabage
+			item = newItem(FOOD_MEAT, EXCELLENT, 0, 2, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			free(item);
+		}
+	}
+
 	// lunatic
 	else if (client_classes[player] == CLASS_LUNATIC)
 	{
@@ -1639,10 +1800,10 @@ void initClass(int player)
 		stats[player]->CON -= 1;
 		stats[player]->GOLD += 500;
 
-		stats[player]->MAXHP -= 20;
-		stats[player]->HP -= 20;
-		stats[player]->MAXMP += 10;
-		stats[player]->MP += 10;
+		stats[player]->MAXHP -= 29;
+		stats[player]->HP -= 29;
+		stats[player]->MAXMP += 30;
+		stats[player]->MP += 30;
 
 		// skills
 		stats[player]->PROFICIENCIES[PRO_MACE] = 5;

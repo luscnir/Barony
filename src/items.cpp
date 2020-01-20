@@ -2655,21 +2655,6 @@ void useItem(Item* item, int player, Entity* usedBy)
 	{
 		switch ( item->type )
 		{
-			case ARTIFACT_BREASTPIECE:
-				messagePlayer(player, language[2972]);
-				break;
-			case ARTIFACT_HELM:
-				messagePlayer(player, language[2973]);
-				break;
-			case ARTIFACT_BOOTS:
-				messagePlayer(player, language[2974]);
-				break;
-			case ARTIFACT_CLOAK:
-				messagePlayer(player, language[2975]);
-				break;
-			case ARTIFACT_GLOVES:
-				messagePlayer(player, language[2976]);
-				break;
 			case AMULET_LIFESAVING:
 				messagePlayer(player, language[2478]);
 				break;
@@ -2787,7 +2772,21 @@ void useItem(Item* item, int player, Entity* usedBy)
 			case TOOL_BLINDFOLD_TELEPATHY:
 				messagePlayer(player, language[2908]);
 				break;
-
+			case ARTIFACT_BREASTPIECE:
+				messagePlayer(player, language[4203]);
+				break;
+			case ARTIFACT_HELM:
+				messagePlayer(player, language[4200]);
+				break;
+			case ARTIFACT_BOOTS:
+				messagePlayer(player, language[4201]);
+				break;
+			case ARTIFACT_CLOAK:
+				messagePlayer(player, language[4204]);
+				break;
+			case ARTIFACT_GLOVES:
+				messagePlayer(player, language[4202]);
+				break;
 			case ABYSSAL_HELM:
 				messagePlayer(player, language[3720]);
 				break;
@@ -2804,34 +2803,34 @@ void useItem(Item* item, int player, Entity* usedBy)
 				messagePlayer(player, language[3724]);
 				break;
 			case ABYSSAL_SWORD:
-				messagePlayer(player, language[3725]);
+				messagePlayer(player, language[4205]);
 				break;
 			case ABYSSAL_MACE:
-				messagePlayer(player, language[3726]);
+				messagePlayer(player, language[4206]);
 				break;
 			case ABYSSAL_SPEAR:
-				messagePlayer(player, language[3727]);
+				messagePlayer(player, language[4207]);
 				break;
 			case ABYSSAL_AXE:
-				messagePlayer(player, language[3728]);
+				messagePlayer(player, language[4208]);
 				break;
 			case ABYSSAL_SHIELD:
-				messagePlayer(player, language[3729]);
+				messagePlayer(player, language[4209]);
 				break;
 			case ABYSSAL_CROSSBOW:
-				messagePlayer(player, language[3730]);
+				messagePlayer(player, language[4210]);
 				break;
 			case ABYSSAL_RING:
-				messagePlayer(player, language[3731]);
+				messagePlayer(player, language[4211]);
 				break;
 			case ABYSSAL_AMULET:
-				messagePlayer(player, language[3732]);
+				messagePlayer(player, language[4212]);
 				break;
 			case CLOAK_ELEMENTALIST:
-				messagePlayer(player, language[3735]);
+				messagePlayer(player, language[4215]);
 				break;
 			case ABYSSAL_MASK:
-				messagePlayer(player, language[3759]);
+				messagePlayer(player, language[4239]);
 				break;
 
 			//TODO: message for abyssal items, and cloak_elementalist
@@ -3396,7 +3395,7 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if ( type == ABYSSAL_CROSSBOW )
 	{
-		attack += 15;
+		attack += 18;
 	}
 	else if (type == SPEAR_BONE)
 	{
@@ -3436,7 +3435,7 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if (type == CANNON)
 	{
-		attack += 12;
+		attack += 17;
 	}
 	else if (type == CANNON_BOULDER)
 	{
@@ -4704,6 +4703,9 @@ bool isItemEquippableInShieldSlot(Item* item)
 		case TOOL_TORCH:
 		case TOOL_LANTERN:
 		case TOOL_CRYSTALSHARD:
+		case TOOL_GREENTORCH:
+		case ABYSSAL_SHIELD:
+		case NECRO_SHIELD:
 			return true;
 			break;
 		default:

@@ -25,13 +25,13 @@ void initGargoyle(Entity* my, Stat* myStats)
 {
 	node_t* node;
 
-	my->initMonster(873);
+	my->initMonster(1050);
 
 	if (multiplayer != CLIENT)
 	{
-		MONSTER_SPOTSND = 416;
+		MONSTER_SPOTSND = 500;
 		MONSTER_SPOTVAR = 3;
-		MONSTER_IDLESND = 419;
+		MONSTER_IDLESND = 503;
 		MONSTER_IDLEVAR = 3;
 	}
 	if (multiplayer != CLIENT && !MONSTER_INIT)
@@ -129,7 +129,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(874, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1051, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->focaly = 1;
@@ -149,7 +149,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(880, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1057, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -168,7 +168,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(879, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1056, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -187,7 +187,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(876, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1053, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -206,7 +206,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(875, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1052, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -225,7 +225,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right wing
-	entity = newEntity(878, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1055, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -244,7 +244,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left wing
-	entity = newEntity(877, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1054, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -277,7 +277,7 @@ void gargoyleDie(Entity* my)
 		serverSpawnGibForClient(gib);
 	}
 
-	playSoundEntity(my, 419 + rand() % 1, 128);
+	playSoundEntity(my, 505 , 128);
 
 	my->removeMonsterDeathNodes();
 
@@ -521,7 +521,7 @@ void gargoyleMoveBodyparts(Entity * my, Stat * myStats, double dist)
 						}
 					}
 				}
-				// double attack windup
+				/*// double attack windup
 				else if (MONSTER_ATTACK == MONSTER_POSE_MELEE_WINDUP3)
 				{
 					if (MONSTER_ATTACKTIME == 0)
@@ -638,7 +638,7 @@ void gargoyleMoveBodyparts(Entity * my, Stat * myStats, double dist)
 							my->attack(3, 0, nullptr);
 						}
 					}
-				}
+				}*/
 				// default swing
 				else if (MONSTER_ATTACK == 3)
 				{

@@ -16,13 +16,13 @@ void initCholorosh(Entity* my, Stat* myStats)
 	node_t* node;
 	int boss = 0;
 
-	my->initMonster(942);// chlorosh head
+	my->initMonster(1119);// chlorosh head
 
 	if ( multiplayer != CLIENT )
 	{
-		MONSTER_SPOTSND = 464;
+		MONSTER_SPOTSND = 548;
 		MONSTER_SPOTVAR = 3;
-		MONSTER_IDLESND = 467;
+		MONSTER_IDLESND = 551;
 		MONSTER_IDLEVAR = 3;
 	}
 
@@ -383,7 +383,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(949, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1126, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -405,7 +405,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(948, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1125, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -424,7 +424,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(947, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1124, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -443,7 +443,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(945, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1122, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -462,7 +462,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(943, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1120, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -601,7 +601,7 @@ void choloroshDie(Entity* my)
 
 	my->spawnBlood();
 
-	playSoundEntity(my, 470 + rand() % 3, 128);
+	playSoundEntity(my, 554 + rand() % 3, 128);
 
 	my->removeMonsterDeathNodes();
 
@@ -818,7 +818,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->breastplate == nullptr )
 					{
-						entity->sprite = 949;
+						entity->sprite = 1126;
 					}
 					else
 					{
@@ -846,7 +846,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->shoes == nullptr )
 					{
-						entity->sprite = 948;
+						entity->sprite = 1125;
 					}
 					else
 					{
@@ -874,7 +874,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->shoes == nullptr )
 					{
-						entity->sprite = 947;
+						entity->sprite = 1124;
 					}
 					else
 					{
@@ -909,7 +909,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[CHOLOROSH][4][0]; // 0
 						entity->focaly = limbs[CHOLOROSH][4][1]; // 0
 						entity->focalz = limbs[CHOLOROSH][4][2]; // 2
-						entity->sprite = 945;
+						entity->sprite = 1122;
 					}
 					else
 					{
@@ -917,7 +917,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[CHOLOROSH][4][0] + 0.75;
 						entity->focaly = limbs[CHOLOROSH][4][1];
 						entity->focalz = limbs[CHOLOROSH][4][2] - 0.75;
-						entity->sprite = 946;
+						entity->sprite = 1123;
 					}
 				}
 				my->setHumanoidLimbOffset(entity, CHOLOROSH, LIMB_HUMANOID_RIGHTARM);
@@ -937,14 +937,14 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[CHOLOROSH][5][0]; // 0
 						entity->focaly = limbs[CHOLOROSH][5][1]; // 0
 						entity->focalz = limbs[CHOLOROSH][5][2]; // 2
-						entity->sprite = 943;
+						entity->sprite = 1120;
 					}
 					else
 					{
 						entity->focalx = limbs[CHOLOROSH][5][0] + 0.75;
 						entity->focaly = limbs[CHOLOROSH][5][1];
 						entity->focalz = limbs[CHOLOROSH][5][2] - 0.75;
-						entity->sprite = 944;
+						entity->sprite = 1121;
 					}
 				}
 				my->setHumanoidLimbOffset(entity, CHOLOROSH, LIMB_HUMANOID_LEFTARM);

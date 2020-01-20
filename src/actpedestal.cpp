@@ -259,7 +259,7 @@ void Entity::actPedestalBase()
 						if (pedestalHasOrb == pedestalOrbType && pedestalLockOrb == 1)
 						{
 							// if orb locked, then can't retreive.
-							messagePlayer(i, language[2367]);
+							messagePlayer(i, language[4220]);
 						}
 						else if (!strncmp(map.name, "Mural of portals", 4))	//portal symbols
 						{
@@ -542,9 +542,9 @@ void Entity::actPedestalOrb()
 		case 605:
 			particleSprite = sprite + 4;
 			break;
-		case 887:
-		case 888:
-		case 889:
+		case 1064:
+		case 1065:
+		case 1066:
 			particleSprite = 593;
 			break;
 		default:

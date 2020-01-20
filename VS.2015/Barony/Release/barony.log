@@ -1,6 +1,10 @@
-﻿  Generating code
-  0 of 4450 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+﻿  magicgui.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX'
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared
+  Generating code
+  1 of 6292 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    284 functions had inline decision re-evaluated but remain unchanged
+    335 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   barony.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\barony_test.exe

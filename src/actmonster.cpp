@@ -177,7 +177,7 @@ double sightranges[NUMMONSTERS] =
 	256,  // SENTRYBOT
 	192,  // SPELLBOT
 	256,  // GYROBOT
-	32    // DUMMYBOT
+	32,    // DUMMYBOT
 	96,	  // COCKROACH
 	192,  // BURGGUARD
 	96,   // GARGOYLE
@@ -3991,7 +3991,7 @@ void actMonster(Entity* my)
 					|| myStats->type == LICH_ICE 
 					|| (myStats->type == CREATURE_IMP && strstr(map.name, "Boss") && !my->monsterAllyGetPlayerLeader())
 					|| (myStats->type == AUTOMATON && strstr(myStats->name, "corrupted automaton"))
-					|| (myStats->type == SHADOW && !strncmp(map.name, "Hell Boss", 9) && uidToEntity(my->parent) && uidToEntity(my->parent)->getRace() == DEVIL) )
+					|| (myStats->type == SHADOW && !strncmp(map.name, "Hell Boss", 9) && uidToEntity(my->parent) && uidToEntity(my->parent)->getRace() == DEVIL)
 					|| myStats->type == LICH_FALLEN )
 				{
 					double distToPlayer = 0;
@@ -7628,7 +7628,7 @@ void Entity::handleMonsterAttack(Stat* myStats, Entity* target, double dist)
 					|| myStats->weapon->type == SHORTBOW 
 					|| myStats->weapon->type == ARTIFACT_BOW
 					|| myStats->type == LONGBOW
-					|| myStats->type == COMPOUND_BOW)
+					|| myStats->type == COMPOUND_BOW
 					|| myStats->weapon->type == MAKESHIFT_BOW) )
 			{
 				bow = 2;
@@ -10453,7 +10453,6 @@ bool Entity::monsterConsumeFoodEntity(Entity* food, Stat* myStats)
 				myStats->EFFECTS[EFF_CONFUSED];
 				myStats->EFFECTS_TIMERS[EFF_CONFUSED] = TICKS_PER_SECOND * 10;
 				break;
-			
 			case 1:
 				myStats->EFFECTS[EFF_POISONED];
 				myStats->EFFECTS_TIMERS[EFF_POISONED] = TICKS_PER_SECOND * 20;

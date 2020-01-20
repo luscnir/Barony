@@ -27,12 +27,12 @@ void initMatilda(Entity* my, Stat* myStats)
 	my->flags[UPDATENEEDED] = true;
 	my->flags[INVISIBLE] = false;
 
-	my->sprite = 881;
+	my->sprite = 1058;
 	if (multiplayer != CLIENT)
 	{
-		MONSTER_SPOTSND = 422;
+		MONSTER_SPOTSND = 506;
 		MONSTER_SPOTVAR = 3;
-		MONSTER_IDLESND = 425;
+		MONSTER_IDLESND = 509;
 		MONSTER_IDLEVAR = 4;
 	}
 	if (multiplayer != CLIENT && !MONSTER_INIT)
@@ -87,7 +87,7 @@ void initMatilda(Entity* my, Stat* myStats)
 	}
 
 	// right pedipalp
-	Entity* entity = newEntity(882, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1059, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -106,7 +106,7 @@ void initMatilda(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left pedipalp
-	entity = newEntity(882, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1059, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -128,7 +128,7 @@ void initMatilda(Entity* my, Stat* myStats)
 	for (c = 0; c < 8; c++)
 	{
 		// "thigh"
-		entity = newEntity(884, 0, map.entities, nullptr); //Limb entity.
+		entity = newEntity(1061, 0, map.entities, nullptr); //Limb entity.
 		entity->sizex = 4;
 		entity->sizey = 4;
 		entity->skill[2] = my->getUID();
@@ -148,7 +148,7 @@ void initMatilda(Entity* my, Stat* myStats)
 		my->bodyparts.push_back(entity);
 
 		// "shin"
-		entity = newEntity(883, 0, map.entities, nullptr); //Limb entity.
+		entity = newEntity(1060, 0, map.entities, nullptr); //Limb entity.
 		entity->sizex = 4;
 		entity->sizey = 4;
 		entity->skill[2] = my->getUID();
@@ -181,7 +181,7 @@ void matildaDie(Entity* my)
 
 	my->removeMonsterDeathNodes();
 
-	playSoundEntity(my, 429 + rand() % 2, 128);
+	playSoundEntity(my, 513 + rand() % 2, 128);
 	list_RemoveNode(my->mynode);
 	return;
 }

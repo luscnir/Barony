@@ -13,16 +13,16 @@ void initEyeball(Entity* my, Stat* myStats)
 {
 	int c;
 
-	my->sprite = 924;
+	my->sprite = 1101;
 
 	my->flags[UPDATENEEDED] = true;
 	my->flags[INVISIBLE] = false;
 
 	if ( multiplayer != CLIENT )
 	{
-		MONSTER_SPOTSND = 443;
+		MONSTER_SPOTSND = 527;
 		MONSTER_SPOTVAR = 1;
-		MONSTER_IDLESND = 444;
+		MONSTER_IDLESND = 528;
 		MONSTER_IDLEVAR = 1;
 	}
 	if ( multiplayer != CLIENT && !MONSTER_INIT )
@@ -134,13 +134,13 @@ void eyeballAnimate(Entity* my, double dist)
 	if ((ticks % 10 == 0 && dist > 0.1) || (MONSTER_ATTACKTIME != MONSTER_ATTACK))
 	{
 		MONSTER_ATTACKTIME = MONSTER_ATTACK;
-		if (my->sprite == 924)
+		if (my->sprite == 1101)
 		{
-			my->sprite = 925;
+			my->sprite = 1102;
 		}
 		else
 		{
-			my->sprite = 924;
+			my->sprite = 1101;
 		}
 	}
 }
@@ -156,7 +156,7 @@ void eyeballDie(Entity* my)
 
 	my->spawnBlood(160);
 
-	playSoundEntity(my, 445, 128);
+	playSoundEntity(my, 529, 128);
 	list_RemoveNode(my->mynode);
 	return;
 }

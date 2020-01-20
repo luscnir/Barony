@@ -2458,9 +2458,9 @@ void getSpellEffectString(int spellID, char effectTextBuffer[256], char spellTyp
 		case SPELL_10:
 			break;
 		case SPELL_DEATHCOIL:
-			snprintf(spellEffectText, 255, language[3290], damage);
+			snprintf(effectTextBuffer, 255, language[3290], value, language[3300]);
 			snprintf(spellType, 31, language[3303]);
-			spellInfoLines = 2;
+			*spellInfoLines = 2;
 			break;
 		default:
 			break;

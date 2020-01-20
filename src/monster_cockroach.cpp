@@ -23,16 +23,16 @@ void initCockroach(Entity* my, Stat* myStats)
 {
 	int c;
 
-	my->sprite = 818; // cockroach model 818
+	my->sprite = 995; // cockroach model 818
 
 	my->flags[UPDATENEEDED] = true;
 	my->flags[INVISIBLE] = false;
 
 	if (multiplayer != CLIENT)
 	{
-		MONSTER_SPOTSND = 405;
+		MONSTER_SPOTSND = 488;
 		MONSTER_SPOTVAR = 1;
-		MONSTER_IDLESND = 404;
+		MONSTER_IDLESND = 189;
 		MONSTER_IDLEVAR = 1;
 	}
 	if (multiplayer != CLIENT && !MONSTER_INIT)
@@ -104,13 +104,13 @@ void cockroachAnimate(Entity* my, double dist)
 	if ((ticks % 10 == 0 && dist > 0.1) || (MONSTER_ATTACKTIME != MONSTER_ATTACK))
 	{
 		MONSTER_ATTACKTIME = MONSTER_ATTACK;
-		if (my->sprite == 818)
+		if (my->sprite == 995)
 		{
-			my->sprite = 819;
+			my->sprite = 996;
 		}
 		else
 		{
-			my->sprite = 818;
+			my->sprite = 995;
 		}
 	}
 }
@@ -126,7 +126,7 @@ void cockroachDie(Entity* my)
 
 	my->spawnBlood(212);
 
-	playSoundEntity(my, 406, 128);
+	playSoundEntity(my, 490, 128);
 	list_RemoveNode(my->mynode);
 	return;
 }

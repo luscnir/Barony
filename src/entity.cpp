@@ -229,7 +229,7 @@ Entity::Entity(Sint32 in_sprite, Uint32 pos, list_t* entlist, list_t* creatureli
 	pistonCamRotateSpeed(fskill[0]),
 	arrowPower(skill[3]),
 	arrowPoisonTime(skill[4]),
-	arrowArmorPierce(skill[5]),
+	arrowArmorPierce(skill[5]),//
 	arrowSpeed(fskill[4]),
 	arrowFallSpeed(fskill[5]),
 	arrowBoltDropOffRange(skill[6]),
@@ -8324,13 +8324,6 @@ void Entity::attack(int pose, int charge, Entity* target)
 						}
 					}
 
-					bool statusInflicted = false;
-					bool paralyzeStatusInflicted = false;
-					bool slowStatusInflicted = false;
-					bool bleedStatusInflicted = false;
-					bool swordExtraDamageInflicted = false;
-					bool knockbackInflicted = false;
-
 					if ( (hitstats->EFFECTS[EFF_WEBBED] || pose == PLAYER_POSE_GOLEM_SMASH) 
 						&& !hitstats->EFFECTS[EFF_KNOCKBACK] && hit.entity->setEffect(EFF_KNOCKBACK, true, 30, false) )
 					{
@@ -8620,6 +8613,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 					}
 
 					bool playerPoisonedTarget = false;
+					bool applyPoison = false;
 
 					// special monster effects
 					if ( myStats->type == CRYSTALGOLEM && pose == MONSTER_POSE_GOLEM_SMASH )
@@ -8661,7 +8655,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 								break;
 							case SPIDER:
 							{
-								bool applyPoison = true;
+								applyPoison = true;
 								if ( behavior == &actPlayer )
 								{
 									if ( charge >= MAXCHARGE - 3 ) // fully charged strike injects venom.
@@ -8689,15 +8683,31 @@ void Entity::attack(int pose, int charge, Entity* target)
 								}
 								break;
 							case MATILDA:
-								hitstats->EFFECTS[EFF_POISONED] = true;
-								hitstats->EFFECTS_TIMERS[EFF_POISONED] = std::max(200, 600 - hit.entity->getCON() * 20);
-								hitstats->EFFECTS[EFF_SLOW] = true;
-								hitstats->EFFECTS_TIMERS[EFF_SLOW] = std::max(50, 150 - hit.entity->getCON() * 5);
-								hitstats->EFFECTS[EFF_BLEEDING] = true;
-								hitstats->EFFECTS_TIMERS[EFF_BLEEDING] = std::max(50, 150 - hit.entity->getCON() * 20);
-								messagePlayer(playerhit, language[686]);
-								messagePlayer(playerhit, language[687]);
-								serverUpdateEffects(playerhit);
+								applyPoison = true;
+								if (behavior == &actPlayer)
+								{
+									if (charge >= MAXCHARGE - 3) // fully charged strike injects venom.
+									{
+										applyPoison = true;
+									}
+									else
+									{
+										applyPoison = false;
+									}
+								}
+								if (applyPoison)
+								{
+									playerPoisonedTarget = true;
+									hitstats->EFFECTS[EFF_POISONED] = true;
+									hitstats->EFFECTS_TIMERS[EFF_POISONED] = std::max(200, 600 - hit.entity->getCON() * 20);
+									hitstats->EFFECTS[EFF_SLOW] = true;
+									hitstats->EFFECTS_TIMERS[EFF_SLOW] = std::max(50, 150 - hit.entity->getCON() * 5);
+									hitstats->EFFECTS[EFF_BLEEDING] = true;
+									hitstats->EFFECTS_TIMERS[EFF_BLEEDING] = std::max(50, 150 - hit.entity->getCON() * 20);
+									messagePlayer(playerhit, language[686]);
+									messagePlayer(playerhit, language[687]);
+									serverUpdateEffects(playerhit);
+								}
 								break;
 							}
 							case SUCCUBUS:
@@ -12745,10 +12755,6 @@ int Entity::getAttackPose() const
 			{
 				pose = MONSTER_POSE_MAGIC_WINDUP2;
 			}
-			else if (myStats->type == GARGOYLE && this->monsterSpecialTimer == MONSTER_SPECIAL_COOLDOWN_GARGOYLE_SLOW)
-			{
-				pose = MONSTER_POSE_MAGIC_WINDUP2;
-			}
 			else if ( myStats->type == VAMPIRE )
 			{
 				if ( this->monsterSpecialTimer == MONSTER_SPECIAL_COOLDOWN_VAMPIRE_DRAIN )
@@ -12928,17 +12934,6 @@ int Entity::getAttackPose() const
 		else if ( myStats->type == TROLL || myStats->type == YETI )
 		{
 			pose = MONSTER_POSE_MELEE_WINDUP1;
-		}
-		else if (myStats->type == GARGOYLE )
-		{
-			if (this->monsterSpecialTimer == MONSTER_SPECIAL_COOLDOWN_GARGOYLE_ATK)
-			{
-				pose = MONSTER_POSE_MELEE_WINDUP3;
-			}
-			else
-			{
-				pose = MONSTER_POSE_MELEE_WINDUP1 + rand() % 2;
-			}
 		}
 		else
 		{

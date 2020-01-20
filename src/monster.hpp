@@ -217,7 +217,7 @@ static char gibtype[NUMMONSTERS] =
 	0,	//SENTRYBOT
 	0,	//SPELLBOT
 	0,  //GYROBOT
-	0	//DUMMYBOT
+	0,	//DUMMYBOT
 	2,	//COCKROACH,
 	2,	//BURG GUARD,
 	2,	//GARGOYLE,
@@ -273,7 +273,7 @@ static double damagetables[NUMMONSTERS][7] =
 	{ 1.f, 1.f, 1.f, 1.f, 0.5, 0.5, 1.f }, // sentrybot
 	{ 1.f, 1.f, 1.f, 1.f, 0.5, 0.5, 1.f }, // sentrybot
 	{ 1.f, 1.f, 1.f, 1.f, 0.5, 0.5, 1.f }, // gyrobot
-	{ 1.f, 1.f, 1.f, 1.f, 0.5, 1.2, 0.5 }  // dummybot
+	{ 1.f, 1.f, 1.f, 1.f, 0.5, 1.2, 0.5 }, // dummybot
 	{ 0.9, 1.5, 1.f, 0.9, 1.3, 1.f, 1.5 }, // cockroach
 	{ 1.f, 1.1, 0.9, 1.f, 0.8, 1.1, 0.9 }, // burg guard
 	{ 1.2, 1.1, 1.1, 1.f, 1.f, 1.1, 0.8 }, // gargoyle
@@ -318,7 +318,7 @@ static std::vector<std::vector<int>> classStatGrowth =
 	{	5,	5,	3,	2,	2,	1 }, // NINJA 11
 	{	4,	2,	5,	3,	2,	2 }, // MONK 12
 
-	{	3,	6,	5,	2,	6,	2 }, // SHARPSHOOTER 21
+	{	4,	6,	5,	2,	5,	2 }, // SHARPSHOOTER 21
 	{	3,	3,	2,	4,	6,	6 }, // PROPHET 22
 	{	2,	5,	3,	4,	5,	5 }, // LUNATIC 23
 

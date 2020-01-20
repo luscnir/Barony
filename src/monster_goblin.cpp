@@ -56,37 +56,37 @@ void initGoblin(Entity* my, Stat* myStats)
 			}
 			else
 			{
+				int status = DECREPIT + (currentlevel > 5) + (currentlevel > 15) + (currentlevel > 20);
+
 				switch (rand() % 2)
 				{
-				case 0:					//The Potato King
-					myStats->HP = 120;
-					myStats->MAXHP = 120;
-					myStats->OLDHP = myStats->HP;
-					strcpy(myStats->name, "The Potato King");
-					myStats->STR += 6;
-					int status = DECREPIT + (currentlevel > 5) + (currentlevel > 15) + (currentlevel > 20);
-					myStats->weapon = newItem(ARTIFACT_MACE, static_cast<Status>(status), 1, 1, rand(), true, nullptr);
-					myStats->helmet = newItem(HAT_JESTER, SERVICABLE, 3 + rand() % 3, 1, rand(), false, nullptr);
-
-					int c;
-					for (c = 0; c < 3; c++)
-					{
-						Entity* entity = summonMonster(GOBLIN, my->x, my->y);
-						if (entity)
+					case 0:					//The Potato King
+						myStats->HP = 120;
+						myStats->MAXHP = 120;
+						myStats->OLDHP = myStats->HP;
+						strcpy(myStats->name, "The Potato King");
+						myStats->STR += 6;
+						myStats->weapon = newItem(ARTIFACT_MACE, static_cast<Status>(status), 1, 1, rand(), true, nullptr);
+						myStats->helmet = newItem(HAT_JESTER, SERVICABLE, 3 + rand() % 3, 1, rand(), false, nullptr);
+						int c;
+						for (c = 0; c < 3; c++)
 						{
-							entity->parent = my->getUID();
+							Entity* entity = summonMonster(GOBLIN, my->x, my->y);
+							if (entity)
+							{
+								entity->parent = my->getUID();
+							}
 						}
-					}
-					break;
-				case 1:					//Peter Pizza Keeper
-					myStats->HP = 105;
-					myStats->MAXHP = 105;
-					myStats->OLDHP = myStats->HP;
-					strcpy(myStats->name, "Peter Pizza Keeper");
-					myStats->weapon = newItem(STEEL_MACE, EXCELLENT, 0, 1, rand(), true, nullptr);
-					myStats->helmet = newItem(HAT_WIZARD_SLIMY, SERVICABLE, 2 + rand() % 3, 1, rand(), false, nullptr);
-					newItem(FOOD_PIZZA, EXCELLENT, 0, 9, rand(), false, &myStats->inventory);
-					break;
+						break;
+					case 1:					//Peter Pizza Keeper
+						myStats->HP = 105;
+						myStats->MAXHP = 105;
+						myStats->OLDHP = myStats->HP;
+						strcpy(myStats->name, "Peter Pizza Keeper");
+						myStats->weapon = newItem(STEEL_MACE, EXCELLENT, 0, 1, rand(), true, nullptr);
+						myStats->helmet = newItem(HAT_WIZARD_SLIMY, SERVICABLE, 2 + rand() % 3, 1, rand(), false, nullptr);
+						newItem(FOOD_PIZZA, EXCELLENT, 0, 9, rand(), false, &myStats->inventory);
+						break;
 				}
 			}
 

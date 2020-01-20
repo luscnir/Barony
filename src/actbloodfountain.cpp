@@ -149,7 +149,7 @@ void actBloodFountain(Entity* my)
 				{
 					if (players[i]->entity->flags[BURNING])
 					{
-						messagePlayer(i, language[3750]);
+						messagePlayer(i, language[4230]);
 						players[i]->entity->flags[BURNING] = false;
 						serverUpdateEntityFlag(players[i]->entity, BURNING);
 					}
@@ -239,7 +239,7 @@ void actBloodFountain(Entity* my)
 							{
 								if (creature == DEMON)
 								{
-									messagePlayerColor(i, color, language[3751]);
+									messagePlayerColor(i, color, language[4231]);
 									Stat* tmpStats = spawnedMonster->getStats();
 									if (tmpStats)
 									{
@@ -248,13 +248,13 @@ void actBloodFountain(Entity* my)
 								}
 								else
 								{
-									messagePlayerColor(i, color, language[3752]);
+									messagePlayerColor(i, color, language[4232]);
 								}
 							}
 						}
 						else if (currentlevel < 18)
 						{
-							messagePlayerColor(i, color, language[3752]);
+							messagePlayerColor(i, color, language[4232]);
 							spawnedMonster = summonMonster(CREATURE_IMP, my->x, my->y);
 						}
 						else if (currentlevel < 46)
@@ -267,17 +267,17 @@ void actBloodFountain(Entity* my)
 								{
 									strcpy(tmpStats->name, "blood demon");
 								}
-								messagePlayerColor(i, color, language[3751]);
+								messagePlayerColor(i, color, language[4231]);
 							}
 							else
 							{
-								messagePlayerColor(i, color, language[3752]);
+								messagePlayerColor(i, color, language[4232]);
 								spawnedMonster = summonMonster(CREATURE_IMP, my->x, my->y);
 							}
 						}
 						else
 						{
-							messagePlayerColor(i, color, language[3751]);
+							messagePlayerColor(i, color, language[4231]);
 							spawnedMonster = summonMonster(DEMON, my->x, my->y);
 						}
 						break;
@@ -286,7 +286,7 @@ void actBloodFountain(Entity* my)
 						if (stats[i]->type == VAMPIRE) //Blood fountain is good for vampires and not much for everyone else
 						{
 							messagePlayer(i, language[470]);
-							messagePlayer(i, language[3753]);
+							messagePlayer(i, language[4233]);
 							playSoundEntity(players[i]->entity, 52, 64);
 							stats[i]->HUNGER += 150;
 							players[i]->entity->modHP(5);
@@ -296,10 +296,10 @@ void actBloodFountain(Entity* my)
 							players[i]->entity->modHP(-4);
 							playSoundEntity(players[i]->entity, 28, 64);
 							playSoundEntity(players[i]->entity, 249, 128);
-							players[i]->entity->setObituary(language[3754]);
+							players[i]->entity->setObituary(language[4234]);
 
 							Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
-							messagePlayerColor(i, color, language[3183]);
+							messagePlayerColor(i, color, language[4233]);
 							if (i == 0)
 							{
 								camera_shakex += .1;
@@ -332,8 +332,8 @@ void actBloodFountain(Entity* my)
 						playSoundEntity(players[i]->entity, 52, 64);
 						//playSoundEntity(players[i]->entity, 167, 64);
 						Uint32 textcolor = SDL_MapRGB(mainsurface->format, 255, 0, 0);
-						messagePlayerColor(i, textcolor, language[3753]);
-						messagePlayerColor(i, textcolor, language[3755]);
+						messagePlayerColor(i, textcolor, language[4233]);
+						messagePlayerColor(i, textcolor, language[4235]);
 						if (stats[i]->helmet)
 						{
 							stats[i]->helmet->beatitude--;
@@ -390,7 +390,7 @@ void actBloodFountain(Entity* my)
 						playSoundEntity(players[i]->entity, 52, 64);
 						//playSoundEntity(players[i]->entity, 167, 64);
 						Uint32 textcolor = SDL_MapRGB(mainsurface->format, 255, 0, 0);
-						messagePlayerColor(i, textcolor, language[3753]);
+						messagePlayerColor(i, textcolor, language[4233]);
 						//Choose only one piece of equipment to bless.
 
 						//First, Figure out what equipment is available.
@@ -438,7 +438,7 @@ void actBloodFountain(Entity* my)
 
 						if (items.size())
 						{
-							messagePlayerColor(i, textcolor, language[3755]); //"The fountain curses a piece of equipment"
+							messagePlayerColor(i, textcolor, language[4235]); //"The fountain curses a piece of equipment"
 							//Randomly choose a piece of equipment.
 							std::pair<Item*, Uint32> chosen = items[rand() % items.size()];
 							chosen.first->beatitude--;
@@ -462,24 +462,24 @@ void actBloodFountain(Entity* my)
 						if (stats[i]->type != VAMPIRE) //Blood fountain is good for vampires and not much for everyone else
 						{
 							messagePlayer(i, language[470]);
-							messagePlayer(i, language[3756]);
+							messagePlayer(i, language[4236]);
 							playSoundEntity(players[i]->entity, 52, 64);
 							stats[i]->HUNGER -= 100;
 							players[i]->entity->modHP(-45);
-							players[i]->entity->setObituary(language[3754]);
+							players[i]->entity->setObituary(language[4234]);
 							break;
 						}
 						//Does not break here.
 					case 6:
 						messagePlayer(i, language[470]);
-						messagePlayer(i, language[3757]);
+						messagePlayer(i, language[4237]);
 						playSoundEntity(players[i]->entity, 52, 64);
 						stats[i]->HUNGER += 100;
 						players[i]->entity->modHP(30);
 						break;
 					case 7:
 						messagePlayer(i, language[470]);
-						messagePlayer(i, language[3758]);
+						messagePlayer(i, language[4238]);
 						playSoundEntity(players[i]->entity, 52, 64);
 						stats[i]->HUNGER += 100;
 						players[i]->entity->modHP(100);
@@ -494,11 +494,11 @@ void actBloodFountain(Entity* my)
 					}
 					if (potionDropQuantity > 1)
 					{
-						messagePlayerColor(i, uint32ColorGreen(*mainsurface), language[3245], potionDropQuantity);
+						messagePlayerColor(i, uint32ColorGreen(*mainsurface), language[4235], potionDropQuantity);
 					}
 					else if (potionDropQuantity == 1)
 					{
-						messagePlayerColor(i, uint32ColorGreen(*mainsurface), language[3246]);
+						messagePlayerColor(i, uint32ColorGreen(*mainsurface), language[4236]);
 					}
 					messagePlayer(i, language[474]);
 					my->skill[0] = 0; //Dry up fountain.

@@ -53,6 +53,8 @@ void initSpider(Entity* my, Stat* myStats)
 			// boss variants
 			if ( rand() % 50 == 0 && !my->flags[USERFLAG2] )
 			{
+				int status = DECREPIT + (currentlevel > 5) + (currentlevel > 15) + (currentlevel > 20);
+				
 				switch (rand() % 2)
 				{
 				case 0:
@@ -68,7 +70,6 @@ void initSpider(Entity* my, Stat* myStats)
 					myStats->CHR = 10;
 					myStats->LVL = 15;
 					newItem(RING_INVISIBILITY, EXCELLENT, -5, 1, rand(), false, &myStats->inventory);
-					int status = DECREPIT + (currentlevel > 5) + (currentlevel > 15) + (currentlevel > 20);
 					newItem(ARTIFACT_SWORD, static_cast<Status>(status), 1, 1, rand(), false, &myStats->inventory);
 					customItemsToGenerate -= 2;
 					int c;

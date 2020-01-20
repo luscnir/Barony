@@ -1259,7 +1259,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EXP = 0;
 			stats->LVL = 1;
 			break;
-		case 134:
+		case 161:
 		case (1000 + COCKROACH):
 			stats->type = COCKROACH;
 			stats->sex = static_cast<sex_t>(rand() % 2);
@@ -1285,7 +1285,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1] = 1;
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1 + ITEM_CHANCE] = 15; //Random Items
 			break;
-		case 136:
+		case 163:
 		case (1000 + BURGGUARD):
 			stats->type = BURGGUARD;
 			stats->sex = static_cast<sex_t>(rand() % 2);
@@ -1322,7 +1322,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->PROFICIENCIES[PRO_RANGED] = 50;
 			stats->PROFICIENCIES[PRO_SHIELD] = 35;
 			break;
-		case 137:
+		case 164:
 		case (1000 + GARGOYLE):
 			stats->type = GARGOYLE;
 			stats->sex = static_cast<sex_t>(rand() % 2);
@@ -1351,7 +1351,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1] = 1;
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1 + ITEM_CHANCE] = 100; //Random Items
 			break;
-		case 138:
+		case 165:
 		case (1000 + MATILDA):
 			stats->type = MATILDA;
 			stats->sex = FEMALE;
@@ -1374,7 +1374,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->GOLD = 0;
 			stats->HUNGER = 900;
 			break;
-		case 163:
+		case 190:
 		case (1000 + CRYORUNE):
 			stats->type = CRYORUNE;
 			stats->sex = static_cast<sex_t>(rand() % 2);
@@ -1401,7 +1401,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1] = 1;
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1 + ITEM_CHANCE] = 100; //Random Items
 			break;
-		case 164:
+		case 191:
 		case (1000 + YETI):
 			stats->type = YETI;
 			stats->sex = static_cast<sex_t>(rand() % 2);
@@ -1429,7 +1429,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1] = 1;
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1 + ITEM_CHANCE] = 33; //Random Items
 			break;
-		case 165:
+		case 192:
 		case (1000 + ICEDEMON):
 			stats->type = ICEDEMON;
 			stats->sex = MALE;
@@ -1455,7 +1455,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1] = 1;
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1 + ITEM_CHANCE] = 50; //Random Items
 			break;
-		case 166:
+		case 193:
 		case (1000 + EYEBALL):
 			stats->type = EYEBALL;
 			stats->sex = static_cast<sex_t>(rand() % 2);
@@ -1481,7 +1481,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1] = 1;
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_1 + ITEM_CHANCE] = 25; //Random Items
 			break;
-		case 167:
+		case 194:
 		case (1000 + FLESHLING):
 			stats->type = FLESHLING;
 			stats->sex = static_cast<sex_t>(rand() % 2);
@@ -1522,7 +1522,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_3] = 1;
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_3 + ITEM_CHANCE] = 2; //Winny's report
 			break;
-		case 168:
+		case 195:
 		case (1000 + ABOMINATION):
 			stats->type = ABOMINATION;
 			stats->RANDOM_MAXHP = stats->RANDOM_HP;
@@ -1555,7 +1555,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->PROFICIENCIES[PRO_MAGIC] = 90;
 			stats->PROFICIENCIES[PRO_SPELLCASTING] = 90;
 			break;
-		case 169:
+		case 196:
 		case (1000 + CHOLOROSH):
 			stats->type = CHOLOROSH;
 			stats->sex = static_cast<sex_t>(rand() % 2);
@@ -1601,7 +1601,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_2] = 1;
 			stats->EDITOR_ITEMS[ITEM_SLOT_INV_2 + ITEM_CHANCE] = 25; // magicstaff
 			break;
-		case 170:
+		case 197:
 		case (1000 + LICH_FALLEN):
 			stats->type = LICH_FALLEN;
 			stats->sex = FEMALE;
