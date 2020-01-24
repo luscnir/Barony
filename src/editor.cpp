@@ -179,9 +179,9 @@ char teleporterPropertyNames[3][25] =
 	"Type of sprite (0-2)"
 };
 
-char ceilingTilePropertyNames[1][29] =
+char ceilingTilePropertyNames[1][30] =
 {
-	"Model texture to use (0-999)"
+	"Model texture to use (0-9999)"
 };
 
 char spellTrapPropertyNames[5][38] =
@@ -5185,7 +5185,7 @@ int main(int argc, char** argv)
 							{
 								if ( i == 0 )
 								{
-									if ( propertyInt > 999 || propertyInt < 0 )
+									if ( propertyInt > 9999 || propertyInt < 0 )
 									{
 										propertyPageError(i, 0); // reset to default 0.
 									}

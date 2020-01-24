@@ -1780,7 +1780,6 @@ Entity* castSpell(Uint32 caster_uid, spell_t* spell, bool using_magicstaff, bool
 				baseSpeed = 3;
 				baseSideSpeed = 2;
 				traveltime = 15;
-				entity->skill[5] = traveltime;
 			}
 
 			entity = newEntity(168, 1, map.entities, nullptr); // red magic ball
