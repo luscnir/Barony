@@ -2773,34 +2773,34 @@ void useItem(Item* item, int player, Entity* usedBy)
 				messagePlayer(player, language[2908]);
 				break;
 			case ARTIFACT_BREASTPIECE:
-				messagePlayer(player, language[4203]);
+				messagePlayer(player, language[2972]);
 				break;
 			case ARTIFACT_HELM:
-				messagePlayer(player, language[4200]);
+				messagePlayer(player, language[2973]);
 				break;
 			case ARTIFACT_BOOTS:
-				messagePlayer(player, language[4201]);
+				messagePlayer(player, language[2974]);
 				break;
 			case ARTIFACT_CLOAK:
-				messagePlayer(player, language[4204]);
+				messagePlayer(player, language[2975]);
 				break;
 			case ARTIFACT_GLOVES:
-				messagePlayer(player, language[4202]);
+				messagePlayer(player, language[2976]);
 				break;
 			case ABYSSAL_HELM:
-				messagePlayer(player, language[3720]);
+				messagePlayer(player, language[4200]);
 				break;
 			case ABYSSAL_BOOTS:
-				messagePlayer(player, language[3721]);
+				messagePlayer(player, language[4201]);
 				break;
 			case ABYSSAL_KNUCKLES:
-				messagePlayer(player, language[3722]);
+				messagePlayer(player, language[4202]);
 				break;
 			case ABYSSAL_CHEASTPIECE:
-				messagePlayer(player, language[3723]);
+				messagePlayer(player, language[4203]);
 				break;
 			case ABYSSAL_CLOAK:
-				messagePlayer(player, language[3724]);
+				messagePlayer(player, language[4204]);
 				break;
 			case ABYSSAL_SWORD:
 				messagePlayer(player, language[4205]);
@@ -2832,8 +2832,6 @@ void useItem(Item* item, int player, Entity* usedBy)
 			case ABYSSAL_MASK:
 				messagePlayer(player, language[4239]);
 				break;
-
-			//TODO: message for abyssal items, and cloak_elementalist
 
 			default:
 				break;

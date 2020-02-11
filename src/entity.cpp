@@ -8170,7 +8170,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 						else if (myStats->weapon->type == ABYSSAL_AXE)
 						{
 							hitstats->EFFECTS[EFF_SLOW] = true;
-							hitstats->EFFECTS_TIMERS[EFF_SLOW] = TICKS_PER_SECOND * 25;
+							hitstats->EFFECTS_TIMERS[EFF_SLOW] = TICKS_PER_SECOND * 20;
 						}
 
 						else if (myStats->weapon->type == ABYSSAL_MACE)
@@ -8218,7 +8218,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 												break;
 									}
 									//tell the player that a spell was casted from the mace
-									messagePlayer(player, language[3733]);
+									messagePlayer(player, language[4213]);
 								}
 							}
 						}
@@ -8232,7 +8232,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 								{
 									hitstats->EFFECTS[EFF_PARALYZED] = true;
 									hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = TICKS_PER_SECOND * 5;
-									messagePlayer(player, language[3764]);
+									messagePlayer(player, language[4244]);
 								}
 							}
 						}
@@ -8245,9 +8245,9 @@ void Entity::attack(int pose, int charge, Entity* target)
 							//Ice gloves steals MP when hit fire monsters
 							if ( hitstats->type == DEMON || hitstats->type == CREATURE_IMP || hitstats->type == DEVIL || hitstats->type == LICH_FIRE )
 							{
-								hitstats->MP -= 1;
-								this->modMP(+1);
-								messagePlayer(player, language[3762]);
+								hitstats->MP -= 3;
+								this->modMP(+3);
+								messagePlayer(player, language[4242]);
 							}
 						}
 					}
@@ -8269,9 +8269,9 @@ void Entity::attack(int pose, int charge, Entity* target)
 							//Melting cloak steals HP when hit ice monsters
 							if ( hitstats->type == CRYORUNE || hitstats->type == YETI || hitstats->type == ICEDEMON || hitstats->type == LICH_ICE )
 							{
-								hitstats->HP -= 1;
-								this->modHP(+1);
-								messagePlayer(player, language[3763]);
+								hitstats->HP -= 3;
+								this->modHP(+3);
+								messagePlayer(player, language[4243]);
 							}
 						}
 					}
@@ -8283,7 +8283,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 							//gain mana per hit
 							if (hitstats)
 							{
-								this->modMP(+3);
+								this->modMP(+5);
 							}
 						}
 					}
@@ -8291,7 +8291,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 					if (myStats->amulet)
 					{
 						//Lifesteal when low on HP
-						if (myStats->amulet->type == ABYSSAL_AMULET && myStats->HP <= 10)
+						if (myStats->amulet->type == ABYSSAL_AMULET && myStats->HP <= 25)
 						{
 							//Unique interaction with Dragon Mail
 							if (myStats->breastplate && myStats->breastplate->type == ARTIFACT_BREASTPIECE)
@@ -8307,18 +8307,18 @@ void Entity::attack(int pose, int charge, Entity* target)
 
 										if (playerhit > 0 && hit.entity->flags[BURNING])
 										{
-											messagePlayer(playerhit, language[3737]); // "The Amulet sets you on fire!"
+											messagePlayer(playerhit, language[4217]); // "The Amulet sets you on fire!"
 										}
 									}
-									this->modHP(+25);
-									messagePlayer(player, language[3736]);
+									this->modHP(+50);
+									messagePlayer(player, language[4216]);
 								}
 							}
 							//What normally happens
 							else
 							{
-								this->modHP(+10);
-								messagePlayer(player, language[3734]);
+								this->modHP(+20);
+								messagePlayer(player, language[4214]);
 							}
 						//spawnAmbientParticles(100, 862, 10 + rand() % 30, 0.5, true);
 						}
