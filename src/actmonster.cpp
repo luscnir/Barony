@@ -11023,6 +11023,7 @@ int Entity::getMonsterEffectiveDistanceOfRangedWeapon(Item* weapon)
 			distance = 100;
 			break;
 		case LONGBOW:
+		case ABYSSAL_CROSSBOW:
 			distance = 200;
 			break;
 		default:

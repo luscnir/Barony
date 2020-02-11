@@ -601,7 +601,7 @@ void actHudWeapon(Entity* my)
 					}
 				}
 			}
-			else if ( stats[clientnum]->weapon && (stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW) )
+			else if ( stats[clientnum]->weapon && (stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW ) )
 			{
 				HUDWEAPON_SHOOTING_RANGED_WEAPON = RANGED_ANIM_BEING_DRAWN;
 				if ( rangedWeaponUseQuiverOnAttack(stats[clientnum]) )
@@ -636,6 +636,10 @@ void actHudWeapon(Entity* my)
 						else if ( stats[clientnum]->weapon->type == HEAVY_CROSSBOW )
 						{
 							my->sprite = 987;
+						}
+						else if (stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW)
+						{
+							my->sprite = 1354;
 						}
 					}
 					else if ( HUDWEAPON_CHOP == CROSSBOW_CHOP_RELOAD_ENDING )
@@ -721,7 +725,7 @@ void actHudWeapon(Entity* my)
 		weaponSwitch = false;
 		if ( !hideWeapon )
 		{
-			if ( stats[clientnum]->weapon && (stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW) )
+			if ( stats[clientnum]->weapon && (stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW) )
 			{
 				swingweapon = false;
 				HUDWEAPON_CHARGE = 0;
@@ -789,6 +793,7 @@ void actHudWeapon(Entity* my)
 			if ( rangedweapon && stats[clientnum]->weapon
 				&& stats[clientnum]->weapon->type != CROSSBOW
 				&& stats[clientnum]->weapon->type != HEAVY_CROSSBOW
+				&& stats[clientnum]->weapon->type != ABYSSAL_CROSSBOW
 				)
 			{
 				HUDWEAPON_BOW_FORCE_RELOAD = 1;
@@ -832,6 +837,7 @@ void actHudWeapon(Entity* my)
 	if ( rangedweapon && stats[clientnum]->weapon 
 		&& stats[clientnum]->weapon->type != CROSSBOW
 		&& stats[clientnum]->weapon->type != HEAVY_CROSSBOW
+		&& stats[clientnum]->weapon->type != ABYSSAL_CROSSBOW
 		&& !hideWeapon )
 	{
 		bowFireRate = bowDrawBaseTicks * (rangedAttackGetSpeedModifier(stats[clientnum]));
@@ -988,6 +994,7 @@ void actHudWeapon(Entity* my)
 		else if ( swingweapon && bowGimpTimer > 0 && rangedweapon && stats[clientnum]->weapon
 			&& stats[clientnum]->weapon->type != CROSSBOW
 			&& stats[clientnum]->weapon->type != HEAVY_CROSSBOW
+			&& stats[clientnum]->weapon->type != ABYSSAL_CROSSBOW
 			&& !hideWeapon )
 		{
 			ignoreAttack = true;
@@ -1918,7 +1925,7 @@ void actHudWeapon(Entity* my)
 			}
 		}
 
-		bool crossbow = stats[clientnum]->weapon && (stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW);
+		bool crossbow = stats[clientnum]->weapon && (stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW);
 
 		if ( stats[clientnum]->weapon && !hideWeapon )
 		{
@@ -3276,7 +3283,7 @@ void actHudShield(Entity* my)
 	HUDSHIELD_DEFEND = defending;
 	HUDSHIELD_SNEAKING = sneaking;
 
-	bool crossbow = (stats[clientnum]->weapon && (stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW) );
+	bool crossbow = (stats[clientnum]->weapon && (stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW) );
 	bool doCrossbowReloadAnimation = false;
 	bool doBowReload = false;
 
@@ -3977,13 +3984,15 @@ void actHudArrowModel(Entity* my)
 		&& (stats[clientnum]->weapon->type == SHORTBOW
 			|| stats[clientnum]->weapon->type == LONGBOW
 			|| stats[clientnum]->weapon->type == ARTIFACT_BOW
-			|| stats[clientnum]->weapon->type == COMPOUND_BOW ) 
+			|| stats[clientnum]->weapon->type == COMPOUND_BOW
+			|| stats[clientnum]->weapon->type == MAKESHIFT_BOW )
 		)
 	{
 		bow = true;
 	}
 	else if ( stats[clientnum]->weapon
-		&& (stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW) )
+		&& (stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == HEAVY_CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW
+			|| stats[clientnum]->weapon->type == CANNON || stats[clientnum]->weapon->type == CANNON_BOULDER ) )
 	{
 		crossbow = true;
 	}
@@ -4031,7 +4040,7 @@ void actHudArrowModel(Entity* my)
 			my->flags[INVISIBLE] = true;
 			return;
 		}
-		if ( stats[clientnum]->weapon->type == CROSSBOW )//|| stats[clientnum]->weapon->type == ABYSS_CROSSBOW)
+		if ( stats[clientnum]->weapon->type == CROSSBOW || stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW )
 		{
 			if ( hudweapon->sprite != items[CROSSBOW].fpindex )
 			{
@@ -4116,7 +4125,7 @@ void actHudArrowModel(Entity* my)
 
 	if ( crossbow )
 	{
-		if ( hudweapon->sprite == items[CROSSBOW].fpindex )
+		if ( hudweapon->sprite == items[CROSSBOW].fpindex || hudweapon->sprite == items[ABYSSAL_CROSSBOW].fpindex)
 		{
 			my->focalx += 3.5;
 			my->focaly += 0.25;

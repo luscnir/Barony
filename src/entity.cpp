@@ -6549,12 +6549,12 @@ void Entity::attack(int pose, int charge, Entity* target)
 					entity = newEntity(245, 1, map.entities, nullptr); // boulder
 					playSoundEntity(this, 150 , 96);
 				}
-				
 				else
 				{
 					entity = newEntity(166, 1, map.entities, nullptr); // arrow
 					playSoundEntity(this, 239 + rand() % 3, 96);
 				}
+
 				entity->parent = uid;
 				entity->x = x;
 				entity->y = y;
@@ -12832,7 +12832,7 @@ int Entity::getAttackPose() const
 				|| myStats->type == SHADOW || myStats->type == BURGGUARD
 				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH )
 			{
-				if ( myStats->weapon->type == CROSSBOW || myStats->weapon->type == HEAVY_CROSSBOW )
+				if ( myStats->weapon->type == CROSSBOW || myStats->weapon->type == HEAVY_CROSSBOW || myStats->weapon->type == ABYSSAL_CROSSBOW )
 				{
 					pose = MONSTER_POSE_RANGED_WINDUP1;
 				}
@@ -13935,7 +13935,7 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 		else if ( weaponLimb->sprite == items[SHORTBOW].index || weaponLimb->sprite == items[ARTIFACT_BOW].index
 			|| weaponLimb->sprite == items[LONGBOW].index || weaponLimb->sprite == items[COMPOUND_BOW].index )
 		{
-			if ( weaponLimb->sprite == items[SHORTBOW].index )
+			if ( weaponLimb->sprite == items[SHORTBOW].index || weaponLimb->sprite == items[MAKESHIFT_BOW].index )
 			{
 				switch ( monsterType )
 				{
@@ -16694,14 +16694,11 @@ void Entity::setRangedProjectileAttack(Entity& marksman, Stat& myStats, int opti
 		//}
 		if (myStats.weapon->type == ABYSSAL_CROSSBOW)
 		{
-			//this crossbow stuns while you are full HP
-			{
-				if (myStats.HP == myStats.MAXHP)
-				{
-					//mini-stuns bolts
-					this->arrowStunTime = 10;
-				}
-			}
+			//if (myStats.HP == myStats.MAXHP) //this crossbow used to stuns while you are full HP
+			//{
+				//mini-stuns bolts
+				this->arrowStunTime = 20;
+			//}
 		}
 		if ( myStats.weapon->type != SLING )
 		{
@@ -16820,7 +16817,7 @@ bool Entity::setArrowProjectileProperties(int weaponType)
 		return true;
 	}
 
-	if ( weaponType == CROSSBOW || weaponType == SLING || weaponType == HEAVY_CROSSBOW || weaponType == ABYSSAL_CROSSBOW )
+	if ( weaponType == CROSSBOW || weaponType == SLING || weaponType == HEAVY_CROSSBOW || weaponType == ABYSSAL_CROSSBOW || weaponType == CANNON || weaponType == CANNON_BOULDER )
 	{
 		this->vel_z = -0.2;
 		this->arrowSpeed = 6;
