@@ -282,11 +282,11 @@ void actLeftHandMagic(Entity* my)
 		}
 		else if (stats[clientnum]->gloves->type == ABYSSAL_KNUCKLES)
 		{
-			my->sprite = 823;
+			my->sprite = 1025;
 		}
 		else if (stats[clientnum]->gloves->type == ICE_GLOVES)
 		{
-			my->sprite = 955;
+			my->sprite = 1179;
 		}
 
 	}
@@ -652,11 +652,11 @@ void actRightHandMagic(Entity* my)
 		}
 		else if (stats[clientnum]->gloves->type == ABYSSAL_KNUCKLES)
 		{
-			my->sprite = 848;
+			my->sprite = 1000;
 		}
 		else if (stats[clientnum]->gloves->type == ICE_GLOVES)
 		{
-			my->sprite = 1002;
+			my->sprite = 1132;
 		}
 	}
 
