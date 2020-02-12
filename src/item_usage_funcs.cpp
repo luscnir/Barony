@@ -4593,7 +4593,7 @@ void item_ToolUnihorn(Item*& item, int player)
 	{
 		return;
 	}
-	messagePlayer(player, language[3760]);
+	messagePlayer(player, language[4240]);
 	if( stats[player]->EFFECTS_TIMERS[EFF_BLIND] > 1 )
 	{
 		stats[player]->EFFECTS_TIMERS[EFF_BLIND] = 1;

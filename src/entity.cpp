@@ -3441,13 +3441,13 @@ void Entity::handleEffects(Stat* myStats)
 		{
 			if (rand() % 2000 == 0)   // .05% chance every frame
 			{
-				messagePlayer(player, language[3761]);
+				messagePlayer(player, language[4241]);
 
 				switch (rand() % 20)	//5% chance for each effect
 				{
 				case 0:
 					myStats->EFFECTS[EFF_POISONED] = true;
-					myStats->EFFECTS_TIMERS[EFF_POISONED] = 30 *TICKS_PER_SECOND;
+					myStats->EFFECTS_TIMERS[EFF_POISONED] = 30 * TICKS_PER_SECOND;
 					break;
 				case 1:
 					myStats->EFFECTS[EFF_ASLEEP] = true;
@@ -3489,7 +3489,15 @@ void Entity::handleEffects(Stat* myStats)
 					teleportRandom();
 					break;
 				case 11:
-					this->modHP(-5);
+					if (myStats->HP >= 10)
+					{
+						this->modHP(-5);
+					}
+					else
+					{
+					myStats->EFFECTS[EFF_POTION_STR] = true;
+					myStats->EFFECTS_TIMERS[EFF_POTION_STR] = 30 * TICKS_PER_SECOND;
+					}
 					break;
 				case 12:
 					this->modHP(+15);
@@ -3532,7 +3540,10 @@ void Entity::handleEffects(Stat* myStats)
 					castSpell(uid, &spell_cureailment, true, false);
 					break;
 				case 19:
-					this->modHP(-15);
+					if (myStats->HP >= 30)
+					{
+						this->modHP(-15);
+					}
 					this->modMP(+50);
 					castSpell(uid, &spell_bleed, true, false);
 					break;
@@ -3542,7 +3553,18 @@ void Entity::handleEffects(Stat* myStats)
 			}
 		}
 	}
-
+	if (client_classes[player] == CLASS_LUNATIC)
+	{
+		//this->modHP = 1;
+		if (stats[player]->MAXHP > 1)
+		{
+			stats[player]->MAXHP = 1;
+		}
+		if (stats[player]->HP > 1)
+		{
+			stats[player]->HP = 1;
+		}
+	}
 
 
 	// regaining energy over time

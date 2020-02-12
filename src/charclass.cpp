@@ -1800,8 +1800,10 @@ void initClass(int player)
 		stats[player]->CON -= 1;
 		stats[player]->GOLD += 500;
 
-		stats[player]->MAXHP -= 29;
-		stats[player]->HP -= 29;
+		//stats[player]->MAXHP -= 29;
+		//stats[player]->HP -= 29;
+		stats[player]->MAXHP = 1;
+		stats[player]->HP = 1;
 		stats[player]->MAXMP += 30;
 		stats[player]->MP += 30;
 
@@ -1855,6 +1857,19 @@ void initClass(int player)
 			useItem(item, player);
 		}
 
+		// amulet of life saving
+		item = newItem(AMULET_LIFESAVING, DECREPIT, 0, 1, 0, true, NULL);
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
 		// boots of lightness
 		item = newItem(BOOTS_LIGHTNESS, DECREPIT, 0, 1, 0, true, NULL);
 		if (player == clientnum)
@@ -1890,10 +1905,16 @@ void initClass(int player)
 			hotbar[2].item = item2->uid;
 			free(item);
 
-			// scroll of teleport
-			item = newItem(SCROLL_TELEPORTATION, DECREPIT, 0, 10, 0, true, NULL);
+			// water bootle
+			item = newItem(POTION_WATER, SERVICABLE, 1, 10, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[3].item = item2->uid;
+			free(item);
+
+			// scroll of teleport
+			item = newItem(SCROLL_TELEPORTATION, DECREPIT, 0, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[4].item = item2->uid;
 			free(item);
 
 			// ring of randomness
@@ -1903,11 +1924,6 @@ void initClass(int player)
 
 			// tentacle pie
 			item = newItem(FOOD_TENTACLEPIE, EXCELLENT, 0, 2, 0, true, NULL);
-			item2 = itemPickup(player, item);
-			free(item);
-
-			// water bootle
-			item = newItem(POTION_WATER, SERVICABLE, 1, 5, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			free(item);
 
