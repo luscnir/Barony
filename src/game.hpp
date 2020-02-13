@@ -341,7 +341,7 @@ extern char last_port[64];
 
 #define SPRITE_FLAME 13
 #define SPRITE_CRYSTALFLAME 96
-#define SPRITE_GREENFLAME 135
+#define SPRITE_GREENFLAME 162
 
 #define MAXCHARGE 30 // charging up weapons
 
