@@ -655,7 +655,7 @@ bool Entity::devilSummonMonster(Entity* summonOnEntity, Monster creature, int ra
 				if ( !map.tiles[OBSTACLELAYER + index] &&
 					((target->behavior == &actPlayer && !map.tiles[index])
 						|| (target->behavior != &actPlayer 
-								&& (map.tiles[index] || creature != DEMON) && !swimmingtiles[map.tiles[index]] && !lavatiles[map.tiles[index]] )
+								&& (map.tiles[index] || creature != DEMON) && !swimmingtiles[map.tiles[index]] && !lavatiles[map.tiles[index]] && !poisontiles[map.tiles[index]] )
 					) 
 				)
 				{

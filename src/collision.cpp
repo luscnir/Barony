@@ -392,7 +392,7 @@ bool entityInsideTile(Entity* entity, int x, int y, int z, bool checkSafeTiles)
 							{
 								isMonster = true;
 							}
-						if ((swimmingtiles[map.tiles[z + y * MAPLAYERS + x * MAPLAYERS * map.height]] || lavatiles[map.tiles[z + y * MAPLAYERS + x * MAPLAYERS * map.height]])
+						if ((swimmingtiles[map.tiles[z + y * MAPLAYERS + x * MAPLAYERS * map.height]] || lavatiles[map.tiles[z + y * MAPLAYERS + x * MAPLAYERS * map.height]] || poisontiles[map.tiles[z + y * MAPLAYERS + x * MAPLAYERS * map.height]])
 							&& isMonster)
 						{
 							return true;
@@ -550,7 +550,7 @@ int barony_clear(real_t tx, real_t ty, Entity* my)
 				}
 
 				if (!levitating && (!map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]
-					|| ((swimmingtiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]] || lavatiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]])
+					|| ((swimmingtiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]] || lavatiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]] || poisontiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]] )
 						&& isMonster)))
 				{
 					// no floor
@@ -1175,7 +1175,7 @@ real_t lineTrace(Entity* my, real_t x1, real_t y1, real_t angle, real_t range, i
 					isMonster = true;
 				}
 			if (!map.tiles[index]
-				|| ((swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]]) && isMonster))
+				|| ((swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]] || poisontiles[map.tiles[index]]) && isMonster))
 			{
 				hit.x = ix;
 				hit.y = iy;
@@ -1351,7 +1351,7 @@ real_t lineTraceTarget(Entity* my, real_t x1, real_t y1, real_t angle, real_t ra
 					isMonster = true;
 				}
 			if (!map.tiles[index]
-				|| ((swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]]) && isMonster))
+				|| ((swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]] || poisontiles[map.tiles[index]]) && isMonster))
 			{
 				hit.x = ix;
 				hit.y = iy;
@@ -1434,7 +1434,7 @@ int checkObstacle(long x, long y, Entity* my, Entity* target)
 			}
 			if (!levitating
 				&& (!map.tiles[index]
-					|| ((swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]])
+					|| ((swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]] || poisontiles[map.tiles[index]] )
 						&& isMonster)))   // no floor
 			{
 				return 1; // if there's no floor, or either water/lava then a non-levitating monster sees obstacle.

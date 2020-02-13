@@ -471,9 +471,9 @@ void actBoulder(Entity* my)
 	int x = std::min<int>(std::max(0, (int)(my->x / 16)), map.width);
 	int y = std::min<int>(std::max(0, (int)(my->y / 16)), map.height);
 	Uint32 index = y * MAPLAYERS + x * MAPLAYERS * map.height;
-	if ( !map.tiles[index] || swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]] )
+	if ( !map.tiles[index] || swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]] || poisontiles[map.tiles[index]] )
 	{
-		if ( (swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]]) 
+		if ( (swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]] || poisontiles[map.tiles[index]] )
 			&& (my->sprite == BOULDER_LAVA_SPRITE || my->sprite == BOULDER_ARCANE_SPRITE) )
 		{
 			// lava/arcane balls, roll over lava.

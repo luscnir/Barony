@@ -1752,7 +1752,7 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 							fellInLava = true;
 							tryReposition = true;
 						}
-						else if ( swimmingtiles[map.tiles[0 + u * MAPLAYERS + v * MAPLAYERS * map.height]] )
+						else if ( swimmingtiles[map.tiles[0 + u * MAPLAYERS + v * MAPLAYERS * map.height]] || poisontiles[map.tiles[0 + u * MAPLAYERS + v * MAPLAYERS * map.height]] )
 						{
 							fellInWater = true;
 							tryReposition = true;

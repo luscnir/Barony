@@ -1287,7 +1287,8 @@ void Entity::lichFireSummonMonster(Monster creature)
 			(map.tiles[OBSTACLELAYER + index] == 1
 				|| map.tiles[index] == 0
 				|| swimmingtiles[map.tiles[index]]
-				|| lavatiles[map.tiles[index]])
+				|| lavatiles[map.tiles[index]]
+				|| poisontiles[map.tiles[index]])
 			)
 		{
 			// find a spot that isn't wall, no floor or lava/water tiles.

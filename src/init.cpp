@@ -508,6 +508,7 @@ int initApp(char* title, int fullscreen)
 	animatedtiles = (bool*) malloc(sizeof(bool) * numtiles);
 	lavatiles = (bool*) malloc(sizeof(bool) * numtiles);
 	swimmingtiles = (bool*)malloc(sizeof(bool) * numtiles);
+	poisontiles = (bool*)malloc(sizeof(bool) * numtiles);
 	fp = openDataFile(tilesDirectory.c_str(), "r");
 	for ( c = 0; !feof(fp); c++ )
 	{
@@ -520,6 +521,7 @@ int initApp(char* title, int fullscreen)
 		animatedtiles[c] = false;
 		lavatiles[c] = false;
 		swimmingtiles[c] = false;
+		poisontiles[c] = false;
 		if ( tiles[c] != NULL )
 		{
 			for (x = 0; x < strlen(name); x++)
@@ -538,6 +540,10 @@ int initApp(char* title, int fullscreen)
 			if ( strstr(name, "Water") || strstr(name, "water") || strstr(name, "swimtile") || strstr(name, "Swimtile") )
 			{
 				swimmingtiles[c] = true;
+			}
+			if (strstr(name, "Poison") || strstr(name, "poison"))
+			{
+				poisontiles[c] = true;
 			}
 		}
 		else
@@ -2106,6 +2112,11 @@ int deinitApp()
 	{
 		free(swimmingtiles);
 		swimmingtiles = nullptr;
+	}
+	if (poisontiles)
+	{
+		free(poisontiles);
+		poisontiles = nullptr;
 	}
 
 	// free sprites

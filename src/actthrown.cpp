@@ -357,7 +357,7 @@ void actThrown(Entity* my)
 					}
 				}
 				else if ( item && (item->type >= TOOL_BOMB && item->type <= TOOL_TELEPORT_BOMB)
-					&& !(swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]]) )
+					&& !(swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]] || poisontiles[map.tiles[index]]) )
 				{
 					// don't deploy on swimming/lava tiles.
 					if ( parent )
@@ -369,7 +369,7 @@ void actThrown(Entity* my)
 					return;
 				}
 				else if ( item && itemIsThrowableTinkerTool(item) && !(item->type >= TOOL_BOMB && item->type <= TOOL_TELEPORT_BOMB)
-					&& !(swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]])
+					&& !(swimmingtiles[map.tiles[index]] || lavatiles[map.tiles[index]] || poisontiles[map.tiles[index]] )
 					&& tinkeringItemCanBePlaced )
 				{
 					// don't deploy on swimming/lava tiles.

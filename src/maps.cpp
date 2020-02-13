@@ -2027,6 +2027,11 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapPa
 				possiblelocations[y + x * map.height] = false;
 				numpossiblelocations--;
 			}
+			else if (poisontiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]])
+			{
+				possiblelocations[y + x * map.height] = false;
+				numpossiblelocations--;
+			}
 			else
 			{
 				possiblelocations[y + x * map.height] = true;

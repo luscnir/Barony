@@ -1913,7 +1913,8 @@ void actPlayer(Entity* my)
 			int x = std::min(std::max<unsigned int>(0, floor(my->x / 16)), map.width - 1);
 			int y = std::min(std::max<unsigned int>(0, floor(my->y / 16)), map.height - 1);
 			if ( swimmingtiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]]
-				|| lavatiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]] )
+				|| lavatiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]] 
+				|| poisontiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]] )
 			{
 				// can swim in lavatiles or swimmingtiles only.
 				if ( rand() % 400 == 0 && multiplayer != CLIENT )
@@ -1960,7 +1961,7 @@ void actPlayer(Entity* my)
 				if ( multiplayer != CLIENT )
 				{
 					// Check if the Player is in Water or Lava
-					if ( swimmingtiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]] )
+					if ( swimmingtiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]] || poisontiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]])
 					{
 						if ( my->flags[BURNING] )
 						{
@@ -2017,6 +2018,22 @@ void actPlayer(Entity* my)
 								stats[PLAYER_NUM]->HUNGER -= 25;
 								serverUpdateHunger(PLAYER_NUM);
 							}
+						}
+						//Check for poisoned water
+						if (poisontiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]])
+						{
+							if (!stats[PLAYER_NUM]->EFFECTS[EFF_POISONED])
+							{
+								my->setEffect(EFF_POISONED, true, 1000, true);
+								serverUpdateEntitySkill(my, 50);
+							}
+							/*
+							if (!my->flags[EFF_POISONED])
+							{
+								// Attempt to poison Entity 
+								my->flags[EFF_POISONED] = true;
+								my->flags[EFF_POISONED] = 15 * TICKS_PER_SECOND;
+							}*/
 						}
 					}
 					else if ( ticks % 10 == 0 ) // Lava deals damage every 10 ticks
