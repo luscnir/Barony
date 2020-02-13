@@ -2027,13 +2027,6 @@ void actPlayer(Entity* my)
 								my->setEffect(EFF_POISONED, true, 1000, true);
 								serverUpdateEntitySkill(my, 50);
 							}
-							/*
-							if (!my->flags[EFF_POISONED])
-							{
-								// Attempt to poison Entity 
-								my->flags[EFF_POISONED] = true;
-								my->flags[EFF_POISONED] = 15 * TICKS_PER_SECOND;
-							}*/
 						}
 					}
 					else if ( ticks % 10 == 0 ) // Lava deals damage every 10 ticks
