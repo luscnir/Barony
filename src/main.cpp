@@ -266,6 +266,7 @@ Uint32 numsprites, numtiles, nummodels;
 bool *animatedtiles = nullptr;
 bool *lavatiles = nullptr;
 bool *swimmingtiles = nullptr;
+bool *poisontiles = nullptr;
 int rscale = 1;
 real_t vidgamma = 1.0f;
 real_t* zbuffer = nullptr;

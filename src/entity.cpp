@@ -3554,7 +3554,7 @@ void Entity::handleEffects(Stat* myStats)
 		}
 	}
 
-	if (client_classes[player] == CLASS_LUNATIC) //lunatic can gain any hp!
+	if (client_classes[player] == CLASS_LUNATIC) //lunatic can't gain any hp!
 	{
 		if (stats[player]->MAXHP > 1)
 		{

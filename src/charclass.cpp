@@ -1911,12 +1911,6 @@ void initClass(int player)
 			hotbar[3].item = item2->uid;
 			free(item);
 
-			// scroll of teleport
-			item = newItem(SCROLL_TELEPORTATION, DECREPIT, 0, 1, 0, true, NULL);
-			item2 = itemPickup(player, item);
-			hotbar[4].item = item2->uid;
-			free(item);
-
 			// ring of randomness
 			item = newItem(RING_RANDOMNESS, DECREPIT, -1, 1, 0, false, NULL);
 			item2 = itemPickup(player, item);

@@ -2024,6 +2024,7 @@ void physfsReloadTiles(bool reloadAll)
 				animatedtiles[c] = false;
 				lavatiles[c] = false;
 				swimmingtiles[c] = false;
+				//poisontiles[c] = false;
 				if ( tiles[c] != NULL )
 				{
 					size_t found = tileFile.find(".png");
@@ -2042,6 +2043,10 @@ void physfsReloadTiles(bool reloadAll)
 					if ( strstr(name, "Water") || strstr(name, "water") || strstr(name, "swimtile") || strstr(name, "Swimtile") )
 					{
 						swimmingtiles[c] = true;
+					}
+					if (strstr(name, "Moss") || strstr(name, "moss"))
+					{
+						//poisontiles[c] = true;
 					}
 				}
 				else

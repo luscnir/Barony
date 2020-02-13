@@ -1667,7 +1667,7 @@ void actMonster(Entity* my)
 			{
 				yetiMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1089)     // ice demon body
+			else if (my->sprite == 1100)     // ice demon body
 			{
 				my->flags[BURNABLE] = false;
 				iceDemonMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));

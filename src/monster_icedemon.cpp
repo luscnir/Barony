@@ -15,7 +15,7 @@ void initIceDemon(Entity* my, Stat* myStats)
 	int c;
 	node_t* node;
 
-	my->initMonster(1088);
+	my->initMonster(1094);
 
 	if (multiplayer != CLIENT)
 	{
