@@ -22,7 +22,8 @@
 
 bool hideItemFromShopView(Item& item)
 {
-	if ( item.type == ARTIFACT_ORB_GREEN || item.type == ARTIFACT_ORB_RED || item.type == ARTIFACT_ORB_BLUE )
+	if ( item.type == ARTIFACT_ORB_GREEN || item.type == ARTIFACT_ORB_RED || item.type == ARTIFACT_ORB_BLUE
+		|| item.type == SYMBOL_RAGE || item.type == SYMBOL_CRUELTY || item.type == SYMBOL_HATRED )
 	{
 		return true;
 	}
@@ -35,6 +36,9 @@ void rebuildShopInventory()
 	bool mysteriousShopkeeperGreenOrb = false;
 	bool mysteriousShopkeeperBlueOrb = false;
 	bool mysteriousShopkeeperRedOrb = false;
+	bool mysteriousShopkeeperGreenSymbol = false;
+	bool mysteriousShopkeeperBlueSymbol = false;
+	bool mysteriousShopkeeperRedSymbol = false;
 	if ( mysteriousShopkeeper )
 	{
 		for ( node_t* node = shopInv->first; node != NULL; node = node->next )
@@ -53,6 +57,18 @@ void rebuildShopInventory()
 				else if ( item->type == ARTIFACT_ORB_GREEN )
 				{
 					mysteriousShopkeeperGreenOrb = true;
+				}
+				else if ( item->type == SYMBOL_RAGE )
+				{
+					mysteriousShopkeeperGreenSymbol = true;
+				}
+				else if ( item->type == SYMBOL_CRUELTY )
+				{
+					mysteriousShopkeeperBlueSymbol = true;
+				}
+				else if ( item->type == SYMBOL_HATRED )
+				{
+					mysteriousShopkeeperRedSymbol = true;
 				}
 			}
 		}
@@ -80,6 +96,21 @@ void rebuildShopInventory()
 				}
 				if ( !mysteriousShopkeeperRedOrb
 					&& shopkeeperMysteriousItems[ARTIFACT_ORB_RED].find(item->type) != shopkeeperMysteriousItems[ARTIFACT_ORB_RED].end() )
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperGreenSymbol
+					&& shopkeeperMysteriousItems[SYMBOL_RAGE].find(item->type) != shopkeeperMysteriousItems[SYMBOL_RAGE].end())
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperBlueSymbol
+					&& shopkeeperMysteriousItems[SYMBOL_CRUELTY].find(item->type) != shopkeeperMysteriousItems[SYMBOL_CRUELTY].end())
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperRedSymbol
+					&& shopkeeperMysteriousItems[SYMBOL_HATRED].find(item->type) != shopkeeperMysteriousItems[SYMBOL_HATRED].end())
 				{
 					continue;
 				}
@@ -148,6 +179,21 @@ void rebuildShopInventory()
 				}
 				if ( !mysteriousShopkeeperRedOrb
 					&& shopkeeperMysteriousItems[ARTIFACT_ORB_RED].find(item->type) != shopkeeperMysteriousItems[ARTIFACT_ORB_RED].end() )
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperGreenSymbol
+					&& shopkeeperMysteriousItems[SYMBOL_RAGE].find(item->type) != shopkeeperMysteriousItems[SYMBOL_RAGE].end())
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperBlueSymbol
+					&& shopkeeperMysteriousItems[SYMBOL_CRUELTY].find(item->type) != shopkeeperMysteriousItems[SYMBOL_CRUELTY].end())
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperRedSymbol
+					&& shopkeeperMysteriousItems[SYMBOL_HATRED].find(item->type) != shopkeeperMysteriousItems[SYMBOL_HATRED].end())
 				{
 					continue;
 				}
@@ -437,6 +483,9 @@ void updateShopWindow()
 	bool mysteriousShopkeeperGreenOrb = false;
 	bool mysteriousShopkeeperBlueOrb = false;
 	bool mysteriousShopkeeperRedOrb = false;
+	bool mysteriousShopkeeperGreenSymbol = false;
+	bool mysteriousShopkeeperBlueSymbol = false;
+	bool mysteriousShopkeeperRedSymbol = false;
 	if ( mysteriousShopkeeper )
 	{
 		for ( node = shopInv->first; node != NULL; node = node->next )
@@ -455,6 +504,18 @@ void updateShopWindow()
 				else if ( item->type == ARTIFACT_ORB_GREEN )
 				{
 					mysteriousShopkeeperGreenOrb = true;
+				}
+				else if (item->type == SYMBOL_RAGE)
+				{
+					mysteriousShopkeeperGreenSymbol = true;
+				}
+				else if (item->type == SYMBOL_CRUELTY)
+				{
+					mysteriousShopkeeperBlueSymbol = true;
+				}
+				else if (item->type == SYMBOL_HATRED)
+				{
+					mysteriousShopkeeperRedSymbol = true;
 				}
 			}
 		}
@@ -483,6 +544,22 @@ void updateShopWindow()
 				{
 					continue;
 				}
+				if (!mysteriousShopkeeperGreenSymbol
+					&& shopkeeperMysteriousItems[SYMBOL_RAGE].find(item->type) != shopkeeperMysteriousItems[SYMBOL_RAGE].end())
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperBlueSymbol
+					&& shopkeeperMysteriousItems[SYMBOL_CRUELTY].find(item->type) != shopkeeperMysteriousItems[SYMBOL_CRUELTY].end())
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperRedSymbol
+					&& shopkeeperMysteriousItems[SYMBOL_HATRED].find(item->type) != shopkeeperMysteriousItems[SYMBOL_HATRED].end())
+				{
+					continue;
+				}
+
 			}
 			if ( hideItemFromShopView(*item) )
 			{

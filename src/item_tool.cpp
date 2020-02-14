@@ -545,6 +545,15 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 				case ARTIFACT_ORB_GREEN:
 					messagePlayer(player, language[3888], entity.getStats()->name);
 					break;
+				case SYMBOL_RAGE:
+					messagePlayer(player, language[4251], entity.getStats()->name);
+					break;
+				case SYMBOL_CRUELTY:
+					messagePlayer(player, language[4252], entity.getStats()->name);
+					break;
+				case SYMBOL_HATRED:
+					messagePlayer(player, language[4253], entity.getStats()->name);
+					break;
 				default:
 					break;
 			}

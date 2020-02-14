@@ -15069,6 +15069,15 @@ void Entity::monsterAddNearbyItemToInventory(Stat* myStats, int rangeToFind, int
 							case ARTIFACT_ORB_GREEN:
 								messagePlayer(owner->skill[2], language[3888], myStats->name);
 								break;
+							case SYMBOL_RAGE:
+								messagePlayer(owner->skill[2], language[4251], myStats->name);
+								break;
+							case SYMBOL_CRUELTY:
+								messagePlayer(owner->skill[2], language[4252], myStats->name);
+								break;
+							case SYMBOL_HATRED:
+								messagePlayer(owner->skill[2], language[4253], myStats->name);
+								break;
 							default:
 								break;
 						}
@@ -15383,7 +15392,10 @@ bool Entity::monsterWantsItem(const Item& item, Item**& shouldEquip, node_t*& re
 			{
 				if ( item.type == ARTIFACT_ORB_BLUE
 					|| item.type == ARTIFACT_ORB_GREEN
-					|| item.type == ARTIFACT_ORB_RED )
+					|| item.type == ARTIFACT_ORB_RED
+					|| item.type == SYMBOL_RAGE
+					|| item.type == SYMBOL_CRUELTY
+					|| item.type == SYMBOL_HATRED )
 				{
 					return true;
 				}

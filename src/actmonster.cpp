@@ -3484,7 +3484,10 @@ void actMonster(Entity* my)
 							Item* item = (Item*)node->element;
 							if ( item && (item->type == ARTIFACT_ORB_BLUE
 									|| item->type == ARTIFACT_ORB_GREEN
-									|| item->type == ARTIFACT_ORB_RED)
+									|| item->type == ARTIFACT_ORB_RED
+									|| item->type == SYMBOL_RAGE
+									|| item->type == SYMBOL_CRUELTY
+									|| item->type == SYMBOL_HATRED)
 								)
 							{
 								hasOrb = true;
