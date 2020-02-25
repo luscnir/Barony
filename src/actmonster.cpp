@@ -2075,7 +2075,7 @@ void actMonster(Entity* my)
 				int c;
 				for (c = 0; c < MAXPLAYERS; c++)
 				{
-					MONSTER_SOUND = playSoundPlayer(c, 477, 128);
+					MONSTER_SOUND = playSoundPlayer(c, 561, 128);
 				}
 			}
 		}
@@ -2116,7 +2116,7 @@ void actMonster(Entity* my)
 				int c;
 				for (c = 0; c < MAXPLAYERS; c++)
 				{
-					MONSTER_SOUND = playSoundPlayer(c, 478, 128);
+					MONSTER_SOUND = playSoundPlayer(c, 562, 128);
 				}
 			}
 		}
@@ -2143,7 +2143,7 @@ void actMonster(Entity* my)
 				int c;
 				for (c = 0; c < MAXPLAYERS; c++)
 				{
-					playSoundPlayer(c, 479, 128);
+					playSoundPlayer(c, 563, 128);
 				}
 			}
 		}
@@ -6290,8 +6290,14 @@ timeToGoAgain:
 				playSoundEntity(my, 166, 128);
 
 				Monster creature = NOTHING;
-				switch ( rand() % 5 )
+				if (!strncmp(map.name, "Abyss Boss", 4) )
 				{
+					creature = GHOUL;		//TODO: make unique monter(Illusion)
+				}
+				else
+				{
+					switch (rand() % 5)
+					{
 					case 0:
 					case 1:
 						creature = CREATURE_IMP;
@@ -6301,6 +6307,7 @@ timeToGoAgain:
 					case 4:
 						creature = DEMON;
 						break;
+					}
 				}
 				if ( creature != DEMON )
 				{

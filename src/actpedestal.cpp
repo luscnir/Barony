@@ -366,7 +366,7 @@ void Entity::actPedestalOrb()
 	{
 		if (!strncmp(map.name, "Mural of portals", 4))
 		{
-			sprite = parent->pedestalHasOrb + 887 - 1;
+			sprite = parent->pedestalHasOrb + 1064 - 1;
 		}
 		else
 		{

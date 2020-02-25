@@ -1499,10 +1499,8 @@ void initClass(int player)
 		stats[player]->CHR -= 1;
 		stats[player]->INT -= 1;
 
-		stats[player]->MAXHP += 5;
-		stats[player]->HP += 5;
-		stats[player]->MAXMP += 5;
-		stats[player]->MP += 5;
+		stats[player]->MAXHP += 10;
+		stats[player]->HP += 10;
 
 		// skills
 		stats[player]->PROFICIENCIES[PRO_AXE] = 5;
@@ -1766,8 +1764,8 @@ void initClass(int player)
 			item2 = itemPickup(player, item);
 			free(item);
 
-			// speed spellbook
-			item = newItem(SPELLBOOK_SPEED, EXCELLENT, 0, 1, 2, true, NULL);
+			// detect food spellbook
+			item = newItem(SPELLBOOK_DETECT_FOOD, EXCELLENT, 0, 1, 2, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[8].item = item2->uid;
 			free(item);

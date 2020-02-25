@@ -8824,7 +8824,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 								if (rand() % 2 == 0)
 								{
 									hitstats->EFFECTS[EFF_PARALYZED] = true;
-									hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = std::max(50, 150 - hit.entity->getCON() * 5);
+									hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = std::max(100, 200 - hit.entity->getCON() * 5);
 									messagePlayer(playerhit, language[4245]);
 									messagePlayer(playerhit, language[4246]);
 									serverUpdateEffects(playerhit);
@@ -17420,7 +17420,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalx = limbs[monster][9][0] - .5;
 				helm->focaly = limbs[monster][9][1] - 2.75;
 				helm->focalz = limbs[monster][9][2] + 2.75;
-				if ( helm->sprite == (items[HAT_HOOD].index + 2) )
+				if ( helm->sprite == (items[HAT_HOOD].index + 2) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index + 2) )
 				{
 					helm->focaly -= 0.25; // black hood
 				}
@@ -17433,7 +17433,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalx = limbs[monster][9][0] - .5;
 				helm->focaly = limbs[monster][9][1] - 2.15;
 				helm->focalz = limbs[monster][9][2] + 2.25;
-				if ( helm->sprite == (items[HAT_HOOD].index + 2) )
+				if ( helm->sprite == (items[HAT_HOOD].index + 2) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index + 2) )
 				{
 					helm->focaly += 0.25; // black hood
 				}
@@ -17455,7 +17455,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalz = limbs[monster][9][2] + 2.5;
 				if ( monster == GOBLIN && this->sprite == 752 ) // special female offset.
 				{
-					if ( helm->sprite == (items[HAT_HOOD].index + 3) )
+					if ( helm->sprite == (items[HAT_HOOD].index + 3) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index + 3) )
 					{
 						helm->focaly -= 0.5; // purple hood
 					}
@@ -17601,6 +17601,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalz = limbs[monster][10][2] - 2;
 				break;
 			case GOATMAN:
+			case CHOLOROSH:
 				helm->focalx = limbs[monster][10][0] + 0.7;
 				helm->focaly = limbs[monster][10][1] + 0.25;
 				helm->focalz = limbs[monster][10][2] - 2.55;
@@ -17611,6 +17612,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalz = limbs[monster][10][2] - 1.5;
 				break;
 			case GOBLIN:
+			case BURGGUARD:
 				helm->focalx = limbs[monster][10][0] + 0.7;
 				helm->focaly = limbs[monster][10][1] + 0;
 				helm->focalz = limbs[monster][10][2] - 2.25;
@@ -19023,7 +19025,8 @@ void Entity::setHelmetLimbOffsetWithMask(Entity* helm, Entity* mask)
 		|| (helm->sprite >= items[HAT_HOOD].index && helm->sprite < items[HAT_HOOD].index + items[HAT_HOOD].variations)
 		|| helm->sprite == items[HAT_HOOD_RED].index
 		|| helm->sprite == items[HAT_HOOD_SILVER].index
-		|| helm->sprite == items[PUNISHER_HOOD].index )
+		|| helm->sprite == items[PUNISHER_HOOD].index
+		|| helm->sprite == items[HAT_HOOD_YELLOWGREEN].index )
 	{
 		helm->scalex = 1.05;
 		helm->scaley = 1.05;
@@ -19052,6 +19055,7 @@ void Entity::setHelmetLimbOffsetWithMask(Entity* helm, Entity* mask)
 			}
 			break;
 		case GOBLIN:
+		case BURGGUARD:
 			if ( helm->sprite == items[LEATHER_HELM].index
 				|| helm->sprite == items[IRON_HELM].index )
 			{
@@ -19064,6 +19068,7 @@ void Entity::setHelmetLimbOffsetWithMask(Entity* helm, Entity* mask)
 			}
 			break;
 		case GOATMAN:
+		case CHOLOROSH:
 			if ( helm->sprite == items[LEATHER_HELM].index
 				|| helm->sprite == items[IRON_HELM].index )
 			{

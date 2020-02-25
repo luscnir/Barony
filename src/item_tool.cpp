@@ -474,7 +474,14 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 			consumeItem(item, player);
 			return;
 		}
-		messagePlayer(player, language[2368]);
+		if (!strncmp(map.name, "Mural of portals", 4))
+		{
+			messagePlayer(player, language[4221]);
+		}
+		else
+		{
+			messagePlayer(player, language[2368]);
+		}
 		bool playSound = true;
 
 		if ( type == ARTIFACT_ORB_BLUE && entity.pedestalOrbType == 1 )
@@ -492,6 +499,18 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 		else if ( type == ARTIFACT_ORB_GREEN && entity.pedestalOrbType == 4 )
 		{
 			messagePlayer(player, language[2370]);
+		}
+		else if (type == SYMBOL_RAGE && entity.pedestalOrbType == 1)
+		{
+			messagePlayer(player, language[4223]);
+		}
+		else if (type == SYMBOL_CRUELTY && entity.pedestalOrbType == 2)
+		{
+			messagePlayer(player, language[4223]);
+		}
+		else if (type == SYMBOL_HATRED && entity.pedestalOrbType == 3)
+		{
+			messagePlayer(player, language[4223]);
 		}
 		else
 		{
