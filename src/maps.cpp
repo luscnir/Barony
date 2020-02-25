@@ -6004,7 +6004,7 @@ void assignActions(map_t* map)
 								postProcessEntity->z -= 6;
 								tmpentity->parent = postProcessEntity->getUID();
 							}
-							else if ( tmpentity->sprite == 630 || tmpentity->sprite == 902 )
+							else if ( tmpentity->sprite == 630 || tmpentity->sprite == 1079 )
 							{
 								// is podium
 								postProcessEntity->z -= 6;
