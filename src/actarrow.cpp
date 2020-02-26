@@ -397,6 +397,8 @@ void actArrow(Entity* my)
 							case LICH_FIRE:
 							case DEVIL:
 							case ICEDEMON:
+							case EYEBALL:
+							case FLESHLING:
 							case ABOMINATION:
 							case LICH_FALLEN:
 								// smite these creatures
@@ -424,6 +426,10 @@ void actArrow(Entity* my)
 							case KOBOLD:
 							case COCKATRICE:
 							case TROLL:
+							case GARGOYLE:
+							case MATILDA:
+							case YETI:
+							case ICEDEMON:
 								// more damage to these creatures
 								huntingDamage = true;
 								for ( int gibs = 0; gibs < 10; ++gibs )
@@ -479,6 +485,8 @@ void actArrow(Entity* my)
 									case SCARAB:
 									case GNOME:
 									case KOBOLD:
+									case COCKROACH:
+									case FLESHLING:
 										// small creatures, no penalty for low shot.
 										hitWeaklyOnTarget = false;
 										break;

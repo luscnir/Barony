@@ -1,11 +1,7 @@
 ﻿  actmonster.cpp
-  charclass.cpp
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\actmonster.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\actmonster.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\charclass.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\charclass.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\charclass.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\actmonster.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX'
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(649,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(651,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(683,35): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
@@ -28,8 +24,8 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(1131,4
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(1131,37): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(1131,30): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(3102,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(4305,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(4307,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(4305,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(4307,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(4746,51): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(4823,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6340,55): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
@@ -41,25 +37,25 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6428,5
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6428,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6453,55): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6453,30): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6469,32): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6469,32): warning C4244:         with
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6469,32): warning C4244:         [
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6469,32): warning C4244:             _Ty=int
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6469,32): warning C4244:         ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6485,33): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6485,33): warning C4244:         with
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6485,33): warning C4244:         [
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6485,33): warning C4244:             _Ty=int
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6485,33): warning C4244:         ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(7767,76): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(7824,81): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(9027,29): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(9768,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(11020,31): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(11024,30): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6469,31): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6469,31): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6469,31): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6469,31): warning C4244:             _Ty=int
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6469,31): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6594,32): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6594,32): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6594,32): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6594,32): warning C4244:             _Ty=int
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6594,32): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(7876,76): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(7933,81): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(9136,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(9877,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(11129,31): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(11133,30): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
   Generating code
-  6 of 6294 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  72 of 6294 functions ( 1.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    333 functions had inline decision re-evaluated but remain unchanged
+    385 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   barony.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\barony_test.exe

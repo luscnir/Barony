@@ -3671,7 +3671,7 @@ void actMonster(Entity* my)
 
 
 					if ( (entity->sprite == 274 || entity->sprite == 646 
-						|| entity->sprite == 650 || entity->sprite == 304) 
+						|| entity->sprite == 650 || entity->sprite == 304 || entity->sprite == 1121 )
 						&& entity->flags[PASSABLE] == true )
 					{
 						// LICH/LICH_FIRE/LICH_ICE/DEVIL
@@ -4266,13 +4266,13 @@ void actMonster(Entity* my)
 					}
 				}
 			}
-			if ( my->monsterMoveTime == 0 
+			if (my->monsterMoveTime == 0
 				&& (uidToEntity(myStats->leader_uid) == NULL || my->monsterAllyState == ALLY_STATE_DEFEND)
-				&& !myStats->EFFECTS[EFF_FEAR] 
+				&& !myStats->EFFECTS[EFF_FEAR]
 				&& !myStats->EFFECTS[EFF_DISORIENTED]
 				&& !isIllusionTaunt
 				&& !(monsterIsImmobileTurret(my, myStats))
-				&& myStats->type != DEVIL )
+				&& myStats->type != DEVIL)
 			{
 				std::vector<std::pair<int, int>> possibleCoordinates;
 				my->monsterMoveTime = rand() % 30;
@@ -4286,13 +4286,13 @@ void actMonster(Entity* my)
 				int upperY = std::min<int>(centerY + (map.height / 2), map.height);
 				//messagePlayer(0, "my x: %d, my y: %d, rangex: (%d-%d), rangey: (%d-%d)", centerX, centerY, lowerX, upperX, lowerY, upperY);
 
-				if ( myStats->type != SHOPKEEPER && (myStats->MISC_FLAGS[STAT_FLAG_NPC] == 0 && my->monsterAllyState == ALLY_STATE_DEFAULT) )
+				if (myStats->type != SHOPKEEPER && (myStats->MISC_FLAGS[STAT_FLAG_NPC] == 0 && my->monsterAllyState == ALLY_STATE_DEFAULT))
 				{
-					for ( x = lowerX; x < upperX; x++ )
+					for (x = lowerX; x < upperX; x++)
 					{
-						for ( y = lowerY; y < upperY; y++ )
+						for (y = lowerY; y < upperY; y++)
 						{
-							if ( !checkObstacle(x << 4, y << 4, my, NULL) )
+							if (!checkObstacle(x << 4, y << 4, my, NULL))
 							{
 								goodspots++;
 								possibleCoordinates.push_back(std::make_pair(x, y));
@@ -4302,13 +4302,13 @@ void actMonster(Entity* my)
 				}
 				else
 				{
-					for ( x = 0; x < map.width; x++ )
+					for (x = 0; x < map.width; x++)
 					{
-						for ( y = 0; y < map.height; y++ )
+						for (y = 0; y < map.height; y++)
 						{
-							if ( x << 4 >= my->monsterPathBoundaryXStart && x << 4 <= my->monsterPathBoundaryXEnd
-								&& y << 4 >= my->monsterPathBoundaryYStart && y << 4 <= my->monsterPathBoundaryYEnd )
-								if ( !checkObstacle(x << 4, y << 4, my, NULL) )
+							if (x << 4 >= my->monsterPathBoundaryXStart && x << 4 <= my->monsterPathBoundaryXEnd
+								&& y << 4 >= my->monsterPathBoundaryYStart && y << 4 <= my->monsterPathBoundaryYEnd)
+								if (!checkObstacle(x << 4, y << 4, my, NULL))
 								{
 									goodspots++;
 									possibleCoordinates.push_back(std::make_pair(x, y));
@@ -4316,7 +4316,7 @@ void actMonster(Entity* my)
 						}
 					}
 				}
-				if ( goodspots )
+				if (goodspots)
 				{
 					int chosenspot = rand() % goodspots;
 					int currentspot = 0;
@@ -4346,8 +4346,8 @@ void actMonster(Entity* my)
 							break;
 						}
 					}*/
-					path = generatePath( (int)floor(my->x / 16), (int)floor(my->y / 16), x, y, my, NULL );
-					if ( my->children.first != NULL )
+					path = generatePath((int)floor(my->x / 16), (int)floor(my->y / 16), x, y, my, NULL);
+					if (my->children.first != NULL)
 					{
 						list_RemoveNode(my->children.first);
 					}
@@ -4896,33 +4896,33 @@ timeToGoAgain:
 			}
 			else
 			{
-				// devil specific code
-				if ( !MONSTER_ATTACK || MONSTER_ATTACK == 4 )
+			// devil specific code
+				if (!MONSTER_ATTACK || MONSTER_ATTACK == 4)
 				{
 					my->monsterSpecialTimer++;
 					int difficulty = 40;
 					int numPlayers = 0;
 
-					for ( int c = 0; c < MAXPLAYERS; ++c )
+					for (int c = 0; c < MAXPLAYERS; ++c)
 					{
-						if ( players[c] && players[c]->entity )
+						if (players[c] && players[c]->entity)
 						{
 							++numPlayers;
 						}
 					}
-					if ( numPlayers > 0 )
+					if (numPlayers > 0)
 					{
 						difficulty /= numPlayers; // 40/20/13/10 - basically how long you get to wail on Baphy. Shorter is harder.
 					}
 
-					if ( my->monsterSpecialTimer > 60 || (devilstate == 72 && my->monsterSpecialTimer > difficulty))
+					if (my->monsterSpecialTimer > 60 || (devilstate == 72 && my->monsterSpecialTimer > difficulty))
 					{
-						if ( !devilstate ) // devilstate is 0 at the start of the fight and doesn't return to 0.
+						if (!devilstate) // devilstate is 0 at the start of the fight and doesn't return to 0.
 						{
-							if ( !MONSTER_ATTACK )
+							if (!MONSTER_ATTACK)
 							{
 								int c;
-								for ( c = 0; c < MAXPLAYERS; c++ )
+								for (c = 0; c < MAXPLAYERS; c++)
 								{
 									playSoundPlayer(c, 204, 64);
 								}
@@ -4933,41 +4933,41 @@ timeToGoAgain:
 								serverUpdateEntitySkill(my, 8);
 								serverUpdateEntitySkill(my, 9);
 								serverUpdateEntitySkill(my, 10);
-								for ( int c = 0; c < MAXPLAYERS; ++c )
+								for (int c = 0; c < MAXPLAYERS; ++c)
 								{
-									if ( players[c] && players[c]->entity )
+									if (players[c] && players[c]->entity)
 									{
 										my->devilSummonMonster(nullptr, SHADOW, 5, c);
 									}
 								}
 								my->devilSummonMonster(nullptr, DEMON, 5);
 							}
-							else if ( MONSTER_ATTACKTIME > 90 )
+							else if (MONSTER_ATTACKTIME > 90)
 							{
 								my->monsterState = MONSTER_STATE_DEVIL_TELEPORT; // devil teleport state
 							}
 						}
 						else
 						{
-							if ( !devilacted )
+							if (!devilacted)
 							{
-								switch ( devilstate )
+								switch (devilstate)
 								{
-									case 72:
-										my->monsterState = MONSTER_STATE_DEVIL_SUMMON; // devil summoning state
-										break;
-									case 73:
-										MONSTER_ATTACK = 5 + rand() % 2; // fireballs
-										break;
-									case 74:
-										my->monsterState = MONSTER_STATE_DEVIL_BOULDER; // devil boulder drop
-										break;
+								case 72:
+									my->monsterState = MONSTER_STATE_DEVIL_SUMMON; // devil summoning state
+									break;
+								case 73:
+									MONSTER_ATTACK = 5 + rand() % 2; // fireballs
+									break;
+								case 74:
+									my->monsterState = MONSTER_STATE_DEVIL_BOULDER; // devil boulder drop
+									break;
 								}
 								devilacted = 1;
 							}
 							else
 							{
-								if ( rand() % 2 && devilstate == 73 )
+								if (rand() % 2 && devilstate == 73)
 								{
 									MONSTER_ATTACK = 5 + rand() % 2; // more fireballs
 								}
@@ -4980,7 +4980,7 @@ timeToGoAgain:
 						my->monsterSpecialTimer = 0;
 					}
 				}
-				else if ( MONSTER_ATTACK == 5 || MONSTER_ATTACK == 6 )
+				else if (MONSTER_ATTACK == 5 || MONSTER_ATTACK == 6)
 				{
 					// throw fireballs
 					my->yaw = my->yaw + MONSTER_WEAPONYAW;
@@ -4988,27 +4988,27 @@ timeToGoAgain:
 					my->yaw = my->yaw - MONSTER_WEAPONYAW;
 
 					// let's throw one specifically aimed at our players to be mean.
-					if ( MONSTER_ATTACKTIME == 10 )
+					if (MONSTER_ATTACKTIME == 10)
 					{
 						real_t oldYaw = my->yaw;
 						tangent = atan2(entity->y - my->y, entity->x - my->x);
 						my->yaw = tangent;
 						Entity* fireball = castSpell(my->getUID(), &spell_fireball, true, false);
-						for ( c = 0; c < MAXPLAYERS; ++c )
+						for (c = 0; c < MAXPLAYERS; ++c)
 						{
-							if ( players[c] && players[c]->entity && entity != players[c]->entity )
+							if (players[c] && players[c]->entity && entity != players[c]->entity)
 							{
 								tangent = atan2(entity->y - my->y, entity->x - my->x);
 								real_t dir = oldYaw - tangent;
-								while ( dir >= PI )
+								while (dir >= PI)
 								{
 									dir -= PI * 2;
 								}
-								while ( dir < -PI )
+								while (dir < -PI)
 								{
 									dir += PI * 2;
 								}
-								if ( dir >= -7 * PI / 16 && dir <= 7 * PI / 16 )
+								if (dir >= -7 * PI / 16 && dir <= 7 * PI / 16)
 								{
 									my->yaw = tangent;
 									Entity* fireball = castSpell(my->getUID(), &spell_fireball, true, false);
@@ -5020,24 +5020,24 @@ timeToGoAgain:
 				}
 
 				// rotate monster
-				tangent = atan2( entity->y - my->y, entity->x - my->x );
+				tangent = atan2(entity->y - my->y, entity->x - my->x);
 				MONSTER_VELX = cos(tangent);
 				MONSTER_VELY = sin(tangent);
-				dir = my->yaw - atan2( MONSTER_VELY, MONSTER_VELX );
-				while ( dir >= PI )
+				dir = my->yaw - atan2(MONSTER_VELY, MONSTER_VELX);
+				while (dir >= PI)
 				{
 					dir -= PI * 2;
 				}
-				while ( dir < -PI )
+				while (dir < -PI)
 				{
 					dir += PI * 2;
 				}
 				my->yaw -= dir / 2;
-				while ( my->yaw < 0 )
+				while (my->yaw < 0)
 				{
 					my->yaw += 2 * PI;
 				}
-				while ( my->yaw >= 2 * PI )
+				while (my->yaw >= 2 * PI)
 				{
 					my->yaw -= 2 * PI;
 				}
@@ -6458,568 +6458,677 @@ timeToGoAgain:
 				lichFallenDie(my);
 			}
 		}
-		else if ( my->monsterState == MONSTER_STATE_DEVIL_TELEPORT )     // devil teleport state
+		else if (my->monsterState == MONSTER_STATE_DEVIL_TELEPORT)     // devil teleport state
 		{
-			my->flags[PASSABLE] = true;
-			my->yaw += .1; // rotate
-			if ( my->yaw >= PI * 2 )
-			{
-				my->yaw -= PI * 2;
-			}
-			my->z = std::min<int>(my->z + 1, 64); // descend
-			MONSTER_ATTACK = 4;
-			MONSTER_ATTACKTIME = 0;
-			MONSTER_ARMBENDED = 1;
-			if ( my->monsterSpecialTimer == 0 )
-			{
-				serverUpdateEntitySkill(my, 8);
-				serverUpdateEntitySkill(my, 9);
-				serverUpdateEntitySkill(my, 0);
-			}
-			++my->monsterSpecialTimer;
+		my->flags[PASSABLE] = true;
+		my->yaw += .1; // rotate
+		if (my->yaw >= PI * 2)
+		{
+			my->yaw -= PI * 2;
 		}
-		else if ( my->monsterState == MONSTER_STATE_DEVIL_RISING )     // devil rising state (post-teleport)
+		my->z = std::min<int>(my->z + 1, 64); // descend
+		MONSTER_ATTACK = 4;
+		MONSTER_ATTACKTIME = 0;
+		MONSTER_ARMBENDED = 1;
+		if (my->monsterSpecialTimer == 0)
 		{
-			if ( my->monsterSpecialTimer <= 0 )
+			serverUpdateEntitySkill(my, 8);
+			serverUpdateEntitySkill(my, 9);
+			serverUpdateEntitySkill(my, 10);
+		}
+		++my->monsterSpecialTimer;
+		if (my->z >= 64)
+		{
+			node_t* node;
+			int c = 0;
+			for (node = map.entities->first; node != nullptr; node = node->next)
 			{
-				my->z = std::max<int>(my->z - 1, -4); // ascend
-			}
-			else
-			{
-				--my->monsterSpecialTimer;
-				if ( my->monsterSpecialTimer <= 0 )
+				Entity* entity = (Entity*)node->element;
+				if (entity->behavior == &actDevilTeleport)
 				{
-					if ( myStats->HP > 0 )
+					if (entity->x == my->x && entity->y == my->y)
 					{
-						my->flags[PASSABLE] = false;
+						continue;
 					}
-					node_t* node;
-					for ( node = map.creatures->first; node != nullptr; node = node->next ) //Since it only looks at entities that have stats, only creatures can have stats; don't iterate map.entities.
+					switch (entity->sprite)
 					{
-						Entity* entity = (Entity*)node->element;
-						if ( entity == my )
+					case 72:
+						if (devilstate == 74)
+						{
+							c++;
+						}
+						continue;
+					case 73:
+						if (devilstate == 0 || devilstate == 72)
+						{
+							c++;
+						}
+						continue;
+					case 74:
+						if (devilstate == 73)
+						{
+							c++;
+						}
+						continue;
+					default:
+						continue;
+					}
+				}
+			}
+			if (c)
+			{
+				int i = rand() % c;
+				c = 0;
+				for (node = map.entities->first; node != nullptr; node = node->next)
+				{
+					Entity* entity = (Entity*)node->element;
+					if (entity->behavior == &actDevilTeleport)
+					{
+						if (entity->x == my->x && entity->y == my->y)
 						{
 							continue;
 						}
-						if ( entityInsideEntity(my, entity) )
+						switch (entity->sprite)
 						{
-							Stat* stats = entity->getStats();
-							if ( stats )
+						case 72:
+							if (devilstate == 74)
 							{
-								if ( stats->HP > 0 )
+								if (c == i)
 								{
-									stats->HP = 0;
+									break;
 								}
+								else
+								{
+									c++;
+									continue;
+								}
+							}
+							continue;
+						case 73:
+							if (devilstate == 0 || devilstate == 72)
+							{
+								if (c == i)
+								{
+									break;
+								}
+								else
+								{
+									c++;
+									continue;
+								}
+							}
+							continue;
+						case 74:
+							if (devilstate == 73)
+							{
+								if (c == i)
+								{
+									break;
+								}
+								else
+								{
+									c++;
+									continue;
+								}
+							}
+							continue;
+						default:
+							continue;
+						}
+						my->x = entity->x;
+						my->y = entity->y;
+						devilstate = entity->sprite;
+						devilacted = 0;
+						break;
+					}
+				}
+			}
+			my->monsterSpecialTimer = 30;
+			my->monsterState = MONSTER_STATE_DEVIL_RISING;
+			}
+		}
+		else if (my->monsterState == MONSTER_STATE_DEVIL_RISING)     // devil rising state (post-teleport)
+		{
+		if (my->monsterSpecialTimer <= 0)
+		{
+			my->z = std::max<int>(my->z - 1, -4); // ascend
+		}
+		else
+		{
+			--my->monsterSpecialTimer;
+			if (my->monsterSpecialTimer <= 0)
+			{
+				if (myStats->HP > 0)
+				{
+					my->flags[PASSABLE] = false;
+				}
+				node_t* node;
+				for (node = map.creatures->first; node != nullptr; node = node->next) //Since it only looks at entities that have stats, only creatures can have stats; don't iterate map.entities.
+				{
+					Entity* entity = (Entity*)node->element;
+					if (entity == my)
+					{
+						continue;
+					}
+					if (entityInsideEntity(my, entity))
+					{
+						Stat* stats = entity->getStats();
+						if (stats)
+						{
+							if (stats->HP > 0)
+							{
+								stats->HP = 0;
 							}
 						}
 					}
 				}
 			}
-			if ( !devilroar )
+		}
+		if (!devilroar)
+		{
+			if (my->z <= -4)
 			{
-				if ( my->z <= -4 )
+				int j = rand() % 5;
+				int c;
+				for (c = 0; c < MAXPLAYERS; c++)
 				{
-					int j = rand() % 5;
-					int c;
-					for ( c = 0; c < MAXPLAYERS; c++ )
-					{
-						playSoundPlayer(c, 204 + j, 64);
-					}
-					playSoundEntity(my, 204 + j, 128);
-					devilroar = 1;
-					MONSTER_ATTACK = 4;
-					MONSTER_ATTACKTIME = 0;
-					MONSTER_ARMBENDED = 1;
-					serverUpdateEntitySkill(my, 8);
-					serverUpdateEntitySkill(my, 9);
-					serverUpdateEntitySkill(my, 10);
+					playSoundPlayer(c, 204 + j, 64);
 				}
-				else
-				{
-					my->yaw += .1; // rotate
-					if ( my->yaw >= PI * 2 )
-					{
-						my->yaw -= PI * 2;
-					}
-				}
+				playSoundEntity(my, 204 + j, 128);
+				devilroar = 1;
+				MONSTER_ATTACK = 4;
+				MONSTER_ATTACKTIME = 0;
+				MONSTER_ARMBENDED = 1;
+				serverUpdateEntitySkill(my, 8);
+				serverUpdateEntitySkill(my, 9);
+				serverUpdateEntitySkill(my, 10);
 			}
 			else
 			{
-				node_t* tempNode;
-				Entity* playertotrack = nullptr;
-				for ( tempNode = map.creatures->first; tempNode != nullptr; tempNode = tempNode->next ) //Only inspects players, so don't iterate map.entities.
+				my->yaw += .1; // rotate
+				if (my->yaw >= PI * 2)
 				{
-					Entity* tempEntity = (Entity*)tempNode->element;
-					double lowestdist = 5000;
-					if ( tempEntity->behavior == &actPlayer )
-					{
-						double disttoplayer = entityDist(my, tempEntity);
-						if ( disttoplayer < lowestdist )
-						{
-							playertotrack = tempEntity;
-						}
-					}
-				}
-				if ( playertotrack )
-				{
-					my->monsterTarget = playertotrack->getUID();
-					my->monsterTargetX = playertotrack->x;
-					my->monsterTargetY = playertotrack->y;
-					MONSTER_VELX = my->monsterTargetX - my->x;
-					MONSTER_VELY = my->monsterTargetY - my->y;
-				}
-				else
-				{
-					MONSTER_VELX = 0;
-					MONSTER_VELY = 0;
-				}
-
-				// rotate monster
-				dir = my->yaw - atan2( MONSTER_VELY, MONSTER_VELX );
-
-				// To prevent the Entity's position from being updated by dead reckoning on the CLient, set the velocity to 0 after usage
-				MONSTER_VELX = 0.0;
-				MONSTER_VELY = 0.0;
-
-				while ( dir >= PI )
-				{
-					dir -= PI * 2;
-				}
-				while ( dir < -PI )
-				{
-					dir += PI * 2;
-				}
-				my->yaw -= dir / 2;
-				while ( my->yaw < 0 )
-				{
-					my->yaw += 2 * PI;
-				}
-				while ( my->yaw >= 2 * PI )
-				{
-					my->yaw -= 2 * PI;
-				}
-
-				if ( MONSTER_ATTACKTIME > 60 )
-				{
-					my->monsterState = MONSTER_STATE_ATTACK;
-					MONSTER_ATTACK = 0;
-					MONSTER_ATTACKTIME = 0;
-					MONSTER_ARMBENDED = 0;
-					serverUpdateEntitySkill(my, 8);
-					serverUpdateEntitySkill(my, 9);
-					serverUpdateEntitySkill(my, 10);
-					devilroar = 0;
-					MONSTER_VELX = 0;
-					MONSTER_VELY = 0;
+					my->yaw -= PI * 2;
 				}
 			}
 		}
-		else if ( my->monsterState == MONSTER_STATE_DEVIL_SUMMON )     // devil summoning state
+		else
 		{
-			MONSTER_ATTACK = 4;
-			MONSTER_ATTACKTIME = 0;
-			if ( my->monsterSpecialTimer == 0 )
+			node_t* tempNode;
+			Entity* playertotrack = nullptr;
+			for (tempNode = map.creatures->first; tempNode != nullptr; tempNode = tempNode->next) //Only inspects players, so don't iterate map.entities.
 			{
-				serverUpdateEntitySkill(my, 8);
-				serverUpdateEntitySkill(my, 9);
-			}
-			++my->monsterSpecialTimer;
-			if ( my->monsterSpecialTimer == 20 ) // start the spawn animations
-			{
-				Monster creature = NOTHING;
-				int numToSpawn = 3;
-				int numPlayers = 1;
-				std::vector<int> alivePlayers;
-				for ( int c = 1; c < MAXPLAYERS; ++c )
+				Entity* tempEntity = (Entity*)tempNode->element;
+				double lowestdist = 5000;
+				if (tempEntity->behavior == &actPlayer)
 				{
-					if ( !client_disconnected[c] )
+					double disttoplayer = entityDist(my, tempEntity);
+					if (disttoplayer < lowestdist)
 					{
-						++numToSpawn;
-						++numPlayers;
-						if ( players[c] && players[c]->entity )
-						{
-							alivePlayers.push_back(c);
-						}
+						playertotrack = tempEntity;
 					}
 				}
+			}
+			if (playertotrack)
+			{
+				my->monsterTarget = playertotrack->getUID();
+				my->monsterTargetX = playertotrack->x;
+				my->monsterTargetY = playertotrack->y;
+				MONSTER_VELX = my->monsterTargetX - my->x;
+				MONSTER_VELY = my->monsterTargetY - my->y;
+			}
+			else
+			{
+				MONSTER_VELX = 0;
+				MONSTER_VELY = 0;
+			}
 
-				int spawnedShadows = 0;
-				while ( numToSpawn > 0 )
+			// rotate monster
+			dir = my->yaw - atan2(MONSTER_VELY, MONSTER_VELX);
+
+			// To prevent the Entity's position from being updated by dead reckoning on the CLient, set the velocity to 0 after usage
+			MONSTER_VELX = 0.0;
+			MONSTER_VELY = 0.0;
+
+			while (dir >= PI)
+			{
+				dir -= PI * 2;
+			}
+			while (dir < -PI)
+			{
+				dir += PI * 2;
+			}
+			my->yaw -= dir / 2;
+			while (my->yaw < 0)
+			{
+				my->yaw += 2 * PI;
+			}
+			while (my->yaw >= 2 * PI)
+			{
+				my->yaw -= 2 * PI;
+			}
+
+			if (MONSTER_ATTACKTIME > 60)
+			{
+				my->monsterState = MONSTER_STATE_ATTACK;
+				MONSTER_ATTACK = 0;
+				MONSTER_ATTACKTIME = 0;
+				MONSTER_ARMBENDED = 0;
+				serverUpdateEntitySkill(my, 8);
+				serverUpdateEntitySkill(my, 9);
+				serverUpdateEntitySkill(my, 10);
+				devilroar = 0;
+				MONSTER_VELX = 0;
+				MONSTER_VELY = 0;
+			}
+		}
+		}
+		else if (my->monsterState == MONSTER_STATE_DEVIL_SUMMON)     // devil summoning state
+		{
+		MONSTER_ATTACK = 4;
+		MONSTER_ATTACKTIME = 0;
+		if (my->monsterSpecialTimer == 0)
+		{
+			serverUpdateEntitySkill(my, 8);
+			serverUpdateEntitySkill(my, 9);
+		}
+		++my->monsterSpecialTimer;
+		if (my->monsterSpecialTimer == 20) // start the spawn animations
+		{
+			Monster creature = NOTHING;
+			int numToSpawn = 3;
+			int numPlayers = 1;
+			std::vector<int> alivePlayers;
+			for (int c = 1; c < MAXPLAYERS; ++c)
+			{
+				if (!client_disconnected[c])
 				{
-					if ( devilsummonedtimes % 2 == 1 && my->devilGetNumMonstersInArena(SHADOW) + spawnedShadows < numPlayers ) 
+					++numToSpawn;
+					++numPlayers;
+					if (players[c] && players[c]->entity)
 					{
-						// odd numbered spawns.
-						// let's make some shadows.
-						if ( !alivePlayers.empty() )
-						{
-							int vectorEntry = rand() % alivePlayers.size();
-							my->devilSummonMonster(nullptr, SHADOW, 5, alivePlayers[vectorEntry]);
-							alivePlayers.erase(alivePlayers.begin() + vectorEntry);
-						}
-						else
-						{
-							my->devilSummonMonster(nullptr, SHADOW, 9);
-						}
-						++spawnedShadows;
+						alivePlayers.push_back(c);
+					}
+				}
+			}
+
+			int spawnedShadows = 0;
+			while (numToSpawn > 0)
+			{
+				if (devilsummonedtimes % 2 == 1 && my->devilGetNumMonstersInArena(SHADOW) + spawnedShadows < numPlayers)
+				{
+					// odd numbered spawns.
+					// let's make some shadows.
+					if (!alivePlayers.empty())
+					{
+						int vectorEntry = rand() % alivePlayers.size();
+						my->devilSummonMonster(nullptr, SHADOW, 5, alivePlayers[vectorEntry]);
+						alivePlayers.erase(alivePlayers.begin() + vectorEntry);
 					}
 					else
 					{
-						switch ( rand() % 5 )
-						{
-							case 0:
-							case 1:
-								my->devilSummonMonster(nullptr, CREATURE_IMP, 9);
-								break;
-							case 2:
-							case 3:
-							case 4:
-								my->devilSummonMonster(nullptr, DEMON, 7);
-								break;
-						}
+						my->devilSummonMonster(nullptr, SHADOW, 9);
 					}
-					--numToSpawn;
+					++spawnedShadows;
 				}
-				++devilsummonedtimes;
-			}
-			else if ( my->monsterSpecialTimer > 100 ) // end this state.
-			{
-				MONSTER_ATTACK = 0;
-				MONSTER_ATTACKTIME = 0;
-				serverUpdateEntitySkill(my, 8);
-				serverUpdateEntitySkill(my, 9);
-				my->monsterSpecialTimer = 0;
-				my->monsterState = MONSTER_STATE_ATTACK;
-				node_t* tempNode;
-				Entity* playertotrack = nullptr;
-				for ( tempNode = map.creatures->first; tempNode != nullptr; tempNode = tempNode->next ) //Only inspects players, so don't iterate map.entities. Technically, only needs to iterate through the players[] array, eh?
+				else
 				{
-					Entity* tempEntity = (Entity*)tempNode->element;
-					double lowestdist = 5000;
-					if ( tempEntity->behavior == &actPlayer )
+					switch (rand() % 5)
 					{
-						double disttoplayer = entityDist(my, tempEntity);
-						if ( disttoplayer < lowestdist )
-						{
-							playertotrack = tempEntity;
-						}
+					case 0:
+					case 1:
+						my->devilSummonMonster(nullptr, CREATURE_IMP, 9);
+						break;
+					case 2:
+					case 3:
+					case 4:
+						my->devilSummonMonster(nullptr, DEMON, 7);
+						break;
 					}
 				}
-				if ( playertotrack )
+				--numToSpawn;
+			}
+			++devilsummonedtimes;
+		}
+		else if (my->monsterSpecialTimer > 100) // end this state.
+		{
+			MONSTER_ATTACK = 0;
+			MONSTER_ATTACKTIME = 0;
+			serverUpdateEntitySkill(my, 8);
+			serverUpdateEntitySkill(my, 9);
+			my->monsterSpecialTimer = 0;
+			my->monsterState = MONSTER_STATE_ATTACK;
+			node_t* tempNode;
+			Entity* playertotrack = nullptr;
+			for (tempNode = map.creatures->first; tempNode != nullptr; tempNode = tempNode->next) //Only inspects players, so don't iterate map.entities. Technically, only needs to iterate through the players[] array, eh?
+			{
+				Entity* tempEntity = (Entity*)tempNode->element;
+				double lowestdist = 5000;
+				if (tempEntity->behavior == &actPlayer)
 				{
-					my->monsterTarget = playertotrack->getUID();
-					my->monsterTargetX = playertotrack->x;
-					my->monsterTargetY = playertotrack->y;
+					double disttoplayer = entityDist(my, tempEntity);
+					if (disttoplayer < lowestdist)
+					{
+						playertotrack = tempEntity;
+					}
 				}
+			}
+			if (playertotrack)
+			{
+				my->monsterTarget = playertotrack->getUID();
+				my->monsterTargetX = playertotrack->x;
+				my->monsterTargetY = playertotrack->y;
 			}
 		}
-		else if ( my->monsterState == MONSTER_STATE_DEVIL_BOULDER )     // devil boulder spawn state
+		}
+		else if (my->monsterState == MONSTER_STATE_DEVIL_BOULDER)     // devil boulder spawn state
 		{
-			int angle = -1;
-			if ( (int)(my->x / 16) == 14 && (int)(my->y / 16) == 32 )
-			{
-				angle = 0;
-			}
-			else if ( (int)(my->x / 16) == 32 && (int)(my->y / 16) == 14 )
-			{
-				angle = 1;
-			}
-			else if ( (int)(my->x / 16) == 50 && (int)(my->y / 16) == 32 )
-			{
-				angle = 2;
-			}
-			else if ( (int)(my->x / 16) == 32 && (int)(my->y / 16) == 50 )
-			{
-				angle = 3;
-			}
-			std::unordered_set<int> lavalLocationsXY = { 22,23,24,31,32,33,40,41,42 };
-			int numLavaBoulders = 0;
+		int angle = -1;
+		if ((int)(my->x / 16) == 14 && (int)(my->y / 16) == 32)
+		{
+			angle = 0;
+		}
+		else if ((int)(my->x / 16) == 32 && (int)(my->y / 16) == 14)
+		{
+			angle = 1;
+		}
+		else if ((int)(my->x / 16) == 50 && (int)(my->y / 16) == 32)
+		{
+			angle = 2;
+		}
+		else if ((int)(my->x / 16) == 32 && (int)(my->y / 16) == 50)
+		{
+			angle = 3;
+		}
+		std::unordered_set<int> lavalLocationsXY = { 22,23,24,31,32,33,40,41,42 };
+		int numLavaBoulders = 0;
 
-			my->yaw = angle * PI / 2;
-			my->monsterSpecialTimer++;
-			if ( my->monsterSpecialTimer == 10 )
-			{
-				MONSTER_ATTACK = 1;
-				MONSTER_ATTACKTIME = 0;
-				serverUpdateEntitySkill(my, 8);
-				serverUpdateEntitySkill(my, 9);
+		my->yaw = angle * PI / 2;
+		my->monsterSpecialTimer++;
+		if (my->monsterSpecialTimer == 10)
+		{
+			MONSTER_ATTACK = 1;
+			MONSTER_ATTACKTIME = 0;
+			serverUpdateEntitySkill(my, 8);
+			serverUpdateEntitySkill(my, 9);
 
-				my->castOrbitingMagicMissile(SPELL_BLEED, 32.0, 0.0, 300);
-				my->castOrbitingMagicMissile(SPELL_BLEED, 32.0, 2 * PI / 5, 300);
-				my->castOrbitingMagicMissile(SPELL_BLEED, 32.0, 4 * PI / 5, 300);
-				my->castOrbitingMagicMissile(SPELL_BLEED, 32.0, 6 * PI / 5, 300);
-				my->castOrbitingMagicMissile(SPELL_BLEED, 32.0, 8 * PI / 5, 300);
-			}
-			if ( my->monsterSpecialTimer == 40 )
+			my->castOrbitingMagicMissile(SPELL_BLEED, 32.0, 0.0, 300);
+			my->castOrbitingMagicMissile(SPELL_BLEED, 32.0, 2 * PI / 5, 300);
+			my->castOrbitingMagicMissile(SPELL_BLEED, 32.0, 4 * PI / 5, 300);
+			my->castOrbitingMagicMissile(SPELL_BLEED, 32.0, 6 * PI / 5, 300);
+			my->castOrbitingMagicMissile(SPELL_BLEED, 32.0, 8 * PI / 5, 300);
+		}
+		if (my->monsterSpecialTimer == 40)
+		{
+			int c;
+			double oyaw = my->yaw;
+			for (c = 0; c < 12; c++)
 			{
-				int c;
-				double oyaw = my->yaw;
-				for ( c = 0; c < 12; c++ )
+				my->yaw = ((double)c + ((rand() % 100) / 100.f)) * (PI * 2) / 12.f;
+				castSpell(my->getUID(), &spell_fireball, true, false);
+			}
+			my->yaw = oyaw;
+			for (c = 0; c < 7; ++c)
+			{
+				if (c == 6 && (angle == 1 || angle == 2))
 				{
-					my->yaw = ((double)c + ((rand() % 100) / 100.f)) * (PI * 2) / 12.f;
-					castSpell(my->getUID(), &spell_fireball, true, false);
+					continue;
 				}
-				my->yaw = oyaw;
-				for ( c = 0; c < 7; ++c )
+				Entity* entity = newEntity(245, 1, map.entities, nullptr); // boulder
+				entity->parent = my->getUID();
+				if (angle == 0)
 				{
-					if ( c == 6 && (angle == 1 || angle == 2) )
-					{
-						continue;
-					}
-					Entity* entity = newEntity(245, 1, map.entities, nullptr); // boulder
-					entity->parent = my->getUID();
-					if ( angle == 0 )
-					{
-						entity->x = (20 << 4) + 8;
-						entity->y = (32 << 4) + 8 + 32 * c;
-					}
-					else if ( angle == 1 )
-					{
-						entity->x = (20 << 4) + 8 + 32 * c;
-						entity->y = (20 << 4) + 8;
-					}
-					else if ( angle == 2 )
-					{
-						entity->x = (44 << 4) + 8;
-						entity->y = (20 << 4) + 8 + 32 * c;
-					}
-					else if ( angle == 3 )
-					{
-						entity->x = (32 << 4) + 8 + 32 * c;
-						entity->y = (44 << 4) + 8;
-					}
-
-					if ( lavalLocationsXY.find(static_cast<int>(entity->x / 16)) != lavalLocationsXY.end()
-						|| lavalLocationsXY.find(static_cast<int>(entity->y / 16)) != lavalLocationsXY.end()
-						|| myStats->HP < myStats->MAXHP * 0.5 )
-					{
-						// will roll over lava or Baphy < 50% HP
-						int chance = 4;
-						if ( myStats->HP < myStats->MAXHP * 0.25 )
-						{
-							chance = 1;
-						}
-						else if ( myStats->HP < myStats->MAXHP * 0.5 )
-						{
-							chance = 2;
-						}
-						else if ( myStats->HP < myStats->MAXHP * 0.75 )
-						{
-							chance = 3;
-						}
-
-						if ( rand() % chance == 0 || (numLavaBoulders < 2 && rand() % 2) )
-						{
-							entity->sprite = 989; // lava boulder.
-							++numLavaBoulders;
-						}
-					}
-
-					entity->z = -64;
-					entity->yaw = angle * (PI / 2.f);
-					entity->sizex = 7;
-					entity->sizey = 7;
-					entity->behavior = &actBoulder;
-					entity->flags[UPDATENEEDED] = true;
-					entity->flags[PASSABLE] = true;
+					entity->x = (20 << 4) + 8;
+					entity->y = (32 << 4) + 8 + 32 * c;
 				}
-			}
-			if ( my->monsterSpecialTimer == 60 )
-			{
-				MONSTER_ATTACK = 2;
-				MONSTER_ATTACKTIME = 0;
-				serverUpdateEntitySkill(my, 8);
-				serverUpdateEntitySkill(my, 9);
-			}
-			if ( my->monsterSpecialTimer == 90 )
-			{
-				int c;
-				double oyaw = my->yaw;
-				for ( c = 0; c < 12; ++c )
+				else if (angle == 1)
 				{
-					my->yaw = ((double)c + ((rand() % 100) / 100.f)) * (PI * 2) / 12.f;
-					castSpell(my->getUID(), &spell_fireball, true, false);
+					entity->x = (20 << 4) + 8 + 32 * c;
+					entity->y = (20 << 4) + 8;
 				}
-				for ( c = 0; c < MAXPLAYERS; ++c )
+				else if (angle == 2)
 				{
-					my->devilBoulderSummonIfPlayerIsHiding(c);
+					entity->x = (44 << 4) + 8;
+					entity->y = (20 << 4) + 8 + 32 * c;
 				}
-				my->yaw = oyaw;
-
-				for ( c = 0; c < 7; ++c )
+				else if (angle == 3)
 				{
-					if ( c == 6 && (angle == 0 || angle == 3) )
-					{
-						continue;
-					}
-					Entity* entity = newEntity(245, 1, map.entities, nullptr); // boulder
-					entity->parent = my->getUID();
-					if ( angle == 0 )
-					{
-						entity->x = (20 << 4) + 8;
-						entity->y = (20 << 4) + 8 + 32 * c;
-					}
-					else if ( angle == 1 )
-					{
-						entity->x = (32 << 4) + 8 + 32 * c;
-						entity->y = (20 << 4) + 8;
-					}
-					else if ( angle == 2 )
-					{
-						entity->x = (44 << 4) + 8;
-						entity->y = (32 << 4) + 8 + 32 * c;
-					}
-					else if ( angle == 3 )
-					{
-						entity->x = (20 << 4) + 8 + 32 * c;
-						entity->y = (44 << 4) + 8;
-					}
-
-					if ( lavalLocationsXY.find(static_cast<int>(entity->x / 16)) != lavalLocationsXY.end()
-						|| lavalLocationsXY.find(static_cast<int>(entity->y / 16)) != lavalLocationsXY.end() 
-						|| myStats->HP < myStats->MAXHP * 0.5 )
-					{
-						// will roll over lava or Baphy < 50% HP
-						int chance = 4;
-						if ( myStats->HP < myStats->MAXHP * 0.25 )
-						{
-							chance = 1;
-						}
-						else if ( myStats->HP < myStats->MAXHP * 0.5 )
-						{
-							chance = 2;
-						}
-						else if ( myStats->HP < myStats->MAXHP * 0.75 )
-						{
-							chance = 3;
-						}
-
-						if ( rand() % chance == 0 || (numLavaBoulders < 2 && rand() % 2) )
-						{
-							entity->sprite = 989; // lava boulder.
-							++numLavaBoulders;
-						}
-					}
-
-					entity->z = -64;
-					entity->yaw = angle * (PI / 2.f);
-					entity->sizex = 7;
-					entity->sizey = 7;
-					entity->behavior = &actBoulder;
-					entity->flags[UPDATENEEDED] = true;
-					entity->flags[PASSABLE] = true;
+					entity->x = (32 << 4) + 8 + 32 * c;
+					entity->y = (44 << 4) + 8;
 				}
-			}
-			if ( my->monsterSpecialTimer == 180 )
-			{
-				MONSTER_ATTACK = 3;
-				MONSTER_ATTACKTIME = 0;
-				serverUpdateEntitySkill(my, 8);
-				serverUpdateEntitySkill(my, 9);
-			}
-			if ( my->monsterSpecialTimer == 210 )
-			{
-				int c;
-				double oyaw = my->yaw;
-				for ( c = 0; c < 12; ++c )
+
+				if (lavalLocationsXY.find(static_cast<int>(entity->x / 16)) != lavalLocationsXY.end()
+					|| lavalLocationsXY.find(static_cast<int>(entity->y / 16)) != lavalLocationsXY.end()
+					|| myStats->HP < myStats->MAXHP * 0.5)
 				{
-					my->yaw = ((double)c + ((rand() % 100) / 100.f)) * (PI * 2) / 12.f;
-					castSpell(my->getUID(), &spell_fireball, true, false);
-				}
-				for ( c = 0; c < MAXPLAYERS; ++c )
-				{
-					my->devilBoulderSummonIfPlayerIsHiding(c);
-				}
-				my->yaw = oyaw;
-				for ( c = 0; c < 12; ++c )
-				{
-					Entity* entity = newEntity(245, 1, map.entities, nullptr); // boulder
-					entity->parent = my->getUID();
-					if ( angle == 0 )
+					// will roll over lava or Baphy < 50% HP
+					int chance = 4;
+					if (myStats->HP < myStats->MAXHP * 0.25)
 					{
-						entity->x = (20 << 4) + 8;
-						entity->y = (21 << 4) + 8 + 32 * c;
+						chance = 1;
 					}
-					else if ( angle == 1 )
+					else if (myStats->HP < myStats->MAXHP * 0.5)
 					{
-						entity->x = (21 << 4) + 8 + 32 * c;
-						entity->y = (20 << 4) + 8;
+						chance = 2;
 					}
-					else if ( angle == 2 )
+					else if (myStats->HP < myStats->MAXHP * 0.75)
 					{
-						entity->x = (44 << 4) + 8;
-						entity->y = (21 << 4) + 8 + 32 * c;
-					}
-					else if ( angle == 3 )
-					{
-						entity->x = (21 << 4) + 8 + 32 * c;
-						entity->y = (44 << 4) + 8;
+						chance = 3;
 					}
 
-					if ( lavalLocationsXY.find(static_cast<int>(entity->x / 16)) != lavalLocationsXY.end()
-						|| lavalLocationsXY.find(static_cast<int>(entity->y / 16)) != lavalLocationsXY.end()
-						|| myStats->HP < myStats->MAXHP * 0.5 )
+					if (rand() % chance == 0 || (numLavaBoulders < 2 && rand() % 2))
 					{
-						// will roll over lava or Baphy < 50% HP
-						int chance = 4;
-						if ( myStats->HP < myStats->MAXHP * 0.25 )
-						{
-							chance = 1;
-						}
-						else if ( myStats->HP < myStats->MAXHP * 0.5 )
-						{
-							chance = 2;
-						}
-						else if ( myStats->HP < myStats->MAXHP * 0.75 )
-						{
-							chance = 3;
-						}
-
-						if ( rand() % chance == 0 || (numLavaBoulders < 3 && rand() % 2) )
-						{
-							entity->sprite = 989; // lava boulder.
-							++numLavaBoulders;
-						}
-					}
-
-					entity->z = -64;
-					entity->yaw = angle * (PI / 2.f);
-					entity->sizex = 7;
-					entity->sizey = 7;
-					entity->behavior = &actBoulder;
-					entity->flags[UPDATENEEDED] = true;
-					entity->flags[PASSABLE] = true;
-				}
-			}
-			if ( my->monsterSpecialTimer == 300 )   // 300 blaze it I guess
-			{
-				MONSTER_ATTACK = 0;
-				MONSTER_ATTACKTIME = 0;
-				serverUpdateEntitySkill(my, 8);
-				serverUpdateEntitySkill(my, 9);
-				my->monsterSpecialTimer = 0;
-				my->monsterState = MONSTER_STATE_ATTACK;
-				node_t* tempNode;
-				Entity* playertotrack = nullptr;
-				for ( tempNode = map.creatures->first; tempNode != nullptr; tempNode = tempNode->next ) //Iterate map.creatures, since only inspecting players, not all entities. Technically should just iterate over players[]?
-				{
-					Entity* tempEntity = (Entity*)tempNode->element;
-					double lowestdist = 5000;
-					if ( tempEntity->behavior == &actPlayer )
-					{
-						double disttoplayer = entityDist(my, tempEntity);
-						if ( disttoplayer < lowestdist )
-						{
-							playertotrack = tempEntity;
-						}
+						entity->sprite = 989; // lava boulder.
+						++numLavaBoulders;
 					}
 				}
-				if ( playertotrack )
+
+				entity->z = -64;
+				entity->yaw = angle * (PI / 2.f);
+				entity->sizex = 7;
+				entity->sizey = 7;
+				entity->behavior = &actBoulder;
+				entity->flags[UPDATENEEDED] = true;
+				entity->flags[PASSABLE] = true;
+			}
+		}
+		if (my->monsterSpecialTimer == 60)
+		{
+			MONSTER_ATTACK = 2;
+			MONSTER_ATTACKTIME = 0;
+			serverUpdateEntitySkill(my, 8);
+			serverUpdateEntitySkill(my, 9);
+		}
+		if (my->monsterSpecialTimer == 90)
+		{
+			int c;
+			double oyaw = my->yaw;
+			for (c = 0; c < 12; ++c)
+			{
+				my->yaw = ((double)c + ((rand() % 100) / 100.f)) * (PI * 2) / 12.f;
+				castSpell(my->getUID(), &spell_fireball, true, false);
+			}
+			for (c = 0; c < MAXPLAYERS; ++c)
+			{
+				my->devilBoulderSummonIfPlayerIsHiding(c);
+			}
+			my->yaw = oyaw;
+
+			for (c = 0; c < 7; ++c)
+			{
+				if (c == 6 && (angle == 0 || angle == 3))
 				{
-					my->monsterTarget = playertotrack->getUID();
-					my->monsterTargetX = playertotrack->x;
-					my->monsterTargetY = playertotrack->y;
+					continue;
+				}
+				Entity* entity = newEntity(245, 1, map.entities, nullptr); // boulder
+				entity->parent = my->getUID();
+				if (angle == 0)
+				{
+					entity->x = (20 << 4) + 8;
+					entity->y = (20 << 4) + 8 + 32 * c;
+				}
+				else if (angle == 1)
+				{
+					entity->x = (32 << 4) + 8 + 32 * c;
+					entity->y = (20 << 4) + 8;
+				}
+				else if (angle == 2)
+				{
+					entity->x = (44 << 4) + 8;
+					entity->y = (32 << 4) + 8 + 32 * c;
+				}
+				else if (angle == 3)
+				{
+					entity->x = (20 << 4) + 8 + 32 * c;
+					entity->y = (44 << 4) + 8;
+				}
+
+				if (lavalLocationsXY.find(static_cast<int>(entity->x / 16)) != lavalLocationsXY.end()
+					|| lavalLocationsXY.find(static_cast<int>(entity->y / 16)) != lavalLocationsXY.end()
+					|| myStats->HP < myStats->MAXHP * 0.5)
+				{
+					// will roll over lava or Baphy < 50% HP
+					int chance = 4;
+					if (myStats->HP < myStats->MAXHP * 0.25)
+					{
+						chance = 1;
+					}
+					else if (myStats->HP < myStats->MAXHP * 0.5)
+					{
+						chance = 2;
+					}
+					else if (myStats->HP < myStats->MAXHP * 0.75)
+					{
+						chance = 3;
+					}
+
+					if (rand() % chance == 0 || (numLavaBoulders < 2 && rand() % 2))
+					{
+						entity->sprite = 989; // lava boulder.
+						++numLavaBoulders;
+					}
+				}
+
+				entity->z = -64;
+				entity->yaw = angle * (PI / 2.f);
+				entity->sizex = 7;
+				entity->sizey = 7;
+				entity->behavior = &actBoulder;
+				entity->flags[UPDATENEEDED] = true;
+				entity->flags[PASSABLE] = true;
+			}
+		}
+		if (my->monsterSpecialTimer == 180)
+		{
+			MONSTER_ATTACK = 3;
+			MONSTER_ATTACKTIME = 0;
+			serverUpdateEntitySkill(my, 8);
+			serverUpdateEntitySkill(my, 9);
+		}
+		if (my->monsterSpecialTimer == 210)
+		{
+			int c;
+			double oyaw = my->yaw;
+			for (c = 0; c < 12; ++c)
+			{
+				my->yaw = ((double)c + ((rand() % 100) / 100.f)) * (PI * 2) / 12.f;
+				castSpell(my->getUID(), &spell_fireball, true, false);
+			}
+			for (c = 0; c < MAXPLAYERS; ++c)
+			{
+				my->devilBoulderSummonIfPlayerIsHiding(c);
+			}
+			my->yaw = oyaw;
+			for (c = 0; c < 12; ++c)
+			{
+				Entity* entity = newEntity(245, 1, map.entities, nullptr); // boulder
+				entity->parent = my->getUID();
+				if (angle == 0)
+				{
+					entity->x = (20 << 4) + 8;
+					entity->y = (21 << 4) + 8 + 32 * c;
+				}
+				else if (angle == 1)
+				{
+					entity->x = (21 << 4) + 8 + 32 * c;
+					entity->y = (20 << 4) + 8;
+				}
+				else if (angle == 2)
+				{
+					entity->x = (44 << 4) + 8;
+					entity->y = (21 << 4) + 8 + 32 * c;
+				}
+				else if (angle == 3)
+				{
+					entity->x = (21 << 4) + 8 + 32 * c;
+					entity->y = (44 << 4) + 8;
+				}
+
+				if (lavalLocationsXY.find(static_cast<int>(entity->x / 16)) != lavalLocationsXY.end()
+					|| lavalLocationsXY.find(static_cast<int>(entity->y / 16)) != lavalLocationsXY.end()
+					|| myStats->HP < myStats->MAXHP * 0.5)
+				{
+					// will roll over lava or Baphy < 50% HP
+					int chance = 4;
+					if (myStats->HP < myStats->MAXHP * 0.25)
+					{
+						chance = 1;
+					}
+					else if (myStats->HP < myStats->MAXHP * 0.5)
+					{
+						chance = 2;
+					}
+					else if (myStats->HP < myStats->MAXHP * 0.75)
+					{
+						chance = 3;
+					}
+
+					if (rand() % chance == 0 || (numLavaBoulders < 3 && rand() % 2))
+					{
+						entity->sprite = 989; // lava boulder.
+						++numLavaBoulders;
+					}
+				}
+
+				entity->z = -64;
+				entity->yaw = angle * (PI / 2.f);
+				entity->sizex = 7;
+				entity->sizey = 7;
+				entity->behavior = &actBoulder;
+				entity->flags[UPDATENEEDED] = true;
+				entity->flags[PASSABLE] = true;
+			}
+		}
+		if (my->monsterSpecialTimer == 300)   // 300 blaze it I guess
+		{
+			MONSTER_ATTACK = 0;
+			MONSTER_ATTACKTIME = 0;
+			serverUpdateEntitySkill(my, 8);
+			serverUpdateEntitySkill(my, 9);
+			my->monsterSpecialTimer = 0;
+			my->monsterState = MONSTER_STATE_ATTACK;
+			node_t* tempNode;
+			Entity* playertotrack = nullptr;
+			for (tempNode = map.creatures->first; tempNode != nullptr; tempNode = tempNode->next) //Iterate map.creatures, since only inspecting players, not all entities. Technically should just iterate over players[]?
+			{
+				Entity* tempEntity = (Entity*)tempNode->element;
+				double lowestdist = 5000;
+				if (tempEntity->behavior == &actPlayer)
+				{
+					double disttoplayer = entityDist(my, tempEntity);
+					if (disttoplayer < lowestdist)
+					{
+						playertotrack = tempEntity;
+					}
 				}
 			}
+			if (playertotrack)
+			{
+				my->monsterTarget = playertotrack->getUID();
+				my->monsterTargetX = playertotrack->x;
+				my->monsterTargetY = playertotrack->y;
+			}
+		}
 		}
 		else if ( my->monsterState == MONSTER_STATE_LICHFIRE_DODGE
 			|| my->monsterState == MONSTER_STATE_LICHICE_DODGE )
