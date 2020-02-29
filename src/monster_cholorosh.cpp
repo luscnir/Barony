@@ -1436,28 +1436,53 @@ void Entity::choloroshChooseWeapon(const Entity* target, double dist)
 bool Entity::choloroshCanWieldItem(const Item& item) const
 {
 
-	switch ( itemCategory(&item) )
+	Stat* myStats = getStats();
+	if (!myStats)
 	{
-		case WEAPON:
+		return false;
+	}
+
+	if (monsterAllyIndex >= 0 && (monsterAllyClass != ALLY_CLASS_MIXED || item.interactNPCUid == getUID()))
+	{
+		return monsterAllyEquipmentInClass(item);
+	}
+
+	switch (itemCategory(&item))
+	{
+	case WEAPON:
+		return true;
+	case POTION:
+		switch (item.type)
+		{
+		case POTION_BOOZE:
 			return true;
-		case POTION:
-			switch ( item.type )
-			{
-				case POTION_HEALING:
-					return true;
-				default:
-					return false;
-			}
-		case THROWN:
-			return true;
-		case ARMOR:
+		case POTION_HEALING:
 			return true;
 		default:
 			return false;
+		}
+		break;
+	case TOOL:
+		if (itemTypeIsQuiver(item.type))
+		{
+			return true;
+		}
+		break;
+	case THROWN:
+		return true;
+	case ARMOR:
+	{ //Little baby compiler stop whining, wah wah.
+		int equipType = checkEquipType(&item);
+		if (equipType == TYPE_HAT || equipType == TYPE_HELM)
+		{
+			return false; //No can wear hats, because horns.
+		}
+		return true; //Can wear all other armor.
+	}
+	default:
+		return false;
 	}
 
 	return false;
+
 }
-
-
-

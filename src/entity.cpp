@@ -11324,7 +11324,7 @@ bool Entity::checkEnemy(Entity* your)
 							}
 							break;
 						case INSECTOID:
-							if ( yourStats->type == SCARAB || yourStats->type == INSECTOID || yourStats->type == SCORPION )
+							if ( yourStats->type == SCARAB || yourStats->type == INSECTOID || yourStats->type == SCORPION || yourStats->type == COCKROACH )
 							{
 								result = false;
 							}
@@ -11414,7 +11414,7 @@ bool Entity::checkEnemy(Entity* your)
 							break;
 						case INSECTOID:
 							if ( myStats->type == SCARAB 
-								|| myStats->type == INSECTOID || myStats->type == SCORPION )
+								|| myStats->type == INSECTOID || myStats->type == SCORPION || yourStats->type == COCKROACH )
 							{
 								result = false;
 							}
@@ -11691,7 +11691,7 @@ bool Entity::checkFriend(Entity* your)
 							break;
 						case INSECTOID:
 							if ( yourStats->type == SCARAB 
-								|| yourStats->type == INSECTOID || yourStats->type == SCORPION )
+								|| yourStats->type == INSECTOID || yourStats->type == SCORPION || yourStats->type == COCKROACH )
 							{
 								result = true;
 							}
@@ -11780,7 +11780,7 @@ bool Entity::checkFriend(Entity* your)
 							break;
 						case INSECTOID:
 							if ( myStats->type == SCARAB 
-								|| myStats->type == INSECTOID || myStats->type == SCORPION )
+								|| myStats->type == INSECTOID || myStats->type == SCORPION || yourStats->type == COCKROACH )
 							{
 								result = true;
 							}
@@ -13915,6 +13915,8 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 				case GOATMAN:
 				case INSECTOID:
 				case GOBLIN:
+				case BURGGUARD:
+				case CHOLOROSH:
 					weaponLimb->x += 0.5 * cos(weaponArmLimb->yaw + PI / 2);
 					weaponLimb->y += 0.5 * sin(weaponArmLimb->yaw + PI / 2);
 					break;
@@ -13977,6 +13979,8 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 					case INSECTOID:
 					case SUCCUBUS:
 					case INCUBUS:
+					case BURGGUARD:
+					case CHOLOROSH:
 						weaponLimb->x += -.1 * cos(weaponArmLimb->yaw + PI / 2) + 0.25 * cos(weaponArmLimb->yaw);
 						weaponLimb->y += -.1 * sin(weaponArmLimb->yaw + PI / 2) + 0.25 * sin(weaponArmLimb->yaw);
 						weaponLimb->z += -1;
@@ -14024,6 +14028,8 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 					case GOBLIN:
 					case GOATMAN:
 					case INSECTOID:
+					case BURGGUARD:
+					case CHOLOROSH:
 						weaponLimb->x += -.1 * cos(weaponArmLimb->yaw + PI / 2) + 0.5 * cos(weaponArmLimb->yaw);
 						weaponLimb->y += -.1 * sin(weaponArmLimb->yaw + PI / 2) + 0.5 * sin(weaponArmLimb->yaw);
 						weaponLimb->z += -1;
@@ -14080,6 +14086,8 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 					case GOBLIN:
 					case GOATMAN:
 					case INSECTOID:
+					case BURGGUARD:
+					case CHOLOROSH:
 						weaponLimb->x += -.1 * cos(weaponArmLimb->yaw + PI / 2) + 0.5 * cos(weaponArmLimb->yaw);
 						weaponLimb->y += -.1 * sin(weaponArmLimb->yaw + PI / 2) + 0.5 * sin(weaponArmLimb->yaw);
 						weaponLimb->z += -1;
@@ -14127,6 +14135,8 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 				case AUTOMATON:
 				case INSECTOID:
 				case GOBLIN:
+				case BURGGUARD:
+				case CHOLOROSH:
 					weaponLimb->focaly -= 0.05; // minor z-fighting fix.
 					break;
 				default:
@@ -14182,6 +14192,8 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 				case GOATMAN:
 				case INSECTOID:
 				case GOBLIN:
+				case BURGGUARD:
+				case CHOLOROSH:
 					weaponLimb->x += 0.5 * cos(weaponArmLimb->yaw + PI / 2);
 					weaponLimb->y += 0.5 * sin(weaponArmLimb->yaw + PI / 2);
 					break;
@@ -17372,7 +17384,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalx = limbs[monster][9][0] - .5;
 				helm->focaly = limbs[monster][9][1] - 2.5;
 				helm->focalz = limbs[monster][9][2] + 2.25;
-				if ( helm->sprite == (items[HAT_HOOD].index + 2) )
+				if ( helm->sprite == (items[HAT_HOOD].index + 2) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index) )
 				{
 					helm->focaly += 0.5; // black hood
 				}
@@ -17420,7 +17432,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalx = limbs[monster][9][0] - .5;
 				helm->focaly = limbs[monster][9][1] - 2.75;
 				helm->focalz = limbs[monster][9][2] + 2.75;
-				if ( helm->sprite == (items[HAT_HOOD].index + 2) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index + 2) )
+				if ( helm->sprite == (items[HAT_HOOD].index + 2) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index) )
 				{
 					helm->focaly -= 0.25; // black hood
 				}
@@ -17433,7 +17445,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalx = limbs[monster][9][0] - .5;
 				helm->focaly = limbs[monster][9][1] - 2.15;
 				helm->focalz = limbs[monster][9][2] + 2.25;
-				if ( helm->sprite == (items[HAT_HOOD].index + 2) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index + 2) )
+				if ( helm->sprite == (items[HAT_HOOD].index + 2) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index ) )
 				{
 					helm->focaly += 0.25; // black hood
 				}
@@ -17455,7 +17467,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalz = limbs[monster][9][2] + 2.5;
 				if ( monster == GOBLIN && this->sprite == 752 ) // special female offset.
 				{
-					if ( helm->sprite == (items[HAT_HOOD].index + 3) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index + 3) )
+					if ( helm->sprite == (items[HAT_HOOD].index + 3) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index) )
 					{
 						helm->focaly -= 0.5; // purple hood
 					}
@@ -18873,7 +18885,7 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 			shieldLimb->focalx -= .5;
 			shieldLimb->focaly -= 0.7;
 		}
-		else if ( race == GOATMAN || race == GOBLIN || race == INSECTOID )
+		else if ( race == GOATMAN || race == GOBLIN || race == INSECTOID || race == BURGGUARD || race == CHOLOROSH )
 		{
 			shieldLimb->focalz -= 0.5;
 		}
@@ -19061,7 +19073,7 @@ void Entity::setHelmetLimbOffsetWithMask(Entity* helm, Entity* mask)
 			{
 				helm->focalz -= 0.2;
 			}
-			else if ( helm->sprite == (items[HAT_HOOD].index + 2) )
+			else if ( helm->sprite == (items[HAT_HOOD].index + 2) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index) )
 			{
 				// black hood
 				helm->focalx += 0.25;
@@ -19114,7 +19126,7 @@ void Entity::setHelmetLimbOffsetWithMask(Entity* helm, Entity* mask)
 			{
 				helm->focalz -= 0.2;
 			}
-			else if ( helm->sprite == (items[HAT_HOOD].index + 2) )
+			else if ( helm->sprite == (items[HAT_HOOD].index + 2) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index) )
 			{
 				// black hood
 				helm->focalx += 0.25;
@@ -19242,6 +19254,7 @@ void Entity::handleQuiverThirdPersonModel(Stat& myStats)
 				break;
 			case KOBOLD:
 			case GNOME:
+			case FLESHLING:
 				// no strap.
 				break;
 			default:

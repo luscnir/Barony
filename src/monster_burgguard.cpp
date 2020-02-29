@@ -105,34 +105,6 @@ void initBurgGuard(Entity* my, Stat* myStats)
 				break;
 			}
 
-			//give shield
-			if (myStats->shield == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_SHIELD] == 1)
-			{
-				// give shield
-				switch (rand() % 10)
-				{
-				case 0:
-				case 1:
-					myStats->shield = newItem(TOOL_GREENTORCH, SERVICABLE, -1 + rand() % 3, 1, rand(), false, nullptr);
-					break;
-				case 2:
-				case 3:
-				case 4:
-					break;
-				case 5:
-				case 6:
-					myStats->shield = newItem(WOODEN_SHIELD, DECREPIT, -1 + rand() % 3, 1, rand(), false, nullptr);
-					break;
-				case 7:
-				case 8:
-					myStats->shield = newItem(BRONZE_SHIELD, DECREPIT, -1 + rand() % 3, 1, rand(), false, nullptr);
-					break;
-				case 9:
-					myStats->shield = newItem(IRON_SHIELD, DECREPIT, -2 + rand() % 3, 1, rand(), false, nullptr);
-					break;
-				}
-			}
-
 			//give weapon
 			if (myStats->weapon == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_WEAPON] == 1)
 			{
@@ -158,6 +130,41 @@ void initBurgGuard(Entity* my, Stat* myStats)
 				case 9:
 					myStats->weapon = newItem(MAGICSTAFF_SLOW, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);
 					break;
+				}
+			}
+
+			//give shield
+			if (myStats->shield == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_SHIELD] == 1)
+			{
+				if (myStats->weapon && isRangedWeapon(*myStats->weapon))
+				{
+					my->monsterGenerateQuiverItem(myStats);
+				}
+				else
+				{
+					// give shield
+					switch (rand() % 10)
+					{
+					case 0:
+					case 1:
+						myStats->shield = newItem(TOOL_GREENTORCH, SERVICABLE, -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
+					case 2:
+					case 3:
+					case 4:
+						break;
+					case 5:
+					case 6:
+						myStats->shield = newItem(WOODEN_SHIELD, DECREPIT, -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
+					case 7:
+					case 8:
+						myStats->shield = newItem(BRONZE_SHIELD, DECREPIT, -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
+					case 9:
+						myStats->shield = newItem(IRON_SHIELD, DECREPIT, -2 + rand() % 3, 1, rand(), false, nullptr);
+						break;
+					}
 				}
 			}
 
@@ -487,8 +494,8 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			{
 				wearingring = true;
 			}
-		if (myStats->mask != NULL)
-			if (myStats->mask->type == ABYSSAL_AMULET)
+		if (myStats->mask != nullptr)
+			if (myStats->mask->type == ABYSSAL_MASK)
 			{
 				wearingring = true;
 			}
@@ -561,6 +568,7 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 	}
 
 	Entity* shieldarm = nullptr;
+	Entity* helmet = nullptr;
 
 	//Move bodyparts
 	for (bodypart = 0, node = my->children.first; node != nullptr; node = node->next, bodypart++)
@@ -698,68 +706,68 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_LEFTLEG);
 			break;
 			// right arm
-		case LIMB_HUMANOID_RIGHTARM:
-		{
-			node_t* weaponNode = list_Node(&my->children, 7);
-			if (weaponNode)
+			case LIMB_HUMANOID_RIGHTARM:
 			{
-				Entity* weapon = (Entity*)weaponNode->element;
-				if (MONSTER_ARMBENDED || (weapon->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT))
+				node_t* weaponNode = list_Node(&my->children, 7);
+				if (weaponNode)
 				{
-					// if weapon invisible and I'm not attacking, relax arm.
-					entity->focalx = limbs[BURGGUARD][4][0]; // 0
-					entity->focaly = limbs[BURGGUARD][4][1]; // 0
-					entity->focalz = limbs[BURGGUARD][4][2]; // 2
-					entity->sprite = 1045;
+					Entity* weapon = (Entity*)weaponNode->element;
+					if (MONSTER_ARMBENDED || (weapon->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT))
+					{
+						// if weapon invisible and I'm not attacking, relax arm.
+						entity->focalx = limbs[BURGGUARD][4][0]; // 0
+						entity->focaly = limbs[BURGGUARD][4][1]; // 0
+						entity->focalz = limbs[BURGGUARD][4][2]; // 2
+						entity->sprite = 1045;
+					}
+					else
+					{
+						// else flex arm.
+						entity->focalx = limbs[BURGGUARD][4][0] + 0.75;
+						entity->focaly = limbs[BURGGUARD][4][1];
+						entity->focalz = limbs[BURGGUARD][4][2] - 0.75;
+						entity->sprite = 1047;
+					}
+				}
+				my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_RIGHTARM);
+				entity->yaw += MONSTER_WEAPONYAW;
+				break;
+				// left arm
+			}
+			case LIMB_HUMANOID_LEFTARM:
+			{
+				shieldarm = entity;
+				node_t* shieldNode = list_Node(&my->children, 8);
+				if (shieldNode)
+				{
+					Entity* shield = (Entity*)shieldNode->element;
+					if (shield->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT)
+					{
+						entity->focalx = limbs[BURGGUARD][5][0]; // 0
+						entity->focaly = limbs[BURGGUARD][5][1]; // 0
+						entity->focalz = limbs[BURGGUARD][5][2]; // 2
+						entity->sprite = 1044;
+					}
+					else
+					{
+						entity->focalx = limbs[BURGGUARD][5][0] + 0.75;
+						entity->focaly = limbs[BURGGUARD][5][1];
+						entity->focalz = limbs[BURGGUARD][5][2] - 0.75;
+						entity->sprite = 1046;
+					}
+				}
+				my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_LEFTARM);
+				if (my->monsterDefend && my->monsterAttack == 0)
+				{
+					MONSTER_SHIELDYAW = PI / 5;
 				}
 				else
 				{
-					// else flex arm.
-					entity->focalx = limbs[BURGGUARD][4][0] + 0.75;
-					entity->focaly = limbs[BURGGUARD][4][1];
-					entity->focalz = limbs[BURGGUARD][4][2] - 0.75;
-					entity->sprite = 1047;
+					MONSTER_SHIELDYAW = 0;
 				}
+				entity->yaw += MONSTER_SHIELDYAW;
+				break;
 			}
-			my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_RIGHTARM);
-			entity->yaw += MONSTER_WEAPONYAW;
-			break;
-			// left arm
-		}
-		case LIMB_HUMANOID_LEFTARM:
-		{
-			shieldarm = entity;
-			node_t* shieldNode = list_Node(&my->children, 8);
-			if (shieldNode)
-			{
-				Entity* shield = (Entity*)shieldNode->element;
-				if (shield->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT)
-				{
-					entity->focalx = limbs[BURGGUARD][5][0]; // 0
-					entity->focaly = limbs[BURGGUARD][5][1]; // 0
-					entity->focalz = limbs[BURGGUARD][5][2]; // 2
-					entity->sprite = 1044;
-				}
-				else
-				{
-					entity->focalx = limbs[BURGGUARD][5][0] + 0.75;
-					entity->focaly = limbs[BURGGUARD][5][1];
-					entity->focalz = limbs[BURGGUARD][5][2] - 0.75;
-					entity->sprite = 1046;
-				}
-			}
-			my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_LEFTARM);
-			if (my->monsterDefend && my->monsterAttack == 0)
-			{
-				MONSTER_SHIELDYAW = PI / 5;
-			}
-			else
-			{
-				MONSTER_SHIELDYAW = 0;
-			}
-			entity->yaw += MONSTER_SHIELDYAW;
-			break;
-		}
 		// weapon
 		case LIMB_HUMANOID_WEAPON:
 			if (multiplayer != CLIENT)
@@ -824,6 +832,10 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 				{
 					entity->flags[INVISIBLE] = false;
 					entity->sprite = itemModel(myStats->shield);
+					if (itemTypeIsQuiver(myStats->shield->type))
+					{
+						entity->handleQuiverThirdPersonModel(*myStats);
+					}
 				}
 				if (myStats->EFFECTS[EFF_INVISIBLE] || wearingring) //TODO: isInvisible()?
 				{
@@ -902,6 +914,7 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			break;
 			// helm
 		case LIMB_HUMANOID_HELMET:
+			helmet = entity;
 			entity->focalx = limbs[BURGGUARD][9][0]; // 0
 			entity->focaly = limbs[BURGGUARD][9][1]; // 0
 			entity->focalz = limbs[BURGGUARD][9][2]; // -2
@@ -955,7 +968,17 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			entity->roll = PI / 2;
 			if (multiplayer != CLIENT)
 			{
-				if (myStats->mask == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring) //TODO: isInvisible()?
+				bool hasSteelHelm = false;
+				if (myStats->helmet)
+				{
+					if (myStats->helmet->type == STEEL_HELM
+						|| myStats->helmet->type == CRYSTAL_HELM
+						|| myStats->helmet->type == ARTIFACT_HELM)
+					{
+						hasSteelHelm = true;
+					}
+				}
+				if (myStats->mask == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring || hasSteelHelm) //TODO: isInvisible()?
 				{
 					entity->flags[INVISIBLE] = true;
 				}
@@ -1003,9 +1026,18 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 
 			if (entity->sprite != 165)
 			{
-				entity->focalx = limbs[BURGGUARD][10][0] + .35; // .35
-				entity->focaly = limbs[BURGGUARD][10][1] - 2; // -2
-				entity->focalz = limbs[BURGGUARD][10][2]; // .25
+				if (entity->sprite == items[MASK_SHAMAN].index)
+				{
+					entity->roll = 0;
+					my->setHelmetLimbOffset(entity);
+					my->setHelmetLimbOffsetWithMask(helmet, entity);
+				}
+				else
+				{
+					entity->focalx = limbs[BURGGUARD][10][0] + .35; // .35
+					entity->focaly = limbs[BURGGUARD][10][1] - 2; // -2
+					entity->focalz = limbs[BURGGUARD][10][2]; // .25
+				}
 			}
 			else
 			{
@@ -1063,6 +1095,12 @@ bool Entity::burgGuardCanWieldItem(const Item& item) const
 		return true;
 	case THROWN:
 		return true;
+	case TOOL:
+		if (itemTypeIsQuiver(item.type))
+		{
+			return true;
+		}
+		break;
 	default:
 		return false;
 	}

@@ -913,7 +913,7 @@ bool makeFollower(int monsterclicked, bool ringconflict, char namesays[64], Enti
 			}
 			else if ( stats[monsterclicked]->type == INSECTOID )
 			{
-				if ( race == INSECTOID || race == SCARAB || race == SCORPION )
+				if ( race == INSECTOID || race == SCARAB || race == SCORPION || race == COCKROACH )
 				{
 					canAlly = true;
 				}
@@ -3330,6 +3330,7 @@ void actMonster(Entity* my)
 		case DUMMYBOT:
 		case BURGGUARD:
 		case CHOLOROSH:
+		case LICH_FALLEN:
 			handleinvisible = false;
 			break;
 		default:
@@ -10950,6 +10951,7 @@ void Entity::monsterGenerateQuiverItem(Stat* myStats, bool lesserMonster)
 			}
 			break;
 		case GOBLIN:
+		case BURGGUARD:
 			switch ( rand() % 5 )
 			{
 				case 0:
@@ -10982,6 +10984,7 @@ void Entity::monsterGenerateQuiverItem(Stat* myStats, bool lesserMonster)
 			}
 			break;
 		case INSECTOID:
+		case CHOLOROSH:
 			switch ( rand() % 5 )
 			{
 				case 0:
