@@ -494,6 +494,7 @@ char itemNameStrings[NUM_ITEM_STRINGS][32] =
 	"machete",
 	"stone_axe",
 	"needle",
+	"hat_tophat",
 	""
 };
 
@@ -519,6 +520,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"hat_hood_yellowgreen",
 		"abyssal_helm",
 		"hat_wizard_smily",
+		"hat_tophat",
 		""
 	},
 	{

@@ -2124,6 +2124,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case HAT_HOOD_YELLOWGREEN:
 		case ABYSSAL_HELM:
 		case HAT_WIZARD_SLIMY:
+		case HAT_TOPHAT:
 			equipItem(item, &stats[player]->helmet, player);
 			break;
 		case AMULET_SEXCHANGE:

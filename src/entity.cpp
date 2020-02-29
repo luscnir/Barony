@@ -12219,6 +12219,7 @@ int checkEquipType(const Item *item)
 		case PUNISHER_HOOD:
 		case HAT_HOOD_YELLOWGREEN:
 		case HAT_WIZARD_SLIMY:
+		case HAT_TOPHAT:
 			return TYPE_HAT;
 			break;
 
@@ -17467,7 +17468,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 				helm->focalz = limbs[monster][9][2] + 2.5;
 				if ( monster == GOBLIN && this->sprite == 752 ) // special female offset.
 				{
-					if ( helm->sprite == (items[HAT_HOOD].index + 3) || helm->sprite == (items[HAT_HOOD_YELLOWGREEN].index) )
+					if ( helm->sprite == (items[HAT_HOOD].index + 3) )
 					{
 						helm->focaly -= 0.5; // purple hood
 					}
@@ -17485,7 +17486,7 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 		helm->focalz += limbs[HUMAN][12][2];*/
 		helm->roll = PI / 2;
 	}
-	else if ( helm->sprite == items[HAT_WIZARD].index || helm->sprite == items[HAT_JESTER].index || helm->sprite == items[HAT_WIZARD_SLIMY].index)
+	else if ( helm->sprite == items[HAT_WIZARD].index || helm->sprite == items[HAT_JESTER].index || helm->sprite == items[HAT_WIZARD_SLIMY].index || helm->sprite == items[HAT_TOPHAT].index )
 	{
 		switch ( monster )
 		{
