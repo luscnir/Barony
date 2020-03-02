@@ -3182,18 +3182,18 @@ void assignActions(map_t* map)
 			case 94:
 			case 95:
 				//moded monsters
-			case 161:
-			case 163:
-			case 164:
-			case 165:
-			case 190:
-			case 191:
-			case 192:
-			case 193:
-			case 194:
-			case 195:
-			case 196:
-			case 197:
+			case 211:
+			case 213:
+			case 214:
+			case 215:
+			case 240:
+			case 241:
+			case 242:
+			case 243:
+			case 244:
+			case 245:
+			case 246:
+			case 247:
 			{
 				entity->sizex = 4;
 				entity->sizey = 4;
@@ -3330,51 +3330,51 @@ void assignActions(map_t* map)
 				{
 					monsterType = GHOUL;
 				}
-				else if (entity->sprite == 161)     // cockroach.png
+				else if (entity->sprite == 211)     // cockroach.png
 				{
 					monsterType = COCKROACH;
 				}
-				else if (entity->sprite == 163)     // burgGuard.png
+				else if (entity->sprite == 213)     // burgGuard.png
 				{
 					monsterType = BURGGUARD;
 				}
-				else if (entity->sprite == 164)     // gargoyle.png
+				else if (entity->sprite == 214)     // gargoyle.png
 				{
 					monsterType = GARGOYLE;
 				}
-				else if (entity->sprite == 165)     // matilda.png
+				else if (entity->sprite == 215)     // matilda.png
 				{
 					monsterType = MATILDA;
 				}
-				else if (entity->sprite == 190)     // cryorune.png
+				else if (entity->sprite == 240)     // cryorune.png
 				{
 					monsterType = CRYORUNE;
 				}
-				else if (entity->sprite == 191)     // yeti.png
+				else if (entity->sprite == 241)     // yeti.png
 				{
 					monsterType = YETI;
 				}
-				else if (entity->sprite == 192)     // icedemon.png
+				else if (entity->sprite == 242)     // icedemon.png
 				{
 					monsterType = ICEDEMON;
 				}
-				else if (entity->sprite == 193)     // eyeball.png
+				else if (entity->sprite == 243)     // eyeball.png
 				{
 					monsterType = EYEBALL;
 				}
-				else if (entity->sprite == 194)     // fleshling.png
+				else if (entity->sprite == 244)     // fleshling.png
 				{
 					monsterType = FLESHLING;
 				}
-				else if (entity->sprite == 195)     // abomination.png
+				else if (entity->sprite == 245)     // abomination.png
 				{
 					monsterType = ABOMINATION;
 				}
-				else if (entity->sprite == 196)     // cholorosh.png
+				else if (entity->sprite == 246)     // cholorosh.png
 				{
 					monsterType = CHOLOROSH;
 				}
-				else if (entity->sprite == 197)     // lich.png
+				else if (entity->sprite == 247)     // lich.png
 				{
 					monsterType = LICH_FALLEN;
 				}
@@ -3838,7 +3838,7 @@ void assignActions(map_t* map)
 				break;
 			}
 			//blood fountain
-			case 167:
+			case 217:
 			{
 				entity->sizex = 4;
 				entity->sizey = 4;
@@ -4445,7 +4445,7 @@ void assignActions(map_t* map)
 				}
 				break;
 			//moded chairs
-			case 171:
+			case 221:
 				entity->furnitureType = FURNITURE_CHAIR; // so everything knows I'm a chair
 				entity->sizex = 2;
 				entity->sizey = 2;
@@ -4461,7 +4461,7 @@ void assignActions(map_t* map)
 					entity->yaw = (prng_get_uint() % 360) * (PI / 180.f);
 				}
 				break;
-			case 175:
+			case 225:
 				entity->furnitureType = FURNITURE_CHAIR; // so everything knows I'm a chair
 				entity->sizex = 2;
 				entity->sizey = 2;
@@ -4536,7 +4536,7 @@ void assignActions(map_t* map)
 				childEntity->flags[PASSABLE] = true;
 				break;
 				// bloody speartrap
-			case 169:
+			case 219:
 				entity->sizex = 6;
 				entity->sizey = 6;
 				entity->x += 8;
@@ -5158,7 +5158,7 @@ void assignActions(map_t* map)
 				break;
 			}
 			// symbol pedestal
-			case 166:
+			case 216:
 			{
 				entity->sizex = 4;
 				entity->sizey = 4;
@@ -5445,7 +5445,7 @@ void assignActions(map_t* map)
 				}
 				break;
 			//blue bed
-			case 170:
+			case 220:
 				entity->furnitureType = FURNITURE_BED; // so everything knows I'm a bed
 				entity->x += 8;
 				entity->y += 8;
@@ -5542,7 +5542,7 @@ void assignActions(map_t* map)
 				break;
 			}
 			// green podium
-			case 176:
+			case 226:
 			{
 				entity->sizex = 3;
 				entity->sizey = 3;
@@ -5635,7 +5635,7 @@ void assignActions(map_t* map)
 				break;
 			}
 			//bloody rock
-			case 168:
+			case 218:
 			{
 				entity->x += 8;
 				entity->y += 8;
@@ -5662,7 +5662,7 @@ void assignActions(map_t* map)
 				entity->setUID(-3);*/
 				break;
 			}
-			case 172:
+			case 222:
 			{
 				entity->x += 8;
 				entity->y += 8;
@@ -5689,7 +5689,7 @@ void assignActions(map_t* map)
 				entity->setUID(-3);*/
 				break;
 			}
-			case 173:
+			case 223:
 			{
 				entity->x += 8;
 				entity->y += 8;
@@ -5717,7 +5717,7 @@ void assignActions(map_t* map)
 				break;
 			}
 			// grass purple texture
-			case 178:
+			case 228:
 			{
 				entity->x += 8;
 				entity->y += 8;
@@ -5812,7 +5812,7 @@ void assignActions(map_t* map)
 				entity->skill[28] = 1; // is a mechanism
 				break;
 			// acid spray trap:
-			case 177:
+			case 227:
 				entity->sizex = 2;
 				entity->sizey = 2;
 				entity->x += 8;
@@ -5824,7 +5824,7 @@ void assignActions(map_t* map)
 				entity->skill[28] = 1; // is a mechanism
 				break;
 			// portal jumps 2 levels
-			case 179:
+			case 229:
 				entity->x += 8;
 				entity->y += 8;
 				entity->sprite = 1081;
@@ -5836,7 +5836,7 @@ void assignActions(map_t* map)
 				entity->flags[BRIGHT] = true;
 				break;
 			// portal jumps 8 levels
-			case 180:
+			case 230:
 				entity->x += 8;
 				entity->y += 8;
 				entity->sprite = 1081;
@@ -5848,7 +5848,7 @@ void assignActions(map_t* map)
 				entity->flags[BRIGHT] = true;
 				break;
 			// ladder jumps 2 levels
-			case 181:
+			case 231:
 				entity->sizex = 4;
 				entity->sizey = 4;
 				entity->x += 8;
@@ -5859,7 +5859,7 @@ void assignActions(map_t* map)
 				entity->sprite = 161;
 				break;
 			// ladder jumps 7 levels
-			case 182:
+			case 232:
 				entity->sizex = 4;
 				entity->sizey = 4;
 				entity->x += 8;
@@ -5870,7 +5870,7 @@ void assignActions(map_t* map)
 				entity->sprite = 161;
 				break;
 				// ladder jumps 8 levels
-			case 183:
+			case 233:
 				entity->sizex = 4;
 				entity->sizey = 4;
 				entity->x += 8;
@@ -5881,7 +5881,7 @@ void assignActions(map_t* map)
 				entity->sprite = 161;
 				break;
 			// ladder jumps 9 levels
-			case 184:
+			case 234:
 				entity->sizex = 4;
 				entity->sizey = 4;
 				entity->x += 8;
@@ -5892,7 +5892,7 @@ void assignActions(map_t* map)
 				entity->sprite = 161;
 				break;
 				// ladder jumps 10 levels
-			case 185:
+			case 235:
 				entity->sizex = 4;
 				entity->sizey = 4;
 				entity->x += 8;
@@ -5903,7 +5903,7 @@ void assignActions(map_t* map)
 				entity->sprite = 161;
 				break;
 			// ladder jumps 16 levels
-			case 186:
+			case 236:
 				entity->sizex = 4;
 				entity->sizey = 4;
 				entity->x += 8;
@@ -5914,7 +5914,7 @@ void assignActions(map_t* map)
 				entity->sprite = 161;
 				break;
 			// ladder jumps 14 levels
-			case 187:
+			case 237:
 				entity->sizex = 4;
 				entity->sizey = 4;
 				entity->x += 8;
@@ -5925,7 +5925,7 @@ void assignActions(map_t* map)
 				entity->sprite = 161;
 				break;
 			// Mid game portal jumps 13 levels
-			case 188:
+			case 238:
 				entity->x += 8;
 				entity->y += 8;
 				entity->sprite = 1081;
@@ -5937,7 +5937,7 @@ void assignActions(map_t* map)
 				entity->flags[BRIGHT] = true;
 				break;
 				// mid game portal:
-			case 189:
+			case 239:
 				entity->x += 8;
 				entity->y += 8;
 				entity->sprite = 614;
@@ -5953,7 +5953,7 @@ void assignActions(map_t* map)
 					entity->skill[28] = 1; // is a mechanism
 				}
 				break;
-			case 199:
+			case 249:
 				entity->x += 8;
 				entity->y += 8;
 				entity->sprite = 614;
@@ -6004,7 +6004,7 @@ void assignActions(map_t* map)
 								postProcessEntity->z -= 6;
 								tmpentity->parent = postProcessEntity->getUID();
 							}
-							else if ( tmpentity->sprite == 630 || tmpentity->sprite == 1079 )
+							else if ( tmpentity->sprite == 630 || tmpentity->sprite == 1179 )
 							{
 								// is podium
 								postProcessEntity->z -= 6;

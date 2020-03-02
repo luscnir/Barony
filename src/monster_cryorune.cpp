@@ -15,16 +15,16 @@ void initCryorune(Entity* my, Stat* myStats)
 	int c;
 	node_t* node;
 
-	my->sprite = 1085;
+	my->sprite = 1185;
 
 	my->flags[UPDATENEEDED] = true;
 	my->flags[INVISIBLE] = false;
 
 	if ( multiplayer != CLIENT )
 	{
-		MONSTER_SPOTSND = 515;
+		MONSTER_SPOTSND = 615;
 		MONSTER_SPOTVAR = 2;
-		MONSTER_IDLESND = 517;
+		MONSTER_IDLESND = 617;
 		MONSTER_IDLEVAR = 2;
 	}
 	if ( multiplayer != CLIENT && !MONSTER_INIT )
@@ -176,17 +176,17 @@ void cryoruneAnimate(Entity* my, double dist)
 	if ( (ticks % 10 == 0 && dist > 0.1) || (MONSTER_ATTACKTIME == 0 && MONSTER_ATTACK == 1) )
 	{
 		//MONSTER_ATTACKTIME = MONSTER_ATTACK;
-		if ( my->sprite == 1085 )
+		if ( my->sprite == 1185 )
 		{
-			my->sprite = 1086;
+			my->sprite = 1186;
 		}
-		else if (my->sprite == 1086)
+		else if (my->sprite == 1186)
 		{
-			my->sprite = 1087;
+			my->sprite = 1187;
 		}
 		else
 		{
-			my->sprite = 1085;
+			my->sprite = 1185;
 		}
 	}
 
@@ -207,7 +207,7 @@ void actCryoruneLimb(Entity* my)
 
 void cryoruneDie(Entity* my)
 {
-	playSoundEntity(my, 519 + rand() % 2, 100);
+	playSoundEntity(my, 619 + rand() % 2, 100);
 	list_RemoveNode(my->mynode);
 	return;
 }

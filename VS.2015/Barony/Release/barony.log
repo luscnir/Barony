@@ -1,17 +1,128 @@
-﻿  monster_burgguard.cpp
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX'
+﻿  actmonster.cpp
+  monster_burgguard.cpp
+  monster_cholorosh.cpp
+  monster_cockroach.cpp
+  monster_cryorune.cpp
+  monster_eyeball.cpp
+  monster_fleshling.cpp
+  monster_lichfallen.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_cryorune.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_cryorune.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_burgguard.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_burgguard.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\actmonster.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\actmonster.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_lichfallen.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_lichfallen.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_eyeball.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_eyeball.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_cholorosh.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_cholorosh.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_fleshling.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_fleshling.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_cockroach.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_cockroach.cpp)
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(70,57): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(70,50): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(25,6): warning C4101: 'c': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(799,55): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(852,55): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(893,55): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(942,55): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(1008,55): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\monster_lichfallen.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(799,56): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(852,56): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(893,56): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(942,56): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_burgguard.cpp(1008,56): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_lichfallen.cpp(206,48): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_lichfallen.cpp(206,37): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_lichfallen.cpp(206,26): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_lichfallen.cpp(219,33): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_lichfallen.cpp(219,26): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_lichfallen.cpp(219,19): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_lichfallen.cpp(430,51): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_lichfallen.cpp(430,39): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_eyeball.cpp(60,56): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_eyeball.cpp(60,49): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_lichfallen.cpp(1116,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\actmonster.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_lichfallen.cpp(1072,13): warning C4101: 'tempNode': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cryorune.cpp(72,56): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cryorune.cpp(72,49): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cryorune.cpp(16,10): warning C4101: 'node': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cryorune.cpp(170,6): warning C4101: 'bodypart': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cryorune.cpp(169,10): warning C4101: 'node': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(15,6): warning C4101: 'c': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(991,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(1040,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(1081,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(1129,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cholorosh.cpp(1195,56): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(61,54): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(61,47): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(715,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(764,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_fleshling.cpp(858,58): warning C4805: '!=': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(649,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(651,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(683,35): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(683,24): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(686,36): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(686,25): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(696,35): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(696,24): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(699,36): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(699,25): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(709,35): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(709,28): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(712,36): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(712,29): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(722,35): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(722,28): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(725,36): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(725,29): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(1131,44): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(1131,37): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(1131,30): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(3102,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_cockroach.cpp(24,6): warning C4101: 'c': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(4306,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(4308,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(4747,51): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(4824,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6341,55): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6341,30): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6390,79): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6390,55): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6390,30): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6429,57): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6429,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6454,55): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6454,30): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6470,31): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6470,31): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6470,31): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6470,31): warning C4244:             _Ty=int
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6470,31): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6595,32): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6595,32): warning C4244:         with
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6595,32): warning C4244:         [
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6595,32): warning C4244:             _Ty=int
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(6595,32): warning C4244:         ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(7877,76): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(7934,81): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(9137,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(9878,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(11132,31): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  monster_matilda.cpp
+  monster_yeti.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actmonster.cpp(11136,30): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_matilda.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_matilda.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_yeti.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_yeti.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_yeti.cpp(51,56): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_yeti.cpp(51,49): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
   Generating code
-  2 of 6294 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  19 of 6294 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    351 functions had inline decision re-evaluated but remain unchanged
+    331 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   barony.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\barony_test.exe

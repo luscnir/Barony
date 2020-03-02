@@ -2789,49 +2789,49 @@ void useItem(Item* item, int player, Entity* usedBy)
 				messagePlayer(player, language[2976]);
 				break;
 			case ABYSSAL_HELM:
-				messagePlayer(player, language[4200]);
+				messagePlayer(player, language[6200]);
 				break;
 			case ABYSSAL_BOOTS:
-				messagePlayer(player, language[4201]);
+				messagePlayer(player, language[6201]);
 				break;
 			case ABYSSAL_KNUCKLES:
-				messagePlayer(player, language[4202]);
+				messagePlayer(player, language[6202]);
 				break;
 			case ABYSSAL_CHEASTPIECE:
-				messagePlayer(player, language[4203]);
+				messagePlayer(player, language[6203]);
 				break;
 			case ABYSSAL_CLOAK:
-				messagePlayer(player, language[4204]);
+				messagePlayer(player, language[6204]);
 				break;
 			case ABYSSAL_SWORD:
-				messagePlayer(player, language[4205]);
+				messagePlayer(player, language[6205]);
 				break;
 			case ABYSSAL_MACE:
-				messagePlayer(player, language[4206]);
+				messagePlayer(player, language[6206]);
 				break;
 			case ABYSSAL_SPEAR:
-				messagePlayer(player, language[4207]);
+				messagePlayer(player, language[6207]);
 				break;
 			case ABYSSAL_AXE:
-				messagePlayer(player, language[4208]);
+				messagePlayer(player, language[6208]);
 				break;
 			case ABYSSAL_SHIELD:
-				messagePlayer(player, language[4209]);
+				messagePlayer(player, language[6209]);
 				break;
 			case ABYSSAL_CROSSBOW:
-				messagePlayer(player, language[4210]);
+				messagePlayer(player, language[6210]);
 				break;
 			case ABYSSAL_RING:
-				messagePlayer(player, language[4211]);
+				messagePlayer(player, language[6211]);
 				break;
 			case ABYSSAL_AMULET:
-				messagePlayer(player, language[4212]);
+				messagePlayer(player, language[6212]);
 				break;
 			case CLOAK_ELEMENTALIST:
-				messagePlayer(player, language[4215]);
+				messagePlayer(player, language[6215]);
 				break;
 			case ABYSSAL_MASK:
-				messagePlayer(player, language[4239]);
+				messagePlayer(player, language[6239]);
 				break;
 
 			default:

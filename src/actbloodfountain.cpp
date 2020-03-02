@@ -239,7 +239,7 @@ void actBloodFountain(Entity* my)
 							{
 								if (creature == DEMON)
 								{
-									messagePlayerColor(i, color, language[4231]);
+									messagePlayerColor(i, color, language[6231]);
 									Stat* tmpStats = spawnedMonster->getStats();
 									if (tmpStats)
 									{
@@ -248,13 +248,13 @@ void actBloodFountain(Entity* my)
 								}
 								else
 								{
-									messagePlayerColor(i, color, language[4232]);
+									messagePlayerColor(i, color, language[6232]);
 								}
 							}
 						}
 						else if (currentlevel < 18)
 						{
-							messagePlayerColor(i, color, language[4232]);
+							messagePlayerColor(i, color, language[6232]);
 							spawnedMonster = summonMonster(CREATURE_IMP, my->x, my->y);
 						}
 						else if (currentlevel < 46)
@@ -267,17 +267,17 @@ void actBloodFountain(Entity* my)
 								{
 									strcpy(tmpStats->name, "blood demon");
 								}
-								messagePlayerColor(i, color, language[4231]);
+								messagePlayerColor(i, color, language[6231]);
 							}
 							else
 							{
-								messagePlayerColor(i, color, language[4232]);
+								messagePlayerColor(i, color, language[6232]);
 								spawnedMonster = summonMonster(CREATURE_IMP, my->x, my->y);
 							}
 						}
 						else
 						{
-							messagePlayerColor(i, color, language[4231]);
+							messagePlayerColor(i, color, language[6231]);
 							spawnedMonster = summonMonster(DEMON, my->x, my->y);
 						}
 						break;
@@ -286,7 +286,7 @@ void actBloodFountain(Entity* my)
 						if (stats[i]->type == VAMPIRE) //Blood fountain is good for vampires and not much for everyone else
 						{
 							messagePlayer(i, language[470]);
-							messagePlayer(i, language[4233]);
+							messagePlayer(i, language[6233]);
 							playSoundEntity(players[i]->entity, 52, 64);
 							stats[i]->HUNGER += 150;
 							players[i]->entity->modHP(5);
@@ -296,10 +296,10 @@ void actBloodFountain(Entity* my)
 							players[i]->entity->modHP(-4);
 							playSoundEntity(players[i]->entity, 28, 64);
 							playSoundEntity(players[i]->entity, 249, 128);
-							players[i]->entity->setObituary(language[4234]);
+							players[i]->entity->setObituary(language[6234]);
 
 							Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
-							messagePlayerColor(i, color, language[4233]);
+							messagePlayerColor(i, color, language[6233]);
 							if (i == 0)
 							{
 								camera_shakex += .1;
@@ -332,8 +332,8 @@ void actBloodFountain(Entity* my)
 						playSoundEntity(players[i]->entity, 52, 64);
 						//playSoundEntity(players[i]->entity, 167, 64);
 						Uint32 textcolor = SDL_MapRGB(mainsurface->format, 255, 0, 0);
-						messagePlayerColor(i, textcolor, language[4233]);
-						messagePlayerColor(i, textcolor, language[4235]);
+						messagePlayerColor(i, textcolor, language[6233]);
+						messagePlayerColor(i, textcolor, language[6235]);
 						if (stats[i]->helmet)
 						{
 							stats[i]->helmet->beatitude--;

@@ -358,51 +358,51 @@ int Entity::getMonsterTypeFromSprite()
 	{
 		return DUMMYBOT;
 	}
-	else if (mySprite == 818 || mySprite == 819)	// cockroach
+	else if ( mySprite == 1095 || mySprite == 1096 )	// cockroach
 	{
 		return COCKROACH;
 	}
-	else if (mySprite == 865)     // burg guard head
+	else if ( mySprite == 1142 )     // burg guard head
 	{
 		return BURGGUARD;
 	}
-	else if (mySprite == 873)     // gargoyle head
+	else if ( mySprite == 1150 )     // gargoyle head
 	{
 		return GARGOYLE;
 	}
-	else if (mySprite == 881)     // Matilda body
+	else if ( mySprite == 1158 )     // Matilda body
 	{
 		return MATILDA;
 	}
-	else if (mySprite == 908 || mySprite == 909 || mySprite == 910)	// cryorune
+	else if ( mySprite == 1185 || mySprite == 1186 || mySprite == 1187 )	// cryorune
 	{
 		return CRYORUNE;
 	}
-	else if (mySprite == 911)     // yeti head
+	else if ( mySprite == 1188 )     // yeti head
 	{
 		return YETI;
 	}
-	else if (mySprite == 917)     // ice demon head
+	else if ( mySprite == 1194 )     // ice demon head
 	{
 		return ICEDEMON;
 	}
-	else if (mySprite == 924 || mySprite == 925)	// eyeball
+	else if ( mySprite == 1201 || mySprite == 1202 )	// eyeball
 	{
 		return EYEBALL;
 	}
-	else if (mySprite == 926)     // fleshling head
+	else if ( mySprite == 1203 )     // fleshling head
 	{
 		return FLESHLING;
 	}
-	else if (mySprite == 934)     // abomination head
+	else if ( mySprite == 1211 )     // abomination head
 	{
 		return ABOMINATION;
 	}
-	else if (mySprite == 942)     // cholorosh head
+	else if ( mySprite == 1219 )     // cholorosh head
 	{
 		return CHOLOROSH;
 	}
-	else if (mySprite == 951)     // fallen lich body
+	else if ( mySprite == 1228 )     // fallen lich body
 	{
 		return LICH_FALLEN;
 	}

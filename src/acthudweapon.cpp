@@ -147,11 +147,11 @@ void actHudArm(Entity* my)
 		}
 		else if ( stats[clientnum]->gloves->type == ABYSSAL_KNUCKLES )
 		{
-			my->sprite = 1000;
+			my->sprite = 1100;
 		}
 		else if ( stats[clientnum]->gloves->type == ICE_GLOVES ) 
 		{
-			my->sprite = 1132;
+			my->sprite = 1232;
 		}
 
 		//handle new gloves position

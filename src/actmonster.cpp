@@ -1450,51 +1450,51 @@ void actMonster(Entity* my)
 			{
 				initDummyBot(my, nullptr);
 			}
-			else if (my->sprite == 995 || my->sprite == 996)     // cockroach
+			else if (my->sprite == 1095 || my->sprite == 1096)     // cockroach
 			{
 				initCockroach(my, nullptr);
 			}
-			else if (my->sprite == 1042 )     // burg guard head
+			else if (my->sprite == 1142 )     // burg guard head
 			{
 				initBurgGuard(my, nullptr);
 			}
-			else if (my->sprite == 1050)     // gargoyle head
+			else if (my->sprite == 1150)     // gargoyle head
 			{
 				initGargoyle(my, nullptr);
 			}
-			else if (my->sprite == 1058)     // matilda body
+			else if (my->sprite == 1158)     // matilda body
 			{
 				initMatilda(my, nullptr);
 			}
-			else if (my->sprite == 1085 || my->sprite == 1086 || my->sprite == 1087 )	// cryorune
+			else if (my->sprite == 1185 || my->sprite == 1186 || my->sprite == 1187 )	// cryorune
 			{
 				initCryorune(my, nullptr);
 			}
-			else if (my->sprite == 1088)     // yeti head
+			else if (my->sprite == 1188)     // yeti head
 			{
 				initYeti(my, nullptr);
 			}
-			else if (my->sprite == 1094)     // ice demon head
+			else if (my->sprite == 1194)     // ice demon head
 			{
 				initIceDemon(my, nullptr);
 			}
-			else if (my->sprite == 1101 || my->sprite == 1102)     // eyeball
+			else if (my->sprite == 1201 || my->sprite == 1202)     // eyeball
 			{
 				initEyeball(my, nullptr);
 			}
-			else if (my->sprite == 1103)     // fleshling head
+			else if (my->sprite == 1203)     // fleshling head
 			{
 				initFleshling(my, nullptr);
 			}
-			else if (my->sprite == 1111)     // abomination head
+			else if (my->sprite == 1211)     // abomination head
 			{
 				initAbomination(my, nullptr);
 			}
-			else if (my->sprite == 1119)     // cholorosh head
+			else if (my->sprite == 1219)     // cholorosh head
 			{
 				initCholorosh(my, nullptr);
 			}
-			else if (my->sprite == 1127)     // fallen lich body
+			else if (my->sprite == 1227)     // fallen lich body
 			{
 				initLichFallen(my, nullptr);
 			}
@@ -1642,53 +1642,53 @@ void actMonster(Entity* my)
 			{
 				dummyBotAnimate(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 995 || my->sprite == 996)     // cockroach
+			else if (my->sprite == 1095 || my->sprite == 1096)     // cockroach
 			{
 				cockroachAnimate(my, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1042)     // burg guard head
+			else if (my->sprite == 1142)     // burg guard head
 			{
 				burgGuardMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1050)     // gargoyle head
+			else if (my->sprite == 1150)     // gargoyle head
 			{
 				gargoyleMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1058)     // Matilda body
+			else if (my->sprite == 1158)     // Matilda body
 			{
 				matildaMoveBodyparts(my, NULL, sqrt(MONSTER_VELX* MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1085 || my->sprite == 1086 || my->sprite == 1087)     // cryorune
+			else if (my->sprite == 1185 || my->sprite == 1186 || my->sprite == 1187)     // cryorune
 			{
 				my->flags[BURNABLE] = false;
 				cryoruneAnimate(my, sqrt(MONSTER_VELX* MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1088)     // yeti body
+			else if (my->sprite == 1188)     // yeti body
 			{
 				yetiMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1100)     // ice demon body
+			else if (my->sprite == 1200)     // ice demon body
 			{
 				my->flags[BURNABLE] = false;
 				iceDemonMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1101 || my->sprite == 1102)     // eyeball
+			else if (my->sprite == 1201 || my->sprite == 1202)     // eyeball
 			{
 				eyeballAnimate(my, sqrt(MONSTER_VELX* MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1103)     // fleshling head
+			else if (my->sprite == 1203)     // fleshling head
 			{
 				fleshlingMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1111)     // abomination head
+			else if (my->sprite == 1211)     // abomination head
 			{
 				abominationMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1119)     // cholorosh head
+			else if (my->sprite == 1219)     // cholorosh head
 			{
 				choloroshMoveBodyparts(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
 			}
-			else if (my->sprite == 1126)     // lich body
+			else if (my->sprite == 1226)     // lich body
 			{
 				my->flags[BURNABLE] = false;
 				lichFallenAnimate(my, NULL, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
@@ -2075,7 +2075,7 @@ void actMonster(Entity* my)
 				int c;
 				for (c = 0; c < MAXPLAYERS; c++)
 				{
-					MONSTER_SOUND = playSoundPlayer(c, 561, 128);
+					MONSTER_SOUND = playSoundPlayer(c, 661, 128);
 				}
 			}
 		}
@@ -2116,7 +2116,7 @@ void actMonster(Entity* my)
 				int c;
 				for (c = 0; c < MAXPLAYERS; c++)
 				{
-					MONSTER_SOUND = playSoundPlayer(c, 562, 128);
+					MONSTER_SOUND = playSoundPlayer(c, 662, 128);
 				}
 			}
 		}
@@ -2143,7 +2143,7 @@ void actMonster(Entity* my)
 				int c;
 				for (c = 0; c < MAXPLAYERS; c++)
 				{
-					playSoundPlayer(c, 563, 128);
+					playSoundPlayer(c, 663, 128);
 				}
 			}
 		}
@@ -6446,7 +6446,7 @@ timeToGoAgain:
 				int c;
 				for (c = 0; c < MAXPLAYERS; c++)
 				{
-					playSoundPlayer(c, 563, 128);
+					playSoundPlayer(c, 663, 128);
 				}
 			}
 			if (my->monsterSpecialTimer % 10 == 0)

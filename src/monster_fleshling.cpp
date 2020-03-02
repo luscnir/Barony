@@ -16,13 +16,13 @@ void initFleshling(Entity* my, Stat* myStats)
 	int c;
 	node_t* node;
 
-	my->initMonster(1103);
+	my->initMonster(1203);
 
 	if ( multiplayer != CLIENT )
 	{
-		MONSTER_SPOTSND = 530;
+		MONSTER_SPOTSND = 630;
 		MONSTER_SPOTVAR = 5;
-		MONSTER_IDLESND = 536;
+		MONSTER_IDLESND = 636;
 		MONSTER_IDLEVAR = 3;
 	}
 	if ( multiplayer != CLIENT && !MONSTER_INIT )
@@ -198,7 +198,7 @@ void initFleshling(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(1110, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1210, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -217,7 +217,7 @@ void initFleshling(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(1109, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1209, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -236,7 +236,7 @@ void initFleshling(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(1106, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1206, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -255,7 +255,7 @@ void initFleshling(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(1107, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1207, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -274,7 +274,7 @@ void initFleshling(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(1104, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1204, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -383,7 +383,7 @@ void fleshlingDie(Entity* my)
 
 	my->removeMonsterDeathNodes();
 
-	playSoundEntity(my, 538 + rand() % 4, 128);
+	playSoundEntity(my, 638 + rand() % 4, 128);
 	list_RemoveNode(my->mynode);
 	return;
 }
@@ -546,7 +546,7 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->shoes == nullptr )
 					{
-						entity->sprite = 1109;
+						entity->sprite = 1209;
 					}
 					else
 					{
@@ -581,7 +581,7 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->shoes == nullptr )
 					{
-						entity->sprite = 1106;
+						entity->sprite = 1206;
 					}
 					else
 					{
@@ -623,14 +623,14 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[FLESHLING][4][0]; // 0
 						entity->focaly = limbs[FLESHLING][4][1]; // 0
 						entity->focalz = limbs[FLESHLING][4][2]; // 2
-						entity->sprite = 1107;
+						entity->sprite = 1207;
 					}
 					else
 					{
 						entity->focalx = limbs[FLESHLING][4][0] + 1; // 1
 						entity->focaly = limbs[FLESHLING][4][1]; // 0
 						entity->focalz = limbs[FLESHLING][4][2] - 1; // 1
-						entity->sprite = 1106;
+						entity->sprite = 1206;
 					}
 				}
 				entity->x += 2.5 * cos(my->yaw + PI / 2) - .75 * cos(my->yaw);
@@ -656,14 +656,14 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[FLESHLING][5][0]; // 0
 						entity->focaly = limbs[FLESHLING][5][1]; // 0
 						entity->focalz = limbs[FLESHLING][5][2]; // 2
-						entity->sprite = 1104;
+						entity->sprite = 1204;
 					}
 					else
 					{
 						entity->focalx = limbs[FLESHLING][5][0] + 1; // 1
 						entity->focaly = limbs[FLESHLING][5][1]; // 0
 						entity->focalz = limbs[FLESHLING][5][2] - 1; // 1
-						entity->sprite = 1105;
+						entity->sprite = 1205;
 					}
 				}
 				entity->x -= 2.5 * cos(my->yaw + PI / 2) + .75 * cos(my->yaw);

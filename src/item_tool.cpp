@@ -502,15 +502,15 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 		}
 		else if (type == SYMBOL_RAGE && entity.pedestalOrbType == 1)
 		{
-			messagePlayer(player, language[4223]);
+			messagePlayer(player, language[6223]);
 		}
 		else if (type == SYMBOL_CRUELTY && entity.pedestalOrbType == 2)
 		{
-			messagePlayer(player, language[4223]);
+			messagePlayer(player, language[6223]);
 		}
 		else if (type == SYMBOL_HATRED && entity.pedestalOrbType == 3)
 		{
-			messagePlayer(player, language[4223]);
+			messagePlayer(player, language[6223]);
 		}
 		else
 		{
@@ -565,13 +565,13 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 					messagePlayer(player, language[3888], entity.getStats()->name);
 					break;
 				case SYMBOL_RAGE:
-					messagePlayer(player, language[4251], entity.getStats()->name);
+					messagePlayer(player, language[6251], entity.getStats()->name);
 					break;
 				case SYMBOL_CRUELTY:
-					messagePlayer(player, language[4252], entity.getStats()->name);
+					messagePlayer(player, language[6252], entity.getStats()->name);
 					break;
 				case SYMBOL_HATRED:
-					messagePlayer(player, language[4253], entity.getStats()->name);
+					messagePlayer(player, language[6253], entity.getStats()->name);
 					break;
 				default:
 					break;

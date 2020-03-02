@@ -25,7 +25,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 {
 	node_t* node;
 
-	my->initMonster(1050);
+	my->initMonster(1150);
 
 	if (multiplayer != CLIENT)
 	{
@@ -129,7 +129,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(1051, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1151, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->focaly = 1;
@@ -149,7 +149,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(1057, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1157, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -168,7 +168,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(1056, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1156, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -187,7 +187,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(1053, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1153, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -206,7 +206,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(1052, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1152, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -225,7 +225,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right wing
-	entity = newEntity(1055, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1155, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -244,7 +244,7 @@ void initGargoyle(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left wing
-	entity = newEntity(1054, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1154, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();

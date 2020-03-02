@@ -25,14 +25,14 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	int c;
 	node_t* node;
 
-	//Sprite 865 = Burg Guard head model.
-	my->initMonster(1042);
+	//Sprite 1142 = Burg Guard head model.
+	my->initMonster(1142);
 
 	if (multiplayer != CLIENT)
 	{
-		MONSTER_SPOTSND = 497;
+		MONSTER_SPOTSND = 597;
 		MONSTER_SPOTVAR = 3;
-		MONSTER_IDLESND = 494;
+		MONSTER_IDLESND = 594;
 		MONSTER_IDLEVAR = 3;
 	}
 	if (multiplayer != CLIENT && !MONSTER_INIT)
@@ -244,7 +244,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(1043, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1143, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -266,7 +266,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(1049, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1149, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -285,7 +285,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(1048, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1148, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -304,7 +304,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(1045, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1145, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -323,7 +323,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(1044, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1144, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -462,7 +462,7 @@ void burgGuardDie(Entity* my)
 
 	my->spawnBlood(212);
 
-	playSoundEntity(my, 491 + rand() % 3, 128);
+	playSoundEntity(my, 591 + rand() % 3, 128);
 
 	my->removeMonsterDeathNodes();
 
@@ -627,7 +627,7 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			{
 				if (myStats->breastplate == nullptr)
 				{
-					entity->sprite = 1043;
+					entity->sprite = 1143;
 				}
 				else
 				{
@@ -655,7 +655,7 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			{
 				if (myStats->shoes == nullptr)
 				{
-					entity->sprite = 1049;
+					entity->sprite = 1149;
 				}
 				else
 				{
@@ -683,7 +683,7 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			{
 				if (myStats->shoes == nullptr)
 				{
-					entity->sprite = 1048;
+					entity->sprite = 1148;
 				}
 				else
 				{
@@ -706,80 +706,224 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 			my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_LEFTLEG);
 			break;
 			// right arm
-			case LIMB_HUMANOID_RIGHTARM:
+		case LIMB_HUMANOID_RIGHTARM:
+		{
+			node_t* weaponNode = list_Node(&my->children, 7);
+			if (weaponNode)
 			{
-				node_t* weaponNode = list_Node(&my->children, 7);
-				if (weaponNode)
+				Entity* weapon = (Entity*)weaponNode->element;
+				if (MONSTER_ARMBENDED || (weapon->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT))
 				{
-					Entity* weapon = (Entity*)weaponNode->element;
-					if (MONSTER_ARMBENDED || (weapon->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT))
-					{
-						// if weapon invisible and I'm not attacking, relax arm.
-						entity->focalx = limbs[BURGGUARD][4][0]; // 0
-						entity->focaly = limbs[BURGGUARD][4][1]; // 0
-						entity->focalz = limbs[BURGGUARD][4][2]; // 2
-						entity->sprite = 1045;
-					}
-					else
-					{
-						// else flex arm.
-						entity->focalx = limbs[BURGGUARD][4][0] + 0.75;
-						entity->focaly = limbs[BURGGUARD][4][1];
-						entity->focalz = limbs[BURGGUARD][4][2] - 0.75;
-						entity->sprite = 1047;
-					}
-				}
-				my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_RIGHTARM);
-				entity->yaw += MONSTER_WEAPONYAW;
-				break;
-				// left arm
-			}
-			case LIMB_HUMANOID_LEFTARM:
-			{
-				shieldarm = entity;
-				node_t* shieldNode = list_Node(&my->children, 8);
-				if (shieldNode)
-				{
-					Entity* shield = (Entity*)shieldNode->element;
-					if (shield->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT)
-					{
-						entity->focalx = limbs[BURGGUARD][5][0]; // 0
-						entity->focaly = limbs[BURGGUARD][5][1]; // 0
-						entity->focalz = limbs[BURGGUARD][5][2]; // 2
-						entity->sprite = 1044;
-					}
-					else
-					{
-						entity->focalx = limbs[BURGGUARD][5][0] + 0.75;
-						entity->focaly = limbs[BURGGUARD][5][1];
-						entity->focalz = limbs[BURGGUARD][5][2] - 0.75;
-						entity->sprite = 1046;
-					}
-				}
-				my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_LEFTARM);
-				if (my->monsterDefend && my->monsterAttack == 0)
-				{
-					MONSTER_SHIELDYAW = PI / 5;
+					// if weapon invisible and I'm not attacking, relax arm.
+					entity->focalx = limbs[BURGGUARD][4][0]; // 0
+					entity->focaly = limbs[BURGGUARD][4][1]; // 0
+					entity->focalz = limbs[BURGGUARD][4][2]; // 2
+					entity->sprite = 1145;
 				}
 				else
 				{
-					MONSTER_SHIELDYAW = 0;
+					// else flex arm.
+					entity->focalx = limbs[BURGGUARD][4][0] + 0.75;
+					entity->focaly = limbs[BURGGUARD][4][1];
+					entity->focalz = limbs[BURGGUARD][4][2] - 0.75;
+					entity->sprite = 1147;
 				}
-				entity->yaw += MONSTER_SHIELDYAW;
-				break;
 			}
-		// weapon
-		case LIMB_HUMANOID_WEAPON:
-			if (multiplayer != CLIENT)
+			my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_RIGHTARM);
+			entity->yaw += MONSTER_WEAPONYAW;
+			break;
+			// left arm
+		}
+		case LIMB_HUMANOID_LEFTARM:
+		{
+			shieldarm = entity;
+			node_t* shieldNode = list_Node(&my->children, 8);
+			if (shieldNode)
 			{
-				if (myStats->weapon == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring) //TODO: isInvisible()?
+				Entity* shield = (Entity*)shieldNode->element;
+				if (shield->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT)
 				{
-					entity->flags[INVISIBLE] = true;
+					entity->focalx = limbs[BURGGUARD][5][0]; // 0
+					entity->focaly = limbs[BURGGUARD][5][1]; // 0
+					entity->focalz = limbs[BURGGUARD][5][2]; // 2
+					entity->sprite = 1144;
 				}
 				else
 				{
-					entity->sprite = itemModel(myStats->weapon);
-					if (itemCategory(myStats->weapon) == SPELLBOOK)
+					entity->focalx = limbs[BURGGUARD][5][0] + 0.75;
+					entity->focaly = limbs[BURGGUARD][5][1];
+					entity->focalz = limbs[BURGGUARD][5][2] - 0.75;
+					entity->sprite = 1146;
+				}
+			}
+			my->setHumanoidLimbOffset(entity, BURGGUARD, LIMB_HUMANOID_LEFTARM);
+			if (my->monsterDefend && my->monsterAttack == 0)
+			{
+				MONSTER_SHIELDYAW = PI / 5;
+			}
+			else
+			{
+				MONSTER_SHIELDYAW = 0;
+			}
+			entity->yaw += MONSTER_SHIELDYAW;
+			break;
+		}
+			// weapon
+			case LIMB_HUMANOID_WEAPON:
+				if (multiplayer != CLIENT)
+				{
+					if (myStats->weapon == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring) //TODO: isInvisible()?
+					{
+						entity->flags[INVISIBLE] = true;
+					}
+					else
+					{
+						entity->sprite = itemModel(myStats->weapon);
+						if (itemCategory(myStats->weapon) == SPELLBOOK)
+						{
+							entity->flags[INVISIBLE] = true;
+						}
+						else
+						{
+							entity->flags[INVISIBLE] = false;
+						}
+					}
+					if (multiplayer == SERVER)
+					{
+						// update sprites for clients
+						if (entity->skill[10] != entity->sprite)
+						{
+							entity->skill[10] = entity->sprite;
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if (entity->skill[11] != entity->flags[INVISIBLE])
+						{
+							entity->skill[11] = entity->flags[INVISIBLE];
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
+						{
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+					}
+				}
+				else
+				{
+					if (entity->sprite <= 0)
+					{
+						entity->flags[INVISIBLE] = true;
+					}
+				}
+				if (weaponarm != nullptr)
+				{
+					my->handleHumanoidWeaponLimb(entity, weaponarm);
+				}
+				break;
+				// shield
+			case 8:
+				if (multiplayer != CLIENT)
+				{
+					if (myStats->shield == nullptr)
+					{
+						entity->flags[INVISIBLE] = true;
+						entity->sprite = 0;
+					}
+					else
+					{
+						entity->flags[INVISIBLE] = false;
+						entity->sprite = itemModel(myStats->shield);
+						if (itemTypeIsQuiver(myStats->shield->type))
+						{
+							entity->handleQuiverThirdPersonModel(*myStats);
+						}
+					}
+					if (myStats->EFFECTS[EFF_INVISIBLE] || wearingring) //TODO: isInvisible()?
+					{
+						entity->flags[INVISIBLE] = true;
+					}
+					if (multiplayer == SERVER)
+					{
+						// update sprites for clients
+						if (entity->skill[10] != entity->sprite)
+						{
+							entity->skill[10] = entity->sprite;
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if (entity->skill[11] != entity->flags[INVISIBLE])
+						{
+							entity->skill[11] = entity->flags[INVISIBLE];
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
+						{
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+					}
+				}
+				else
+				{
+					if (entity->sprite <= 0)
+					{
+						entity->flags[INVISIBLE] = true;
+					}
+				}
+				my->handleHumanoidShieldLimb(entity, shieldarm);
+				break;
+				// cloak
+			case LIMB_HUMANOID_CLOAK:
+				if (multiplayer != CLIENT)
+				{
+					if (myStats->cloak == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring) //TODO: isInvisible()?
+					{
+						entity->flags[INVISIBLE] = true;
+					}
+					else
+					{
+						entity->flags[INVISIBLE] = false;
+						entity->sprite = itemModel(myStats->cloak);
+					}
+					if (multiplayer == SERVER)
+					{
+						// update sprites for clients
+						if (entity->skill[10] != entity->sprite)
+						{
+							entity->skill[10] = entity->sprite;
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if (entity->skill[11] != entity->flags[INVISIBLE])
+						{
+							entity->skill[11] = entity->flags[INVISIBLE];
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
+						{
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+					}
+				}
+				else
+				{
+					if (entity->sprite <= 0)
+					{
+						entity->flags[INVISIBLE] = true;
+					}
+				}
+				entity->x -= cos(my->yaw);
+				entity->y -= sin(my->yaw);
+				entity->yaw += PI / 2;
+				break;
+				// helm
+			case LIMB_HUMANOID_HELMET:
+				helmet = entity;
+				entity->focalx = limbs[BURGGUARD][9][0]; // 0
+				entity->focaly = limbs[BURGGUARD][9][1]; // 0
+				entity->focalz = limbs[BURGGUARD][9][2]; // -2
+				entity->pitch = my->pitch;
+				entity->roll = 0;
+				if (multiplayer != CLIENT)
+				{
+					entity->sprite = itemModel(myStats->helmet);
+					if (myStats->helmet == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring) //TODO: isInvisible()?
 					{
 						entity->flags[INVISIBLE] = true;
 					}
@@ -787,265 +931,121 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 					{
 						entity->flags[INVISIBLE] = false;
 					}
-				}
-				if (multiplayer == SERVER)
-				{
-					// update sprites for clients
-					if (entity->skill[10] != entity->sprite)
+					if (multiplayer == SERVER)
 					{
-						entity->skill[10] = entity->sprite;
-						serverUpdateEntityBodypart(my, bodypart);
+						// update sprites for clients
+						if (entity->skill[10] != entity->sprite)
+						{
+							entity->skill[10] = entity->sprite;
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if (entity->skill[11] != entity->flags[INVISIBLE])
+						{
+							entity->skill[11] = entity->flags[INVISIBLE];
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
+						{
+							serverUpdateEntityBodypart(my, bodypart);
+						}
 					}
-					if (entity->skill[11] != entity->flags[INVISIBLE])
-					{
-						entity->skill[11] = entity->flags[INVISIBLE];
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-					if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
-					{
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-				}
-			}
-			else
-			{
-				if (entity->sprite <= 0)
-				{
-					entity->flags[INVISIBLE] = true;
-				}
-			}
-			if (weaponarm != nullptr)
-			{
-				my->handleHumanoidWeaponLimb(entity, weaponarm);
-			}
-			break;
-			// shield
-		case 8:
-			if (multiplayer != CLIENT)
-			{
-				if (myStats->shield == nullptr)
-				{
-					entity->flags[INVISIBLE] = true;
-					entity->sprite = 0;
 				}
 				else
 				{
-					entity->flags[INVISIBLE] = false;
-					entity->sprite = itemModel(myStats->shield);
-					if (itemTypeIsQuiver(myStats->shield->type))
+					if (entity->sprite <= 0)
 					{
-						entity->handleQuiverThirdPersonModel(*myStats);
+						entity->flags[INVISIBLE] = true;
 					}
 				}
-				if (myStats->EFFECTS[EFF_INVISIBLE] || wearingring) //TODO: isInvisible()?
+				my->setHelmetLimbOffset(entity);
+				break;
+				// mask
+			case LIMB_HUMANOID_MASK:
+				entity->focalx = limbs[BURGGUARD][10][0]; // 0
+				entity->focaly = limbs[BURGGUARD][10][1]; // 0
+				entity->focalz = limbs[BURGGUARD][10][2]; // .25
+				entity->pitch = my->pitch;
+				entity->roll = PI / 2;
+				if (multiplayer != CLIENT)
 				{
-					entity->flags[INVISIBLE] = true;
-				}
-				if (multiplayer == SERVER)
-				{
-					// update sprites for clients
-					if (entity->skill[10] != entity->sprite)
+					bool hasSteelHelm = false;
+					if (myStats->helmet)
 					{
-						entity->skill[10] = entity->sprite;
-						serverUpdateEntityBodypart(my, bodypart);
+						if (myStats->helmet->type == STEEL_HELM
+							|| myStats->helmet->type == CRYSTAL_HELM
+							|| myStats->helmet->type == ARTIFACT_HELM)
+						{
+							hasSteelHelm = true;
+						}
 					}
-					if (entity->skill[11] != entity->flags[INVISIBLE])
+					if (myStats->mask == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring || hasSteelHelm) //TODO: isInvisible()?
 					{
-						entity->skill[11] = entity->flags[INVISIBLE];
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-					if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
-					{
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-				}
-			}
-			else
-			{
-				if (entity->sprite <= 0)
-				{
-					entity->flags[INVISIBLE] = true;
-				}
-			}
-			my->handleHumanoidShieldLimb(entity, shieldarm);
-			break;
-			// cloak
-		case LIMB_HUMANOID_CLOAK:
-			if (multiplayer != CLIENT)
-			{
-				if (myStats->cloak == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring) //TODO: isInvisible()?
-				{
-					entity->flags[INVISIBLE] = true;
-				}
-				else
-				{
-					entity->flags[INVISIBLE] = false;
-					entity->sprite = itemModel(myStats->cloak);
-				}
-				if (multiplayer == SERVER)
-				{
-					// update sprites for clients
-					if (entity->skill[10] != entity->sprite)
-					{
-						entity->skill[10] = entity->sprite;
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-					if (entity->skill[11] != entity->flags[INVISIBLE])
-					{
-						entity->skill[11] = entity->flags[INVISIBLE];
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-					if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
-					{
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-				}
-			}
-			else
-			{
-				if (entity->sprite <= 0)
-				{
-					entity->flags[INVISIBLE] = true;
-				}
-			}
-			entity->x -= cos(my->yaw);
-			entity->y -= sin(my->yaw);
-			entity->yaw += PI / 2;
-			break;
-			// helm
-		case LIMB_HUMANOID_HELMET:
-			helmet = entity;
-			entity->focalx = limbs[BURGGUARD][9][0]; // 0
-			entity->focaly = limbs[BURGGUARD][9][1]; // 0
-			entity->focalz = limbs[BURGGUARD][9][2]; // -2
-			entity->pitch = my->pitch;
-			entity->roll = 0;
-			if (multiplayer != CLIENT)
-			{
-				entity->sprite = itemModel(myStats->helmet);
-				if (myStats->helmet == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring) //TODO: isInvisible()?
-				{
-					entity->flags[INVISIBLE] = true;
-				}
-				else
-				{
-					entity->flags[INVISIBLE] = false;
-				}
-				if (multiplayer == SERVER)
-				{
-					// update sprites for clients
-					if (entity->skill[10] != entity->sprite)
-					{
-						entity->skill[10] = entity->sprite;
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-					if (entity->skill[11] != entity->flags[INVISIBLE])
-					{
-						entity->skill[11] = entity->flags[INVISIBLE];
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-					if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
-					{
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-				}
-			}
-			else
-			{
-				if (entity->sprite <= 0)
-				{
-					entity->flags[INVISIBLE] = true;
-				}
-			}
-			my->setHelmetLimbOffset(entity);
-			break;
-			// mask
-		case LIMB_HUMANOID_MASK:
-			entity->focalx = limbs[BURGGUARD][10][0]; // 0
-			entity->focaly = limbs[BURGGUARD][10][1]; // 0
-			entity->focalz = limbs[BURGGUARD][10][2]; // .25
-			entity->pitch = my->pitch;
-			entity->roll = PI / 2;
-			if (multiplayer != CLIENT)
-			{
-				bool hasSteelHelm = false;
-				if (myStats->helmet)
-				{
-					if (myStats->helmet->type == STEEL_HELM
-						|| myStats->helmet->type == CRYSTAL_HELM
-						|| myStats->helmet->type == ARTIFACT_HELM)
-					{
-						hasSteelHelm = true;
-					}
-				}
-				if (myStats->mask == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring || hasSteelHelm) //TODO: isInvisible()?
-				{
-					entity->flags[INVISIBLE] = true;
-				}
-				else
-				{
-					entity->flags[INVISIBLE] = false;
-				}
-				if (myStats->mask != nullptr)
-				{
-					if (myStats->mask->type == TOOL_GLASSES)
-					{
-						entity->sprite = 165; // GlassesWorn.vox
+						entity->flags[INVISIBLE] = true;
 					}
 					else
 					{
-						entity->sprite = itemModel(myStats->mask);
+						entity->flags[INVISIBLE] = false;
 					}
-				}
-				if (multiplayer == SERVER)
-				{
-					// update sprites for clients
-					if (entity->skill[10] != entity->sprite)
+					if (myStats->mask != nullptr)
 					{
-						entity->skill[10] = entity->sprite;
-						serverUpdateEntityBodypart(my, bodypart);
+						if (myStats->mask->type == TOOL_GLASSES)
+						{
+							entity->sprite = 165; // GlassesWorn.vox
+						}
+						else
+						{
+							entity->sprite = itemModel(myStats->mask);
+						}
 					}
-					if (entity->skill[11] != entity->flags[INVISIBLE])
+					if (multiplayer == SERVER)
 					{
-						entity->skill[11] = entity->flags[INVISIBLE];
-						serverUpdateEntityBodypart(my, bodypart);
+						// update sprites for clients
+						if (entity->skill[10] != entity->sprite)
+						{
+							entity->skill[10] = entity->sprite;
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if (entity->skill[11] != entity->flags[INVISIBLE])
+						{
+							entity->skill[11] = entity->flags[INVISIBLE];
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
+						{
+							serverUpdateEntityBodypart(my, bodypart);
+						}
 					}
-					if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
-					{
-						serverUpdateEntityBodypart(my, bodypart);
-					}
-				}
-			}
-			else
-			{
-				if (entity->sprite <= 0)
-				{
-					entity->flags[INVISIBLE] = true;
-				}
-			}
-
-			if (entity->sprite != 165)
-			{
-				if (entity->sprite == items[MASK_SHAMAN].index)
-				{
-					entity->roll = 0;
-					my->setHelmetLimbOffset(entity);
-					my->setHelmetLimbOffsetWithMask(helmet, entity);
 				}
 				else
 				{
-					entity->focalx = limbs[BURGGUARD][10][0] + .35; // .35
-					entity->focaly = limbs[BURGGUARD][10][1] - 2; // -2
+					if (entity->sprite <= 0)
+					{
+						entity->flags[INVISIBLE] = true;
+					}
+				}
+
+				if (entity->sprite != 165)
+				{
+					if (entity->sprite == items[MASK_SHAMAN].index)
+					{
+						entity->roll = 0;
+						my->setHelmetLimbOffset(entity);
+						my->setHelmetLimbOffsetWithMask(helmet, entity);
+					}
+					else
+					{
+						entity->focalx = limbs[BURGGUARD][10][0] + .35; // .35
+						entity->focaly = limbs[BURGGUARD][10][1] - 2; // -2
+						entity->focalz = limbs[BURGGUARD][10][2]; // .25
+					}
+				}
+				else
+				{
+					entity->focalx = limbs[BURGGUARD][10][0] + .25; // .25
+					entity->focaly = limbs[BURGGUARD][10][1] - 2.25; // -2.25
 					entity->focalz = limbs[BURGGUARD][10][2]; // .25
 				}
-			}
-			else
-			{
-				entity->focalx = limbs[BURGGUARD][10][0] + .25; // .25
-				entity->focaly = limbs[BURGGUARD][10][1] - 2.25; // -2.25
-				entity->focalz = limbs[BURGGUARD][10][2]; // .25
-			}
-			break;
+				break;
 		}
 	}
 	// rotate shield a bit

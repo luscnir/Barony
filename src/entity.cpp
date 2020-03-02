@@ -3441,13 +3441,22 @@ void Entity::handleEffects(Stat* myStats)
 		{
 			if (rand() % 2000 == 0)   // .05% chance every frame
 			{
-				messagePlayer(player, language[4241]);
+				messagePlayer(player, language[6241]);
 
 				switch (rand() % 20)	//5% chance for each effect
 				{
 				case 0:
-					myStats->EFFECTS[EFF_POISONED] = true;
-					myStats->EFFECTS_TIMERS[EFF_POISONED] = 30 * TICKS_PER_SECOND;
+					if (myStats->HP >= 10)
+					{
+						myStats->EFFECTS[EFF_POISONED] = true;
+						myStats->EFFECTS_TIMERS[EFF_POISONED] = 30 * TICKS_PER_SECOND;
+					}
+					else
+					{
+						myStats->EFFECTS[EFF_CONFUSED] = true;
+						myStats->EFFECTS_TIMERS[EFF_CONFUSED] = 15 * TICKS_PER_SECOND;
+						break;
+					}
 					break;
 				case 1:
 					myStats->EFFECTS[EFF_ASLEEP] = true;
@@ -8240,7 +8249,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 												break;
 									}
 									//tell the player that a spell was casted from the mace
-									messagePlayer(player, language[4213]);
+									messagePlayer(player, language[6213]);
 								}
 							}
 						}
@@ -8254,7 +8263,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 								{
 									hitstats->EFFECTS[EFF_PARALYZED] = true;
 									hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = TICKS_PER_SECOND * 5;
-									messagePlayer(player, language[4244]);
+									messagePlayer(player, language[6244]);
 								}
 							}
 						}
@@ -8269,7 +8278,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 							{
 								hitstats->MP -= 3;
 								this->modMP(+3);
-								messagePlayer(player, language[4242]);
+								messagePlayer(player, language[6242]);
 							}
 						}
 					}
@@ -8293,7 +8302,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 							{
 								hitstats->HP -= 3;
 								this->modHP(+3);
-								messagePlayer(player, language[4243]);
+								messagePlayer(player, language[6243]);
 							}
 						}
 					}
@@ -8333,14 +8342,14 @@ void Entity::attack(int pose, int charge, Entity* target)
 										}
 									}
 									this->modHP(+50);
-									messagePlayer(player, language[4216]);
+									messagePlayer(player, language[6216]);
 								}
 							}
 							//What normally happens
 							else
 							{
 								this->modHP(+20);
-								messagePlayer(player, language[4214]);
+								messagePlayer(player, language[6214]);
 							}
 						//spawnAmbientParticles(100, 862, 10 + rand() % 30, 0.5, true);
 						}
@@ -12276,11 +12285,11 @@ int setGloveSprite(Stat* myStats, Entity* ent, int spriteOffset)
 	}
 	else if (myStats->gloves->type == ABYSSAL_KNUCKLES )
 	{
-		ent->sprite = 1026 + (spriteOffset > 0 ? 1 : 0);
+		ent->sprite = 1126 + (spriteOffset > 0 ? 1 : 0);
 	}
 	else if (myStats->gloves->type == ICE_GLOVES)
 	{
-		ent->sprite = 1132 + myStats->sex + spriteOffset;
+		ent->sprite = 1232 + myStats->sex + spriteOffset;
 	}
 	else
 	{
@@ -12345,11 +12354,11 @@ bool Entity::setBootSprite(Entity* leg, int spriteOffset)
 			}
 			else if ( myStats->shoes->type == ABYSSAL_BOOTS )
 			{
-				leg->sprite = 1034 + myStats->sex + spriteOffset;
+				leg->sprite = 1134 + myStats->sex + spriteOffset;
 			}
 			else if ( myStats->shoes->type == BOOTS_LIGHTNESS || myStats->shoes->type == BOOTS_SUPER_LIGHTNESS )
 			{
-				leg->sprite = 1142 + myStats->sex + spriteOffset;
+				leg->sprite = 1242 + myStats->sex + spriteOffset;
 			}
 			else
 			{
@@ -12398,11 +12407,11 @@ bool Entity::setBootSprite(Entity* leg, int spriteOffset)
 			}
 			else if ( myStats->shoes->type == ABYSSAL_BOOTS )
 			{
-				leg->sprite = 1034 + spriteOffset;
+				leg->sprite = 1134 + spriteOffset;
 			}
 			else if ( myStats->shoes->type == BOOTS_LIGHTNESS || myStats->shoes->type == BOOTS_SUPER_LIGHTNESS )
 			{
-				leg->sprite = 1142 + myStats->sex + spriteOffset;
+				leg->sprite = 1242 + myStats->sex + spriteOffset;
 			}
 			else
 			{
@@ -15083,13 +15092,13 @@ void Entity::monsterAddNearbyItemToInventory(Stat* myStats, int rangeToFind, int
 								messagePlayer(owner->skill[2], language[3888], myStats->name);
 								break;
 							case SYMBOL_RAGE:
-								messagePlayer(owner->skill[2], language[4251], myStats->name);
+								messagePlayer(owner->skill[2], language[6251], myStats->name);
 								break;
 							case SYMBOL_CRUELTY:
-								messagePlayer(owner->skill[2], language[4252], myStats->name);
+								messagePlayer(owner->skill[2], language[6252], myStats->name);
 								break;
 							case SYMBOL_HATRED:
-								messagePlayer(owner->skill[2], language[4253], myStats->name);
+								messagePlayer(owner->skill[2], language[6253], myStats->name);
 								break;
 							default:
 								break;

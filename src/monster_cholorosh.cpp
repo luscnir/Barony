@@ -16,13 +16,13 @@ void initCholorosh(Entity* my, Stat* myStats)
 	node_t* node;
 	int boss = 0;
 
-	my->initMonster(1119);// chlorosh head
+	my->initMonster(1219);// chlorosh head
 
 	if ( multiplayer != CLIENT )
 	{
-		MONSTER_SPOTSND = 548;
+		MONSTER_SPOTSND = 648;
 		MONSTER_SPOTVAR = 3;
-		MONSTER_IDLESND = 551;
+		MONSTER_IDLESND = 651;
 		MONSTER_IDLEVAR = 3;
 	}
 
@@ -383,7 +383,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(1126, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1226, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -405,7 +405,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(1125, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1225, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -424,7 +424,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(1124, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1224, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -443,7 +443,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(1122, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1222, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -462,7 +462,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(1120, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1220, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -601,7 +601,7 @@ void choloroshDie(Entity* my)
 
 	my->spawnBlood();
 
-	playSoundEntity(my, 554 + rand() % 3, 128);
+	playSoundEntity(my, 654 + rand() % 3, 128);
 
 	my->removeMonsterDeathNodes();
 
@@ -707,6 +707,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	}
 
 	Entity* shieldarm = nullptr;
+	Entity* helmet = nullptr;
 
 	//Move bodyparts
 	for (bodypart = 0, node = my->children.first; node != nullptr; node = node->next, bodypart++)
@@ -818,7 +819,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->breastplate == nullptr )
 					{
-						entity->sprite = 1126;
+						entity->sprite = 1226;
 					}
 					else
 					{
@@ -846,7 +847,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->shoes == nullptr )
 					{
-						entity->sprite = 1125;
+						entity->sprite = 1225;
 					}
 					else
 					{
@@ -874,7 +875,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->shoes == nullptr )
 					{
-						entity->sprite = 1124;
+						entity->sprite = 1224;
 					}
 					else
 					{
@@ -909,7 +910,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[CHOLOROSH][4][0]; // 0
 						entity->focaly = limbs[CHOLOROSH][4][1]; // 0
 						entity->focalz = limbs[CHOLOROSH][4][2]; // 2
-						entity->sprite = 1122;
+						entity->sprite = 1222;
 					}
 					else
 					{
@@ -917,7 +918,7 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[CHOLOROSH][4][0] + 0.75;
 						entity->focaly = limbs[CHOLOROSH][4][1];
 						entity->focalz = limbs[CHOLOROSH][4][2] - 0.75;
-						entity->sprite = 1123;
+						entity->sprite = 1223;
 					}
 				}
 				my->setHumanoidLimbOffset(entity, CHOLOROSH, LIMB_HUMANOID_RIGHTARM);
@@ -937,14 +938,14 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[CHOLOROSH][5][0]; // 0
 						entity->focaly = limbs[CHOLOROSH][5][1]; // 0
 						entity->focalz = limbs[CHOLOROSH][5][2]; // 2
-						entity->sprite = 1120;
+						entity->sprite = 1220;
 					}
 					else
 					{
 						entity->focalx = limbs[CHOLOROSH][5][0] + 0.75;
 						entity->focaly = limbs[CHOLOROSH][5][1];
 						entity->focalz = limbs[CHOLOROSH][5][2] - 0.75;
-						entity->sprite = 1121;
+						entity->sprite = 1221;
 					}
 				}
 				my->setHumanoidLimbOffset(entity, CHOLOROSH, LIMB_HUMANOID_LEFTARM);
@@ -1152,9 +1153,19 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				entity->focalz = limbs[CHOLOROSH][10][2]; // .25
 				entity->pitch = my->pitch;
 				entity->roll = PI / 2;
-				if ( multiplayer != CLIENT )
+				if (multiplayer != CLIENT)
 				{
-					if ( myStats->mask == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring ) //TODO: isInvisible()?
+					bool hasSteelHelm = false;
+					if (myStats->helmet)
+					{
+						if (myStats->helmet->type == STEEL_HELM
+							|| myStats->helmet->type == CRYSTAL_HELM
+							|| myStats->helmet->type == ARTIFACT_HELM)
+						{
+							hasSteelHelm = true;
+						}
+					}
+					if (myStats->mask == nullptr || myStats->EFFECTS[EFF_INVISIBLE] || wearingring || hasSteelHelm) //TODO: isInvisible()?
 					{
 						entity->flags[INVISIBLE] = true;
 					}
@@ -1162,9 +1173,9 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					{
 						entity->flags[INVISIBLE] = false;
 					}
-					if ( myStats->mask != nullptr )
+					if (myStats->mask != nullptr)
 					{
-						if ( myStats->mask->type == TOOL_GLASSES )
+						if (myStats->mask->type == TOOL_GLASSES)
 						{
 							entity->sprite = 165; // GlassesWorn.vox
 						}
@@ -1173,20 +1184,20 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 							entity->sprite = itemModel(myStats->mask);
 						}
 					}
-					if ( multiplayer == SERVER )
+					if (multiplayer == SERVER)
 					{
 						// update sprites for clients
-						if ( entity->skill[10] != entity->sprite )
+						if (entity->skill[10] != entity->sprite)
 						{
 							entity->skill[10] = entity->sprite;
 							serverUpdateEntityBodypart(my, bodypart);
 						}
-						if ( entity->skill[11] != entity->flags[INVISIBLE] )
+						if (entity->skill[11] != entity->flags[INVISIBLE])
 						{
 							entity->skill[11] = entity->flags[INVISIBLE];
 							serverUpdateEntityBodypart(my, bodypart);
 						}
-						if ( entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10) )
+						if (entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10))
 						{
 							serverUpdateEntityBodypart(my, bodypart);
 						}
@@ -1194,16 +1205,25 @@ void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				}
 				else
 				{
-					if ( entity->sprite <= 0 )
+					if (entity->sprite <= 0)
 					{
 						entity->flags[INVISIBLE] = true;
 					}
 				}
-				if ( entity->sprite != 165 )
+				if (entity->sprite != 165)
 				{
-					entity->focalx = limbs[CHOLOROSH][10][0] + .35; // .35
-					entity->focaly = limbs[CHOLOROSH][10][1] - 2; // -2
-					entity->focalz = limbs[CHOLOROSH][10][2]; // .25
+					if (entity->sprite == items[MASK_SHAMAN].index)
+					{
+						entity->roll = 0;
+						my->setHelmetLimbOffset(entity);
+						my->setHelmetLimbOffsetWithMask(helmet, entity);
+					}
+					else
+					{
+						entity->focalx = limbs[CHOLOROSH][10][0] + .35; // .35
+						entity->focaly = limbs[CHOLOROSH][10][1] - 2; // -2
+						entity->focalz = limbs[CHOLOROSH][10][2]; // .25
+					}
 				}
 				else
 				{
@@ -1454,8 +1474,6 @@ bool Entity::choloroshCanWieldItem(const Item& item) const
 	case POTION:
 		switch (item.type)
 		{
-		case POTION_BOOZE:
-			return true;
 		case POTION_HEALING:
 			return true;
 		default:

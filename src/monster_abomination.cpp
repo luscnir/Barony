@@ -18,7 +18,7 @@ void initAbomination(Entity* my, Stat* myStats)
 	int c;
 	node_t* node;
 
-	my->initMonster(1111);
+	my->initMonster(1211);
 
 	if ( multiplayer != CLIENT )
 	{
@@ -80,7 +80,7 @@ void initAbomination(Entity* my, Stat* myStats)
 	}
 
 	// torso
-	Entity* entity = newEntity(1118, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1218, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -102,7 +102,7 @@ void initAbomination(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(1117, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1217, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -121,7 +121,7 @@ void initAbomination(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(1116, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1216, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -140,7 +140,7 @@ void initAbomination(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(1114, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1214, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -159,7 +159,7 @@ void initAbomination(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(1112, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1212, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
@@ -760,7 +760,7 @@ void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->breastplate == NULL )
 					{
-						entity->sprite = 1118;
+						entity->sprite = 1218;
 					}
 					else
 					{
@@ -786,7 +786,7 @@ void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				break;
 			// right leg
 			case LIMB_HUMANOID_RIGHTLEG:
-				entity->sprite = 1117;
+				entity->sprite = 1217;
 				entity->x += 1 * cos(my->yaw + PI / 2) + .25 * cos(my->yaw);
 				entity->y += 1 * sin(my->yaw + PI / 2) + .25 * sin(my->yaw);
 				entity->z += 4;
@@ -798,7 +798,7 @@ void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				break;
 			// left leg
 			case LIMB_HUMANOID_LEFTLEG:
-				entity->sprite = 1116;
+				entity->sprite = 1216;
 				entity->x -= 1 * cos(my->yaw + PI / 2) - .25 * cos(my->yaw);
 				entity->y -= 1 * sin(my->yaw + PI / 2) - .25 * sin(my->yaw);
 				entity->z += 4;
@@ -821,7 +821,7 @@ void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[ABOMINATION][4][0] - 0.25; // 0
 						entity->focaly = limbs[ABOMINATION][4][1] - 0.25; // 0
 						entity->focalz = limbs[ABOMINATION][4][2]; // 2
-						entity->sprite = 1114;
+						entity->sprite = 1214;
 					}
 					else
 					{
@@ -829,7 +829,7 @@ void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[ABOMINATION][4][0];
 						entity->focaly = limbs[ABOMINATION][4][1];
 						entity->focalz = limbs[ABOMINATION][4][2];
-						entity->sprite = 1115;
+						entity->sprite = 1215;
 					}
 				}
 				entity->x += 2.5 * cos(my->yaw + PI / 2) - .20 * cos(my->yaw);
@@ -856,7 +856,7 @@ void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[ABOMINATION][5][0] - 0.25; // 0
 						entity->focaly = limbs[ABOMINATION][5][1] + 0.25; // 0
 						entity->focalz = limbs[ABOMINATION][5][2]; // 2
-						entity->sprite = 1112;
+						entity->sprite = 1212;
 					}
 					else
 					{
@@ -864,7 +864,7 @@ void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist)
 						entity->focalx = limbs[ABOMINATION][5][0];
 						entity->focaly = limbs[ABOMINATION][5][1];
 						entity->focalz = limbs[ABOMINATION][5][2];
-						entity->sprite = 1113;
+						entity->sprite = 1213;
 						if ( my->monsterAttack == MONSTER_POSE_MAGIC_WINDUP3 || my->monsterAttack == MONSTER_POSE_SPECIAL_WINDUP1 )
 						{
 							entity->yaw -= MONSTER_WEAPONYAW;
