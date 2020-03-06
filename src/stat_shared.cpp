@@ -1606,7 +1606,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->type = LICH_FALLEN;
 			stats->sex = FEMALE;
 			stats->appearance = rand();
-			strcpy(stats->name, "The Wicked One");
+			strcpy(stats->name, "The Fallen");
 			stats->inventory.first = nullptr;
 			stats->inventory.last = nullptr;
 			stats->HP = 3000;

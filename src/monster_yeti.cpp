@@ -15,7 +15,7 @@ void initYeti(Entity* my, Stat* myStats)
 	int c;
 	node_t* node;
 
-	my->initMonster(1'88);
+	my->initMonster(1188);
 
 	if ( multiplayer != CLIENT )
 	{

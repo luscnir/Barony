@@ -49,18 +49,18 @@ int checkSpriteType(Sint32 sprite)
 	case 80:
 	case 81:
 	case 82:
-	case 211:
-	case 213:
-	case 214:
-	case 215:
-	case 240:
-	case 241:
-	case 242:
-	case 243:
-	case 244:
-	case 245:
-	case 246:
-	case 247:
+	case 161:
+	case 163:
+	case 164:
+	case 165:
+	case 190:
+	case 191:
+	case 192:
+	case 193:
+	case 194:
+	case 195:
+	case 196:
+	case 197:
 		//monsters
 		return 1;
 		break;
@@ -91,7 +91,7 @@ int checkSpriteType(Sint32 sprite)
 		return 7;
 		break;
 	case 116:
-	case 216:
+	case 166:
 		//pedestal
 		return 8;
 		break;
@@ -115,21 +115,21 @@ int checkSpriteType(Sint32 sprite)
 		// Moded A_D furniture
 	//case 167:// BloodyFountain
 	//case 169:// BloodySpearTrap
-	case 220:
-	case 221:
-	case 224:
-	case 225:
-	case 226:
-	case 227:
+	case 170:
+	case 171:
+	case 174:
+	case 175:
+	case 176:
+	case 177:
 		// general furniture/misc.
 		return 12;
 		break;
 	case 127:
 		// Moded A_D Floor dec
-	case 218:
-	case 222:
-	case 223:
-	case 228:
+	case 168:
+	case 172:
+	case 173:
+	case 178:
 		// floor decoration
 		return 13;
 		break;
@@ -952,62 +952,7 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"LIGHT SOURCE",
 	"TEXT SOURCE",
 	"SIGNAL TIMER",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
+	"1",
 	"",
 	"",
 	"",
@@ -1043,8 +988,8 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"BLOODY FOUNTAIN",
 	"BLOODY ROCK",
 	"BLOODY SPEAR TRAP",
-	"BLUE CHAIR",
 	"BLUE BED",
+	"BLUE CHAIR",
 	"FLOOR GRASS SNOW",
 	"SEWER GARBAGE",
 	"SEWER PILLAR",
@@ -1366,56 +1311,6 @@ char tileEditorNameStrings[NUM_EDITOR_TILES][44] =
 	"Sky.png",
 	"SkyCrackle.png",
 	"SkyCrackle_B.png",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
 	"BigYellowSquare.png",
 	"OldGrid.png",
 	"OldGridwat1.png",

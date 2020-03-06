@@ -1202,7 +1202,13 @@ int loadMap(const char* filename2, map_t* destmap, list_t* entlist, list_t* crea
 			}
 		}
 	}
-
+	/*if (map.tiles[128] >= 238)
+	{
+		map.tiles += 50; 
+		saveMap(map.name); 
+		//return;
+	}*/
+	//if (map.flags[32] >= 135) map.entities += 50;// saveMap(); return; ///One Off
 	return numentities;
 }
 

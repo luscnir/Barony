@@ -811,7 +811,7 @@ void Entity::actPortalJump2()
 	}
 
 	yaw += 0.01; // rotate slowly on my axis
-	sprite = 1081 + (this->ticks / 20) % 4; // animate
+	sprite = 1181 + (this->ticks / 20) % 4; // animate
 
 	if (multiplayer == CLIENT)
 	{
@@ -926,7 +926,7 @@ void Entity::actPortalJump8()
 	}
 
 	yaw += 0.01; // rotate slowly on my axis
-	sprite = 1081 + (this->ticks / 20) % 4; // animate
+	sprite = 1181 + (this->ticks / 20) % 4; // animate
 
 	if (multiplayer == CLIENT)
 	{
@@ -1524,7 +1524,7 @@ void Entity::actMidPortalJump13()
 	}
 
 	yaw += 0.01; // rotate slowly on my axis
-	sprite = 1081 + (this->ticks / 20) % 4; // animate
+	sprite = 1181 + (this->ticks / 20) % 4; // animate
 
 	if (multiplayer == CLIENT)
 	{

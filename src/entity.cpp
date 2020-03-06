@@ -6569,11 +6569,11 @@ void Entity::attack(int pose, int charge, Entity* target)
 					}
 				}
 				else if ( myStats->weapon->type == ABYSSAL_CROSSBOW ){
-					entity = newEntity(1038, 1, map.entities, nullptr); // lighting bolt
+					entity = newEntity(1138, 1, map.entities, nullptr); // lighting bolt
 					playSoundEntity(this, 239 + rand() % 3, 96);
 				}
 				else if (myStats->weapon->type == CANNON) {
-					entity = newEntity(1162, 1, map.entities, nullptr); // cannonball
+					entity = newEntity(1262, 1, map.entities, nullptr); // cannonball
 					playSoundEntity(this, 153 , 96);
 				}
 				else if (myStats->weapon->type == CANNON_BOULDER) {

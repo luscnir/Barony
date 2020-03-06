@@ -639,7 +639,7 @@ void actHudWeapon(Entity* my)
 						}
 						else if (stats[clientnum]->weapon->type == ABYSSAL_CROSSBOW)
 						{
-							my->sprite = 1354;
+							my->sprite = 1454;
 						}
 					}
 					else if ( HUDWEAPON_CHOP == CROSSBOW_CHOP_RELOAD_ENDING )

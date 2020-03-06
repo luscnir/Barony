@@ -161,8 +161,8 @@ int initGame()
 		if (c >= TOOL_GREENTORCH)
 		{
 			newItems = c - TOOL_GREENTORCH;
-			items[c].name_identified = language[3950 + newItems * 2];
-			items[c].name_unidentified = language[3951 + newItems * 2];
+			items[c].name_identified = language[5950 + newItems * 2];
+			items[c].name_unidentified = language[5951 + newItems * 2];
 		}
 		else if (c > SPELLBOOK_DETECT_FOOD)
 		{
