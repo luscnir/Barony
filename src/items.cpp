@@ -1686,7 +1686,9 @@ EquipItemResult equipItem(Item* item, Item** slot, int player)
 					{
 						playSoundEntity(players[player]->entity, 44 + rand() % 3, 64);
 					}
-					else if ( item->type == TOOL_TORCH || item->type == TOOL_LANTERN || item->type == TOOL_CRYSTALSHARD || item->type == TOOL_GREENTORCH)
+					else if ( item->type == TOOL_TORCH || item->type == TOOL_LANTERN || item->type == TOOL_CRYSTALSHARD 
+						|| item->type == TOOL_GREENTORCH || item->type == TOOL_CANDLE || item->type == TOOL_CANDLE_TIMELESS
+						|| item->type == INQUISITOR_LANTERN )
 					{
 						playSoundEntity(players[player]->entity, 134, 64);
 					}
@@ -2040,6 +2042,10 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case CRYSTAL_SHIELD:
 		case ABYSSAL_SHIELD:
 		case NECRO_SHIELD:
+		case ANTI_SLEEP_SHIELD:
+		case ANTI_CHARM_SHIELD:
+		case ANTI_BLEED_SHIELD:
+		case LOST_SHIELD:
 			equipItem(item, &stats[player]->shield, player);
 			break;
 		case CROSSBOW:
@@ -2062,6 +2068,11 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case SUEDE_GLOVES:
 		case ABYSSAL_KNUCKLES:
 		case ICE_GLOVES:
+		case INQUISITOR_GLOVES:
+		case LIFESTEAL_KNUCKLES:
+		case MANA_GLOVES:
+		case TIN_GLOVES:
+		case LOST_GAUNTLETS:
 			equipItem(item, &stats[player]->gloves, player);
 			break;
 		case CLOAK:
@@ -2076,6 +2087,8 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case ABYSSAL_CLOAK:
 		case CLOAK_ELEMENTALIST:
 		case CLOAK_MELTING:
+		case INQUISITOR_BACKPACK:
+		case LOST_CLOAK:
 			equipItem(item, &stats[player]->cloak, player);
 			break;
 		case LEATHER_BOOTS:
@@ -2091,6 +2104,10 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case ABYSSAL_BOOTS:
 		case BOOTS_LIGHTNESS:
 		case BOOTS_SUPER_LIGHTNESS:
+		case INQUISITOR_BOOTS:
+		case FLYING_SHOES:
+		case TIN_BOOTS:
+		case LOST_BOOTS:
 			equipItem(item, &stats[player]->shoes, player);
 			break;
 		case LEATHER_BREASTPIECE:
@@ -2106,6 +2123,14 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case MACHINIST_APRON:
 		case ABYSSAL_CHEASTPIECE:
 		case IRON_BREASTPIECE_SLIMY:
+		case INQUISITOR_BREASTPIECE:
+		case ELEMENTALIST_DOUBLET:
+		case LIZARD_LEATHER_BREASTPIECE:
+		case CHAIN_ROBES:
+		case CHAIN_ROBES_AQUA:
+		case MARBLE_BREASTPIECE:
+		case TIN_BREASTPIECE:
+		case LOST_BREASTPIECE:
 			equipItem(item, &stats[player]->breastplate, player);
 			break;
 		case HAT_PHRYGIAN:
@@ -2125,6 +2150,11 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case ABYSSAL_HELM:
 		case HAT_WIZARD_SLIMY:
 		case HAT_TOPHAT:
+		case INQUISITOR_HELM:
+		case ELEMENTALIST_HAT:
+		case PUNCHING_HELM:
+		case TIN_HELM:
+		case LOST_HELM:
 			equipItem(item, &stats[player]->helmet, player);
 			break;
 		case AMULET_SEXCHANGE:
@@ -2136,6 +2166,8 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case AMULET_WATERBREATHING:
 		case AMULET_MAGICREFLECTION:
 		case ABYSSAL_AMULET:
+		case INQUISITOR_AMULET:
+		case LOST_AMULET:
 			equipItem(item, &stats[player]->amulet, player);
 			break;
 		case AMULET_STRANGULATION:
@@ -2362,6 +2394,8 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case RING_TELEPORTATION:
 		case ABYSSAL_RING:
 		case RING_RANDOMNESS:
+		case INQUISITOR_RING:
+		case LOST_RING:
 			equipItem(item, &stats[player]->ring, player);
 			break;
 		case SPELLBOOK_FORCEBOLT:
@@ -2473,6 +2507,9 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case QUIVER_CRYSTAL:
 		case QUIVER_HUNTING:
 		case TOOL_GREENTORCH:
+		case INQUISITOR_LANTERN:
+		case TOOL_CANDLE:
+		case TOOL_CANDLE_TIMELESS:
 			equipItem(item, &stats[player]->shield, player);
 			break;
 		case TOOL_BLINDFOLD:
@@ -2491,6 +2528,12 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case TOOL_GLASSES:
 		case MASK_SHAMAN:
 		case ABYSSAL_MASK:
+		case INQUISITOR_MASK:
+		case MASK_GOOGLY:
+		case MASK_GRID:
+		case MASK_ANGRY:
+		case MASK_EYE:
+		case LOST_MASK:
 			equipItem(item, &stats[player]->mask, player);
 			break;
 		case TOOL_BEARTRAP:
@@ -2531,6 +2574,9 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case FOOD_HAMLETDINER:
 		case FOOD_ANGLERFISH:
 		case FOOD_TENTACLEPIE:
+		case FOOD_TOMATO:
+		case FOOD_CABBAGE:
+		case FOOD_PEARS:
 			item_Food(item, player);
 			break;
 		case FOOD_TIN:
@@ -2606,6 +2652,16 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case TRIDENT:
 		case CANNON:
 		case CANNON_BOULDER:
+		case INQUISITOR_SPEAR:
+		case INQUISITOR_SWORD:
+		case INQUISITOR_AXE:
+		case INQUISITOR_HAMMER:
+		case INQUISITOR_BOW:
+		case LOST_POLEARM:
+		case LOST_AXE:
+		case LOST_MACE:
+		case LOST_SWORD:
+		case LOST_BOW:
 		case NEEDLE:
 			equipItem(item, &stats[player]->weapon, player);
 			break;
@@ -2828,12 +2884,60 @@ void useItem(Item* item, int player, Entity* usedBy)
 				messagePlayer(player, language[6212]);
 				break;
 			case CLOAK_ELEMENTALIST:
+			case ELEMENTALIST_HAT:
 				messagePlayer(player, language[6215]);
 				break;
 			case ABYSSAL_MASK:
 				messagePlayer(player, language[6239]);
 				break;
-
+			case INQUISITOR_RING:
+				messagePlayer(player, language[6254]);
+				break;
+			case INQUISITOR_MASK:
+				messagePlayer(player, language[6255]);
+				break;
+			case INQUISITOR_AMULET:
+				messagePlayer(player, language[6256]);
+				break;
+			case INQUISITOR_HELM:
+				messagePlayer(player, language[6257]);
+				break;
+			case INQUISITOR_BOOTS:
+				messagePlayer(player, language[6258]);
+				break;
+			case INQUISITOR_GLOVES:
+				messagePlayer(player, language[6259]);
+				break;
+			case INQUISITOR_BREASTPIECE:
+				messagePlayer(player, language[6260]);
+				break;
+			case INQUISITOR_BACKPACK:
+				messagePlayer(player, language[6261]);
+				break;
+			case LOST_RING:
+				messagePlayer(player, language[6262]);
+				break;
+			case LOST_MASK:
+				messagePlayer(player, language[6263]);
+				break;
+			case LOST_AMULET:
+				messagePlayer(player, language[6264]);
+				break;
+			case LOST_HELM:
+				messagePlayer(player, language[6265]);
+				break;
+			case LOST_BOOTS:
+				messagePlayer(player, language[6266]);
+				break;
+			case LOST_GAUNTLETS:
+				messagePlayer(player, language[6267]);
+				break;
+			case LOST_BREASTPIECE:
+				messagePlayer(player, language[6268]);
+				break;
+			case LOST_CLOAK:
+				messagePlayer(player, language[6269]);
+				break;
 			default:
 				break;
 		}
@@ -3440,6 +3544,65 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	{
 		attack += 75;
 	}
+	else if (type == INQUISITOR_SPEAR)
+	{
+		attack += 9;
+	}
+	else if (type == INQUISITOR_SWORD)
+	{
+		attack += 8;
+	}
+	else if (type == INQUISITOR_AXE)
+	{
+		attack += 19;
+	}
+	else if (type == INQUISITOR_HAMMER)
+	{
+		attack += 14;
+	}
+	else if (type == INQUISITOR_BOW)
+	{
+		attack += 17;
+	}
+	else if (type == LOST_POLEARM)
+	{
+		attack += 9;
+	}
+	else if (type == LOST_AXE)
+	{
+		attack += 9;
+	}
+	else if (type == LOST_MACE)
+	{
+		attack += 9;
+	}
+	else if (type == LOST_SWORD)
+	{
+		attack += 9;
+	}
+	else if (type == LOST_BOW)//the higher the level the higher the damage
+	{
+		if (currentlevel >= 48)
+		{
+			attack += 30;
+		}
+		else if (currentlevel >= 33)
+		{
+			attack += 25;
+		}
+		else if (currentlevel >= 21)
+		{
+			attack += 20;
+		}
+		else if (currentlevel >= 7)
+		{
+			attack += 15;
+		}
+		else
+		{
+			attack += 10;
+		}
+	}
 	else if (type == NEEDLE)
 	{
 		attack += 99;
@@ -3663,6 +3826,114 @@ Sint32 Item::armorGetAC(Stat* wielder) const
 	else if (type == NECRO_SHIELD)
 	{
 		armor += 5;
+	}
+	else if (type == INQUISITOR_HELM)
+	{
+		armor += 3;
+	}
+	else if (type == INQUISITOR_GLOVES)
+	{
+		armor += 3;
+	}
+	else if (type == INQUISITOR_BOOTS)
+	{
+		armor += 3;
+	}
+	else if (type == INQUISITOR_BREASTPIECE)
+	{
+		armor += 4;
+	}
+	else if (type == INQUISITOR_BACKPACK)
+	{
+		armor += 3;
+	}
+	else if (type == INQUISITOR_AMULET)
+	{
+		armor -= 15;
+	}
+	else if (type == TIN_HELM)
+	{
+		armor += 1;
+	}
+	else if (type == MASK_GRID)
+	{
+		armor += 1;
+	}
+	else if (type == ANTI_SLEEP_SHIELD)
+	{
+		armor += 2;
+	}
+	else if (type == ANTI_CHARM_SHIELD)
+	{
+		armor += 2;
+	}
+	else if (type == ANTI_BLEED_SHIELD)
+	{
+		armor += 2;
+	}
+	else if (type == PUNCHING_HELM)
+	{
+		armor += 3;
+	}
+	else if (type == ELEMENTALIST_DOUBLET)
+	{
+		armor += 1;
+	}
+	else if (type == LIZARD_LEATHER_BREASTPIECE)
+	{
+		armor += 2;
+	}
+	else if (type == LIFESTEAL_KNUCKLES)
+	{
+		armor += 3;
+	}
+	else if (type == MANA_GLOVES)
+	{
+		armor += 1;
+	}
+	else if (type == CHAIN_ROBES || type == CHAIN_ROBES_AQUA )
+	{
+		armor += 2;
+	}
+	else if (type == MARBLE_BREASTPIECE)
+	{
+		armor += 4;
+	}
+	else if (type == TIN_HELM)
+	{
+		armor += 1;
+	}
+	else if (type == TIN_GLOVES)
+	{
+		armor += 1;
+	}
+	else if (type == TIN_BOOTS)
+	{
+		armor += 1;
+	}
+	else if (type == TIN_BREASTPIECE)
+	{
+		armor += 2;
+	}
+	else if (type == LOST_HELM)
+	{
+		armor += 3;
+	}
+	else if (type == LOST_GAUNTLETS)
+	{
+		armor += 3;
+	}
+	else if (type == LOST_BOOTS)
+	{
+		armor += 3;
+	}
+	else if (type == LOST_BREASTPIECE)
+	{
+		armor += 4;
+	}
+	else if (type == LOST_SHIELD)
+	{
+		armor += 3;
 	}
 	//armor *= (double)(item->status/5.0);
 
@@ -4311,6 +4582,8 @@ bool isRangedWeapon(const Item& item)
 		case MAKESHIFT_BOW:
 		case CANNON:
 		case CANNON_BOULDER:
+		case INQUISITOR_BOW:
+		case LOST_BOW:
 			return true;
 		default:
 			return false;
@@ -4630,7 +4903,8 @@ bool Item::shouldItemStack(int player)
 				&& this->type != TOOL_PICKAXE 
 				&& this->type != TOOL_ALEMBIC 
 				&& this->type != TOOL_TINKERING_KIT
-				&& this->type != ENCHANTED_FEATHER)
+				&& this->type != ENCHANTED_FEATHER
+				&& this->type != TOOL_UNIHORN )
 			)
 		{
 			// THROWN, GEM, TOOLS, POTIONS should stack when equipped.
@@ -4705,6 +4979,10 @@ bool isItemEquippableInShieldSlot(Item* item)
 		case TOOL_GREENTORCH:
 		case ABYSSAL_SHIELD:
 		case NECRO_SHIELD:
+		case ANTI_SLEEP_SHIELD:
+		case ANTI_CHARM_SHIELD:
+		case ANTI_BLEED_SHIELD:
+		case LOST_SHIELD:
 			return true;
 			break;
 		default:
@@ -4903,7 +5181,16 @@ bool itemSpriteIsBreastpiece(int sprite)
 		|| sprite == items[SILVER_DOUBLET].index
 		|| sprite == items[ARTIFACT_BREASTPIECE].index
 		|| sprite == items[TUNIC].index
-		|| sprite == items[MACHINIST_APRON].index )
+		|| sprite == items[MACHINIST_APRON].index
+		|| sprite == items[ABYSSAL_CHEASTPIECE].index
+		|| sprite == items[IRON_BREASTPIECE_SLIMY].index
+		|| sprite == items[INQUISITOR_BREASTPIECE].index
+		|| sprite == items[LIZARD_LEATHER_BREASTPIECE].index
+		|| sprite == items[CHAIN_ROBES].index
+		|| sprite == items[CHAIN_ROBES_AQUA].index
+		|| sprite == items[MARBLE_BREASTPIECE].index
+		|| sprite == items[TIN_BREASTPIECE].index
+		|| sprite == items[LOST_BREASTPIECE].index )
 	{
 		return true;
 	}

@@ -3562,7 +3562,17 @@ void Entity::handleEffects(Stat* myStats)
 			}
 		}
 	}
-
+	if (myStats->mask != NULL)
+	{
+		// random teleportation
+		if (myStats->mask->type == LOST_MASK)
+		{
+			if (rand() % 3000 == 0)   // .3% chance every frame
+			{
+				castSpell(uid, &spell_acidSpray, true, false);
+			}
+		}
+	}
 	if (client_classes[player] == CLASS_LUNATIC) //lunatic can't gain any hp!
 	{
 		if (stats[player]->MAXHP > 1)
@@ -4965,7 +4975,7 @@ Sint32 statGetSTR(Stat* entitystats, Entity* my)
 	}
 	if ( entitystats->ring != nullptr )
 	{
-		if ( entitystats->ring->type == RING_STRENGTH )
+		if ( entitystats->ring->type == RING_STRENGTH || entitystats->ring->type == INQUISITOR_RING )
 		{
 			if ( entitystats->ring->beatitude >= 0 || cursedItemIsBuff )
 			{
@@ -4974,6 +4984,40 @@ Sint32 statGetSTR(Stat* entitystats, Entity* my)
 			STR += (cursedItemIsBuff ? abs(entitystats->ring->beatitude) : entitystats->ring->beatitude);
 		}
 	}
+	if (entitystats->mask != nullptr)
+	{
+		if (entitystats->mask->type == MASK_ANGRY)
+		{
+			if (entitystats->mask->beatitude >= 0 || cursedItemIsBuff)
+			{
+				STR++;
+			}
+			STR += (cursedItemIsBuff ? abs(entitystats->mask->beatitude) : entitystats->mask->beatitude);
+		}
+	}
+	if (entitystats->helmet != nullptr)
+	{
+		if (entitystats->helmet->type == PUNCHING_HELM && entitystats->weapon == nullptr)//helm of punching is only for punching
+		{
+			if (entitystats->helmet->beatitude >= 0 || cursedItemIsBuff)
+			{
+				STR += 3;
+			}
+			STR += (cursedItemIsBuff ? abs(entitystats->helmet->beatitude) : entitystats->helmet->beatitude);
+		}
+	}
+	if (entitystats->weapon != nullptr)
+	{
+		if (entitystats->weapon->type == INQUISITOR_SWORD)
+		{
+			if (entitystats->weapon->beatitude >= 0 || cursedItemIsBuff)
+			{
+				STR += 3;
+			}
+			STR += (cursedItemIsBuff ? abs(entitystats->weapon->beatitude) : entitystats->weapon->beatitude);
+		}
+	}
+
 	if ( entitystats->EFFECTS[EFF_DRUNK] )
 	{
 		switch ( entitystats->type )
@@ -5189,6 +5233,18 @@ Sint32 statGetDEX(Stat* entitystats, Entity* my)
 		}
 	}
 
+	if (entitystats->breastplate != nullptr)
+	{
+		if (entitystats->breastplate->type == LIZARD_LEATHER_BREASTPIECE)
+		{
+			if (entitystats->breastplate->beatitude >= 0 || cursedItemIsBuff)
+			{
+				DEX++;
+			}
+			DEX += (cursedItemIsBuff ? abs(entitystats->breastplate->beatitude) : entitystats->breastplate->beatitude);
+		}
+	}
+
 	if (entitystats->weapon != nullptr)
 	{
 		if (entitystats->weapon->type == ABYSSAL_CROSSBOW)
@@ -5199,8 +5255,38 @@ Sint32 statGetDEX(Stat* entitystats, Entity* my)
 			}
 			DEX += (cursedItemIsBuff ? abs(entitystats->weapon->beatitude) : entitystats->weapon->beatitude);
 		}
+		if (entitystats->weapon->type == INQUISITOR_SWORD)
+		{
+			if (entitystats->weapon->beatitude >= 0 || cursedItemIsBuff)
+			{
+				DEX += 2;
+			}
+			DEX += (cursedItemIsBuff ? abs(entitystats->weapon->beatitude) : entitystats->weapon->beatitude);
+		}
 	}
 
+	if (entitystats->ring != nullptr)
+	{
+		if (entitystats->ring->type == INQUISITOR_RING)
+		{
+			if (entitystats->ring->beatitude >= 0 || cursedItemIsBuff)
+			{
+				DEX++;
+			}
+			DEX += (cursedItemIsBuff ? abs(entitystats->ring->beatitude) : entitystats->ring->beatitude);
+		}
+	}
+	if (entitystats->mask != nullptr)
+	{
+		if (entitystats->mask->type == MASK_ANGRY)
+		{
+			if (entitystats->mask->beatitude >= 0 || cursedItemIsBuff)
+			{
+				DEX++;
+			}
+			DEX += (cursedItemIsBuff ? abs(entitystats->mask->beatitude) : entitystats->mask->beatitude);
+		}
+	}
 
 	if ( entitystats->EFFECTS[EFF_DRUNK] )
 	{
@@ -5315,7 +5401,7 @@ Sint32 statGetCON(Stat* entitystats, Entity* my)
 
 	if ( entitystats->ring != nullptr )
 	{
-		if ( entitystats->ring->type == RING_CONSTITUTION )
+		if ( entitystats->ring->type == RING_CONSTITUTION || entitystats->ring->type == INQUISITOR_RING )
 		{
 			if ( entitystats->ring->beatitude >= 0 || cursedItemIsBuff )
 			{
@@ -5345,7 +5431,28 @@ Sint32 statGetCON(Stat* entitystats, Entity* my)
 			}
 			CON += (cursedItemIsBuff ? abs(entitystats->breastplate->beatitude) : entitystats->breastplate->beatitude);
 		}
+		else if (entitystats->breastplate->type == INQUISITOR_BREASTPIECE)
+		{
+			if (entitystats->breastplate->beatitude >= 0 || cursedItemIsBuff)
+			{
+				int extraCON = entitystats->CHR * 0.2;//% of your CHR is gain in CON
+				CON += extraCON;
+			}
+			CON += (cursedItemIsBuff ? abs(entitystats->breastplate->beatitude) : entitystats->breastplate->beatitude);
+		}
 	}
+	if (entitystats->mask != nullptr)
+	{
+		if (entitystats->mask->type == MASK_ANGRY)
+		{
+			if (entitystats->mask->beatitude >= 0 || cursedItemIsBuff)
+			{
+				CON--;
+			}
+			CON -= (cursedItemIsBuff ? abs(entitystats->mask->beatitude) : entitystats->mask->beatitude);
+		}
+	}
+
 	if ( entitystats->EFFECTS[EFF_SHRINE_RED_BUFF] )
 	{
 		CON += 8;
@@ -5424,6 +5531,14 @@ Sint32 statGetINT(Stat* entitystats, Entity* my)
 			}
 			INT += (cursedItemIsBuff ? abs(entitystats->helmet->beatitude) : entitystats->helmet->beatitude);
 		}
+		else if (entitystats->helmet->type == ELEMENTALIST_HAT)
+		{
+			if (entitystats->helmet->beatitude >= 0 || cursedItemIsBuff)
+			{
+				INT += 2;
+			}
+			INT += (cursedItemIsBuff ? abs(entitystats->helmet->beatitude) : entitystats->helmet->beatitude);
+		}
 		else if ( entitystats->helmet->type == ARTIFACT_HELM )
 		{
 			if ( entitystats->helmet->beatitude >= 0 || cursedItemIsBuff )
@@ -5433,9 +5548,20 @@ Sint32 statGetINT(Stat* entitystats, Entity* my)
 			INT += (cursedItemIsBuff ? abs(entitystats->helmet->beatitude) : entitystats->helmet->beatitude);
 		}
 	}
+	if (entitystats->breastplate != nullptr)
+	{
+		if (entitystats->breastplate->type == ELEMENTALIST_DOUBLET)
+		{
+			if (entitystats->breastplate->beatitude >= 0 || cursedItemIsBuff)
+			{
+				INT += 3;
+			}
+			INT += (cursedItemIsBuff ? abs(entitystats->breastplate->beatitude) : entitystats->breastplate->beatitude);
+		}
+	}
 	if (entitystats->cloak != nullptr)
 	{
-		if (entitystats->cloak->type == CLOAK_ELEMENTALIST)
+		if ( entitystats->cloak->type == CLOAK_ELEMENTALIST )
 		{
 			if (entitystats->cloak->beatitude >= 0 || cursedItemIsBuff)
 			{
@@ -5444,6 +5570,29 @@ Sint32 statGetINT(Stat* entitystats, Entity* my)
 			INT += (cursedItemIsBuff ? abs(entitystats->cloak->beatitude) : entitystats->cloak->beatitude);
 		}
 	}
+	if (entitystats->ring != nullptr)
+	{
+		if (  entitystats->ring->type == INQUISITOR_RING )
+		{
+			if (entitystats->ring->beatitude >= 0 || cursedItemIsBuff)
+			{
+				INT++;
+			}
+			INT += (cursedItemIsBuff ? abs(entitystats->ring->beatitude) : entitystats->ring->beatitude);
+		}
+	}
+	if (entitystats->weapon != nullptr)
+	{
+		if (entitystats->weapon->type == INQUISITOR_SWORD)
+		{
+			if (entitystats->weapon->beatitude >= 0 || cursedItemIsBuff)
+			{
+				INT += 4;
+			}
+			INT += (cursedItemIsBuff ? abs(entitystats->weapon->beatitude) : entitystats->weapon->beatitude);
+		}
+	}
+
 	if ( my && entitystats->EFFECTS[EFF_DRUNK] && my->behavior == &actPlayer && entitystats->type == GOATMAN )
 	{
 		INT -= 8;
@@ -5527,7 +5676,7 @@ Sint32 statGetPER(Stat* entitystats, Entity* my)
 	}
 	if ( entitystats->mask )
 	{
-		if ( entitystats->mask->type == TOOL_GLASSES )
+		if ( entitystats->mask->type == TOOL_GLASSES || entitystats->mask->type == MASK_EYE )
 		{
 			if ( entitystats->mask->beatitude >= 0 || cursedItemIsBuff )
 			{
@@ -5550,6 +5699,14 @@ Sint32 statGetPER(Stat* entitystats, Entity* my)
 			}
 			PER += (cursedItemIsBuff ? abs(entitystats->mask->beatitude) : entitystats->mask->beatitude);
 		}
+		else if (entitystats->mask->type == MASK_ANGRY)
+		{
+			if (entitystats->mask->beatitude >= 0 || cursedItemIsBuff)
+			{
+				PER--;
+			}
+			PER -= (cursedItemIsBuff ? abs(entitystats->mask->beatitude) : entitystats->mask->beatitude);
+		}
 	}
 	if ( entitystats->breastplate )
 	{
@@ -5571,6 +5728,28 @@ Sint32 statGetPER(Stat* entitystats, Entity* my)
 				PER += 4;
 			}
 			PER += (cursedItemIsBuff ? abs(entitystats->helmet->beatitude) : entitystats->helmet->beatitude);
+		}
+	}
+	if (entitystats->ring != nullptr)
+	{
+		if (entitystats->ring->type == INQUISITOR_RING)
+		{
+			if (entitystats->ring->beatitude >= 0 || cursedItemIsBuff)
+			{
+				PER++;
+			}
+			PER += (cursedItemIsBuff ? abs(entitystats->ring->beatitude) : entitystats->ring->beatitude);
+		}
+	}
+	if (entitystats->weapon != nullptr)
+	{
+		if (entitystats->weapon->type == INQUISITOR_SWORD)
+		{
+			if (entitystats->weapon->beatitude >= 0 || cursedItemIsBuff)
+			{
+				PER -= 7;
+			}
+			PER += (cursedItemIsBuff ? abs(entitystats->weapon->beatitude) : entitystats->weapon->beatitude);
 		}
 	}
 	if ( !(svFlags & SV_FLAG_HUNGER) )
@@ -5656,10 +5835,18 @@ Sint32 statGetCHR(Stat* entitystats, Entity* my)
 			}
 			CHR += (cursedItemIsBuff ? abs(entitystats->helmet->beatitude) : entitystats->helmet->beatitude);
 		}
+		else if (entitystats->helmet->type == INQUISITOR_HELM)
+		{
+			if (entitystats->helmet->beatitude >= 0 || cursedItemIsBuff)
+			{
+				CHR += 8;
+			}
+			CHR += (cursedItemIsBuff ? abs(entitystats->helmet->beatitude) : entitystats->helmet->beatitude);
+		}
 	}
 	if ( entitystats->ring != nullptr )
 	{
-		if ( entitystats->ring->type == RING_ADORNMENT )
+		if ( entitystats->ring->type == RING_ADORNMENT || entitystats->ring->type == INQUISITOR_RING )
 		{
 			if ( entitystats->ring->beatitude >= 0 || cursedItemIsBuff )
 			{
@@ -6513,7 +6700,8 @@ void Entity::attack(int pose, int charge, Entity* target)
 						bowDegradeChance = std::min(bowDegradeChance, 90);
 					}
 				}
-				if ( bowDegradeChance < 100 && rand() % bowDegradeChance == 0 && myStats->weapon->type != ARTIFACT_BOW && myStats->weapon->type != ABYSSAL_CROSSBOW )
+				if ( bowDegradeChance < 100 && rand() % bowDegradeChance == 0 && myStats->weapon->type != ARTIFACT_BOW && myStats->weapon->type != ABYSSAL_CROSSBOW
+					&& myStats->weapon->type != INQUISITOR_BOW && myStats->weapon->type != LOST_BOW )
 				{
 					if ( myStats->weapon != NULL )
 					{
@@ -7184,7 +7372,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 				{
 					if ( myStats->weapon->type == BRONZE_AXE || myStats->weapon->type == IRON_AXE || myStats->weapon->type == STEEL_AXE
 						|| myStats->weapon->type == CRYSTAL_BATTLEAXE || myStats->weapon->type == ABYSSAL_AXE || myStats->weapon->type == EXECUTIONER_AXE 
-						|| myStats->weapon->type == STONE_AXE )
+						|| myStats->weapon->type == STONE_AXE || myStats->weapon->type == INQUISITOR_AXE || myStats->weapon->type == LOST_AXE )
 					{
 						axe = 1; // axes do extra damage to doors :)
 					}
@@ -7806,7 +7994,9 @@ void Entity::attack(int pose, int charge, Entity* target)
 					{
 						weaponType = (*weaponToBreak)->type;
 						if ( weaponType == ARTIFACT_AXE || weaponType == ARTIFACT_MACE || weaponType == ARTIFACT_SPEAR || weaponType == ARTIFACT_SWORD
-							|| weaponType == ABYSSAL_AXE || weaponType == ABYSSAL_MACE || weaponType == ABYSSAL_SPEAR || weaponType == ABYSSAL_SWORD )
+							|| weaponType == ABYSSAL_AXE || weaponType == ABYSSAL_MACE || weaponType == ABYSSAL_SPEAR || weaponType == ABYSSAL_SWORD
+							|| weaponType == INQUISITOR_AXE || weaponType == INQUISITOR_HAMMER || weaponType == INQUISITOR_SPEAR || weaponType == INQUISITOR_SWORD
+							|| weaponType == LOST_AXE || weaponType == LOST_MACE || weaponType == LOST_POLEARM || weaponType == LOST_SWORD )
 						{
 							artifactWeapon = true;
 						}
@@ -8267,6 +8457,54 @@ void Entity::attack(int pose, int charge, Entity* target)
 								}
 							}
 						}
+						else if (myStats->weapon->type == INQUISITOR_SPEAR)
+						{
+							if (enemy_hp <= enemy_maxhp * 0.2)//execute low hp targets
+							{
+								hitstats->HP -= 1000;
+								messagePlayer(player, language[6270]);
+							}
+						}
+						else if (myStats->weapon->type == INQUISITOR_AXE)
+						{
+							if (hitstats && myStats->HP >= 10)//uses HP to do damage
+							{
+								this->modHP(-10);
+								hitstats->HP -= 5;
+								messagePlayer(player, language[6271]);
+							}
+						}
+						else if (myStats->weapon->type == LOST_POLEARM)
+						{
+							if (hitstats)
+							{
+								hitstats->EFFECTS[EFF_KNOCKBACK] = true;
+								hitstats->EFFECTS_TIMERS[EFF_KNOCKBACK] = TICKS_PER_SECOND * 1;
+							}
+						}
+						else if (myStats->weapon->type == LOST_AXE)
+						{
+							if (hitstats)
+							{
+								int extraDamage = (myStats->MAXHP - myStats->HP)* -0.1;//equals to % of your missing Health
+								hitstats->HP -= extraDamage;//The lower your HP the more damage you do damage
+							}
+						}
+						else if (myStats->weapon->type == LOST_SWORD)
+						{
+						if (hitstats->MP > 5)
+							{
+								hitstats->MP -= 100;//empty target mana
+								messagePlayer(player, language[6272]);
+							}
+						}
+						else if (myStats->weapon->type == LOST_MACE)
+						{
+							if (hitstats)
+							{
+								this->modHP(+6);//lifesteal
+							}
+						}
 					}
 
 					if (myStats->gloves)
@@ -8279,6 +8517,24 @@ void Entity::attack(int pose, int charge, Entity* target)
 								hitstats->MP -= 3;
 								this->modMP(+3);
 								messagePlayer(player, language[6242]);
+							}
+						}
+						else if ( myStats->gloves->type == INQUISITOR_GLOVES )
+						{
+							//Demons take extra damage
+							if (hitstats->type == DEMON || hitstats->type == CREATURE_IMP || hitstats->type == DEVIL
+								|| hitstats->type == SUCCUBUS || hitstats->type == INCUBUS 
+								|| hitstats->type == FLESHLING || hitstats->type == ABOMINATION )
+							{
+								hitstats->HP -= 10;
+								messagePlayer(player, language[6274]);
+							}
+						}
+						else if ( myStats->gloves->type == LIFESTEAL_KNUCKLES && myStats->weapon == nullptr )
+						{
+							if (hitstats)
+							{
+								this->modHP(+3);//lifesteal
 							}
 						}
 					}
@@ -8352,6 +8608,19 @@ void Entity::attack(int pose, int charge, Entity* target)
 								messagePlayer(player, language[6214]);
 							}
 						//spawnAmbientParticles(100, 862, 10 + rand() % 30, 0.5, true);
+						}
+					}
+					if (myStats->mask)
+					{
+						if (myStats->mask->type == INQUISITOR_MASK)
+						{
+							//Undead take extra damage
+							if (hitstats->type == SKELETON || hitstats->type == GHOUL || hitstats->type == VAMPIRE || hitstats->type == LICH
+								|| hitstats->type == LICH_FIRE || hitstats->type == LICH_ICE || hitstats->type == LICH_FALLEN )
+							{
+								hitstats->HP -= 10;
+								messagePlayer(player, language[6273]);
+							}
 						}
 					}
 
@@ -10890,7 +11159,10 @@ void Entity::awardXP(Entity* src, bool share, bool root)
 	{
 		if ( destStats->type == CREATURE_IMP 
 			|| destStats->type == DEMON
-			|| (destStats->type == AUTOMATON && !strcmp(destStats->name, "corrupted automaton")) )
+			|| (destStats->type == AUTOMATON && !strcmp(destStats->name, "corrupted automaton"))
+			|| destStats->type == CHOLOROSH
+			//|| destStats->type == ILLUSION
+			)
 		{
 			if ( !flags[USERFLAG2] )
 			{
@@ -12142,6 +12414,10 @@ int checkEquipType(const Item *item)
 		case ABYSSAL_BOOTS:
 		case BOOTS_LIGHTNESS:
 		case BOOTS_SUPER_LIGHTNESS:
+		case INQUISITOR_BOOTS:
+		case FLYING_SHOES:
+		case TIN_BOOTS:
+		case LOST_BOOTS:
 			return TYPE_BOOTS;
 			break;
 
@@ -12151,6 +12427,10 @@ int checkEquipType(const Item *item)
 		case CRYSTAL_HELM:
 		case ARTIFACT_HELM:
 		case ABYSSAL_HELM:
+		case INQUISITOR_HELM:
+		case PUNCHING_HELM:
+		case TIN_HELM:
+		case LOST_HELM:
 			return TYPE_HELM;
 			break;
 
@@ -12164,6 +12444,14 @@ int checkEquipType(const Item *item)
 		case ARTIFACT_BREASTPIECE:
 		case ABYSSAL_CHEASTPIECE:
 		case IRON_BREASTPIECE_SLIMY:
+		case INQUISITOR_BREASTPIECE:
+		case ELEMENTALIST_DOUBLET:
+		case LIZARD_LEATHER_BREASTPIECE:
+		case CHAIN_ROBES:
+		case CHAIN_ROBES_AQUA:
+		case MARBLE_BREASTPIECE:
+		case TIN_BREASTPIECE:
+		case LOST_BREASTPIECE:
 			return TYPE_BREASTPIECE;
 			break;
 
@@ -12176,6 +12464,10 @@ int checkEquipType(const Item *item)
 		case MIRROR_SHIELD:
 		case ABYSSAL_SHIELD:
 		case NECRO_SHIELD:
+		case ANTI_SLEEP_SHIELD:
+		case ANTI_CHARM_SHIELD:
+		case ANTI_BLEED_SHIELD:
+		case LOST_SHIELD:
 			return TYPE_SHIELD;
 			break;
 
@@ -12183,6 +12475,9 @@ int checkEquipType(const Item *item)
 		case TOOL_LANTERN:
 		case TOOL_CRYSTALSHARD:
 		case TOOL_GREENTORCH:
+		case INQUISITOR_LANTERN:
+		case TOOL_CANDLE:
+		case TOOL_CANDLE_TIMELESS:
 			return TYPE_OFFHAND;
 			break;
 
@@ -12198,6 +12493,8 @@ int checkEquipType(const Item *item)
 		case ABYSSAL_CLOAK:
 		case CLOAK_ELEMENTALIST:
 		case CLOAK_MELTING:
+		case INQUISITOR_BACKPACK:
+		case LOST_CLOAK:
 			return TYPE_CLOAK;
 			break;
 
@@ -12215,6 +12512,11 @@ int checkEquipType(const Item *item)
 		case SUEDE_GLOVES:
 		case ABYSSAL_KNUCKLES:
 		case ICE_GLOVES:
+		case INQUISITOR_GLOVES:
+		case LIFESTEAL_KNUCKLES:
+		case MANA_GLOVES:
+		case TIN_GLOVES:
+		case LOST_GAUNTLETS:
 			return TYPE_GLOVES;
 			break;
 
@@ -12229,6 +12531,7 @@ int checkEquipType(const Item *item)
 		case HAT_HOOD_YELLOWGREEN:
 		case HAT_WIZARD_SLIMY:
 		case HAT_TOPHAT:
+		case ELEMENTALIST_HAT:
 			return TYPE_HAT;
 			break;
 
@@ -12290,6 +12593,26 @@ int setGloveSprite(Stat* myStats, Entity* ent, int spriteOffset)
 	else if (myStats->gloves->type == ICE_GLOVES)
 	{
 		ent->sprite = 1232 + myStats->sex + spriteOffset;
+	}
+	else if (myStats->gloves->type == INQUISITOR_GLOVES)
+	{
+		ent->sprite = 1289 + myStats->sex + spriteOffset;
+	}
+	else if (myStats->gloves->type == LIFESTEAL_KNUCKLES)
+	{
+		ent->sprite = 1319 + myStats->sex + spriteOffset;
+	}
+	else if (myStats->gloves->type == MANA_GLOVES)
+	{
+		ent->sprite = 1322 + myStats->sex + spriteOffset;
+	}
+	else if (myStats->gloves->type == TIN_GLOVES)
+	{
+		ent->sprite = 1334 + myStats->sex + spriteOffset;
+	}
+	else if (myStats->gloves->type == LOST_GAUNTLETS)
+	{
+		ent->sprite = 1358 + myStats->sex + spriteOffset;
 	}
 	else
 	{
@@ -12360,6 +12683,22 @@ bool Entity::setBootSprite(Entity* leg, int spriteOffset)
 			{
 				leg->sprite = 1242 + myStats->sex + spriteOffset;
 			}
+			else if (myStats->shoes->type == INQUISITOR_BOOTS)
+			{
+				leg->sprite = 1406 + myStats->sex + spriteOffset;
+			}
+			else if (myStats->shoes->type == FLYING_SHOES)
+			{
+				leg->sprite = 1410 + myStats->sex + spriteOffset;
+			}
+			else if (myStats->shoes->type == TIN_BOOTS)
+			{
+				leg->sprite = 1414 + myStats->sex + spriteOffset;
+			}
+			else if (myStats->shoes->type == LOST_BOOTS)
+			{
+				leg->sprite = 1418 + myStats->sex + spriteOffset;
+			}
 			else
 			{
 				return false;
@@ -12412,6 +12751,22 @@ bool Entity::setBootSprite(Entity* leg, int spriteOffset)
 			else if ( myStats->shoes->type == BOOTS_LIGHTNESS || myStats->shoes->type == BOOTS_SUPER_LIGHTNESS )
 			{
 				leg->sprite = 1242 + myStats->sex + spriteOffset;
+			}
+			else if (myStats->shoes->type == INQUISITOR_BOOTS)
+			{
+				leg->sprite = 1406 + myStats->sex + spriteOffset;
+			}
+			else if (myStats->shoes->type == FLYING_SHOES)
+			{
+				leg->sprite = 1410 + myStats->sex + spriteOffset;
+			}
+			else if (myStats->shoes->type == TIN_BOOTS)
+			{
+				leg->sprite = 1414 + myStats->sex + spriteOffset;
+			}
+			else if (myStats->shoes->type == LOST_BOOTS)
+			{
+				leg->sprite = 1418 + myStats->sex + spriteOffset;
 			}
 			else
 			{
@@ -12497,7 +12852,7 @@ bool isLevitating(Stat* mystats)
 	}
 	if ( mystats->shoes != NULL )
 	{
-		if ( mystats->shoes->type == STEEL_BOOTS_LEVITATION )
+		if ( mystats->shoes->type == STEEL_BOOTS_LEVITATION || mystats->shoes->type == FLYING_SHOES )
 		{
 			return true;
 		}
@@ -12528,19 +12883,19 @@ int getWeaponSkill(Item* weapon)
 		return PRO_UNARMED;
 	}
 
-	if ( weapon->type == QUARTERSTAFF || weapon->type == IRON_SPEAR || weapon->type == STEEL_HALBERD || weapon->type == ARTIFACT_SPEAR || weapon->type == CRYSTAL_SPEAR || weapon->type == ABYSSAL_SPEAR || weapon->type == SPEAR_BONE || weapon->type == TRIDENT )
+	if ( weapon->type == QUARTERSTAFF || weapon->type == IRON_SPEAR || weapon->type == STEEL_HALBERD || weapon->type == ARTIFACT_SPEAR || weapon->type == CRYSTAL_SPEAR || weapon->type == ABYSSAL_SPEAR || weapon->type == SPEAR_BONE || weapon->type == TRIDENT || weapon->type == INQUISITOR_SPEAR || weapon->type == LOST_POLEARM )
 	{
 		return PRO_POLEARM;
 	}
-	if ( weapon->type == BRONZE_SWORD || weapon->type == IRON_SWORD || weapon->type == STEEL_SWORD || weapon->type == ARTIFACT_SWORD || weapon->type == CRYSTAL_SWORD || weapon->type == ABYSSAL_SWORD || weapon->type == MACHETE || weapon->type == RAPIER || weapon->type == NEEDLE )
+	if ( weapon->type == BRONZE_SWORD || weapon->type == IRON_SWORD || weapon->type == STEEL_SWORD || weapon->type == ARTIFACT_SWORD || weapon->type == CRYSTAL_SWORD || weapon->type == ABYSSAL_SWORD || weapon->type == MACHETE || weapon->type == RAPIER || weapon->type == INQUISITOR_SWORD || weapon->type == LOST_SWORD || weapon->type == NEEDLE )
 	{
 		return PRO_SWORD;
 	}
-	if ( weapon->type == BRONZE_MACE || weapon->type == IRON_MACE || weapon->type == STEEL_MACE || weapon->type == ARTIFACT_MACE || weapon->type == CRYSTAL_MACE || weapon->type == ABYSSAL_MACE || weapon->type == WOOD_HAMMER || weapon->type == GRANITE_MAUL )
+	if ( weapon->type == BRONZE_MACE || weapon->type == IRON_MACE || weapon->type == STEEL_MACE || weapon->type == ARTIFACT_MACE || weapon->type == CRYSTAL_MACE || weapon->type == ABYSSAL_MACE || weapon->type == WOOD_HAMMER || weapon->type == GRANITE_MAUL || weapon->type == INQUISITOR_HAMMER || weapon->type == LOST_MACE )
 	{
 		return PRO_MACE;
 	}
-	if ( weapon->type == BRONZE_AXE || weapon->type == IRON_AXE || weapon->type == STEEL_AXE || weapon->type == ARTIFACT_AXE || weapon->type == CRYSTAL_BATTLEAXE || weapon->type == ABYSSAL_AXE || weapon->type == STONE_AXE || weapon->type == EXECUTIONER_AXE )
+	if ( weapon->type == BRONZE_AXE || weapon->type == IRON_AXE || weapon->type == STEEL_AXE || weapon->type == ARTIFACT_AXE || weapon->type == CRYSTAL_BATTLEAXE || weapon->type == ABYSSAL_AXE || weapon->type == STONE_AXE || weapon->type == EXECUTIONER_AXE || weapon->type == INQUISITOR_AXE || weapon->type == LOST_AXE )
 	{
 		return PRO_AXE;
 	}
@@ -13653,11 +14008,15 @@ Uint32 Entity::getMonsterFootstepSound(int footstepType, int bootSprite)
 			{
 				sound = 14 + rand() % 7;
 			}
-			else if ( bootSprite >= 857 && bootSprite <= 860 ) // abyssal boots
+			else if ( bootSprite >= 1134 && bootSprite <= 1137 ) // abyssal boots
 			{
 				sound = 14 + rand() % 7;
 			}
-			else if (bootSprite >= 965 && bootSprite <= 968) // boots of lightness
+			else if (bootSprite >= 1242 && bootSprite <= 1245) // boots of lightness
+			{
+				sound = 14 + rand() % 7;
+			}
+			else if (bootSprite >= 1406 && bootSprite <= 1421) // inquisitor boots,flying shoes,tin boots,lost boots
 			{
 				sound = 14 + rand() % 7;
 			}
@@ -13968,7 +14327,8 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 			}
 		}
 		else if ( weaponLimb->sprite == items[SHORTBOW].index || weaponLimb->sprite == items[ARTIFACT_BOW].index
-			|| weaponLimb->sprite == items[LONGBOW].index || weaponLimb->sprite == items[COMPOUND_BOW].index )
+			|| weaponLimb->sprite == items[LONGBOW].index || weaponLimb->sprite == items[COMPOUND_BOW].index 
+			|| weaponLimb->sprite == items[INQUISITOR_BOW].index || weaponLimb->sprite == items[LOST_BOW].index )
 		{
 			if ( weaponLimb->sprite == items[SHORTBOW].index || weaponLimb->sprite == items[MAKESHIFT_BOW].index )
 			{
@@ -14012,7 +14372,9 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 				}
 			}
 			else if ( weaponLimb->sprite == items[ARTIFACT_BOW].index
-				|| weaponLimb->sprite == items[LONGBOW].index )
+				|| weaponLimb->sprite == items[LONGBOW].index 
+				|| weaponLimb->sprite == items[INQUISITOR_BOW].index 
+				|| weaponLimb->sprite == items[LOST_BOW].index )
 			{
 				switch ( monsterType )
 				{
@@ -15177,7 +15539,7 @@ void Entity::monsterAddNearbyItemToInventory(Stat* myStats, int rangeToFind, int
 						{
 							playSoundEntity(this, 44 + rand() % 3, 64);
 						}
-						else if ( item->type == TOOL_TORCH || item->type == TOOL_LANTERN || item->type == TOOL_CRYSTALSHARD || item->type == TOOL_GREENTORCH)
+						else if ( item->type == TOOL_TORCH || item->type == TOOL_LANTERN || item->type == TOOL_CRYSTALSHARD || item->type == TOOL_GREENTORCH || item->type == INQUISITOR_LANTERN )
 						{
 							playSoundEntity(this, 134, 64);
 						}
@@ -15541,7 +15903,7 @@ bool Entity::monsterWantsItem(const Item& item, Item**& shouldEquip, node_t*& re
 			}
 			if ( item.interactNPCUid == getUID() )
 			{
-				if ( item.type == TOOL_TORCH || item.type == TOOL_LANTERN || item.type == TOOL_CRYSTALSHARD || item.type == TOOL_GREENTORCH )
+				if ( item.type == TOOL_TORCH || item.type == TOOL_LANTERN || item.type == TOOL_CRYSTALSHARD || item.type == TOOL_GREENTORCH || item.type == INQUISITOR_LANTERN )
 				{
 					shouldEquip = &myStats->shield;
 					return true;
@@ -15817,7 +16179,25 @@ void Entity::degradeArmor(Stat& hitstats, Item& armor, int armornum)
 		|| armor.type == ABYSSAL_SHIELD
 		|| armor.type == ABYSSAL_RING
 		|| armor.type == ABYSSAL_AMULET
-		|| armor.type == ABYSSAL_MASK )
+		|| armor.type == ABYSSAL_MASK
+		|| armor.type == INQUISITOR_BOOTS
+		|| armor.type == INQUISITOR_HELM
+		|| armor.type == INQUISITOR_BACKPACK
+		|| armor.type == INQUISITOR_GLOVES
+		|| armor.type == INQUISITOR_BREASTPIECE
+		|| armor.type == INQUISITOR_LANTERN
+		|| armor.type == INQUISITOR_RING
+		|| armor.type == INQUISITOR_AMULET
+		|| armor.type == INQUISITOR_MASK
+		|| armor.type == LOST_BOOTS
+		|| armor.type == LOST_HELM
+		|| armor.type == LOST_CLOAK
+		|| armor.type == LOST_GAUNTLETS
+		|| armor.type == LOST_BREASTPIECE
+		|| armor.type == LOST_SHIELD
+		|| armor.type == LOST_RING
+		|| armor.type == LOST_AMULET
+		|| armor.type == LOST_MASK )
 	
 	{
 		return;
@@ -16504,6 +16884,37 @@ int Entity::getManaRegenInterval(Stat& myStats)
 			}
 		}
 	}
+	if (myStats.gloves != nullptr)
+	{
+		if (myStats.gloves->type == MANA_GLOVES)
+		{
+			if (myStats.gloves->beatitude >= 0 || cursedItemIsBuff)
+			{
+				manaring++;
+			}
+			else
+			{
+				manaring--;
+			}
+		}
+	}
+	if (myStats.amulet != nullptr)
+	{
+		if (myStats.amulet->type == LOST_AMULET)
+		{
+			if (myStats.HP > myStats.MP)
+			{
+				if (myStats.amulet->beatitude >= 0 || cursedItemIsBuff)
+				{
+					manaring++;
+				}
+				else
+				{
+					manaring--;
+				}
+			}
+		}
+	}
 
 	if ( manaring >= 2 && ticks % TICKS_PER_SECOND == 0 )
 	{
@@ -16650,6 +17061,24 @@ int Entity::getHealthRegenInterval(Stat& myStats)
 		}
 	}
 
+	if (myStats.amulet != nullptr)
+	{
+		if (myStats.amulet->type == LOST_AMULET)
+		{
+			if (myStats.HP <= myStats.MP)
+			{
+				if (myStats.amulet->beatitude >= 0 || cursedItemIsBuff)
+				{
+					healring++;
+				}
+				else
+				{
+					healring--;
+				}
+			}
+		}
+	}
+
 	if ( myStats.EFFECTS[EFF_TROLLS_BLOOD] )
 	{
 		healring += 1;
@@ -16676,7 +17105,7 @@ int Entity::getHealthRegenInterval(Stat& myStats)
 		}
 	}
 
-	if ( !strncmp(map.name, "Mages Guild", 11) && myStats.type == SHOPKEEPER )
+	if ( (!strncmp(map.name, "Mages Guild", 11) || !strncmp(map.name, "Necropolis", 4) ) && myStats.type == SHOPKEEPER )
 	{
 		healring = 25; // these guys like regenerating
 	}
@@ -16890,7 +17319,7 @@ bool Entity::setArrowProjectileProperties(int weaponType)
 	{
 		this->vel_z = -0.6;
 		this->arrowFallSpeed = 0.08;
-		if ( weaponType == SHORTBOW || weaponType == COMPOUND_BOW || weaponType == ARTIFACT_BOW || weaponType == MAKESHIFT_BOW )
+		if ( weaponType == SHORTBOW || weaponType == COMPOUND_BOW || weaponType == ARTIFACT_BOW || weaponType == MAKESHIFT_BOW || weaponType == INQUISITOR_BOW || weaponType == LOST_BOW )
 		{
 			this->arrowSpeed = 7;
 			this->vel_z = -0.6;
@@ -17495,7 +17924,9 @@ void Entity::setHelmetLimbOffset(Entity* helm)
 		helm->focalz += limbs[HUMAN][12][2];*/
 		helm->roll = PI / 2;
 	}
-	else if ( helm->sprite == items[HAT_WIZARD].index || helm->sprite == items[HAT_JESTER].index || helm->sprite == items[HAT_WIZARD_SLIMY].index || helm->sprite == items[HAT_TOPHAT].index )
+	else if ( helm->sprite == items[HAT_WIZARD].index || helm->sprite == items[HAT_JESTER].index 
+	|| helm->sprite == items[HAT_WIZARD_SLIMY].index || helm->sprite == items[HAT_TOPHAT].index 
+	|| helm->sprite == items[ELEMENTALIST_HAT].index )
 	{
 		switch ( monster )
 		{
@@ -17866,9 +18297,16 @@ int Entity::getMagicResistance()
 		}
 		if (myStats->breastplate)
 		{
-			if (myStats->breastplate->type == ABYSSAL_CHEASTPIECE)
+			if ( myStats->breastplate->type == ABYSSAL_CHEASTPIECE )
 			{
 				resistance += 1;
+			}
+		}
+		if (myStats->amulet)
+		{
+			if ( myStats->amulet->type == INQUISITOR_AMULET )
+			{
+				resistance += 4;
 			}
 		}
 		if ( myStats->EFFECTS[EFF_MAGICRESIST] )
@@ -18227,7 +18665,8 @@ void Entity::setHumanoidLimbOffset(Entity* limb, Monster race, int limbType)
 				if ( limb->sprite == items[WIZARD_DOUBLET].index
 					|| limb->sprite == items[HEALER_DOUBLET].index
 					|| limb->sprite == items[TUNIC].index
-					|| limb->sprite == items[TUNIC].index + 1 )
+					|| limb->sprite == items[TUNIC].index + 1 
+					|| limb->sprite == items[ELEMENTALIST_DOUBLET].index )
 				{
 					limb->z += 0.15;
 					limb->scalez = 0.9;
@@ -18403,7 +18842,8 @@ void Entity::setHumanoidLimbOffset(Entity* limb, Monster race, int limbType)
 				if ( limb->sprite == items[WIZARD_DOUBLET].index
 					|| limb->sprite == items[HEALER_DOUBLET].index
 					|| limb->sprite == items[TUNIC].index
-					|| limb->sprite == items[TUNIC].index + 1 )
+					|| limb->sprite == items[TUNIC].index + 1
+					|| limb->sprite == items[ELEMENTALIST_DOUBLET].index )
 				{
 					limb->z += 0.5;
 				}
@@ -18554,6 +18994,13 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 				flameEntity->y += 2 * sin(shieldArmLimb->yaw);
 				flameEntity->z -= 2;
 			}
+			else if (shieldLimb->sprite == items[INQUISITOR_LANTERN].index)
+			{
+				flameEntity = spawnFlame(shieldLimb, SPRITE_ANGELFLAME);
+				flameEntity->x += 2 * cos(shieldArmLimb->yaw);
+				flameEntity->y += 2 * sin(shieldArmLimb->yaw);
+				flameEntity->z -= 1;
+			}
 			else if ( itemSpriteIsQuiverThirdPersonModel(shieldLimb->sprite) )
 			{
 				shieldLimb->focalz += 3;
@@ -18582,7 +19029,8 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 				if ( shieldLimb->sprite != items[TOOL_TORCH].index 
 					&& shieldLimb->sprite != items[TOOL_LANTERN].index
 					&& shieldLimb->sprite != items[TOOL_CRYSTALSHARD].index
-					&& shieldLimb->sprite != items[TOOL_GREENTORCH].index )
+					&& shieldLimb->sprite != items[TOOL_GREENTORCH].index
+					&& shieldLimb->sprite != items[INQUISITOR_LANTERN].index )
 				{
 					// shield, so rotate a little.
 					shieldLimb->roll += PI / 64;
@@ -18609,7 +19057,8 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 			shieldLimb->roll = 0;
 			shieldLimb->pitch = 0;
 
-			if ( shieldLimb->sprite != items[TOOL_TORCH].index && shieldLimb->sprite != items[TOOL_LANTERN].index && shieldLimb->sprite != items[TOOL_CRYSTALSHARD].index && shieldLimb->sprite != items[TOOL_GREENTORCH].index)
+			if ( shieldLimb->sprite != items[TOOL_TORCH].index && shieldLimb->sprite != items[TOOL_LANTERN].index && shieldLimb->sprite != items[TOOL_CRYSTALSHARD].index 
+				&& shieldLimb->sprite != items[TOOL_GREENTORCH].index && shieldLimb->sprite != items[INQUISITOR_LANTERN].index )
 			{
 				shieldLimb->focalx = limbs[race][7][0] - 0.65;
 				shieldLimb->focaly = limbs[race][7][1];
@@ -18673,6 +19122,13 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 				flameEntity->y += 2.5 * sin(shieldLimb->yaw + PI / 16);
 				flameEntity->z -= 2;
 			}
+			else if (shieldLimb->sprite == items[INQUISITOR_LANTERN].index)
+			{
+				flameEntity = spawnFlame(shieldLimb, SPRITE_ANGELFLAME);
+				flameEntity->x += 2.5 * cos(shieldLimb->yaw + PI / 16);
+				flameEntity->y += 2.5 * sin(shieldLimb->yaw + PI / 16);
+				flameEntity->z -= 1;
+			}
 			else if ( shieldLimb->sprite >= items[SPELLBOOK_LIGHT].index
 				&& shieldLimb->sprite < (items[SPELLBOOK_LIGHT].index + items[SPELLBOOK_LIGHT].variations) )
 			{
@@ -18714,7 +19170,8 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 				if ( shieldLimb->sprite != items[TOOL_TORCH].index
 					&& shieldLimb->sprite != items[TOOL_LANTERN].index
 					&& shieldLimb->sprite != items[TOOL_CRYSTALSHARD].index
-					&& shieldLimb->sprite != items[TOOL_GREENTORCH].index )
+					&& shieldLimb->sprite != items[TOOL_GREENTORCH].index
+					&& shieldLimb->sprite != items[INQUISITOR_LANTERN].index )
 				{
 					// shield, so rotate a little.
 					shieldLimb->roll += PI / 64;
@@ -18861,7 +19318,8 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 				if ( shieldLimb->sprite != items[TOOL_TORCH].index
 					&& shieldLimb->sprite != items[TOOL_LANTERN].index
 					&& shieldLimb->sprite != items[TOOL_CRYSTALSHARD].index
-					&& shieldLimb->sprite != items[TOOL_GREENTORCH].index)
+					&& shieldLimb->sprite != items[TOOL_GREENTORCH].index 
+					&& shieldLimb->sprite != items[INQUISITOR_LANTERN].index )
 				{
 					// shield, so rotate a little.
 					shieldLimb->roll += PI / 64;

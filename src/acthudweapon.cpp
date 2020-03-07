@@ -153,9 +153,32 @@ void actHudArm(Entity* my)
 		{
 			my->sprite = 1232;
 		}
+		else if (stats[clientnum]->gloves->type == INQUISITOR_GLOVES)
+		{
+			my->sprite = 1288;
+		}
+		else if (stats[clientnum]->gloves->type == LIFESTEAL_KNUCKLES)
+		{
+			my->sprite = 1318;
+		}
+		else if (stats[clientnum]->gloves->type == MANA_GLOVES)
+		{
+			my->sprite = 1321;
+		}
+		else if (stats[clientnum]->gloves->type == TIN_GLOVES)
+		{
+			my->sprite = 1333;
+		}
+		else if (stats[clientnum]->gloves->type == LOST_GAUNTLETS)
+		{
+			my->sprite = 1357;
+		}
 
 		//handle new gloves position
-		if ( stats[clientnum]->gloves->type == ICE_GLOVES || stats[clientnum]->gloves->type == ABYSSAL_KNUCKLES )
+		if ( stats[clientnum]->gloves->type == ICE_GLOVES || stats[clientnum]->gloves->type == ABYSSAL_KNUCKLES
+			|| stats[clientnum]->gloves->type == INQUISITOR_GLOVES || stats[clientnum]->gloves->type == LIFESTEAL_KNUCKLES
+			|| stats[clientnum]->gloves->type == MANA_GLOVES || stats[clientnum]->gloves->type == TIN_GLOVES
+			|| stats[clientnum]->gloves->type == LOST_GAUNTLETS )
 		{
 			my->x -= 0.5;
 			my->y -= 0.75;
@@ -794,6 +817,8 @@ void actHudWeapon(Entity* my)
 				&& stats[clientnum]->weapon->type != CROSSBOW
 				&& stats[clientnum]->weapon->type != HEAVY_CROSSBOW
 				&& stats[clientnum]->weapon->type != ABYSSAL_CROSSBOW
+				&& stats[clientnum]->weapon->type != CANNON
+				&& stats[clientnum]->weapon->type != CANNON_BOULDER
 				)
 			{
 				HUDWEAPON_BOW_FORCE_RELOAD = 1;
@@ -995,6 +1020,8 @@ void actHudWeapon(Entity* my)
 			&& stats[clientnum]->weapon->type != CROSSBOW
 			&& stats[clientnum]->weapon->type != HEAVY_CROSSBOW
 			&& stats[clientnum]->weapon->type != ABYSSAL_CROSSBOW
+			&& stats[clientnum]->weapon->type != CANNON
+			&& stats[clientnum]->weapon->type != CANNON_BOULDER
 			&& !hideWeapon )
 		{
 			ignoreAttack = true;
@@ -1063,7 +1090,9 @@ void actHudWeapon(Entity* my)
 							|| stats[clientnum]->weapon->type == ARTIFACT_BOW
 							|| stats[clientnum]->weapon->type == LONGBOW
 							|| stats[clientnum]->weapon->type == COMPOUND_BOW
-							|| stats[clientnum]->weapon->type == MAKESHIFT_BOW )
+							|| stats[clientnum]->weapon->type == MAKESHIFT_BOW
+							|| stats[clientnum]->weapon->type == INQUISITOR_BOW
+							|| stats[clientnum]->weapon->type == LOST_BOW )
 						{
 							if ( !stats[clientnum]->defending && !throwGimpTimer )
 							{
@@ -1492,7 +1521,9 @@ void actHudWeapon(Entity* my)
 							|| stats[clientnum]->weapon->type == ARTIFACT_BOW
 							|| stats[clientnum]->weapon->type == LONGBOW
 							|| stats[clientnum]->weapon->type == COMPOUND_BOW
-							|| stats[clientnum]->weapon->type == MAKESHIFT_BOW ) )
+							|| stats[clientnum]->weapon->type == MAKESHIFT_BOW 
+							|| stats[clientnum]->weapon->type == INQUISITOR_BOW
+							|| stats[clientnum]->weapon->type == LOST_BOW ) )
 					{
 						// not drawing bow anymore, reset.
 						bowIsBeingDrawn = false;
@@ -1914,7 +1945,9 @@ void actHudWeapon(Entity* my)
 					|| stats[clientnum]->weapon->type == ARTIFACT_BOW
 					|| stats[clientnum]->weapon->type == LONGBOW
 					|| stats[clientnum]->weapon->type == COMPOUND_BOW
-					|| stats[clientnum]->weapon->type == MAKESHIFT_BOW )
+					|| stats[clientnum]->weapon->type == MAKESHIFT_BOW
+					|| stats[clientnum]->weapon->type == INQUISITOR_BOW
+					|| stats[clientnum]->weapon->type == LOST_BOW )
 				{
 					if (bowFire)
 					{
@@ -2153,7 +2186,7 @@ void actHudWeapon(Entity* my)
 			if ( stats[clientnum]->weapon && !hideWeapon )
 			{
 				int weaponSkill = getWeaponSkill(stats[clientnum]->weapon);
-				if ( weaponSkill == PRO_SWORD || stats[clientnum]->weapon->type == STEEL_HALBERD )
+				if ( weaponSkill == PRO_SWORD || stats[clientnum]->weapon->type == STEEL_HALBERD || stats[clientnum]->weapon->type == INQUISITOR_SPEAR )
 				{
 					HUDWEAPON_CHOP = 7;  // swords + halberds can stab
 				}
@@ -2362,7 +2395,7 @@ void actHudWeapon(Entity* my)
 				{
 					if ( itemCategory(stats[clientnum]->weapon) != MAGICSTAFF && stats[clientnum]->weapon->type != CRYSTAL_SPEAR && stats[clientnum]->weapon->type != IRON_SPEAR
 						 && stats[clientnum]->weapon->type != ARTIFACT_SPEAR && stats[clientnum]->weapon->type != ABYSSAL_SPEAR && stats[clientnum]->weapon->type != SPEAR_BONE 
-						 && stats[clientnum]->weapon->type != TRIDENT )
+						 && stats[clientnum]->weapon->type != TRIDENT && stats[clientnum]->weapon->type != LOST_POLEARM )
 					{
 						HUDWEAPON_CHOP = 1;
 					}
@@ -2946,7 +2979,9 @@ void actHudWeapon(Entity* my)
 				|| item->type == ARTIFACT_BOW
 				|| item->type == LONGBOW
 				|| item->type == COMPOUND_BOW
-				|| item->type == MAKESHIFT_BOW )
+				|| item->type == MAKESHIFT_BOW
+				|| item->type == INQUISITOR_BOW
+				|| item->type == LOST_BOW )
 			{
 				my->x = 6 + HUDWEAPON_MOVEX;
 				my->y = 3 + HUDWEAPON_MOVEY;
@@ -3372,7 +3407,8 @@ void actHudShield(Entity* my)
 			}
 			if ( stats[clientnum]->shield )
 			{
-				if ( stats[clientnum]->shield->type == TOOL_TORCH || stats[clientnum]->shield->type == TOOL_CRYSTALSHARD || stats[clientnum]->shield->type == TOOL_GREENTORCH )
+				if ( stats[clientnum]->shield->type == TOOL_TORCH || stats[clientnum]->shield->type == TOOL_CRYSTALSHARD || stats[clientnum]->shield->type == TOOL_GREENTORCH 
+					|| stats[clientnum]->shield->type == TOOL_CANDLE || stats[clientnum]->shield->type == TOOL_CANDLE_TIMELESS )
 				{
 					if ( HUDSHIELD_MOVEX < 1.5 )
 					{
@@ -3708,7 +3744,7 @@ void actHudShield(Entity* my)
 	{
 		if (itemCategory(stats[clientnum]->shield) == TOOL)
 		{
-			if (stats[clientnum]->shield->type == TOOL_TORCH)
+			if (stats[clientnum]->shield->type == TOOL_TORCH || stats[clientnum]->shield->type == TOOL_CANDLE || stats[clientnum]->shield->type == TOOL_CANDLE_TIMELESS )
 			{
 				Entity* entity = spawnFlame(my, SPRITE_FLAME);
 				entity->flags[OVERDRAW] = true;
@@ -3737,6 +3773,13 @@ void actHudShield(Entity* my)
 				entity->flags[OVERDRAW] = true;
 				entity->z -= 2.5 * cos(HUDSHIELD_ROLL);
 				entity->y += 2.5 * sin(HUDSHIELD_ROLL);
+				my->flags[BRIGHT] = true;
+			}
+			else if (stats[clientnum]->shield->type == INQUISITOR_LANTERN)
+			{
+				Entity* entity = spawnFlame(my, SPRITE_ANGELFLAME);
+				entity->flags[OVERDRAW] = true;
+				entity->z += 1;
 				my->flags[BRIGHT] = true;
 			}
 		}
@@ -3985,7 +4028,9 @@ void actHudArrowModel(Entity* my)
 			|| stats[clientnum]->weapon->type == LONGBOW
 			|| stats[clientnum]->weapon->type == ARTIFACT_BOW
 			|| stats[clientnum]->weapon->type == COMPOUND_BOW
-			|| stats[clientnum]->weapon->type == MAKESHIFT_BOW )
+			|| stats[clientnum]->weapon->type == MAKESHIFT_BOW
+			|| stats[clientnum]->weapon->type == INQUISITOR_BOW
+			|| stats[clientnum]->weapon->type == LOST_BOW )
 		)
 	{
 		bow = true;

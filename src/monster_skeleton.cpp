@@ -279,7 +279,7 @@ void initSkeleton(Entity* my, Stat* myStats)
 						myStats->MP = 100;
 						myStats->MAXMP = 100;
 						strcpy(myStats->name, "Elementalist Bobby Bob Bones");
-						myStats->weapon = newItem(ABYSSAL_MACE, EXCELLENT, 0, 1, rand(), true, nullptr);
+						myStats->weapon = newItem(ABYSSAL_MACE, EXCELLENT, 0, 0, rand(), true, nullptr);
 						myStats->shield = newItem(TOOL_CRYSTALSHARD, WORN, 0, 1, 1, true, nullptr);
 						myStats->helmet = newItem(HAT_WIZARD, EXCELLENT, 2, 1, 1, true, nullptr);
 						myStats->cloak = newItem(CLOAK_ELEMENTALIST, DECREPIT, 0, 1, 1, true, nullptr);
