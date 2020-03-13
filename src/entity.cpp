@@ -3948,6 +3948,13 @@ void Entity::handleEffects(Stat* myStats)
 	// bleeding
 	if ( myStats->EFFECTS[EFF_BLEEDING] )
 	{
+		if (myStats->shield && myStats->shield->type == ANTI_BLEED_SHIELD )
+		{
+			messagePlayer(player, language[6275]);
+			myStats->EFFECTS_TIMERS[EFF_BLEEDING] = 0;
+			myStats->EFFECTS[EFF_BLEEDING] = false;
+			serverUpdateEffects(player);
+		}
 		if ( ticks % 120 == 0 )
 		{
 			if ( myStats->HP > 5 + (std::max(0, getCON())) ) // CON increases when bleeding stops.
@@ -4636,7 +4643,73 @@ void Entity::handleEffects(Stat* myStats)
 			}
 		}
 	}
-
+	if ( myStats->shield )
+	{
+		/*if ( myStats->shield->type == ANTI_BLEED_SHIELD )	//call around line 3951, when bleed effects procs
+		{
+			messagePlayer(player, language[6275]);
+			myStats->EFFECTS_TIMERS[EFF_BLEEDING] = 0;
+			myStats->EFFECTS[EFF_BLEEDING] = false;
+			serverUpdateEffects(player);
+		}
+		else*/ if (myStats->shield->type == ANTI_SLEEP_SHIELD && myStats->EFFECTS_TIMERS[EFF_ASLEEP] > 0)
+		{
+			switch (rand() % 10)
+			{
+			case 0:
+				messagePlayer(player, language[6277]);
+				break;
+			default:
+				messagePlayer(player, language[6276]);
+				break;
+			}
+			myStats->EFFECTS_TIMERS[EFF_ASLEEP] = 0;
+			myStats->EFFECTS[EFF_ASLEEP] = false;
+			serverUpdateEffects(player);
+		}
+		else if (myStats->shield->type == ANTI_CHARM_SHIELD && myStats->EFFECTS_TIMERS[EFF_PACIFY] > 0)
+		{
+			messagePlayer(player, language[6278]);
+			myStats->EFFECTS_TIMERS[EFF_PACIFY] = 0;
+			myStats->EFFECTS[EFF_PACIFY] = false;
+			serverUpdateEffects(player);
+		}
+		else if ( myStats->shield->type == LOST_SHIELD )
+		{
+			if (myStats->EFFECTS_TIMERS[EFF_PARALYZED] > 0)
+			{
+				myStats->EFFECTS_TIMERS[EFF_PARALYZED] = 1;
+			}
+			if (myStats->EFFECTS_TIMERS[EFF_SLOW] > 0)
+			{
+				myStats->EFFECTS_TIMERS[EFF_SLOW] = 1;
+			}
+			if (myStats->EFFECTS_TIMERS[EFF_POISONED] > 0)
+			{
+				myStats->EFFECTS_TIMERS[EFF_POISONED] = 1;
+			}
+			if (myStats->EFFECTS_TIMERS[EFF_PACIFY] > 0)
+			{
+				myStats->EFFECTS_TIMERS[EFF_PACIFY] = 1;
+			}
+			if (myStats->EFFECTS_TIMERS[EFF_ASLEEP] > 0)
+			{
+				myStats->EFFECTS_TIMERS[EFF_ASLEEP] = 1;
+			}
+			if (myStats->EFFECTS_TIMERS[EFF_BLEEDING] > 0)
+			{
+				myStats->EFFECTS_TIMERS[EFF_BLEEDING] = 1;
+			}
+			if (myStats->EFFECTS_TIMERS[EFF_BLIND] > 0)
+			{
+				myStats->EFFECTS_TIMERS[EFF_BLIND] = 1;
+			}
+			if (myStats->EFFECTS_TIMERS[EFF_CONFUSED] > 0)
+			{
+				myStats->EFFECTS_TIMERS[EFF_CONFUSED] = 1;
+			}
+		}
+	}
 	if (myStats->mask != NULL)
 	{
 		//abyssal mask imunity to blindness
