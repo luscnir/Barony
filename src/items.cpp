@@ -114,6 +114,12 @@ Item* newItem(ItemType type, Status status, Sint16 beatitude, Sint16 count, Uint
 						inventory_y = 4;
 						break;
 					}
+					else if (stats[i]->cloak && stats[i]->cloak->type == INQUISITOR_BACKPACK
+						&& (shouldInvertEquipmentBeatitude(stats[i]) ? stats[i]->cloak->beatitude <= 0 : stats[i]->cloak->beatitude >= 0))
+					{
+						inventory_y = 5;
+						break;
+					}
 					break;
 				}
 			}
@@ -126,6 +132,11 @@ Item* newItem(ItemType type, Status status, Sint16 beatitude, Sint16 count, Uint
 					&& (shouldInvertEquipmentBeatitude(stats[clientnum]) ? stats[clientnum]->cloak->beatitude <= 0 : stats[clientnum]->cloak->beatitude >= 0) )
 				{
 					inventory_y = 4;
+				}
+				else if (stats[clientnum]->cloak && stats[clientnum]->cloak->type == INQUISITOR_BACKPACK
+					&& (shouldInvertEquipmentBeatitude(stats[clientnum]) ? stats[clientnum]->cloak->beatitude <= 0 : stats[clientnum]->cloak->beatitude >= 0))
+				{
+					inventory_y = 5;
 				}
 			}
 		}
@@ -2918,10 +2929,10 @@ void useItem(Item* item, int player, Entity* usedBy)
 				messagePlayer(player, language[6262]);
 				break;
 			case LOST_MASK:
-				messagePlayer(player, language[6263]);
+				messagePlayer(player, language[6264]);
 				break;
 			case LOST_AMULET:
-				messagePlayer(player, language[6264]);
+				messagePlayer(player, language[6263]);
 				break;
 			case LOST_HELM:
 				messagePlayer(player, language[6265]);
@@ -3584,23 +3595,23 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	{
 		if (currentlevel >= 48)
 		{
-			attack += 30;
+			attack += 29;
 		}
 		else if (currentlevel >= 33)
 		{
-			attack += 25;
+			attack += 24;
 		}
 		else if (currentlevel >= 21)
 		{
-			attack += 20;
+			attack += 19;
 		}
 		else if (currentlevel >= 7)
 		{
-			attack += 15;
+			attack += 14;
 		}
 		else
 		{
-			attack += 10;
+			attack += 9;
 		}
 	}
 	else if (type == NEEDLE)
@@ -3845,17 +3856,13 @@ Sint32 Item::armorGetAC(Stat* wielder) const
 	}
 	else if (type == INQUISITOR_BACKPACK)
 	{
-		armor += 3;
+		armor += 2;
 	}
 	else if (type == INQUISITOR_AMULET)
 	{
-		armor -= 15;
+		armor -= 0;
 	}
 	else if (type == TIN_HELM)
-	{
-		armor += 1;
-	}
-	else if (type == MASK_GRID)
 	{
 		armor += 1;
 	}
@@ -3934,6 +3941,10 @@ Sint32 Item::armorGetAC(Stat* wielder) const
 	else if (type == LOST_SHIELD)
 	{
 		armor += 3;
+	}
+	else if (type == MASK_GRID)
+	{
+		armor += 1;
 	}
 	//armor *= (double)(item->status/5.0);
 
@@ -4979,9 +4990,12 @@ bool isItemEquippableInShieldSlot(Item* item)
 		case TOOL_GREENTORCH:
 		case ABYSSAL_SHIELD:
 		case NECRO_SHIELD:
+		case INQUISITOR_LANTERN:
 		case ANTI_SLEEP_SHIELD:
 		case ANTI_CHARM_SHIELD:
 		case ANTI_BLEED_SHIELD:
+		case TOOL_CANDLE:
+		case TOOL_CANDLE_TIMELESS:
 		case LOST_SHIELD:
 			return true;
 			break;

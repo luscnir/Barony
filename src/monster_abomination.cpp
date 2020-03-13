@@ -994,7 +994,7 @@ void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				entity->yaw = shieldarm->yaw;
 				entity->roll = 0;
 				entity->pitch = 0;
-				if ( entity->sprite == items[TOOL_TORCH].index )
+				if ( entity->sprite == items[TOOL_TORCH].index || entity->sprite == items[TOOL_CANDLE].index || entity->sprite == items[TOOL_CANDLE_TIMELESS].index )
 				{
 					entity2 = spawnFlame(entity, SPRITE_FLAME);
 					entity2->x += 2 * cos(entity->yaw);
@@ -1023,9 +1023,19 @@ void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					entity2->y += 2 * sin(entity->yaw);
 					entity2->z -= 2;
 				}
+				else if (entity->sprite == items[INQUISITOR_LANTERN].index)
+				{
+					entity->z += 2;
+					entity2 = spawnFlame(entity, SPRITE_ANGELFLAME);
+					entity2->x += 2 * cos(entity->yaw);
+					entity2->y += 2 * sin(entity->yaw);
+					entity2->z += 1;
+				}
 				if ( MONSTER_SHIELDYAW > PI / 32 )
 				{
-					if ( entity->sprite != items[TOOL_TORCH].index && entity->sprite != items[TOOL_LANTERN].index && entity->sprite != items[TOOL_CRYSTALSHARD].index && entity->sprite != items[TOOL_GREENTORCH].index)
+					if ( entity->sprite != items[TOOL_TORCH].index && entity->sprite != items[TOOL_LANTERN].index && entity->sprite != items[TOOL_CRYSTALSHARD].index 
+						&& entity->sprite != items[TOOL_GREENTORCH].index && entity->sprite != items[INQUISITOR_LANTERN].index && entity->sprite != items[TOOL_CANDLE].index
+						&& entity->sprite != items[TOOL_CANDLE_TIMELESS].index )
 					{
 						// shield, so rotate a little.
 						entity->roll += PI / 64;
@@ -1206,7 +1216,9 @@ void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	if ( shieldNode )
 	{
 		Entity* shieldEntity = (Entity*)shieldNode->element;
-		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index)
+		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index
+			&& shieldEntity->sprite != items[TOOL_GREENTORCH].index && shieldEntity->sprite != items[INQUISITOR_LANTERN].index && shieldEntity->sprite != items[TOOL_CANDLE].index
+			&& shieldEntity->sprite != items[TOOL_CANDLE_TIMELESS].index )
 		{
 			shieldEntity->yaw -= PI / 6;
 		}

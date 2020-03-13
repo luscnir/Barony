@@ -288,6 +288,26 @@ void actLeftHandMagic(Entity* my)
 		{
 			my->sprite = 1279;
 		}
+		else if (stats[clientnum]->gloves->type == INQUISITOR_GLOVES)
+		{
+			my->sprite = 1290;
+		}
+		else if (stats[clientnum]->gloves->type == LIFESTEAL_KNUCKLES)
+		{
+			my->sprite = 1320;
+		}
+		else if (stats[clientnum]->gloves->type == MANA_GLOVES)
+		{
+			my->sprite = 1323;
+		}
+		else if (stats[clientnum]->gloves->type == TIN_GLOVES)
+		{
+			my->sprite = 1335;
+		}
+		else if (stats[clientnum]->gloves->type == LOST_GAUNTLETS)
+		{
+			my->sprite = 1359;
+		}
 
 	}
 
@@ -657,6 +677,26 @@ void actRightHandMagic(Entity* my)
 		else if (stats[clientnum]->gloves->type == ICE_GLOVES)
 		{
 			my->sprite = 1232;
+		}
+		else if (stats[clientnum]->gloves->type == INQUISITOR_GLOVES)
+		{
+			my->sprite = 1289;
+		}
+		else if (stats[clientnum]->gloves->type == LIFESTEAL_KNUCKLES)
+		{
+			my->sprite = 1319;
+		}
+		else if (stats[clientnum]->gloves->type == MANA_GLOVES)
+		{
+			my->sprite = 1322;
+		}
+		else if (stats[clientnum]->gloves->type == TIN_GLOVES)
+		{
+			my->sprite = 1334;
+		}
+		else if (stats[clientnum]->gloves->type == LOST_GAUNTLETS)
+		{
+			my->sprite = 1358;
 		}
 	}
 

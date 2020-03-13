@@ -10722,7 +10722,9 @@ bool Entity::monsterAllyEquipmentInClass(const Item& item) const
 					return true;
 					break;
 				case TOOL:
-					if ( item.type == TOOL_TORCH || item.type == TOOL_LANTERN || item.type == TOOL_CRYSTALSHARD || item.type == TOOL_GREENTORCH)
+					if ( item.type == TOOL_TORCH || item.type == TOOL_LANTERN || item.type == TOOL_CRYSTALSHARD 
+						|| item.type == TOOL_GREENTORCH || item.type == INQUISITOR_LANTERN || item.type == TOOL_CANDLE
+						|| item.type == TOOL_CANDLE_TIMELESS )
 					{
 						return true;
 					}

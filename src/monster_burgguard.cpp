@@ -60,7 +60,7 @@ void initBurgGuard(Entity* my, Stat* myStats)
 				myStats->MAXHP = 150;
 				myStats->OLDHP = myStats->HP;
 				strcpy(myStats->name, "General Gloobutamos");
-				myStats->weapon = newItem(ABYSSAL_SPEAR, EXCELLENT, 1, 1, rand(), true, nullptr);
+				myStats->weapon = newItem(ABYSSAL_SPEAR, EXCELLENT, 0, 1, rand(), true, nullptr);
 				myStats->helmet = newItem(HAT_WIZARD_SLIMY, EXCELLENT, 1 + rand() % 3, 1, rand(), false, nullptr);
 				myStats->breastplate = newItem(IRON_BREASTPIECE_SLIMY, SERVICABLE, 1 + rand() % 3, 1, rand(), false, nullptr);
 
@@ -1053,7 +1053,9 @@ void burgGuardMoveBodyparts(Entity * my, Stat * myStats, double dist)
 	if (shieldNode)
 	{
 		Entity* shieldEntity = (Entity*)shieldNode->element;
-		if (shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index)
+		if (shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index 
+			&& shieldEntity->sprite != items[TOOL_GREENTORCH].index && shieldEntity->sprite != items[INQUISITOR_LANTERN].index && shieldEntity->sprite != items[TOOL_CANDLE].index
+			&& shieldEntity->sprite != items[TOOL_CANDLE_TIMELESS].index )
 		{
 			shieldEntity->yaw -= PI / 6;
 		}

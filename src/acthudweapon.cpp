@@ -155,23 +155,23 @@ void actHudArm(Entity* my)
 		}
 		else if (stats[clientnum]->gloves->type == INQUISITOR_GLOVES)
 		{
-			my->sprite = 1288;
+			my->sprite = 1289;
 		}
 		else if (stats[clientnum]->gloves->type == LIFESTEAL_KNUCKLES)
 		{
-			my->sprite = 1318;
+			my->sprite = 1319;
 		}
 		else if (stats[clientnum]->gloves->type == MANA_GLOVES)
 		{
-			my->sprite = 1321;
+			my->sprite = 1322;
 		}
 		else if (stats[clientnum]->gloves->type == TIN_GLOVES)
 		{
-			my->sprite = 1333;
+			my->sprite = 1334;
 		}
 		else if (stats[clientnum]->gloves->type == LOST_GAUNTLETS)
 		{
-			my->sprite = 1357;
+			my->sprite = 1358;
 		}
 
 		//handle new gloves position
@@ -180,9 +180,9 @@ void actHudArm(Entity* my)
 			|| stats[clientnum]->gloves->type == MANA_GLOVES || stats[clientnum]->gloves->type == TIN_GLOVES
 			|| stats[clientnum]->gloves->type == LOST_GAUNTLETS )
 		{
-			my->x -= 0.5;
+			my->x -= 0.5f;
 			my->y -= 0.75;
-			my->z -= 0.45;
+			my->z -= 0.55;
 		}
 
 		if ( stats[clientnum]->weapon == nullptr )
@@ -446,7 +446,6 @@ void actHudWeapon(Entity* my)
 		{
 			waterwalkingboots = true;
 		}
-
 	// swimming
 	if (players[clientnum] && players[clientnum]->entity)
 	{
@@ -516,7 +515,8 @@ void actHudWeapon(Entity* my)
 		{
 			rangedweapon = true;
 		}
-		else if (stats[clientnum]->weapon->type == CANNON || stats[clientnum]->weapon->type == CANNON_BOULDER)
+		else if (stats[clientnum]->weapon->type == CANNON || stats[clientnum]->weapon->type == CANNON_BOULDER
+			|| stats[clientnum]->weapon->type == INQUISITOR_BOW || stats[clientnum]->weapon->type == LOST_BOW )
 		{
 			rangedweapon = true;
 		}

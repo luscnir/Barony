@@ -1384,7 +1384,7 @@ void shopkeeperMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				entity->x -= 2.5 * cos(my->yaw + PI / 2) + .20 * cos(my->yaw);
 				entity->y -= 2.5 * sin(my->yaw + PI / 2) + .20 * sin(my->yaw);
 				entity->z += 2.5;
-				if ( entity->sprite == items[TOOL_TORCH].index )
+				if (entity->sprite == items[TOOL_TORCH].index || entity->sprite == items[TOOL_CANDLE].index || entity->sprite == items[TOOL_CANDLE_TIMELESS].index)
 				{
 					entity2 = spawnFlame(entity, SPRITE_FLAME);
 					entity2->x += 2 * cos(my->yaw);
@@ -1412,6 +1412,14 @@ void shopkeeperMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					entity2->x += 2 * cos(my->yaw);
 					entity2->y += 2 * sin(my->yaw);
 					entity2->z -= 2;
+				}
+				else if (entity->sprite == items[INQUISITOR_LANTERN].index)
+				{
+					entity->z += 2;
+					entity2 = spawnFlame(entity, SPRITE_ANGELFLAME);
+					entity2->x += 2 * cos(entity->yaw);
+					entity2->y += 2 * sin(entity->yaw);
+					entity2->z += 1;
 				}
 				break;
 				// cloak
@@ -1598,7 +1606,9 @@ void shopkeeperMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	if ( shieldNode )
 	{
 		Entity* shieldEntity = (Entity*)shieldNode->element;
-		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index)
+		if (shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index
+			&& shieldEntity->sprite != items[TOOL_GREENTORCH].index && shieldEntity->sprite != items[INQUISITOR_LANTERN].index && shieldEntity->sprite != items[TOOL_CANDLE].index
+			&& shieldEntity->sprite != items[TOOL_CANDLE_TIMELESS].index)
 		{
 			shieldEntity->yaw -= PI / 6;
 		}

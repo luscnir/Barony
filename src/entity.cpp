@@ -792,7 +792,9 @@ int Entity::entityLightAfterReductions(Stat& myStats, Entity* observer)
 				if ( stats[player]->shield )
 				{
 					if ( stats[player]->shield->type == TOOL_TORCH || stats[player]->shield->type == TOOL_CRYSTALSHARD
-						|| stats[player]->shield->type == TOOL_LANTERN )
+						|| stats[player]->shield->type == TOOL_LANTERN || stats[player]->shield->type == TOOL_GREENTORCH
+						|| stats[player]->shield->type == INQUISITOR_LANTERN || stats[player]->shield->type == TOOL_CANDLE
+						|| stats[player]->shield->type == TOOL_CANDLE_TIMELESS )
 					{
 					}
 					else
@@ -3575,13 +3577,13 @@ void Entity::handleEffects(Stat* myStats)
 	}
 	if (client_classes[player] == CLASS_LUNATIC) //lunatic can't gain any hp!
 	{
-		if (stats[player]->MAXHP > 1)
+		if (myStats->MAXHP > 1 )
 		{
-			stats[player]->MAXHP = 1;
+			myStats->MAXHP = 1;
 		}
-		if (stats[player]->HP > 1)
+		if ( myStats->HP > 1 )
 		{
-			stats[player]->HP = 1;
+			myStats->HP = 1;
 		}
 	}
 
@@ -3785,7 +3787,7 @@ void Entity::handleEffects(Stat* myStats)
 	// torches/lamps burn down
 	if ( myStats->shield != NULL )
 	{
-		if ( myStats->shield->type == TOOL_TORCH || myStats->shield->type == TOOL_LANTERN || myStats->shield->type == TOOL_GREENTORCH )
+		if ( myStats->shield->type == TOOL_TORCH || myStats->shield->type == TOOL_LANTERN || myStats->shield->type == TOOL_GREENTORCH || myStats->shield->type == TOOL_CANDLE )
 		{
 			this->char_torchtime++;
 			if ( (this->char_torchtime >= 7200 && myStats->shield->type == TOOL_TORCH) || (this->char_torchtime >= 10260) )
@@ -4204,7 +4206,7 @@ void Entity::handleEffects(Stat* myStats)
 				if ( myStats->cloak != nullptr )
 				{
 					// 1 in 10 chance of dealing damage to Entity's cloak
-					if ( rand() % 10 == 0 && myStats->cloak->type != ARTIFACT_CLOAK && myStats->cloak->type != CLOAK_BACKPACK && myStats->cloak->type != ABYSSAL_CLOAK )
+					if ( rand() % 10 == 0 && myStats->cloak->type != ARTIFACT_CLOAK && myStats->cloak->type != CLOAK_BACKPACK && myStats->cloak->type != ABYSSAL_CLOAK && myStats->cloak->type != INQUISITOR_BACKPACK && myStats->cloak->type != LOST_CLOAK )
 					{
 						if ( player == clientnum )
 						{
@@ -4736,11 +4738,15 @@ Sint32 Entity::getAttack()
 			{
 				attack += 2 + entitystats->gloves->beatitude;
 			}
-			else if ( entitystats->gloves->type == SPIKED_GAUNTLETS )
+			else if ( entitystats->gloves->type == SPIKED_GAUNTLETS || entitystats->gloves->type == LIFESTEAL_KNUCKLES )
 			{
 				attack += 3 + entitystats->gloves->beatitude;
 			}
-			else if (entitystats->gloves->type == ABYSSAL_KNUCKLES)
+			else if ( entitystats->gloves->type == LOST_GAUNTLETS )
+			{
+				attack += 4 + entitystats->gloves->beatitude;
+			}
+			else if ( entitystats->gloves->type == ABYSSAL_KNUCKLES )
 			{
 				attack += 5 + entitystats->gloves->beatitude;
 			}
@@ -5450,6 +5456,25 @@ Sint32 statGetCON(Stat* entitystats, Entity* my)
 				CON--;
 			}
 			CON -= (cursedItemIsBuff ? abs(entitystats->mask->beatitude) : entitystats->mask->beatitude);
+		}
+		if (entitystats->mask->type == MASK_GRID)
+		{
+			if (entitystats->mask->beatitude >= 0 || cursedItemIsBuff)
+			{
+				CON++;
+			}
+			CON += (cursedItemIsBuff ? abs(entitystats->mask->beatitude) : entitystats->mask->beatitude);
+		}
+	}
+	if (entitystats->amulet != nullptr)
+	{
+		if (entitystats->amulet->type == INQUISITOR_AMULET)
+		{
+			if (entitystats->amulet->beatitude >= 0 || cursedItemIsBuff)
+			{
+				CON -= 30;
+			}
+			CON += (cursedItemIsBuff ? abs(entitystats->amulet->beatitude) : entitystats->amulet->beatitude);
 		}
 	}
 
@@ -7972,6 +7997,8 @@ void Entity::attack(int pose, int charge, Entity* target)
 							case IRON_KNUCKLES:
 							case SPIKED_GAUNTLETS:
 							case ABYSSAL_KNUCKLES:
+							case LIFESTEAL_KNUCKLES:
+							case LOST_GAUNTLETS:
 								hasMeleeGloves = true;
 								break;
 							default:
@@ -8459,9 +8486,9 @@ void Entity::attack(int pose, int charge, Entity* target)
 						}
 						else if (myStats->weapon->type == INQUISITOR_SPEAR)
 						{
-							if (enemy_hp <= enemy_maxhp * 0.2)//execute low hp targets
+							if ( hitstats->HP <= 50)//execute low hp targets
 							{
-								hitstats->HP -= 1000;
+								hitstats->HP = 0;
 								messagePlayer(player, language[6270]);
 							}
 						}
@@ -8478,23 +8505,24 @@ void Entity::attack(int pose, int charge, Entity* target)
 						{
 							if (hitstats)
 							{
-								hitstats->EFFECTS[EFF_KNOCKBACK] = true;
-								hitstats->EFFECTS_TIMERS[EFF_KNOCKBACK] = TICKS_PER_SECOND * 1;
+								//hitstats->weapon = newItem(LOST_POLEARM, EXCELLENT, 0, 1, rand(), true, nullptr);//parasite weapon idea
+								//hitstats->EFFECTS[EFF_DASH] = true;
+								//hitstats->EFFECTS_TIMERS[EFF_DASH] = TICKS_PER_SECOND * 1;
 							}
 						}
 						else if (myStats->weapon->type == LOST_AXE)
 						{
 							if (hitstats)
 							{
-								int extraDamage = (myStats->MAXHP - myStats->HP)* -0.1;//equals to % of your missing Health
+								int extraDamage = (myStats->MAXHP - myStats->HP)* 0.15;//equals to 15% of your missing Health
 								hitstats->HP -= extraDamage;//The lower your HP the more damage you do damage
 							}
 						}
 						else if (myStats->weapon->type == LOST_SWORD)
 						{
-						if (hitstats->MP > 5)
+						if (hitstats->HP == 0)
 							{
-								hitstats->MP -= 100;//empty target mana
+								myStats->MAXMP += 1;//empty target mana
 								messagePlayer(player, language[6272]);
 							}
 						}
@@ -8734,7 +8762,11 @@ void Entity::attack(int pose, int charge, Entity* target)
 										baseMultiplier = 0.35;
 										break;
 									case SPIKED_GAUNTLETS:
+									case LIFESTEAL_KNUCKLES:
 										baseMultiplier = 0.5;
+										break;
+									case LOST_GAUNTLETS:
+										baseMultiplier = 0.6;
 										break;
 									case ABYSSAL_KNUCKLES:
 										baseMultiplier = 0.75;
@@ -12596,23 +12628,23 @@ int setGloveSprite(Stat* myStats, Entity* ent, int spriteOffset)
 	}
 	else if (myStats->gloves->type == INQUISITOR_GLOVES)
 	{
-		ent->sprite = 1289 + myStats->sex + spriteOffset;
+		ent->sprite = 1361 + myStats->sex + spriteOffset;
 	}
 	else if (myStats->gloves->type == LIFESTEAL_KNUCKLES)
 	{
-		ent->sprite = 1319 + myStats->sex + spriteOffset;
+		ent->sprite = 1373 + myStats->sex + spriteOffset;
 	}
 	else if (myStats->gloves->type == MANA_GLOVES)
 	{
-		ent->sprite = 1322 + myStats->sex + spriteOffset;
+		ent->sprite = 1381 + myStats->sex + spriteOffset;
 	}
 	else if (myStats->gloves->type == TIN_GLOVES)
 	{
-		ent->sprite = 1334 + myStats->sex + spriteOffset;
+		ent->sprite = 1397 + myStats->sex + spriteOffset;
 	}
 	else if (myStats->gloves->type == LOST_GAUNTLETS)
 	{
-		ent->sprite = 1358 + myStats->sex + spriteOffset;
+		ent->sprite = 1389 + myStats->sex + spriteOffset;
 	}
 	else
 	{
@@ -15539,7 +15571,7 @@ void Entity::monsterAddNearbyItemToInventory(Stat* myStats, int rangeToFind, int
 						{
 							playSoundEntity(this, 44 + rand() % 3, 64);
 						}
-						else if ( item->type == TOOL_TORCH || item->type == TOOL_LANTERN || item->type == TOOL_CRYSTALSHARD || item->type == TOOL_GREENTORCH || item->type == INQUISITOR_LANTERN )
+						else if ( item->type == TOOL_TORCH || item->type == TOOL_LANTERN || item->type == TOOL_CRYSTALSHARD || item->type == TOOL_GREENTORCH || item->type == INQUISITOR_LANTERN || item->type == TOOL_CANDLE || item->type == TOOL_CANDLE_TIMELESS )
 						{
 							playSoundEntity(this, 134, 64);
 						}
@@ -15903,7 +15935,7 @@ bool Entity::monsterWantsItem(const Item& item, Item**& shouldEquip, node_t*& re
 			}
 			if ( item.interactNPCUid == getUID() )
 			{
-				if ( item.type == TOOL_TORCH || item.type == TOOL_LANTERN || item.type == TOOL_CRYSTALSHARD || item.type == TOOL_GREENTORCH || item.type == INQUISITOR_LANTERN )
+				if ( item.type == TOOL_TORCH || item.type == TOOL_LANTERN || item.type == TOOL_CRYSTALSHARD || item.type == TOOL_GREENTORCH || item.type == INQUISITOR_LANTERN || item.type == TOOL_CANDLE || item.type == TOOL_CANDLE_TIMELESS )
 				{
 					shouldEquip = &myStats->shield;
 					return true;
@@ -18965,7 +18997,7 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 			shieldLimb->roll = 0;
 			shieldLimb->pitch = 0;
 
-			if ( shieldLimb->sprite == items[TOOL_TORCH].index )
+			if ( shieldLimb->sprite == items[TOOL_TORCH].index || shieldLimb->sprite == items[TOOL_CANDLE].index || shieldLimb->sprite == items[TOOL_CANDLE_TIMELESS].index )
 			{
 				flameEntity = spawnFlame(shieldLimb, SPRITE_FLAME);
 				flameEntity->x += 2 * cos(shieldArmLimb->yaw);
@@ -19030,7 +19062,9 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 					&& shieldLimb->sprite != items[TOOL_LANTERN].index
 					&& shieldLimb->sprite != items[TOOL_CRYSTALSHARD].index
 					&& shieldLimb->sprite != items[TOOL_GREENTORCH].index
-					&& shieldLimb->sprite != items[INQUISITOR_LANTERN].index )
+					&& shieldLimb->sprite != items[INQUISITOR_LANTERN].index
+					&& shieldLimb->sprite != items[TOOL_CANDLE].index
+					&& shieldLimb->sprite != items[TOOL_CANDLE_TIMELESS].index )
 				{
 					// shield, so rotate a little.
 					shieldLimb->roll += PI / 64;
@@ -19058,7 +19092,8 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 			shieldLimb->pitch = 0;
 
 			if ( shieldLimb->sprite != items[TOOL_TORCH].index && shieldLimb->sprite != items[TOOL_LANTERN].index && shieldLimb->sprite != items[TOOL_CRYSTALSHARD].index 
-				&& shieldLimb->sprite != items[TOOL_GREENTORCH].index && shieldLimb->sprite != items[INQUISITOR_LANTERN].index )
+				&& shieldLimb->sprite != items[TOOL_GREENTORCH].index && shieldLimb->sprite != items[INQUISITOR_LANTERN].index && shieldLimb->sprite != items[TOOL_CANDLE].index 
+				&& shieldLimb->sprite != items[TOOL_CANDLE_TIMELESS].index )
 			{
 				shieldLimb->focalx = limbs[race][7][0] - 0.65;
 				shieldLimb->focaly = limbs[race][7][1];
@@ -19093,7 +19128,7 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 				}
 			}
 
-			if ( shieldLimb->sprite == items[TOOL_TORCH].index )
+			if ( shieldLimb->sprite == items[TOOL_TORCH].index || shieldLimb->sprite == items[TOOL_CANDLE].index || shieldLimb->sprite == items[TOOL_CANDLE_TIMELESS].index )
 			{
 				flameEntity = spawnFlame(shieldLimb, SPRITE_FLAME);
 				flameEntity->x += 2.5 * cos(shieldLimb->yaw + PI / 16);
@@ -19171,7 +19206,9 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 					&& shieldLimb->sprite != items[TOOL_LANTERN].index
 					&& shieldLimb->sprite != items[TOOL_CRYSTALSHARD].index
 					&& shieldLimb->sprite != items[TOOL_GREENTORCH].index
-					&& shieldLimb->sprite != items[INQUISITOR_LANTERN].index )
+					&& shieldLimb->sprite != items[INQUISITOR_LANTERN].index 
+					&& shieldLimb->sprite != items[TOOL_CANDLE].index
+					&& shieldLimb->sprite != items[TOOL_CANDLE_TIMELESS].index )
 				{
 					// shield, so rotate a little.
 					shieldLimb->roll += PI / 64;
@@ -19226,7 +19263,7 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 				shieldLimb->focalz = limbs[race][7][2];
 			}*/
 
-			if ( shieldLimb->sprite == items[TOOL_TORCH].index )
+			if ( shieldLimb->sprite == items[TOOL_TORCH].index || shieldLimb->sprite == items[TOOL_CANDLE].index || shieldLimb->sprite == items[TOOL_CANDLE_TIMELESS].index )
 			{
 				flameEntity = spawnFlame(shieldLimb, SPRITE_FLAME);
 				flameEntity->x += 2 * cos(shieldLimb->yaw);
@@ -19254,6 +19291,14 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 				flameEntity->x += 2 * cos(shieldLimb->yaw);
 				flameEntity->y += 2 * sin(shieldLimb->yaw);
 				flameEntity->z -= 2;
+			}
+			else if (shieldLimb->sprite == items[INQUISITOR_LANTERN].index)
+			{
+				shieldLimb->z += 2;
+				flameEntity = spawnFlame(shieldLimb, SPRITE_ANGELFLAME);
+				flameEntity->x += 2 * cos(shieldLimb->yaw);
+				flameEntity->y += 2 * sin(shieldLimb->yaw);
+				flameEntity->z += 1;
 			}
 			else if ( shieldLimb->sprite >= items[SPELLBOOK_LIGHT].index
 				&& shieldLimb->sprite < (items[SPELLBOOK_LIGHT].index + items[SPELLBOOK_LIGHT].variations) )
@@ -19319,7 +19364,9 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 					&& shieldLimb->sprite != items[TOOL_LANTERN].index
 					&& shieldLimb->sprite != items[TOOL_CRYSTALSHARD].index
 					&& shieldLimb->sprite != items[TOOL_GREENTORCH].index 
-					&& shieldLimb->sprite != items[INQUISITOR_LANTERN].index )
+					&& shieldLimb->sprite != items[INQUISITOR_LANTERN].index
+					&& shieldLimb->sprite != items[TOOL_CANDLE].index 
+					&& shieldLimb->sprite != items[TOOL_CANDLE_TIMELESS].index )
 				{
 					// shield, so rotate a little.
 					shieldLimb->roll += PI / 64;

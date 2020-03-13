@@ -1604,6 +1604,11 @@ void gameLogic(void)
 			{
 				backpack_sizey = 4;
 			}
+			else if (stats[clientnum]->cloak && stats[clientnum]->cloak->type == INQUISITOR_BACKPACK
+				&& (shouldInvertEquipmentBeatitude(stats[clientnum]) ? stats[clientnum]->cloak->beatitude <= 0 : stats[clientnum]->cloak->beatitude >= 0))
+			{
+				backpack_sizey = 5;
+			}
 
 			if ( tooManySpells && gui_mode == GUI_MODE_INVENTORY && inventory_mode == INVENTORY_MODE_SPELL )
 			{
@@ -1612,6 +1617,10 @@ void gameLogic(void)
 			else if ( backpack_sizey == 4 )
 			{
 				INVENTORY_SIZEY = 4;
+			}
+			else if ( backpack_sizey == 5 )
+			{
+				INVENTORY_SIZEY = 5;
 			}
 			else
 			{
@@ -2180,6 +2189,11 @@ void gameLogic(void)
 			{
 				backpack_sizey = 4;
 			}
+			else if (stats[clientnum]->cloak && stats[clientnum]->cloak->type == INQUISITOR_BACKPACK
+				&& (shouldInvertEquipmentBeatitude(stats[clientnum]) ? stats[clientnum]->cloak->beatitude <= 0 : stats[clientnum]->cloak->beatitude >= 0))
+			{
+				backpack_sizey = 5;
+			}
 
 			if ( tooManySpells && gui_mode == GUI_MODE_INVENTORY && inventory_mode == INVENTORY_MODE_SPELL )
 			{
@@ -2188,6 +2202,10 @@ void gameLogic(void)
 			else if ( backpack_sizey == 4 )
 			{
 				INVENTORY_SIZEY = 4;
+			}
+			else if (backpack_sizey == 5)
+			{
+				INVENTORY_SIZEY = 5;
 			}
 			else
 			{

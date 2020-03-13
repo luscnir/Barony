@@ -2580,7 +2580,7 @@ void actPlayer(Entity* my)
 			{
 				if ( PLAYER_NUM == clientnum )
 				{
-					if ( stats[PLAYER_NUM]->shield->type == TOOL_TORCH )
+					if ( stats[PLAYER_NUM]->shield->type == TOOL_TORCH || stats[PLAYER_NUM]->shield->type == TOOL_CANDLE || stats[PLAYER_NUM]->shield->type == TOOL_CANDLE_TIMELESS )
 					{
 						PLAYER_TORCH = 7 + my->getPER() / 3 + (stats[PLAYER_NUM]->defending) * 1;
 					}
@@ -2600,6 +2600,10 @@ void actPlayer(Entity* my)
 					{
 						PLAYER_TORCH = 6 + my->getPER() / 3 + (stats[PLAYER_NUM]->defending) * 2;
 					}
+					else if (stats[PLAYER_NUM]->shield->type == INQUISITOR_LANTERN)
+					{
+						PLAYER_TORCH = 35 + my->getPER() / 3 + (stats[PLAYER_NUM]->defending) * 1;
+					}
 					else if ( !PLAYER_DEBUGCAM )
 					{
 						PLAYER_TORCH = 3 + my->getPER() / 3;
@@ -2611,7 +2615,7 @@ void actPlayer(Entity* my)
 				}
 				else
 				{
-					if ( stats[PLAYER_NUM]->shield->type == TOOL_TORCH )
+					if ( stats[PLAYER_NUM]->shield->type == TOOL_TORCH || stats[PLAYER_NUM]->shield->type == TOOL_CANDLE || stats[PLAYER_NUM]->shield->type == TOOL_CANDLE_TIMELESS )
 					{
 						PLAYER_TORCH = 7;
 					}
@@ -2630,6 +2634,10 @@ void actPlayer(Entity* my)
 					else if (stats[PLAYER_NUM]->shield->type == ABYSSAL_SHIELD)
 					{
 						PLAYER_TORCH = 6;
+					}
+					else if (stats[PLAYER_NUM]->shield->type == INQUISITOR_LANTERN)
+					{
+						PLAYER_TORCH = 35;
 					}
 					else
 					{
@@ -3493,6 +3501,13 @@ void actPlayer(Entity* my)
 		if ( stats[PLAYER_NUM]->amulet != NULL )
 		{
 			if ( stats[PLAYER_NUM]->amulet->type == AMULET_WATERBREATHING )
+			{
+				amuletwaterbreathing = true;
+			}
+		}
+		if (stats[PLAYER_NUM]->breastplate != NULL)
+		{
+			if (stats[PLAYER_NUM]->breastplate->type == CHAIN_ROBES_AQUA )
 			{
 				amuletwaterbreathing = true;
 			}
@@ -4962,7 +4977,7 @@ void actPlayer(Entity* my)
 						}
 					}
 
-					if ( entity->sprite == items[CLOAK_BACKPACK].index )
+					if ( entity->sprite == items[CLOAK_BACKPACK].index || entity->sprite == items[INQUISITOR_BACKPACK].index )
 					{
 						// human
 						if ( playerRace == HUMAN || playerRace == VAMPIRE )
@@ -5349,7 +5364,9 @@ void actPlayer(Entity* my)
 		if ( shieldNode )
 		{
 			Entity* shieldEntity = (Entity*)shieldNode->element;
-			if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index)
+			if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index 
+				&& shieldEntity->sprite != items[TOOL_GREENTORCH].index && shieldEntity->sprite != items[INQUISITOR_LANTERN].index && shieldEntity->sprite != items[TOOL_CANDLE].index
+				&& shieldEntity->sprite != items[TOOL_CANDLE_TIMELESS].index )
 			{
 				shieldEntity->yaw -= PI / 6;
 			}

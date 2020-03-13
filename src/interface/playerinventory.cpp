@@ -196,6 +196,8 @@ char* itemUseString(const Item* item)
 			case TOOL_LANTERN:
 			case TOOL_CRYSTALSHARD:
 			case TOOL_GREENTORCH:
+			case TOOL_CANDLE:
+			case TOOL_CANDLE_TIMELESS:
 				if ( itemIsEquipped(item, clientnum) )
 				{
 					return language[335];
