@@ -10583,6 +10583,21 @@ bool Entity::monsterConsumeFoodEntity(Entity* food, Stat* myStats)
 				break;
 			}
 			break;
+		case FOOD_TOMATO:
+			heal = 5 + item->beatitude;
+			buffDuration = std::min(buffDuration, 4 * TICKS_PER_SECOND);
+			myStats->HUNGER += 170;
+			break;
+		case FOOD_CABBAGE:
+			heal = 6 + item->beatitude;
+			buffDuration = std::min(buffDuration, 3 * TICKS_PER_SECOND);
+			myStats->HUNGER += 240;
+			break;
+		case FOOD_PEARS:
+			heal = 5 + item->beatitude;
+			buffDuration = std::min(buffDuration, 3 * TICKS_PER_SECOND);
+			myStats->HUNGER += 200;
+			break;
 		default:
 			free(item);
 			handleNPCInteractDialogue(*myStats, ALLY_EVENT_INTERACT_ITEM_NOUSE);

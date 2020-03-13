@@ -4234,6 +4234,15 @@ void item_Food(Item*& item, int player)
 					break;
 				}
 				break;
+			case FOOD_TOMATO:
+				stats[player]->HUNGER += 170;
+				break;
+			case FOOD_CABBAGE:
+				stats[player]->HUNGER += 240;
+				break;
+			case FOOD_PEARS:
+				stats[player]->HUNGER += 200;
+				break;
 			default:
 				hungerIncrease = 10;
 				break;
@@ -4255,19 +4264,27 @@ void item_Food(Item*& item, int player)
 				{
 					case FOOD_BREAD:
 					case FOOD_TOMALLEY:
+					case FOOD_PIZZA:
 						manaRegenPercent = 0.4;
 						break;
 					case FOOD_CREAMPIE:
+					case FOOD_TENTACLEPIE:
 						manaRegenPercent = 0.2;
 						break;
 					case FOOD_CHEESE:
+					case FOOD_CHEDDARCHEESEWHEEL:
 						manaRegenPercent = 0.1;
 						break;
 					case FOOD_APPLE:
+					case FOOD_BANANA:
+					case FOOD_PEARS:
+					case FOOD_TOMATO:
 						manaRegenPercent = 0.2;
 						break;
 					case FOOD_MEAT:
 					case FOOD_FISH:
+					case FOOD_SALMON:
+					case FOOD_ANGLERFISH:
 						manaRegenPercent = 0.5;
 						break;
 					case FOOD_BLOOD:
@@ -5063,6 +5080,16 @@ void item_FoodAutomaton(Item*& item, int player)
 		case FOOD_MEAT:
 		case FOOD_FISH:
 		case FOOD_TIN:
+		case FOOD_CHEDDARCHEESEWHEEL:
+		case FOOD_BANANA:
+		case FOOD_SALMON:
+		case FOOD_PIZZA:
+		case FOOD_TENTACLEPIE:
+		case FOOD_ANGLERFISH:
+		case FOOD_TOMATO:
+		case FOOD_PEARS:
+		case FOOD_CABBAGE:
+		case FOOD_HAMLETDINER:
 			if ( svFlags & SV_FLAG_HUNGER )
 			{
 				messagePlayer(player, language[3697]); // no effect.
@@ -5254,6 +5281,16 @@ bool itemIsConsumableByAutomaton(const Item& item)
 		case FOOD_MEAT:
 		case FOOD_FISH:
 		case FOOD_TIN:
+		case FOOD_CHEDDARCHEESEWHEEL:
+		case FOOD_BANANA:
+		case FOOD_SALMON:
+		case FOOD_PIZZA:
+		case FOOD_TENTACLEPIE:
+		case FOOD_ANGLERFISH:
+		case FOOD_TOMATO:
+		case FOOD_PEARS:
+		case FOOD_CABBAGE:
+		case FOOD_HAMLETDINER:
 
 		case GEM_ROCK:
 		case GEM_GLASS:
