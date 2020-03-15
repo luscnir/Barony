@@ -6700,6 +6700,9 @@ bool GenericGUIMenu::tinkeringGetItemValue(const Item* item, int* metal, int* ma
 			break;
 
 		case ARTIFACT_BOW:
+		case ABYSSAL_CROSSBOW:
+		case INQUISITOR_BOW:
+		case LOST_BOW:
 		case BOOMERANG:
 		case ABYSSAL_AMULET:
 		case ABYSSAL_MASK:
@@ -6735,7 +6738,6 @@ bool GenericGUIMenu::tinkeringGetItemValue(const Item* item, int* metal, int* ma
 		case ABYSSAL_BOOTS:
 		case ABYSSAL_KNUCKLES:
 		case ABYSSAL_AXE:
-		case ABYSSAL_CROSSBOW:
 		case ABYSSAL_MACE:
 		case ABYSSAL_SHIELD:
 		case ABYSSAL_SPEAR:
@@ -6744,7 +6746,6 @@ bool GenericGUIMenu::tinkeringGetItemValue(const Item* item, int* metal, int* ma
 		case INQUISITOR_BOOTS:
 		case INQUISITOR_GLOVES:
 		case INQUISITOR_AXE:
-		case INQUISITOR_BOW:
 		case INQUISITOR_HAMMER:
 		case INQUISITOR_LANTERN:
 		case INQUISITOR_SPEAR:
@@ -6753,7 +6754,6 @@ bool GenericGUIMenu::tinkeringGetItemValue(const Item* item, int* metal, int* ma
 		case LOST_BOOTS:
 		case LOST_GAUNTLETS:
 		case LOST_AXE:
-		case LOST_BOW:
 		case LOST_MACE:
 		case LOST_SHIELD:
 		case LOST_POLEARM:

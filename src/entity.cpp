@@ -236,7 +236,8 @@ Entity::Entity(Sint32 in_sprite, Uint32 pos, list_t* entlist, list_t* creatureli
 	arrowShotByWeapon(skill[7]),
 	arrowQuiverType(skill[8]),
 	arrowShotByParent(skill[9]),
-	arrowStunTime(skill[6]),
+	arrowStunTime(skill[20]),
+	arrowCharmTime(skill[21]),
 	actmagicIsVertical(skill[6]),
 	actmagicIsOrbiting(skill[7]),
 	actmagicOrbitDist(skill[8]),
@@ -3575,6 +3576,43 @@ void Entity::handleEffects(Stat* myStats)
 			}
 		}
 	}
+	if (myStats->shoes != NULL)
+	{
+		// random magic mapping
+		if (myStats->shoes->type == LOST_BOOTS)
+		{
+			if (rand() % 10000 == 0)   // .01% chance every frame
+			{
+				castSpell(uid, &spell_magicmapping, false, false);
+			}
+		}
+	}
+	if (myStats->breastplate != NULL)
+	{
+		// random health
+		if (myStats->breastplate->type == LOST_BREASTPIECE)
+		{
+			if (rand() % 5000 == 0 && myStats->HP != myStats->MAXHP)   // 0.5% chance every frame
+			{
+				this->modHP(+15);
+				messagePlayer(player, language[6280]);
+			}
+		}
+	}
+	if (myStats->cloak != NULL)
+	{
+		// random mana
+		if (myStats->cloak->type == LOST_CLOAK && myStats->MP != myStats->MAXMP)
+		{
+			if (rand() % 5000 == 0)   // 0.5% chance every frame
+			{
+				this->modMP(+15);
+				messagePlayer(player, language[6281]);
+			}
+		}
+	}
+
+
 	if (client_classes[player] == CLASS_LUNATIC) //lunatic can't gain any hp!
 	{
 		if (myStats->MAXHP > 1 )
@@ -5280,7 +5318,7 @@ Sint32 statGetDEX(Stat* entitystats, Entity* my)
 	}
 	if ( entitystats->shoes != nullptr )
 	{
-		if ( entitystats->shoes->type == LEATHER_BOOTS_SPEED )
+		if ( entitystats->shoes->type == LEATHER_BOOTS_SPEED || entitystats->shoes->type == INQUISITOR_BOOTS )
 		{
 			if ( entitystats->shoes->beatitude >= 0 || cursedItemIsBuff )
 			{
@@ -8578,9 +8616,76 @@ void Entity::attack(int pose, int charge, Entity* target)
 						{
 							if (hitstats)
 							{
-								//hitstats->weapon = newItem(LOST_POLEARM, EXCELLENT, 0, 1, rand(), true, nullptr);//parasite weapon idea
-								//hitstats->EFFECTS[EFF_DASH] = true;
-								//hitstats->EFFECTS_TIMERS[EFF_DASH] = TICKS_PER_SECOND * 1;
+								//diferent effect depending on the floor
+								if (currentlevel >= 57)	//abyss
+								{
+									hitstats->EFFECTS[EFF_CONFUSED] = true;
+									hitstats->EFFECTS_TIMERS[EFF_CONFUSED] = TICKS_PER_SECOND * 3;
+								}
+								else if (currentlevel >= 51)	//citadel
+								{
+									hitstats->EFFECTS[EFF_FEAR] = true;
+									hitstats->EFFECTS_TIMERS[EFF_FEAR] = TICKS_PER_SECOND * 1;
+								}
+								else if (currentlevel >= 47)	//crystal caves
+								{
+									hitstats->EFFECTS[EFF_PARALYZED] = true;
+									hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = TICKS_PER_SECOND * 1;
+								}
+								else if (currentlevel >= 40)	//catacombs
+								{
+									hitstats->EFFECTS[EFF_BLEEDING] = true;
+									hitstats->EFFECTS_TIMERS[EFF_BLEEDING] = TICKS_PER_SECOND * 10;
+								}
+								else if (currentlevel >= 36)	//hell
+								{
+									if (hit.entity->flags[BURNABLE])
+									{
+										if (hitstats)
+										{
+											hitstats->poisonKiller = uid;
+										}
+
+										bool wasBurning = hit.entity->flags[BURNING];
+										// Attempt to set the Entity on fire
+										hit.entity->SetEntityOnFire();
+
+										if (!wasBurning && hit.entity->flags[BURNING])
+										{
+											hit.entity->char_fire = TICKS_TO_PROCESS_FIRE * 3;
+											dyrnwynBurn = true;
+										}
+									}
+								}
+								else if (currentlevel >= 31)	//ruins
+								{
+									hitstats->EFFECTS[EFF_PACIFY] = true;
+									hitstats->EFFECTS_TIMERS[EFF_PACIFY] = TICKS_PER_SECOND * 1;
+								}
+								else if (currentlevel >= 25)	//tundra
+								{
+									hitstats->EFFECTS[EFF_SLOW] = true;
+									hitstats->EFFECTS_TIMERS[EFF_SLOW] = TICKS_PER_SECOND * 15;
+								}
+								else if (currentlevel >= 19)	//labyrinth
+								{
+									hitstats->EFFECTS[EFF_BLIND] = true;
+									hitstats->EFFECTS_TIMERS[EFF_BLIND] = TICKS_PER_SECOND * 10;
+								}
+								else if (currentlevel >= 13)	//burg
+								{
+									hitstats->EFFECTS[EFF_POISONED] = true;
+									hitstats->EFFECTS_TIMERS[EFF_POISONED] = TICKS_PER_SECOND * 15;
+								}
+								else if (currentlevel >= 6)	//swamp
+								{
+									hitstats->EFFECTS[EFF_DISORIENTED] = true;
+									hitstats->EFFECTS_TIMERS[EFF_DISORIENTED] = TICKS_PER_SECOND * 5;
+								}
+								else						//mines
+								{
+									hitstats->HP -= 1;
+								}
 							}
 						}
 						else if (myStats->weapon->type == LOST_AXE)
@@ -8664,14 +8769,34 @@ void Entity::attack(int pose, int charge, Entity* target)
 						}
 					}
 
-					if (myStats->ring)
+					if ( myStats->ring )
 					{
-						if (myStats->ring->type == ABYSSAL_RING)
+						if ( myStats->ring->type == ABYSSAL_RING )
 						{
 							//gain mana per hit
-							if (hitstats)
+							if ( hitstats )
 							{
 								this->modMP(+5);
+							}
+						}
+						else if ( myStats->ring->type == LOST_RING )
+						{
+							//gain mana per hit
+							if (hit.entity->flags[BURNABLE])
+							{
+								if (hitstats)
+								{
+									hitstats->poisonKiller = uid;
+								}
+
+								bool wasBurning = hit.entity->flags[BURNING];
+								// Attempt to set the Entity on fire
+								hit.entity->SetEntityOnFire();
+
+								if (!wasBurning && hit.entity->flags[BURNING])
+								{
+									hit.entity->char_fire = TICKS_TO_PROCESS_FIRE * 4;
+								}
 							}
 						}
 					}
@@ -8724,6 +8849,20 @@ void Entity::attack(int pose, int charge, Entity* target)
 							}
 						}
 					}
+					if (myStats->helmet)
+					{
+						if (myStats->helmet->type == LOST_HELM)
+						{
+							if (rand() % 100 == 0) //1% chance to burst
+							{
+								castSpell(uid, &spell_fireball, true, false);
+								castSpell(uid, &spell_cold, true, false);
+								castSpell(uid, &spell_lightning, true, false);
+								messagePlayer(player, language[6279]);
+							}
+						}
+					}
+
 
 					if ( (hitstats->EFFECTS[EFF_WEBBED] || pose == PLAYER_POSE_GOLEM_SMASH) 
 						&& !hitstats->EFFECTS[EFF_KNOCKBACK] && hit.entity->setEffect(EFF_KNOCKBACK, true, 30, false) )
@@ -9208,16 +9347,16 @@ void Entity::attack(int pose, int charge, Entity* target)
 								{
 									hitstats->EFFECTS[EFF_PARALYZED] = true;
 									hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = std::max(100, 200 - hit.entity->getCON() * 5);
-									messagePlayer(playerhit, language[4245]);
-									messagePlayer(playerhit, language[4246]);
+									messagePlayer(playerhit, language[6245]);
+									messagePlayer(playerhit, language[6246]);
 									serverUpdateEffects(playerhit);
 								}
 								else
 								{
 									hitstats->EFFECTS[EFF_BLIND] = true;
 									hitstats->EFFECTS_TIMERS[EFF_BLIND] = std::max(50, 150 - hit.entity->getCON() * 5);
-									messagePlayer(playerhit, language[4245]);
-									messagePlayer(playerhit, language[4247]);
+									messagePlayer(playerhit, language[6245]);
+									messagePlayer(playerhit, language[6247]);
 									serverUpdateEffects(playerhit);
 								}
 								hitstats->HP -= 15;
@@ -9268,16 +9407,16 @@ void Entity::attack(int pose, int charge, Entity* target)
 									{
 										hitstats->EFFECTS[EFF_PARALYZED] = true;
 										hitstats->EFFECTS_TIMERS[EFF_PARALYZED] = std::max(50, 150 - hit.entity->getCON() * 5);
-										messagePlayer(playerhit, language[4245]);
-										messagePlayer(playerhit, language[4246]);
+										messagePlayer(playerhit, language[6245]);
+										messagePlayer(playerhit, language[6246]);
 										serverUpdateEffects(playerhit);
 									}
 									else
 									{
 										hitstats->EFFECTS[EFF_BLIND] = true;
 										hitstats->EFFECTS_TIMERS[EFF_BLIND] = std::max(50, 150 - hit.entity->getCON() * 5);
-										messagePlayer(playerhit, language[4245]);
-										messagePlayer(playerhit, language[4247]);
+										messagePlayer(playerhit, language[6245]);
+										messagePlayer(playerhit, language[6247]);
 										serverUpdateEffects(playerhit);
 									}
 									hitstats->HP -= 15;
@@ -12961,6 +13100,10 @@ bool isLevitating(Stat* mystats)
 		{
 			return true;
 		}
+		else if ( mystats->shoes->type == INQUISITOR_BOOTS && currentlevel >= 46 )
+		{
+			return true;
+		}
 	}
 	if ( mystats->cloak != NULL )
 	{
@@ -14163,7 +14306,9 @@ void Entity::handleHumanoidWeaponLimb(Entity* weaponLimb, Entity* weaponArmLimb)
 		}
 		else if ( weaponLimb->sprite == items[ARTIFACT_BOW].index 
 			|| weaponLimb->sprite == items[LONGBOW].index
-			|| weaponLimb->sprite == items[COMPOUND_BOW].index )
+			|| weaponLimb->sprite == items[COMPOUND_BOW].index
+			|| weaponLimb->sprite == items[INQUISITOR_BOW].index
+			|| weaponLimb->sprite == items[LOST_BOW].index )
 		{
 			if ( isPlayer && monsterType == HUMAN )
 			{
@@ -17283,15 +17428,21 @@ void Entity::setRangedProjectileAttack(Entity& marksman, Stat& myStats, int opti
 		//	// poison arrow
 		//	//this->arrowPoisonTime = 540;    // 9 seconds of poison
 		//}
-		if (myStats.weapon->type == ABYSSAL_CROSSBOW)
+		
+		if ( myStats.weapon->type == ABYSSAL_CROSSBOW )
 		{
-			//if (myStats.HP == myStats.MAXHP) //this crossbow used to stuns while you are full HP
-			//{
-				//mini-stuns bolts
-				this->arrowStunTime = 20;
-			//}
+			//mini-stuns bolts
+			this->arrowStunTime = 25;	//0,5 second
 		}
-		if ( myStats.weapon->type != SLING )
+		else if (myStats.weapon->type == INQUISITOR_BOW)
+		{
+			if (rand() % 4 == 0)		//25% chance 
+			{
+				//charm arrow
+				this->arrowCharmTime = 200;//4 seconds
+			}
+		}
+		else if ( myStats.weapon->type != SLING )
 		{
 			// get armor pierce chance.
 			int statChance = std::min(std::max(marksman.getPER() / 2, 0), 50); // 0 to 50 value.

@@ -3928,7 +3928,16 @@ Sint32 Item::armorGetAC(Stat* wielder) const
 	}
 	else if (type == LOST_GAUNTLETS)
 	{
-		armor += 3;
+		// boss maps
+		if ( !strncmp(map.name, "Boss", 4) || !strncmp(map.name, "The Minotaur Maze", 4) || !strncmp(map.name, "Hell Boss", 4)
+		|| !strncmp(map.name, "Sanctum", 4) || !strncmp(map.name, "Abyss Boss", 4) )
+		{
+			armor += 7;
+		}
+		else
+		{
+			armor += 3;
+		}
 	}
 	else if (type == LOST_BOOTS)
 	{

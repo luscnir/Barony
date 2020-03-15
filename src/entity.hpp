@@ -370,7 +370,8 @@ public:
 	Sint32& arrowShotByWeapon; //skill[7]
 	Sint32& arrowQuiverType; //skill[8]
 	Sint32& arrowShotByParent; //skill[9]
-	Sint32& arrowStunTime;
+	Sint32& arrowStunTime; //skill[20]
+	Sint32& arrowCharmTime; //skill[21]
 	enum arrowShotBy : int
 	{
 		ARROW_SHOT_BY_TRAP,

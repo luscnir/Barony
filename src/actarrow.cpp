@@ -862,6 +862,7 @@ void actArrow(Entity* my)
 								hit.entity->monsterHitTime = std::max(HITRATE - 12, hit.entity->monsterHitTime);
 							}
 							statusEffectApplied = true;
+
 						}
 						else if ( my->arrowQuiverType == QUIVER_HUNTING && !(hitstats->amulet && hitstats->amulet->type == AMULET_POISONRESISTANCE)
 							&& !(hitstats->type == INSECTOID) )
@@ -916,6 +917,19 @@ void actArrow(Entity* my)
 								messagePlayerColor(hit.entity->skill[2], color, language[451]); // you are hit by an arrow!
 							}
 						}
+
+						if (my->arrowStunTime > 0 && damage > 0)
+						{
+							hitstats->EFFECTS[EFF_STUNNED] = true;
+							hitstats->EFFECTS_TIMERS[EFF_STUNNED] = my->arrowStunTime;
+						}
+
+						if (my->arrowCharmTime > 0 && damage > 0)
+						{
+							hitstats->EFFECTS[EFF_PACIFY] = true;
+							hitstats->EFFECTS_TIMERS[EFF_PACIFY] = my->arrowCharmTime;
+						}
+
 					}
 					else
 					{
@@ -957,13 +971,6 @@ void actArrow(Entity* my)
 					{
 						playSoundEntity(hit.entity, 28, 64);
 					}
-
-					if (my->arrowStunTime > 0)
-					{
-						hitstats->EFFECTS[EFF_STUNNED] = true;
-						hitstats->EFFECTS_TIMERS[EFF_STUNNED] = my->arrowStunTime;
-					}
-
 
 					// update enemy bar for attacker
 					if ( !strcmp(hitstats->name, "") )

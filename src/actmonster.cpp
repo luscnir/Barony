@@ -7749,7 +7749,9 @@ void Entity::handleMonsterAttack(Stat* myStats, Entity* target, double dist)
 					|| myStats->weapon->type == ARTIFACT_BOW
 					|| myStats->type == LONGBOW
 					|| myStats->type == COMPOUND_BOW
-					|| myStats->weapon->type == MAKESHIFT_BOW) )
+					|| myStats->weapon->type == MAKESHIFT_BOW
+					|| myStats->weapon->type == INQUISITOR_BOW
+					|| myStats->weapon->type == LOST_BOW) )
 			{
 				bow = 2;
 				if ( myStats->type == COMPOUND_BOW )

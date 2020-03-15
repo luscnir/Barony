@@ -1760,7 +1760,7 @@ void initClass(int player)
 			free(item);
 
 			// scroll of magic map
-			item = newItem(SCROLL_MAGICMAPPING, SERVICABLE, 0, 3, 0, true, NULL);
+			item = newItem(SCROLL_MAGICMAPPING, SERVICABLE, 0, 1, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			free(item);
 
