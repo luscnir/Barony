@@ -1269,6 +1269,7 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case SCORPION:
 				case SHOPKEEPER:
 				case COCKROACH:
+				case ANT:
 					difficulty = 0;
 					break;
 				case GOBLIN:
@@ -1280,6 +1281,8 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case SUCCUBUS:
 				case BURGGUARD:
 				case EYEBALL:
+				case DUSTDEVIL:
+				case SKU_LIT:
 					difficulty = 1;
 					break;
 				case CREATURE_IMP:
@@ -1292,11 +1295,14 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case CRYORUNE:
 				case YETI:
 				case FLESHLING:
+				case PARASITE:
+				case RAN_GIC:
 					difficulty = 2;
 					break;
 				case CRYSTALGOLEM:
 				case VAMPIRE:
 				case CHOLOROSH:
+				case WAN_RIT:
 					difficulty = 5;
 					break;
 				case COCKATRICE:
@@ -1310,6 +1316,7 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case ICEDEMON:
 				case ABOMINATION:
 				case LICH_FALLEN:
+				case METALLICBEAST:
 					difficulty = 666;
 					break;
 			}
@@ -1962,7 +1969,7 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 			slot = itemSlot(targetStats, targetStats->breastplate);
 			if ( slot )
 			{
-				if ( monsterSummonType == KOBOLD || monsterSummonType == GNOME )
+				if ( monsterSummonType == KOBOLD || monsterSummonType == GNOME || monsterSummonType == FLESHLING || monsterSummonType == DUSTDEVIL )
 				{
 					// kobold/gnomes can't equip breastplate, drop it!
 					Entity* dropped = dropItemMonster(targetStats->breastplate, target, targetStats);
@@ -1990,7 +1997,7 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 			slot = itemSlot(targetStats, targetStats->helmet);
 			if ( slot )
 			{
-				if ( monsterSummonType == KOBOLD || monsterSummonType == GNOME )
+				if ( monsterSummonType == KOBOLD || monsterSummonType == GNOME || monsterSummonType == FLESHLING || monsterSummonType == DUSTDEVIL )
 				{
 					// kobold/gnomes can't equip non-hoods, drop the rest
 					if ( (*slot)->type == HAT_HOOD )
@@ -2042,7 +2049,7 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 			slot = itemSlot(targetStats, targetStats->gloves);
 			if ( slot )
 			{
-				if ( monsterSummonType == KOBOLD || monsterSummonType == GNOME )
+				if ( monsterSummonType == KOBOLD || monsterSummonType == GNOME || monsterSummonType == FLESHLING || monsterSummonType == DUSTDEVIL )
 				{
 					// kobold/gnomes can't equip gloves, drop it!
 					Entity* dropped = dropItemMonster(targetStats->gloves, target, targetStats);

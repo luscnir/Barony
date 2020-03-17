@@ -401,6 +401,7 @@ void actArrow(Entity* my)
 							case FLESHLING:
 							case ABOMINATION:
 							case LICH_FALLEN:
+							case DUSTDEVIL:
 								// smite these creatures
 								silverDamage = true;
 								spawnMagicEffectParticles(hit.entity->x, hit.entity->y, hit.entity->z, 981);
@@ -430,6 +431,10 @@ void actArrow(Entity* my)
 							case MATILDA:
 							case YETI:
 							case ICEDEMON:
+							case ANT:
+							case DUSTDEVIL:
+							case PARASITE:
+							case METALLICBEAST:
 								// more damage to these creatures
 								huntingDamage = true;
 								for ( int gibs = 0; gibs < 10; ++gibs )
@@ -487,6 +492,8 @@ void actArrow(Entity* my)
 									case KOBOLD:
 									case COCKROACH:
 									case FLESHLING:
+									case ANT:
+									case DUSTDEVIL:
 										// small creatures, no penalty for low shot.
 										hitWeaklyOnTarget = false;
 										break;

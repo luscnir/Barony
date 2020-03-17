@@ -47,7 +47,7 @@ void initMetallicBeast(Entity* my, Stat* myStats)
 			{
 				strcpy(myStats->name, "Titanium");
 				myStats->LVL = 50;
-				myStats->STR = 50;
+				myStats->STR = 80;
 				myStats->PER = 50;
 				myStats->INT = 50;
 				newItem(INQUISITOR_HAMMER, EXCELLENT, 0, 1, 0, false, nullptr);

@@ -2628,6 +2628,8 @@ int FollowerRadialMenu::optionDisabledForCreature(int playerSkillLVL, int monste
 		case SENTRYBOT:
 		case SPELLBOT:
 		case COCKROACH:
+		case ANT:
+		case SKU_LIT:
 			creatureTier = 0;
 			break;
 		case GOBLIN:
@@ -2639,6 +2641,8 @@ int FollowerRadialMenu::optionDisabledForCreature(int playerSkillLVL, int monste
 		case SUCCUBUS:
 		case BURGGUARD:
 		case CRYORUNE:
+		case DUSTDEVIL:
+		case RAN_GIC:
 			creatureTier = 1;
 			break;
 		case CREATURE_IMP:
@@ -2651,6 +2655,7 @@ int FollowerRadialMenu::optionDisabledForCreature(int playerSkillLVL, int monste
 		case YETI:
 		case EYEBALL:
 		case FLESHLING:
+		case PARASITE:
 			creatureTier = 2;
 			break;
 		case CRYSTALGOLEM:
@@ -2658,6 +2663,8 @@ int FollowerRadialMenu::optionDisabledForCreature(int playerSkillLVL, int monste
 		case COCKATRICE:
 		case SHADOW:
 		case CHOLOROSH:
+		case METALLICBEAST:
+		case WAN_RIT:
 			creatureTier = 3;
 			break;
 		default:
@@ -3060,6 +3067,8 @@ bool FollowerRadialMenu::allowedInteractFood(int monsterType)
 		case YETI:
 		case FLESHLING:
 		case CHOLOROSH:
+		case ANT:
+		case PARASITE:
 			return true;
 			break;
 		default:
@@ -3083,6 +3092,7 @@ bool FollowerRadialMenu::allowedInteractWorld(int monsterType)
 		case BURGGUARD:
 		case FLESHLING:
 		case CHOLOROSH:
+		case DUSTDEVIL:
 			return true;
 			break;
 		default:
@@ -3110,6 +3120,7 @@ bool FollowerRadialMenu::allowedInteractItems(int monsterType)
 		case BURGGUARD:
 		case FLESHLING:
 		case CHOLOROSH:
+		case DUSTDEVIL:
 			if ( followerToCommand && followerToCommand->monsterAllySummonRank != 0 )
 			{
 				return false;

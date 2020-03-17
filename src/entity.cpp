@@ -740,6 +740,27 @@ void Entity::killedByMonsterObituary(Entity* victim)
 			case LICH_FALLEN:
 				victim->setObituary(language[2177]);
 				break;
+			case ANT:
+				victim->setObituary(language[2178]);
+				break;
+			case DUSTDEVIL:
+				victim->setObituary(language[2179]);
+				break;
+			case PARASITE:
+				victim->setObituary(language[2180]);
+				break;
+			case METALLICBEAST:
+				victim->setObituary(language[2181]);
+				break;
+			case SKU_LIT:
+				victim->setObituary(language[2182]);
+				break;
+			case RAN_GIC:
+				victim->setObituary(language[2183]);
+				break;
+			case WAN_RIT:
+				victim->setObituary(language[2184]);
+				break;
 			default:
 				victim->setObituary(language[1500]);
 				break;
@@ -9360,6 +9381,9 @@ void Entity::attack(int pose, int charge, Entity* target)
 									serverUpdateEffects(playerhit);
 								}
 								hitstats->HP -= 15;
+							case PARASITE:
+								hitstats->EFFECTS[EFF_BLEEDING] = true;
+								hitstats->EFFECTS_TIMERS[EFF_BLEEDING] = std::max(100, 300 - hit.entity->getCON() * 5);
 								break;
 							default:
 								break;
@@ -9420,6 +9444,10 @@ void Entity::attack(int pose, int charge, Entity* target)
 										serverUpdateEffects(playerhit);
 									}
 									hitstats->HP -= 15;
+									break;
+								case PARASITE:
+									hitstats->EFFECTS[EFF_BLEEDING] = true;
+									hitstats->EFFECTS_TIMERS[EFF_BLEEDING] = std::max(100, 300 - hit.entity->getCON() * 5);
 									break;
 								default:
 									break;
@@ -12964,6 +12992,7 @@ bool Entity::setBootSprite(Entity* leg, int spriteOffset)
 		case BURGGUARD:
 		case FLESHLING:
 		case CHOLOROSH:
+		case DUSTDEVIL:
 			if ( myStats->shoes->type == LEATHER_BOOTS || myStats->shoes->type == LEATHER_BOOTS_SPEED )
 			{
 				leg->sprite = 148 + spriteOffset;
@@ -13368,7 +13397,8 @@ int Entity::getAttackPose() const
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
 				|| myStats->type == SHADOW || myStats->type == BURGGUARD
-				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH )
+				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH
+				|| myStats->type == DUSTDEVIL )
 			{
 				pose = MONSTER_POSE_MELEE_WINDUP1;
 			}
@@ -13414,11 +13444,12 @@ int Entity::getAttackPose() const
 				|| myStats->type == GNOME || myStats->type == SUCCUBUS
 				|| myStats->type == SHOPKEEPER || myStats->type == SHADOW 
 				|| myStats->type == BURGGUARD || myStats->type == GARGOYLE
-				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH )
+				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH
+				|| myStats->type == DUSTDEVIL )
 			{
 				pose = MONSTER_POSE_MAGIC_WINDUP1;
 			}
-			else if ( myStats->type == DEMON || myStats->type == CREATURE_IMP || myStats->type == ICEDEMON  )
+			else if ( myStats->type == DEMON || myStats->type == CREATURE_IMP || myStats->type == ICEDEMON || myStats->type == METALLICBEAST )
 			{
 				pose = MONSTER_POSE_MELEE_WINDUP1;
 			}
@@ -13466,7 +13497,8 @@ int Entity::getAttackPose() const
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
 				|| myStats->type == SHADOW || myStats->type == BURGGUARD
-				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH )
+				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH
+				|| myStats->type == METALLICBEAST )
 			{
 				if ( myStats->weapon->type == CROSSBOW || myStats->weapon->type == HEAVY_CROSSBOW || myStats->weapon->type == ABYSSAL_CROSSBOW )
 				{
@@ -13509,7 +13541,8 @@ int Entity::getAttackPose() const
 				|| myStats->type == SKELETON || myStats->type == GNOME
 				|| myStats->type == SUCCUBUS || myStats->type == SHOPKEEPER
 				|| myStats->type == SHADOW || myStats->type == BURGGUARD
-				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH )
+				|| myStats->type == FLESHLING || myStats->type == CHOLOROSH
+				|| myStats->type == DUSTDEVIL )
 			{
 				if ( getWeaponSkill(myStats->weapon) == PRO_AXE || getWeaponSkill(myStats->weapon) == PRO_MACE
 					|| myStats->weapon->type == TOOL_WHIP )
@@ -13541,7 +13574,8 @@ int Entity::getAttackPose() const
 			|| myStats->type == SHOPKEEPER || myStats->type == MINOTAUR
 			|| myStats->type == SHADOW || myStats->type == BURGGUARD 
 			|| myStats->type == ICEDEMON || myStats->type == FLESHLING 
-			|| myStats->type == ABOMINATION || myStats->type == CHOLOROSH)
+			|| myStats->type == ABOMINATION || myStats->type == CHOLOROSH
+			|| myStats->type == DUSTDEVIL || myStats->type == METALLICBEAST )
 		{
 			pose = MONSTER_POSE_MELEE_WINDUP1;
 		}
@@ -16013,6 +16047,7 @@ bool Entity::monsterWantsItem(const Item& item, Item**& shouldEquip, node_t*& re
 		case SKELETON:
 		case VAMPIRE:
 		case FLESHLING:
+		case DUSTDEVIL:
 			if ( !monsterAllyEquipmentInClass(item) )
 			{
 				return false;
@@ -16546,7 +16581,10 @@ bool Entity::shouldRetreat(Stat& myStats)
 	}
 
 	//Moded creatures that don't run:
-	if ( myStats.type == BURGGUARD || myStats.type == GARGOYLE || myStats.type == MATILDA || myStats.type == CRYORUNE || myStats.type == ICEDEMON || myStats.type == ABOMINATION )
+	if ( myStats.type == BURGGUARD || myStats.type == GARGOYLE || myStats.type == MATILDA 
+		|| myStats.type == CRYORUNE || myStats.type == ICEDEMON || myStats.type == ABOMINATION 
+		|| myStats.type == DUSTDEVIL || myStats.type == PARASITE || myStats.type == METALLICBEAST
+		|| myStats.type == SKU_LIT || myStats.type == RAN_GIC || myStats.type == WAN_RIT )
 	{
 		return false;
 	}
@@ -19994,6 +20032,7 @@ void Entity::handleQuiverThirdPersonModel(Stat& myStats)
 			case KOBOLD:
 			case GNOME:
 			case FLESHLING:
+			case DUSTDEVIL:
 				// no strap.
 				break;
 			default:

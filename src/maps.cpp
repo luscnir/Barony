@@ -424,7 +424,7 @@ int monsterCurve(int level)
 		case 6:
 		case 7:
 		case 8:
-			return RAT;
+			return ANT;
 		case 9:
 			return COCKROACH;
 			break;
@@ -3374,9 +3374,37 @@ void assignActions(map_t* map)
 				{
 					monsterType = CHOLOROSH;
 				}
-				else if (entity->sprite == 197)     // lich.png
+				else if (entity->sprite == 197)     
 				{
 					monsterType = LICH_FALLEN;
+				}
+				else if (entity->sprite == 200)    
+				{
+					monsterType = ANT;
+				}
+				else if (entity->sprite == 201)     
+				{
+					monsterType = DUSTDEVIL;
+				}
+				else if (entity->sprite == 202)    
+				{
+					monsterType = PARASITE;
+				}
+				else if (entity->sprite == 203)     
+				{
+					monsterType = METALLICBEAST;
+				}
+				else if (entity->sprite == 204)     
+				{
+					monsterType = SKU_LIT;
+				}
+				else if (entity->sprite == 205)     
+				{
+					monsterType = RAN_GIC;
+				}
+				else if (entity->sprite == 206)     
+				{
+					monsterType = WAN_RIT;
 				}
 				else
 				{
@@ -3740,6 +3768,47 @@ void assignActions(map_t* map)
 						entity->z = -1.3;
 						entity->yaw = PI;
 						entity->sprite = 1228;
+						break;
+					case ANT:
+						entity->focalx = limbs[ANT][0][0]; // 0
+						entity->focaly = limbs[ANT][0][1]; // 0
+						entity->focalz = limbs[ANT][0][2]; // 0
+						break;
+					case DUSTDEVIL:
+						entity->z = 2.25;
+						entity->focalx = limbs[DUSTDEVIL][0][0]; // 0
+						entity->focaly = limbs[DUSTDEVIL][0][1]; // 0
+						entity->focalz = limbs[DUSTDEVIL][0][2]; // -2
+						break;
+					case PARASITE:
+						entity->z = -2.5;
+						entity->focalx = limbs[PARASITE][0][0]; // 0
+						entity->focaly = limbs[PARASITE][0][1]; // 0
+						entity->focalz = limbs[PARASITE][0][2]; // -2
+						break;
+					case METALLICBEAST:
+						entity->z = -8.5;
+						entity->focalx = limbs[METALLICBEAST][0][0]; // -1
+						entity->focaly = limbs[METALLICBEAST][0][1]; // 0
+						entity->focalz = limbs[METALLICBEAST][0][2]; // -1.25
+						break;
+					case SKU_LIT:
+						entity->z = -4.5;
+						entity->focalx = limbs[SKU_LIT][0][0]; // 0
+						entity->focaly = limbs[SKU_LIT][0][1]; // 0
+						entity->focalz = limbs[SKU_LIT][0][2]; // 
+						break;
+					case RAN_GIC:
+						entity->z = -1.5;
+						entity->focalx = limbs[RAN_GIC][0][0]; // 0
+						entity->focaly = limbs[RAN_GIC][0][1]; // 0
+						entity->focalz = limbs[RAN_GIC][0][2]; // 0
+						break;
+					case WAN_RIT:
+						entity->z = -5;
+						entity->focalx = limbs[WAN_RIT][0][0]; // 0
+						entity->focaly = limbs[WAN_RIT][0][1]; // 0
+						entity->focalz = limbs[WAN_RIT][0][2]; // 
 						break;
 					default:
 						break;

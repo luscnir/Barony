@@ -61,6 +61,13 @@ int checkSpriteType(Sint32 sprite)
 	case 195:
 	case 196:
 	case 197:
+	case 200:
+	case 201:
+	case 202:
+	case 203:
+	case 204:
+	case 205:
+	case 206:
 		//monsters
 		return 1;
 		break;
@@ -1174,7 +1181,14 @@ char monsterEditorNameStrings[NUMMONSTERS][17] =
 	"fleshling",
 	"abomination",
 	"chlorosh",
-	"lichfallen"
+	"lichfallen",
+	"ant",
+	"dustDevil",
+	"parasite",
+	"metallicBeast",
+	"sku-lit",
+	"ran-gic",
+	"wan-rit"
 };
 
 char tileEditorNameStrings[NUM_EDITOR_TILES][44] =
@@ -1750,6 +1764,8 @@ int canWearEquip(Entity* entity, int category)
 				case YETI:
 				case EYEBALL:
 				case ABOMINATION:
+				case ANT:
+				case PARASITE:
 					equipType = 0;
 					break;
 
@@ -1759,6 +1775,10 @@ int canWearEquip(Entity* entity, int category)
 				case DEMON:
 				case CRYORUNE:
 				case ICEDEMON:
+				case METALLICBEAST:
+				case SKU_LIT:
+				case RAN_GIC:
+				case WAN_RIT:
 					equipType = 1;
 					break;
 
@@ -1770,6 +1790,7 @@ int canWearEquip(Entity* entity, int category)
 				case LICH_ICE:
 				case FLESHLING:
 				case LICH_FALLEN:
+				case DUSTDEVIL:
 					equipType = 2;
 					break;
 

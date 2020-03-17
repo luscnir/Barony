@@ -47,9 +47,9 @@ void initParasite(Entity* my, Stat* myStats)
 			else
 			{
 				strcpy(myStats->name, "Eater of Minds");
-				myStats->INT = 30;
-				myStats->PER = 13;
-				myStats->DEX = 8;
+				myStats->INT = 35;
+				myStats->PER = 30;
+				myStats->DEX = 16;
 				myStats->weapon = newItem(SPELLBOOK_BLEED, EXCELLENT, 0, 1, 0, false, nullptr);
 				newItem (INQUISITOR_AXE, EXCELLENT, 0, 1, 0, false, nullptr);
 

@@ -208,6 +208,29 @@ void Entity::initMonster(int mySprite)
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
 			break;
+		case ANT:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case DUSTDEVIL:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case PARASITE:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case METALLICBEAST:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+		case SKU_LIT:
+		case RAN_GIC:
+		case WAN_RIT:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
+			break;
+
 		default:
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
@@ -406,6 +429,34 @@ int Entity::getMonsterTypeFromSprite()
 	{
 		return LICH_FALLEN;
 	}
+	else if ( mySprite == 1426 || mySprite == 1427 )	// ant
+	{
+		return ANT;
+	}
+	else if ( mySprite == 1428 )     // dust devil head
+	{
+		return DUSTDEVIL;
+	}
+	else if ( mySprite == 1436 || mySprite == 1437 )	// eyeball
+	{
+		return PARASITE;
+	}
+	else if ( mySprite == 1438 )     // metallic beast head
+	{
+		return METALLICBEAST;
+	}
+	else if ( mySprite == 1445 || mySprite == 1446 || mySprite == 1447 )	// sku-lit
+	{
+		return SKU_LIT;
+	}
+	else if ( mySprite == 1448 || mySprite == 1449 )	// ran-gic
+	{
+		return RAN_GIC;
+	}
+	else if (mySprite == 1450 || mySprite == 1451 || mySprite == 1452 || mySprite == 1453)	// wan-rit
+	{
+		return WAN_RIT;
+	}
 
 	return NOTHING;
 }
@@ -451,7 +502,7 @@ void Entity::actMonsterLimb(bool processLight)
 		int carryingLightSource = 0;
 		if ( flags[INVISIBLE] == false )
 		{
-			if ( sprite == 93 )   // torch
+			if ( sprite == 93 || sprite == 1337 )   // torch and candle
 			{
 				carryingLightSource = 6;
 			}
@@ -463,13 +514,17 @@ void Entity::actMonsterLimb(bool processLight)
 			{
 				carryingLightSource = 4;
 			}
-			else if (sprite == 814)	// green torch
+			else if ( sprite == 814 )	// green torch
 			{
 				carryingLightSource = 8;
 			}
-			else if (sprite == 836)	// abyssal shield
+			else if ( sprite == 836 )	// abyssal shield
 			{
 				carryingLightSource = 5;
+			}
+			else if ( sprite == 1285 )	// abyssal shield
+			{
+				carryingLightSource = 35;
 			}
 		}
 

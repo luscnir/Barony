@@ -44,14 +44,14 @@ void initWanRit(Entity* my, Stat* myStats)
 			if ( rand() % 50 == 0 && !my->flags[USERFLAG2] )
 			{
 				strcpy(myStats->name, "War-One");
-				myStats->HP = 700;
-				myStats->MAXHP = 700;
+				myStats->HP = 350;
+				myStats->MAXHP = 350;
 				myStats->OLDHP = myStats->HP;
-				myStats->STR = 35;
+				myStats->STR = 75;
 				myStats->DEX = 10;
-				myStats->CON = 20;
+				myStats->CON = 29;
 				myStats->INT = 20;
-				myStats->LVL = 39;
+				myStats->LVL = 36;
 				newItem(LOST_AXE, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
 				customItemsToGenerate = customItemsToGenerate - 1;
 				int c;

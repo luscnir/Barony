@@ -165,6 +165,7 @@
     <ClCompile Include="..\..\src\menu.cpp" />
     <ClCompile Include="..\..\src\messages.cpp" />
     <ClCompile Include="..\..\src\monster_abomination.cpp" />
+    <ClCompile Include="..\..\src\monster_ant.cpp" />
     <ClCompile Include="..\..\src\monster_automaton.cpp" />
     <ClCompile Include="..\..\src\monster_burgguard.cpp" />
     <ClCompile Include="..\..\src\monster_cholorosh.cpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="..\..\src\monster_cryorune.cpp" />
     <ClCompile Include="..\..\src\monster_crystalgolem.cpp" />
     <ClCompile Include="..\..\src\monster_demon.cpp" />
+    <ClCompile Include="..\..\src\monster_dustdevil.cpp" />
     <ClCompile Include="..\..\src\monster_fleshling.cpp" />
     <ClCompile Include="..\..\src\monster_devil.cpp" />
     <ClCompile Include="..\..\src\monster_eyeball.cpp" />
@@ -192,7 +194,10 @@
     <ClCompile Include="..\..\src\monster_lichfire.cpp" />
     <ClCompile Include="..\..\src\monster_lichice.cpp" />
     <ClCompile Include="..\..\src\monster_matilda.cpp" />
+    <ClCompile Include="..\..\src\monster_metallicbeast.cpp" />
     <ClCompile Include="..\..\src\monster_minotaur.cpp" />
+    <ClCompile Include="..\..\src\monster_parasite.cpp" />
+    <ClCompile Include="..\..\src\monster_ran-gic.cpp" />
     <ClCompile Include="..\..\src\monster_rat.cpp" />
     <ClCompile Include="..\..\src\monster_scarab.cpp" />
     <ClCompile Include="..\..\src\monster_scorpion.cpp" />
@@ -201,11 +206,13 @@
     <ClCompile Include="..\..\src\monster_shared.cpp" />
     <ClCompile Include="..\..\src\monster_shopkeeper.cpp" />
     <ClCompile Include="..\..\src\monster_skeleton.cpp" />
+    <ClCompile Include="..\..\src\monster_sku-lit.cpp" />
     <ClCompile Include="..\..\src\monster_slime.cpp" />
     <ClCompile Include="..\..\src\monster_spider.cpp" />
     <ClCompile Include="..\..\src\monster_succubus.cpp" />
     <ClCompile Include="..\..\src\monster_troll.cpp" />
     <ClCompile Include="..\..\src\monster_vampire.cpp" />
+    <ClCompile Include="..\..\src\monster_wan-rit.cpp" />
     <ClCompile Include="..\..\src\monster_yeti.cpp" />
     <ClCompile Include="..\..\src\net.cpp" />
     <ClCompile Include="..\..\src\objects.cpp" />
