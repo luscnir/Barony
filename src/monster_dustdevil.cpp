@@ -1,4 +1,5 @@
 
+
 #include "main.hpp"
 #include "game.hpp"
 #include "stat.hpp"
@@ -10,20 +11,21 @@
 #include "net.hpp"
 #include "collision.hpp"
 #include "player.hpp"
+#include "magic/magic.hpp"
 
-void initFleshling(Entity* my, Stat* myStats)
+void initDustDevil(Entity* my, Stat* myStats)
 {
-	int c;
 	node_t* node;
 
-	my->initMonster(926);
+	//Sprite 1428 = dustDevil head model
+	my->initMonster(1428);
 
 	if ( multiplayer != CLIENT )
 	{
-		MONSTER_SPOTSND = 449;
-		MONSTER_SPOTVAR = 5;
-		MONSTER_IDLESND = 446;
-		MONSTER_IDLEVAR = 3;
+		MONSTER_SPOTSND = 667;
+		MONSTER_SPOTVAR = 3;
+		MONSTER_IDLESND = 670;
+		MONSTER_IDLEVAR = 2;
 	}
 	if ( multiplayer != CLIENT && !MONSTER_INIT )
 	{
@@ -46,42 +48,23 @@ void initFleshling(Entity* my, Stat* myStats)
 			}
 			else
 			{
-				switch (rand() % 2)
+				strcpy(myStats->name, "Keeper of the sands");
+				myStats->LVL += 5;
+				myStats->STR += 5;
+				for (int c = 0; c < 5; c++)
 				{
-				case 0:					//The Bloodthirsty
-					myStats->HP = 165;
-					myStats->MAXHP = 165;
-					myStats->OLDHP = myStats->HP;
-					strcpy(myStats->name, "The Bloodthirsty");
-					myStats->weapon = newItem(ABYSSAL_SWORD, EXCELLENT, 1, 1, rand(), true, nullptr);
-					myStats->shield = newItem(STEEL_SHIELD, EXCELLENT, 0, 1, rand(), true, nullptr);
-					int c;
-					for (c = 0; c < 3; c++)
+					Entity* entity = summonMonster(COCKROACH, my->x, my->y);
+					if (entity)
 					{
-						Entity* entity = summonMonster(TROLL, my->x, my->y);
-						if (entity)
-						{
-							entity->parent = my->getUID();
-						}
+						entity->parent = my->getUID();
 					}
-					break;
-				case 1:					//Thiseddys, Mutant priest
-					myStats->HP = 130;
-					myStats->MAXHP = 130;
-					myStats->OLDHP = myStats->HP;
-					strcpy(myStats->name, "Thiseddys, Mutant priest");
-					myStats->weapon = newItem(SPELLBOOK_ACID_SPRAY, EXCELLENT, 0, 1, rand(), true, nullptr);
-					myStats->mask = newItem(TOOL_BLINDFOLD_TELEPATHY, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
-					myStats->cloak = newItem(CLOAK_YELLOWGREEN, SERVICABLE, 1, 1, rand(), false, nullptr);
-					break;
 				}
+				myStats->weapon = newItem(INQUISITOR_BOW, EXCELLENT, 0, 1, 0, false, nullptr);
+				myStats->helmet = newItem(HAT_HOOD, static_cast<Status>(WORN + rand() % 3), 3, 1, 1, false, nullptr);
+				myStats->cloak = newItem(CLOAK_BLACK, SERVICABLE, -3, 1, 0, true, nullptr);
 			}
+
 			// random effects
-			if ( rand() % 8 == 0 )
-			{
-				myStats->EFFECTS[EFF_ASLEEP] = true;
-				myStats->EFFECTS_TIMERS[EFF_ASLEEP] = 1800 + rand() % 1800;
-			}
 
 			// generates equipment and weapons if available from editor
 			createMonsterEquipment(myStats);
@@ -97,6 +80,36 @@ void initFleshling(Entity* my, Stat* myStats)
 
 			my->setHardcoreStats(*myStats);
 
+			//give weapon
+			if ( myStats->weapon == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_WEAPON] == 1 )
+			{
+				switch ( rand() % 10 )
+				{
+					case 0:
+						myStats->weapon = newItem(IRON_DAGGER, WORN, 0, 4, rand(), false, nullptr);
+						break;
+					case 1:
+						myStats->weapon = newItem(SHORTBOW, EXCELLENT, 1, 1, rand(), false, nullptr);
+						break;
+					case 2:
+						myStats->weapon = newItem(IRON_SWORD, static_cast<Status>(WORN + rand() % 3), -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
+					case 3:
+					case 4:
+						myStats->weapon = newItem(WOOD_HAMMER, static_cast<Status>(WORN + rand() % 3), -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+						myStats->weapon = newItem(CROSSBOW, static_cast<Status>(WORN + rand() % 3), -1 + rand() % 3, 1, rand(), false, nullptr);
+						break;
+					case 9:
+						myStats->weapon = newItem(MAKESHIFT_BOW, static_cast<Status>(DECREPIT + rand() % 4), -2 + rand() % 5, 1, rand(), false, nullptr);
+						break;
+				}
+			}
+
 			// generate the default inventory items for the monster, provided the editor sprite allowed enough default slots
 			switch ( defaultItems )
 			{
@@ -105,18 +118,28 @@ void initFleshling(Entity* my, Stat* myStats)
 				case 4:
 				case 3:
 				case 2:
-					if ( rand() % 10 == 0 )
+					if ( rand() % 20 == 0 )
 					{
-						int i = 1 + rand() % 4;
-						for ( c = 0; c < i; c++ )
+						newItem(ENCHANTED_FEATHER, SERVICABLE, 0, 1, (2 * (ENCHANTED_FEATHER_MAX_DURABILITY - 1)) / 4, false, &myStats->inventory);
+					}
+					else if ( rand() % 5 == 0 ) // 20% chance
+					{
+						if ( rand() % 2 )
 						{
-							newItem(static_cast<ItemType>(GEM_GARNET + rand() % 15), static_cast<Status>(1 + rand() % 4), 0, 1, rand(), false, &myStats->inventory);
+							newItem(TOOL_ALEMBIC, WORN, -1 + rand() % 3, 1, rand(), false, &myStats->inventory);
+						}
+						else
+						{
+							newItem(TOOL_TINKERING_KIT, WORN, -1 + rand() % 3, 1, rand(), false, &myStats->inventory);
 						}
 					}
 				case 1:
-					if ( rand() % 3 == 0 )
+					if ( my->hasRangedWeapon() )
 					{
-						newItem(FOOD_SALMON, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
+						if ( rand() % 5 > 0 ) // 80% chance
+						{
+							newItem(SPELLBOOK_LIGHT, DECREPIT, 0, 1, MONSTER_ITEM_UNDROPPABLE_APPEARANCE, false, &myStats->inventory);
+						}
 					}
 					break;
 				default:
@@ -126,48 +149,35 @@ void initFleshling(Entity* my, Stat* myStats)
 			//give shield
 			if ( myStats->shield == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_SHIELD] == 1 )
 			{
-				switch ( rand() % 10 )
+				if ( myStats->weapon && isRangedWeapon(*myStats->weapon) )
 				{
-					case 0:
-					case 1:
-						myStats->shield = newItem(TOOL_TORCH, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
-					case 2:
-					case 3:
-					case 4:
-					case 5:
-					case 6:
-						break;
-					case 7:
-					case 8:
-					case 9:
-						myStats->shield = newItem(IRON_SHIELD, static_cast<Status>(WORN + rand() % 2), -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
+					my->monsterGenerateQuiverItem(myStats);
 				}
-			}
-
-			//give weapon
-			if ( myStats->weapon == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_WEAPON] == 1 )
-			{
-				switch ( rand() % 10 )
+				else
 				{
-					case 0:
-						myStats->GOLD += 100;
-						myStats->weapon = newItem(TOOL_PICKAXE, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
-					case 1:
-					case 2:
-					case 3:
-					case 4:
-						myStats->weapon = newItem(CROSSBOW, DECREPIT, -2 + rand() % 3, 1, rand(), false, nullptr);
-						break;
-					case 5:
-					case 6:
-					case 7:
-					case 8:
-					case 9:
-						myStats->weapon = newItem(MAGICSTAFF_BLEED, EXCELLENT, -1 + rand() % 3, 1, rand(), false, nullptr);
-						break;
+					switch ( rand() % 10 )
+					{
+						case 0:
+							myStats->shield = newItem(IRON_SHIELD, static_cast<Status>(WORN + rand() % 2), -2 + rand() % 5, 1, rand(), false, nullptr);
+							break;
+						case 1:
+						case 2:
+						case 3:
+							myStats->shield = newItem(TOOL_CANDLE, static_cast<Status>(DECREPIT + rand() % 4), -1 + rand() % 3, 1, rand(), false, nullptr);
+							break;
+						case 4:
+						case 5:
+							myStats->shield = newItem(TOOL_LANTERN, EXCELLENT, 0, 1, rand(), false, nullptr);
+							break;
+						case 6:
+							myStats->shield = newItem(STEEL_SHIELD, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
+							break;
+						case 7:
+						case 8:
+						case 9:
+							// nothing
+							break;
+					}
 				}
 			}
 
@@ -183,29 +193,52 @@ void initFleshling(Entity* my, Stat* myStats)
 					case 4:
 					case 5:
 					case 6:
-						break;
 					case 7:
+						break;
 					case 8:
 					case 9:
-						myStats->cloak = newItem(CLOAK, SERVICABLE, -1 + rand() % 3, 1, rand(), false, nullptr);
+						myStats->cloak = newItem(CLOAK, static_cast<Status>(WORN + rand() % 3), -1 + rand() % 3, 1, rand(), false, nullptr);
 						break;
+				}
+			}
+
+			// give helm
+			if ( myStats->helmet == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_HELM] == 1 )
+			{
+				switch (rand() % 10)
+				{
+				case 0:
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+				case 6:
+					break;
+				case 7:
+					myStats->helmet = newItem(TIN_HELM, static_cast<Status>(WORN + rand() % 3), -1 + rand() % 3, 1, 1, false, nullptr);
+					break;
+				case 8:
+				case 9:
+					myStats->helmet = newItem(HAT_HOOD, static_cast<Status>(WORN + rand() % 3), -1 + rand() % 3, 1, 1, false, nullptr);
+					break;
 				}
 			}
 		}
 	}
 
 	// torso
-	Entity* entity = newEntity(933, 0, map.entities, nullptr); //Limb entity.
+	Entity* entity = newEntity(1435, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[FLESHLING][1][0]; // 0
-	entity->focaly = limbs[FLESHLING][1][1]; // 0
-	entity->focalz = limbs[FLESHLING][1][2]; // 0
-	entity->behavior = &actFleshlingLimb;
+	entity->focalx = limbs[DUSTDEVIL][1][0]; // 0
+	entity->focaly = limbs[DUSTDEVIL][1][1]; // 0
+	entity->focalz = limbs[DUSTDEVIL][1][2]; // 0
+	entity->behavior = &actDustDevilLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -214,17 +247,17 @@ void initFleshling(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right leg
-	entity = newEntity(932, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1443, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[FLESHLING][2][0]; // .25
-	entity->focaly = limbs[FLESHLING][2][1]; // 0
-	entity->focalz = limbs[FLESHLING][2][2]; // 1.5
-	entity->behavior = &actFleshlingLimb;
+	entity->focalx = limbs[DUSTDEVIL][2][0]; // .25
+	entity->focaly = limbs[DUSTDEVIL][2][1]; // 0
+	entity->focalz = limbs[DUSTDEVIL][2][2]; // 1.5
+	entity->behavior = &actDustDevilLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -233,17 +266,17 @@ void initFleshling(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left leg
-	entity = newEntity(929, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1441, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[FLESHLING][3][0]; // .25
-	entity->focaly = limbs[FLESHLING][3][1]; // 0
-	entity->focalz = limbs[FLESHLING][3][2]; // 1.5
-	entity->behavior = &actFleshlingLimb;
+	entity->focalx = limbs[DUSTDEVIL][3][0]; // .25
+	entity->focaly = limbs[DUSTDEVIL][3][1]; // 0
+	entity->focalz = limbs[DUSTDEVIL][3][2]; // 1.5
+	entity->behavior = &actDustDevilLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -252,17 +285,17 @@ void initFleshling(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// right arm
-	entity = newEntity(930, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1442, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[FLESHLING][4][0]; // 0
-	entity->focaly = limbs[FLESHLING][4][1]; // 0
-	entity->focalz = limbs[FLESHLING][4][2]; // 2
-	entity->behavior = &actFleshlingLimb;
+	entity->focalx = limbs[DUSTDEVIL][4][0]; // 0
+	entity->focaly = limbs[DUSTDEVIL][4][1]; // 0
+	entity->focalz = limbs[DUSTDEVIL][4][2]; // 2
+	entity->behavior = &actDustDevilLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -271,17 +304,17 @@ void initFleshling(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 
 	// left arm
-	entity = newEntity(927, 0, map.entities, nullptr); //Limb entity.
+	entity = newEntity(1440, 0, map.entities, nullptr); //Limb entity.
 	entity->sizex = 4;
 	entity->sizey = 4;
 	entity->skill[2] = my->getUID();
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[FLESHLING][5][0]; // 0
-	entity->focaly = limbs[FLESHLING][5][1]; // 0
-	entity->focalz = limbs[FLESHLING][5][2]; // 2
-	entity->behavior = &actFleshlingLimb;
+	entity->focalx = limbs[DUSTDEVIL][5][0]; // 0
+	entity->focaly = limbs[DUSTDEVIL][5][1]; // 0
+	entity->focalz = limbs[DUSTDEVIL][5][2]; // 2
+	entity->behavior = &actDustDevilLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -298,10 +331,10 @@ void initFleshling(Entity* my, Stat* myStats)
 	entity->flags[NOUPDATE] = true;
 	entity->flags[INVISIBLE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[FLESHLING][6][0]; // 2
-	entity->focaly = limbs[FLESHLING][6][1]; // 0
-	entity->focalz = limbs[FLESHLING][6][2]; // -.5
-	entity->behavior = &actFleshlingLimb;
+	entity->focalx = limbs[DUSTDEVIL][6][0]; // 2
+	entity->focaly = limbs[DUSTDEVIL][6][1]; // 0
+	entity->focalz = limbs[DUSTDEVIL][6][2]; // -.5
+	entity->behavior = &actDustDevilLimb;
 	entity->parent = my->getUID();
 	entity->pitch = .25;
 	node = list_AddNodeLast(&my->children);
@@ -319,10 +352,10 @@ void initFleshling(Entity* my, Stat* myStats)
 	entity->flags[NOUPDATE] = true;
 	entity->flags[INVISIBLE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[FLESHLING][7][0]; // 0
-	entity->focaly = limbs[FLESHLING][7][1]; // 0
-	entity->focalz = limbs[FLESHLING][7][2]; // 1.5
-	entity->behavior = &actFleshlingLimb;
+	entity->focalx = limbs[DUSTDEVIL][7][0]; // 0
+	entity->focaly = limbs[DUSTDEVIL][7][1]; // 0
+	entity->focalz = limbs[DUSTDEVIL][7][2]; // 1.5
+	entity->behavior = &actDustDevilLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -342,10 +375,32 @@ void initFleshling(Entity* my, Stat* myStats)
 	entity->flags[NOUPDATE] = true;
 	entity->flags[INVISIBLE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[FLESHLING][8][0]; // 0
-	entity->focaly = limbs[FLESHLING][8][1]; // 0
-	entity->focalz = limbs[FLESHLING][8][2]; // 4
-	entity->behavior = &actFleshlingLimb;
+	entity->focalx = limbs[DUSTDEVIL][8][0]; // 0
+	entity->focaly = limbs[DUSTDEVIL][8][1]; // 0
+	entity->focalz = limbs[DUSTDEVIL][8][2]; // 4
+	entity->behavior = &actDustDevilLimb;
+	entity->parent = my->getUID();
+	node = list_AddNodeLast(&my->children);
+	node->element = entity;
+	node->deconstructor = &emptyDeconstructor;
+	node->size = sizeof(Entity*);
+	my->bodyparts.push_back(entity);
+
+	// helmet
+	entity = newEntity(-1, 0, map.entities, nullptr); //Limb entity.
+	entity->sizex = 4;
+	entity->sizey = 4;
+	entity->skill[2] = my->getUID();
+	entity->scalex = 1.1;
+	entity->scaley = 1.1;
+	entity->scalez = 1.1;
+	entity->flags[PASSABLE] = true;
+	entity->flags[NOUPDATE] = true;
+	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
+	entity->focalx = limbs[DUSTDEVIL][9][0]; // 0
+	entity->focaly = limbs[DUSTDEVIL][9][1]; // 0
+	entity->focalz = limbs[DUSTDEVIL][9][2]; // -2
+	entity->behavior = &actDustDevilLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -359,15 +414,15 @@ void initFleshling(Entity* my, Stat* myStats)
 	}
 }
 
-void actFleshlingLimb(Entity* my)
+void actDustDevilLimb(Entity* my)
 {
 	my->actMonsterLimb(true);
 }
 
-void fleshlingDie(Entity* my)
+void dustDevilDie(Entity* my)
 {
 	int c;
-	for ( c = 0; c < 6; c++ )
+	for ( c = 0; c < 6; ++c )
 	{
 		Entity* entity = spawnGib(my);
 		if ( entity )
@@ -380,14 +435,14 @@ void fleshlingDie(Entity* my)
 
 	my->removeMonsterDeathNodes();
 
-	playSoundEntity(my, 454 + rand() % 4, 128);
+	playSoundEntity(my, 672 + rand() % 2, 128);
 	list_RemoveNode(my->mynode);
 	return;
 }
 
-#define FLESHLINGWALKSPEED .13
+#define DUSTDEVILWALKSPEED .13
 
-void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
+void dustDevilMoveBodyparts(Entity* my, Stat* myStats, double dist)
 {
 	node_t* node;
 	Entity* entity = nullptr, *entity2 = nullptr;
@@ -409,6 +464,13 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 			{
 				wearingring = true;
 			}
+		if (myStats->mask != nullptr)
+		{
+			if (myStats->mask->type == ABYSSAL_MASK)
+			{
+				wearingring = true;
+			}
+		}
 		if ( myStats->EFFECTS[EFF_INVISIBLE] == true || wearingring == true )
 		{
 			my->flags[INVISIBLE] = true;
@@ -431,7 +493,7 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					entity->flags[INVISIBLE] = true;
 					serverUpdateEntityBodypart(my, bodypart);
 				}
-				bodypart++;
+				++bodypart;
 			}
 		}
 		else
@@ -441,12 +503,12 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 			bodypart = 0;
 			for (node = my->children.first; node != nullptr; node = node->next)
 			{
-				if ( bodypart < 2 )
+				if ( bodypart < LIMB_HUMANOID_TORSO )
 				{
-					bodypart++;
+					++bodypart;
 					continue;
 				}
-				if ( bodypart >= 7 )
+				if ( bodypart >= LIMB_HUMANOID_WEAPON )
 				{
 					break;
 				}
@@ -457,7 +519,7 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					serverUpdateEntityBodypart(my, bodypart);
 					serverUpdateEntityFlag(my, INVISIBLE);
 				}
-				bodypart++;
+				++bodypart;
 			}
 		}
 
@@ -477,7 +539,7 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	Entity* shieldarm = nullptr;
 
 	//Move bodyparts
-	for (bodypart = 0, node = my->children.first; node != nullptr; node = node->next, bodypart++)
+	for (bodypart = 0, node = my->children.first; node != nullptr; node = node->next, ++bodypart)
 	{
 		if ( bodypart < LIMB_HUMANOID_TORSO )
 		{
@@ -495,9 +557,10 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 		{
 			entity->yaw = my->yaw;
 		}
+
 		if ( bodypart == LIMB_HUMANOID_RIGHTLEG || bodypart == LIMB_HUMANOID_LEFTARM )
 		{
-			my->humanoidAnimateWalk(entity, node, bodypart, FLESHLINGWALKSPEED, dist, 0.4);
+			my->humanoidAnimateWalk(entity, node, bodypart, DUSTDEVILWALKSPEED, dist, 0.4);
 		}
 		else if ( bodypart == LIMB_HUMANOID_LEFTLEG || bodypart == LIMB_HUMANOID_RIGHTARM || bodypart == LIMB_HUMANOID_CLOAK )
 		{
@@ -515,8 +578,8 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				entity->pitch = entity->fskill[0];
 			}
 
-			my->humanoidAnimateWalk(entity, node, bodypart, FLESHLINGWALKSPEED, dist, 0.4);
-
+			my->humanoidAnimateWalk(entity, node, bodypart, DUSTDEVILWALKSPEED, dist, 0.4);
+			
 			if ( bodypart == LIMB_HUMANOID_CLOAK )
 			{
 				entity->fskill[0] = entity->pitch;
@@ -538,7 +601,7 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->shoes == nullptr )
 					{
-						entity->sprite = 932;
+						entity->sprite = 1434;
 					}
 					else
 					{
@@ -573,7 +636,7 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				{
 					if ( myStats->shoes == nullptr )
 					{
-						entity->sprite = 929;
+						entity->sprite = 1431;
 					}
 					else
 					{
@@ -605,24 +668,25 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 			// right arm
 			case LIMB_HUMANOID_RIGHTARM:
 			{
-				;
 				node_t* weaponNode = list_Node(&my->children, 7);
 				if ( weaponNode )
 				{
 					Entity* weapon = (Entity*)weaponNode->element;
 					if ( my->monsterArmbended || (weapon->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT) )
 					{
-						entity->focalx = limbs[FLESHLING][4][0]; // 0
-						entity->focaly = limbs[FLESHLING][4][1]; // 0
-						entity->focalz = limbs[FLESHLING][4][2]; // 2
-						entity->sprite = 930;
+						// if weapon invisible and I'm not moving, relax arm.
+						entity->focalx = limbs[DUSTDEVIL][4][0]; // 0
+						entity->focaly = limbs[DUSTDEVIL][4][1]; // 0
+						entity->focalz = limbs[DUSTDEVIL][4][2]; // 2
+						entity->sprite = 1432;
 					}
 					else
 					{
-						entity->focalx = limbs[FLESHLING][4][0] + 1; // 1
-						entity->focaly = limbs[FLESHLING][4][1]; // 0
-						entity->focalz = limbs[FLESHLING][4][2] - 1; // 1
-						entity->sprite = 931;
+						// else flex arm.
+						entity->focalx = limbs[DUSTDEVIL][4][0] + 1; // 1
+						entity->focaly = limbs[DUSTDEVIL][4][1]; // 0
+						entity->focalz = limbs[DUSTDEVIL][4][2] - 1; // 1
+						entity->sprite = 1433;
 					}
 				}
 				entity->x += 2.5 * cos(my->yaw + PI / 2) - .75 * cos(my->yaw);
@@ -645,17 +709,19 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					Entity* shield = (Entity*)shieldNode->element;
 					if ( shield->flags[INVISIBLE] && my->monsterState == MONSTER_STATE_WAIT )
 					{
-						entity->focalx = limbs[FLESHLING][5][0]; // 0
-						entity->focaly = limbs[FLESHLING][5][1]; // 0
-						entity->focalz = limbs[FLESHLING][5][2]; // 2
-						entity->sprite = 927;
+						// if shield invisible and I'm not moving, relax arm.
+						entity->focalx = limbs[DUSTDEVIL][5][0]; // 0
+						entity->focaly = limbs[DUSTDEVIL][5][1]; // 0
+						entity->focalz = limbs[DUSTDEVIL][5][2]; // 2
+						entity->sprite = 1429;
 					}
 					else
 					{
-						entity->focalx = limbs[FLESHLING][5][0] + 1; // 1
-						entity->focaly = limbs[FLESHLING][5][1]; // 0
-						entity->focalz = limbs[FLESHLING][5][2] - 1; // 1
-						entity->sprite = 928;
+						// else flex arm.
+						entity->focalx = limbs[DUSTDEVIL][5][0] + 1; // 1
+						entity->focaly = limbs[DUSTDEVIL][5][1]; // 0
+						entity->focalz = limbs[DUSTDEVIL][5][2] - 1; // 1
+						entity->sprite = 1430;
 					}
 				}
 				entity->x -= 2.5 * cos(my->yaw + PI / 2) + .75 * cos(my->yaw);
@@ -740,6 +806,10 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					{
 						entity->flags[INVISIBLE] = false;
 						entity->sprite = itemModel(myStats->shield);
+						if ( itemTypeIsQuiver(myStats->shield->type) )
+						{
+							entity->handleQuiverThirdPersonModel(*myStats);
+						}
 					}
 					if ( myStats->EFFECTS[EFF_INVISIBLE] || wearingring ) //TODO: isInvisible()?
 					{
@@ -777,7 +847,7 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				entity->yaw = shieldarm->yaw;
 				entity->roll = 0;
 				entity->pitch = 0;
-				if ( entity->sprite == items[TOOL_TORCH].index )
+				if (entity->sprite == items[TOOL_TORCH].index || entity->sprite == items[TOOL_CANDLE].index || entity->sprite == items[TOOL_CANDLE_TIMELESS].index)
 				{
 					entity2 = spawnFlame(entity, SPRITE_FLAME);
 					entity2->x += 2 * cos(entity->yaw);
@@ -806,9 +876,19 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 					entity2->y += 2 * sin(entity->yaw);
 					entity2->z -= 2;
 				}
-				if ( MONSTER_SHIELDYAW > PI / 32 )
+				else if (entity->sprite == items[INQUISITOR_LANTERN].index)
 				{
-					if ( entity->sprite != items[TOOL_TORCH].index && entity->sprite != items[TOOL_LANTERN].index && entity->sprite != items[TOOL_CRYSTALSHARD].index && entity->sprite != items[TOOL_GREENTORCH].index)
+					entity->z += 2;
+					entity2 = spawnFlame(entity, SPRITE_ANGELFLAME);
+					entity2->x += 2 * cos(entity->yaw);
+					entity2->y += 2 * sin(entity->yaw);
+					entity2->z += 1;
+				}
+				if (MONSTER_SHIELDYAW > PI / 32)
+				{
+					if (entity->sprite != items[TOOL_TORCH].index && entity->sprite != items[TOOL_LANTERN].index && entity->sprite != items[TOOL_CRYSTALSHARD].index
+						&& entity->sprite != items[TOOL_GREENTORCH].index && entity->sprite != items[INQUISITOR_LANTERN].index && entity->sprite != items[TOOL_CANDLE].index
+						&& entity->sprite != items[TOOL_CANDLE_TIMELESS].index)
 					{
 						// shield, so rotate a little.
 						entity->roll += PI / 64;
@@ -824,6 +904,15 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 							entity2->y += 0.75 * sin(shieldarm->yaw);
 						}
 					}
+				}
+				if ( itemSpriteIsQuiverThirdPersonModel(entity->sprite) )
+				{
+					/*shieldLimb->x -= -0.25 * cos(this->yaw + PI / 2) + 1.25 * cos(this->yaw);
+					shieldLimb->y -= -0.25 * sin(this->yaw + PI / 2) + 1.25 * sin(this->yaw);*/
+					entity->x -= 0.25 * cos(my->yaw + PI / 2);
+					entity->y -= 0.25 * sin(my->yaw + PI / 2);
+					entity->z += 1;
+					entity->yaw += PI / 6;
 				}
 				break;
 			// cloak
@@ -869,6 +958,52 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 				entity->y -= sin(my->yaw) * 1.5;
 				entity->yaw += PI / 2;
 				break;
+			// helmet
+			case LIMB_HUMANOID_HELMET:
+				entity->focalx = limbs[DUSTDEVIL][9][0]; // 0
+				entity->focaly = limbs[DUSTDEVIL][9][1]; // 0
+				entity->focalz = limbs[DUSTDEVIL][9][2]; // -2
+				entity->pitch = my->pitch;
+				entity->roll = 0;
+				if ( multiplayer != CLIENT )
+				{
+					entity->sprite = itemModel(myStats->helmet);
+					if ( myStats->helmet == NULL || myStats->EFFECTS[EFF_INVISIBLE] || wearingring ) //TODO: isInvisible()?
+					{
+						entity->flags[INVISIBLE] = true;
+					}
+					else
+					{
+						entity->flags[INVISIBLE] = false;
+					}
+					if ( multiplayer == SERVER )
+					{
+						// update sprites for clients
+						if ( entity->skill[10] != entity->sprite )
+						{
+							entity->skill[10] = entity->sprite;
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if ( entity->skill[11] != entity->flags[INVISIBLE] )
+						{
+							entity->skill[11] = entity->flags[INVISIBLE];
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+						if ( entity->getUID() % (TICKS_PER_SECOND * 10) == ticks % (TICKS_PER_SECOND * 10) )
+						{
+							serverUpdateEntityBodypart(my, bodypart);
+						}
+					}
+				}
+				else
+				{
+					if ( entity->sprite <= 0 )
+					{
+						entity->flags[INVISIBLE] = true;
+					}
+				}
+				my->setHelmetLimbOffset(entity);
+				break;
 		}
 	}
 	// rotate shield a bit
@@ -876,7 +1011,9 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist)
 	if ( shieldNode )
 	{
 		Entity* shieldEntity = (Entity*)shieldNode->element;
-		if ( shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index && shieldEntity->sprite != items[TOOL_GREENTORCH].index )
+		if (shieldEntity->sprite != items[TOOL_TORCH].index && shieldEntity->sprite != items[TOOL_LANTERN].index && shieldEntity->sprite != items[TOOL_CRYSTALSHARD].index
+			&& shieldEntity->sprite != items[TOOL_GREENTORCH].index && shieldEntity->sprite != items[INQUISITOR_LANTERN].index && shieldEntity->sprite != items[TOOL_CANDLE].index
+			&& shieldEntity->sprite != items[TOOL_CANDLE_TIMELESS].index)
 		{
 			shieldEntity->yaw -= PI / 6;
 		}

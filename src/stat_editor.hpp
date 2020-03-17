@@ -69,8 +69,15 @@ typedef enum
 	ABOMINATION,
 	CHOLOROSH,
 	LICH_FALLEN,
+	ANT,
+	DUSTDEVIL,
+	PARASITE,
+	METALLICBEAST,
+	SKU_LIT,
+	RAN_GIC,
+	WAN_RIT,
 } Monster;
-#define NUMMONSTERS 45
+#define NUMMONSTERS 52
 extern int kills[NUMMONSTERS];
 
 // effects

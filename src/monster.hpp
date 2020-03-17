@@ -61,9 +61,16 @@ enum Monster : int
 	FLESHLING,
 	ABOMINATION,
 	CHOLOROSH,
-	LICH_FALLEN
+	LICH_FALLEN,
+	ANT,
+	DUSTDEVIL,
+	PARASITE,
+	METALLICBEAST,
+	SKU_LIT,
+	RAN_GIC,
+	WAN_RIT
 };
-const int NUMMONSTERS = 49;
+const int NUMMONSTERS = 56;
 extern int kills[NUMMONSTERS];
 
 static char monstertypename[][16] =
@@ -116,7 +123,14 @@ static char monstertypename[][16] =
 	"fleshling",
 	"abomination",
 	"cholorosh",
-	"lichfallen"
+	"lichfallen",
+	"ant",
+	"dustdevil",
+	"parasite",
+	"metallicbeast",
+	"sku-lit",
+	"ran-gic",
+	"wan-rit"
 };
 
 static char monstertypenamecapitalized[][16] =
@@ -169,7 +183,14 @@ static char monstertypenamecapitalized[][16] =
 	"Fleshling",
 	"Abomination",
 	"Cholorosh",
-	"Lichfallen"
+	"Lichfallen",
+	"Ant",
+	"Dustdevil",
+	"Parasite",
+	"Metallicbeast",
+	"Sku-lit",
+	"Ran-gic",
+	"Wan-rit"
 };
 
 // body part focal points
@@ -229,7 +250,14 @@ static char gibtype[NUMMONSTERS] =
 	1,	//FLESHLING,
 	1,	//ABOMINATION,
 	2,	//CHOLOROSH,
-	4	//LICH_FALLEN
+	4,	//LICH_FALLEN,
+	0,	//ANT,
+	4,	//DUSTDEVIL,
+	1,	//PARASITE,
+	0,	//METALLICBEAST,
+	3,	//SKU_LIT,
+	3,	//RAN_GIC,
+	3	//WAN_RIT
 };
 
 // columns go like this:
@@ -285,7 +313,14 @@ static double damagetables[NUMMONSTERS][7] =
 	{ 0.9, 1.f, 1.f, 0.9, 1.2, 1.f, 1.f }, // fleshling
 	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.f }, // abomination
 	{ 1.1, 0.8, 1.3, 1.f, 1.f, 0.9, 0.8 }, // cholorosh
-	{ 1.5, 1.5, 1.5, 1.5, 1.3, 1.f, 1.5 }  // lichfallen
+	{ 1.5, 1.5, 1.5, 1.5, 1.3, 1.f, 1.5 }, // lichfallen
+	{ 0.8, 1.1, 1.f, 0.5, 1.1, 1.f, 1.3 }, // ant
+	{ 0.8, 0.8, 0.8, 0.8, 0.8, 1.5, 0.8 }, // dust devil
+	{ 1.2, 1.f, 1.3, 1.4, 1.4, 0.5, 1.f }, // parasite
+	{ 0.5, 1.f, 1.f, 0.5, 1.5, 1.f, 0.8 }, // metallic beast
+	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.2 }, // skul-lit
+	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.2 }, // ran-gic
+	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.2 }  // wan-rit
 };
 
 enum DamageTableType : int
@@ -538,6 +573,13 @@ void initFleshling(Entity* my, Stat* myStats);
 void initAbomination(Entity* my, Stat* myStats);
 void initCholorosh(Entity* my, Stat* myStats);
 void initLichFallen(Entity* my, Stat* myStats);
+void initAnt(Entity* my, Stat* myStats);
+void initDustDevil(Entity* my, Stat* myStats);
+void initParasite(Entity* my, Stat* myStats);
+void initMetallicBeast(Entity* my, Stat* myStats);
+void initSkuLit(Entity* my, Stat* myStats);
+void initRanGic(Entity* my, Stat* myStats);
+void initWanRit(Entity* my, Stat* myStats);
 
 //--act*Limb functions--
 void actHumanLimb(Entity* my);
@@ -579,6 +621,13 @@ void actFleshlingLimb(Entity* my);
 void actAbominationLimb(Entity* my);
 void actCholoroshLimb(Entity* my);
 void actLichFallenLimb(Entity* my);
+void actAntLimb(Entity* my);
+void actDustDevilLimb(Entity* my);
+void actParasiteLimb(Entity* my);
+void actMetallicBeastLimb(Entity* my);
+void actSkuLitLimb(Entity* my);
+void actRanGicLimb(Entity* my);
+void actWanRitLimb(Entity* my);
 
 //--*Die functions--
 void humanDie(Entity* my);
@@ -625,6 +674,13 @@ void fleshlingDie(Entity* my);
 void abominationDie(Entity* my);
 void choloroshDie(Entity* my);
 void lichFallenDie(Entity* my);
+void antDie(Entity* my);
+void dustDevilDie(Entity* my);
+void parasiteDie(Entity* my);
+void metallicBeastDie(Entity* my);
+void skuLitDie(Entity* my);
+void ranGicDie(Entity* my);
+void wanRitDie(Entity* my);
 
 //--*MoveBodyparts functions--
 void humanMoveBodyparts(Entity* my, Stat* myStats, double dist);
@@ -671,6 +727,13 @@ void fleshlingMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void abominationMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void choloroshMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void lichFallenAnimate(Entity* my, Stat* myStats, double dist);
+void antAnimate(Entity* my, double dist);
+void dustDeviAnimate(Entity* my, Stat* myStats, double dist);
+void parasiteAnimate(Entity* my, double dist);
+void metallicBeastAnimate(Entity* my, Stat* myStats, double dist);
+void skuLitAnimate(Entity* my, double dist);
+void ranGicAnimate(Entity* my, double dist);
+void wanRitAnimate(Entity* my, double dist);
 
 //--misc functions--
 void actMinotaurTrap(Entity* my);
