@@ -1359,6 +1359,7 @@ void clientActions(Entity* entity)
 			entity->behavior = &actSwitch;
 			break;
 		case 186:
+		case 1425:
 			entity->behavior = &actGate;
 			break;
 		case 216:

@@ -128,6 +128,7 @@ int checkSpriteType(Sint32 sprite)
 	case 175:
 	case 176:
 	case 177:
+	case 212:
 		// general furniture/misc.
 		return 12;
 		break;
@@ -137,6 +138,8 @@ int checkSpriteType(Sint32 sprite)
 	case 172:
 	case 173:
 	case 178:
+	case 208:
+	case 209:
 		// floor decoration
 		return 13;
 		break;
@@ -1129,7 +1132,20 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"CHLOROSH",
 	"LICH_FALLEN",
 	"ABYSS COLUMN BLOCK",
-	"END PORTAL ABYSS"
+	"END PORTAL ABYSS",
+	"ANT",
+	"DUST DEVIL",
+	"PARASITE",
+	"METALLIC BEAST",
+	"SKU-LIT",
+	"RAN-GIC",
+	"WAN-RIT",
+	"NOT USED AngelFlame",
+	"GRASS VINES",
+	"TALL WHEAT",
+	"MARBLE GATE (North-South)",
+	"MARBLE GATE (East-West)",
+	"METAL TABLE"
 };
 
 char monsterEditorNameStrings[NUMMONSTERS][17] =

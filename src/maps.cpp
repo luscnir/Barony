@@ -4496,6 +4496,28 @@ void assignActions(map_t* map)
 				}
 				break;
 			}
+			//metal table
+			case 212:
+			{
+				entity->sizex = 5;
+				entity->sizey = 4;
+				entity->x += 8;
+				entity->y += 8;
+				entity->z = 8;
+				entity->focalz = -3;
+				entity->sprite = 1424;
+				entity->behavior = &actFurniture;
+				entity->flags[BURNABLE] = true;
+				entity->furnitureType = FURNITURE_TABLE;
+				if (prng_get_uint() % 4 == 0 || !strcmp(map->name, "Start Map"))
+				{
+					childEntity->z = 0;
+					childEntity->itemNotMoving = 1; // so the item retains its position
+					childEntity->itemNotMovingClient = 1; // so the item retains its position for clients
+					entity->parent = childEntity->getUID();
+				}
+				break;
+			}
 			// chair
 			case 60:
 				entity->furnitureType = FURNITURE_CHAIR; // so everything knows I'm a chair
@@ -5680,6 +5702,7 @@ void assignActions(map_t* map)
 			{
 				entity->x += 8;
 				entity->y += 8;
+				entity->sprite = 673;
 				entity->sprite = entity->floorDecorationModel;
 				entity->sizex = 0.01;
 				entity->sizey = 0.01;
@@ -5791,6 +5814,52 @@ void assignActions(map_t* map)
 				entity->x += 8;
 				entity->y += 8;
 				entity->sprite = 1180;
+				entity->sizex = 0.01;
+				entity->sizey = 0.01;
+				entity->z = 7.5 - entity->floorDecorationHeightOffset * 0.25;
+				if (entity->floorDecorationRotation == -1)
+				{
+					entity->yaw = (prng_get_uint() % 8) * (PI / 4);
+				}
+				else
+				{
+					entity->yaw = entity->floorDecorationRotation * (PI / 4);
+				}
+				entity->flags[BLOCKSIGHT] = false;
+				entity->flags[PASSABLE] = true;
+				entity->flags[UNCLICKABLE] = true;
+				entity->behavior = &actFloorDecoration;
+				break;
+			}
+			// grass Vines texture
+			case 208:
+			{
+				entity->x += 8;
+				entity->y += 8;
+				entity->sprite = 1422;
+				entity->sizex = 0.01;
+				entity->sizey = 0.01;
+				entity->z = 7.5 - entity->floorDecorationHeightOffset * 0.25;
+				if (entity->floorDecorationRotation == -1)
+				{
+					entity->yaw = (prng_get_uint() % 8) * (PI / 4);
+				}
+				else
+				{
+					entity->yaw = entity->floorDecorationRotation * (PI / 4);
+				}
+				entity->flags[BLOCKSIGHT] = false;
+				entity->flags[PASSABLE] = true;
+				entity->flags[UNCLICKABLE] = true;
+				entity->behavior = &actFloorDecoration;
+				break;
+			}
+			// Tall Wheat texture
+			case 209:
+			{
+				entity->x += 8;
+				entity->y += 8;
+				entity->sprite = 1423;
 				entity->sizex = 0.01;
 				entity->sizey = 0.01;
 				entity->z = 7.5 - entity->floorDecorationHeightOffset * 0.25;
@@ -6067,7 +6136,7 @@ void assignActions(map_t* map)
 					{
 						if ( postProcessEntity->z > 4 )
 						{
-							if ( tmpentity->sprite == 271 )
+							if ( tmpentity->sprite == 271 || tmpentity->sprite == 1424 )
 							{
 								// is table
 								postProcessEntity->z -= 6;
