@@ -1,18 +1,105 @@
-﻿  monster_sku-lit.cpp
-  monster_wan-rit.cpp
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_sku-lit.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_sku-lit.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\monster_wan-rit.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\monster_wan-rit.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_sku-lit.cpp(64,56): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_sku-lit.cpp(64,49): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_wan-rit.cpp(60,55): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_wan-rit.cpp(60,48): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_sku-lit.cpp(14,6): warning C4101: 'c': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\monster_wan-rit.cpp(14,6): warning C4101: 'c': unreferenced local variable
+﻿  maps.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX'
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(530,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(549,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(574,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(759,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(761,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(907,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(909,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(911,30): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(911,51): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(920,54): warning C4805: '==': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(929,50): warning C4805: '==': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(948,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(951,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(952,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1094,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1096,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1098,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1102,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1210,13): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1214,14): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1239,13): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1243,14): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1254,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1333,27): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1337,28): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1371,49): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1371,80): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1659,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1661,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1729,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1733,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1735,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1784,10): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1785,10): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1787,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1788,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1834,12): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1838,13): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2011,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2013,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2044,17): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2045,17): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2046,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2046,47): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2142,11): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2146,12): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2183,69): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2183,52): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(459,47): warning C4101: 'subroomPickRoom': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2557,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2559,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4424,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4424,51): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4488,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4489,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4490,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4490,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4890,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4890,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4930,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4930,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4970,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4970,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5010,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5010,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5148,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5149,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5152,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5152,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5168,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5169,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5172,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5172,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5428,20): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5429,20): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5430,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5430,51): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5502,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5502,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5802,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5803,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5830,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5831,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5857,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5858,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5884,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5885,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5912,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5913,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5935,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5936,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5958,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5959,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6307,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6307,28): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  2 of 6373 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 6373 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    352 functions had inline decision re-evaluated but remain unchanged
+    353 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   barony.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\barony_test.exe
