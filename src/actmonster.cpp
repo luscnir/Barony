@@ -1812,6 +1812,7 @@ void actMonster(Entity* my)
 			else if (my->sprite == 1450 || my->sprite == 1451 || my->sprite == 1452 || my->sprite == 1453)     // wan-rit
 			{
 				wanRitAnimate(my, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
+				actDemonCeilingBuster(my);
 			}
 			else
 			{
@@ -7888,6 +7889,7 @@ timeToGoAgain:
 		else if (myStats->type == WAN_RIT)
 		{
 			wanRitAnimate(my, sqrt(MONSTER_VELX * MONSTER_VELX + MONSTER_VELY * MONSTER_VELY));
+			actMinotaurCeilingBuster(my);
 		}
 	}
 }
