@@ -3781,7 +3781,7 @@ void assignActions(map_t* map)
 						entity->focalz = limbs[DUSTDEVIL][0][2]; // -2
 						break;
 					case PARASITE:
-						entity->z = -2.5;
+						entity->z = 0.5;
 						entity->focalx = limbs[PARASITE][0][0]; // 0
 						entity->focaly = limbs[PARASITE][0][1]; // 0
 						entity->focalz = limbs[PARASITE][0][2]; // -2
@@ -3790,22 +3790,22 @@ void assignActions(map_t* map)
 						entity->z = -8.5;
 						entity->focalx = limbs[METALLICBEAST][0][0]; // -1
 						entity->focaly = limbs[METALLICBEAST][0][1]; // 0
-						entity->focalz = limbs[METALLICBEAST][0][2]; // -1.25
+						entity->focalz = limbs[METALLICBEAST][0][2]; // 
 						break;
 					case SKU_LIT:
-						entity->z = -4.5;
+						entity->z = -4;
 						entity->focalx = limbs[SKU_LIT][0][0]; // 0
 						entity->focaly = limbs[SKU_LIT][0][1]; // 0
 						entity->focalz = limbs[SKU_LIT][0][2]; // 
 						break;
 					case RAN_GIC:
-						entity->z = -1.5;
+						entity->z = 1.25;
 						entity->focalx = limbs[RAN_GIC][0][0]; // 0
 						entity->focaly = limbs[RAN_GIC][0][1]; // 0
 						entity->focalz = limbs[RAN_GIC][0][2]; // 0
 						break;
 					case WAN_RIT:
-						entity->z = -5;
+						entity->z = -4;
 						entity->focalx = limbs[WAN_RIT][0][0]; // 0
 						entity->focaly = limbs[WAN_RIT][0][1]; // 0
 						entity->focalz = limbs[WAN_RIT][0][2]; // 

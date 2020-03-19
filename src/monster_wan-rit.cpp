@@ -65,6 +65,8 @@ void initWanRit(Entity* my, Stat* myStats)
 				}
 			}
 			// random effects
+			myStats->EFFECTS[EFF_LEVITATING] = true;
+			myStats->EFFECTS_TIMERS[EFF_LEVITATING] = 0;
 
 			// generates equipment and weapons if available from editor
 			createMonsterEquipment(myStats);
@@ -157,8 +159,6 @@ void wanRitDie(Entity* my)
 		Entity* gib = spawnGib(my);
 		serverSpawnGibForClient(gib);
 	}
-
-	my->spawnBlood();
 
 	playSoundEntity(my, 706 + rand() % 3, 64);
 	list_RemoveNode(my->mynode);

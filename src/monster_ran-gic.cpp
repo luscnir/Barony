@@ -165,8 +165,6 @@ void ranGicDie(Entity* my)
 		serverSpawnGibForClient(gib);
 	}
 
-	my->spawnBlood();
-
 	playSoundEntity(my, 698 + rand() % 2, 64);
 	list_RemoveNode(my->mynode);
 	return;

@@ -229,16 +229,7 @@ void actMetallicBeastLimb(Entity* my)
 
 void metallicBeastDie(Entity* my)
 {
-	int c;
-	for ( c = 0; c < 5; c++ )
-	{
-		Entity* gib = spawnGib(my);
-		serverSpawnGibForClient(gib);
-	}
-
-	my->spawnBlood();
-
-	playSoundEntity(my, 386 + rand() % 3, 128);
+	playSoundEntity(my, 686 + rand() % 3, 128);
 
 	my->removeMonsterDeathNodes();
 

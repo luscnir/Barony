@@ -85,6 +85,8 @@ void initSkuLit(Entity* my, Stat* myStats)
 				
 			}
 			// random effects
+			myStats->EFFECTS[EFF_LEVITATING] = true;
+			myStats->EFFECTS_TIMERS[EFF_LEVITATING] = 0;
 
 			// generates equipment and weapons if available from editor
 			createMonsterEquipment(myStats);
@@ -108,7 +110,7 @@ void initSkuLit(Entity* my, Stat* myStats)
 				case 4:
 				case 3:
 				case 2:
-					if (rand() % 50 == 0)
+					if (rand() % 40 == 0)
 					{
 						newItem(MARBLE_BREASTPIECE, DECREPIT, 0, 1, rand(), false, &myStats->inventory);
 					}
@@ -160,8 +162,6 @@ void skuLitDie(Entity* my)
 		Entity* gib = spawnGib(my);
 		serverSpawnGibForClient(gib);
 	}
-
-	my->spawnBlood();
 
 	playSoundEntity(my, 694, 64);
 	list_RemoveNode(my->mynode);
