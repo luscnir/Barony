@@ -205,7 +205,6 @@ void Entity::initMonster(int mySprite)
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
 			break;
 		case LICH_FALLEN:
-		case CLONE_FALLEN:
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
 			break;
@@ -231,6 +230,9 @@ void Entity::initMonster(int mySprite)
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
 			break;
+		case CLONE_FALLEN:
+			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
+			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
 
 		default:
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
@@ -527,7 +529,7 @@ void Entity::actMonsterLimb(bool processLight)
 			{
 				carryingLightSource = 5;
 			}
-			else if ( sprite == 1285 )	// abyssal shield
+			else if ( sprite == 1285 )	// inquisitor lantern
 			{
 				carryingLightSource = 35;
 			}

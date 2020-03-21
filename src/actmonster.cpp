@@ -678,6 +678,7 @@ Entity* summonMonster(Monster creature, long x, long y, bool forceLocation)
 				entity->focalx = limbs[CLONE_FALLEN][0][0]; // -0.75
 				entity->focaly = limbs[CLONE_FALLEN][0][1]; // 0
 				entity->focalz = limbs[CLONE_FALLEN][0][2]; // 0
+				break;
 			default:
 				//Spawn a potato.
 				list_RemoveNode(entity->mynode);

@@ -1,7 +1,950 @@
-﻿  entity_shared.cpp
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX'
-  Microsoft (R) Incremental Linker Version 14.23.28106.4
+﻿  buttons.cpp
+  cursors.cpp
+  draw.cpp
+  editor.cpp
+  entity_editor.cpp
+  entity_shared.cpp
+  files.cpp
+  hash.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\buttons.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\buttons.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\cursors.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\cursors.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\draw.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\draw.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\entity_shared.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\entity_shared.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\files.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\files.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\hash.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\hash.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(505,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(507,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(537,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(790,9): warning C4101: 'c2': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(824,9): warning C4101: 'c2': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(957,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(959,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1018,42): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1019,42): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1011,7): warning C4101: 'tmp': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1293,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1295,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1314,39): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1416,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1424,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1426,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1428,12): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1428,34): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1494,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1496,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1663,6): warning C4101: 'c': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(218,12): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(220,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(221,55): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(221,45): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(227,14): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(262,12): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(264,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(265,55): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(265,45): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(271,14): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(304,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(304,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(305,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(305,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(310,14): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(349,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(349,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(350,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(350,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(351,44): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(351,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(352,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(352,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(393,64): warning C4244: '=': conversion from 'double' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(394,64): warning C4244: '=': conversion from 'double' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(395,75): warning C4244: '=': conversion from 'double' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(396,75): warning C4244: '=': conversion from 'double' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(398,64): warning C4244: '=': conversion from 'double' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(399,64): warning C4244: '=': conversion from 'double' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(400,75): warning C4244: '=': conversion from 'double' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(401,75): warning C4244: '=': conversion from 'double' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(432,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(432,18): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(433,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(447,27): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(449,54): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(449,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(450,33): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(450,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(451,54): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(451,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(452,34): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(452,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(453,65): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(453,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(454,33): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(454,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(455,65): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(455,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(456,32): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(456,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(500,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(500,18): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(500,15): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(500,12): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(503,54): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(503,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(504,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(504,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(505,54): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(505,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(506,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(506,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(507,65): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(507,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(508,44): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(508,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(509,65): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(509,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(510,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(510,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(550,27): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(553,54): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(553,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(554,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(554,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(555,54): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(555,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(556,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(556,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(557,65): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(557,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(558,44): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(558,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(559,65): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(559,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(560,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(560,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(603,54): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(603,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(604,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(604,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(605,54): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(605,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(606,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(606,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(607,65): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(607,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(608,44): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(608,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(609,65): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(609,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(610,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(610,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(672,42): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(672,24): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(674,42): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(674,24): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(779,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(779,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(781,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(781,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(783,44): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(783,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(785,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(785,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(834,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(837,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(837,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(840,44): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(840,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(843,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(897,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(897,18): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(897,15): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(897,12): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(901,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(901,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(903,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(903,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(905,44): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(905,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(907,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(907,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(974,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(974,18): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(975,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(993,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(993,18): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(993,15): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(993,12): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(996,71): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(996,32): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(998,82): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(998,32): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(999,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1000,93): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1000,43): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1001,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1001,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1002,82): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1002,43): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1003,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1029,22): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1030,30): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1046,32): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1052,16): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1088,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1184,14): warning C4244: '=': conversion from 'double' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1185,14): warning C4244: '=': conversion from 'double' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1196,38): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1196,58): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1270,37): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1270,56): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1281,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1281,63): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1305,40): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1305,59): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1385,17): warning C4244: '=': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1386,17): warning C4244: '=': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1387,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1387,47): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1456,42): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1457,42): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1462,46): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1562,42): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1563,42): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1568,46): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1936,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1938,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1966,23): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1967,13): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1968,30): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(1969,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2079,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2079,13): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2080,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2080,13): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2081,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2081,13): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2082,22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2082,13): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2087,31): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2087,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2088,31): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2088,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2089,31): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2089,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2090,31): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2090,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2096,31): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2096,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2097,32): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2098,31): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2098,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2099,67): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2099,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2100,31): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2100,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2101,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2102,31): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2102,16): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2132,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2544,40): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2546,40): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2557,13): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2558,13): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2566,15): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2567,15): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\entity_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\entity_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1151,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1152,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(657,8): warning C4101: 's': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1417,14): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1418,14): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(323,84): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(324,77): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(490,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(492,42): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(522,42): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(522,103): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(524,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(524,104): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(593,15): warning C4244: '=': conversion from 'real_t' to 'Uint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(800,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(802,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(806,13): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(822,13): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(843,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(845,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1052,6): warning C4101: 'c': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1182,9): warning C4101: 'line': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1156,6): warning C4101: 'c': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1916,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1402,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1421,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1423,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1445,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1871,18): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1879,18): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1887,18): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1895,18): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1903,18): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2043,34): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2043,69): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2060,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2060,56): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2072,49): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2072,70): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2099,8): warning C4101: 'tempstr': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2152,8): warning C4101: 'tempstr': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2118,34): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2188,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2118,69): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2128,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2130,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2132,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2214,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2132,86): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2155,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2155,67): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2249,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2212,41): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2212,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2253,44): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2272,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2272,65): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2275,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2523,95): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2528,77): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2533,78): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2543,78): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2605,97): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2610,77): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2615,79): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2627,79): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(4040,95): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(4045,65): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(4050,68): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(4058,68): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6612,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6615,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6654,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6657,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6673,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6679,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6687,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6748,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6754,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6762,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6823,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6831,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6880,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6888,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(7035,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(7070,13): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(7099,13): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(7208,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(7226,13): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(7239,13): warning C4018: '<': signed/unsigned mismatch
+  init.cpp
+  items_editor.cpp
+  light.cpp
+  list.cpp
+  main.cpp
+  objects.cpp
+  opengl.cpp
+  sound.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\items_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\items_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\light.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\light.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\main.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\main.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\list.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\list.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\init.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\init.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\sound.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\sound.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\opengl.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\opengl.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\objects.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\objects.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(48,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(48,48): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(83,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(83,55): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(104,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(104,55): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(116,125): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(116,81): warning C4244: '=': conversion from '_Ty' to 'Sint32', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(153,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(153,48): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(157,124): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(157,80): warning C4244: '=': conversion from '_Ty' to 'Sint32', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\items_editor.cpp(64,10): warning C4101: 'y': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\items_editor.cpp(309,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(118,15): warning C4244: '=': conversion from 'real_t' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(119,25): warning C4244: '=': conversion from 'real_t' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(120,15): warning C4244: '=': conversion from 'real_t' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(133,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(135,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.cpp(333,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\list.cpp(102,11): warning C4550: expression evaluates to a function which is missing an argument list
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\list.cpp(219,26): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\list.cpp(408,26): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(799,7): warning C4101: 'dummy': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1057,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1138,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1203,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1284,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1349,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1429,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1494,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1574,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1639,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1720,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1785,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1866,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1894,18): warning C4018: '<': signed/unsigned mismatch
+  stat_editor.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(44,8): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(45,8): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(78,45): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(116,29): warning C4244: '=': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(117,43): warning C4244: '=': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(122,55): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(122,39): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(122,27): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(133,28): warning C4244: '=': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(134,13): warning C4244: '=': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(135,13): warning C4244: '=': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(136,60): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(136,45): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(136,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(140,71): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(140,51): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(140,30): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(141,49): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(141,33): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(141,17): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(201,166): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(201,115): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(201,64): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(227,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(227,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(227,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(228,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(228,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(228,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(229,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(229,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(229,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(230,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(230,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(230,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(247,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(247,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(247,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(248,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(248,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(248,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(249,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(249,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(249,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(250,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(250,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(250,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(267,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(267,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(267,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(268,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(268,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(268,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(269,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(269,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(269,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(270,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(270,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(270,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(287,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(287,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(287,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(288,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(288,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(288,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(289,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(289,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(289,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(290,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(290,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(290,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(307,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(307,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(307,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(308,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(308,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(308,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(309,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(309,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(309,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(310,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(310,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(310,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(327,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(327,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(327,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(328,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(328,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(328,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(329,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(329,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(329,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(330,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(330,29): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(330,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(343,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(353,167): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(353,116): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(353,65): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(357,167): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(357,116): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(357,65): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(362,166): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(362,115): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(362,64): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(374,70): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(374,35): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(374,31): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(375,70): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(375,35): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(375,31): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(376,70): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(376,35): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(376,31): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(458,16): warning C4244: 'initializing': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(459,16): warning C4244: 'initializing': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(464,55): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(464,39): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(464,27): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(486,45): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(512,60): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(512,45): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(512,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(516,13): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(521,13): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(523,49): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(523,33): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(523,17): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(549,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(549,17): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(549,14): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(555,57): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(555,36): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(555,15): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(572,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(572,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(574,42): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(574,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(576,43): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(576,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(578,42): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(578,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(643,16): warning C4244: 'initializing': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(644,16): warning C4244: 'initializing': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(649,55): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(649,39): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(649,27): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(682,60): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(682,45): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(682,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(686,13): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(691,13): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(693,49): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(693,33): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(693,17): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(713,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(713,17): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(713,14): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(729,39): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(729,25): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(731,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(731,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(733,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(733,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(735,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(735,25): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(758,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(758,48): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(809,79): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(821,16): warning C4244: 'initializing': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(822,16): warning C4244: 'initializing': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(837,64): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(837,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(840,80): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(840,30): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(843,73): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(843,30): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(846,57): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(846,37): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(854,67): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(854,38): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(857,83): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(857,30): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(860,75): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(860,30): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(863,59): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(863,38): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(873,15): warning C4244: 'initializing': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(874,15): warning C4244: 'initializing': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(879,54): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(879,38): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(879,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(898,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(900,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(923,54): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(957,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(957,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(957,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(959,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(959,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(959,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(961,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(961,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(961,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(963,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(963,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(963,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(965,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(965,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(965,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(967,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(967,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(967,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(972,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(972,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(972,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(974,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(974,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(974,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(977,59): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(977,46): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(977,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(981,59): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(981,46): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(981,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(982,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(982,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(982,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(984,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(984,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(984,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(992,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1004,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1004,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1004,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1014,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1014,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1014,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1016,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1016,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1016,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1018,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1018,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1018,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1020,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1020,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1020,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1035,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1035,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1035,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1037,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1037,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1037,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1039,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1039,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1039,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1041,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\objects.cpp(114,77): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1041,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\objects.cpp(115,78): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1041,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1043,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1043,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1043,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1045,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\objects.cpp(202,25): warning C4101: 'ba': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1045,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1045,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1050,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1050,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1050,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1052,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1052,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1052,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1055,58): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1055,45): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1055,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1059,59): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1059,46): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1059,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1060,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1060,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1060,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1062,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1062,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1062,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1070,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1082,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1082,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1082,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1088,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1088,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1088,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1090,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1090,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1090,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1092,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1092,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1092,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1094,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1094,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1094,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1109,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1109,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1109,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1111,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1111,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1111,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1113,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1113,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1113,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1115,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1115,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1115,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1117,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1117,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1117,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1119,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1119,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1119,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1124,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1124,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1124,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1126,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1126,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1126,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1129,58): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1129,45): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1129,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1133,58): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1133,45): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1133,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1134,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1134,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1134,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1136,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1136,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1136,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1156,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1156,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1156,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1162,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1162,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1162,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1164,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1164,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1164,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1166,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1166,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1166,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1168,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1168,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1168,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1183,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1183,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1183,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1185,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1185,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1185,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1187,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1187,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1187,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1189,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1189,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1189,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1191,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1191,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1191,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1193,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1193,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1193,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1198,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1198,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1198,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1200,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1200,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1200,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1203,59): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1203,46): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1203,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1207,58): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1207,45): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1207,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1208,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1208,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1208,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1210,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1210,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1210,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1230,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1230,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1230,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1236,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1236,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1236,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1238,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1238,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1238,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1240,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1240,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1240,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1242,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1242,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1242,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1278,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1278,22): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1278,19): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1280,58): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1280,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1280,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1282,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1282,22): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1282,19): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1284,58): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1284,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1284,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1286,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1286,22): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1286,19): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1288,59): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1288,37): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1288,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1290,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1290,22): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1290,19): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1292,59): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1292,37): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1292,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1304,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1304,22): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1304,19): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1306,61): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1306,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1306,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1308,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1308,22): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1308,19): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1310,62): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1310,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1310,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1312,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1312,22): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1312,19): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1314,62): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1314,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1314,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1316,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1316,22): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1316,19): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1318,61): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1318,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1318,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1329,24): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1329,21): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1329,18): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1339,58): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1339,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1339,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1341,58): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1341,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1341,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1343,59): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1343,37): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1343,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1345,59): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1345,37): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1345,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1357,61): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1357,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1357,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1359,62): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1359,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1359,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1361,62): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1361,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1361,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1363,61): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1363,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1363,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1964,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1972,30): warning C4244: '=': conversion from 'const real_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=GLfloat
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1973,30): warning C4244: '=': conversion from 'const real_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=GLfloat
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1974,34): warning C4244: '=': conversion from 'const real_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=GLfloat
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2496,39): warning C4244: 'argument': conversion from 'real_t' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2529,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2572,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2598,6): warning C4101: 'c': unreferenced local variable
+  stat_shared.cpp
+  steam_shared.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\stat_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\stat_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\stat_shared.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\stat_shared.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\steam_shared.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\steam_shared.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\stat_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\stat_editor.cpp(33,10): warning C4101: 'node': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\stat_shared.cpp)
+  Microsoft (R) Incremental Linker Version 14.25.28610.4
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
   "/OUT:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.exe" steam_api.lib OpenGL32.lib glu32.lib SDL2.lib SDL2main.lib SDL2_net.lib SDL2_image.lib fmodex_vc.lib libpng.lib zlib.lib SDL2_ttf.lib physfs.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST "/MANIFESTUAC:level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG "/PDB:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT "/IMPLIB:C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.lib" /MACHINE:X86 /SAFESEH Release\wineditoricon.res 
@@ -25,8 +968,7 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150)
   Release\stat_shared.obj 
   Release\steam_shared.obj 
   Generating code
-  7 of 1313 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    13 functions had inline decision re-evaluated but remain unchanged
+  Compiler version has changed, fall back to full compilation.
+  All 1318 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   editor.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.exe

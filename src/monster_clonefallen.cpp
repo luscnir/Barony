@@ -1021,7 +1021,7 @@ void cloneFallenAnimate(Entity* my, Stat* myStats, double dist)
 				// head
 			case LICH_HEAD:
 			{
-				entity->z -= 4.25;
+				entity->z -= 8.5;//lich_fallen is 4.25;
 				node_t* tempNode;
 				Entity* playertotrack = NULL;
 				double disttoplayer = 0.0;
