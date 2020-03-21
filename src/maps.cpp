@@ -3817,6 +3817,12 @@ void assignActions(map_t* map)
 						entity->focaly = limbs[WAN_RIT][0][1]; // 0
 						entity->focalz = limbs[WAN_RIT][0][2]; // 
 						break;
+					case CLONE_FALLEN:
+						entity->z = -1.3;
+						entity->focalx = limbs[CLONE_FALLEN][0][0]; // -0.75
+						entity->focaly = limbs[CLONE_FALLEN][0][1]; // 0
+						entity->focalz = limbs[CLONE_FALLEN][0][2]; // 0
+						break;
 					default:
 						break;
 				}

@@ -68,9 +68,10 @@ enum Monster : int
 	METALLICBEAST,
 	SKU_LIT,
 	RAN_GIC,
-	WAN_RIT
+	WAN_RIT,
+	CLONE_FALLEN
 };
-const int NUMMONSTERS = 56;
+const int NUMMONSTERS = 57;
 extern int kills[NUMMONSTERS];
 
 static char monstertypename[][16] =
@@ -130,7 +131,8 @@ static char monstertypename[][16] =
 	"metallicbeast",
 	"sku-lit",
 	"ran-gic",
-	"wan-rit"
+	"wan-rit",
+	"clonefallen"
 };
 
 static char monstertypenamecapitalized[][16] =
@@ -190,7 +192,8 @@ static char monstertypenamecapitalized[][16] =
 	"Metallicbeast",
 	"Sku-lit",
 	"Ran-gic",
-	"Wan-rit"
+	"Wan-rit",
+	"Clonefallen"
 };
 
 // body part focal points
@@ -257,7 +260,8 @@ static char gibtype[NUMMONSTERS] =
 	0,	//METALLICBEAST,
 	3,	//SKU_LIT,
 	3,	//RAN_GIC,
-	3	//WAN_RIT
+	3,	//WAN_RIT
+	0	//CLONE_FALLEN
 };
 
 // columns go like this:
@@ -320,7 +324,8 @@ static double damagetables[NUMMONSTERS][7] =
 	{ 0.5, 1.f, 1.f, 0.5, 1.5, 1.f, 0.8 }, // metallic beast
 	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.2 }, // skul-lit
 	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.2 }, // ran-gic
-	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.2 }  // wan-rit
+	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.2 }, // wan-rit
+	{ 1.f, 1.f, 1.f, 1.f, 1.f, 1.f, 1.f }  // clone fallen
 };
 
 enum DamageTableType : int
@@ -580,6 +585,7 @@ void initMetallicBeast(Entity* my, Stat* myStats);
 void initSkuLit(Entity* my, Stat* myStats);
 void initRanGic(Entity* my, Stat* myStats);
 void initWanRit(Entity* my, Stat* myStats);
+void initCloneFallen(Entity* my, Stat* myStats);
 
 //--act*Limb functions--
 void actHumanLimb(Entity* my);
@@ -621,13 +627,9 @@ void actFleshlingLimb(Entity* my);
 void actAbominationLimb(Entity* my);
 void actCholoroshLimb(Entity* my);
 void actLichFallenLimb(Entity* my);
-void actAntLimb(Entity* my);
 void actDustDevilLimb(Entity* my);
-void actParasiteLimb(Entity* my);
 void actMetallicBeastLimb(Entity* my);
-void actSkuLitLimb(Entity* my);
-void actRanGicLimb(Entity* my);
-void actWanRitLimb(Entity* my);
+void actCloneFallenLimb(Entity* my);
 
 //--*Die functions--
 void humanDie(Entity* my);
@@ -681,6 +683,7 @@ void metallicBeastDie(Entity* my);
 void skuLitDie(Entity* my);
 void ranGicDie(Entity* my);
 void wanRitDie(Entity* my);
+void cloneFallenDie(Entity* my);
 
 //--*MoveBodyparts functions--
 void humanMoveBodyparts(Entity* my, Stat* myStats, double dist);
@@ -734,6 +737,7 @@ void metallicBeastMoveBodyparts(Entity* my, Stat* myStats, double dist);
 void skuLitAnimate(Entity* my, double dist);
 void ranGicAnimate(Entity* my, double dist);
 void wanRitAnimate(Entity* my, double dist);
+void cloneFallenAnimate(Entity* my, Stat* myStats, double dist);
 
 //--misc functions--
 void actMinotaurTrap(Entity* my);

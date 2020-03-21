@@ -1317,6 +1317,7 @@ void spellEffectCharmMonster(Entity& my, spellElement_t& element, Entity* parent
 				case ABOMINATION:
 				case LICH_FALLEN:
 				case METALLICBEAST:
+				case CLONE_FALLEN:
 					difficulty = 666;
 					break;
 			}
@@ -1697,6 +1698,12 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 			case CRYORUNE:
 			case YETI:
 			case EYEBALL:
+			case ANT:
+			case PARASITE:
+			case METALLICBEAST:
+			case SKU_LIT:
+			case RAN_GIC:
+			case WAN_RIT:
 				summonCanEquipItems = false;
 				break;
 			default:
@@ -1723,6 +1730,12 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 			case CRYORUNE:
 			case YETI:
 			case EYEBALL:
+			case ANT:
+			case PARASITE:
+			case METALLICBEAST:
+			case SKU_LIT:
+			case RAN_GIC:
+			case WAN_RIT:
 				hitMonsterCanTransferEquipment = false;
 				break;
 			default:
@@ -1736,7 +1749,9 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 		bool fellInWater = false;
 
 		if ( targetStats->EFFECTS[EFF_LEVITATING]
-			&& (monsterSummonType != CREATURE_IMP && monsterSummonType != COCKATRICE && monsterSummonType != SHADOW && monsterSummonType != GARGOYLE && monsterSummonType != CRYORUNE && monsterSummonType != EYEBALL ) )
+			&& (monsterSummonType != CREATURE_IMP && monsterSummonType != COCKATRICE && monsterSummonType != SHADOW
+				&& monsterSummonType != GARGOYLE && monsterSummonType != CRYORUNE && monsterSummonType != EYEBALL 
+				&& monsterSummonType != DUSTDEVIL && monsterSummonType != SKU_LIT && monsterSummonType != WAN_RIT ) )
 		{
 			// check if there's a floor...
 			int x, y, u, v;

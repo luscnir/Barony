@@ -1630,6 +1630,33 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->PROFICIENCIES[PRO_SPELLCASTING] = 100;
 			stats->PROFICIENCIES[PRO_AXE] = 90;
 			break;
+		case (1000 + CLONE_FALLEN):
+			stats->type = CLONE_FALLEN;
+			stats->sex = FEMALE;
+			stats->appearance = rand();
+			stats->inventory.first = nullptr;
+			stats->inventory.last = nullptr;
+			stats->HP = 1;
+			stats->MAXHP = stats->HP;
+			stats->MP = 1;
+			stats->MAXMP = 1;
+			stats->OLDHP = stats->HP;
+			stats->STR = 80;
+			stats->DEX = 13;
+			stats->CON = 30;
+			stats->INT = 25;
+			stats->PER = 70;
+			stats->CHR = 0;
+			stats->EXP = 0;
+			stats->LVL = 0;
+			stats->GOLD = 0;
+			stats->HUNGER = 900;
+			stats->EDITOR_ITEMS[ITEM_SLOT_WEAPON] = 0;
+			stats->PROFICIENCIES[PRO_RANGED] = 100;
+			stats->PROFICIENCIES[PRO_MAGIC] = 100;
+			stats->PROFICIENCIES[PRO_SPELLCASTING] = 100;
+			stats->PROFICIENCIES[PRO_AXE] = 90;
+			break;
 		case 200:
 		case (1000 + ANT):
 			stats->type = ANT;

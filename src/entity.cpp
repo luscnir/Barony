@@ -761,6 +761,9 @@ void Entity::killedByMonsterObituary(Entity* victim)
 			case WAN_RIT:
 				victim->setObituary(language[2184]);
 				break;
+			case CLONE_FALLEN:
+				victim->setObituary(language[2185]);
+				break;
 			default:
 				victim->setObituary(language[1500]);
 				break;
@@ -4791,7 +4794,7 @@ void Entity::handleEffects(Stat* myStats)
 
 	// wake up
 	if ( myStats->EFFECTS[EFF_ASLEEP] && (myStats->OLDHP > myStats->HP || (myStats->type >= LICH && myStats->type < KOBOLD)
-		|| myStats->type == COCKATRICE || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == LICH_FALLEN) )
+		|| myStats->type == COCKATRICE || myStats->type == LICH_FIRE || myStats->type == LICH_ICE || myStats->type == LICH_FALLEN || myStats->type == CLONE_FALLEN ) )
 	{
 		messagePlayer(player, language[658]);
 		if ( monsterAllyGetPlayerLeader() && monsterAllySpecial == ALLY_SPECIAL_CMD_REST )
@@ -7808,7 +7811,12 @@ void Entity::attack(int pose, int charge, Entity* target)
 						case LICH_ICE:
 						case LICH_FIRE:
 						case DEVIL:
+						case ICEDEMON:
+						case FLESHLING:
+						case ABOMINATION:
 						case LICH_FALLEN:
+						case DUSTDEVIL:
+						case CLONE_FALLEN:
 						{
 							// smite these creatures
 							real_t amount = 0.0;
@@ -11433,7 +11441,7 @@ void Entity::awardXP(Entity* src, bool share, bool root)
 			|| destStats->type == DEMON
 			|| (destStats->type == AUTOMATON && !strcmp(destStats->name, "corrupted automaton"))
 			|| destStats->type == CHOLOROSH
-			//|| destStats->type == ILLUSION
+			|| destStats->type == CLONE_FALLEN
 			)
 		{
 			if ( !flags[USERFLAG2] )
@@ -16584,16 +16592,14 @@ bool Entity::shouldRetreat(Stat& myStats)
 	if ( myStats.type == BURGGUARD || myStats.type == GARGOYLE || myStats.type == MATILDA 
 		|| myStats.type == CRYORUNE || myStats.type == ICEDEMON || myStats.type == ABOMINATION 
 		|| myStats.type == DUSTDEVIL || myStats.type == PARASITE || myStats.type == METALLICBEAST
-		|| myStats.type == SKU_LIT || myStats.type == RAN_GIC || myStats.type == WAN_RIT )
+		|| myStats.type == SKU_LIT || myStats.type == RAN_GIC || myStats.type == WAN_RIT 
+		|| CLONE_FALLEN )
 	{
 		return false;
 	}
 	else if (myStats.type == LICH_FALLEN)
 	{
-		//may need change depending with attack/phase lich_fallen is using
-		{
-			return false;
-		}
+		return false;
 	}
 
 	if ( myStats.type == VAMPIRE )

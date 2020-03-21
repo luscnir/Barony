@@ -18,9 +18,9 @@ static const int LICH_LEFTARM = 3;
 static const int LICH_HEAD = 4;
 static const int LICH_WEAPON = 5;
 
-void initLichFallen(Entity* my, Stat* myStats)
+void initCloneFallen(Entity* my, Stat* myStats)
 {
-	my->initMonster(1228);
+	my->initMonster(1456);
 
 	if ( multiplayer != CLIENT )
 	{
@@ -40,14 +40,6 @@ void initLichFallen(Entity* my, Stat* myStats)
 
 			// apply random stat increases if set in stat_shared.cpp or editor
 			setRandomMonsterStats(myStats);
-
-			for ( int c = 1; c < MAXPLAYERS; ++c )
-			{
-				if ( !client_disconnected[c] )
-				{
-					myStats->MAXHP += 500;
-				}
-			}
 
 			myStats->HP = myStats->MAXHP;
 			myStats->OLDHP = myStats->HP;
@@ -91,7 +83,7 @@ void initLichFallen(Entity* my, Stat* myStats)
 			//give weapon
 			if ( myStats->weapon == NULL && myStats->EDITOR_ITEMS[ITEM_SLOT_WEAPON] == 1 )
 			{
-				myStats->weapon = newItem(EXECUTIONER_AXE, EXCELLENT, -3, 1, rand(), true, NULL);//change to new axe/bow once made
+				myStats->weapon = newItem(SPELLBOOK_BLEED, EXCELLENT, -3, 1, rand(), true, NULL);//change to new axe/bow once made
 			}
 		}
 	}
@@ -104,10 +96,10 @@ void initLichFallen(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[LICH_FALLEN][1][0]; // 0
-	entity->focaly = limbs[LICH_FALLEN][1][1]; // 0
-	entity->focalz = limbs[LICH_FALLEN][1][2]; // 2
-	entity->behavior = &actLichFallenLimb;
+	entity->focalx = limbs[CLONE_FALLEN][1][0]; // 0
+	entity->focaly = limbs[CLONE_FALLEN][1][1]; // 0
+	entity->focalz = limbs[CLONE_FALLEN][1][2]; // 2
+	entity->behavior = &actCloneFallenLimb;
 	entity->parent = my->getUID();
 	node_t* node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -123,10 +115,10 @@ void initLichFallen(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[LICH_FALLEN][2][0]; // 0
-	entity->focaly = limbs[LICH_FALLEN][2][1]; // 0
-	entity->focalz = limbs[LICH_FALLEN][2][2]; // 2
-	entity->behavior = &actLichFallenLimb;
+	entity->focalx = limbs[CLONE_FALLEN][2][0]; // 0
+	entity->focaly = limbs[CLONE_FALLEN][2][1]; // 0
+	entity->focalz = limbs[CLONE_FALLEN][2][2]; // 2
+	entity->behavior = &actCloneFallenLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -143,10 +135,10 @@ void initLichFallen(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[LICH_FALLEN][3][0]; // 0
-	entity->focaly = limbs[LICH_FALLEN][3][1]; // 0
-	entity->focalz = limbs[LICH_FALLEN][3][2]; // -2
-	entity->behavior = &actLichFallenLimb;
+	entity->focalx = limbs[CLONE_FALLEN][3][0]; // 0
+	entity->focaly = limbs[CLONE_FALLEN][3][1]; // 0
+	entity->focalz = limbs[CLONE_FALLEN][3][2]; // -2
+	entity->behavior = &actCloneFallenLimb;
 	entity->parent = my->getUID();
 	node = list_AddNodeLast(&my->children);
 	node->element = entity;
@@ -162,10 +154,10 @@ void initLichFallen(Entity* my, Stat* myStats)
 	entity->flags[PASSABLE] = true;
 	entity->flags[NOUPDATE] = true;
 	entity->flags[USERFLAG2] = my->flags[USERFLAG2];
-	entity->focalx = limbs[LICH_FALLEN][4][0]; // 1.5
-	entity->focaly = limbs[LICH_FALLEN][4][1]; // 0
-	entity->focalz = limbs[LICH_FALLEN][4][2]; // -.5
-	entity->behavior = &actLichFallenLimb;
+	entity->focalx = limbs[CLONE_FALLEN][4][0]; // 1.5
+	entity->focaly = limbs[CLONE_FALLEN][4][1]; // 0
+	entity->focalz = limbs[CLONE_FALLEN][4][2]; // -.5
+	entity->behavior = &actCloneFallenLimb;
 	entity->parent = my->getUID();
 	entity->pitch = .25;
 	node = list_AddNodeLast(&my->children);
@@ -175,11 +167,11 @@ void initLichFallen(Entity* my, Stat* myStats)
 	my->bodyparts.push_back(entity);
 }
 
-void lichFallenDie(Entity* my)
+void cloneFallenDie(Entity* my)
 {
 	node_t* node, *nextnode;
 	int c;
-	for ( c = 0; c < 20; c++ )
+	for ( c = 0; c < 5; c++ )
 	{
 		Entity* entity = spawnGib(my);
 		if ( entity )
@@ -188,45 +180,17 @@ void lichFallenDie(Entity* my)
 		}
 	}
 	my->removeMonsterDeathNodes();
-	playSoundEntity(my, 663, 128);
 	my->removeLightField();
-	// kill all other monsters on the level
-	for ( node = map.creatures->first; node != NULL; node = nextnode )
-	{
-		nextnode = node->next;
-		Entity* entity = (Entity*)node->element;
-		if ( entity )
-		{
-			if ( entity == my )
-			{
-				continue;
-			}
-			if ( entity->behavior == &actMonster )
-			{
-				spawnExplosion(entity->x, entity->y, entity->z);
-				Stat* stats = entity->getStats();
-				if ( stats )
-				{
-					if ( stats->type != HUMAN )
-					{
-						stats->HP = 0;
-					}
-				}
-			}
-		}
-	}
-
-	spawnExplosion(my->x, my->y, my->z);
 	list_RemoveNode(my->mynode);
 	return;
 }
 
-void actLichFallenLimb(Entity* my)
+void actCloneFallenLimb(Entity* my)
 {
 	my->actMonsterLimb();
 }
 
-void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
+void cloneFallenAnimate(Entity* my, Stat* myStats, double dist)
 {
 	node_t* node;
 	Entity* entity = nullptr, *entity2 = nullptr;
@@ -274,15 +238,6 @@ void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
 			bodypart = 0;
 			for ( node = my->children.first; node != nullptr; node = node->next )
 			{
-				if ( bodypart < LICH_RIGHTARM )
-				{
-					bodypart++;
-					continue;
-				}
-				if ( bodypart >= LICH_WEAPON )
-				{
-					break;
-				}
 				entity = (Entity*)node->element;
 				if ( !entity->flags[INVISIBLE] )
 				{
@@ -349,11 +304,6 @@ void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
 			{
 				my->monsterLichBattleState = LICH_BATTLE_READY;
 				generatePathMaps();
-				swornenemies[LICH_FALLEN][CHOLOROSH] = false;
-				swornenemies[CLONE_FALLEN][CHOLOROSH] = false;
-				swornenemies[CLONE_FALLEN][LICH_FALLEN] = false;
-				swornenemies[CLONE_FALLEN][HUMAN] = true;
-				swornenemies[CHOLOROSH][HUMAN] = true;
 				real_t distToPlayer = 0;
 				int c, playerToChase = -1;
 				for ( c = 0; c < MAXPLAYERS; c++ )
@@ -1157,14 +1107,14 @@ void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
 						entity->pitch += PI / 2 + 0.25;
 					}
 
-					entity->focalx = limbs[LICH_FALLEN][4][0];
-					entity->focaly = limbs[LICH_FALLEN][4][1];
-					entity->focalz = limbs[LICH_FALLEN][4][2];
+					entity->focalx = limbs[CLONE_FALLEN][4][0];
+					entity->focaly = limbs[CLONE_FALLEN][4][1];
+					entity->focalz = limbs[CLONE_FALLEN][4][2];
 					if ( my->monsterArmbended )
 					{
 						// adjust focal points during side swing
-						entity->focalx = limbs[LICH_FALLEN][4][0] - 0.8;
-						entity->focalz = limbs[LICH_FALLEN][4][2] + 1;
+						entity->focalx = limbs[CLONE_FALLEN][4][0] - 0.8;
+						entity->focalz = limbs[CLONE_FALLEN][4][2] + 1;
 						entity->pitch += cos(weaponarm->roll) * PI / 2;
 						entity->yaw -= sin(weaponarm->roll) * PI / 2;
 					}
@@ -1187,168 +1137,3 @@ void lichFallenAnimate(Entity* my, Stat* myStats, double dist)
 		// do nothing, don't reset attacktime or increment it.
 	}
 }
-/*
-void Entity::lichFallenSetNextAttack(Stat& myStats)
-{
-	monsterLichIceCastPrev = monsterLichIceCastSeq;
-	//messagePlayer(0, "melee: %d, magic %d", monsterLichMeleeSwingCount, monsterLichMagicCastCount);
-	switch ( monsterLichIceCastSeq )
-	{
-		case LICH_ATK_VERTICAL_SINGLE:
-			if ( monsterSpecialState == 0 && monsterState != MONSTER_STATE_LICH_CASTSPELLS
-				&& monsterSpecialTimer == 0 && rand() % 4 > 0 )
-			{
-				monsterLichMeleeSwingCount = 0;
-				monsterSpecialState = LICH_ICE_ATTACK_COMBO;
-				//createParticleDot(this);
-			}
-			++monsterLichMeleeSwingCount;
-			switch ( rand() % 3 )
-			{
-				case 0:
-					monsterLichIceCastSeq = LICH_ATK_VERTICAL_SINGLE;
-					break;
-				case 1:
-					monsterLichIceCastSeq = LICH_ATK_HORIZONTAL_SINGLE;
-					break;
-				case 2:
-					if ( monsterSpecialState == LICH_ICE_ATTACK_COMBO )
-					{
-						monsterLichIceCastSeq = LICH_ATK_FALLING_DIAGONAL;
-						//monsterSpecialState = 0;
-						//monsterSpecialTimer = 100;
-					}
-					else
-					{
-						monsterLichIceCastSeq = LICH_ATK_VERTICAL_SINGLE;
-					}
-					break;
-				case 3:
-					//monsterLichIceCastSeq = LICH_ATK_FALLING_DIAGONAL;
-					//monsterLichIceCastSeq = LICH_ATK_RISING_RAIN;
-					//monsterLichIceCastSeq = LICH_ATK_CHARGE_AOE;
-					break;
-				default:
-					break;
-			}
-			break;
-		case LICH_ATK_HORIZONTAL_SINGLE:
-			if ( monsterSpecialState == 0
-				&& monsterSpecialTimer == 0 && rand() % 4 > 0 )
-			{
-				monsterLichMeleeSwingCount = 0;
-				monsterSpecialState = LICH_ICE_ATTACK_COMBO;
-				//createParticleDot(this);
-			}
-			++monsterLichMeleeSwingCount;
-			switch ( rand() % 3 )
-			{
-				case 0:
-					monsterLichIceCastSeq = LICH_ATK_VERTICAL_SINGLE;
-					break;
-				case 1:
-					monsterLichIceCastSeq = LICH_ATK_HORIZONTAL_SINGLE;
-					break;
-				case 2:
-					if ( monsterSpecialState == LICH_ICE_ATTACK_COMBO )
-					{
-						monsterLichIceCastSeq = LICH_ATK_FALLING_DIAGONAL;
-						//monsterSpecialState = 0;
-						//monsterSpecialTimer = 100;
-					}
-					else
-					{
-						monsterLichIceCastSeq = LICH_ATK_BASICSPELL_SINGLE;
-					}
-					break;
-				default:
-					break;
-			}
-			break;
-		case LICH_ATK_RISING_RAIN:
-			monsterLichMeleeSwingCount = 0;
-			switch ( rand() % 4 )
-			{
-				case 0:
-				case 1:
-				case 2:
-					monsterLichFireMeleeSeq = LICH_ATK_VERTICAL_SINGLE;
-					break;
-				case 3:
-					monsterLichFireMeleeSeq = LICH_ATK_HORIZONTAL_SINGLE;
-					break;
-				default:
-					break;
-			}
-			break;
-		case LICH_ATK_BASICSPELL_SINGLE:
-			++monsterLichMagicCastCount;
-			if ( monsterLichMagicCastCount > 2 || rand() % 2 == 0 )
-			{
-				monsterLichIceCastSeq = LICH_ATK_VERTICAL_SINGLE;
-				monsterLichMagicCastCount = 0;
-			}
-			break;
-		case LICH_ATK_CHARGE_AOE:
-			//monsterLichMeleeSwingCount = 0;
-			switch ( rand() % 2 )
-			{
-				case 0:
-					monsterLichIceCastSeq = LICH_ATK_VERTICAL_SINGLE;
-					break;
-				case 1:
-					monsterLichIceCastSeq = LICH_ATK_HORIZONTAL_SINGLE;
-					break;
-				default:
-					break;
-			}
-			break;
-		case LICH_ATK_FALLING_DIAGONAL:
-			switch ( rand() % 2 )
-			{
-				case 0:
-					monsterLichIceCastSeq = LICH_ATK_VERTICAL_SINGLE;
-					break;
-				case 1:
-					monsterLichIceCastSeq = LICH_ATK_HORIZONTAL_SINGLE;
-					break;
-				default:
-					break;
-			}
-			break;
-		case LICH_ATK_SUMMON:
-			switch ( rand() % 2 )
-			{
-				case 0:
-					monsterLichIceCastSeq = LICH_ATK_VERTICAL_SINGLE;
-					break;
-				case 1:
-					monsterLichIceCastSeq = LICH_ATK_HORIZONTAL_SINGLE;
-					break;
-				default:
-					break;
-			}
-			break;
-		default:
-			break;
-	}
-}
-//*/
-
-/*
-void Entity::lichFallenCreateCannon()
-{
-	//spellTimer->particleTimerCountdownAction = PARTICLE_TIMER_ACTION_SHOOT_PARTICLES;
-	for ( int i = 0; i < 6; ++i )
-	{
-		Entity* spellOrbit = castOrbitingMagicMissile(SPELL_MAGICMISSILE, 8.0, i * PI / 3, 500);
-		spellOrbit->z = -25;
-		spellOrbit->actmagicOrbitStartZ = spellOrbit->z;
-	}
-	createParticleDropRising(this, 683, 1.0);
-	if ( multiplayer == SERVER )
-	{
-		serverSpawnMiscParticles(this, PARTICLE_EFFECT_RISING_DROP, 678);
-	}
-}
-*/

@@ -169,6 +169,7 @@
     <ClCompile Include="..\..\src\monster_automaton.cpp" />
     <ClCompile Include="..\..\src\monster_burgguard.cpp" />
     <ClCompile Include="..\..\src\monster_cholorosh.cpp" />
+    <ClCompile Include="..\..\src\monster_clonefallen.cpp" />
     <ClCompile Include="..\..\src\monster_cockatrice.cpp" />
     <ClCompile Include="..\..\src\monster_cockroach.cpp" />
     <ClCompile Include="..\..\src\monster_cryorune.cpp" />

@@ -1807,6 +1807,7 @@ int canWearEquip(Entity* entity, int category)
 				case FLESHLING:
 				case LICH_FALLEN:
 				case DUSTDEVIL:
+				case CLONE_FALLEN:
 					equipType = 2;
 					break;
 

@@ -205,6 +205,7 @@ void Entity::initMonster(int mySprite)
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
 			break;
 		case LICH_FALLEN:
+		case CLONE_FALLEN:
 			monsterFootstepType = MONSTER_FOOTSTEP_NONE;
 			monsterSpellAnimation = MONSTER_SPELLCAST_NONE;
 			break;
@@ -456,6 +457,10 @@ int Entity::getMonsterTypeFromSprite()
 	else if (mySprite == 1450 || mySprite == 1451 || mySprite == 1452 || mySprite == 1453)	// wan-rit
 	{
 		return WAN_RIT;
+	}
+	else if (mySprite == 1456)     // fallen clone body
+	{
+		return CLONE_FALLEN;
 	}
 
 	return NOTHING;
