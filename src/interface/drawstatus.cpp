@@ -2060,7 +2060,7 @@ int drawSpellTooltip(spell_t* spell, Item* item, SDL_Rect* src)
 				damage += (damage * (bonus * 0.01 + getBonusFromCasterOfSpellElement(players[clientnum]->entity, primaryElement)));
 				heal += (heal * (bonus * 0.01 + getBonusFromCasterOfSpellElement(players[clientnum]->entity, primaryElement)));
 			}
-			if ( spell->ID == SPELL_HEALING || spell->ID == SPELL_EXTRAHEALING )
+			if ( spell->ID == SPELL_HEALING || spell->ID == SPELL_EXTRAHEALING || spell->ID == SPELL_ULTRAHEALING )
 			{
 				damage = heal;
 			}
@@ -2257,6 +2257,7 @@ void getSpellEffectString(int spellID, char effectTextBuffer[256], char spellTyp
 			break;
 		case SPELL_HEALING:
 		case SPELL_EXTRAHEALING:
+		case SPELL_ULTRAHEALING:
 		{
 			snprintf(spellType, 31, language[3301]);
 			snprintf(effectTextBuffer, 255, language[3307], value);

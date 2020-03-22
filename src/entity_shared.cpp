@@ -558,6 +558,13 @@ char itemNameStrings[NUM_ITEM_STRINGS][32] =
 	"lost_gauntlets",
 	"lost_boots",
 	"lost_cloak",
+	"golden_key",
+	"sacrificial_dagger",
+	"quiver_ice",
+	"cross_antilich",
+	"spellbook_ultrahealing",
+	"amulet_manabound",
+	"scoll_legend",
 	"needle",
 	""
 };
@@ -751,6 +758,8 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"lost_mace",
 		"lost_sword",
 		"lost_bow",
+		"cross_antilich",
+		"spellbook_ultrahealing",
 		"needle",
 		""
 	},
@@ -784,6 +793,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"tool_candle",
 		"tool_candle_timeless",
 		"lost_shield",
+		"quiver_ice",
 		""
 	},
 	{
@@ -867,6 +877,7 @@ char itemStringsByType[10][NUM_ITEM_STRINGS_BY_TYPE][32] =
 		"abyssal_amulet",
 		"inquisitor_amulet",
 		"lost_amulet",
+		"amulet_manabound",
 		""
 	},
 	{

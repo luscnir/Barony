@@ -78,6 +78,7 @@ void freeSpells()
 	list_FreeAll(&spell_dash.elements);
 	list_FreeAll(&spell_polymorph.elements);
 	list_FreeAll(&spell_deathCoil.elements);
+	list_FreeAll(&spell_ultrahealing.elements);
 }
 
 void spell_magicMap(int player)

@@ -243,6 +243,9 @@ void actArrowTrap(Entity* my)
 							// causes poison for six seconds
 							entity->arrowPoisonTime = 360;
 							break;
+						case QUIVER_ICE:
+							entity->sprite = 1460;
+							break;
 						default:
 							break;
 					}

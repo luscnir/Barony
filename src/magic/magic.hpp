@@ -72,7 +72,8 @@ static const int SPELL_SELF_POLYMORPH = 52;
 static const int SPELL_9 = 53;
 static const int SPELL_10 = 54;
 static const int SPELL_DEATHCOIL = 55;
-static const int NUM_SPELLS = 56;
+static const int SPELL_ULTRAHEALING = 56;
+static const int NUM_SPELLS = 57;
 
 
 #define SPELLELEMENT_CONFUSE_BASE_DURATION 2//In seconds.
@@ -490,6 +491,7 @@ extern spell_t spell_flutter;
 extern spell_t spell_dash;
 extern spell_t spell_polymorph;
 extern spell_t spell_deathCoil;
+extern spell_t spell_ultrahealing;
 //TODO: Armor/protection/warding spells.
 //TODO: Targeting method?
 

@@ -23,7 +23,8 @@
 bool hideItemFromShopView(Item& item)
 {
 	if ( item.type == ARTIFACT_ORB_GREEN || item.type == ARTIFACT_ORB_RED || item.type == ARTIFACT_ORB_BLUE
-		|| item.type == SYMBOL_RAGE || item.type == SYMBOL_CRUELTY || item.type == SYMBOL_HATRED )
+		|| item.type == SYMBOL_RAGE || item.type == SYMBOL_CRUELTY || item.type == SYMBOL_HATRED
+		|| item.type == GOLDEN_KEY )
 	{
 		return true;
 	}
@@ -39,6 +40,7 @@ void rebuildShopInventory()
 	bool mysteriousShopkeeperGreenSymbol = false;
 	bool mysteriousShopkeeperBlueSymbol = false;
 	bool mysteriousShopkeeperRedSymbol = false;
+	bool mysteriousShopkeeperGoldenKey = false;
 	if ( mysteriousShopkeeper )
 	{
 		for ( node_t* node = shopInv->first; node != NULL; node = node->next )
@@ -69,6 +71,10 @@ void rebuildShopInventory()
 				else if ( item->type == SYMBOL_HATRED )
 				{
 					mysteriousShopkeeperRedSymbol = true;
+				}
+				else if (item->type == GOLDEN_KEY )
+				{
+					mysteriousShopkeeperGoldenKey = true;
 				}
 			}
 		}
@@ -111,6 +117,11 @@ void rebuildShopInventory()
 				}
 				if (!mysteriousShopkeeperRedSymbol
 					&& shopkeeperMysteriousItems[SYMBOL_HATRED].find(item->type) != shopkeeperMysteriousItems[SYMBOL_HATRED].end())
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperGoldenKey
+					&& shopkeeperMysteriousItems[GOLDEN_KEY].find(item->type) != shopkeeperMysteriousItems[GOLDEN_KEY].end())
 				{
 					continue;
 				}
@@ -194,6 +205,11 @@ void rebuildShopInventory()
 				}
 				if (!mysteriousShopkeeperRedSymbol
 					&& shopkeeperMysteriousItems[SYMBOL_HATRED].find(item->type) != shopkeeperMysteriousItems[SYMBOL_HATRED].end())
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperGoldenKey
+					&& shopkeeperMysteriousItems[GOLDEN_KEY].find(item->type) != shopkeeperMysteriousItems[GOLDEN_KEY].end())
 				{
 					continue;
 				}
@@ -486,6 +502,7 @@ void updateShopWindow()
 	bool mysteriousShopkeeperGreenSymbol = false;
 	bool mysteriousShopkeeperBlueSymbol = false;
 	bool mysteriousShopkeeperRedSymbol = false;
+	bool mysteriousShopkeeperGoldenKey = false;
 	if ( mysteriousShopkeeper )
 	{
 		for ( node = shopInv->first; node != NULL; node = node->next )
@@ -516,6 +533,10 @@ void updateShopWindow()
 				else if (item->type == SYMBOL_HATRED)
 				{
 					mysteriousShopkeeperRedSymbol = true;
+				}
+				else if (item->type == GOLDEN_KEY)
+				{
+					mysteriousShopkeeperGoldenKey = true;
 				}
 			}
 		}
@@ -556,6 +577,11 @@ void updateShopWindow()
 				}
 				if (!mysteriousShopkeeperRedSymbol
 					&& shopkeeperMysteriousItems[SYMBOL_HATRED].find(item->type) != shopkeeperMysteriousItems[SYMBOL_HATRED].end())
+				{
+					continue;
+				}
+				if (!mysteriousShopkeeperGoldenKey
+					&& shopkeeperMysteriousItems[GOLDEN_KEY].find(item->type) != shopkeeperMysteriousItems[GOLDEN_KEY].end())
 				{
 					continue;
 				}

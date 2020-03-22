@@ -40,7 +40,8 @@ std::unordered_map<int, std::unordered_set<int>> shopkeeperMysteriousItems(
 	{ ARTIFACT_ORB_RED, { CRYSTAL_SWORD, CRYSTAL_BATTLEAXE, CRYSTAL_SPEAR, CRYSTAL_MACE } },
 	{ SYMBOL_RAGE, { ABYSSAL_CROSSBOW, ABYSSAL_SPEAR, EXECUTIONER_AXE } },
 	{ SYMBOL_CRUELTY, { ABYSSAL_AXE, ABYSSAL_MACE, RAPIER } },
-	{ SYMBOL_HATRED, { ABYSSAL_SWORD, GRANITE_MAUL, TRIDENT, CANNON } }
+	{ SYMBOL_HATRED, { ABYSSAL_SWORD, GRANITE_MAUL, TRIDENT, CANNON } },
+	{ GOLDEN_KEY, { INQUISITOR_SWORD, INQUISITOR_BOW, INQUISITOR_AXE } }
 });
 
 /*-------------------------------------------------------------------------------

@@ -2045,6 +2045,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case STEEL_CHAKRAM:
 		case CRYSTAL_SHURIKEN:
 		case BOOMERANG:
+		case CROSS_ANTILICH:
 			equipItem(item, &stats[player]->weapon, player);
 			break;
 		case STEEL_SHIELD:
@@ -2179,6 +2180,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case ABYSSAL_AMULET:
 		case INQUISITOR_AMULET:
 		case LOST_AMULET:
+		case AMULET_MANABOUND:
 			equipItem(item, &stats[player]->amulet, player);
 			break;
 		case AMULET_STRANGULATION:
@@ -2461,6 +2463,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case SPELLBOOK_DASH:
 		case SPELLBOOK_SELF_POLYMORPH:
 		case SPELLBOOK_DEATHCOIL:
+		case SPELLBOOK_ULTRAHEALING:
 			item_Spellbook(item, player);
 			break;
 		case GEM_ROCK:
@@ -2521,6 +2524,7 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case INQUISITOR_LANTERN:
 		case TOOL_CANDLE:
 		case TOOL_CANDLE_TIMELESS:
+		case QUIVER_ICE:
 			equipItem(item, &stats[player]->shield, player);
 			break;
 		case TOOL_BLINDFOLD:
@@ -2683,10 +2687,22 @@ void useItem(Item* item, int player, Entity* usedBy)
 		case SYMBOL_RAGE:
 		case SYMBOL_CRUELTY:
 		case SYMBOL_HATRED:
+		case GOLDEN_KEY:
 			equipItem(item, &stats[player]->weapon, player);
 			break;
 		case TOOL_UNIHORN:
 			item_ToolUnihorn(item, player);
+			break;
+		case SACRIFICIAL_DAGGER:
+			item_Sacrifice(item, player);
+			break;
+		case SCROLL_LEGEND:
+			item_ScrollLegend(item, player);
+			if (!players[player]->entity->isBlind())
+			{
+				consumeItem(item, player);
+			}
+			break;
 		default:
 			printlog("error: item %d used, but it has no use case!\n", (int)item->type);
 			break;
@@ -2949,6 +2965,8 @@ void useItem(Item* item, int player, Entity* usedBy)
 			case LOST_CLOAK:
 				messagePlayer(player, language[6269]);
 				break;
+			case AMULET_MANABOUND:
+				messagePlayer(player, language[6290]);
 			default:
 				break;
 		}
@@ -3614,7 +3632,15 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 			attack += 9;
 		}
 	}
-	else if (type == NEEDLE)
+	else if ( type == QUIVER_ICE )
+	{
+		return attack + 2;
+	}
+	else if ( type == CROSS_ANTILICH )
+	{
+		attack += 4;
+	}
+	else if ( type == NEEDLE )
 	{
 		attack += 99;
 	}
@@ -4176,7 +4202,11 @@ void Item::apply(int player, Entity* entity)
 		{
 			applyEmptyPotion(player, *entity);
 		}
-		if ( type >= SYMBOL_RAGE && type <= SYMBOL_HATRED )
+		else if ( type >= SYMBOL_RAGE && type <= SYMBOL_HATRED )
+		{
+			applyOrb(player, type, *entity);
+		}
+		else if ( type == GOLDEN_KEY )
 		{
 			applyOrb(player, type, *entity);
 		}
@@ -4187,7 +4217,11 @@ void Item::apply(int player, Entity* entity)
 	{
 		applyOrb(player, type, *entity);
 	}
-	if ( type >= SYMBOL_RAGE && type <= SYMBOL_HATRED)
+	else if ( type >= SYMBOL_RAGE && type <= SYMBOL_HATRED)
+	{
+		applyOrb(player, type, *entity);
+	}
+	else if ( type == GOLDEN_KEY )
 	{
 		applyOrb(player, type, *entity);
 	}
@@ -4924,7 +4958,8 @@ bool Item::shouldItemStack(int player)
 				&& this->type != TOOL_ALEMBIC 
 				&& this->type != TOOL_TINKERING_KIT
 				&& this->type != ENCHANTED_FEATHER
-				&& this->type != TOOL_UNIHORN )
+				&& this->type != TOOL_UNIHORN
+				&& this->type != SACRIFICIAL_DAGGER )
 			)
 		{
 			// THROWN, GEM, TOOLS, POTIONS should stack when equipped.

@@ -282,6 +282,26 @@ void Entity::actPedestalBase()
 							serverUpdateEntitySkill(this, 0); // update symbol status.
 							messagePlayer(i, language[2374], symbolOrb->getName());
 						}
+						else if (!strncmp(map.name, "Vault", 4))	//Vault to alt path
+						{
+							Item* symbolOrb = newItem(static_cast<ItemType>(GOLDEN_KEY + pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
+							itemPickup(i, symbolOrb);
+							if (pedestalHasOrb == pedestalOrbType)
+							{
+								if (!pedestalInvertedPower)
+								{
+									mechanismPowerOff();
+								}
+								else
+								{
+									mechanismPowerOn();
+								}
+								updateCircuitNeighbors();
+							}
+							pedestalHasOrb = 0;
+							serverUpdateEntitySkill(this, 0); // update status.
+							messagePlayer(i, language[2374], symbolOrb->getName());
+						}
 						else
 						{
 							Item* itemOrb = newItem(static_cast<ItemType>(ARTIFACT_ORB_BLUE + pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
@@ -409,6 +429,26 @@ void Entity::actPedestalOrb()
 									}
 									parent->pedestalHasOrb = 0;
 									serverUpdateEntitySkill(parent, 0); // update symbol status 
+									messagePlayer(i, language[2374], itemOrb->getName());
+								}
+								else if (!strncmp(map.name, "Vault", 4))//Golden key version
+								{
+									Item* itemOrb = newItem(static_cast<ItemType>(GOLDEN_KEY + parent->pedestalHasOrb - 1), EXCELLENT, 0, 1, rand(), true, nullptr);
+									itemPickup(i, itemOrb);
+									if (parent->pedestalHasOrb == parent->pedestalOrbType)
+									{
+										if (!pedestalInvertedPower)
+										{
+											parent->mechanismPowerOff();
+										}
+										else
+										{
+											parent->mechanismPowerOn();
+										}
+										updateCircuitNeighbors();
+									}
+									parent->pedestalHasOrb = 0;
+									serverUpdateEntitySkill(parent, 0); // update  status 
 									messagePlayer(i, language[2374], itemOrb->getName());
 								}
 								else

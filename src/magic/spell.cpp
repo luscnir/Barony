@@ -132,6 +132,7 @@ spell_t spell_flutter;
 spell_t spell_dash;
 spell_t spell_polymorph;
 spell_t spell_deathCoil;
+spell_t spell_ultrahealing;
 
 bool addSpell(int spell, int player, bool ignoreSkill)
 {
@@ -309,6 +310,9 @@ bool addSpell(int spell, int player, bool ignoreSkill)
 			break;
 		case SPELL_DEATHCOIL:
 			new_spell = copySpell(&spell_deathCoil);
+			break;
+		case SPELL_ULTRAHEALING:
+			new_spell = copySpell(&spell_ultrahealing);
 			break;
 		default:
 			return false;
@@ -813,6 +817,9 @@ spell_t* getSpellFromID(int ID)
 		case SPELL_DEATHCOIL:
 			spell = &spell_deathCoil;
 			break;
+		case SPELL_ULTRAHEALING:
+			spell = &spell_ultrahealing;
+			break;
 		default:
 			break;
 	}
@@ -990,6 +997,9 @@ int getSpellbookFromSpellID(int spellID)
 		case SPELL_DEATHCOIL:
 			itemType = SPELLBOOK_DEATHCOIL;
 			break;
+		case SPELL_ULTRAHEALING:
+			itemType = SPELLBOOK_ULTRAHEALING;
+			break;
 		default:
 			break;
 	}
@@ -1109,6 +1119,8 @@ int getSpellIDFromSpellbook(int spellbookType)
 			return spell_weakness.ID;
 		case SPELLBOOK_DEATHCOIL:
 			return spell_deathCoil.ID;
+		case SPELLBOOK_ULTRAHEALING:
+			return spell_ultrahealing.ID;
 		default:
 			return SPELL_NONE;
 	}

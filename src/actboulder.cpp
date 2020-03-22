@@ -233,7 +233,7 @@ int boulderCheckAgainstEntity(Entity* my, Entity* entity, bool ignoreInsideEntit
 					}
 				}
 
-				bool lifeSaving = (stats->HP <= 0 && stats->amulet && stats->amulet->type == AMULET_LIFESAVING);
+				bool lifeSaving = (stats->HP <= 0 && stats->amulet && ( stats->amulet->type == AMULET_LIFESAVING || stats->amulet->type == AMULET_MANABOUND ) );
 				if ( !lifeSaving )
 				{
 					if ( stats->HP <= 0 && entity->behavior == &actPlayer 

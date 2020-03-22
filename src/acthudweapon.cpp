@@ -1432,7 +1432,8 @@ void actHudWeapon(Entity* my)
 							}
 						}
 						else if ( ( item->type >= ARTIFACT_ORB_BLUE && item->type <= ARTIFACT_ORB_GREEN )
-							   || ( item->type >= SYMBOL_RAGE && item->type <= SYMBOL_HATRED ) )
+							   || ( item->type >= SYMBOL_RAGE && item->type <= SYMBOL_HATRED ) 
+							   || ( item->type == GOLDEN_KEY ) )
 						{
 							HUDWEAPON_MOVEX = 5;
 							HUDWEAPON_CHOP = 3;
@@ -1911,7 +1912,8 @@ void actHudWeapon(Entity* my)
 					&& !(item->type >= ARTIFACT_ORB_BLUE && item->type <= ARTIFACT_ORB_GREEN)
 					&& !(itemIsThrowableTinkerTool(item))
 					&& item->type != TOOL_WHIP
-					&& !(item->type >= SYMBOL_RAGE && item->type <= SYMBOL_HATRED) )
+					&& !(item->type >= SYMBOL_RAGE && item->type <= SYMBOL_HATRED)
+					&& item->type != GOLDEN_KEY )
 				{
 					if ( stats[clientnum]->weapon->type != TOOL_PICKAXE && itemCategory(item) != THROWN )
 					{
@@ -2957,7 +2959,8 @@ void actHudWeapon(Entity* my)
 		{
 			if (item->type == TOOL_SKELETONKEY || item->type == TOOL_LOCKPICK
 				|| (item->type >= ARTIFACT_ORB_BLUE && item->type <= ARTIFACT_ORB_GREEN)
-				|| (item->type >= SYMBOL_RAGE && item->type <= SYMBOL_HATRED))
+				|| (item->type >= SYMBOL_RAGE && item->type <= SYMBOL_HATRED)
+				|| (item->type == GOLDEN_KEY) )
 			{
 				defaultpitch = -PI / 8.f;
 			}
@@ -4145,6 +4148,9 @@ void actHudArrowModel(Entity* my)
 				break;
 			case QUIVER_HUNTING:
 				my->sprite = 941;
+				break;
+			case QUIVER_ICE:
+				my->sprite = 1461;
 				break;
 			default:
 				break;

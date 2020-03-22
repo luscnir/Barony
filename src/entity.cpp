@@ -4654,6 +4654,18 @@ void Entity::handleEffects(Stat* myStats)
 				myStats->amulet = NULL;
 			}
 		}
+		// manabound
+		if ( myStats->amulet->type == AMULET_MANABOUND )
+		{
+			int manacost = 30;
+			if ( myStats->HP <= 0 && myStats->MP >= manacost)
+			{
+				myStats->MP -= manacost;
+				myStats->HP = 15;
+				messagePlayer(player, language[653]);
+				messagePlayer(player, language[6289]);
+			}
+		}
 	}
 
 	if ( player >= 0 
@@ -15754,6 +15766,9 @@ void Entity::monsterAddNearbyItemToInventory(Stat* myStats, int rangeToFind, int
 							case SYMBOL_HATRED:
 								messagePlayer(owner->skill[2], language[6253], myStats->name);
 								break;
+							case GOLDEN_KEY:
+								messagePlayer(owner->skill[2], language[6282], myStats->name);
+								break;
 							default:
 								break;
 						}
@@ -16072,7 +16087,8 @@ bool Entity::monsterWantsItem(const Item& item, Item**& shouldEquip, node_t*& re
 					|| item.type == ARTIFACT_ORB_RED
 					|| item.type == SYMBOL_RAGE
 					|| item.type == SYMBOL_CRUELTY
-					|| item.type == SYMBOL_HATRED )
+					|| item.type == SYMBOL_HATRED
+					|| item.type == GOLDEN_KEY )
 				{
 					return true;
 				}
@@ -17572,6 +17588,9 @@ void Entity::setRangedProjectileAttack(Entity& marksman, Stat& myStats, int opti
 				break;
 			case QUIVER_HUNTING:
 				sprite = 930;
+				break;
+			case QUIVER_ICE:
+				sprite = 1460;
 				break;
 			default:
 				break;

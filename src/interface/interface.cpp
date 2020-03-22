@@ -3268,6 +3268,7 @@ bool GenericGUIMenu::isItemRepairable(const Item* item, int repairScroll)
 				case TOOL_DUMMYBOT:
 				case ENCHANTED_FEATHER:
 				case TOOL_UNIHORN:
+				case SACRIFICIAL_DAGGER:
 					return false;
 					break;
 				default:
@@ -6504,6 +6505,7 @@ bool GenericGUIMenu::tinkeringGetItemValue(const Item* item, int* metal, int* ma
 		case MASK_SHAMAN:
 		case CLOAK_ELEMENTALIST:
 		case ELEMENTALIST_DOUBLET:
+		case AMULET_MANABOUND:
 			*metal = 1;
 			*magic = 4;
 			break;
@@ -6515,6 +6517,7 @@ bool GenericGUIMenu::tinkeringGetItemValue(const Item* item, int* metal, int* ma
 		case SCROLL_DESTROYARMOR:
 		case SCROLL_TELEPORTATION:
 		case TOOL_UNIHORN:
+		case CROSS_ANTILICH:
 			*metal = 0;
 			*magic = 2;
 			break;
@@ -6572,6 +6575,7 @@ bool GenericGUIMenu::tinkeringGetItemValue(const Item* item, int* metal, int* ma
 		case SPELLBOOK_FLUTTER:
 		case SCROLL_CHARGING:
 		case SCROLL_CONJUREARROW:
+		case AMULET_MANABOUND:
 			*metal = 0;
 			*magic = 6;
 			break;
@@ -6596,6 +6600,8 @@ bool GenericGUIMenu::tinkeringGetItemValue(const Item* item, int* metal, int* ma
 		case SPELLBOOK_SELF_POLYMORPH:
 		case GEM_LUCK:
 		case ENCHANTED_FEATHER:
+		case SACRIFICIAL_DAGGER:
+		case SPELLBOOK_ULTRAHEALING:
 			*metal = 0;
 			*magic = 8;
 
@@ -6779,6 +6785,11 @@ bool GenericGUIMenu::tinkeringGetItemValue(const Item* item, int* metal, int* ma
 		case LOST_BREASTPIECE:
 			*metal = 16;
 			*magic = 16;
+			break;
+
+		case SCROLL_LEGEND:
+			*metal = 0;
+			*magic = 20;
 			break;
 
 		case TOOL_SENTRYBOT:

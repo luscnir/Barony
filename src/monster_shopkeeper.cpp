@@ -616,12 +616,16 @@ void initShopkeeper(Entity* my, Stat* myStats)
 								{
 									quivers.push_back(QUIVER_KNOCKBACK);
 								}
-								if ( currentlevel >= 10 )
+								if ( currentlevel >= 15 )
 								{
 									quivers.push_back(QUIVER_FIRE);
 									quivers.push_back(QUIVER_HUNTING);
 								}
-								if ( currentlevel >= 18 )
+								if (currentlevel >= 23)
+								{
+									quivers.push_back(QUIVER_ICE);
+								}
+								if ( currentlevel >= 34 )
 								{
 									quivers.push_back(QUIVER_PIERCE);
 									quivers.push_back(QUIVER_CRYSTAL);

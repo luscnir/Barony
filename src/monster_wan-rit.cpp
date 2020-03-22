@@ -112,7 +112,7 @@ void initWanRit(Entity* my, Stat* myStats)
 					}
 					break;
 				case 1:
-					if (rand() % 20)
+					if (rand() % 100)
 					{
 						newItem(TOOL_UNIHORN, DECREPIT, 0, 1, rand(), false, &myStats->inventory);
 					}

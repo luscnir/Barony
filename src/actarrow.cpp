@@ -55,7 +55,8 @@ enum ArrowSpriteTypes : int
 	PROJECTILE_FIRE_SPRITE,
 	PROJECTILE_HEAVY_SPRITE,
 	PROJECTILE_CRYSTAL_SPRITE,
-	PROJECTILE_HUNTING_SPRITE
+	PROJECTILE_HUNTING_SPRITE,
+	PROJECTILE_ICE_SPRITE = 1460
 };
 
 void actArrow(Entity* my)
@@ -185,6 +186,14 @@ void actArrow(Entity* my)
 			Entity* particle = spawnMagicParticleCustom(my, 157, 0.5, 4);
 			particle->flags[SPRITE] = true;
 		}
+	}
+	else if (my->arrowQuiverType == QUIVER_ICE || my->sprite == PROJECTILE_ICE_SPRITE)
+	{
+	if (ARROW_STUCK == 0)
+	{
+		Entity* particle = spawnMagicParticleCustom(my, 157, 0.5, 4);
+		particle->flags[SPRITE] = true;
+	}
 	}
 
 	if ( multiplayer != CLIENT )
@@ -922,6 +931,40 @@ void actArrow(Entity* my)
 							{
 								Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
 								messagePlayerColor(hit.entity->skill[2], color, language[451]); // you are hit by an arrow!
+							}
+						}
+						else if (my->arrowQuiverType == QUIVER_ICE)
+						{
+							bool frost = hitstats->EFFECTS[EFF_SLOW];
+							
+							hitstats->EFFECTS[EFF_STUNNED] = true;
+							hitstats->EFFECTS_TIMERS[EFF_STUNNED] = 75;
+							hitstats->EFFECTS[EFF_SLOW] = true;
+							hitstats->EFFECTS_TIMERS[EFF_SLOW] = 250;
+							if (hitstats)
+							{
+								hitstats->poisonKiller = my->parent;
+							}
+							if (!frost && hitstats->EFFECTS[EFF_STUNNED] >= 1)
+							{
+								if (parent && parent->behavior == &actPlayer)
+								{
+									Uint32 color = SDL_MapRGB(mainsurface->format, 0, 255, 0);
+									if (hitstats)
+									{
+										messagePlayerMonsterEvent(parent->skill[2], color, *hitstats, language[6287], language[6288], MSG_COMBAT);
+										if (hit.entity->behavior == &actMonster)
+										{
+											achievementObserver.addEntityAchievementTimer(hit.entity, AchievementObserver::BARONY_ACH_PLEASE_HOLD, 150, true, 0);
+										}
+									}
+								}
+								if (hit.entity->behavior == &actPlayer)
+								{
+									Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
+									messagePlayerColor(hit.entity->skill[2], color, language[6286]);
+								}
+								statusEffectApplied = true;
 							}
 						}
 

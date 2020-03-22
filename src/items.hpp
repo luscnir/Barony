@@ -414,9 +414,16 @@ typedef enum ItemType
 	LOST_GAUNTLETS,
 	LOST_BOOTS,
 	LOST_CLOAK,
+	GOLDEN_KEY,
+	SACRIFICIAL_DAGGER,
+	QUIVER_ICE,
+	CROSS_ANTILICH,
+	SPELLBOOK_ULTRAHEALING,
+	AMULET_MANABOUND,
+	SCROLL_LEGEND,
 	NEEDLE
 } ItemType;
-const int NUMITEMS = 391;
+const int NUMITEMS = 398;
 
 //NOTE: If you change this, make sure to update NUMCATEGORIES in game.h to reflect the total number of categories. Not doing that will make bad things happen.
 typedef enum Category
@@ -635,6 +642,8 @@ void item_FoodAutomaton(Item*& item, int player);
 void item_Gem(Item* item, int player);
 void item_Spellbook(Item*& item, int player);
 void item_ToolUnihorn(Item*& item, int player);
+void item_Sacrifice(Item*& item, int player);
+void item_ScrollLegend(Item*& item, int player);
 
 //General functions.
 Item* newItem(ItemType type, Status status, Sint16 beatitude, Sint16 count, Uint32 appearance, bool identified, list_t* inventory);

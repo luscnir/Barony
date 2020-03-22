@@ -3680,7 +3680,8 @@ void actMonster(Entity* my)
 									|| item->type == ARTIFACT_ORB_RED
 									|| item->type == SYMBOL_RAGE
 									|| item->type == SYMBOL_CRUELTY
-									|| item->type == SYMBOL_HATRED)
+									|| item->type == SYMBOL_HATRED
+									|| item->type == GOLDEN_KEY )
 								)
 							{
 								hasOrb = true;
@@ -11201,33 +11202,52 @@ void Entity::monsterGenerateQuiverItem(Stat* myStats, bool lesserMonster)
 			}
 			break;
 		case GOBLIN:
-		case BURGGUARD:
-			switch ( rand() % 5 )
+			switch (rand() % 5)
 			{
-				case 0:
-				case 1:
-					myStats->shield = newItem(QUIVER_FIRE, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
-					break;
-				case 2:
-				case 3:
-					myStats->shield = newItem(QUIVER_KNOCKBACK, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
-					break;
-				case 4:
-					if ( currentlevel >= 18 )
+			case 0:
+			case 1:
+				myStats->shield = newItem(QUIVER_FIRE, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
+				break;
+			case 2:
+			case 3:
+				myStats->shield = newItem(QUIVER_KNOCKBACK, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
+				break;
+			case 4:
+				if (currentlevel >= 18)
+				{
+					if (rand() % 2)
 					{
-						if ( rand() % 2 )
-						{
-							myStats->shield = newItem(QUIVER_FIRE, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
-						}
-						else
-						{
-							myStats->shield = newItem(QUIVER_KNOCKBACK, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
-						}
+						myStats->shield = newItem(QUIVER_FIRE, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
 					}
 					else
 					{
 						myStats->shield = newItem(QUIVER_KNOCKBACK, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
 					}
+				}
+				else
+				{
+					myStats->shield = newItem(QUIVER_KNOCKBACK, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
+				}
+				break;
+			default:
+				break;
+			}
+			break;
+		case BURGGUARD:
+			switch ( rand() % 5 )
+			{
+				case 0:
+				case 1:
+					myStats->shield = newItem(QUIVER_ICE, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
+					break;
+				case 2:
+					myStats->shield = newItem(QUIVER_HUNTING, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
+					break;
+				case 3:
+					myStats->shield = newItem(QUIVER_SILVER, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
+					break;
+				case 4:
+					myStats->shield = newItem(QUIVER_KNOCKBACK, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
 					break;
 				default:
 					break;
@@ -11242,6 +11262,8 @@ void Entity::monsterGenerateQuiverItem(Stat* myStats, bool lesserMonster)
 					myStats->shield = newItem(QUIVER_PIERCE, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
 					break;
 				case 2:
+					myStats->shield = newItem(QUIVER_ICE, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
+					break;
 				case 3:
 					myStats->shield = newItem(QUIVER_HUNTING, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
 					break;
@@ -11370,7 +11392,7 @@ void Entity::monsterGenerateQuiverItem(Stat* myStats, bool lesserMonster)
 			{
 			case 0:
 			case 1:
-				myStats->shield = newItem(QUIVER_HUNTING, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
+				myStats->shield = newItem(QUIVER_ICE, SERVICABLE, 0, ammo, ITEM_GENERATED_QUIVER_APPEARANCE, false, nullptr);
 				break;
 			case 2:
 			case 3:

@@ -225,7 +225,7 @@ void actThrown(Entity* my)
 			/*THROWN_VELX = 0.f;
 			THROWN_VELY = 0.f;
 			THROWN_VELZ = 0.f;*/
-			if ( type == BRONZE_TOMAHAWK || type == IRON_DAGGER )
+			if ( type == BRONZE_TOMAHAWK || type == IRON_DAGGER || type == CROSS_ANTILICH )
 			{
 				// axe and dagger spin vertically
 				my->pitch += 0.2;
@@ -753,6 +753,7 @@ void actThrown(Entity* my)
 					case STEEL_CHAKRAM:
 					case CRYSTAL_SHURIKEN:
 					case BOOMERANG:
+					case CROSS_ANTILICH:
 					{
 						if ( damage <= 0 && hit.entity->behavior == &actPlayer )
 						{

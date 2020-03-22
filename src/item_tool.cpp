@@ -512,6 +512,10 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 		{
 			messagePlayer(player, language[6223]);
 		}
+		else if (type == GOLDEN_KEY && entity.pedestalOrbType == 4)
+		{
+			messagePlayer(player, language[6285]);
+		}
 		else
 		{
 			// incorrect orb.
@@ -530,6 +534,10 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 			if (!strncmp(map.name, "Mural of portals", 4))
 			{
 				entity.pedestalHasOrb = type - SYMBOL_RAGE + 1;
+			}
+			else if (!strncmp(map.name, "Vault", 4))
+			{
+				entity.pedestalHasOrb = type - GOLDEN_KEY + 1;
 			}
 			else
 			{
@@ -572,6 +580,9 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 					break;
 				case SYMBOL_HATRED:
 					messagePlayer(player, language[6253], entity.getStats()->name);
+					break;
+				case GOLDEN_KEY:
+					messagePlayer(player, language[6282], entity.getStats()->name);
 					break;
 				default:
 					break;

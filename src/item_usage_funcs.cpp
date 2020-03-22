@@ -4633,6 +4633,213 @@ void item_ToolUnihorn(Item*& item, int player)
 	}
 }
 
+void item_Sacrifice(Item*& item, int player)
+{
+	messagePlayer(player, language[6283]);
+	players[player]->entity->modMP(-40);
+	stats[player]->EFFECTS_TIMERS[EFF_SLOW] = 1.5 * TICKS_PER_SECOND;
+	stats[player]->EFFECTS_TIMERS[EFF_POTION_STR] = 25 * TICKS_PER_SECOND;
+	stats[player]->EFFECTS_TIMERS[EFF_MAGICAMPLIFY] = 25 * TICKS_PER_SECOND;
+}
+
+void item_ScrollLegend(Item*& item, int player)
+{
+	Item* target;
+	node_t* node, * nextnode;
+
+	if (players[player] == nullptr || players[player]->entity == nullptr)
+	{
+		return;
+	}
+
+	// this is a CLIENT function
+	if (player != clientnum)
+	{
+		return;
+	}
+
+	if (players[player]->entity->isBlind())
+	{
+		messagePlayer(player, language[775]);
+		return;
+	}
+
+	if (player == clientnum)
+	{
+		conductIlliterate = false;
+	}
+	item->identified = 1;
+	messagePlayer(player, language[848]);
+	messagePlayer(player, language[6284]);
+	switch ( rand() % 51 )	//Drops random legendary item
+	{
+		//artifact set
+		case 0:
+			dropItem(newItem(ARTIFACT_AXE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 1:
+			dropItem(newItem(ARTIFACT_BOOTS, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 2:
+			dropItem(newItem(ARTIFACT_BOW, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 3:
+			dropItem(newItem(ARTIFACT_BREASTPIECE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 4:
+			dropItem(newItem(ARTIFACT_CLOAK, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 5:
+			dropItem(newItem(ARTIFACT_GLOVES, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 6:
+			dropItem(newItem(ARTIFACT_HELM, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 7:
+			dropItem(newItem(ARTIFACT_MACE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 8:
+			dropItem(newItem(ARTIFACT_SPEAR, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 9:
+			dropItem(newItem(ARTIFACT_SWORD, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		//abyssal set
+		case 10:
+			dropItem(newItem(ABYSSAL_AXE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 11:
+			dropItem(newItem(ABYSSAL_BOOTS, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 12:
+			dropItem(newItem(ABYSSAL_CROSSBOW, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 13:
+			dropItem(newItem(ABYSSAL_CHEASTPIECE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 14:
+			dropItem(newItem(ABYSSAL_CLOAK, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 15:
+			dropItem(newItem(ABYSSAL_KNUCKLES, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 16:
+			dropItem(newItem(ABYSSAL_HELM, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 17:
+			dropItem(newItem(ABYSSAL_MACE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 18:
+			dropItem(newItem(ABYSSAL_SPEAR, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 19:
+			dropItem(newItem(ABYSSAL_SWORD, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 20:
+			dropItem(newItem(ABYSSAL_SHIELD, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 21:
+			dropItem(newItem(ABYSSAL_RING, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 22:
+			dropItem(newItem(ABYSSAL_AMULET, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 23:
+			dropItem(newItem(ABYSSAL_MASK, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		//inquisitor set
+		case 24:
+			dropItem(newItem(INQUISITOR_AXE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 25:
+			dropItem(newItem(INQUISITOR_BOOTS, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 26:
+			dropItem(newItem(INQUISITOR_BOW, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 27:
+			dropItem(newItem(INQUISITOR_BREASTPIECE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 28:
+			dropItem(newItem(INQUISITOR_BACKPACK, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 29:
+			dropItem(newItem(INQUISITOR_GLOVES, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 30:
+			dropItem(newItem(INQUISITOR_HELM, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 31:
+			dropItem(newItem(INQUISITOR_HAMMER, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 32:
+			dropItem(newItem(INQUISITOR_SPEAR, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 33:
+			dropItem(newItem(INQUISITOR_SWORD, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 34:
+			dropItem(newItem(INQUISITOR_LANTERN, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 35:
+			dropItem(newItem(INQUISITOR_RING, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 36:
+			dropItem(newItem(INQUISITOR_AMULET, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 37:
+			dropItem(newItem(INQUISITOR_MASK, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		//lost set
+		case 38:
+			dropItem(newItem(LOST_AXE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 39:
+			dropItem(newItem(LOST_BOOTS, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 40:
+			dropItem(newItem(LOST_BOW, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 41:
+			dropItem(newItem(LOST_BREASTPIECE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 42:
+			dropItem(newItem(LOST_CLOAK, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 43:
+			dropItem(newItem(LOST_GAUNTLETS, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 44:
+			dropItem(newItem(LOST_HELM, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 45:
+			dropItem(newItem(LOST_MACE, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 46:
+			dropItem(newItem(LOST_POLEARM, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 47:
+			dropItem(newItem(LOST_SWORD, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 48:
+			dropItem(newItem(LOST_SHIELD, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 49:
+			dropItem(newItem(LOST_RING, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 50:
+			dropItem(newItem(LOST_AMULET, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		case 51:
+			dropItem(newItem(LOST_MASK, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+		default:
+			//should never happen, drop the a new scroll
+			dropItem(newItem(SCROLL_LEGEND, EXCELLENT, item->beatitude, 1, rand(), true, &stats[player]->inventory), player);
+			break;
+	}
+}
+
 void item_Spellbook(Item*& item, int player)
 {
 	node_t* node, *nextnode;
@@ -4959,6 +5166,9 @@ void item_Spellbook(Item*& item, int player)
 			case SPELLBOOK_DEATHCOIL:
 				learned = addSpell(SPELL_DEATHCOIL, player);
 				break;
+			case SPELLBOOK_ULTRAHEALING:
+				learned = addSpell(SPELL_ULTRAHEALING, player);
+				break;
 			default:
 				learned = addSpell(SPELL_FORCEBOLT, player);
 				break;
@@ -5206,6 +5416,10 @@ void item_FoodAutomaton(Item*& item, int player)
 				stats[player]->HUNGER = std::min(stats[player]->HUNGER, 1199);
 			}
 			break;
+		case SCROLL_LEGEND:
+			stats[player]->HUNGER += 1500;
+			players[player]->entity->modMP(300);
+			break;
 		default:
 			messagePlayer(player, "Unknown food?");
 			break;
@@ -5328,6 +5542,7 @@ bool itemIsConsumableByAutomaton(const Item& item)
 		case SCROLL_SUMMON:
 		case SCROLL_FIRE:
 		case SCROLL_CONJUREARROW:
+		case SCROLL_LEGEND:
 		case TOOL_MAGIC_SCRAP:
 		case TOOL_METAL_SCRAP:
 			return true;
