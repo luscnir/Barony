@@ -6575,7 +6575,6 @@ bool GenericGUIMenu::tinkeringGetItemValue(const Item* item, int* metal, int* ma
 		case SPELLBOOK_FLUTTER:
 		case SCROLL_CHARGING:
 		case SCROLL_CONJUREARROW:
-		case AMULET_MANABOUND:
 			*metal = 0;
 			*magic = 6;
 			break;

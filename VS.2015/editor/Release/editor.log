@@ -1,46 +1,27 @@
 ﻿  buttons.cpp
-  cursors.cpp
   draw.cpp
   editor.cpp
   entity_editor.cpp
   entity_shared.cpp
   files.cpp
-  hash.cpp
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\buttons.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\buttons.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\cursors.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\cursors.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\draw.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\draw.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\entity_shared.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\entity_shared.cpp)
+  init.cpp
+  items_editor.cpp
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\files.cpp)
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\files.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\hash.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\hash.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(505,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(507,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(537,16): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(790,9): warning C4101: 'c2': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(824,9): warning C4101: 'c2': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(957,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(959,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1018,42): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1019,42): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1011,7): warning C4101: 'tmp': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1293,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1295,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1314,39): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1416,16): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1424,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1426,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1428,12): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1428,34): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1494,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1496,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1663,6): warning C4101: 'c': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\draw.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\draw.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\entity_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\entity_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\items_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\items_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\entity_shared.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\entity_shared.cpp)
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\editor.cpp)
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\buttons.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\buttons.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\init.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\init.cpp)
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(218,12): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(220,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(221,55): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
@@ -260,13 +241,40 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2557,13): wa
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2558,13): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2566,15): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\draw.cpp(2567,15): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\entity_editor.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\entity_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(505,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(507,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(537,16): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1151,18): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1152,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(790,9): warning C4101: 'c2': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(824,9): warning C4101: 'c2': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(957,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(959,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1018,42): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1019,42): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1011,7): warning C4101: 'tmp': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1293,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1295,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1314,39): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1416,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1424,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1426,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1428,12): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1428,34): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1494,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1496,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\buttons.cpp(1663,6): warning C4101: 'c': unreferenced local variable
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(657,8): warning C4101: 's': unreferenced local variable
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1417,14): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1418,14): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\items_editor.cpp(64,10): warning C4101: 'y': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\items_editor.cpp(309,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1916,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2099,8): warning C4101: 'tempstr': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2152,8): warning C4101: 'tempstr': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2188,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2214,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2249,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(323,84): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(324,77): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(490,41): warning C4018: '<': signed/unsigned mismatch
@@ -285,7 +293,6 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(845,18): w
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1052,6): warning C4101: 'c': unreferenced local variable
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1182,9): warning C4101: 'line': unreferenced local variable
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1156,6): warning C4101: 'c': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(1916,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1402,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1421,18): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(1423,19): warning C4018: '<': signed/unsigned mismatch
@@ -301,19 +308,14 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2060,29): 
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2060,56): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2072,49): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2072,70): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2099,8): warning C4101: 'tempstr': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2152,8): warning C4101: 'tempstr': unreferenced local variable
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2118,34): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2188,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2118,69): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2128,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2130,24): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2132,43): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2214,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2132,86): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2155,32): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2155,67): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\files.cpp(2249,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2212,41): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2212,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(2253,44): warning C4018: '<': signed/unsigned mismatch
@@ -344,17 +346,31 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(4040,95): 
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(4045,65): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(4050,68): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(4058,68): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(799,7): warning C4101: 'dummy': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1057,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1138,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1203,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1284,41): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6612,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1349,43): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6615,29): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6654,28): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6657,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1429,41): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6673,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1494,43): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6679,28): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6687,30): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6748,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1574,41): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6754,28): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6762,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1639,43): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6823,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1720,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1785,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1866,41): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1894,18): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6831,29): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6880,28): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(6888,29): warning C4018: '<': signed/unsigned mismatch
@@ -364,76 +380,47 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(7099,13): 
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(7208,19): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(7226,13): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\editor.cpp(7239,13): warning C4018: '<': signed/unsigned mismatch
-  init.cpp
-  items_editor.cpp
-  light.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1964,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1972,30): warning C4244: '=': conversion from 'const real_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=GLfloat
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1973,30): warning C4244: '=': conversion from 'const real_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=GLfloat
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1974,34): warning C4244: '=': conversion from 'const real_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=GLfloat
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2496,39): warning C4244: 'argument': conversion from 'real_t' to 'float', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2529,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2572,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2598,6): warning C4101: 'c': unreferenced local variable
   list.cpp
   main.cpp
   objects.cpp
   opengl.cpp
-  sound.cpp
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\items_editor.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\items_editor.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\light.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\light.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\main.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\main.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\list.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\list.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\init.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\init.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\sound.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\sound.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\opengl.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\opengl.cpp)
+  stat_editor.cpp
+  stat_shared.cpp
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\objects.cpp)
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\objects.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(48,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(48,48): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(83,26): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(83,55): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(104,26): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(104,55): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(116,125): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(116,81): warning C4244: '=': conversion from '_Ty' to 'Sint32', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(153,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(153,48): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(157,124): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\light.cpp(157,80): warning C4244: '=': conversion from '_Ty' to 'Sint32', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\items_editor.cpp(64,10): warning C4101: 'y': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\items_editor.cpp(309,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(118,15): warning C4244: '=': conversion from 'real_t' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(119,25): warning C4244: '=': conversion from 'real_t' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(120,15): warning C4244: '=': conversion from 'real_t' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(133,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\sound.cpp(135,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.cpp(333,17): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\list.cpp(102,11): warning C4550: expression evaluates to a function which is missing an argument list
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\list.cpp(219,26): warning C4018: '>': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\list.cpp(408,26): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(799,7): warning C4101: 'dummy': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1057,43): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1138,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1203,43): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1284,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1349,43): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1429,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1494,43): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1574,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1639,43): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1720,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1785,43): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1866,41): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1894,18): warning C4018: '<': signed/unsigned mismatch
-  stat_editor.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\list.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\list.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\main.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\main.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\stat_shared.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\stat_shared.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\opengl.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\opengl.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\objects.cpp(114,77): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\objects.cpp(115,78): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\objects.cpp(202,25): warning C4101: 'ba': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\stat_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\stat_editor.cpp)
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(44,8): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(45,8): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(78,45): warning C4018: '<': signed/unsigned mismatch
@@ -691,15 +678,12 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1039,53): 
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1039,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1039,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1041,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\objects.cpp(114,77): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1041,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\objects.cpp(115,78): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1041,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1043,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1043,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1043,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1045,54): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\objects.cpp(202,25): warning C4101: 'ba': unreferenced local variable
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1045,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1045,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1050,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
@@ -765,13 +749,16 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1129,45): 
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1129,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1133,58): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1133,45): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\list.cpp(102,11): warning C4550: expression evaluates to a function which is missing an argument list
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1133,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1134,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1134,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\list.cpp(219,26): warning C4018: '>': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1134,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1136,53): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1136,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1136,28): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\list.cpp(408,26): warning C4018: '>=': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1156,26): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1156,23): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1156,20): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
@@ -883,6 +870,7 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1314,27): 
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1316,25): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1316,22): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1316,19): warning C4244: 'argument': conversion from 'real_t' to 'GLfloat', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.cpp(333,17): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1318,61): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1318,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1318,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
@@ -913,37 +901,9 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1361,27): 
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1363,61): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1363,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\opengl.cpp(1363,27): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1964,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1972,30): warning C4244: '=': conversion from 'const real_t' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=GLfloat
-          ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1973,30): warning C4244: '=': conversion from 'const real_t' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=GLfloat
-          ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(1974,34): warning C4244: '=': conversion from 'const real_t' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=GLfloat
-          ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2496,39): warning C4244: 'argument': conversion from 'real_t' to 'float', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2529,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2572,17): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\init.cpp(2598,6): warning C4101: 'c': unreferenced local variable
-  stat_shared.cpp
-  steam_shared.cpp
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\stat_editor.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\stat_editor.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\stat_shared.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\stat_shared.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\steam_shared.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\steam_shared.cpp)
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\stat_editor.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(423,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\stat_shared.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(423,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\stat_editor.cpp)
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\stat_editor.cpp(33,10): warning C4101: 'node': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\stat_shared.cpp)
   Microsoft (R) Incremental Linker Version 14.25.28610.4
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
@@ -968,7 +928,8 @@ C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(422,2
   Release\stat_shared.obj 
   Release\steam_shared.obj 
   Generating code
-  Compiler version has changed, fall back to full compilation.
-  All 1318 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  7 of 1318 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    15 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   editor.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\editor.exe

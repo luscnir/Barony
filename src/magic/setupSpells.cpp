@@ -1326,7 +1326,7 @@ void setupSpells()   ///TODO: Verify this function.
 	spellConstructor(&spell_ultrahealing);
 	strcpy(spell_ultrahealing.name, language[6250]);
 	spell_ultrahealing.ID = SPELL_ULTRAHEALING;
-	spell_ultrahealing.difficulty = 100;
+	spell_ultrahealing.difficulty = 80;
 	spell_ultrahealing.elements.first = NULL;
 	spell_ultrahealing.elements.last = NULL;
 	node = list_AddNodeLast(&spell_ultrahealing.elements);
@@ -1335,5 +1335,5 @@ void setupSpells()   ///TODO: Verify this function.
 	node->deconstructor = &spellElementDeconstructor;
 	element = (spellElement_t*)node->element;
 	element->node = node;
-	element->mana = 70;
+	element->mana = 90;
 }

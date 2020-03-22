@@ -4636,9 +4636,11 @@ void item_ToolUnihorn(Item*& item, int player)
 void item_Sacrifice(Item*& item, int player)
 {
 	messagePlayer(player, language[6283]);
-	players[player]->entity->modMP(-40);
+	players[player]->entity->modHP(-40);
 	stats[player]->EFFECTS_TIMERS[EFF_SLOW] = 1.5 * TICKS_PER_SECOND;
+	stats[player]->EFFECTS[EFF_POTION_STR] = true;
 	stats[player]->EFFECTS_TIMERS[EFF_POTION_STR] = 25 * TICKS_PER_SECOND;
+	stats[player]->EFFECTS[EFF_MAGICAMPLIFY] = true;
 	stats[player]->EFFECTS_TIMERS[EFF_MAGICAMPLIFY] = 25 * TICKS_PER_SECOND;
 }
 
