@@ -99,6 +99,7 @@ int checkSpriteType(Sint32 sprite)
 		break;
 	case 116:
 	case 166:
+	case 213:
 		//pedestal
 		return 8;
 		break;
@@ -1156,7 +1157,9 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"TALL WHEAT",
 	"MARBLE GATE (North-South)",
 	"MARBLE GATE (East-West)",
-	"METAL TABLE"
+	"METAL TABLE",
+	"PEDESTAL LOCK",
+	""
 };
 
 char monsterEditorNameStrings[NUMMONSTERS][17] =

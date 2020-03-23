@@ -1391,6 +1391,7 @@ void clientActions(Entity* entity)
 			break;
 		case 601:
 		case 1167:
+		case 1458:
 			entity->behavior = &actPedestalBase;
 			break;
 		case 602:
@@ -1400,6 +1401,7 @@ void clientActions(Entity* entity)
 		case 1164:
 		case 1165:
 		case 1166:
+		case 1457:
 			entity->behavior = &actPedestalOrb;
 			break;
 		case 667:

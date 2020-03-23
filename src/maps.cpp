@@ -5397,6 +5397,57 @@ void assignActions(map_t* map)
 				tempNode->size = sizeof(Entity*);
 				break;
 			}
+			// key pedestal
+			case 213:
+			{
+				entity->sizex = 4;
+				entity->sizey = 4;
+				entity->x += 8;
+				entity->y += 8;
+				entity->z = 4.5;
+				entity->behavior = &actPedestalBase;
+				entity->sprite = 1458; //pedestal base
+				entity->flags[PASSABLE] = false;
+				entity->pedestalOrbType = entity->pedestalOrbType + 1;// set in editor as 0-3, need 1-4.
+				if (entity->pedestalHasOrb == 1) // set in editor
+				{
+					entity->pedestalHasOrb = entity->pedestalOrbType;
+				}
+				//entity->pedestalInvertedPower // set in editor
+				entity->pedestalInit = 0;
+				//entity->pedestalInGround = 0; // set in editor
+				//entity->pedestalLockOrb // set in editor
+				if (entity->pedestalInGround)
+				{
+					entity->z += 11;
+					entity->flags[PASSABLE] = true;
+				}
+
+				childEntity = newEntity(602 + entity->pedestalOrbType - 1, 0, map->entities, nullptr); //floating orb
+				childEntity->parent = entity->getUID();
+				childEntity->behavior = &actPedestalOrb;
+				childEntity->x = entity->x;
+				childEntity->y = entity->y;
+				TileEntityList.addEntity(*childEntity);
+				childEntity->z = -2;
+				childEntity->sizex = 2;
+				childEntity->sizey = 2;
+				childEntity->flags[UNCLICKABLE] = true;
+				childEntity->flags[PASSABLE] = true;
+				childEntity->flags[INVISIBLE] = false;
+				if (entity->pedestalInGround)
+				{
+					childEntity->z += 11;
+					childEntity->orbStartZ = -0.5;
+				}
+				childEntity->pedestalOrbInit();
+
+				node_t* tempNode = list_AddNodeLast(&entity->children);
+				tempNode->element = childEntity; // add the node to the children list.
+				tempNode->deconstructor = &emptyDeconstructor;
+				tempNode->size = sizeof(Entity*);
+				break;
+			}
 			// mid game portal:
 			case 117:
 				entity->x += 8;
