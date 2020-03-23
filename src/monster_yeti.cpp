@@ -59,7 +59,7 @@ void initYeti(Entity* my, Stat* myStats)
 				myStats->OLDHP = myStats->HP;
 				myStats->GOLD += 100;
 				myStats->LVL += 10;
-				newItem(ABYSSAL_AXE, EXCELLENT, 1, 1, rand(), false, &myStats->inventory);
+				newItem(ABYSSAL_AXE, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
 			}
 
 			// random effects

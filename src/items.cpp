@@ -3527,7 +3527,7 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if ( type == ABYSSAL_CROSSBOW )
 	{
-		attack += 18;
+		attack += 16;
 	}
 	else if (type == SPEAR_BONE)
 	{
@@ -3575,7 +3575,7 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if (type == INQUISITOR_SPEAR)
 	{
-		attack += 9;
+		attack += 8;
 	}
 	else if (type == INQUISITOR_SWORD)
 	{
@@ -3583,7 +3583,7 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if (type == INQUISITOR_AXE)
 	{
-		attack += 19;
+		attack += 15;
 	}
 	else if (type == INQUISITOR_HAMMER)
 	{
@@ -3591,7 +3591,7 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if (type == INQUISITOR_BOW)
 	{
-		attack += 17;
+		attack += 14;
 	}
 	else if (type == LOST_POLEARM)
 	{
@@ -3638,11 +3638,19 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if ( type == CROSS_ANTILICH )
 	{
-		attack += 4;
+		// lich maps
+		if ( !strncmp(map.name, "Boss", 4) || !strncmp(map.name, "Sanctum", 4) || !strncmp(map.name, "Abyss Boss", 4) )
+		{
+			attack += 99;
+		}
+		else
+		{
+			attack += 1;
+		}
 	}
 	else if ( type == NEEDLE )
 	{
-		attack += 99;
+		attack += 999;
 	}
 	// old formula
 	//attack *= (double)(status / 5.0);

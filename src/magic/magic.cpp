@@ -337,6 +337,7 @@ bool spellEffectDominate(Entity& my, spellElement_t& element, Entity& caster, En
 		|| hitstats->type == ICEDEMON
 		|| hitstats->type == ABOMINATION
 		|| hitstats->type == LICH_FALLEN
+		|| hitstats->type == CLONE_FALLEN
 		)
 	{
 		Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
@@ -880,7 +881,7 @@ void spellEffectStealWeapon(Entity& my, spellElement_t& element, Entity* parent,
 				return;
 			}
 
-			if ( hitstats->type == LICH || hitstats->type == LICH_FIRE || hitstats->type == LICH_ICE || hitstats->type == DEVIL )
+			if ( hitstats->type == LICH || hitstats->type == LICH_FIRE || hitstats->type == LICH_ICE || hitstats->type == DEVIL || hitstats->type == LICH_FALLEN || hitstats->type == CLONE_FALLEN )
 			{
 				return;
 			}
@@ -1643,7 +1644,7 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 	if ( targetStats->type == LICH || targetStats->type == SHOPKEEPER || targetStats->type == DEVIL
 		|| targetStats->type == MINOTAUR || targetStats->type == LICH_FIRE || targetStats->type == LICH_ICE
 		|| targetStats->type == MATILDA || targetStats->type == ICEDEMON || targetStats->type == ABOMINATION
-		|| targetStats->type == LICH_FALLEN
+		|| targetStats->type == LICH_FALLEN || targetStats->type == CLONE_FALLEN
 		|| (target->behavior == &actMonster && target->monsterAllySummonRank != 0)
 		|| (targetStats->type == INCUBUS && !strncmp(targetStats->name, "inner demon", strlen("inner demon")))
 		)
@@ -1664,7 +1665,7 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 			|| monsterSummonType == MIMIC || monsterSummonType == BUGBEAR || monsterSummonType == OCTOPUS
 			|| monsterSummonType == MINOTAUR || monsterSummonType == LICH_FIRE || monsterSummonType == LICH_ICE
 			|| monsterSummonType == MATILDA || monsterSummonType == ICEDEMON || monsterSummonType == ABOMINATION
-			|| monsterSummonType == LICH_FALLEN
+			|| monsterSummonType == LICH_FALLEN || monsterSummonType == CLONE_FALLEN
 			|| monsterSummonType == NOTHING || monsterSummonType == targetStats->type || monsterSummonType == HUMAN
 			|| (targetStats->leader_uid != 0 && monsterSummonType == SHADOW) || monsterSummonType == SENTRYBOT
 			|| monsterSummonType == SPELLBOT || monsterSummonType == GYROBOT || monsterSummonType == DUMMYBOT )
@@ -2749,6 +2750,8 @@ bool spellEffectDemonIllusion(Entity& my, spellElement_t& element, Entity* paren
 						case LICH_FIRE:
 						case LICH_ICE:
 						case MINOTAUR:
+						case LICH_FALLEN:
+						case CLONE_FALLEN:
 							break;
 						default:
 							target->monsterAcquireAttackTarget(*monster, MONSTER_STATE_PATH);

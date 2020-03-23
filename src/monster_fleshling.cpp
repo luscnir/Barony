@@ -53,7 +53,7 @@ void initFleshling(Entity* my, Stat* myStats)
 					myStats->MAXHP += 165;
 					myStats->OLDHP = myStats->HP;
 					strcpy(myStats->name, "The Bloodthirsty");
-					myStats->weapon = newItem(ABYSSAL_SWORD, EXCELLENT, 1, 1, rand(), true, nullptr);
+					myStats->weapon = newItem(ABYSSAL_SWORD, EXCELLENT, 0, 1, rand(), true, nullptr);
 					myStats->shield = newItem(STEEL_SHIELD_RESISTANCE, EXCELLENT, 0, 1, rand(), true, nullptr);
 					int c;
 					for (c = 0; c < 3; c++)

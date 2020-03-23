@@ -189,11 +189,11 @@ void actArrow(Entity* my)
 	}
 	else if (my->arrowQuiverType == QUIVER_ICE || my->sprite == PROJECTILE_ICE_SPRITE)
 	{
-	if (ARROW_STUCK == 0)
-	{
-		Entity* particle = spawnMagicParticleCustom(my, 157, 0.5, 4);
-		particle->flags[SPRITE] = true;
-	}
+		if (ARROW_STUCK == 0)
+		{
+			Entity* particle = spawnMagicParticleCustom(my, 214, 0.5, 4);
+			particle->flags[SPRITE] = true;
+		}
 	}
 
 	if ( multiplayer != CLIENT )

@@ -53,28 +53,48 @@ void initRat(Entity* my, Stat* myStats)
 			// boss variants
 			if ( rand() % 50 == 0 && !my->flags[USERFLAG2] )
 			{
-				strcpy(myStats->name, "Algernon");
-				myStats->HP = 60;
-				myStats->MAXHP = 60;
-				myStats->OLDHP = myStats->HP;
-				myStats->STR = -1;
-				myStats->DEX = 20;
-				myStats->CON = 2;
-				myStats->INT = 20;
-				myStats->PER = -2;
-				myStats->CHR = 5;
-				myStats->LVL = 10;
-				newItem(GEM_EMERALD, static_cast<Status>(1 + rand() % 4), 0, 1, rand(), true, &myStats->inventory);
-				newItem(FOOD_CHEDDARCHEESEWHEEL, EXCELLENT, 1, 1, rand(), false, &myStats->inventory);
-				customItemsToGenerate = customItemsToGenerate - 1;
-				int c;
-				for ( c = 0; c < 6; c++ )
+				switch (rand() % 2)
 				{
-					Entity* entity = summonMonster(RAT, my->x, my->y);
-					if ( entity )
+				case 0:
+					strcpy(myStats->name, "Algernon");
+					myStats->HP = 60;
+					myStats->MAXHP = 60;
+					myStats->OLDHP = myStats->HP;
+					myStats->STR = -1;
+					myStats->DEX = 20;
+					myStats->CON = 2;
+					myStats->INT = 20;
+					myStats->PER = -2;
+					myStats->CHR = 5;
+					myStats->LVL = 10;
+					newItem(GEM_EMERALD, static_cast<Status>(1 + rand() % 4), 0, 1, rand(), true, &myStats->inventory);
+					newItem(FOOD_CHEDDARCHEESEWHEEL, EXCELLENT, 1, 1, rand(), false, &myStats->inventory);
+					customItemsToGenerate = customItemsToGenerate - 1;
+					int c;
+					for (c = 0; c < 6; c++)
 					{
-						entity->parent = my->getUID();
+						Entity* entity = summonMonster(RAT, my->x, my->y);
+						if (entity)
+						{
+							entity->parent = my->getUID();
+						}
 					}
+					break;
+				case 1:
+					strcpy(myStats->name, "Vermin Lord");
+					myStats->HP = 65;
+					myStats->MAXHP = 65;
+					myStats->OLDHP = myStats->HP;
+					myStats->STR = 4;
+					myStats->DEX = -1;
+					myStats->CON = 4;
+					myStats->INT = 10;
+					myStats->PER = -1;
+					myStats->CHR = 3;
+					myStats->LVL = 9;
+					newItem(INQUISITOR_SWORD, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
+					customItemsToGenerate = customItemsToGenerate - 1;
+					break;
 				}
 			}
 			// random effects

@@ -82,7 +82,7 @@ void initCholorosh(Entity* my, Stat* myStats)
 					myStats->MAXHP += 75;
 					myStats->HP = myStats->MAXHP -1;
 					myStats->OLDHP = myStats->MAXHP -1;		//Can not be full HP or abyssal_crossbow can stun-lock the player/target.
-					myStats->weapon = newItem(ABYSSAL_CROSSBOW, EXCELLENT, 1 , 1, rand(), false, &myStats->inventory);
+					myStats->weapon = newItem(ABYSSAL_CROSSBOW, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
 					myStats->helmet = newItem(STEEL_HELM, SERVICABLE, rand() % 5, 1, rand(), false, nullptr);
 					myStats->breastplate = newItem(STEEL_BREASTPIECE, SERVICABLE, 0, 1, rand(), false, nullptr);
 					myStats->shoes = newItem(STEEL_BOOTS, SERVICABLE, 0, 1, rand(), false, nullptr);
