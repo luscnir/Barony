@@ -360,7 +360,8 @@ static std::vector<std::vector<int>> classStatGrowth =
 
 	{	4,	6,	5,	2,	5,	2 }, // SHARPSHOOTER 21
 	{	3,	3,	2,	4,	6,	6 }, // PROPHET 22
-	{	2,	5,	3,	4,	5,	5 }, // LUNATIC 23
+	{	4,	4,	4,	4,	4,	4 }, // TOURIST 23
+	{	2,	5,	3,	4,	5,	5 }, // LUNATIC 24
 
 	{	3,	2,	4,	6,	4,	4 }, // CONJURER 13
 	{	3,	3,	1,	6,	6,	3 }, // ACCURSED 14
