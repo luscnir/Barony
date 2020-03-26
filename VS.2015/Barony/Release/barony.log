@@ -1,9 +1,63 @@
 ﻿  charclass.cpp
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX'
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(423,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared
+  item_usage_funcs.cpp
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\item_usage_funcs.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\item_usage_funcs.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(57,1): warning C4005: 'PATH_MAX': macro redefinition (compiling source file ..\..\src\charclass.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX' (compiling source file ..\..\src\charclass.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(423,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\charclass.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(423,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared (compiling source file ..\..\src\item_usage_funcs.cpp)
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(106,60): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(106,49): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(106,38): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(513,56): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(513,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(513,34): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(676,56): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(676,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(676,34): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(745,13): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1458,13): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1555,13): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1766,57): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1766,46): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1766,35): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1793,28): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1825,56): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1825,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1825,34): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1911,57): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1911,46): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1911,35): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1970,56): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1970,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(1970,34): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(2364,80): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(2364,47): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(2376,4): warning C4244: 'argument': conversion from 'real_t' to 'Uint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(2377,4): warning C4244: 'argument': conversion from 'real_t' to 'Uint16', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(3070,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(3072,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(3586,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(3588,138): warning C4244: 'argument': conversion from 'double' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(3588,89): warning C4244: 'argument': conversion from 'double' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(3891,73): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
+          with
+          [
+              _Ty=unsigned int
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(3892,73): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
+          with
+          [
+              _Ty=unsigned int
+          ]
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(4304,20): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(4541,19): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(4642,48): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(4652,18): warning C4101: 'nextnode': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(4652,10): warning C4101: 'node': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\item_usage_funcs.cpp(4651,8): warning C4101: 'target': unreferenced local variable
   Generating code
-  1 of 6429 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  4 of 6429 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     359 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

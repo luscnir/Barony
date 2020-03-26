@@ -1496,8 +1496,10 @@ void initClass(int player)
 		// attributes
 		stats[player]->PER += 1;
 		stats[player]->DEX += 1;
+		stats[player]->CON += 1;
 		stats[player]->CHR -= 1;
 		stats[player]->INT -= 1;
+		stats[player]->STR -= 1;
 
 		stats[player]->MAXHP += 10;
 		stats[player]->HP += 10;
@@ -1720,14 +1722,14 @@ void initClass(int player)
 
 		if (player == clientnum)
 		{
-			// staff of opening
-			item = newItem(MAGICSTAFF_OPENING, WORN, 0, 1, 0, true, NULL);
+			// cross of antilich
+			item = newItem(CROSS_ANTILICH, SERVICABLE, 0, 3, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[2].item = item2->uid;
 			free(item);
 
-			// cross of antilich
-			item = newItem(CROSS_ANTILICH, SERVICABLE, 0, 3, 0, true, NULL);
+			// unicorn horn
+			item = newItem(TOOL_UNIHORN, WORN, 0, 1, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[3].item = item2->uid;
 			free(item);
@@ -1735,12 +1737,6 @@ void initClass(int player)
 			// scroll of magic map
 			item = newItem(SCROLL_MAGICMAPPING, SERVICABLE, 0, 1, 0, true, NULL);
 			item2 = itemPickup(player, item);
-			free(item);
-
-			// unicorn horn
-			item = newItem(TOOL_UNIHORN, WORN, 0, 1, 0, true, NULL);
-			item2 = itemPickup(player, item);
-			hotbar[4].item = item2->uid;
 			free(item);
 
 			// healing spellbook
