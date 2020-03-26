@@ -1591,8 +1591,8 @@ void initClass(int player)
 
 		if (player == clientnum)
 		{
-			// shortbow
-			item = newItem(QUIVER_KNOCKBACK, EXCELLENT, 0, 20, 0, true, NULL);
+			// quiver knockback
+			item = newItem(QUIVER_KNOCKBACK, EXCELLENT, 0, 50, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[1].item = item2->uid;
 			free(item);
@@ -1642,9 +1642,9 @@ void initClass(int player)
 		stats[player]->MP += 5;
 
 		// skills
-		stats[player]->PROFICIENCIES[PRO_POLEARM] = 35;
+		stats[player]->PROFICIENCIES[PRO_POLEARM] = 30;
 		stats[player]->PROFICIENCIES[PRO_MACE] = 5;
-		stats[player]->PROFICIENCIES[PRO_MAGIC] = 30;
+		stats[player]->PROFICIENCIES[PRO_MAGIC] = 35;
 		stats[player]->PROFICIENCIES[PRO_SPELLCASTING] = 50;
 		stats[player]->PROFICIENCIES[PRO_APPRAISAL] = 20;
 		stats[player]->PROFICIENCIES[PRO_SWIMMING] = 20;
@@ -1692,19 +1692,6 @@ void initClass(int player)
 			useItem(item, player);
 		}
 
-		// boots
-		item = newItem(LEATHER_BOOTS, DECREPIT, 0, 1, 0, true, NULL);
-		if (player == clientnum)
-		{
-			item2 = itemPickup(player, item);
-			useItem(item2, player);
-			free(item);
-		}
-		else
-		{
-			useItem(item, player);
-		}
-
 		// elementalist hat
 		item = newItem(ELEMENTALIST_HAT, WORN, 0, 1, 0, true, NULL);
 		if (player == clientnum)
@@ -1718,7 +1705,7 @@ void initClass(int player)
 			useItem(item, player);
 		}
 
-		// tunic
+		// chain robes
 		item = newItem(CHAIN_ROBES, DECREPIT, 0, 1, 0, true, NULL);
 		if (player == clientnum)
 		{
@@ -1733,15 +1720,14 @@ void initClass(int player)
 
 		if (player == clientnum)
 		{
-
 			// staff of opening
 			item = newItem(MAGICSTAFF_OPENING, WORN, 0, 1, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[2].item = item2->uid;
 			free(item);
 
-			// cure potion
-			item = newItem(POTION_CUREAILMENT, SERVICABLE, 0, 3, 0, true, NULL);
+			// cross of antilich
+			item = newItem(CROSS_ANTILICH, SERVICABLE, 0, 3, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[3].item = item2->uid;
 			free(item);
@@ -1749,6 +1735,12 @@ void initClass(int player)
 			// scroll of magic map
 			item = newItem(SCROLL_MAGICMAPPING, SERVICABLE, 0, 1, 0, true, NULL);
 			item2 = itemPickup(player, item);
+			free(item);
+
+			// unicorn horn
+			item = newItem(TOOL_UNIHORN, WORN, 0, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[4].item = item2->uid;
 			free(item);
 
 			// healing spellbook
@@ -1798,27 +1790,536 @@ void initClass(int player)
 		stats[player]->MAXMP = ( rand() % 30 ) + 15;
 		stats[player]->MP = stats[player]->MAXMP;
 
-		// skills //around 170 total
-		stats[player]->PROFICIENCIES[PRO_ALCHEMY] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_APPRAISAL] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_LEADERSHIP] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_LOCKPICKING] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_MAGIC] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_SPELLCASTING] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_STEALTH] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_SWIMMING] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_TRADING] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_SHIELD] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_POLEARM] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_MACE] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_AXE] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_SWORD] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_RANGED] = (rand() % 20);
-		stats[player]->PROFICIENCIES[PRO_UNARMED] = (rand() % 20);
+		// skills //around 240 total, most classes are 170
+		stats[player]->PROFICIENCIES[PRO_ALCHEMY] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_APPRAISAL] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_LEADERSHIP] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_LOCKPICKING] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_MAGIC] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_SPELLCASTING] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_STEALTH] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_SWIMMING] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_TRADING] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_SHIELD] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_POLEARM] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_MACE] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_AXE] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_SWORD] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_RANGED] = (rand() % 30);
+		stats[player]->PROFICIENCIES[PRO_UNARMED] = (rand() % 30);
 
+
+		//helm
+		switch (rand() % 13)
+		{
+			case 0:
+				item = newItem(LEATHER_HELM, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 1:
+				item = newItem(TIN_HELM, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 2:
+				item = newItem(IRON_HELM, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 3:
+				item = newItem(STEEL_HELM, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 4:
+				item = newItem(HAT_PHRYGIAN, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 5:
+				item = newItem(HAT_FEZ, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 6:
+				switch (rand() % 4)
+				{
+				case 0:
+					item = newItem(HAT_HOOD, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+					break;
+				case 1:
+					item = newItem(HAT_HOOD_RED, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+					break;
+				case 2:
+					item = newItem(HAT_HOOD_SILVER, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+					break;
+				case 3:
+					item = newItem(HAT_HOOD_YELLOWGREEN, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+					break;
+				}
+				break;
+			case 7:
+				item = newItem(HAT_JESTER, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 2), 1, rand(), true, NULL);
+				break;
+			case 8:
+				item = newItem(HAT_TOPHAT, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 9:
+				item = newItem(HAT_WIZARD, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 10:
+				item = newItem(HAT_WIZARD_SLIMY, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 11:
+				item = newItem(ELEMENTALIST_HAT, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 12:
+				item = newItem(PUNCHING_HELM, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+		}
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		//breastplate
+		if (rand() % 2 == 0 || 1)//66% chance
+		{
+			switch (rand() % 13)
+			{
+			case 0:
+				item = newItem(LEATHER_BREASTPIECE, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 1:
+				item = newItem(TIN_BREASTPIECE, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 2:
+				item = newItem(IRON_BREASTPIECE, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 3:
+				item = newItem(STEEL_BREASTPIECE, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 4:
+				item = newItem(IRON_BREASTPIECE_SLIMY, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 5:
+				item = newItem(HEALER_DOUBLET, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 6:
+				item = newItem(WIZARD_DOUBLET, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 7:
+				item = newItem(TUNIC, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 8:
+				item = newItem(SILVER_DOUBLET, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 9:
+				item = newItem(ELEMENTALIST_DOUBLET, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 10:
+				item = newItem(CHAIN_ROBES, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 11:
+				item = newItem(CHAIN_ROBES_AQUA, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 12:
+				item = newItem(MARBLE_BREASTPIECE, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			}
+			if (player == clientnum)
+			{
+				item2 = itemPickup(player, item);
+				useItem(item2, player);
+				free(item);
+			}
+			else
+			{
+				useItem(item, player);
+			}
+		}
+
+		//boots
+		if (rand() % 3 == 0 ) // 33% chance
+		{
+			switch (rand() % 6)
+			{
+			case 0:
+				if (rand() % 5 == 0)
+				{
+					item = newItem(LEATHER_BOOTS_SPEED, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				else
+				{
+					item = newItem(LEATHER_BOOTS, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				break;
+			case 1:
+				item = newItem(TIN_BOOTS, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 2:
+				if (rand() % 5 == 0)
+				{
+					item = newItem(IRON_BOOTS_WATERWALKING, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				else
+				{
+					item = newItem(IRON_BOOTS, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				break;
+			case 3:
+				if (rand() % 5 == 0)
+				{
+					item = newItem(STEEL_BOOTS_FEATHER, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				else
+				{
+					item = newItem(STEEL_BOOTS, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				break;
+			case 4:
+				item = newItem(SUEDE_BOOTS, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 5:
+				item = newItem(FLYING_SHOES, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			}
+			if (player == clientnum)
+			{
+				item2 = itemPickup(player, item);
+				useItem(item2, player);
+				free(item);
+			}
+			else
+			{
+				useItem(item, player);
+			}
+		}
+
+		//gloves
+		if (rand() % 3 == 0) // 33% chance
+		{
+			switch (rand() % 11)
+			{
+			case 0:
+				if (rand() % 5 == 0)
+				{
+					item = newItem(GLOVES_DEXTERITY, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				else
+				{
+					item = newItem(GLOVES, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				break;
+			case 1:
+				item = newItem(TIN_GLOVES, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 2:
+				if (rand() % 5 == 0)
+				{
+					item = newItem(BRACERS_CONSTITUTION, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				else
+				{
+					item = newItem(BRACERS, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				break;
+			case 3:
+				if (rand() % 5 == 0)
+				{
+					item = newItem(GAUNTLETS_STRENGTH, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				else
+				{
+					item = newItem(GAUNTLETS, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				}
+				break;
+			case 4:
+				item = newItem(BRASS_KNUCKLES, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 5:
+				item = newItem(IRON_KNUCKLES, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 6:
+				item = newItem(SPIKED_GAUNTLETS, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 7:
+				item = newItem(SUEDE_GLOVES, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 8:
+				item = newItem(ICE_GLOVES, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 9:
+				item = newItem(LIFESTEAL_KNUCKLES, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 10:
+				item = newItem(MANA_GLOVES, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			}
+			if (player == clientnum)
+			{
+				item2 = itemPickup(player, item);
+				useItem(item2, player);
+				free(item);
+			}
+			else
+			{
+				useItem(item, player);
+			}
+		}
+
+		//cloak
+		if (rand() % 3 == 0) // 33% chance
+		{
+			switch (rand() % 8)
+			{
+			case 0:
+				switch (rand() % 4)
+				{
+				case 0:
+				case 1:
+					item = newItem(CLOAK_PROTECTION, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+					break;
+				case 2:
+					item = newItem(CLOAK_INVISIBILITY, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+					break;
+				case 3:
+					item = newItem(CLOAK_MAGICREFLECTION, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+					break;
+				}
+				break;
+			case 1:
+				item = newItem(CLOAK, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 2:
+				item = newItem(CLOAK_BACKPACK, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 3:
+				item = newItem(CLOAK_BLACK, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 4:
+				item = newItem(CLOAK_ELEMENTALIST, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+				break;
+			case 5:
+				item = newItem(CLOAK_MELTING, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 6:
+				item = newItem(CLOAK_SILVER, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			case 7:
+				item = newItem(CLOAK_YELLOWGREEN, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+				break;
+			}
+			if (player == clientnum)
+			{
+				item2 = itemPickup(player, item);
+				useItem(item2, player);
+				free(item);
+			}
+			else
+			{
+				useItem(item, player);
+			}
+		}
+
+		//weapon
+		switch (rand() % 5)
+		{
+			case 0:
+				switch (rand() % 6) // bronze
+				{
+				case 0:
+					item = newItem(BRONZE_AXE, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 1:
+					item = newItem(BRONZE_MACE, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 2:
+					item = newItem(BRONZE_SWORD, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 3:
+					item = newItem(QUARTERSTAFF, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 4:
+				case 5:
+					item = newItem(SLING, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				}
+			case 1:
+				switch (rand() % 6) // tin
+				{
+				case 0:
+					item = newItem(STONE_AXE, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 1:
+					item = newItem(WOOD_HAMMER, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 2:
+					item = newItem(MACHETE, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 3:
+					item = newItem(SPEAR_BONE, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 4:
+				case 5:
+					item = newItem(MAKESHIFT_BOW, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				}
+				break;
+			case 2:
+				switch (rand() % 6) // iron
+				{
+				case 0:
+					item = newItem(IRON_AXE, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 1:
+					item = newItem(IRON_MACE, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 2:
+					item = newItem(IRON_SPEAR, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 3:
+					item = newItem(IRON_SWORD, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 4:
+				case 5:
+					item = newItem(SHORTBOW, static_cast<Status>(WORN + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				}
+				break;
+			case 3:
+				switch (rand() % 6) // steel
+				{
+				case 0:
+					item = newItem(STEEL_AXE, static_cast<Status>(DECREPIT + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 1:
+					item = newItem(STEEL_MACE, static_cast<Status>(DECREPIT + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 2:
+					item = newItem(STEEL_SWORD, static_cast<Status>(DECREPIT + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 3:
+					item = newItem(STEEL_HALBERD, static_cast<Status>(DECREPIT + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 4:
+					item = newItem(LONGBOW, static_cast<Status>(DECREPIT + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				case 5:
+					item = newItem(CROSSBOW, static_cast<Status>(DECREPIT + (rand() % 3)), 0, 1, rand(), true, NULL);
+					break;
+				}
+				break;
+			case 4:
+				switch (rand() % 11) // crystal
+				{
+				case 0:
+					item = newItem(CRYSTAL_BATTLEAXE, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				case 1:
+					item = newItem(CRYSTAL_MACE, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				case 2:
+					item = newItem(CRYSTAL_SWORD, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				case 3:
+					item = newItem(CRYSTAL_SPEAR, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				case 4:
+					item = newItem(COMPOUND_BOW, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				case 5:
+					item = newItem(HEAVY_CROSSBOW, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				case 6:
+					item = newItem(EXECUTIONER_AXE, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				case 7:
+					item = newItem(GRANITE_MAUL, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				case 8:
+					item = newItem(RAPIER, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				case 9:
+					item = newItem(TRIDENT, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				case 10:
+					item = newItem(CANNON, static_cast<Status>(DECREPIT + (rand() % 2)), 0, 1, rand(), true, NULL);
+					break;
+				}
+				break;
+		}
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			hotbar[0].item = item2->uid;
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
+
+		// Shield
+		switch (rand() % 16)
+		{
+		case 0:
+			item = newItem(BRONZE_SHIELD, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+			break;
+		case 1:
+			item = newItem(WOODEN_SHIELD, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+			break;
+		case 2:
+			item = newItem(ANTI_BLEED_SHIELD, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+			break;
+		case 3:
+			item = newItem(ANTI_CHARM_SHIELD, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+			break;
+		case 4:
+			item = newItem(ANTI_SLEEP_SHIELD, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+			break;
+		case 5:
+			item = newItem(IRON_SHIELD, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+			break;
+		case 6:
+			item = newItem(STEEL_SHIELD, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 2), 1, rand(), true, NULL);
+			break;
+		case 7:
+			item = newItem(STEEL_SHIELD_RESISTANCE, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 2), 1, rand(), true, NULL);
+			break;
+		case 8:
+		case 9:
+			item = newItem(TOOL_TORCH, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+			break;
+		case 10:
+			item = newItem(TOOL_CANDLE, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+			break;
+		case 11:
+			item = newItem(TOOL_CANDLE_TIMELESS, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+			break;
+		case 12:
+			item = newItem(TOOL_LANTERN, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+			break;
+		case 13:
+			item = newItem(TOOL_CRYSTALSHARD, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+			break;
+		case 14:
+			item = newItem(TOOL_GREENTORCH, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, rand(), true, NULL);
+			break;
+		case 15:
+			item = newItem(MIRROR_SHIELD, static_cast<Status>(DECREPIT + (rand() % 4)), (rand() % 3) - 1, 1, rand(), true, NULL);
+			break;
+		}
+		if (player == clientnum)
+		{
+			item2 = itemPickup(player, item);
+			useItem(item2, player);
+			hotbar[2].item = item2->uid;
+			free(item);
+		}
+		else
+		{
+			useItem(item, player);
+		}
 
 		//Mask
-		if (rand() % 10 == 0)
+		if (rand() % 10 == 0)	// 10% cheance
 		{
 			switch (rand() % 10)
 			{
@@ -2153,7 +2654,7 @@ void initClass(int player)
 					switch (rand() % 16)
 					{
 					case 0:
-						item = newItem(SCROLL_BLANK, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 2 , 0, true, NULL);
+						//item = newItem(SCROLL_BLANK, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 2 , 0, true, NULL);
 						item = newItem(ENCHANTED_FEATHER, static_cast<Status>(DECREPIT + (rand() % 4)), 0, 1, 0, true, NULL);
 						break;
 					case 1:
@@ -2302,6 +2803,7 @@ void initClass(int player)
 					break;
 				}
 				item2 = itemPickup(player, item);
+				hotbar[9].item = item2->uid;
 				free(item);
 			}
 
@@ -2403,13 +2905,11 @@ void initClass(int player)
 	{
 		// attributes
 		stats[player]->PER += 1;
-		stats[player]->INT += 1;
+		stats[player]->DEX += 1;
 		stats[player]->CHR -= 1;
 		stats[player]->CON -= 1;
 		stats[player]->GOLD += 500;
 
-		//stats[player]->MAXHP -= 29;
-		//stats[player]->HP -= 29;
 		stats[player]->MAXHP = 1;
 		stats[player]->HP = 1;
 		stats[player]->MAXMP += 30;
@@ -2423,19 +2923,6 @@ void initClass(int player)
 		stats[player]->PROFICIENCIES[PRO_TRADING] = 30;
 		stats[player]->PROFICIENCIES[PRO_ALCHEMY] = 20;
 		stats[player]->PROFICIENCIES[PRO_STEALTH] = 20;
-
-		//  googly eyes
-		item = newItem(MASK_GOOGLY, EXCELLENT, 0, 1, 0, true, NULL);
-		if (player == clientnum)
-		{
-			item2 = itemPickup(player, item);
-			useItem(item2, player);
-			free(item);
-		}
-		else
-		{
-			useItem(item, player);
-		}
 
 		// wooden hammer
 		item = newItem(WOOD_HAMMER, DECREPIT, 0, 1, 0, true, NULL);
@@ -2477,7 +2964,7 @@ void initClass(int player)
 			useItem(item, player);
 		}
 
-		// amulet of life saving
+		// amulet of manabound
 		item = newItem(AMULET_MANABOUND, WORN, 0, 1, 0, true, NULL);
 		if (player == clientnum)
 		{
@@ -2519,16 +3006,16 @@ void initClass(int player)
 
 		if (player == clientnum)
 		{
-			// unicorn horn
-			item = newItem(TOOL_UNIHORN, WORN, 0, 1, 0, true, NULL);
-			item2 = itemPickup(player, item);
-			hotbar[3].item = item2->uid;
-			free(item);
-
 			// water bootle
 			item = newItem(POTION_WATER, SERVICABLE, 1, 5, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[1].item = item2->uid;
+			free(item);
+
+			// sacrificial dagger
+			item = newItem(SACRIFICIAL_DAGGER, WORN, 0, 1, 0, true, NULL);
+			item2 = itemPickup(player, item);
+			hotbar[4].item = item2->uid;
 			free(item);
 
 			// ring of randomness
