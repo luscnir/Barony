@@ -1634,8 +1634,8 @@ void initClass(int player)
 	{
 		// attributes
 		stats[player]->PER += 1;
-		stats[player]->CON += 1;
 		stats[player]->INT += 1;
+		stats[player]->STR -= 1;
 		stats[player]->DEX -= 1;
 
 		stats[player]->MAXHP -= 5;
@@ -1728,8 +1728,8 @@ void initClass(int player)
 			hotbar[2].item = item2->uid;
 			free(item);
 
-			// unicorn horn
-			item = newItem(TOOL_UNIHORN, WORN, 0, 1, 0, true, NULL);
+			// sacrificial dagger
+			item = newItem(SACRIFICIAL_DAGGER, WORN, 0, 1, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[3].item = item2->uid;
 			free(item);
@@ -3008,8 +3008,8 @@ void initClass(int player)
 			hotbar[1].item = item2->uid;
 			free(item);
 
-			// sacrificial dagger
-			item = newItem(SACRIFICIAL_DAGGER, WORN, 0, 1, 0, true, NULL);
+			// unicorn horn
+			item = newItem(TOOL_UNIHORN, WORN, 0, 1, 0, true, NULL);
 			item2 = itemPickup(player, item);
 			hotbar[4].item = item2->uid;
 			free(item);
