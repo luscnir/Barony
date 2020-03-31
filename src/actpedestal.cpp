@@ -166,7 +166,7 @@ void Entity::actPedestalBase()
 		{
 			mechanismPowerOn();
 			updateCircuitNeighbors();
-			if ( !strncmp(map.name, "Boss", 4) || !strncmp(map.name, "Mural of portals", 4) )
+			if ( !strncmp(map.name, "Boss", 4) )
 			{
 				applyAura = true;
 			}
@@ -387,6 +387,10 @@ void Entity::actPedestalOrb()
 		if (!strncmp(map.name, "Mural of portals", 4))
 		{
 			sprite = parent->pedestalHasOrb + 1064 - 1;
+		}
+		else if (!strncmp(map.name, "Vault", 4))
+		{
+			sprite = parent->pedestalHasOrb + 1457 - 1;
 		}
 		else
 		{

@@ -476,7 +476,11 @@ void Item::applyOrb(int player, ItemType type, Entity& entity)
 		}
 		if (!strncmp(map.name, "Mural of portals", 4))
 		{
-			messagePlayer(player, language[4221]);
+			messagePlayer(player, language[6221]);
+		}
+		else if (!strncmp(map.name, "Vault", 4))
+		{
+			messagePlayer(player, language[6291]);
 		}
 		else
 		{
