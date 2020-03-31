@@ -8741,7 +8741,7 @@ void Entity::attack(int pose, int charge, Entity* target)
 						{
 						if (hitstats->HP == 0)
 							{
-								myStats->MAXMP += 1;//empty target mana
+								myStats->MAXMP += 3;//empty target mana
 								messagePlayer(player, language[6272]);
 							}
 						}

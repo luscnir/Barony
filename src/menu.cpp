@@ -2255,9 +2255,9 @@ void handleMainMenu(bool mode)
 								if ( stats[0]->appearance != 0 )
 								{
 									// convert human class to monster special classes on reselect.
-									if ( client_classes[0] > CLASS_MONK )
+									if ( client_classes[0] > CLASS_LUNATIC )
 									{
-										client_classes[0] = CLASS_MONK + stats[0]->playerRace;
+										client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace;
 									}
 								}
 								stats[0]->appearance = 0; // use racial passives
@@ -2504,9 +2504,9 @@ void handleMainMenu(bool mode)
 					{
 						stats[0]->appearance = 0;
 						// convert human class to monster special classes on reselect.
-						if ( stats[0]->playerRace != RACE_HUMAN && client_classes[0] > CLASS_MONK )
+						if ( stats[0]->playerRace != RACE_HUMAN && client_classes[0] > CLASS_LUNATIC )
 						{
-							client_classes[0] = CLASS_MONK + stats[0]->playerRace;
+							client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace;
 							stats[0]->clearStats();
 							initClass(0);
 						}
@@ -8112,7 +8112,7 @@ void handleMainMenu(bool mode)
 			// spice of life achievement
 			usedClass[client_classes[clientnum]] = true;
 			bool usedAllClasses = true;
-			for ( c = 0; c <= CLASS_MONK; c++ )
+			for ( c = 0; c <= CLASS_LUNATIC; c++ )
 			{
 				if ( !usedClass[c] )
 				{
@@ -13367,10 +13367,10 @@ void buttonRandomCharacter(button_t* my)
 		}
 		else
 		{
-			client_classes[0] = rand() % (CLASS_MONK + 2);
-			if ( client_classes[0] > CLASS_MONK )
+			client_classes[0] = rand() % (CLASS_LUNATIC + 2);
+			if ( client_classes[0] > CLASS_LUNATIC )
 			{
-				client_classes[0] = CLASS_MONK + stats[0]->playerRace; // monster specific classes.
+				client_classes[0] = CLASS_LUNATIC + stats[0]->playerRace; // monster specific classes.
 			}
 			stats[0]->appearance = 0;
 		}
