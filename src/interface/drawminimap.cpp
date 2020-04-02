@@ -142,13 +142,14 @@ void drawMinimap()
 	for ( node = map.entities->first; node != NULL; node = node->next )
 	{
 		Entity* entity = (Entity*)node->element;
-		if ( entity->sprite == 161 || (entity->sprite >= 254 && entity->sprite < 258) )   // ladder or portal models
+		if ( entity->sprite == 161 || (entity->sprite >= 254 && entity->sprite < 258)
+			|| entity->behavior == &actCustomPortal )   // ladder or portal models
 		{
 			if ( entity->x >= 0 && entity->y >= 0 && entity->x < map.width << 4 && entity->y < map.height << 4 )
 			{
 				x = floor(entity->x / 16);
 				y = floor(entity->y / 16);
-				if ( minimap[y][x] || entity->entityShowOnMap > 0 )
+				if ( minimap[y][x] || (entity->entityShowOnMap > 0 && !(entity->behavior == &actCustomPortal)) )
 				{
 					if ( ticks % 40 - ticks % 20 )
 					{
@@ -165,6 +166,10 @@ void drawMinimap()
 		}
 		else
 		{
+			if ( entity->skill[28] > 0 ) // mechanism
+			{
+				continue;
+			}
 			if ( entity->behavior == &actMonster && entity->monsterAllyIndex < 0 )
 			{
 				bool warningEffect = false;
@@ -187,13 +192,24 @@ void drawMinimap()
 					&& ((stats[clientnum]->ring && stats[clientnum]->ring->type == RING_WARNING) 
 						|| (entity->entityShowOnMap > 0)) )
 				{
+					int beatitude = 0;
+					if ( stats[clientnum]->ring && stats[clientnum]->ring->type == RING_WARNING )
+					{
+						beatitude = stats[clientnum]->ring->beatitude;
+						// invert for succ/incubus
+						if ( beatitude < 0 && shouldInvertEquipmentBeatitude(stats[clientnum]) )
+						{
+							beatitude = abs(stats[clientnum]->ring->beatitude);
+						}
+					}
+
 					bool doEffect = false;
 					if ( entity->entityShowOnMap > 0 )
 					{
 						doEffect = true;
 					}
 					else if ( stats[clientnum]->ring && players[clientnum] && players[clientnum]->entity 
-						&& entityDist(players[clientnum]->entity, entity) < 16.0 * std::max(3, (11 + 5 * stats[clientnum]->ring->beatitude)) )
+						&& entityDist(players[clientnum]->entity, entity) < 16.0 * std::max(3, (11 + 5 * beatitude)) )
 					{
 						doEffect = true;
 					}

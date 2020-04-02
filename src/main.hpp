@@ -21,6 +21,7 @@ typedef double real_t;
 #include <iostream>
 #include <list>
 #include <string>
+#include <vector>
 //using namespace std; //For C++ strings //This breaks messages on certain systems, due to template<class _CharT> class std::__cxx11::messages
 using std::string; //Instead of including an entire namespace, please explicitly include only the parts you need, and check for conflicts as reasonably possible.
 #include <unordered_map>
@@ -182,6 +183,34 @@ extern bool stop;
 #define IN_HOTBAR_SCROLL_RIGHT 23
 #define IN_HOTBAR_SCROLL_SELECT 24
 #define NUMIMPULSES 25
+static const std::vector<std::string> impulseStrings =
+{
+	"IN_FORWARD",
+	"IN_LEFT",
+	"IN_BACK",
+	"IN_RIGHT",
+	"IN_TURNL",
+	"IN_TURNR",
+	"IN_UP",
+	"IN_DOWN",
+	"IN_CHAT",
+	"IN_COMMAND",
+	"IN_STATUS",
+	"IN_SPELL_LIST",
+	"IN_CAST_SPELL",
+	"IN_DEFEND",
+	"IN_ATTACK",
+	"IN_USE",
+	"IN_AUTOSORT",
+	"IN_MINIMAPSCALE",
+	"IN_TOGGLECHATLOG",
+	"IN_FOLLOWERMENU",
+	"IN_FOLLOWERMENU_LASTCMD",
+	"IN_FOLLOWERMENU_CYCLENEXT",
+	"IN_HOTBAR_SCROLL_LEFT",
+	"IN_HOTBAR_SCROLL_RIGHT",
+	"IN_HOTBAR_SCROLL_SELECT"
+};
 
 //Joystick/gamepad impulses
 //TODO: Split bindings into three subcategories: Bifunctional, Game Exclusive, Menu Exclusive.
@@ -261,8 +290,6 @@ typedef struct view_t
 	Sint32 winx, winy, winw, winh;
 } view_t;
 
-extern view_t camera;
-
 class Entity; //TODO: Bugger?
 
 // node structure
@@ -301,7 +328,7 @@ typedef struct map_t
 #define MAPLAYERS 3 // number of layers contained in a single map
 #define OBSTACLELAYER 1 // obstacle layer in map
 #define MAPFLAGS 16 // map flags for custom properties
-#define MAPFLAGTEXTS 17 // map flags for custom properties
+#define MAPFLAGTEXTS 19 // map flags for custom properties
 // names for the flag indices
 static const int MAP_FLAG_CEILINGTILE = 0;
 static const int MAP_FLAG_DISABLETRAPS = 1;
@@ -327,12 +354,16 @@ static const int MAP_FLAG_DISABLETELEPORT = 13;
 static const int MAP_FLAG_DISABLELEVITATION = 14;
 static const int MAP_FLAG_GENADJACENTROOMS = 15;
 static const int MAP_FLAG_DISABLEOPENING = 16;
+static const int MAP_FLAG_DISABLEMESSAGES = 17;
+static const int MAP_FLAG_DISABLEHUNGER = 18;
 
 #define MFLAG_DISABLEDIGGING ((map.flags[MAP_FLAG_GENBYTES3] >> 24) & 0xFF) // first leftmost byte
 #define MFLAG_DISABLETELEPORT ((map.flags[MAP_FLAG_GENBYTES3] >> 16) & 0xFF) // second leftmost byte
 #define MFLAG_DISABLELEVITATION ((map.flags[MAP_FLAG_GENBYTES3] >> 8) & 0xFF) // third leftmost byte
 #define MFLAG_GENADJACENTROOMS ((map.flags[MAP_FLAG_GENBYTES3] >> 0) & 0xFF) // fourth leftmost byte
 #define MFLAG_DISABLEOPENING ((map.flags[MAP_FLAG_GENBYTES4] >> 24) & 0xFF) // first leftmost byte
+#define MFLAG_DISABLEMESSAGES ((map.flags[MAP_FLAG_GENBYTES4] >> 16) & 0xFF) // second leftmost byte
+#define MFLAG_DISABLEHUNGER ((map.flags[MAP_FLAG_GENBYTES4] >> 8) & 0xFF) // third leftmost byte
 
 // delete entity structure
 typedef struct deleteent_t
@@ -445,6 +476,18 @@ typedef struct door_t
 #define TEXTURESIZE 32
 #define TEXTUREPOWER 5 // power of 2 that texture size is, ie pow(2,TEXTUREPOWER) = TEXTURESIZE
 #define MAXPLAYERS 4
+#ifdef BARONY_SUPER_MULTIPLAYER
+#define MAXPLAYERS 16
+#endif
+
+// shaking/bobbing, that sort of thing
+struct cameravars_t {
+	real_t shakex;
+	real_t shakex2;
+	int shakey;
+	int shakey2;
+};
+extern cameravars_t cameravars[MAXPLAYERS];
 
 extern int game;
 extern bool loading;
@@ -473,6 +516,7 @@ extern string lastname;
 extern int lastCreatedCharacterClass;
 extern int lastCreatedCharacterAppearance;
 extern int lastCreatedCharacterSex;
+extern int lastCreatedCharacterRace;
 static const unsigned NUM_MOUSE_STATUS = 6;
 extern Sint8 mousestatus[NUM_MOUSE_STATUS];
 //extern Sint8 omousestatus[NUM_MOUSE_STATUS];
@@ -501,12 +545,15 @@ extern int minimapScaleQuickToggle;
 extern bool softwaremode;
 extern real_t* zbuffer;
 extern Sint32* lightmap;
+extern Sint32* lightmapSmoothed;
 extern bool* vismap;
 extern Entity** clickmap;
 extern list_t entitiesdeleted;
 extern Sint32 multiplayer;
 extern bool directConnect;
 extern bool client_disconnected[MAXPLAYERS];
+extern view_t cameras[MAXPLAYERS];
+extern view_t menucam;
 extern int minotaurlevel;
 #define SINGLE 0
 #define SERVER 1
@@ -588,6 +635,7 @@ extern bool* shoparea;
 extern real_t globalLightModifier;
 extern real_t globalLightTelepathyModifier;
 extern int globalLightModifierActive;
+extern int globalLightSmoothingRate;
 enum LightModifierValues : int
 {
 	GLOBAL_LIGHT_MODIFIER_STOPPED,
@@ -653,7 +701,7 @@ void glDrawWorld(view_t* camera, int mode);
 SDL_Cursor* newCursor(char* image[]);
 
 // function prototypes for maps.c:
-int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int> mapParameters = std::make_tuple(-1, -1, -1)); // secretLevelChance of -1 is default Barony generation.
+int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int, int> mapParameters = std::make_tuple(-1, -1, -1, 0)); // secretLevelChance of -1 is default Barony generation.
 void assignActions(map_t* map);
 
 // Cursor bitmap definitions
@@ -674,7 +722,7 @@ extern GLuint fbo_tex;
 extern GLuint fbo_ren;
 #endif
 void GO_SwapBuffers(SDL_Window* screen);
-unsigned int GO_GetPixelU32(int x, int y);
+unsigned int GO_GetPixelU32(int x, int y, view_t& camera);
 
 #ifdef STEAMWORKS
 #include <steam/steam_api.h>

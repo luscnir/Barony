@@ -1,11 +1,11 @@
 /*-------------------------------------------------------------------------------
 
-BARONY
-File: actpowerorb.cpp
-Desc: behavior function for power orbs
+	BARONY
+	File: actpowerorb.cpp
+	Desc: behavior function for power orbs
 
-Copyright 2013-2016 (c) Turning Wheel LLC, all rights reserved.
-See LICENSE for details.
+	Copyright 2013-2016 (c) Turning Wheel LLC, all rights reserved.
+	See LICENSE for details.
 
 -------------------------------------------------------------------------------*/
 
@@ -23,10 +23,10 @@ See LICENSE for details.
 
 /*-------------------------------------------------------------------------------
 
-act*
+	act*
 
-The following function describes an entity behavior. The function
-takes a pointer to the entity that uses it as an argument.
+	The following function describes an entity behavior. The function
+	takes a pointer to the entity that uses it as an argument.
 
 -------------------------------------------------------------------------------*/
 
@@ -116,13 +116,19 @@ void Entity::actPedestalBase()
 			orbEntity->vel_z = vel_z;
 			orbEntity->z += orbEntity->vel_z;
 			// shake camera if in range.
-			if ( players[clientnum] && players[clientnum]->entity )
-			{
-				real_t dist = entityDist(players[clientnum]->entity, this);
-				if ( dist < 512 && ticks % 5 == 0 )
+			for (int c = 0; c < MAXPLAYERS; ++c) {
+				if (client_disconnected[c] || !players[c]) {
+					continue;
+				}
+				auto& player = players[c];
+				if ( player && player->entity )
 				{
-					camera_shakex += .02;
-					camera_shakey += 2;
+					real_t dist = entityDist(player->entity, this);
+					if ( dist < 512 && ticks % 5 == 0 )
+					{
+						cameravars[c].shakex += .02;
+						cameravars[c].shakey += 2;
+					}
 				}
 			}
 		}
@@ -462,7 +468,7 @@ void Entity::actPedestalOrb()
 									if (parent->pedestalHasOrb == parent->pedestalOrbType)
 									{
 										// only update power when right orb is in place.
-										if (!pedestalInvertedPower)
+										if ( !parent->pedestalInvertedPower )
 										{
 											parent->mechanismPowerOff();
 										}
@@ -470,7 +476,7 @@ void Entity::actPedestalOrb()
 										{
 											parent->mechanismPowerOn();
 										}
-										updateCircuitNeighbors();
+										parent->updateCircuitNeighbors();
 									}
 									parent->pedestalHasOrb = 0;
 									serverUpdateEntitySkill(parent, 0); // update orb status

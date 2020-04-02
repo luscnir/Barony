@@ -43,7 +43,7 @@ real_t getLightForEntity(real_t x, real_t y)
 	}
 	int u = x;
 	int v = y;
-	return std::min(std::max(0, lightmap[v + u * map.height]), 255) / 255.0;
+	return std::min(std::max(0, lightmapSmoothed[v + u * map.height]), 255) / 255.0;
 }
 
 /*-------------------------------------------------------------------------------
@@ -757,7 +757,7 @@ real_t getLightAt(int x, int y)
 		{
 			if ( u >= 0 && u < map.width && v >= 0 && v < map.height )
 			{
-				l += std::min(std::max(0, lightmap[v + u * map.height]), 255) / 255.0;
+				l += std::min(std::max(0, lightmapSmoothed[v + u * map.height]), 255) / 255.0;
 			}
 		}
 	}
@@ -805,11 +805,38 @@ void glDrawWorld(view_t* camera, int mode)
 		}
 	}
 
+	for ( int v = 0; v < map.height; v++ )
+	{
+		for ( int u = 0; u < map.width; u++ )
+		{
+			int smoothingRate = globalLightSmoothingRate;
+			int difference = abs(lightmapSmoothed[v + u * map.height] - lightmap[v + u * map.height]);
+			if ( difference > 64 )
+			{
+				smoothingRate *= 4;
+			}
+			else if ( difference > 32 )
+			{
+				smoothingRate *= 2;
+			}
+			if ( lightmapSmoothed[v + u * map.height] < lightmap[v + u * map.height] )
+			{
+				lightmapSmoothed[v + u * map.height] = std::min(lightmap[v + u * map.height], lightmapSmoothed[v + u * map.height] + smoothingRate);
+			}
+			else if ( lightmapSmoothed[v + u * map.height] > lightmap[v + u * map.height] )
+			{
+				lightmapSmoothed[v + u * map.height] = std::max(lightmap[v + u * map.height], lightmapSmoothed[v + u * map.height] - smoothingRate);
+			}
+		}
+	}
 
 	if ( map.flags[MAP_FLAG_CEILINGTILE] != 0 && map.flags[MAP_FLAG_CEILINGTILE] < numtiles )
 	{
 		mapceilingtile = map.flags[MAP_FLAG_CEILINGTILE];
 	}
+
+	glEnable(GL_SCISSOR_TEST);
+	glScissor(camera->winx, yres - camera->winh - camera->winy, camera->winw, camera->winh);
 
 	if ( clouds && mode == REALCOLORS )
 	{
@@ -991,7 +1018,7 @@ void glDrawWorld(view_t* camera, int mode)
 								{
 									if ( x < map.width - 1 )
 									{
-										s = std::min(std::max(0, lightmap[y + (x + 1) * map.height]), 255) / 255.0;
+										s = std::min(std::max(0, lightmapSmoothed[y + (x + 1) * map.height]), 255) / 255.0;
 										if ( globalLightModifierActive )
 										{
 											s *= globalLightModifier;
@@ -1069,7 +1096,7 @@ void glDrawWorld(view_t* camera, int mode)
 								{
 									if ( y < map.height - 1 )
 									{
-										s = std::min(std::max(0, lightmap[(y + 1) + x * map.height]), 255) / 255.0;
+										s = std::min(std::max(0, lightmapSmoothed[(y + 1) + x * map.height]), 255) / 255.0;
 										if ( globalLightModifierActive )
 										{
 											s *= globalLightModifier;
@@ -1143,7 +1170,7 @@ void glDrawWorld(view_t* camera, int mode)
 								{
 									if ( x > 0 )
 									{
-										s = std::min(std::max(0, lightmap[y + (x - 1) * map.height]), 255) / 255.0;
+										s = std::min(std::max(0, lightmapSmoothed[y + (x - 1) * map.height]), 255) / 255.0;
 										if ( globalLightModifierActive )
 										{
 											s *= globalLightModifier;
@@ -1217,7 +1244,7 @@ void glDrawWorld(view_t* camera, int mode)
 								{
 									if ( y > 0 )
 									{
-										s = std::min(std::max(0, lightmap[(y - 1) + x * map.height]), 255) / 255.0;
+										s = std::min(std::max(0, lightmapSmoothed[(y - 1) + x * map.height]), 255) / 255.0;
 										if ( globalLightModifierActive )
 										{
 											s *= globalLightModifier;
@@ -1325,7 +1352,7 @@ void glDrawWorld(view_t* camera, int mode)
 						// unsmooth lighting
 						if ( mode == REALCOLORS )
 						{
-							s = std::min(std::max(0, lightmap[y + x * map.height]), 255) / 255.0;
+							s = std::min(std::max(0, lightmapSmoothed[y + x * map.height]), 255) / 255.0;
 							glColor3f(s, s, s);
 						}
 
@@ -1370,6 +1397,9 @@ void glDrawWorld(view_t* camera, int mode)
 		}
 	}
 	glEnd();
+
+	glDisable(GL_SCISSOR_TEST);
+	glScissor(0, 0, xres, yres);
 }
 
 /*GLuint create_shader(const char* filename, GLenum type)
@@ -1415,7 +1445,7 @@ static int dirty = 1;
 static int oldx = 0, oldy = 0;
 static unsigned int oldpix = 0;
 
-unsigned int GO_GetPixelU32(int x, int y)
+unsigned int GO_GetPixelU32(int x, int y, view_t& camera)
 {
 	if(!dirty && (oldx==x) && (oldy==y))
 		return oldpix;

@@ -1128,6 +1128,10 @@ int getSpellIDFromSpellbook(int spellbookType)
 
 bool spellInList(list_t* list, spell_t* spell)
 {
+	if ( !spell )
+	{
+		return false;
+	}
 	node_t* node;
 	for ( node = list->first; node != NULL; node = node->next )
 	{

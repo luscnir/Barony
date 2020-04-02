@@ -42,11 +42,6 @@ extern real_t mousespeed;
 void handleEvents(void);
 void startMessages();
 
-extern real_t camera_shakex;
-extern real_t camera_shakex2;
-extern int camera_shakey;
-extern int camera_shakey2;
-
 // net packet send
 typedef struct packetsend_t
 {
@@ -109,6 +104,8 @@ extern bool shootmode;
 extern char address[64];
 extern bool loadnextlevel;
 extern int skipLevelsOnLoad;
+extern bool loadingSameLevelAsCurrent;
+extern std::string loadCustomNextMap;
 extern Uint32 forceMapSeed;
 extern int currentlevel;
 extern bool secretlevel;
@@ -291,6 +288,7 @@ void actPowerCrystalParticleIdle(Entity* my);
 void actPedestalBase(Entity* my);
 void actPedestalOrb(Entity* my);
 void actMidGamePortal(Entity* my);
+void actCustomPortal(Entity* my);
 void actTeleporter(Entity* my);
 void actMagicTrapCeiling(Entity* my);
 void actExpansionEndGamePortal(Entity* my);

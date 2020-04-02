@@ -570,6 +570,8 @@ void Entity::actChest()
 					newItem(POTION_EMPTY, SERVICABLE, 0, 0 + rand() % 3, 0, true, inventory);
 				}
 				break;
+			case 8:
+				break;
 			default:
 				//Default case. Should never be reached.
 				newItem(static_cast<ItemType>(0), BROKEN, 0, 1, rand(), false, inventory);
@@ -705,12 +707,7 @@ void Entity::actChest()
 				chestOpener = chestclicked;
 				if ( chestclicked == clientnum ) // i.e host opened the chest, close GUIs
 				{
-					if ( removecursegui_active )
-					{
-						closeRemoveCurseGUI();
-					}
-					GenericGUI.closeGUI();
-					identifygui_active = false;
+					closeAllGUIs(DONT_CHANGE_SHOOTMODE, CLOSEGUI_DONT_CLOSE_CHEST);
 				}
 				if (chestclicked != 0 && multiplayer == SERVER)
 				{
@@ -739,8 +736,7 @@ void Entity::actChest()
 				}
 				else
 				{
-					shootmode = false;
-					gui_mode = GUI_MODE_INVENTORY; //Set it to the inventory screen so that the player can see the chest.
+					openStatusScreen(GUI_MODE_INVENTORY, INVENTORY_MODE_ITEM); // Reset the GUI to the inventory.
 					if ( numItemsInChest() > 0 )   //Warp mouse to first item in chest only if there are any items!
 					{
 						selectedChestSlot = 0;
@@ -913,6 +909,13 @@ void Entity::closeChest()
 		}
 		else
 		{
+			if ( chestOpener == clientnum )
+			{
+				for ( int c = 0; c < kNumChestItemsToDisplay; ++c )
+				{
+					invitemschest[c] = nullptr;
+				}
+			}
 			chestitemscroll = 0;
 			//Reset chest-gamepad related stuff here.
 			selectedChestSlot = -1;
@@ -926,6 +929,13 @@ void Entity::closeChestServer()
 	{
 		chestStatus = 0;
 		openedChest[chestOpener] = NULL;
+		if ( chestOpener == clientnum )
+		{
+			for ( int c = 0; c < kNumChestItemsToDisplay; ++c )
+			{
+				invitemschest[c] = nullptr;
+			}
+		}
 	}
 }
 
@@ -1264,6 +1274,11 @@ void closeChestClientside()
 	openedChest[clientnum] = NULL;
 
 	chestitemscroll = 0;
+
+	for ( int c = 0; c < kNumChestItemsToDisplay; ++c )
+	{
+		invitemschest[c] = nullptr;
+	}
 
 	//Reset chest-gamepad related stuff here.
 	selectedChestSlot = -1;

@@ -369,6 +369,10 @@ void addItemToMonsterInventory(Item &item, list_t& inventory)
 
 Item* uidToItem(Uint32 uid)
 {
+	if ( uid == 0 )
+	{
+		return nullptr;
+	}
 	node_t* node;
 	for ( node = stats[clientnum]->inventory.first; node != NULL; node = node->next )
 	{
@@ -378,7 +382,7 @@ Item* uidToItem(Uint32 uid)
 			return item;
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
 /*-------------------------------------------------------------------------------
@@ -1391,6 +1395,10 @@ Entity* dropItemMonster(Item* item, Entity* monster, Stat* monsterStats, Sint16 
 	}*/
 	if ( monsterStats )
 	{
+		if ( monsterStats->monsterNoDropItems == 1 )
+		{
+			itemDroppable = false;
+		}
 		if ( monsterStats->type == SKELETON && monster->behavior == &actMonster && monster->monsterAllySummonRank != 0 )
 		{
 			itemDroppable = false;
@@ -1629,7 +1637,7 @@ EquipItemResult equipItem(Item* item, Item** slot, int player)
 {
 	int oldcount;
 
-	if ( pickaxeGimpTimer > 0 && !intro )
+	if ( player == clientnum && pickaxeGimpTimer > 0 && !intro )
 	{
 		return EQUIP_ITEM_FAIL_CANT_UNEQUIP;
 	}
@@ -5319,7 +5327,7 @@ bool Item::unableToEquipDueToSwapWeaponTimer()
 	{
 		return true;
 	}
-	if ( swapWeaponGimpTimer > 0 )
+	if ( swapWeaponGimpTimer > 0 && !intro )
 	{
 		return true;
 	}

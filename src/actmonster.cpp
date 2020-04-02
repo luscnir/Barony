@@ -1384,7 +1384,7 @@ void actMonster(Entity* my)
 	// however, there is a small part for clients:
 	if ( multiplayer == CLIENT )
 	{
-		if ( !MONSTER_INIT && my->sprite >= 100 )
+		if ( !MONSTER_INIT && my->sprite >= 100 && !(my->sprite >= 163 && my->sprite <= 166) )
 		{
 			MONSTER_INIT = 1;
 
@@ -3006,7 +3006,7 @@ void actMonster(Entity* my)
 		}
 
 		// drop gold
-		if ( myStats->GOLD > 0 )
+		if ( myStats->GOLD > 0 && myStats->monsterNoDropItems == 0 )
 		{
 			int x = std::min<int>(std::max(0, (int)(my->x / 16)), map.width - 1);
 			int y = std::min<int>(std::max(0, (int)(my->y / 16)), map.height - 1);
@@ -6418,8 +6418,7 @@ timeToGoAgain:
 					}
 					if ( player == 0 )
 					{
-						shootmode = false;
-						gui_mode = GUI_MODE_INVENTORY;
+						closeAllGUIs(CLOSEGUI_ENABLE_SHOOTMODE, CLOSEGUI_CLOSE_ALL);
 					}
 					else
 					{
@@ -10850,7 +10849,7 @@ bool Entity::monsterConsumeFoodEntity(Entity* food, Stat* myStats)
 			// angry at owner.
 			if ( leader )
 			{
-				monsterAcquireAttackTarget(*leader, MONSTER_STATE_ATTACK);
+				//monsterAcquireAttackTarget(*leader, MONSTER_STATE_ATTACK);
 			}
 		}
 	}

@@ -68,6 +68,10 @@ int checkSpriteType(Sint32 sprite)
 	case 204:
 	case 205:
 	case 206:
+	case 216:
+	case 217:
+	case 218:
+	case 219:
 		//monsters
 		return 1;
 		break;
@@ -120,6 +124,7 @@ int checkSpriteType(Sint32 sprite)
 	case 123:
 	case 124:
 	case 125:
+	case 60:
 		// Moded A_D furniture
 	//case 167:// BloodyFountain
 	//case 169:// BloodySpearTrap
@@ -156,6 +161,26 @@ int checkSpriteType(Sint32 sprite)
 	case 133:
 		// signal modifier
 		return 17;
+	case 161:
+		// custom exit
+		return 18;
+	case 59:
+		// table
+		return 19;
+	case 162: 
+		// readablebook
+		return 20;
+	case 2:
+	case 3:
+		return 21;
+	case 19:
+	case 20:
+	case 113:
+	case 114:
+		return 22;
+	case 1:
+		return 23;
+		break;
 	default:
 		return 0;
 		break;
@@ -1072,7 +1097,7 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"COLUMN DECO",
 	"PODIUM",
 	"PISTONS",
-	"FLOOR DECORATION",
+	"DECORATION",
 	"TELEPORT LOCATION",
 	"ENDEND PORTAL",
 	"SOUND SOURCE",
@@ -1159,6 +1184,13 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"MARBLE GATE (East-West)",
 	"METAL TABLE",
 	"PEDESTAL LOCK",
+	"CUSTOM EXIT",
+	"READABLE BOOK",
+	"SENTRYBOT",
+	"SPELLBOT",
+	"DUMMYBOT",
+	"GYROBOT",
+	"UNUSED"
 	""
 };
 
@@ -1199,7 +1231,8 @@ char monsterEditorNameStrings[NUMMONSTERS][17] =
 	"lich_fire",
 	"sentrybot",
 	"spellbot",
-	"gyrobot"
+	"gyrobot",
+	"dummybot",
 	"cockroach",
 	"burgguard",
 	"gargoyle",
@@ -2133,7 +2166,14 @@ void setSpriteAttributes(Entity* entityNew, Entity* entityToCopy, Entity* entity
 		else
 		{
 			// set default new entity attributes.
-			entityNew->furnitureDir = 0;
+			if ( entityNew->sprite == 60 ) // chair
+			{
+				entityNew->furnitureDir = -1;
+			}
+			else
+			{
+				entityNew->furnitureDir = 0;
+			}
 		}
 	}
 	// floor decoration
@@ -2145,6 +2185,12 @@ void setSpriteAttributes(Entity* entityNew, Entity* entityToCopy, Entity* entity
 			entityNew->floorDecorationModel = entityToCopy->floorDecorationModel;
 			entityNew->floorDecorationRotation = entityToCopy->floorDecorationRotation;
 			entityNew->floorDecorationHeightOffset = entityToCopy->floorDecorationHeightOffset;
+			entityNew->floorDecorationXOffset = entityToCopy->floorDecorationXOffset;
+			entityNew->floorDecorationYOffset = entityToCopy->floorDecorationYOffset;
+			for ( int i = 8; i < 60; ++i )
+			{
+				entityNew->skill[i] = entityToCopy->skill[i];
+			}
 		}
 		else
 		{
@@ -2152,6 +2198,12 @@ void setSpriteAttributes(Entity* entityNew, Entity* entityToCopy, Entity* entity
 			entityNew->floorDecorationModel = 0;
 			entityNew->floorDecorationRotation = 0;
 			entityNew->floorDecorationHeightOffset = 0;
+			entityNew->floorDecorationXOffset = 0;
+			entityNew->floorDecorationYOffset = 0;
+			for ( int i = 8; i < 60; ++i )
+			{
+				entityNew->skill[i] = 0;
+			}
 		}
 	}
 	else if ( spriteType == 14 )
@@ -2208,7 +2260,7 @@ void setSpriteAttributes(Entity* entityNew, Entity* entityToCopy, Entity* entity
 			entityNew->textSourceColorRGB = entityToCopy->textSourceColorRGB;
 			entityNew->textSourceVariables4W = entityToCopy->textSourceVariables4W;
 			entityNew->textSourceDelay = entityToCopy->textSourceDelay;
-			entityNew->textSource3 = entityToCopy->textSource3;
+			entityNew->textSourceIsScript = entityToCopy->textSourceIsScript;
 			for ( int i = 4; i < 60; ++i )
 			{
 				entityNew->skill[i] = entityToCopy->skill[i];
@@ -2220,7 +2272,7 @@ void setSpriteAttributes(Entity* entityNew, Entity* entityToCopy, Entity* entity
 			entityNew->textSourceColorRGB = 0xFFFFFFFF;
 			entityNew->textSourceVariables4W = 0;
 			entityNew->textSourceDelay = 0;
-			entityNew->textSource3 = 0;
+			entityNew->textSourceIsScript = 0;
 			for ( int i = 4; i < 60; ++i )
 			{
 				entityNew->skill[i] = 0;
@@ -2246,6 +2298,122 @@ void setSpriteAttributes(Entity* entityNew, Entity* entityToCopy, Entity* entity
 			entityNew->signalTimerInterval = 0;
 			entityNew->signalTimerRepeatCount = 0;
 			entityNew->signalTimerLatchInput = 0;
+		}
+	}
+	else if ( spriteType == 18 )
+	{
+		if ( entityToCopy != nullptr )
+		{
+			// copy old entity attributes to newly created.
+			entityNew->portalCustomSprite = entityToCopy->portalCustomSprite;
+			entityNew->portalCustomSpriteAnimationFrames = entityToCopy->portalCustomSpriteAnimationFrames;
+			entityNew->portalCustomZOffset = entityToCopy->portalCustomZOffset;
+			entityNew->portalCustomLevelsToJump = entityToCopy->portalCustomLevelsToJump;
+			entityNew->portalNotSecret = entityToCopy->portalNotSecret;
+			entityNew->portalCustomRequiresPower = entityToCopy->portalCustomRequiresPower;
+			for ( int i = 11; i <= 18; ++i )
+			{
+				entityNew->skill[i] = entityToCopy->skill[i];
+			}
+		}
+		else
+		{
+			// set default new entity attributes.
+			entityNew->portalCustomSprite = 161;
+			entityNew->portalCustomSpriteAnimationFrames = 0;
+			entityNew->portalCustomZOffset = 8;
+			entityNew->portalCustomLevelsToJump = 1;
+			entityNew->portalNotSecret = 1;
+			entityNew->portalCustomRequiresPower = 0;
+			for ( int i = 11; i <= 18; ++i )
+			{
+				entityNew->skill[i] = 0;
+			}
+		}
+	}
+	else if ( spriteType == 19 ) // tables
+	{
+		if ( entityToCopy != nullptr )
+		{
+			// copy old entity attributes to newly created.
+			entityNew->furnitureDir = entityToCopy->furnitureDir;
+			entityNew->furnitureTableSpawnChairs = entityToCopy->furnitureTableSpawnChairs;
+			entityNew->furnitureTableRandomItemChance = entityToCopy->furnitureTableRandomItemChance;
+		}
+		else
+		{
+			// set default new entity attributes.
+			entityNew->furnitureDir = -1;
+			entityNew->furnitureTableSpawnChairs = -1;
+			entityNew->furnitureTableRandomItemChance = -1;
+		}
+	}
+	else if ( spriteType == 20 ) // readable book
+	{
+		if ( entityToCopy != nullptr )
+		{
+			// copy old entity attributes to newly created.
+			entityNew->skill[11] = entityToCopy->skill[11];
+			entityNew->skill[12] = entityToCopy->skill[12];
+			entityNew->skill[15] = entityToCopy->skill[15];
+			for ( int i = 40; i <= 52; ++i )
+			{
+				entityNew->skill[i] = entityToCopy->skill[i];
+			}
+		}
+		else
+		{
+			// set default new entity attributes.
+			entityNew->skill[11] = 0;
+			entityNew->skill[12] = 10;
+			entityNew->skill[15] = 0;
+			for ( int i = 40; i <= 52; ++i )
+			{
+				entityNew->skill[i] = 0;
+			}
+		}
+	}
+	else if ( spriteType == 21 ) // doors
+	{
+		if ( entityToCopy != nullptr )
+		{
+			// copy old entity attributes to newly created.
+			entityNew->doorForceLockedUnlocked = entityToCopy->doorForceLockedUnlocked;
+			entityNew->doorDisableLockpicks = entityToCopy->doorDisableLockpicks;
+			entityNew->doorDisableOpening= entityToCopy->doorDisableOpening;
+		}
+		else
+		{
+			// set default new entity attributes.
+			entityNew->doorForceLockedUnlocked = 0;
+			entityNew->doorDisableLockpicks = 0;
+			entityNew->doorDisableOpening = 0;
+		}
+	}
+	else if ( spriteType == 22 ) // gates
+	{
+		if ( entityToCopy != nullptr )
+		{
+			// copy old entity attributes to newly created.
+			entityNew->gateDisableOpening = entityToCopy->gateDisableOpening;
+		}
+		else
+		{
+			// set default new entity attributes.
+			entityNew->gateDisableOpening = 0;
+		}
+	}
+	else if ( spriteType == 23 ) // player spawns
+	{
+		if ( entityToCopy != nullptr )
+		{
+			// copy old entity attributes to newly created.
+			entityNew->playerStartDir = entityToCopy->playerStartDir;
+		}
+		else
+		{
+			// set default new entity attributes.
+			entityNew->playerStartDir = 0;
 		}
 	}
 

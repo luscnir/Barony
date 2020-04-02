@@ -46,6 +46,7 @@ string lastname;
 int lastCreatedCharacterClass = -1;
 int lastCreatedCharacterAppearance = -1;
 int lastCreatedCharacterSex = -1;
+int lastCreatedCharacterRace = -1;
 
 // net stuff
 Uint32 clientplayer = 0;
@@ -158,7 +159,8 @@ Sint32 camx = 0, camy = 0;
 Sint32 ocamx = 0, ocamy = 0;
 Sint32 newcamx, newcamy;
 Uint32 entity_uids = 1, lastEntityUIDs = 1;
-view_t camera;
+view_t cameras[MAXPLAYERS];
+view_t menucam;
 map_t map;
 voxel_t** models = nullptr;
 list_t button_l;
@@ -167,6 +169,7 @@ Uint32 mapseed;
 bool* shoparea = nullptr;
 real_t globalLightModifier = 0.f;
 real_t globalLightTelepathyModifier = 0.f;
+int globalLightSmoothingRate = 1;
 int globalLightModifierActive = 0;
 
 // game variables
@@ -174,6 +177,8 @@ bool shootmode = false;
 Sint8 minimap[64][64];
 bool loadnextlevel = false;
 int skipLevelsOnLoad = 0;
+bool loadingSameLevelAsCurrent = false;
+std::string loadCustomNextMap = "";
 Uint32 forceMapSeed = 0;
 bool loading = false;
 int currentlevel = 0, minotaurlevel = 0;
@@ -271,6 +276,7 @@ int rscale = 1;
 real_t vidgamma = 1.0f;
 real_t* zbuffer = nullptr;
 Sint32* lightmap = nullptr;
+Sint32* lightmapSmoothed = nullptr;
 bool* vismap = nullptr;
 bool mode3d = false;
 bool verticalSync = false;
@@ -300,10 +306,7 @@ SDL_Surface* cross_bmp = nullptr;
 int shaking = 0, bobbing = 0;
 bool fadeout = false, fadefinished = false;
 int fadealpha = 0;
-real_t camera_shakex;
-real_t camera_shakex2;
-int camera_shakey;
-int camera_shakey2;
+cameravars_t cameravars[MAXPLAYERS];
 
 // misc definitions
 char tempstr[1024];

@@ -12,3 +12,11 @@
 #define USE_FMOD
 
 //#define DEBUG_ACHIEVEMENTS
+
+#ifdef BARONY_DRM_FREE
+
+#ifdef STEAMWORKS
+#undef STEAMWORKS
+#endif // STEAMWORKS
+
+#endif

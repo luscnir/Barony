@@ -133,7 +133,7 @@ void actMagiclightBall(Entity* my)
 	{
 		int i = 0;
 		int player = -1;
-		for (i = 0; i < 4; ++i)
+		for (i = 0; i < MAXPLAYERS; ++i)
 		{
 			if (players[i]->entity == caster)
 			{
@@ -176,7 +176,7 @@ void actMagiclightBall(Entity* my)
 					{
 						int i = 0;
 						int player = -1;
-						for (i = 0; i < 4; ++i)
+						for (i = 0; i < MAXPLAYERS; ++i)
 						{
 							if (players[i]->entity == caster)
 							{
@@ -1500,7 +1500,7 @@ void actMagicMissile(Entity* my)   //TODO: Verify this function.
 							}
 							if ( hitstats )
 							{
-								hitstats->poisonKiller = my->parent;
+								hitstats->burningInflictedBy = static_cast<Sint32>(my->parent);
 							}
 
 							// update enemy bar for attacker
@@ -2173,11 +2173,14 @@ void actMagicMissile(Entity* my)   //TODO: Verify this function.
 					{
 						if (hit.entity->behavior == &actDoor)
 						{
-							if ( parent && parent->behavior == &actPlayer && MFLAG_DISABLEOPENING )
+							if ( MFLAG_DISABLEOPENING || hit.entity->doorDisableOpening == 1 )
 							{
-								Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 255);
-								messagePlayerColor(parent->skill[2], 0xFFFFFFFF, language[3096], language[3097]);
-								messagePlayerColor(parent->skill[2], color, language[3101]); // disabled opening spell.
+								if ( parent && parent->behavior == &actPlayer )
+								{
+									Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 255);
+									messagePlayerColor(parent->skill[2], 0xFFFFFFFF, language[3096], language[3097]);
+									messagePlayerColor(parent->skill[2], color, language[3101]); // disabled opening spell.
+								}
 							}
 							else
 							{
@@ -2207,11 +2210,14 @@ void actMagicMissile(Entity* my)   //TODO: Verify this function.
 						}
 						else if ( hit.entity->behavior == &actGate )
 						{
-							if ( parent && parent->behavior == &actPlayer && MFLAG_DISABLEOPENING )
+							if ( MFLAG_DISABLEOPENING || hit.entity->gateDisableOpening == 1 )
 							{
-								Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 255);
-								messagePlayerColor(parent->skill[2], 0xFFFFFFFF, language[3096], language[3098]);
-								messagePlayerColor(parent->skill[2], color, language[3102]); // disabled opening spell.
+								if ( parent && parent->behavior == &actPlayer )
+								{
+									Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 255);
+									messagePlayerColor(parent->skill[2], 0xFFFFFFFF, language[3096], language[3098]);
+									messagePlayerColor(parent->skill[2], color, language[3102]); // disabled opening spell.
+								}
 							}
 							else
 							{
@@ -2242,11 +2248,14 @@ void actMagicMissile(Entity* my)   //TODO: Verify this function.
 							// Unlock the Chest
 							if ( hit.entity->chestLocked )
 							{
-								if ( parent && parent->behavior == &actPlayer && MFLAG_DISABLEOPENING )
+								if ( MFLAG_DISABLEOPENING )
 								{
-									Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 255);
-									messagePlayerColor(parent->skill[2], 0xFFFFFFFF, language[3096], language[3099]);
-									messagePlayerColor(parent->skill[2], color, language[3100]); // disabled opening spell.
+									if ( parent && parent->behavior == &actPlayer )
+									{
+										Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 255);
+										messagePlayerColor(parent->skill[2], 0xFFFFFFFF, language[3096], language[3099]);
+										messagePlayerColor(parent->skill[2], color, language[3100]); // disabled opening spell.
+									}
 								}
 								else
 								{
@@ -2423,7 +2432,13 @@ void actMagicMissile(Entity* my)   //TODO: Verify this function.
 
 							int bleedDuration = (element->duration * (((element->mana) / static_cast<double>(element->base_mana)) * element->overload_multiplier));
 							bleedDuration /= (1 + (int)resistance);
-							hit.entity->setEffect(EFF_BLEEDING, true, bleedDuration, true);
+							if ( hit.entity->setEffect(EFF_BLEEDING, true, bleedDuration, true) )
+							{
+								if ( parent )
+								{
+									hitstats->bleedInflictedBy = static_cast<Sint32>(my->parent);
+								}
+							}
 							hitstats->EFFECTS[EFF_SLOW] = true;
 							hitstats->EFFECTS_TIMERS[EFF_SLOW] = (element->duration * (((element->mana) / static_cast<double>(element->base_mana)) * element->overload_multiplier));
 							hitstats->EFFECTS_TIMERS[EFF_SLOW] /= 4;
@@ -2606,10 +2621,10 @@ void actMagicMissile(Entity* my)   //TODO: Verify this function.
 								net_packet->len = 6;
 								sendPacketSafe(net_sock, -1, net_packet, player - 1);
 							}
-							else if ( player == 0 )
+							else if (player == 0 || splitscreen)
 							{
-								camera_shakex += .1;
-								camera_shakey += 10;
+								cameravars[player].shakex += .1;
+								cameravars[player].shakey += 10;
 							}
 						}
 					}

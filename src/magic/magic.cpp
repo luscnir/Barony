@@ -1647,6 +1647,8 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 		|| targetStats->type == LICH_FALLEN || targetStats->type == CLONE_FALLEN
 		|| (target->behavior == &actMonster && target->monsterAllySummonRank != 0)
 		|| (targetStats->type == INCUBUS && !strncmp(targetStats->name, "inner demon", strlen("inner demon")))
+		|| targetStats->type == SENTRYBOT || targetStats->type == SPELLBOT || targetStats->type == GYROBOT
+		|| targetStats->type == DUMMYBOT
 		)
 	{
 		if ( parent && parent->behavior == &actPlayer )
@@ -1848,6 +1850,14 @@ Entity* spellEffectPolymorph(Entity* target, Stat* targetStats, Entity* parent, 
 			summonedStats->EDITOR_ITEMS[ITEM_SLOT_RING] = 0;
 			summonedStats->EDITOR_ITEMS[ITEM_SLOT_CLOAK] = 0;
 			summonedStats->EDITOR_ITEMS[ITEM_SLOT_AMULET] = 0;
+		}
+
+		for ( int x = ITEM_SLOT_INV_1; x <= ITEM_SLOT_INV_6; x = x + ITEM_SLOT_NUMPROPERTIES )
+		{
+			if ( summonedStats->EDITOR_ITEMS[x] == 1 && summonedStats->EDITOR_ITEMS[x + ITEM_SLOT_CATEGORY] == 0 )
+			{
+				summonedStats->EDITOR_ITEMS[x] = 0; //clear default item in inventory
+			}
 		}
 
 		// copy stats from target to new creature.

@@ -38,10 +38,42 @@ extern bool uiscale_skillspage;
 extern real_t uiscale_hotbar;
 extern real_t uiscale_inventory;
 
-extern char enemy_name[128];
-extern Sint32 enemy_hp, enemy_maxhp, enemy_oldhp;
-extern Uint32 enemy_timer, enemy_lastuid;
-extern Uint32 enemy_bar_color[MAXPLAYERS];
+class EnemyHPDamageBarHandler
+{
+	const int k_maxTickLifetime = 120;
+public:
+
+	struct EnemyHPDetails
+	{
+		char enemy_name[128] = "";
+		Sint32 enemy_hp = 0;
+		Sint32 enemy_maxhp = 0;
+		Sint32 enemy_oldhp = 0;
+		Uint32 enemy_timer = 0;
+		Uint32 enemy_bar_color = 0;
+		bool lowPriorityTick = false;
+		bool shouldDisplay = true;
+		EnemyHPDetails(Sint32 HP, Sint32 maxHP, Sint32 oldHP, Uint32 color, char* name, bool isLowPriority)
+		{
+			memset(enemy_name, 0, 128);
+			enemy_hp = HP;
+			enemy_maxhp = maxHP;
+			enemy_oldhp = oldHP;
+			enemy_timer = ticks;
+			enemy_bar_color = color;
+			lowPriorityTick = isLowPriority;
+			shouldDisplay = true;
+			strcpy(enemy_name, name);
+		}
+	};
+
+	Uint32 enemy_bar_client_colors[MAXPLAYERS];
+	std::unordered_map<Uint32, EnemyHPDetails> HPBars;
+	void addEnemyToList(Sint32 HP, Sint32 maxHP, Sint32 oldHP, Uint32 color, Uint32 uid, char* name, bool isLowPriority);
+	void displayCurrentHPBar();
+};
+extern EnemyHPDamageBarHandler enemyHPDamageBarHandler;
+
 extern int magicBoomerangHotbarSlot;
 
 #ifndef SHOPWINDOW_SIZE
@@ -92,8 +124,6 @@ extern SDL_Surface* backdrop_abyssend_bmp;
 extern int textscroll;
 extern int attributespage;
 extern int proficienciesPage;
-extern Item* invitems[4];
-extern Item* invitemschest[4];
 extern int inventorycategory;
 extern int itemscroll;
 extern view_t camera_charsheet;
@@ -108,8 +138,10 @@ extern SDL_Surface* inventoryChest_bmp;
 extern SDL_Surface* invclose_bmp;
 extern SDL_Surface* invgraball_bmp;
 extern int chestitemscroll; //Same as itemscroll, but for the chest inventory GUI.
-extern Entity* openedChest[4]; //One for each client. //TODO: Clientside, [0] will always point to something other than NULL when a chest is open and it will be NULL when a chest is closed.
+extern Entity* openedChest[MAXPLAYERS]; //One for each client. //TODO: Clientside, [0] will always point to something other than NULL when a chest is open and it will be NULL when a chest is closed.
 extern list_t chestInv; //This is just for the client, so that it can populate the chest inventory on its end.
+static const int kNumChestItemsToDisplay = 4;
+extern Item* invitemschest[kNumChestItemsToDisplay];
 
 extern bool gui_clickdrag; //True as long as an interface element is being dragged.
 extern int dragoffset_x;
@@ -125,7 +157,7 @@ void freeInterfaceResources();
 void clickDescription(int player, Entity* entity);
 void consoleCommand(char* command);
 void drawMinimap();
-void handleDamageIndicators();
+void handleDamageIndicators(int player);
 void handleDamageIndicatorTicks();
 void drawStatus();
 void saveCommand(char* content);
@@ -136,7 +168,7 @@ void updateChestInventory();
 void updateAppraisalItemBox();
 void updatePlayerInventory();
 void updateShopWindow();
-void updateEnemyBar(Entity* source, Entity* target, char* name, Sint32 hp, Sint32 maxhp);
+void updateEnemyBar(Entity* source, Entity* target, char* name, Sint32 hp, Sint32 maxhp, bool lowPriorityTick = false);
 damageIndicator_t* newDamageIndicator(double x, double y);
 
 void selectItemMenuSlot(const Item& item, int entry);
@@ -350,7 +382,7 @@ public:
 		basePotion(nullptr),
 		secondaryPotion(nullptr),
 		alembicItem(nullptr),
-		experimentingAlchemy(nullptr),
+		experimentingAlchemy(false),
 		tinkeringKitItem(nullptr),
 		tinkeringTotalLastCraftableNode(nullptr),
 		tinkeringFilter(TINKER_FILTER_ALL),
@@ -600,6 +632,20 @@ Sint8* inputPressed(Uint32 scancode);
 
 //All the code that sets shootmode = false. Display chests, inventory, books, shopkeeper, identify, whatever.
 void openStatusScreen(int whichGUIMode, int whichInventoryMode); //TODO: Make all the everything use this. //TODO: Make an accompanying closeStatusScreen() function.
+enum CloseGUIShootmode : int
+{
+	DONT_CHANGE_SHOOTMODE,
+	CLOSEGUI_ENABLE_SHOOTMODE
+};
+enum CloseGUIIgnore : int
+{
+	CLOSEGUI_CLOSE_ALL,
+	CLOSEGUI_DONT_CLOSE_FOLLOWERGUI,
+	CLOSEGUI_DONT_CLOSE_CHEST,
+	CLOSEGUI_DONT_CLOSE_SHOP
+};
+
+void closeAllGUIs(CloseGUIShootmode shootmodeAction, CloseGUIIgnore whatToClose);
 
 static const int SCANCODE_UNASSIGNED_BINDING = 399;
 
@@ -732,3 +778,5 @@ public:
 extern FollowerRadialMenu FollowerMenu;
 extern SDL_Rect interfaceSkillsSheet;
 extern SDL_Rect interfacePartySheet;
+extern SDL_Rect interfaceCharacterSheet;
+extern SDL_Rect interfaceMessageStatusBar;

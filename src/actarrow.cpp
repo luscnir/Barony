@@ -21,6 +21,7 @@
 #include "items.hpp"
 #include "magic/magic.hpp"
 #include "scores.hpp"
+#include "player.hpp"
 
 /*-------------------------------------------------------------------------------
 
@@ -563,10 +564,10 @@ void actArrow(Entity* my)
 						playSoundEntity(hit.entity, 28, 64);
 						if ( hit.entity->behavior == &actPlayer )
 						{
-							if ( hit.entity->skill[2] == clientnum )
+							if ( hit.entity->skill[2] == clientnum || splitscreen )
 							{
-								camera_shakex += .1;
-								camera_shakey += 10;
+								cameravars[hit.entity->skill[2]].shakex += .1;
+								cameravars[hit.entity->skill[2]].shakey += 10;
 							}
 							else
 							{
@@ -589,10 +590,10 @@ void actArrow(Entity* my)
 						// playSoundEntity(hit.entity, 66, 64); //*tink*
 						if ( hit.entity->behavior == &actPlayer )
 						{
-							if ( hit.entity->skill[2] == clientnum )
+							if ( hit.entity->skill[2] == clientnum || splitscreen )
 							{
-								camera_shakex += .05;
-								camera_shakey += 5;
+								cameravars[hit.entity->skill[2]].shakex += .05;
+								cameravars[hit.entity->skill[2]].shakey += 5;
 							}
 							else
 							{
@@ -755,27 +756,13 @@ void actArrow(Entity* my)
 					bool statusEffectApplied = false;
 					if ( hitstats->HP > 0 )
 					{
-						/*if ( my->arrowPoisonTime > 0 && damage > 0 )
-						{
-							hitstats->poisonKiller = my->parent;
-							hitstats->EFFECTS[EFF_POISONED] = true;
-							hitstats->EFFECTS_TIMERS[EFF_POISONED] = my->arrowPoisonTime;
-							if ( hit.entity->behavior == &actPlayer )
-							{
-								Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
-								messagePlayerColor(hit.entity->skill[2], color, language[453]);
-								serverUpdateEffects(hit.entity->skill[2]);
-							}
-							statusEffectApplied = true;
-						}*/
-
 						if ( my->arrowQuiverType == QUIVER_FIRE )
 						{
 							bool burning = hit.entity->flags[BURNING];
 							hit.entity->SetEntityOnFire(my);
 							if ( hitstats )
 							{
-								hitstats->poisonKiller = my->parent;
+								hitstats->burningInflictedBy = static_cast<Sint32>(my->parent);
 							}
 							if ( !burning && hit.entity->flags[BURNING] )
 							{

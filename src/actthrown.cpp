@@ -930,6 +930,7 @@ void actThrown(Entity* my)
 								break;
 							case POTION_CONFUSION:
 								item_PotionConfusion(item, hit.entity, parent);
+								disableAlertBlindStatus = true; // don't aggro target.
 								usedpotion = true;
 								break;
 							case POTION_EXTRAHEALING:
@@ -974,12 +975,8 @@ void actThrown(Entity* my)
 								break;
 							case POTION_BLINDNESS:
 							{
-								bool wasBlind = hit.entity->isBlind();
 								item_PotionBlindness(item, hit.entity, parent);
-								if ( hit.entity->isBlind() && !wasBlind )
-								{
-									disableAlertBlindStatus = true; // don't aggro target.
-								}
+								disableAlertBlindStatus = true; // don't aggro target.
 								usedpotion = true;
 								break;
 							}
@@ -1029,7 +1026,6 @@ void actThrown(Entity* my)
 								}
 								if ( hit.entity->behavior == &actMonster )
 								{
-									bool wasBlind = hit.entity->isBlind();
 									if ( hit.entity->setEffect(EFF_BLIND, true, 250, false) )
 									{
 										if ( parent && parent->behavior == &actPlayer )
@@ -1037,11 +1033,7 @@ void actThrown(Entity* my)
 											messagePlayerMonsterEvent(parent->skill[2], color, *hitstats, language[3878], language[3879], MSG_COMBAT);
 										}
 									}
-									if ( hit.entity->isBlind() && !wasBlind )
-									{
-										disableAlertBlindStatus = true; // don't aggro target.
-									}
-
+									disableAlertBlindStatus = true; // don't aggro target.
 								}
 								else if ( hit.entity->behavior == &actPlayer )
 								{
@@ -1188,10 +1180,10 @@ void actThrown(Entity* my)
 					playSoundEntity(hit.entity, 28, 64);
 					if ( hit.entity->behavior == &actPlayer )
 					{
-						if ( hit.entity->skill[2] == clientnum )
+						if ( hit.entity->skill[2] == clientnum || splitscreen )
 						{
-							camera_shakex += .1;
-							camera_shakey += 10;
+							cameravars[hit.entity->skill[2]].shakex += .1;
+							cameravars[hit.entity->skill[2]].shakey += 10;
 						}
 						else
 						{
@@ -1219,8 +1211,8 @@ void actThrown(Entity* my)
 					{
 						if ( hit.entity->skill[2] == clientnum )
 						{
-							camera_shakex += .05;
-							camera_shakey += 5;
+							cameravars[hit.entity->skill[2]].shakex += .05;
+							cameravars[hit.entity->skill[2]].shakey += 5;
 						}
 						else
 						{

@@ -1388,19 +1388,22 @@ void updatePlayerInventory()
 					}
 
 					bool disableItemUsage = false;
-					if ( players[clientnum] && players[clientnum]->entity && players[clientnum]->entity->effectShapeshift != NOTHING )
+					if ( item )
 					{
-						// shape shifted, disable some items
-						if ( !item->usableWhileShapeshifted(stats[clientnum]) )
+						if ( players[clientnum] && players[clientnum]->entity && players[clientnum]->entity->effectShapeshift != NOTHING )
 						{
-							disableItemUsage = true;
+							// shape shifted, disable some items
+							if ( !item->usableWhileShapeshifted(stats[clientnum]) )
+							{
+								disableItemUsage = true;
+							}
 						}
-					}
-					if ( client_classes[clientnum] == CLASS_SHAMAN )
-					{
-						if ( item->type == SPELL_ITEM && !(playerUnlockedShamanSpell(clientnum, item)) )
+						if ( client_classes[clientnum] == CLASS_SHAMAN )
 						{
-							disableItemUsage = true;
+							if ( item->type == SPELL_ITEM && !(playerUnlockedShamanSpell(clientnum, item)) )
+							{
+								disableItemUsage = true;
+							}
 						}
 					}
 
@@ -1492,7 +1495,7 @@ void updatePlayerInventory()
 						}
 					}
 
-					if ( numkey_quick_add )
+					if ( numkey_quick_add && !command )
 					{
 						if ( keystatus[SDL_SCANCODE_1] )
 						{
@@ -1559,9 +1562,10 @@ void updatePlayerInventory()
 	itemContextMenu();
 }
 
-inline bool itemMenuSkipRow1ForChests(const Item& item)
+inline bool itemMenuSkipRow1ForShopsAndChests(const Item& item)
 {
-	if ( openedChest[clientnum] && (itemCategory(&item) == POTION || item.type == TOOL_ALEMBIC || item.type == TOOL_TINKERING_KIT) )
+	if ( (openedChest[clientnum] || gui_mode == GUI_MODE_SHOP) 
+		&& (itemCategory(&item) == POTION || item.type == TOOL_ALEMBIC || item.type == TOOL_TINKERING_KIT || itemCategory(&item) == SPELLBOOK) )
 	{
 		return true;
 	}
@@ -1594,7 +1598,7 @@ inline void drawItemMenuSlots(const Item& item, int slot_width, int slot_height)
 	drawItemMenuSlot(current_x, current_y, slot_width, slot_height, itemMenuSelected == 0); //Option 0 => Store in chest, sell, use.
 	if (itemCategory(&item) != SPELL_CAT)
 	{
-		if ( itemMenuSkipRow1ForChests(item) )
+		if ( itemMenuSkipRow1ForShopsAndChests(item) )
 		{
 			current_y += slot_height;
 			drawItemMenuSlot(current_x, current_y, slot_width, slot_height, itemMenuSelected == 2); //Option 1 => appraise
@@ -1754,7 +1758,7 @@ inline void drawItemMenuOptionPotion(const Item& item, int x, int y, int height,
 	y += height;
 
 	//Option 1.
-	if ( itemMenuSkipRow1ForChests(item) )
+	if ( itemMenuSkipRow1ForShopsAndChests(item) )
 	{
 		// skip this row.
 	}
@@ -1928,22 +1932,29 @@ inline void drawItemMenuOptionSpellbook(const Item& item, int x, int y, int heig
 	y += height;
 
 	//Option 1
-	if ( learnedSpell )
+	if ( itemMenuSkipRow1ForShopsAndChests(item) )
 	{
-		drawOptionUse(item, x, y);
+		// skip this row.
 	}
 	else
 	{
-		if ( itemIsEquipped(&item, clientnum) )
+		if ( learnedSpell )
 		{
-			drawOptionUnwield(x, y);
+			drawOptionUse(item, x, y);
 		}
 		else
 		{
-			drawOptionWield(x, y);
+			if ( itemIsEquipped(&item, clientnum) )
+			{
+				drawOptionUnwield(x, y);
+			}
+			else
+			{
+				drawOptionWield(x, y);
+			}
 		}
+		y += height;
 	}
-	y += height;
 
 	//Option 2
 	drawOptionAppraise(x, y);
@@ -2009,7 +2020,7 @@ inline void selectItemMenuSlot(const Item& item, int x, int y, int slot_width, i
 	}
 	if (itemCategory(&item) != SPELL_CAT)
 	{
-		if ( itemMenuSkipRow1ForChests(item) )
+		if ( itemMenuSkipRow1ForShopsAndChests(item) )
 		{
 			current_y += slot_height;
 			if ( mousey >= current_y && mousey < current_y + slot_height )

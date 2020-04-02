@@ -75,6 +75,13 @@ void segfault_sigaction(int signal, siginfo_t* si, void* arg)
 
 #endif
 
+#ifdef BSD
+
+#include <sys/types.h>
+#include <sys/sysctl.h>
+
+#endif
+
 #ifdef WINDOWS
 void make_minidump(EXCEPTION_POINTERS* e)
 {
@@ -94,7 +101,7 @@ void make_minidump(EXCEPTION_POINTERS* e)
 		strcpy(name, "barony_crash");
 		auto nameEnd = name + strlen("barony_crash");
 		SYSTEMTIME t;
-		GetSystemTime(&t);
+		GetLocalTime(&t);
 		wsprintfA(nameEnd,
 			"_%4d%02d%02d_%02d%02d%02d.dmp",
 			t.wYear, t.wMonth, t.wDay, t.wHour, t.wMinute, t.wSecond);
@@ -262,49 +269,61 @@ void gameLogic(void)
 #endif
 
 	// camera shaking
-	if ( shaking )
+	for (int c = 0; c < MAXPLAYERS; ++c) 
 	{
-		camera_shakex2 = (camera_shakex2 + camera_shakex) * .8;
-		camera_shakey2 = (camera_shakey2 + camera_shakey) * .9;
-		if ( camera_shakex2 > 0 )
+		if ( !splitscreen && c != clientnum )
 		{
-			if ( camera_shakex2 < .02 && camera_shakex >= -.01 )
+			continue;
+		}
+
+		auto& camera_shakex = cameravars[c].shakex;
+		auto& camera_shakey = cameravars[c].shakey;
+		auto& camera_shakex2 = cameravars[c].shakex2;
+		auto& camera_shakey2 = cameravars[c].shakey2;
+		if ( shaking )
+		{
+			camera_shakex2 = (camera_shakex2 + camera_shakex) * .8;
+			camera_shakey2 = (camera_shakey2 + camera_shakey) * .9;
+			if ( camera_shakex2 > 0 )
 			{
-				camera_shakex2 = 0;
-				camera_shakex = 0;
+				if ( camera_shakex2 < .02 && camera_shakex >= -.01 )
+				{
+					camera_shakex2 = 0;
+					camera_shakex = 0;
+				}
+				else
+				{
+					camera_shakex -= .01;
+				}
 			}
-			else
+			else if ( camera_shakex2 < 0 )
 			{
-				camera_shakex -= .01;
+				if ( camera_shakex2 > -.02 && camera_shakex <= .01 )
+				{
+					camera_shakex2 = 0;
+					camera_shakex = 0;
+				}
+				else
+				{
+					camera_shakex += .01;
+				}
+			}
+			if ( camera_shakey2 > 0 )
+			{
+				camera_shakey -= 1;
+			}
+			else if ( camera_shakey2 < 0 )
+			{
+				camera_shakey += 1;
 			}
 		}
-		else if ( camera_shakex2 < 0 )
+		else
 		{
-			if ( camera_shakex2 > -.02 && camera_shakex <= .01 )
-			{
-				camera_shakex2 = 0;
-				camera_shakex = 0;
-			}
-			else
-			{
-				camera_shakex += .01;
-			}
+			camera_shakex = 0;
+			camera_shakey = 0;
+			camera_shakex2 = 0;
+			camera_shakey2 = 0;
 		}
-		if ( camera_shakey2 > 0 )
-		{
-			camera_shakey -= 1;
-		}
-		else if ( camera_shakey2 < 0 )
-		{
-			camera_shakey += 1;
-		}
-	}
-	else
-	{
-		camera_shakex = 0;
-		camera_shakey = 0;
-		camera_shakex2 = 0;
-		camera_shakey2 = 0;
 	}
 
 	// drunkenness
@@ -1097,6 +1116,8 @@ void gameLogic(void)
 						mapseed = forceMapSeed;
 						forceMapSeed = 0;
 					}
+
+					bool loadingTheSameFloorAsCurrent = false;
 					if ( skipLevelsOnLoad > 0 )
 					{
 						currentlevel += skipLevelsOnLoad;
@@ -1106,6 +1127,10 @@ void gameLogic(void)
 						if ( skipLevelsOnLoad < 0 )
 						{
 							currentlevel += skipLevelsOnLoad;
+							if ( skipLevelsOnLoad == -1 )
+							{
+								loadingTheSameFloorAsCurrent = true;
+							}
 						}
 						++currentlevel;
 					}
@@ -1152,17 +1177,36 @@ void gameLogic(void)
 							{
 								continue;
 							}
-							strcpy((char*)net_packet->data, "LVLC");
+							if ( loadingSameLevelAsCurrent )
+							{
+								strcpy((char*)net_packet->data, "LVLR");
+							}
+							else
+							{
+								strcpy((char*)net_packet->data, "LVLC");
+							}
 							net_packet->data[4] = secretlevel;
 							SDLNet_Write32(mapseed, &net_packet->data[5]);
 							SDLNet_Write32(lastEntityUIDs, &net_packet->data[9]);
 							net_packet->data[13] = currentlevel;
+
+							if ( loadCustomNextMap.compare("") != 0 )
+							{
+								strcpy((char*)(&net_packet->data[14]), loadCustomNextMap.c_str());
+								net_packet->data[14 + loadCustomNextMap.length()] = 0;
+								net_packet->len = 14 + loadCustomNextMap.length() + 1;
+							}
+							else
+							{
+								net_packet->data[14] = 0;
+								net_packet->len = 15;
+							}
 							net_packet->address.host = net_clients[c - 1].host;
 							net_packet->address.port = net_clients[c - 1].port;
-							net_packet->len = 14;
 							sendPacketSafe(net_sock, -1, net_packet, c - 1);
 						}
 					}
+					loadingSameLevelAsCurrent = false;
 					darkmap = false;
 					numplayers = 0;
 					int checkMapHash = -1;
@@ -1575,19 +1619,21 @@ void gameLogic(void)
 			}
 
 			// update clients on assailant status
-			for ( c = 1; c < MAXPLAYERS; c++ )
-			{
-				if ( !client_disconnected[c] )
+			if (multiplayer != SINGLE) {
+				for ( c = 1; c < MAXPLAYERS; c++ )
 				{
-					if ( oassailant[c] != assailant[c] )
+					if ( !client_disconnected[c] )
 					{
-						oassailant[c] = assailant[c];
-						strcpy((char*)net_packet->data, "MUSM");
-						net_packet->address.host = net_clients[c - 1].host;
-						net_packet->address.port = net_clients[c - 1].port;
-						net_packet->data[3] = assailant[c];
-						net_packet->len = 4;
-						sendPacketSafe(net_sock, -1, net_packet, c - 1);
+						if ( oassailant[c] != assailant[c] )
+						{
+							oassailant[c] = assailant[c];
+							strcpy((char*)net_packet->data, "MUSM");
+							net_packet->address.host = net_clients[c - 1].host;
+							net_packet->address.port = net_clients[c - 1].port;
+							net_packet->data[3] = assailant[c];
+							net_packet->len = 4;
+							sendPacketSafe(net_sock, -1, net_packet, c - 1);
+						}
 					}
 				}
 			}
@@ -3119,10 +3165,17 @@ int main(int argc, char** argv)
 
 	try
 	{
+#if defined(APPLE) || defined(BSD)
 #ifdef APPLE
 		uint32_t buffsize = 4096;
 		char binarypath[buffsize];
 		int result = _NSGetExecutablePath(binarypath, &buffsize);
+#elif defined(BSD)
+		int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_PATHNAME, -1};
+		size_t buffsize = PATH_MAX;
+		char binarypath[buffsize];
+		int result = sysctl(mib, 4, binarypath, &buffsize, NULL, 0);
+#endif
 		if (result == 0)   //It worked.
 		{
 			printlog("Binary path: %s\n", binarypath);
@@ -3623,15 +3676,15 @@ int main(int argc, char** argv)
 						drawClearBuffers();
 						if ( movie == false )
 						{
-							camera.winx = 0;
-							camera.winy = 0;
-							camera.winw = xres;
-							camera.winh = yres;
-							light = lightSphere(camera.x, camera.y, 16, 64);
-							raycast(&camera, REALCOLORS);
-							glDrawWorld(&camera, REALCOLORS);
-							//drawFloors(&camera);
-							drawEntities3D(&camera, REALCOLORS);
+							menucam.winx = 0;
+							menucam.winy = 0;
+							menucam.winw = xres;
+							menucam.winh = yres;
+							light = lightSphere(menucam.x, menucam.y, 16, 64);
+							raycast(&menucam, REALCOLORS);
+							glDrawWorld(&menucam, REALCOLORS);
+							//drawFloors(&menucam);
+							drawEntities3D(&menucam, REALCOLORS);
 							list_RemoveNode(light->node);
 						}
 
@@ -3673,46 +3726,10 @@ int main(int argc, char** argv)
 					*inputPressed(joyimpulses[INJOY_PAUSE_MENU]) = 0;
 					if ( !shootmode )
 					{
-						shootmode = true;
+						closeAllGUIs(CLOSEGUI_ENABLE_SHOOTMODE, CLOSEGUI_CLOSE_ALL);
 						gui_mode = GUI_MODE_INVENTORY;
-						CloseIdentifyGUI();
-						closeRemoveCurseGUI();
-						GenericGUI.closeGUI();
-						FollowerMenu.closeFollowerMenuGUI();
-						if ( shopkeeper != 0 )
-						{
-							if ( multiplayer != CLIENT )
-							{
-								Entity* entity = uidToEntity(shopkeeper);
-								entity->skill[0] = 0;
-								if ( uidToEntity(entity->skill[1]) )
-								{
-									monsterMoveAside(entity, uidToEntity(entity->skill[1]));
-								}
-								entity->skill[1] = 0;
-							}
-							else
-							{
-								// inform server that we're done talking to shopkeeper
-								strcpy((char*)net_packet->data, "SHPC");
-								SDLNet_Write32((Uint32)shopkeeper, &net_packet->data[4]);
-								net_packet->address.host = net_server.host;
-								net_packet->address.port = net_server.port;
-								net_packet->len = 8;
-								sendPacketSafe(net_sock, -1, net_packet, 0);
-								list_FreeAll(shopInv);
-							}
-							shopkeeper = 0;
-
-							//Clean up shopkeeper gamepad code here.
-							selectedShopSlot = -1;
-						}
 						attributespage = 0;
 						//proficienciesPage = 0;
-						if (openedChest[clientnum])
-						{
-							openedChest[clientnum]->closeChest();
-						}
 					}
 					else
 					{
@@ -3722,117 +3739,190 @@ int main(int argc, char** argv)
 
 				// main drawing
 				drawClearBuffers();
-				camera.ang += camera_shakex2;
-				camera.vang += camera_shakey2 / 200.0;
-				if ( true/*players[clientnum] == nullptr || players[clientnum]->entity == nullptr || !players[clientnum]->entity->isBlind()*/ )
+				for (int c = 0; c < MAXPLAYERS; ++c) 
+				{
+					auto& camera = cameras[c];
+					auto& cvars = cameravars[c];
+					camera.ang += cvars.shakex2;
+					camera.vang += cvars.shakey2 / 200.0;
+				}
+				if ( true )
 				{
 					// drunkenness spinning
 					double cosspin = cos(ticks % 360 * PI / 180.f) * 0.25;
 					double sinspin = sin(ticks % 360 * PI / 180.f) * 0.25;
 
-					//drawSky3D(&camera,sky_bmp);
-					camera.winx = 0;
-					camera.winy = 0;
-					camera.winw = xres;
-					camera.winh = yres;
-					if (shaking && players[clientnum] && players[clientnum]->entity && !gamePaused)
+					int playercount = 0;
+					for (int c = 0; c < MAXPLAYERS; ++c) 
 					{
-						camera.ang += cosspin * drunkextend;
-						camera.vang += sinspin * drunkextend;
+						if (!client_disconnected[c]) 
+						{
+							++playercount;
+						}
 					}
 
-					if ( players[clientnum] && players[clientnum]->entity )
+					if (playercount >= 1) 
 					{
-						if ( players[clientnum]->entity->isBlind() )
+						//int maximum = splitscreen ? MAXPLAYERS : 1;
+						for (int c = 0; c < MAXPLAYERS; ++c)
 						{
-							if ( globalLightModifierActive == GLOBAL_LIGHT_MODIFIER_STOPPED 
-								|| (globalLightModifierActive == GLOBAL_LIGHT_MODIFIER_DISSIPATING && globalLightModifier < 1.f) )
+							if (client_disconnected[c]) 
 							{
-								globalLightModifierActive = GLOBAL_LIGHT_MODIFIER_INUSE;
-								globalLightModifier = 0.f;
-								globalLightTelepathyModifier = 0.f;
-								if ( stats[clientnum]->mask && stats[clientnum]->mask->type == TOOL_BLINDFOLD_TELEPATHY )
-								{
-									for ( node_t* mapNode = map.creatures->first; mapNode != nullptr; mapNode = mapNode->next )
-									{
-										Entity* mapCreature = (Entity*)mapNode->element;
-										if ( mapCreature )
-										{
-											mapCreature->monsterEntityRenderAsTelepath = 1;
-										}
-									}
-								}
+								continue;
 							}
-
-							int PERModifier = 0;
-							if ( stats[clientnum] && stats[clientnum]->EFFECTS[EFF_BLIND]
-								&& !stats[clientnum]->EFFECTS[EFF_ASLEEP] && !stats[clientnum]->EFFECTS[EFF_MESSY] )
+							if ( !splitscreen && c != clientnum )
 							{
-								// blind but not messy or asleep = allow PER to let you see the world a little.
-								PERModifier = players[clientnum]->entity->getPER() / 5;
-								if ( PERModifier < 0 )
-								{
-									PERModifier = 0;
-								}
+								continue;
 							}
-
-							real_t limit = PERModifier * 0.01;
-							globalLightModifier = std::min(limit, globalLightModifier + 0.0005);
-
-							int telepathyLimit = std::min(64, 48 + players[clientnum]->entity->getPER());
-							globalLightTelepathyModifier = std::min(telepathyLimit / 255.0, globalLightTelepathyModifier + (0.2 / 255.0));
-						}
-						else
-						{
-							if ( globalLightModifierActive == GLOBAL_LIGHT_MODIFIER_INUSE )
+							auto& camera = cameras[c];
+							if ( !splitscreen )
 							{
-								for ( node_t* mapNode = map.creatures->first; mapNode != nullptr; mapNode = mapNode->next )
-								{
-									Entity* mapCreature = (Entity*)mapNode->element;
-									if ( mapCreature )
-									{
-										mapCreature->monsterEntityRenderAsTelepath = 0;
-									}
-								}
-							}
-							globalLightModifierActive = GLOBAL_LIGHT_MODIFIER_DISSIPATING;
-							globalLightTelepathyModifier = 0.f;
-							if ( globalLightModifier < 1.f )
-							{
-								globalLightModifier += 0.01;
+								camera.winx = 0;
+								camera.winy = 0;
+								camera.winw = xres;
+								camera.winh = yres;
 							}
 							else
 							{
-								globalLightModifier = 1.01;
-								globalLightModifierActive = GLOBAL_LIGHT_MODIFIER_STOPPED;
+								if (playercount == 1)
+								{
+									camera.winx = 0;
+									camera.winy = 0;
+									camera.winw = xres;
+									camera.winh = yres;
+								} 
+								else if (playercount == 2)
+								{
+									// divide screen horizontally
+									camera.winx = 0;
+									camera.winy = c * yres / 2;
+									camera.winw = xres;
+									camera.winh = yres / 2;
+								} 
+								else if (playercount >= 3) 
+								{
+									// divide screen into quadrants
+									camera.winx = (c % 2) * xres / 2;
+									camera.winy = (c / 2) * yres / 2;
+									camera.winw = xres / 2;
+									camera.winh = yres / 2;
+								}
 							}
-						}
-						raycast(&camera, REALCOLORS);
-						glDrawWorld(&camera, REALCOLORS);
-					}
-					else
-					{
-						raycast(&camera, REALCOLORS);
-						glDrawWorld(&camera, REALCOLORS);
-					}
+							if (shaking && players[c] && players[c]->entity && !gamePaused)
+							{
+								camera.ang += cosspin * drunkextend;
+								camera.vang += sinspin * drunkextend;
+							}
 
-					//drawFloors(&camera);
-					drawEntities3D(&camera, REALCOLORS);
-					if (shaking && players[clientnum] && players[clientnum]->entity && !gamePaused)
-					{
-						camera.ang -= cosspin * drunkextend;
-						camera.vang -= sinspin * drunkextend;
+							if ( players[clientnum] && players[clientnum]->entity )
+							{
+								if ( players[clientnum]->entity->isBlind() )
+								{
+									if ( globalLightModifierActive == GLOBAL_LIGHT_MODIFIER_STOPPED 
+										|| (globalLightModifierActive == GLOBAL_LIGHT_MODIFIER_DISSIPATING && globalLightModifier < 1.f) )
+									{
+										globalLightModifierActive = GLOBAL_LIGHT_MODIFIER_INUSE;
+										globalLightModifier = 0.f;
+										globalLightTelepathyModifier = 0.f;
+										if ( stats[clientnum]->mask && stats[clientnum]->mask->type == TOOL_BLINDFOLD_TELEPATHY )
+										{
+											for ( node_t* mapNode = map.creatures->first; mapNode != nullptr; mapNode = mapNode->next )
+											{
+												Entity* mapCreature = (Entity*)mapNode->element;
+												if ( mapCreature )
+												{
+													mapCreature->monsterEntityRenderAsTelepath = 1;
+												}
+											}
+										}
+									}
+
+									int PERModifier = 0;
+									if ( stats[clientnum] && stats[clientnum]->EFFECTS[EFF_BLIND]
+										&& !stats[clientnum]->EFFECTS[EFF_ASLEEP] && !stats[clientnum]->EFFECTS[EFF_MESSY] )
+									{
+										// blind but not messy or asleep = allow PER to let you see the world a little.
+										PERModifier = players[clientnum]->entity->getPER() / 5;
+										if ( PERModifier < 0 )
+										{
+											PERModifier = 0;
+										}
+									}
+
+									real_t limit = PERModifier * 0.01;
+									globalLightModifier = std::min(limit, globalLightModifier + 0.0005);
+
+									int telepathyLimit = std::min(64, 48 + players[clientnum]->entity->getPER());
+									globalLightTelepathyModifier = std::min(telepathyLimit / 255.0, globalLightTelepathyModifier + (0.2 / 255.0));
+								}
+								else
+								{
+									if ( globalLightModifierActive == GLOBAL_LIGHT_MODIFIER_INUSE )
+									{
+										for ( node_t* mapNode = map.creatures->first; mapNode != nullptr; mapNode = mapNode->next )
+										{
+											Entity* mapCreature = (Entity*)mapNode->element;
+											if ( mapCreature )
+											{
+												mapCreature->monsterEntityRenderAsTelepath = 0;
+											}
+										}
+									}
+									globalLightModifierActive = GLOBAL_LIGHT_MODIFIER_DISSIPATING;
+									globalLightTelepathyModifier = 0.f;
+									if ( globalLightModifier < 1.f )
+									{
+										globalLightModifier += 0.01;
+									}
+									else
+									{
+										globalLightModifier = 1.01;
+										globalLightModifierActive = GLOBAL_LIGHT_MODIFIER_STOPPED;
+									}
+								}
+								raycast(&camera, REALCOLORS);
+								glDrawWorld(&camera, REALCOLORS);
+							}
+							else
+							{
+								raycast(&camera, REALCOLORS);
+								glDrawWorld(&camera, REALCOLORS);
+							}
+
+							//drawFloors(&camera);
+							drawEntities3D(&camera, REALCOLORS);
+							if (shaking && players[clientnum] && players[clientnum]->entity && !gamePaused)
+							{
+								camera.ang -= cosspin * drunkextend;
+								camera.vang -= sinspin * drunkextend;
+							}
+
+							auto& cvars = cameravars[c];
+							camera.ang -= cvars.shakex2;
+							camera.vang -= cvars.shakey2 / 200.0;
+						}
 					}
 				}
-				camera.ang -= camera_shakex2;
-				camera.vang -= camera_shakey2 / 200.0;
 
 				DebugStats.t5MainDraw = std::chrono::high_resolution_clock::now();
 
 				updateMessages();
 				if ( !nohud )
 				{
-					handleDamageIndicators();
+					if (splitscreen) 
+					{
+						for (int c = 0; c < MAXPLAYERS; ++c)
+						{
+							if (!client_disconnected[c]) 
+							{
+								handleDamageIndicators(c);
+							}
+						}
+					} 
+					else 
+					{
+						handleDamageIndicators(0);
+					}
 					drawMessages();
 				}
 
@@ -3852,54 +3942,7 @@ int main(int argc, char** argv)
 						}
 						else
 						{
-							shootmode = true;
-							gui_mode = GUI_MODE_INVENTORY;
-							CloseIdentifyGUI();
-							closeRemoveCurseGUI();
-							GenericGUI.closeGUI();
-							FollowerMenu.closeFollowerMenuGUI();
-						}
-
-						//What even is this code? When should it be run? (it's cancelling a trade by closing the inventory.)
-						if ( shopkeeper != 0 )
-						{
-							if ( multiplayer != CLIENT )
-							{
-								Entity* entity = uidToEntity(shopkeeper);
-								if ( entity )
-								{
-									entity->skill[0] = 0;
-									if ( uidToEntity(entity->skill[1]) )
-									{
-										monsterMoveAside(entity, uidToEntity(entity->skill[1]));
-									}
-									entity->skill[1] = 0;
-								}
-							}
-							else
-							{
-								// inform server that we're done talking to shopkeeper
-								strcpy((char*)net_packet->data, "SHPC");
-								SDLNet_Write32((Uint32)shopkeeper, &net_packet->data[4]);
-								net_packet->address.host = net_server.host;
-								net_packet->address.port = net_server.port;
-								net_packet->len = 8;
-								sendPacketSafe(net_sock, -1, net_packet, 0);
-								list_FreeAll(shopInv);
-							}
-
-							shopkeeper = 0;
-
-							//Clean up shopkeeper gamepad code here.
-							selectedShopSlot = -1;
-						}
-						if ( shootmode )
-						{
-							if (openedChest[clientnum])
-							{
-								openedChest[clientnum]->closeChest();
-							}
-							gui_mode = GUI_MODE_NONE;
+							closeAllGUIs(CLOSEGUI_ENABLE_SHOOTMODE, CLOSEGUI_CLOSE_ALL);
 						}
 					}
 					if (!command && (*inputPressed(impulses[IN_SPELL_LIST]) || *inputPressed(joyimpulses[INJOY_SPELL_LIST])))   //TODO: Move to function in interface or something?
@@ -3956,7 +3999,7 @@ int main(int argc, char** argv)
 								}
 							}
 
-							if ( impulses[IN_DEFEND] == 285 && itemMenuOpen ) // bound to right click, has context menu open.
+							if ( *inputPressed(impulses[IN_DEFEND]) && impulses[IN_DEFEND] == 285 && itemMenuOpen ) // bound to right click, has context menu open.
 							{
 								allowCasting = false;
 							}
@@ -3978,7 +4021,6 @@ int main(int argc, char** argv)
 							if ( shootmode )
 							{
 								*inputPressed(joyimpulses[INJOY_GAME_CAST_SPELL]) = 0;
-								*inputPressed(joyimpulses[INJOY_GAME_DEFEND]) = 0;
 							}
 							if (players[clientnum] && players[clientnum]->entity)
 							{
@@ -3994,7 +4036,7 @@ int main(int argc, char** argv)
 										{
 											messagePlayer(clientnum, language[2998]); // notify no longer eligible for achievement but still cast.
 										}
-										if ( hasSpellbook && *inputPressed(impulses[IN_DEFEND]) )
+										if ( hasSpellbook && (*inputPressed(impulses[IN_DEFEND]) || *inputPressed(joyimpulses[INJOY_GAME_DEFEND])) )
 										{
 											castSpellInit(players[clientnum]->entity->getUID(), getSpellFromID(getSpellIDFromSpellbook(stats[clientnum]->shield->type)), true);
 										}
@@ -4010,7 +4052,7 @@ int main(int argc, char** argv)
 								}
 								else
 								{
-									if ( hasSpellbook && *inputPressed(impulses[IN_DEFEND]) )
+									if ( hasSpellbook && (*inputPressed(impulses[IN_DEFEND]) || *inputPressed(joyimpulses[INJOY_GAME_DEFEND])) )
 									{
 										castSpellInit(players[clientnum]->entity->getUID(), getSpellFromID(getSpellIDFromSpellbook(stats[clientnum]->shield->type)), true);
 									}
@@ -4021,6 +4063,7 @@ int main(int argc, char** argv)
 								}
 							}
 							*inputPressed(impulses[IN_DEFEND]) = 0;
+							*inputPressed(joyimpulses[INJOY_GAME_DEFEND]) = 0;
 						}
 					}
 					if ( !command && *inputPressed(impulses[IN_TOGGLECHATLOG]) || (shootmode && *inputPressed(joyimpulses[INJOY_GAME_TOGGLECHATLOG])) )
@@ -4235,7 +4278,11 @@ int main(int argc, char** argv)
 					// Draw the static HUD elements
 					if ( !nohud )
 					{
+						//auto tStartMinimapDraw = std::chrono::high_resolution_clock::now();
 						drawMinimap(); // Draw the Minimap
+						/*auto tEndMinimapDraw = std::chrono::high_resolution_clock::now();
+						double timeTaken = 1000 * std::chrono::duration_cast<std::chrono::duration<double>>(tEndMinimapDraw - tStartMinimapDraw).count();
+						printlog("Minimap draw time: %.5f", timeTaken);*/
 						drawStatus(); // Draw the Status Bar (Hotbar, Hungry/Minotaur Icons, Tooltips, etc.)
 					}
 

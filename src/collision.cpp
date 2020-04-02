@@ -41,7 +41,7 @@ real_t entityDist(Entity* my, Entity* your)
 	returns the entity that was last clicked on with the mouse
 -------------------------------------------------------------------------------*/
 
-Entity* entityClicked(bool* clickedOnGUI, bool clickCheckOverride)
+Entity* entityClicked(bool* clickedOnGUI, bool clickCheckOverride, int player)
 {
 	Uint32 uidnum;
 	GLubyte pixel[4];
@@ -60,7 +60,7 @@ Entity* entityClicked(bool* clickedOnGUI, bool clickCheckOverride)
 			}
 			return NULL;
 		}
-		if (omousex < camera.winx || omousex >= camera.winx + camera.winw || omousey < camera.winy || omousey >= camera.winy + camera.winh)
+		if ( omousex < 0 || omousex >= 0 + xres || omousey < 0 || omousey >= 0 + yres )
 		{
 			if ( clickedOnGUI )
 			{
@@ -144,10 +144,10 @@ Entity* entityClicked(bool* clickedOnGUI, bool clickCheckOverride)
 				{
 					numspells++;
 				}
-				int maxSpellsOnscreen = camera.winh / spell_list_gui_slot_bmp->h;
+				int maxSpellsOnscreen = yres / spell_list_gui_slot_bmp->h;
 				numspells = std::min(numspells, maxSpellsOnscreen);
 				height += numspells * spell_list_gui_slot_bmp->h;
-				int spelllist_y = camera.winy + ((camera.winh / 2) - (height / 2)) + magicspell_list_offset_x;
+				int spelllist_y = 0 + ((yres / 2) - (height / 2)) + magicspell_list_offset_x;
 
 				if (mouseInBounds(MAGICSPELL_LIST_X, MAGICSPELL_LIST_X + spell_list_titlebar_bmp->w, spelllist_y, spelllist_y + height))
 				{
@@ -159,7 +159,8 @@ Entity* entityClicked(bool* clickedOnGUI, bool clickCheckOverride)
 				}
 			}
 		}
-		if (mouseInBounds(0, 224, 0, 420))   // character sheet
+		if ( mouseInBounds(interfaceCharacterSheet.x, interfaceCharacterSheet.x + interfaceCharacterSheet.w,
+			interfaceCharacterSheet.y, interfaceCharacterSheet.y + interfaceCharacterSheet.h) )   // character sheet
 		{
 			if ( clickedOnGUI )
 			{
@@ -167,8 +168,10 @@ Entity* entityClicked(bool* clickedOnGUI, bool clickCheckOverride)
 			}
 			return NULL;
 		}
-		int x = xres / 2 - (status_bmp->w / 2);
-		if (mouseInBounds(x, x + status_bmp->w, yres - status_bmp->h, yres))
+
+		if ( !hide_statusbar &&
+			mouseInBounds(interfaceMessageStatusBar.x, interfaceMessageStatusBar.x + interfaceMessageStatusBar.w,
+				interfaceMessageStatusBar.y, interfaceMessageStatusBar.y + interfaceMessageStatusBar.h) ) // bottom message log
 		{
 			if ( clickedOnGUI )
 			{
@@ -218,7 +221,7 @@ Entity* entityClicked(bool* clickedOnGUI, bool clickCheckOverride)
 		}
 		else
 		{
-			uidnum = GO_GetPixelU32(omousex, yres - omousey);
+			uidnum = GO_GetPixelU32(omousex, yres - omousey, cameras[player]);
 		}
 	}
 	else
@@ -229,7 +232,7 @@ Entity* entityClicked(bool* clickedOnGUI, bool clickCheckOverride)
 		}
 		else
 		{
-			uidnum = GO_GetPixelU32(xres / 2, yres / 2);
+			uidnum = GO_GetPixelU32(xres / 2, yres / 2, cameras[player]);
 		}
 	}
 
@@ -641,10 +644,18 @@ int barony_clear(real_t tx, real_t ty, Entity* my)
 					}
 					else
 					{
-						continue;
+						if ( my->behavior == &actPlayer && yourStats->monsterForceAllegiance == Stat::MONSTER_FORCE_PLAYER_ENEMY
+							|| entity->behavior == &actPlayer && myStats->monsterForceAllegiance == Stat::MONSTER_FORCE_PLAYER_ENEMY )
+						{
+							// forced enemies.
+						}
+						else
+						{
+							continue;
+						}
 					}
 				}
-				else if (my->behavior == &actPlayer)
+				else if ( my->behavior == &actPlayer )
 				{
 					if (my->checkFriend(entity))
 					{

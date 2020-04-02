@@ -169,6 +169,9 @@ bool item_PotionWater(Item*& item, Entity* entity, Entity* usedBy)
 		}
 	}
 
+	auto& camera_shakex = cameravars[player >= 0 ? player : 0].shakex;
+	auto& camera_shakey = cameravars[player >= 0 ? player : 0].shakey;
+
 	// code below is only run by the player that drank the potion.
 	// if it was thrown, then the function returns in the above code as processed by the server.
 
@@ -485,9 +488,15 @@ bool item_PotionBooze(Item*& item, Entity* entity, Entity* usedBy, bool shouldCo
 
 	if ( svFlags & SV_FLAG_HUNGER )
 	{
-		stats->HUNGER += 100;
 		if ( entity->behavior == &actPlayer )
 		{
+			if ( stats->type != SKELETON && stats->type != AUTOMATON )
+			{
+				if ( stats->HUNGER < 1500 )
+				{
+					stats->HUNGER = std::min(1499, stats->HUNGER + 100);
+				}
+			}
 			if ( stats->playerRace == RACE_INSECTOID && stats->appearance == 0 )
 			{
 				stats->HUNGER += 250;
@@ -621,9 +630,15 @@ bool item_PotionJuice(Item*& item, Entity* entity, Entity* usedBy)
 
 		if ( svFlags & SV_FLAG_HUNGER )
 		{
-			stats->HUNGER += 50;
 			if ( entity->behavior == &actPlayer )
 			{
+				if ( stats->type != SKELETON && stats->type != AUTOMATON )
+				{
+					if ( stats->HUNGER < 1500 )
+					{
+						stats->HUNGER = std::min(1499, stats->HUNGER + 50);
+					}
+				}
 				if ( stats->playerRace == RACE_INSECTOID && stats->appearance == 0 )
 				{
 					stats->HUNGER += 200;
@@ -648,9 +663,15 @@ bool item_PotionJuice(Item*& item, Entity* entity, Entity* usedBy)
 
 		if ( svFlags & SV_FLAG_HUNGER )
 		{
-			stats->HUNGER += 50;
 			if ( entity->behavior == &actPlayer )
 			{
+				if ( stats->type != SKELETON && stats->type != AUTOMATON )
+				{
+					if ( stats->HUNGER < 1500 )
+					{
+						stats->HUNGER = std::min(1499, stats->HUNGER + 50);
+					}
+				}
 				if ( stats->playerRace == RACE_INSECTOID && stats->appearance == 0 )
 				{
 					stats->HUNGER += 200;
@@ -707,6 +728,9 @@ bool item_PotionSickness(Item*& item, Entity* entity, Entity* usedBy)
 	{
 		return false;
 	}
+
+	auto& camera_shakex = cameravars[player >= 0 ? player : 0].shakex;
+	auto& camera_shakey = cameravars[player >= 0 ? player : 0].shakey;
 
 	if ( entity == NULL )
 	{
@@ -1421,6 +1445,9 @@ bool item_PotionAcid(Item*& item, Entity* entity, Entity* usedBy)
 		return false;
 	}
 
+	auto& camera_shakex = cameravars[player >= 0 ? player : 0].shakex;
+	auto& camera_shakey = cameravars[player >= 0 ? player : 0].shakey;
+
 	if ( entity == NULL )
 	{
 		return false;
@@ -1507,6 +1534,9 @@ bool item_PotionUnstableStorm(Item*& item, Entity* entity, Entity* usedBy, Entit
 	{
 		return false;
 	}
+
+	auto& camera_shakex = cameravars[player >= 0 ? player : 0].shakex;
+	auto& camera_shakey = cameravars[player >= 0 ? player : 0].shakey;
 
 	if ( entity == NULL )
 	{
@@ -2315,7 +2345,7 @@ void item_ScrollIdentify(Item* item, int player)
 	identifygui_active = true;
 	identifygui_appraising = false;
 	shootmode = false;
-	gui_mode = GUI_MODE_INVENTORY; //Reset the GUI to the inventory.
+	openStatusScreen(GUI_MODE_INVENTORY, INVENTORY_MODE_ITEM); // Reset the GUI to the inventory.
 
 	if ( removecursegui_active )
 	{
@@ -2722,7 +2752,7 @@ void item_ScrollRemoveCurse(Item* item, int player)
 	{
 		// Uncurse an item
 		shootmode = false;
-		gui_mode = GUI_MODE_INVENTORY; // Reset the GUI to the inventory.
+		openStatusScreen(GUI_MODE_INVENTORY, INVENTORY_MODE_ITEM); // Reset the GUI to the inventory.
 		removecursegui_active = true;
 		if ( identifygui_active )
 		{
@@ -5354,6 +5384,7 @@ void item_FoodAutomaton(Item*& item, int player)
 		case SCROLL_TELEPORTATION:
 		case SCROLL_SUMMON:
 		case SCROLL_CONJUREARROW:
+		case SCROLL_CHARGING:
 			players[player]->entity->modMP(20);
 			stats[player]->HUNGER += 600;
 			break;
@@ -5545,6 +5576,7 @@ bool itemIsConsumableByAutomaton(const Item& item)
 		case SCROLL_SUMMON:
 		case SCROLL_FIRE:
 		case SCROLL_CONJUREARROW:
+		case SCROLL_CHARGING:
 		case SCROLL_LEGEND:
 		case TOOL_MAGIC_SCRAP:
 		case TOOL_METAL_SCRAP:

@@ -128,11 +128,12 @@ void actBeartrap(Entity* my)
 					entity->setEffect(EFF_PARALYZED, true, 200, false);
 					entity->setEffect(EFF_BLEEDING, true, 300, false);
 					int damage = 10 + 3 * (BEARTRAP_STATUS + BEARTRAP_BEATITUDE);
-					Stat* trapperStat = nullptr;
-					if ( parent && (trapperStat = parent->getStats()) )
+					if ( parent )
 					{
+						stat->bleedInflictedBy = static_cast<Sint32>(parent->getUID());
 						//damage += trapperStat->PROFICIENCIES[PRO_LOCKPICKING] / 20;
 					}
+					int oldHP = stat->HP;
 					//messagePlayer(0, "dmg: %d", damage);
 					entity->modHP(-damage);
 					//// alert the monster! DOES NOT WORK DURING PARALYZE.
@@ -147,7 +148,7 @@ void actBeartrap(Entity* my)
 					// set obituary
 					entity->setObituary(language[1504]);
 
-					if ( stat->HP <= 0 )
+					if ( stat->HP <= 0 && oldHP > 0 )
 					{
 						if ( parent )
 						{
@@ -163,10 +164,10 @@ void actBeartrap(Entity* my)
 						{
 							serverUpdateEffects(player);
 						}
-						if ( player == clientnum )
+						if ( player == clientnum || splitscreen )
 						{
-							camera_shakex += .1;
-							camera_shakey += 10;
+							cameravars[entity->skill[2]].shakex += .1;
+							cameravars[entity->skill[2]].shakey += 10;
 						}
 						else if ( player > 0 && multiplayer == SERVER )
 						{
@@ -184,21 +185,24 @@ void actBeartrap(Entity* my)
 						int player = parent->skill[2];
 						if ( player >= 0 )
 						{
-							if ( entityDist(my, parent) >= 64 && entityDist(my, parent) < 128 )
+							if ( oldHP > 0 )
 							{
-								messagePlayer(player, language[2521]);
-							}
-							else
-							{
-								messagePlayer(player, language[2522]);
-							}
-							if ( rand() % 10 == 0 )
-							{
-								parent->increaseSkill(PRO_LOCKPICKING);
-							}
-							if ( rand() % 5 == 0 )
-							{
-								parent->increaseSkill(PRO_RANGED);
+								if ( entityDist(my, parent) >= 64 && entityDist(my, parent) < 128 )
+								{
+									messagePlayer(player, language[2521]);
+								}
+								else
+								{
+									messagePlayer(player, language[2522]);
+								}
+								if ( rand() % 10 == 0 )
+								{
+									parent->increaseSkill(PRO_LOCKPICKING);
+								}
+								if ( rand() % 5 == 0 )
+								{
+									parent->increaseSkill(PRO_RANGED);
+								}
 							}
 							// update enemy bar for attacker
 							if ( !strcmp(stat->name, "") )
@@ -533,10 +537,10 @@ void bombDoEffect(Entity* my, Entity* triggered, real_t entityDistance, bool spa
 	{
 		int player = triggered->skill[2];
 		
-		if ( player == clientnum )
+		if ( player == clientnum || splitscreen )
 		{
-			camera_shakex += .1;
-			camera_shakey += 10;
+			cameravars[triggered->skill[2]].shakex += .1;
+			cameravars[triggered->skill[2]].shakey += 10;
 		}
 		else if ( player > 0 && multiplayer == SERVER )
 		{
