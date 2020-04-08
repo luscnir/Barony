@@ -1184,6 +1184,7 @@ char spriteEditorNameStrings[NUM_EDITOR_SPRITES][64] =
 	"MARBLE GATE (East-West)",
 	"METAL TABLE",
 	"PEDESTAL LOCK",
+	"",
 	"CUSTOM EXIT",
 	"READABLE BOOK",
 	"SENTRYBOT",
