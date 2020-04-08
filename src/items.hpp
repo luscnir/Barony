@@ -423,7 +423,7 @@ typedef enum ItemType
 	SCROLL_LEGEND,
 	NEEDLE
 } ItemType;
-const int NUMITEMS = 398;
+const int NUMITEMS = 399;
 
 //NOTE: If you change this, make sure to update NUMCATEGORIES in game.h to reflect the total number of categories. Not doing that will make bad things happen.
 typedef enum Category

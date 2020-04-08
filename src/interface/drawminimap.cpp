@@ -142,7 +142,7 @@ void drawMinimap()
 	for ( node = map.entities->first; node != NULL; node = node->next )
 	{
 		Entity* entity = (Entity*)node->element;
-		if ( entity->sprite == 161 || (entity->sprite >= 254 && entity->sprite < 258)
+		if ( entity->sprite == 161 || (entity->sprite >= 254 && entity->sprite < 258 ) || ( entity->sprite >= 1181 && entity->sprite < 1184 )
 			|| entity->behavior == &actCustomPortal )   // ladder or portal models
 		{
 			if ( entity->x >= 0 && entity->y >= 0 && entity->x < map.width << 4 && entity->y < map.height << 4 )

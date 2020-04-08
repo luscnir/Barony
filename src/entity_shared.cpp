@@ -68,10 +68,10 @@ int checkSpriteType(Sint32 sprite)
 	case 204:
 	case 205:
 	case 206:
-	case 216:
 	case 217:
 	case 218:
 	case 219:
+	case 220:
 		//monsters
 		return 1;
 		break;
@@ -161,13 +161,13 @@ int checkSpriteType(Sint32 sprite)
 	case 133:
 		// signal modifier
 		return 17;
-	case 161:
+	case 215:
 		// custom exit
 		return 18;
 	case 59:
 		// table
 		return 19;
-	case 162: 
+	case 216:
 		// readablebook
 		return 20;
 	case 2:

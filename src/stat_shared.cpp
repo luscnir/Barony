@@ -1216,8 +1216,8 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			break;
 		case (1000 + SENTRYBOT):
 		case (1000 + SPELLBOT):
-		case 163:
-		case 164:
+		case 217:
+		case 218:
 			if ( (sprite == 1000 + SENTRYBOT) || sprite == 163 )
 			{
 				stats->type = SENTRYBOT;
@@ -1241,7 +1241,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->LVL = 3;
 			stats->monsterTinkeringStatus = DECREPIT; // store the type of item that was used to summon me.
 			break;
-		case 165:
+		case 219:
 		case (1000 + DUMMYBOT):
 			stats->type = DUMMYBOT;
 			stats->MAXHP = 50;
@@ -1258,7 +1258,7 @@ void setDefaultMonsterStats(Stat* stats, int sprite)
 			stats->LVL = 3;
 			stats->monsterTinkeringStatus = DECREPIT; // store the type of item that was used to summon me.
 			break;
-		case 166:
+		case 220:
 		case (1000 + GYROBOT):
 			stats->HP = 10;
 			stats->HP = stats->MAXHP;

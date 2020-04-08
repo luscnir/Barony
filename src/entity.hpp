@@ -1032,7 +1032,7 @@ void actTextSource(Entity* my);
 
 //checks if a sprite falls in certain sprite ranges
 
-static const int NUM_ITEM_STRINGS = 402;
+static const int NUM_ITEM_STRINGS = 403;
 static const int NUM_ITEM_STRINGS_BY_TYPE = 162;
 static const int NUM_EDITOR_SPRITES = 239;
 static const int NUM_EDITOR_TILES = 538;
@@ -1174,9 +1174,9 @@ public:
 		TO_DUSTDEVIL,
 		TO_PARASITE,
 		TO_METALBEAST,
-		TO_SKU-LIT,
-		TO_RAN-GIC,
-		TO_WAN-RIT,
+		TO_SKULIT,
+		TO_RANGIC,
+		TO_WANRIT,
 		TO_CLONEFALLEN
 	};
 	enum ScriptType : int

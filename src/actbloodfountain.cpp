@@ -288,7 +288,7 @@ void actBloodFountain(Entity* my)
 							messagePlayer(i, language[470]);
 							messagePlayer(i, language[6233]);
 							playSoundEntity(players[i]->entity, 52, 64);
-							stats[i]->HUNGER += 150;
+							stats[i]->HUNGER += 1000;
 							players[i]->entity->modHP(5);
 						}
 						else
@@ -300,10 +300,10 @@ void actBloodFountain(Entity* my)
 
 							Uint32 color = SDL_MapRGB(mainsurface->format, 255, 0, 0);
 							messagePlayerColor(i, color, language[6233]);
-							if (i == 0)
+							if (i == 0 || splitscreen)
 							{
-								camera_shakex += .1;
-								camera_shakey += 10;
+								cameravars[i].shakex += .1;
+								cameravars[i].shakey += 10;
 							}
 							else if (multiplayer == SERVER && i > 0)
 							{

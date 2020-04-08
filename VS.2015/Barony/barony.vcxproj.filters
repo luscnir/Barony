@@ -381,6 +381,9 @@
     <ClCompile Include="..\..\src\monster_sentrybot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\json.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\monster_cockroach.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -516,6 +519,12 @@
       <Filter>Header Files\magic</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\cppfuncs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\charclass.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

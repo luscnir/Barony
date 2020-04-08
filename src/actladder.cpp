@@ -1952,7 +1952,6 @@ void Entity::actEndGamePortalAbyss()
 		}
 	}
 }
-}
 
 int customPortalLookForMapWithName(char* mapToSearch, bool isSecretLevel, int levelOffset)
 {
