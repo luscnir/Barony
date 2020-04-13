@@ -101,10 +101,6 @@ void actLadder(Entity* my)
 					{
 						secretlevel = (secretlevel == false);    // toggle level lists
 					}
-					if ( !strncmp(map.name, "Ant Nest", 16) )
-					{
-						currentlevel += 1; // These level still work as normal even as secrets levels.
-					}
 					loadnextlevel = true;
 					return;
 				}
