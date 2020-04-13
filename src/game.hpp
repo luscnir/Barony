@@ -98,7 +98,7 @@ extern Uint32 cycles, pingtime;
 extern Uint32 timesync;
 extern real_t fps;
 extern bool shootmode;
-#define NUMCLASSES 23
+#define NUMCLASSES 25
 #define NUMRACES 13
 #define NUMPLAYABLERACES 9
 extern char address[64];

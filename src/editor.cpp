@@ -308,7 +308,7 @@ char* playerClassLangEntry(int classnum, int playernum)
 	{
 		return language[3223 + classnum - CLASS_CONJURER];
 	}
-	else if ( classnum >= CLASS_SEXTON && classnum <= CLASS_MONK )
+	else if ( classnum >= CLASS_SEXTON && classnum <= CLASS_LUNATIC )
 	{
 		return language[2550 + classnum - CLASS_SEXTON];
 	}

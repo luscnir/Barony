@@ -4681,7 +4681,7 @@ void AchievementObserver::updatePlayerAchievement(int player, Achievement achiev
 					{
 						races.insert(stats[i]->playerRace);
 					}
-					if ( client_classes[i] > CLASS_MONK )
+					if ( client_classes[i] > CLASS_LUNATIC )
 					{
 						classes.insert(client_classes[i]);
 					}

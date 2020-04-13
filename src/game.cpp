@@ -3559,7 +3559,7 @@ int main(int argc, char** argv)
 				{
 					if (strcmp(classtoquickstart, ""))
 					{
-						for ( c = 0; c <= CLASS_MONK; c++ )
+						for ( c = 0; c <= CLASS_LUNATIC; c++ )
 						{
 							if ( !strcmp(classtoquickstart, playerClassLangEntry(c, 0)) )
 							{
