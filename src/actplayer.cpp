@@ -2677,7 +2677,7 @@ void actPlayer(Entity* my)
 					}
 					else if (stats[PLAYER_NUM]->shield->type == TOOL_GREENTORCH)
 					{
-						PLAYER_TORCH = 9 + my->getPER() / 3 + (stats[PLAYER_NUM]->defending) * 2;
+						PLAYER_TORCH = 9 + my->getPER() / 3 + (stats[PLAYER_NUM]->defending) * 3;
 					}
 					else if (stats[PLAYER_NUM]->shield->type == ABYSSAL_SHIELD)
 					{
@@ -2685,7 +2685,7 @@ void actPlayer(Entity* my)
 					}
 					else if (stats[PLAYER_NUM]->shield->type == INQUISITOR_LANTERN)
 					{
-						PLAYER_TORCH = 35 + my->getPER() / 3 + (stats[PLAYER_NUM]->defending) * 1;
+						PLAYER_TORCH = 50 + my->getPER() / 3 + (stats[PLAYER_NUM]->defending) * 1;
 					}
 					else if ( !PLAYER_DEBUGCAM )
 					{
@@ -2720,7 +2720,7 @@ void actPlayer(Entity* my)
 					}
 					else if (stats[PLAYER_NUM]->shield->type == INQUISITOR_LANTERN)
 					{
-						PLAYER_TORCH = 35;
+						PLAYER_TORCH = 50;
 					}
 					else
 					{

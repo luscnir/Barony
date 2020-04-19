@@ -19610,6 +19610,7 @@ void Entity::handleHumanoidShieldLimb(Entity* shieldLimb, Entity* shieldArmLimb)
 			}
 			else if (shieldLimb->sprite == items[INQUISITOR_LANTERN].index)
 			{
+				shieldLimb->z += 2;
 				flameEntity = spawnFlame(shieldLimb, SPRITE_ANGELFLAME);
 				flameEntity->x += 2.5 * cos(shieldLimb->yaw + PI / 16);
 				flameEntity->y += 2.5 * sin(shieldLimb->yaw + PI / 16);

@@ -1,30 +1,27 @@
-﻿  actladder.cpp
+﻿  actbloodfountain.cpp
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(58,1): warning C4005: 'PATH_MAX': macro redefinition
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX'
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(423,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(153,51): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(153,39): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(427,51): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(427,39): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(567,39): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(567,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(726,39): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(726,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(871,39): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(871,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(986,39): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(986,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(1584,39): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(1584,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(1744,39): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(1744,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(1884,39): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(1884,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(2180,52): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actladder.cpp(2180,40): warning C4244: 'argument': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(222,60): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(222,53): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(225,65): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(225,57): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(228,65): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(228,57): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(231,64): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(231,53): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(234,64): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(234,53): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(258,62): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(258,55): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(264,56): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(264,49): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(275,63): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(275,56): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(281,55): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\actbloodfountain.cpp(281,48): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
   Generating code
-  14 of 7143 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  1414 of 7143 functions (19.8%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    365 functions had inline decision re-evaluated but remain unchanged
+    376 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   barony.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\barony.exe

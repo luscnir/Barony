@@ -149,7 +149,7 @@ void actBloodFountain(Entity* my)
 				{
 					if (players[i]->entity->flags[BURNING])
 					{
-						messagePlayer(i, language[4230]);
+						messagePlayer(i, language[6230]);
 						players[i]->entity->flags[BURNING] = false;
 						serverUpdateEntityFlag(players[i]->entity, BURNING);
 					}
@@ -390,7 +390,7 @@ void actBloodFountain(Entity* my)
 						playSoundEntity(players[i]->entity, 52, 64);
 						//playSoundEntity(players[i]->entity, 167, 64);
 						Uint32 textcolor = SDL_MapRGB(mainsurface->format, 255, 0, 0);
-						messagePlayerColor(i, textcolor, language[4233]);
+						messagePlayerColor(i, textcolor, language[6233]);
 						//Choose only one piece of equipment to bless.
 
 						//First, Figure out what equipment is available.
@@ -438,7 +438,7 @@ void actBloodFountain(Entity* my)
 
 						if (items.size())
 						{
-							messagePlayerColor(i, textcolor, language[4235]); //"The fountain curses a piece of equipment"
+							messagePlayerColor(i, textcolor, language[6235]); //"The fountain curses a piece of equipment"
 							//Randomly choose a piece of equipment.
 							std::pair<Item*, Uint32> chosen = items[rand() % items.size()];
 							chosen.first->beatitude--;
@@ -462,24 +462,24 @@ void actBloodFountain(Entity* my)
 						if (stats[i]->type != VAMPIRE) //Blood fountain is good for vampires and not much for everyone else
 						{
 							messagePlayer(i, language[470]);
-							messagePlayer(i, language[4236]);
+							messagePlayer(i, language[6236]);
 							playSoundEntity(players[i]->entity, 52, 64);
 							stats[i]->HUNGER -= 100;
 							players[i]->entity->modHP(-45);
-							players[i]->entity->setObituary(language[4234]);
+							players[i]->entity->setObituary(language[6234]);
 							break;
 						}
 						//Does not break here.
 					case 6:
 						messagePlayer(i, language[470]);
-						messagePlayer(i, language[4237]);
+						messagePlayer(i, language[6237]);
 						playSoundEntity(players[i]->entity, 52, 64);
 						stats[i]->HUNGER += 100;
 						players[i]->entity->modHP(30);
 						break;
 					case 7:
 						messagePlayer(i, language[470]);
-						messagePlayer(i, language[4238]);
+						messagePlayer(i, language[6238]);
 						playSoundEntity(players[i]->entity, 52, 64);
 						stats[i]->HUNGER += 100;
 						players[i]->entity->modHP(100);
@@ -494,11 +494,11 @@ void actBloodFountain(Entity* my)
 					}
 					if (potionDropQuantity > 1)
 					{
-						messagePlayerColor(i, uint32ColorGreen(*mainsurface), language[4235], potionDropQuantity);
+						messagePlayerColor(i, uint32ColorGreen(*mainsurface), language[6235], potionDropQuantity);
 					}
 					else if (potionDropQuantity == 1)
 					{
-						messagePlayerColor(i, uint32ColorGreen(*mainsurface), language[4236]);
+						messagePlayerColor(i, uint32ColorGreen(*mainsurface), language[6236]);
 					}
 					messagePlayer(i, language[474]);
 					my->skill[0] = 0; //Dry up fountain.

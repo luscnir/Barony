@@ -3898,7 +3898,7 @@ Sint32 Item::armorGetAC(Stat* wielder) const
 	}
 	else if (type == INQUISITOR_BACKPACK)
 	{
-		armor += 2;
+		armor += 0;
 	}
 	else if (type == INQUISITOR_AMULET)
 	{
