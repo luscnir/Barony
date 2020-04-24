@@ -430,6 +430,43 @@ int monsterCurve(int level)
 			break;
 		}
 	}
+	else if (!strncmp(map.name, "The Farm", 7))
+	{
+		switch (rand() % 10)
+		{
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+			return DUSTDEVIL;
+		case 7:
+		case 8:
+			return ANT;
+		case 9:
+			return SCORPION;
+		}
+	}
+	else if (!strncmp(map.name, "Chamber of Worms", 6))
+	{
+		switch (rand() % 10)
+		{
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+			return PARASITE;
+		case 9:
+			return DEMON;
+		}
+	}
 	return SKELETON; // basic monster
 }
 
@@ -590,6 +627,10 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int, int> 
 		{
 			secretlevelexit = 1;
 		}
+		else if (currentlevel == 4) //mines others
+		{
+			secretlevelexit = 21;
+		}
 		else if ( currentlevel == 7 || currentlevel == 8 ) //swamp
 		{
 			secretlevelexit = 2;
@@ -598,9 +639,23 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int, int> 
 		{
 			secretlevelexit = 3;
 		}
+		else if (currentlevel == 20) //sand maze others
+		{
+			if (rand() % 10 == 0)		// 10% chance oasis
+			{
+				secretlevelexit = 16;
+			}
+		}
 		else if ( currentlevel == 31 || currentlevel == 33 ) //ruins
 		{
 			secretlevelexit = 4;
+		}
+		else if (currentlevel == 32)		// ruins others
+		{
+			if (completionTime >= TICKS_PER_SECOND * 60 * 60)		// after 1 hour
+			{
+				secretlevelexit = 18;
+			}
 		}
 		else if ( currentlevel == 49 )	//crystal caves
 		{
@@ -622,16 +677,27 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int, int> 
 		{
 			secretlevelexit = 10;
 		}
-		else if (currentlevel == 26)	// tundra catedral secret
+		else if (currentlevel == 26)	// tundra others
 		{
-			if (rand() % 5 == 0)		// 20% chance
+			if (rand() % 5 == 0)		// 20% chance catedral
 			{
 				secretlevelexit = 11;
+			}
+			if (rand() % 10 == 0)		// 10% chance oasis
+			{
+				secretlevelexit = 17;
 			}
 		}
 		else if (currentlevel == 43)		// catacombs
 		{
 			secretlevelexit = 12;
+		}
+		else if (currentlevel == 41)		// catacombs others
+		{
+			if (completionTime >= TICKS_PER_SECOND * 60 * 60)		// after 1 hour
+			{
+				secretlevelexit = 19;
+			}
 		}
 		else if (currentlevel == 22 || currentlevel == 28)		// catacombs entrance (side path)
 		{
@@ -644,6 +710,10 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int, int> 
 		else if (currentlevel == 61)		// abyss mid
 		{
 			secretlevelexit = 15;
+		}
+		else if (currentlevel == 68)		// farm
+		{
+			secretlevelexit = 20;
 		}
 	}
 
@@ -1029,6 +1099,24 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int, int> 
 						break;
 					case 15:
 						strcpy(secretmapname, "abysssecretmid");
+						break;
+					case 16:
+						strcpy(secretmapname, "oasisentrancedesert");
+						break;
+					case 17:
+						strcpy(secretmapname, "oasisentrancetundra");
+						break;
+					case 18:
+						strcpy(secretmapname, "wormsentrancefromruins");
+						break;
+					case 19:
+						strcpy(secretmapname, "wormsentrancefromcatacombs");
+						break;
+					case 20:
+						strcpy(secretmapname, "farmsecret");
+						break;
+					case 21:
+						strcpy(secretmapname, "vaultsecret");
 						break;
 					default:
 						break;

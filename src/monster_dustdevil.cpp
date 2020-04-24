@@ -433,8 +433,6 @@ void dustDevilDie(Entity* my)
 		}
 	}
 
-	my->spawnBlood();
-
 	my->removeMonsterDeathNodes();
 
 	playSoundEntity(my, 672 + rand() % 2, 128);

@@ -90,6 +90,21 @@ extern FMOD_SOUND** icedungmusic;
 extern FMOD_SOUND* snowtownmusic;
 extern FMOD_SOUND* catedralmusic;
 
+extern FMOD_SOUND** catacombsmusic;
+#define NUMCATACOMBSMUSIC 3
+extern FMOD_SOUND** fleshmusic;
+#define NUMFLESHMUSIC 2
+extern FMOD_SOUND* othersecretmusic;
+extern FMOD_SOUND* prenecropolismusic;
+
+extern FMOD_SOUND* necropolismusic;
+extern FMOD_SOUND** abyssmusic;
+#define NUMABYSSMUSIC 3
+extern FMOD_SOUND** emptymusic;
+#define NUMEMPTYMUSIC 2
+
+//TODO:
+
 //TODO: Automatically scan the music folder for a mines subdirectory and use all the music for the mines or something like that. I'd prefer something neat like for that loading music for a level, anyway. And I can just reuse the code I had for ORR.
 
 extern FMOD_CHANNEL* music_channel, *music_channel2, *music_resume; //TODO: List of music, play first one, fade out all the others? Eh, maybe some other day. //music_resume is the music to resume after, say, combat or shops. //TODO: Clear music_resume every biome change. Or otherwise validate it for that level set.
