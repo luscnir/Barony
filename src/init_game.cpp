@@ -489,6 +489,12 @@ int fmod_result;
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/CorruptedMedicine.ogg", FMOD_SOFTWARE, NULL, &matildasforestmusic);
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/snowtown.ogg", FMOD_SOFTWARE, NULL, &snowtownmusic);
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/catedral.ogg", FMOD_SOFTWARE, NULL, &catedralmusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/othersecrets.ogg", FMOD_SOFTWARE, NULL, &othersecretmusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/gatewayToNecropolis.ogg", FMOD_SOFTWARE, NULL, &prenecropolismusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/necropolis.ogg", FMOD_SOFTWARE, NULL, &necropolismusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/preAbyssBoss.ogg", FMOD_SOFTWARE, NULL, &preabyssalbossmusic);
+	//fmod_result = FMOD_System_CreateStream(fmod_system, "music/abyssBoss.ogg", FMOD_SOFTWARE, NULL, &abyssalbossmusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/vault.ogg", FMOD_SOFTWARE, NULL, &vaultmusic);
 	if ( PHYSFS_getRealDir("music/gnomishmines.ogg") != NULL )
 	{
 		fmod_result = FMOD_System_CreateStream(fmod_system, "music/gnomishmines.ogg", FMOD_SOFTWARE, NULL, &gnomishminesmusic);
@@ -623,6 +629,79 @@ int fmod_result;
 			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &icedungmusic[c]);
 		}
 	}
+	if ( NUMCATACOMBSMUSIC > 0 )
+	{
+		catacombsmusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMCATACOMBSMUSIC );
+		for (c = 0; c < NUMCATACOMBSMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/catacombs%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &catacombsmusic[c]);
+		}
+	}
+	if ( NUMFLESHMUSIC > 0 )
+	{
+		fleshmusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMFLESHMUSIC );
+		for (c = 0; c < NUMFLESHMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/flesh%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &fleshmusic[c]);
+		}
+	}
+	if ( NUMABYSSMUSIC > 0 )
+	{
+		abyssmusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMABYSSMUSIC);
+		for (c = 0; c < NUMABYSSMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/abyss%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &abyssmusic[c]);
+		}
+	}
+	if ( NUMEMPTYMUSIC > 0 )
+	{
+		emptymusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMEMPTYMUSIC);
+		for (c = 0; c < NUMEMPTYMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/empty%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &emptymusic[c]);
+		}
+	}
+	if ( NUMANTNESTMUSIC > 0 )
+	{
+		antnestmusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMANTNESTMUSIC);
+		for (c = 0; c < NUMANTNESTMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/antNest%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &antnestmusic[c]);
+		}
+	}
+	if (NUMFARMMUSIC > 0)
+	{
+		farmmusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMFARMMUSIC);
+		for (c = 0; c < NUMFARMMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/farm%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &farmmusic[c]);//Exception thrown
+		}
+	}
+	if (NUMISLANDMUSIC > 0)
+	{
+		islandmusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMISLANDMUSIC);
+		for (c = 0; c < NUMISLANDMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/islands%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &islandmusic[c]);
+		}
+	}
+	if (NUMWORMSMUSIC > 0)
+	{
+		wormsmusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMWORMSMUSIC);
+		for (c = 0; c < NUMWORMSMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/worms%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &wormsmusic[c]);
+		}
+	}
+
 	if ( NUMINTROMUSIC > 0 )
 	{
 		intromusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*)*NUMINTROMUSIC);
@@ -878,6 +957,12 @@ void deinitGame()
 		FMOD_Sound_Release(matildasforestmusic);
 		FMOD_Sound_Release(snowtownmusic);
 		FMOD_Sound_Release(catedralmusic);
+		FMOD_Sound_Release(othersecretmusic);
+		FMOD_Sound_Release(prenecropolismusic);
+		FMOD_Sound_Release(necropolismusic);
+		FMOD_Sound_Release(preabyssalbossmusic);
+		//FMOD_Sound_Release(abyssalbossmusic);
+		FMOD_Sound_Release(vaultmusic);
 		for (c = 0; c < NUMMINESMUSIC; c++)
 		{
 			FMOD_Sound_Release(minesmusic[c]);
@@ -974,6 +1059,56 @@ void deinitGame()
 		{
 			free(icedungmusic);
 		}
+
+		for (c = 0; c < NUMCATACOMBSMUSIC; c++)
+		{
+			FMOD_Sound_Release(catacombsmusic[c]);
+		}
+		if (catacombsmusic)
+		{
+			free(catacombsmusic);
+		}
+		for (c = 0; c < NUMFLESHMUSIC; c++)
+		{
+			FMOD_Sound_Release(fleshmusic[c]);
+		}
+		if (fleshmusic)
+		{
+			free(fleshmusic);
+		}
+		for (c = 0; c < NUMANTNESTMUSIC; c++)
+		{
+			FMOD_Sound_Release(antnestmusic[c]);
+		}
+		if (antnestmusic)
+		{
+			free(antnestmusic);
+		}
+		for (c = 0; c < NUMFARMMUSIC; c++)
+		{
+			FMOD_Sound_Release(farmmusic[c]);
+		}
+		if (farmmusic)
+		{
+			free(farmmusic);
+		}
+		for (c = 0; c < NUMISLANDMUSIC; c++)
+		{
+			FMOD_Sound_Release(islandmusic[c]);
+		}
+		if (islandmusic)
+		{
+			free(islandmusic);
+		}
+		for (c = 0; c < NUMWORMSMUSIC; c++)
+		{
+			FMOD_Sound_Release(wormsmusic[c]);
+		}
+		if (wormsmusic)
+		{
+			free(wormsmusic);
+		}
+
 		for (c = 0; c < NUMINTROMUSIC; c++)
 		{
 			FMOD_Sound_Release(intromusic[c]);

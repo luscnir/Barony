@@ -4740,7 +4740,7 @@ void Entity::handleEffects(Stat* myStats)
 			}
 		}
 		// manabound
-		if ( myStats->amulet->type == AMULET_MANABOUND )
+		else if ( myStats->amulet->type == AMULET_MANABOUND )//erro here
 		{
 			int manacost = 30;
 			if ( myStats->HP <= 0 && myStats->MP >= manacost)

@@ -344,6 +344,7 @@ bool herxmusicplaying = false;
 bool devilmusicplaying = false;
 bool olddarkmap = false;
 bool sanctummusicplaying = false;
+bool abyssalbossmusicplaying = false;
 
 int currenttrack = -1;
 
@@ -669,6 +670,144 @@ void handleLevelMusic()
 		{
 			playmusic( catedralmusic, true, true, true );
 		}
+		
+		else if (!strncmp(map.name, "The Catacombs", 9))     // Catacombs
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMCATACOMBSMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMCATACOMBSMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(catacombsmusic[currenttrack], false, true, true);
+		}
+		else if (!strcmp(map.name, "The Flesh"))     // Flesh
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMFLESHMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMFLESHMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(fleshmusic[currenttrack], false, true, true);
+		}
+		else if ( (!strcmp(map.name, "Lone Shop")) || (!strcmp(map.name, "Haunted House")) || (!strcmp(map.name, "Stone Puzzle")) || (!strcmp(map.name, "Ghost Platforms")) )	// Other secrets
+		{
+			playmusic(othersecretmusic, true, true, true);
+		}
+		else if (!strcmp(map.name, "Mural of portals"))	// portal to Necropolis
+		{
+			playmusic(prenecropolismusic, true, true, true);
+		}
+		else if (!strcmp(map.name, "Necropolis"))	// Necropolis
+		{
+			playmusic(necropolismusic, true, true, true);
+		}
+		else if (!strncmp(map.name, "The Abyss", 9))     // Abyss
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMABYSSMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMABYSSMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(abyssmusic[currenttrack], false, true, true);
+		}
+		else if (!strcmp(map.name, "Empty place"))     // Empty
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMEMPTYMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMEMPTYMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(emptymusic[currenttrack], false, true, true);
+		}
+		else if (!strcmp(map.name, "Walk to the Fallen One"))	// pre abyssal boss
+		{
+			playmusic(preabyssalbossmusic, true, true, true);
+		}
+		/*else if (!strncmp(map.name, "Abyss Boss", 7))	//Abyssal boss
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(music[currenttrack], false, true, true);
+		}//*/
+		else if (!strncmp(map.name, "Ant Nest", 7))	// Ant nest
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMANTNESTMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMANTNESTMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(antnestmusic[currenttrack], false, true, true);
+		}
+		else if (!strcmp(map.name, "Vault") || !strcmp(map.name, "Key temple") || !strcmp(map.name, "Chamber exit") )	// vault
+		{
+			playmusic(vaultmusic, true, true, true);
+		}
+		else if (!strcmp(map.name, "The Farm") || !strcmp(map.name, "Wheat fields") )	// Farm
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMFARMMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMFARMMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(farmmusic[currenttrack], false, true, true);
+		}
+		else if (!strcmp(map.name, "The Gap"))	// the Gap between the Maze and the Tundra
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMISLANDMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMISLANDMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(islandmusic[currenttrack], false, true, true);
+		}
+		else if (!strncmp(map.name, "Chamber of Worms", 7))	//Chamber of Worms
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMWORMSMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMWORMSMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(wormsmusic[currenttrack], false, true, true);
+		}
 
 		else
 		{
@@ -740,7 +879,8 @@ void handleLevelMusic()
 		&& !activeminotaur 
 		&& combat 
 		&& strcmp(map.name, "Hell Boss")
-		&& strcmp(map.name, "Sanctum") )
+		&& strcmp(map.name, "Sanctum")
+		&& strcmp(map.name, "Abyss Boss") )
 	{
 		if ( !strncmp(map.name, "The Swamp", 9) || !strncmp(map.name, "The Temple", 10) )   // the swamp
 		{
@@ -782,6 +922,40 @@ void handleLevelMusic()
 		{
 			playmusic(icedungmusic[0], true, true, true);
 		}
+		else if (!strncmp(map.name, "The Catacombs", 11) || !strcmp(map.name, "Haunted House"))	// the catacombs
+		{
+			playmusic(catacombsmusic[0], true, true, true);
+		}
+		else if (!strcmp(map.name, "The Flesh"))	// Flesh
+		{
+			playmusic(fleshmusic[0], true, true, true);
+		}
+
+		else if (!strncmp(map.name, "The Abyss", 11) || !strcmp(map.name, "Necropolis") || !strcmp(map.name, "Ghost Platforms") )	// the abyss
+		{
+			playmusic(abyssmusic[0], true, true, true);
+		}
+		else if (!strncmp(map.name, "Empty place", 11) )	// the empty place
+		{
+			playmusic(emptymusic[0], true, true, true);
+		}
+		else if (!strncmp(map.name, "Ant Nest", 11) || !strncmp(map.name, "Key temple", 11) )	// ant nest
+		{
+			playmusic(antnestmusic[0], true, true, true);
+		}
+		else if (!strncmp(map.name, "The Farm", 11) || !strncmp(map.name, "Wheat fields", 11))	// farm
+		{
+			playmusic(farmmusic[0], true, true, true);
+		}
+		else if (!strncmp(map.name, "The Gap", 11))	// the gap
+		{
+			playmusic(islandmusic[0], true, true, true);
+		}
+		else if (!strncmp(map.name, "Chamber of Worms", 11))	// worms
+		{
+			playmusic(wormsmusic[0], true, true, true);
+		}
+
 		else
 		{
 			playmusic(minesmusic[0], true, true, true);

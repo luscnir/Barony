@@ -102,8 +102,18 @@ extern FMOD_SOUND** abyssmusic;
 #define NUMABYSSMUSIC 3
 extern FMOD_SOUND** emptymusic;
 #define NUMEMPTYMUSIC 2
+extern FMOD_SOUND* preabyssalbossmusic;
+//extern FMOD_SOUND* abyssalbossmusic; //TODO: abyssboss after music 01(main theme)?
 
-//TODO:
+extern FMOD_SOUND** antnestmusic;
+#define NUMANTNESTMUSIC 2
+extern FMOD_SOUND* vaultmusic;
+extern FMOD_SOUND** farmmusic;
+#define NUMFARMMUSIC 2
+extern FMOD_SOUND** islandmusic;
+#define NUMISLANDMUSIC 2
+extern FMOD_SOUND** wormsmusic;
+#define NUMWORMSMUSIC 2
 
 //TODO: Automatically scan the music folder for a mines subdirectory and use all the music for the mines or something like that. I'd prefer something neat like for that loading music for a level, anyway. And I can just reuse the code I had for ORR.
 
