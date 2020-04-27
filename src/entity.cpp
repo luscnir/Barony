@@ -13042,27 +13042,27 @@ int setGloveSprite(Stat* myStats, Entity* ent, int spriteOffset)
 	}
 	else if (myStats->gloves->type == ICE_GLOVES)
 	{
-		ent->sprite = 1232 + myStats->sex + spriteOffset;
+		ent->sprite = 1233 + myStats->sex + spriteOffset;
 	}
 	else if (myStats->gloves->type == INQUISITOR_GLOVES)
 	{
-		ent->sprite = 1361 + myStats->sex + spriteOffset;
+		ent->sprite = 1362 + myStats->sex + spriteOffset;
 	}
 	else if (myStats->gloves->type == LIFESTEAL_KNUCKLES)
 	{
-		ent->sprite = 1373 + myStats->sex + spriteOffset;
+		ent->sprite = 1374 + myStats->sex + spriteOffset;
 	}
 	else if (myStats->gloves->type == MANA_GLOVES)
 	{
-		ent->sprite = 1381 + myStats->sex + spriteOffset;
+		ent->sprite = 1382 + myStats->sex + spriteOffset;
 	}
 	else if (myStats->gloves->type == TIN_GLOVES)
 	{
-		ent->sprite = 1397 + myStats->sex + spriteOffset;
+		ent->sprite = 1398 + myStats->sex + spriteOffset;
 	}
 	else if (myStats->gloves->type == LOST_GAUNTLETS)
 	{
-		ent->sprite = 1389 + myStats->sex + spriteOffset;
+		ent->sprite = 1390 + myStats->sex + spriteOffset;
 	}
 	else
 	{
