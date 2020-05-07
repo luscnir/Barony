@@ -1,170 +1,108 @@
-﻿  entity.cpp
+﻿  maps.cpp
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\main.hpp(58,1): warning C4005: 'PATH_MAX': macro redefinition
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS-includes\dirent.h(150): message : see previous definition of 'PATH_MAX'
 C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\magic\magic.hpp(423,2): warning C4091: 'typedef ': ignored on left of 'spell_t' when no variable is declared
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(1373,66): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
-          with
-          [
-              _Ty=unsigned int
-          ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(1374,66): warning C4244: 'argument': conversion from 'real_t' to 'const _Ty', possible loss of data
-          with
-          [
-              _Ty=unsigned int
-          ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(1849,9): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(1850,9): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(2183,10): warning C4101: 'entity': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(2182,10): warning C4101: 'node': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(2612,79): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(2612,53): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(2612,23): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(3087,25): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(3091,24): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(3095,24): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(3114,26): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(3118,25): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(4430,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(4437,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5071,65): warning C4244: '*=': conversion from 'const real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5078,65): warning C4244: '*=': conversion from 'const real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5164,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5173,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5340,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5349,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5627,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5636,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5678,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5761,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5770,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5905,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5914,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(5923,17): warning C4244: '*=': conversion from 'double' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(6606,59): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(6606,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(6606,31): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(6610,23): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7236,57): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7276,58): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7491,48): warning C4244: 'argument': conversion from 'double' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7491,44): warning C4244: 'argument': conversion from 'double' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7495,47): warning C4244: 'argument': conversion from 'double' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7495,43): warning C4244: 'argument': conversion from 'double' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7511,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7511,23): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7826,49): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7826,46): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7847,44): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7847,22): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7950,75): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7950,60): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7950,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7989,116): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(7993,116): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(8004,26): warning C4244: '*=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(8008,111): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(8082,76): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(8086,76): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(8095,75): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(8106,25): warning C4244: '*=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(8666,75): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(8666,60): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(8666,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(8846,25): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9105,75): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9105,60): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9105,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9261,77): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9261,62): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9261,47): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9277,76): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9277,61): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9277,46): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9288,75): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9288,60): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(9288,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10244,56): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10244,47): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10244,38): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10326,77): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10326,62): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10326,47): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10489,62): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10489,48): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10489,34): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10493,26): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10574,74): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10574,59): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10574,44): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10590,40): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10590,37): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10590,34): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10598,40): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10598,37): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10598,34): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10606,40): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10606,37): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10606,34): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10614,40): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10614,37): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10614,34): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10718,37): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10718,82): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10764,38): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10764,83): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10773,47): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10773,25): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10868,46): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10868,24): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10875,45): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(10875,23): warning C4244: 'argument': conversion from 'real_t' to 'Sint16', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(11141,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(11143,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(11158,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(11160,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(11187,6): warning C4101: 'pickedlocation': unreferenced local variable
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(15738,38): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(15767,10): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(15768,10): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(15794,41): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(15895,65): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(15967,72): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(16023,75): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(16031,42): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(16038,46): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17054,33): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17055,31): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17056,33): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17057,31): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17058,13): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17060,27): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17103,13): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17103,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17105,27): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17148,13): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17150,24): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17193,13): warning C4244: '=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17193,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17195,24): warning C4244: 'argument': conversion from 'real_t' to 'long', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17403,24): warning C4244: 'initializing': conversion from '_Ty' to 'float', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17406,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17410,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17414,11): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17432,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17436,26): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17440,11): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17443,10): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17583,21): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17587,37): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17612,28): warning C4244: '+=': conversion from 'real_t' to 'int', possible loss of data
-C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\entity.cpp(17760,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(567,94): warning C4474: '_snprintf' : too many arguments passed for format string
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(567,94): message : placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(603,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(622,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(647,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(869,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(871,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1017,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1019,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1021,30): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1021,51): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1030,54): warning C4805: '==': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1039,50): warning C4805: '==': unsafe mix of type 'Sint32' and type 'bool' in operation
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1058,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1061,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1062,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1225,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1227,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1229,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1233,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1341,13): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1345,14): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1370,13): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1374,14): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1385,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1464,27): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1468,28): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1502,49): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1502,80): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1790,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1792,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1860,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1864,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1866,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1915,10): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1916,10): warning C4244: 'initializing': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1918,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1919,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1965,12): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(1969,13): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2142,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2144,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2175,17): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2176,17): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2177,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2177,47): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2273,11): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2277,12): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2315,69): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2315,52): warning C4244: 'argument': conversion from 'real_t' to 'int', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(526,47): warning C4101: 'subroomPickRoom': unreferenced local variable
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2693,17): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(2695,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4624,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4624,51): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4688,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4689,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4690,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4690,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(4782,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5153,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5153,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5193,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5193,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5233,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5233,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5273,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5273,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5411,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5412,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5415,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5415,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5431,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5432,19): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5435,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5435,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5748,20): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5749,20): warning C4244: '=': conversion from 'real_t' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5750,33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5750,51): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5822,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(5822,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6122,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6123,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6155,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6156,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6182,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6183,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6209,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6210,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6237,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6238,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6260,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6261,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6283,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6284,21): warning C4244: '=': conversion from 'double' to 'Sint32', possible loss of data
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6765,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\src\maps.cpp(6765,28): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  1 of 7143 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  5 of 7143 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    367 functions had inline decision re-evaluated but remain unchanged
+    364 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   barony.vcxproj -> C:\Users\Lucas\Desktop\Work\Barony-abyss delver\Barony\VS.2015\Release\barony.exe

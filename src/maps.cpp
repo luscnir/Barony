@@ -467,6 +467,36 @@ int monsterCurve(int level)
 			return DEMON;
 		}
 	}
+	else if (!strncmp(map.name, "The Factory", 4))
+	{
+		switch (rand() % 15)
+		{
+		case 0:
+		case 1:
+			return KOBOLD;
+		case 2:
+		case 3:
+			return INSECTOID;
+		case 4:
+		case 5:
+		case 6:
+			return GOATMAN;
+		case 7:
+			return CRYSTALGOLEM;
+		case 8:
+			return AUTOMATON;
+		case 9:
+			return COCKATRICE;
+		case 10:
+			return SHADOW;
+		case 11:
+			return INCUBUS;
+		case 12:
+		case 13:
+		case 14:
+			return METALLICBEAST;
+		}
+	}
 	return SKELETON; // basic monster
 }
 
@@ -714,6 +744,10 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int, int> 
 		else if (currentlevel == 68)		// farm
 		{
 			secretlevelexit = 20;
+		}
+		else if (currentlevel == 50)		// caves to factory
+		{
+			secretlevelexit = 22;
 		}
 	}
 
@@ -1117,6 +1151,9 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int, int> 
 						break;
 					case 21:
 						strcpy(secretmapname, "vaultsecret");
+						break;
+					case 22:
+						strcpy(secretmapname, "factorypath");
 						break;
 					default:
 						break;

@@ -135,6 +135,7 @@ void initRanGic(Entity* my, Stat* myStats)
 				default:
 					break;
 			}
+			myStats->weapon = newItem(SPELLBOOK_FORCEBOLT, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
 		}
 	}
 }

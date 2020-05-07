@@ -392,7 +392,7 @@ void Entity::actPedestalOrb()
 	{
 		if (!strncmp(map.name, "Mural of portals", 4))
 		{
-			sprite = parent->pedestalHasOrb + 1064 - 1;
+			sprite = parent->pedestalHasOrb + 1164 - 1;
 		}
 		else if (!strncmp(map.name, "Vault", 4))
 		{
@@ -592,9 +592,9 @@ void Entity::actPedestalOrb()
 		case 605:
 			particleSprite = sprite + 4;
 			break;
-		case 1064:
-		case 1065:
-		case 1066:
+		case 1164:
+		case 1165:
+		case 1166:
 			particleSprite = 593;
 			break;
 		default:
