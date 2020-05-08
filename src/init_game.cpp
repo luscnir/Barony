@@ -680,7 +680,7 @@ int fmod_result;
 		for (c = 0; c < NUMFARMMUSIC; c++)
 		{
 			snprintf(tempstr, 1000, "music/farm%02d.ogg", c);
-			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &farmmusic[c]);//Exception thrown
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &farmmusic[c]);
 		}
 	}
 	if (NUMISLANDMUSIC > 0)
@@ -699,6 +699,33 @@ int fmod_result;
 		{
 			snprintf(tempstr, 1000, "music/worms%02d.ogg", c);
 			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &wormsmusic[c]);
+		}
+	}
+	if (NUMABYSSBOSSMUSIC > 0)
+	{
+		abyssbossmusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMABYSSBOSSMUSIC);
+		for (c = 0; c < NUMABYSSBOSSMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/abyssBoss%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &abyssbossmusic[c]);
+		}
+	}
+	if (NUMFACTORYMUSIC > 0)
+	{
+		factorymusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMFACTORYMUSIC);
+		for (c = 0; c < NUMFACTORYMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/factory%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &factorymusic[c]);
+		}
+	}
+	if (NUMLOSTMUSIC > 0)
+	{
+		lostmusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMLOSTMUSIC);
+		for (c = 0; c < NUMLOSTMUSIC; c++)
+		{
+			snprintf(tempstr, 1000, "music/fragment%02d.ogg", c);
+			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &lostmusic[c]);
 		}
 	}
 
@@ -961,7 +988,6 @@ void deinitGame()
 		FMOD_Sound_Release(prenecropolismusic);
 		FMOD_Sound_Release(necropolismusic);
 		FMOD_Sound_Release(preabyssalbossmusic);
-		//FMOD_Sound_Release(abyssalbossmusic);
 		FMOD_Sound_Release(vaultmusic);
 		for (c = 0; c < NUMMINESMUSIC; c++)
 		{
@@ -1059,7 +1085,6 @@ void deinitGame()
 		{
 			free(icedungmusic);
 		}
-
 		for (c = 0; c < NUMCATACOMBSMUSIC; c++)
 		{
 			FMOD_Sound_Release(catacombsmusic[c]);
@@ -1107,6 +1132,30 @@ void deinitGame()
 		if (wormsmusic)
 		{
 			free(wormsmusic);
+		}
+		for (c = 0; c < NUMABYSSBOSSMUSIC; c++)
+		{
+			FMOD_Sound_Release(abyssbossmusic[c]);
+		}
+		if (abyssbossmusic)
+		{
+			free(abyssbossmusic);
+		}
+		for (c = 0; c < NUMFACTORYMUSIC; c++)
+		{
+			FMOD_Sound_Release(factorymusic[c]);
+		}
+		if (factorymusic)
+		{
+			free(factorymusic);
+		}
+		for (c = 0; c < NUMLOSTMUSIC; c++)
+		{
+			FMOD_Sound_Release(lostmusic[c]);
+		}
+		if (lostmusic)
+		{
+			free(lostmusic);
 		}
 
 		for (c = 0; c < NUMINTROMUSIC; c++)

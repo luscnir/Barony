@@ -344,7 +344,7 @@ bool herxmusicplaying = false;
 bool devilmusicplaying = false;
 bool olddarkmap = false;
 bool sanctummusicplaying = false;
-bool abyssalbossmusicplaying = false;
+//bool abyssalbossmusicplaying = false;
 
 int currenttrack = -1;
 
@@ -739,19 +739,6 @@ void handleLevelMusic()
 		{
 			playmusic(preabyssalbossmusic, true, true, true);
 		}
-		/*else if (!strncmp(map.name, "Abyss Boss", 7))	//Abyssal boss
-		{
-			if (!playing)
-			{
-				currenttrack = 1 + rand() % (NUMMUSIC - 1);
-			}
-			currenttrack = currenttrack % NUMMUSIC;
-			if (currenttrack == 0)
-			{
-				currenttrack = 1;
-			}
-			playmusic(music[currenttrack], false, true, true);
-		}//*/
 		else if (!strncmp(map.name, "Ant Nest", 7))	// Ant nest
 		{
 			if (!playing)
@@ -807,6 +794,46 @@ void handleLevelMusic()
 				currenttrack = 1;
 			}
 			playmusic(wormsmusic[currenttrack], false, true, true);
+		}
+
+		else if (!strncmp(map.name, "Abyss Boss", 7))	//Abyss Boss
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMABYSSBOSSMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMABYSSBOSSMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(abyssbossmusic[currenttrack], false, true, true);
+		}
+		else if (!strncmp(map.name, "The Factory", 7))	//The Factory
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMFACTORYMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMFACTORYMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(factorymusic[currenttrack], false, true, true);
+		}
+		else if (!strncmp(map.name, "Lost Fragments", 7))	//Lost Fragments
+		{
+			if (!playing)
+			{
+				currenttrack = 1 + rand() % (NUMLOSTMUSIC - 1);
+			}
+			currenttrack = currenttrack % NUMLOSTMUSIC;
+			if (currenttrack == 0)
+			{
+				currenttrack = 1;
+			}
+			playmusic(lostmusic[currenttrack], false, true, true);
 		}
 
 		else
@@ -954,6 +981,18 @@ void handleLevelMusic()
 		else if (!strncmp(map.name, "Chamber of Worms", 11))	// worms
 		{
 			playmusic(wormsmusic[0], true, true, true);
+		}
+		else if (!strncmp(map.name, "Abyss Boss", 7))	// Abyss Boss
+		{
+			playmusic(abyssbossmusic[0], true, true, true);
+		}
+		else if (!strncmp(map.name, "The Factory", 7))	// The Factory
+		{
+			playmusic(factorymusic[0], true, true, true);
+		}
+		else if (!strncmp(map.name, "Lost Fragment", 7))	// Lost Fragment
+		{
+			playmusic(lostmusic[0], true, true, true);
 		}
 
 		else
