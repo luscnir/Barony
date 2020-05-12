@@ -1402,7 +1402,8 @@ void handleMainMenu(bool mode)
 						singleplayerAliveEndGameAndSave = true;
 						if ( !strncmp(map.name, "Boss", 4)
 							|| !strncmp(map.name, "Hell Boss", 9)
-							|| !strncmp(map.name, "Sanctum", 7) )
+							|| !strncmp(map.name, "Sanctum", 7)
+							|| !strncmp(map.name, "Abyss Boss", 4) )
 						{
 							// boss floor, no save scumming easily!
 							singleplayerAliveEndGameAndSave = false;

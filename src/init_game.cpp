@@ -492,9 +492,10 @@ int fmod_result;
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/othersecrets.ogg", FMOD_SOFTWARE, NULL, &othersecretmusic);
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/gatewayToNecropolis.ogg", FMOD_SOFTWARE, NULL, &prenecropolismusic);
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/necropolis.ogg", FMOD_SOFTWARE, NULL, &necropolismusic);
-	fmod_result = FMOD_System_CreateStream(fmod_system, "music/preAbyssBoss.ogg", FMOD_SOFTWARE, NULL, &preabyssalbossmusic);
-	//fmod_result = FMOD_System_CreateStream(fmod_system, "music/abyssBoss.ogg", FMOD_SOFTWARE, NULL, &abyssalbossmusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/preAbyssBoss.ogg", FMOD_SOFTWARE, NULL, &preabyssbossmusic);
 	fmod_result = FMOD_System_CreateStream(fmod_system, "music/vault.ogg", FMOD_SOFTWARE, NULL, &vaultmusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/abyssBoss00.ogg", FMOD_SOFTWARE, NULL, &abyssbossmusic);
+	fmod_result = FMOD_System_CreateStream(fmod_system, "music/abyssBoss01.ogg", FMOD_SOFTWARE, NULL, &posabyssbossmusic);
 	if ( PHYSFS_getRealDir("music/gnomishmines.ogg") != NULL )
 	{
 		fmod_result = FMOD_System_CreateStream(fmod_system, "music/gnomishmines.ogg", FMOD_SOFTWARE, NULL, &gnomishminesmusic);
@@ -699,15 +700,6 @@ int fmod_result;
 		{
 			snprintf(tempstr, 1000, "music/worms%02d.ogg", c);
 			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &wormsmusic[c]);
-		}
-	}
-	if (NUMABYSSBOSSMUSIC > 0)
-	{
-		abyssbossmusic = (FMOD_SOUND**)malloc(sizeof(FMOD_SOUND*) * NUMABYSSBOSSMUSIC);
-		for (c = 0; c < NUMABYSSBOSSMUSIC; c++)
-		{
-			snprintf(tempstr, 1000, "music/abyssBoss%02d.ogg", c);
-			fmod_result = FMOD_System_CreateStream(fmod_system, tempstr, FMOD_SOFTWARE, NULL, &abyssbossmusic[c]);
 		}
 	}
 	if (NUMFACTORYMUSIC > 0)
@@ -987,8 +979,10 @@ void deinitGame()
 		FMOD_Sound_Release(othersecretmusic);
 		FMOD_Sound_Release(prenecropolismusic);
 		FMOD_Sound_Release(necropolismusic);
-		FMOD_Sound_Release(preabyssalbossmusic);
+		FMOD_Sound_Release(preabyssbossmusic);
 		FMOD_Sound_Release(vaultmusic);
+		FMOD_Sound_Release(abyssbossmusic);
+		FMOD_Sound_Release(posabyssbossmusic);
 		for (c = 0; c < NUMMINESMUSIC; c++)
 		{
 			FMOD_Sound_Release(minesmusic[c]);
@@ -1132,14 +1126,6 @@ void deinitGame()
 		if (wormsmusic)
 		{
 			free(wormsmusic);
-		}
-		for (c = 0; c < NUMABYSSBOSSMUSIC; c++)
-		{
-			FMOD_Sound_Release(abyssbossmusic[c]);
-		}
-		if (abyssbossmusic)
-		{
-			free(abyssbossmusic);
 		}
 		for (c = 0; c < NUMFACTORYMUSIC; c++)
 		{

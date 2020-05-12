@@ -48,6 +48,7 @@ extern bool minotaurmusicplaying;
 extern bool herxmusicplaying;
 extern bool devilmusicplaying;
 extern bool olddarkmap;
+extern bool abyssbossmusicplaying;
 
 extern FMOD_SOUND** sounds;
 extern Uint32 numsounds;
@@ -100,11 +101,8 @@ extern FMOD_SOUND** abyssmusic;
 #define NUMABYSSMUSIC 3
 extern FMOD_SOUND** emptymusic;
 #define NUMEMPTYMUSIC 2
-extern FMOD_SOUND* preabyssalbossmusic;
-
-extern FMOD_SOUND** abyssbossmusic;
-#define NUMABYSSBOSSMUSIC 2
-
+extern FMOD_SOUND* preabyssbossmusic;
+extern FMOD_SOUND* abyssbossmusic, *posabyssbossmusic;
 extern FMOD_SOUND** antnestmusic;
 #define NUMANTNESTMUSIC 2
 extern FMOD_SOUND* vaultmusic;
@@ -114,7 +112,6 @@ extern FMOD_SOUND** islandmusic;
 #define NUMISLANDMUSIC 2
 extern FMOD_SOUND** wormsmusic;
 #define NUMWORMSMUSIC 2
-
 extern FMOD_SOUND** factorymusic;
 #define NUMFACTORYMUSIC 2
 extern FMOD_SOUND** lostmusic;

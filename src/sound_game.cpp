@@ -344,7 +344,7 @@ bool herxmusicplaying = false;
 bool devilmusicplaying = false;
 bool olddarkmap = false;
 bool sanctummusicplaying = false;
-//bool abyssalbossmusicplaying = false;
+bool abyssbossmusicplaying = false;
 
 int currenttrack = -1;
 
@@ -406,7 +406,7 @@ void handleLevelMusic()
 			magisteraround = true;
 			break;
 		}
-		else if (entity->sprite == 1128)     // fallen lich body
+		else if (entity->sprite == 1228)     // fallen lich body
 		{
 			fallenaround = true;
 			break;
@@ -737,7 +737,7 @@ void handleLevelMusic()
 		}
 		else if (!strcmp(map.name, "Walk to the Fallen One"))	// pre abyssal boss
 		{
-			playmusic(preabyssalbossmusic, true, true, true);
+			playmusic(preabyssbossmusic, true, true, true);
 		}
 		else if (!strncmp(map.name, "Ant Nest", 7))	// Ant nest
 		{
@@ -796,18 +796,9 @@ void handleLevelMusic()
 			playmusic(wormsmusic[currenttrack], false, true, true);
 		}
 
-		else if (!strncmp(map.name, "Abyss Boss", 7))	//Abyss Boss
+		else if (!strcmp(map.name, "Abyss Boss"))     // Abyss Boss
 		{
-			if (!playing)
-			{
-				currenttrack = 1 + rand() % (NUMABYSSBOSSMUSIC - 1);
-			}
-			currenttrack = currenttrack % NUMABYSSBOSSMUSIC;
-			if (currenttrack == 0)
-			{
-				currenttrack = 1;
-			}
-			playmusic(abyssbossmusic[currenttrack], false, true, true);
+			playmusic(posabyssbossmusic, true, true, true);
 		}
 		else if (!strncmp(map.name, "The Factory", 7))	//The Factory
 		{
@@ -847,6 +838,7 @@ void handleLevelMusic()
 		minotaurmusicplaying = false;
 		combatmusicplaying = false;
 		shopmusicplaying = false;
+		abyssbossmusicplaying = false;
 		fadein_increment = default_fadein_increment;
 		fadeout_increment = default_fadeout_increment;
 	}
@@ -859,6 +851,7 @@ void handleLevelMusic()
 		minotaurmusicplaying = false;
 		combatmusicplaying = false;
 		shopmusicplaying = false;
+		abyssbossmusicplaying = false;
 		fadein_increment = default_fadein_increment * 2;
 		fadeout_increment = default_fadeout_increment * 2;
 	}
@@ -871,6 +864,7 @@ void handleLevelMusic()
 		minotaurmusicplaying = false;
 		combatmusicplaying = false;
 		shopmusicplaying = false;
+		abyssbossmusicplaying = false;
 		fadein_increment = default_fadein_increment * 2;
 		fadeout_increment = default_fadeout_increment * 2;
 	}
@@ -883,6 +877,7 @@ void handleLevelMusic()
 		minotaurmusicplaying = true;
 		combatmusicplaying = false;
 		shopmusicplaying = false;
+		abyssbossmusicplaying = false;
 		fadein_increment = default_fadein_increment * 5;
 		fadeout_increment = default_fadeout_increment * 5;
 	}
@@ -896,10 +891,24 @@ void handleLevelMusic()
 		combatmusicplaying = false;
 		sanctummusicplaying = true;
 		shopmusicplaying = false;
+		abyssbossmusicplaying = false;
 		fadein_increment = default_fadein_increment * 2;
 		fadeout_increment = default_fadeout_increment * 2;
 	}
-	//else if ( (!musicplaying || !playing) && fallenaround) TODO: fallen_lich music
+	else if ( (!abyssbossmusicplaying || !playing) && fallenaround )
+	{
+		playmusic(abyssbossmusic, true, true, true);
+		levelmusicplaying = false;
+		devilmusicplaying = false;
+		herxmusicplaying = false;
+		minotaurmusicplaying = false;
+		combatmusicplaying = false;
+		sanctummusicplaying = false;
+		shopmusicplaying = false;
+		abyssbossmusicplaying = true;
+		fadein_increment = default_fadein_increment * 2;
+		fadeout_increment = default_fadeout_increment * 2;
+	}
 
 	else if ( (!combatmusicplaying || !playing) 
 		&& !herxaround 
@@ -982,10 +991,6 @@ void handleLevelMusic()
 		{
 			playmusic(wormsmusic[0], true, true, true);
 		}
-		else if (!strncmp(map.name, "Abyss Boss", 7))	// Abyss Boss
-		{
-			playmusic(abyssbossmusic[0], true, true, true);
-		}
 		else if (!strncmp(map.name, "The Factory", 7))	// The Factory
 		{
 			playmusic(factorymusic[0], true, true, true);
@@ -1005,6 +1010,7 @@ void handleLevelMusic()
 		combatmusicplaying = true;
 		shopmusicplaying = false;
 		minotaurmusicplaying = false;
+		abyssbossmusicplaying = false;
 		fadein_increment = default_fadein_increment * 4;
 		fadeout_increment = default_fadeout_increment;
 	}
@@ -1017,6 +1023,7 @@ void handleLevelMusic()
 		minotaurmusicplaying = false;
 		combatmusicplaying = false;
 		shopmusicplaying = true;
+		abyssbossmusicplaying = false;
 		fadein_increment = default_fadein_increment * 4;
 		fadeout_increment = default_fadeout_increment;
 	}

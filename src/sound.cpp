@@ -81,16 +81,16 @@ FMOD_SOUND* prenecropolismusic = NULL;
 FMOD_SOUND* necropolismusic = NULL;
 FMOD_SOUND** abyssmusic = NULL;
 FMOD_SOUND** emptymusic = NULL;
-FMOD_SOUND* preabyssalbossmusic = NULL;
+FMOD_SOUND* preabyssbossmusic = NULL;
 FMOD_SOUND** antnestmusic = NULL;
 FMOD_SOUND* vaultmusic = NULL;
 FMOD_SOUND** farmmusic = NULL;
 FMOD_SOUND** islandmusic = NULL;
 FMOD_SOUND** wormsmusic = NULL;
-
-FMOD_SOUND** abyssbossmusic = NULL;
+FMOD_SOUND* posabyssbossmusic = NULL;
+FMOD_SOUND* abyssbossmusic = NULL;
 FMOD_SOUND** factorymusic = NULL;
-FMOD_SOUND** lostmusicmusic = NULL;
+FMOD_SOUND** lostmusic = NULL;
 
 FMOD_CHANNEL* music_channel = NULL;
 FMOD_CHANNEL* music_channel2 = NULL;
@@ -980,6 +980,8 @@ bool physfsSearchMusicToUpdate()
 	themeMusic.push_back("music/necropolis.ogg");
 	themeMusic.push_back("music/preAbyssBoss.ogg");
 	themeMusic.push_back("music/vault.ogg");
+	themeMusic.push_back("music/abyssBoss00.ogg");
+	themeMusic.push_back("music/abyssBoss01.ogg");
 
 	for ( std::vector<std::string>::iterator it = themeMusic.begin(); it != themeMusic.end(); ++it )
 	{
@@ -1258,20 +1260,6 @@ bool physfsSearchMusicToUpdate()
 			}
 		}
 	}
-
-	for (c = 0; c < NUMABYSSBOSSMUSIC; c++)
-	{
-		snprintf(tempstr, 1000, "music/abyssBoss%02d.ogg", c);
-		if (PHYSFS_getRealDir(tempstr) != NULL)
-		{
-			std::string musicDir = PHYSFS_getRealDir(tempstr);
-			if (musicDir.compare("./") != 0)
-			{
-				printlog("[PhysFS]: Found modified music in music/ directory, reloading music files...");
-				return true;
-			}
-		}
-	}
 	for (c = 0; c < NUMFACTORYMUSIC; c++)
 	{
 		snprintf(tempstr, 1000, "music/factory%02d.ogg", c);
@@ -1355,6 +1343,8 @@ void physfsReloadMusic(bool &introMusicChanged, bool reloadAll)
 	themeMusic.push_back("music/necropolis.ogg");
 	themeMusic.push_back("music/preAbyssBoss.ogg");
 	themeMusic.push_back("music/vault.ogg");
+	themeMusic.push_back("music/abyssBoss00.ogg");
+	themeMusic.push_back("music/abyssBoss01.ogg");
 
 	int index = 0;
 #ifdef USE_OPENAL
@@ -1553,11 +1543,11 @@ void physfsReloadMusic(bool &introMusicChanged, bool reloadAll)
 						fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &necropolismusic);
 						break;
 					case 25:
-						if (preabyssalbossmusic)
+						if (preabyssbossmusic)
 						{
-							FMOD_Sound_Release(preabyssalbossmusic);
+							FMOD_Sound_Release(preabyssbossmusic);
 						}
-						fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &preabyssalbossmusic);
+						fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &preabyssbossmusic);
 						break;
 					case 26:
 						if (vaultmusic)
@@ -1565,6 +1555,20 @@ void physfsReloadMusic(bool &introMusicChanged, bool reloadAll)
 							FMOD_Sound_Release(vaultmusic);
 						}
 						fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &vaultmusic);
+						break;
+					case 27:
+						if (abyssbossmusic)
+						{
+							FMOD_Sound_Release(abyssbossmusic);
+							fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &abyssbossmusic);
+						}
+						break;
+					case 28:
+						if (posabyssbossmusic)
+						{
+							FMOD_Sound_Release(posabyssbossmusic);
+							fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &posabyssbossmusic);
+						}
 						break;
 					default:
 						break;
@@ -1950,26 +1954,6 @@ void physfsReloadMusic(bool &introMusicChanged, bool reloadAll)
 				musicDir.append(PHYSFS_getDirSeparator()).append(tempstr);
 				printlog("[PhysFS]: Reloading music file %s...", tempstr);
 				music = wormsmusic;
-				if (music)
-				{
-					FMOD_Sound_Release(music[c]);
-					fmod_result = FMOD_System_CreateStream(fmod_system, musicDir.c_str(), FMOD_SOFTWARE, NULL, &music[c]);
-				}
-			}
-		}
-	}
-
-	for (c = 0; c < NUMABYSSBOSSMUSIC; c++)
-	{
-		snprintf(tempstr, 1000, "music/abyssBoss%02d.ogg", c);
-		if (PHYSFS_getRealDir(tempstr) != NULL)
-		{
-			std::string musicDir = PHYSFS_getRealDir(tempstr);
-			if (musicDir.compare("./") != 0 || reloadAll)
-			{
-				musicDir.append(PHYSFS_getDirSeparator()).append(tempstr);
-				printlog("[PhysFS]: Reloading music file %s...", tempstr);
-				music = abyssbossmusic;
 				if (music)
 				{
 					FMOD_Sound_Release(music[c]);
