@@ -3619,25 +3619,29 @@ Sint32 Item::weaponGetAttack(Stat* wielder) const
 	}
 	else if (type == LOST_BOW)//the higher the level the higher the damage
 	{
-		if (currentlevel >= 48)
+		if (currentlevel == 56 || currentlevel == 65) //final boss maps
 		{
 			attack += 29;
 		}
-		else if (currentlevel >= 33)
+		if (currentlevel >= 48)
 		{
 			attack += 24;
 		}
-		else if (currentlevel >= 21)
+		else if (currentlevel >= 33)
 		{
 			attack += 19;
 		}
-		else if (currentlevel >= 7)
+		else if (currentlevel >= 21)
 		{
 			attack += 14;
 		}
-		else
+		else if (currentlevel >= 7)
 		{
 			attack += 9;
+		}
+		else
+		{
+			attack += 4;
 		}
 	}
 	else if ( type == QUIVER_ICE )
