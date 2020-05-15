@@ -90,6 +90,59 @@ void initAutomaton(Entity* my, Stat* myStats)
 			int customItemsToGenerate = ITEM_CUSTOM_SLOT_LIMIT;
 
 			// boss variants
+			if (rand() % 50 || my->flags[USERFLAG2])
+			{
+				switch (rand() % 3)
+				{
+				case 0:
+					strcpy(myStats->name, "Living Furnace");
+					myStats->appearance = 0;
+					myStats->sex = MALE;
+					myStats->LVL = 20;
+					myStats->HP = 280;
+					myStats->MAXHP = myStats->HP;
+					myStats->STR = 25;
+					myStats->DEX = 9;
+					myStats->CON = 9;
+					myStats->cloak = newItem(CLOAK_MELTING, EXCELLENT, 0, 1, 0, false, nullptr);
+					myStats->breastplate = newItem(STEEL_BREASTPIECE, EXCELLENT, 0, 1, rand(), false, nullptr);
+					myStats->shoes = newItem(TIN_BOOTS, EXCELLENT, 0, 1, rand(), false, nullptr);
+					myStats->weapon = newItem(GRANITE_MAUL, SERVICABLE, 0, 1, rand(), false, nullptr);
+					myStats->ring = newItem(LOST_RING, EXCELLENT, 0, 1, rand(), false, nullptr);//lost ring
+					myStats->shield = newItem(TOOL_TINKERING_KIT, EXCELLENT, 0, 1, rand(), false, nullptr);
+					break;
+				case 1:
+					strcpy(myStats->name, "Battery");
+					myStats->appearance = 0;
+					myStats->sex = FEMALE;
+					myStats->LVL = 17;
+					myStats->HP = 300;
+					myStats->MAXHP = myStats->HP;
+					myStats->STR = 30;
+					myStats->INT = 10;
+					myStats->mask = newItem(MASK_ANGRY, EXCELLENT, 0, 1, 2, false, nullptr);
+					newItem(TOOL_METAL_SCRAP, EXCELLENT, 20, 1, rand(), false, &myStats->inventory);
+					newItem(TOOL_MAGIC_SCRAP, EXCELLENT, 20, 1, rand(), false, &myStats->inventory);
+					break;
+				case 2:
+					strcpy(myStats->name, "Cosmonaut");
+					myStats->appearance = 0;
+					myStats->sex = FEMALE;
+					myStats->LVL = 27;
+					myStats->HP = 500;
+					myStats->MAXHP = myStats->HP;
+					myStats->STR = 25;
+					myStats->DEX = 8;
+					myStats->CON = 15;
+					myStats->INT = 50;
+					myStats->cloak = newItem(CLOAK_BACKPACK, WORN, 0, 1, 0, false, nullptr);
+					myStats->weapon = newItem(TRIDENT, WORN, -3, 1, rand(), false, nullptr);
+					myStats->shield = newItem(LOST_SHIELD, EXCELLENT, 0, 1, rand(), false, nullptr);//lost shield
+					break;
+				default:
+					break;
+				}
+			}
 			//if ( rand() % 50 || my->flags[USERFLAG2] )
 			//{
 			//	if ( strncmp(map.name, "Underworld", 10) )

@@ -74,7 +74,7 @@ void initHuman(Entity* my, Stat* myStats)
 							specialMonsterType = rand() % 10;
 						}
 					}
-					switch ( rand() % 10 )
+					switch ( rand() % 13 )
 					{
 						case 0:
 							// red riding hood
@@ -301,6 +301,74 @@ void initHuman(Entity* my, Stat* myStats)
 							myStats->cloak = newItem(CLOAK_MAGICREFLECTION, EXCELLENT, 1, 1, 2, false, nullptr);
 							myStats->shoes = newItem(LEATHER_BOOTS_SPEED, EXCELLENT, 1, 1, rand(), false, nullptr);
 							myStats->weapon = newItem(SPELLBOOK_FIREBALL, EXCELLENT, 1, 1, rand(), false, nullptr);
+							break;
+						//WR minibosses 
+						case 10:
+							strcpy(myStats->name, "Lali, Poison Fanatic");
+							myStats->appearance = 4;
+							myStats->sex = FEMALE;
+							myStats->LVL = 20;
+							myStats->HP = 250;
+							myStats->MAXHP = myStats->HP;
+							myStats->MP = 250;
+							myStats->MAXMP = myStats->MP;
+							myStats->STR = 5;
+							myStats->DEX = 6;
+							myStats->CON = 8;
+							myStats->INT = 30;
+							myStats->PER = 15;
+							myStats->CHR = 10;
+							myStats->cloak = newItem(CLOAK_YELLOWGREEN, EXCELLENT, 0, 1, 2, false, nullptr);
+							myStats->breastplate = newItem(TIN_BREASTPIECE, EXCELLENT, 0, 1, rand(), false, nullptr);
+							myStats->gloves = newItem(TIN_GLOVES, EXCELLENT, 0, 1, rand(), false, nullptr);
+							myStats->shoes = newItem(TIN_BOOTS, EXCELLENT, 0, 1, rand(), false, nullptr);
+							myStats->weapon = newItem(SPELLBOOK_POISON, EXCELLENT, 0, 1, rand(), false, nullptr);
+							myStats->mask = newItem(LOST_MASK, EXCELLENT, 0, 1, rand(), false, nullptr);//lost mask
+							break;
+						case 11:
+							strcpy(myStats->name, "Balance Kepper Joe");
+							myStats->appearance = 13;
+							myStats->sex = MALE;
+							myStats->LVL = 20;
+							myStats->HP = 250;
+							myStats->MAXHP = myStats->HP;
+							myStats->MP = 200;
+							myStats->MAXMP = myStats->MP;
+							myStats->STR = 5;
+							myStats->DEX = 6;
+							myStats->CON = 8;
+							myStats->INT = 30;
+							myStats->PER = 15;
+							myStats->CHR = 10;
+							myStats->cloak = newItem(CLOAK_BLACK, EXCELLENT, 0, 1, 0, false, nullptr);
+							myStats->breastplate = newItem(LIZARD_LEATHER_BREASTPIECE, DECREPIT, 0, 1, rand(), false, nullptr);
+							myStats->shoes = newItem(IRON_BOOTS, WORN, 0, 1, rand(), false, nullptr);
+							myStats->weapon = newItem(MAKESHIFT_BOW, EXCELLENT, 4, 1, rand(), false, nullptr);
+							myStats->mask = newItem(MASK_EYE, WORN, 0, 1, rand(), false, nullptr);
+							myStats->amulet = newItem(LOST_AMULET, EXCELLENT, 0, 1, rand(), false, nullptr);//lost amulet
+							break;
+						case 12:
+							strcpy(myStats->name, "Shield Collector");
+							myStats->appearance = 9;
+							myStats->sex = MALE;
+							myStats->LVL = 7;
+							myStats->HP = 130;
+							myStats->MAXHP = myStats->HP;
+							myStats->MP = 100;
+							myStats->MAXMP = myStats->MP;
+							myStats->STR = 4;
+							myStats->DEX = 5;
+							myStats->CON = 5;
+							myStats->INT = 3;
+							myStats->PER = 15;
+							myStats->CHR = 15;
+							myStats->gloves = newItem(IRON_KNUCKLES, DECREPIT, 0, 1, rand(), false, nullptr);
+							myStats->weapon = newItem(STONE_AXE, SERVICABLE, 0, 1, rand(), false, nullptr);
+							myStats->mask = newItem(MASK_GRID, DECREPIT, 0, 1, rand(), false, nullptr);
+							myStats->shield = newItem(IRON_SHIELD, WORN, 0, 1, rand(), false, nullptr);
+							newItem(ANTI_BLEED_SHIELD, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
+							newItem(ANTI_CHARM_SHIELD, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
+							newItem(ANTI_SLEEP_SHIELD, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
 							break;
 						default:
 							break;
