@@ -2103,9 +2103,9 @@ void actPlayer(Entity* my)
 							}
 						}
 						//Check for poisoned water
-						if (poisontiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]])
+						if ( poisontiles[map.tiles[y * MAPLAYERS + x * MAPLAYERS * map.height]] )
 						{
-							if (!stats[PLAYER_NUM]->EFFECTS[EFF_POISONED])
+							if (!stats[PLAYER_NUM]->EFFECTS[EFF_POISONED] && !(stats[PLAYER_NUM]->amulet != NULL && stats[PLAYER_NUM]->amulet->type == AMULET_POISONRESISTANCE) )
 							{
 								my->setEffect(EFF_POISONED, true, 1000, true);
 								serverUpdateEntitySkill(my, 50);
