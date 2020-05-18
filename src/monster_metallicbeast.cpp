@@ -85,6 +85,10 @@ void initMetallicBeast(Entity* my, Stat* myStats)
 				case 6:
 				case 5:
 				case 4:
+					if (rand() % 15 == 0)
+					{
+						newItem(FLYING_SHOES, WORN, 1, 1, 0, false, nullptr);
+					}
 				case 3:
 					if (rand() % 10 == 0)
 					{

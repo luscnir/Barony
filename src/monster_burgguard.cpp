@@ -240,6 +240,34 @@ void initBurgGuard(Entity* my, Stat* myStats)
 					break;
 				}
 			}
+
+			// give mask
+			if (myStats->mask == nullptr && myStats->EDITOR_ITEMS[ITEM_SLOT_ARMOR] == 1)
+			{
+				switch (rand() % 10)
+				{
+				case 0:
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+				case 6:
+				case 7:
+				case 8:
+					break;
+				case 9:
+					if ( rand() % 10 == 0 )
+					{
+						myStats->mask = newItem(MASK_ANGRY, EXCELLENT, 0, 1, rand(), false, nullptr);
+					}
+					else
+					{
+						myStats->mask = newItem(MASK_GRID, DECREPIT, -1 + rand() % 3, 1, rand(), false, nullptr);
+					}
+					break;
+				}
+			}
 		}
 	}
 

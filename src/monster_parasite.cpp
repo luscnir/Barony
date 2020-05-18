@@ -85,6 +85,10 @@ void initParasite(Entity* my, Stat* myStats)
 			case 6:
 			case 5:
 			case 4:
+				if (rand() % 10)
+				{
+					newItem(MANA_GLOVES, DECREPIT, 0, 1, rand(), false, &myStats->inventory);
+				}
 			case 3:
 				if (rand() % 10)
 				{

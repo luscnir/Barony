@@ -85,6 +85,7 @@ void initGoblin(Entity* my, Stat* myStats)
 						strcpy(myStats->name, "Peter Pizza Keeper");
 						myStats->weapon = newItem(STEEL_MACE, EXCELLENT, 0, 1, rand(), true, nullptr);
 						myStats->helmet = newItem(HAT_WIZARD_SLIMY, SERVICABLE, 2 + rand() % 3, 1, rand(), false, nullptr);
+						myStats->mask = newItem(MASK_GOOGLY, SERVICABLE, 0, 1, rand(), false, nullptr);
 						newItem(FOOD_PIZZA, EXCELLENT, 0, 9, rand(), false, &myStats->inventory);
 						break;
 				}

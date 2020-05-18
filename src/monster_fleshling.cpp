@@ -104,7 +104,13 @@ void initFleshling(Entity* my, Stat* myStats)
 				case 6:
 				case 5:
 				case 4:
+					break;
 				case 3:
+					if (rand() % 10 == 0)
+					{
+						newItem(PUNCHING_HELM, WORN, 0, 1, rand(), false, &myStats->inventory);
+					}
+					break;
 				case 2:
 					if ( rand() % 10 == 0 )
 					{
@@ -160,11 +166,13 @@ void initFleshling(Entity* my, Stat* myStats)
 						myStats->weapon = newItem(MACHETE, EXCELLENT, 0 + rand() % 3, 1, rand(), false, nullptr);
 						break;
 					case 2:
+						myStats->weapon = newItem(LIFESTEAL_KNUCKLES, SERVICABLE, -2 + rand() % 4, 1, rand(), false, nullptr);
+						break;
 					case 3:
 					case 4:
+					case 5:
 						myStats->weapon = newItem(CROSSBOW, DECREPIT, -2 + rand() % 3, 1, rand(), false, nullptr);
 						break;
-					case 5:
 					case 6:
 					case 7:
 					case 8:

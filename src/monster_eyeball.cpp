@@ -102,6 +102,8 @@ void initEyeball(Entity* my, Stat* myStats)
 			{
 			case 6:
 			case 5:
+				myStats->mask = newItem(MASK_EYE, WORN, -1 + rand() % 3, 1, rand(), false, nullptr);
+				break;
 			case 4:
 			case 3:
 				if (rand() % 10)
