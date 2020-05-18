@@ -6903,7 +6903,7 @@ int loadMainMenuMap(bool blessedAdditionMaps, bool forceVictoryMap)
 	}
 	else
 	{
-		switch ( rand() % 9 )
+		switch ( rand() % 12 )
 		{
 			case 0:
 				fullMapName = physfsFormatMapName("mainmenu1");
@@ -6939,7 +6939,7 @@ int loadMainMenuMap(bool blessedAdditionMaps, bool forceVictoryMap)
 				break;
 			//(Wicked Rendition) maps
 			case 4:
-				fullMapName = physfsFormatMapName("mainmenu10");
+				fullMapName = physfsFormatMapName("mainmenu10");//last mines
 				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures);
 				menucam.x = 48;
 				menucam.y = 19;
@@ -6947,7 +6947,7 @@ int loadMainMenuMap(bool blessedAdditionMaps, bool forceVictoryMap)
 				menucam.ang = 3.6;
 				break;
 			case 5:
-				fullMapName = physfsFormatMapName("mainmenu11");
+				fullMapName = physfsFormatMapName("mainmenu11");//burg
 				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures);
 				menucam.x = 1.7;
 				menucam.y = 5.2;
@@ -6955,7 +6955,7 @@ int loadMainMenuMap(bool blessedAdditionMaps, bool forceVictoryMap)
 				menucam.ang = 0.0;
 				break;
 			case 6:
-				fullMapName = physfsFormatMapName("mainmenu12");
+				fullMapName = physfsFormatMapName("mainmenu12");//snow town/tundra
 				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures);
 				menucam.x = 13.0;
 				menucam.y = 30.6;
@@ -6963,7 +6963,7 @@ int loadMainMenuMap(bool blessedAdditionMaps, bool forceVictoryMap)
 				menucam.ang = 4.3;
 				break;
 			case 7:
-				fullMapName = physfsFormatMapName("mainmenu13");
+				fullMapName = physfsFormatMapName("mainmenu13");//catacombs
 				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures);
 				menucam.x = 11.0;
 				menucam.y = 2.2;
@@ -6971,12 +6971,36 @@ int loadMainMenuMap(bool blessedAdditionMaps, bool forceVictoryMap)
 				menucam.ang = 0.25;
 				break;
 			case 8:
-				fullMapName = physfsFormatMapName("mainmenu14");
+				fullMapName = physfsFormatMapName("mainmenu14");//abyss
 				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures);
 				menucam.x = 11.7;
 				menucam.y = 9.6;
 				menucam.z = 1;
 				menucam.ang = 0.0;
+				break;
+			case 9:
+				fullMapName = physfsFormatMapName("mainmenu15");//oasis
+				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures);
+				menucam.x = 11.2;
+				menucam.y = 30.4;
+				menucam.z = 1;
+				menucam.ang = 4.0;
+				break;
+			case 10:
+				fullMapName = physfsFormatMapName("mainmenu16");//factory
+				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures);
+				menucam.x = 2.5;
+				menucam.y = 15.9;
+				menucam.z = 4;
+				menucam.ang = 5.6;
+				break;
+			case 11:
+				fullMapName = physfsFormatMapName("mainmenu17");//fragments
+				loadMap(fullMapName.c_str(), &map, map.entities, map.creatures);
+				menucam.x = 40.2;
+				menucam.y = 21.4;
+				menucam.z = 7;
+				menucam.ang = 1.4;
 				break;
 		}
 	}
