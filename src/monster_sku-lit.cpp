@@ -115,7 +115,11 @@ void initSkuLit(Entity* my, Stat* myStats)
 						newItem(MARBLE_BREASTPIECE, DECREPIT, 0, 1, rand(), false, &myStats->inventory);
 					}
 				case 1:
-					if ( rand() % 2 )
+					if (rand() % 20)
+					{
+						newItem(TOOL_CANDLE_TIMELESS, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
+					}
+					else if ( rand() % 2 )
 					{
 						newItem(TOOL_CANDLE, EXCELLENT, 0, 1, rand(), false, &myStats->inventory);
 					}
