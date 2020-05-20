@@ -13288,8 +13288,8 @@ void buttonOpenCharacterCreationWindow(button_t* my)
 	subwindow = 1;
 	subx1 = xres / 2 - 400;
 	subx2 = xres / 2 + 400;
-	suby1 = yres / 2 - 260;
-	suby2 = yres / 2 + 260;
+	suby1 = yres / 2 - 290;
+	suby2 = yres / 2 + 290;
 	strcpy(subtext, "");
 
 	// close button
