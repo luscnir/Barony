@@ -682,7 +682,7 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int, int> 
 		}
 		else if (currentlevel == 32)		// ruins others
 		{
-			if (completionTime >= TICKS_PER_SECOND * 60 * 60)		// after 1 hour
+			if (completionTime <= TICKS_PER_SECOND * 60 * 60)		// after 1 hour
 			{
 				secretlevelexit = 18;
 			}
@@ -724,7 +724,7 @@ int generateDungeon(char* levelset, Uint32 seed, std::tuple<int, int, int, int> 
 		}
 		else if (currentlevel == 41)		// catacombs others
 		{
-			if (completionTime >= TICKS_PER_SECOND * 60 * 60)		// after 1 hour
+			if (completionTime <= TICKS_PER_SECOND * 60 * 60)		// after 1 hour
 			{
 				secretlevelexit = 19;
 			}
