@@ -4667,6 +4667,10 @@ void item_Sacrifice(Item*& item, int player)
 {
 	messagePlayer(player, language[6283]);
 	players[player]->entity->modHP(-25);
+	if ( stats[player]->HP <= 0 )
+	{
+		stats[player]->HP = 1;
+	}
 	stats[player]->EFFECTS[EFF_SLOW] = true;
 	stats[player]->EFFECTS_TIMERS[EFF_SLOW] = 1.5 * TICKS_PER_SECOND;
 	stats[player]->EFFECTS[EFF_POTION_STR] = true;
