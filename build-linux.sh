@@ -6,10 +6,9 @@ rm -rf build/
 mkdir -p build/
 cd build/
 
-
-STEAMWORKS_ENABLED=1 STEAMWORKSROOT="$steamworksDir" cmake \
+STEAMWORKS_ENABLED=1 STEAMWORKS_ROOT="$steamworksDir" cmake \
   -DCMAKE_BUILD_TYPE=Release \
-  -DFMOD_ENABLED=ON \
+  -DOPENAL_ENABLED=ON \
   ..
 
 make

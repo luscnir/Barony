@@ -178,7 +178,7 @@ struct FMOD_VECTOR {
 extern OPENAL_BUFFER** sounds;
 extern Uint32 numsounds;
 extern OPENAL_BUFFER** minesmusic;
-#define NUMMINESMUSIC 4
+#define NUMMINESMUSIC 5
 extern OPENAL_BUFFER** swampmusic;
 #define NUMSWAMPMUSIC 3
 extern OPENAL_BUFFER** labyrinthmusic;
