@@ -612,7 +612,7 @@ void handleLevelMusic()
 			}
 			else
 			{
-				playmusic(minesmusic[4], true, true, true);
+				playmusic(minesmusic[2], true, true, true);
 			}
 		}
 		else if ( !strncmp(map.name, "The Burg", 9))     // the Burg
@@ -1565,7 +1565,7 @@ void handleLevelMusic()
 			if ( hamletmusic )
 			{
 				playmusic(hamletmusic, true, true, true);
-			}
+                        }
 			else
 			{
 				playmusic(minesmusic[4], true, true, true);
